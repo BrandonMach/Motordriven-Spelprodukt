@@ -11,7 +11,7 @@ public class MOBAMovmentTest : MonoBehaviour
     public float rotateSpeedMovement = 0.1f;
     float _rotateVelocity;
 
-
+    public GameObject mousePing;
     void Start()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
@@ -30,7 +30,8 @@ public class MOBAMovmentTest : MonoBehaviour
             {
                 //Have the agent move to the raycast/ hit point
                 _agent.SetDestination(_hit.point);
-
+                mousePing.transform.position = new Vector3(_hit.point.x, (_hit.point.y+0.1f), _hit.point.z);
+                Instantiate(mousePing, mousePing.transform);
                 //Rotation
 
                 Quaternion _rotationToLookAt = Quaternion.LookRotation(_hit.point - transform.position);
@@ -40,4 +41,6 @@ public class MOBAMovmentTest : MonoBehaviour
             }
         }
     }
+
+
 }
