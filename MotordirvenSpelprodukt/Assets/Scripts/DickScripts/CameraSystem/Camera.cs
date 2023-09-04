@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Camera : MonoBehaviour
+public class MOBACamera : MonoBehaviour
 {
     [Header("Camera settings")]
     [SerializeField]
