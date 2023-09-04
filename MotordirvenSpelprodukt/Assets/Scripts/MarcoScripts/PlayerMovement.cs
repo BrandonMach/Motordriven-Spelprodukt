@@ -35,19 +35,19 @@ public class PlayerMovement : MonoBehaviour
         GetCameraValues();
 
         Vector2 inputvector = gameInput.GetMovementVectorNormalized();
-        Vector3 moveDirectionNormalized = inputvector.x * camRight + inputvector.y * camForward;
-        characterController.Move(moveDirectionNormalized * moveSpeed * Time.deltaTime);
+        Vector3 moveDirection = inputvector.x * camRight + inputvector.y * camForward;
+        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
 
         Quaternion currentRotation = transform.rotation;
-        Quaternion newRotation = Quaternion.LookRotation(moveDirectionNormalized);
+        Quaternion newRotation = Quaternion.LookRotation(moveDirection);
 
 
-        isMoving = moveDirectionNormalized != Vector3.zero;
+        isMoving = moveDirection != Vector3.zero;
         if (isMoving)
         {
             transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, rotationSpeed * Time.deltaTime);
         }
-        playerAnimation.Animate(moveDirectionNormalized);
+        playerAnimation.Animate(moveDirection);
     }
         
     private void GetCameraValues()
