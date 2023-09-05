@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 304474268}
   - component: {fileID: 304474267}
   - component: {fileID: 304474270}
+  - component: {fileID: 304474271}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -180,11 +181,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c2f4cb3528b7f47b38f000c09d0010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInput: {fileID: 1796412708}
-  moveSpeed: 5
-  rotationSpeed: 5
-  mainCamera: {fileID: 963194229}
-  playerAnimation: {fileID: 304474270}
+  _gameInput: {fileID: 1796412708}
+  _moveSpeed: 5
+  _rotationSpeed: 5
+  _mainCamera: {fileID: 963194229}
+  _playerAnimation: {fileID: 304474270}
+  _playerScript: {fileID: 304474271}
 --- !u!4 &304474269
 Transform:
   m_ObjectHideFlags: 0
@@ -214,6 +216,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 852812854}
+--- !u!114 &304474271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304474266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a37376fbc42f2246a65e50600126ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameInput: {fileID: 1796412708}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
