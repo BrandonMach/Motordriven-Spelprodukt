@@ -38,13 +38,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = inputvector.x * camRight + inputvector.y * camForward;
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
 
-        Quaternion currentRotation = transform.rotation;
-        Quaternion newRotation = Quaternion.LookRotation(moveDirection);
+  
 
 
         isMoving = moveDirection != Vector3.zero;
         if (isMoving)
         {
+            Quaternion currentRotation = transform.rotation;
+            Quaternion newRotation = Quaternion.LookRotation(moveDirection);
             transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, rotationSpeed * Time.deltaTime);
         }
         playerAnimation.Animate(moveDirection);
