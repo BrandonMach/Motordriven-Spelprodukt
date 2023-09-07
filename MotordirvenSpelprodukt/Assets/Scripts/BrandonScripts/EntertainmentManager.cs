@@ -95,22 +95,28 @@ public class EntertainmentManager : MonoBehaviour
         foreach (GameObject enemies in EnemyGameObjects)
         {
             float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
-            if(dist <= _scanEnemyArea)
+            if(dist > _scanEnemyArea)
             {
-                _timeOutOfCombatCounter = 0; //Lägg till att man måste attackera en enemy innan man sätter den till 0 i real game
-                _isOutOfCombat = false;
-                //Debug.Log("Enemy close enough");
-            }
-            else
-            {
+
                 _timeOutOfCombatCounter += Time.deltaTime;
 
-                if(_timeOutOfCombatCounter >= _timeOutOfCombatThreshold)
+                if (_timeOutOfCombatCounter >= _timeOutOfCombatThreshold)
                 {
                     Debug.Log("Out of Combat");
                     _isOutOfCombat = true;
 
                 }
+
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Q)) //""
+                {
+                    _isOutOfCombat = false;
+                    //_timeOutOfCombatCounter = 0; //Lägg till att man måste attackera en enemy innan man sätter den till 0 i real game
+                }
+                //_isOutOfCombat = false;
+                _timeOutOfCombatCounter = 0; //Lägg till att man måste attackera en enemy innan man sätter den till 0 i real game
             }
         }
 
@@ -135,5 +141,6 @@ public class EntertainmentManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);
+        
     }
 }
