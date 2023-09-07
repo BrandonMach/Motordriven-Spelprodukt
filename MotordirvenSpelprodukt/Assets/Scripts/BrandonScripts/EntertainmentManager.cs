@@ -26,14 +26,17 @@ public class EntertainmentManager : MonoBehaviour
     private float _startETP;
     private float _currentThreshold;
 
-
+    [Header("OOC- Out Of Combat")]
     public GameObject[] EnemyGameObjects;
     public GameObject PlayerCharacter;
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
     [SerializeField] float _timeOutOfCombatCounter = 0;
     [SerializeField] float _timeOutOfCombatThreshold;
 
-
+    [Header("Combo Sequence")]
+    public KeyCode[] _inputSequence;
+    int _indexOfINputSequence = 0;
+    
 
 
     [Header("Conditions")]
@@ -63,10 +66,10 @@ public class EntertainmentManager : MonoBehaviour
         CheckIfOutOfCombat();
 
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _entertainmentPoints += 25;
-        }
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    _entertainmentPoints += 25;
+        //}
 
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -94,8 +97,36 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
 
+        //Combo sequence
+
+        if(_indexOfINputSequence < _inputSequence.Length)
+        {
+            if (Input.GetKeyDown(_inputSequence[_indexOfINputSequence]))  
+            {
+                Debug.Log(_inputSequence[_indexOfINputSequence]);
+                _indexOfINputSequence++;
+               
+                //Timer, if no correct input i made start over
 
 
+
+                if (_indexOfINputSequence == _inputSequence.Length)
+                {
+                    _indexOfINputSequence = 0;
+                    Debug.Log("Combo sequence achived");
+                    _entertainmentPoints += 25;
+                }
+
+            }
+        }
+
+        
+
+
+
+
+
+        //For testing
         OOCPopUp.SetActive(_isOutOfCombat);
        
 
