@@ -8,6 +8,7 @@ public class EntertainmentManager : MonoBehaviour
     //For Testing
     public TextMeshProUGUI EntertainmentText;
     public TextMeshProUGUI CrowdText;
+    public GameObject OOCPopUp;
 
 
     [SerializeField] float _entertainmentPoints;
@@ -30,7 +31,7 @@ public class EntertainmentManager : MonoBehaviour
     public GameObject PlayerCharacter;
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
     [SerializeField] float _timeOutOfCombatCounter = 0;
-    [SerializeField] float _timeOutOfCombatThreshold = 10;
+    [SerializeField] float _timeOutOfCombatThreshold;
 
 
 
@@ -58,6 +59,10 @@ public class EntertainmentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        CheckIfOutOfCombat();
+
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             _entertainmentPoints += 25;
@@ -90,41 +95,42 @@ public class EntertainmentManager : MonoBehaviour
 
 
 
+
+        OOCPopUp.SetActive(_isOutOfCombat);
+       
+
+
+
+
+    }
+
+    void CheckIfOutOfCombat()
+    {
         //Scan for enemies
 
         foreach (GameObject enemies in EnemyGameObjects)
         {
             float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
-            if(dist > _scanEnemyArea)
+            if (dist > _scanEnemyArea)
             {
-
                 _timeOutOfCombatCounter += Time.deltaTime;
 
                 if (_timeOutOfCombatCounter >= _timeOutOfCombatThreshold)
                 {
                     Debug.Log("Out of Combat");
                     _isOutOfCombat = true;
-
                 }
-
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Q)) //""
+                if (Input.GetKeyDown(KeyCode.Q)) //"Switch _isOutOfCombat to false when attacking is detected, Placeholder for now"
                 {
                     _isOutOfCombat = false;
-                    //_timeOutOfCombatCounter = 0; //Lägg till att man måste attackera en enemy innan man sätter den till 0 i real game
+
                 }
-                //_isOutOfCombat = false;
-                _timeOutOfCombatCounter = 0; //Lägg till att man måste attackera en enemy innan man sätter den till 0 i real game
+                _timeOutOfCombatCounter = 0;
             }
         }
-
-       
-
-
-
-
     }
 
     void OutOfCombatDecreaseOverTime()
