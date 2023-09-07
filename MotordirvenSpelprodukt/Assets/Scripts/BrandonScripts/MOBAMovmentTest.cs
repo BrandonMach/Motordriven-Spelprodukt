@@ -8,10 +8,10 @@ public class MOBAMovmentTest : MonoBehaviour
     
     NavMeshAgent _agent;
 
-    public float rotateSpeedMovement = 0.1f;
+    public float RotateSpeedMovement = 0.1f;
     float _rotateVelocity;
 
-    public GameObject mousePing;
+    public GameObject MousePing;
     void Start()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
@@ -30,12 +30,12 @@ public class MOBAMovmentTest : MonoBehaviour
             {
                 //Have the agent move to the raycast/ hit point
                 _agent.SetDestination(_hit.point);
-                mousePing.transform.position = new Vector3(_hit.point.x, (_hit.point.y+0.1f), _hit.point.z);
-                Instantiate(mousePing, mousePing.transform);
+                MousePing.transform.position = new Vector3(_hit.point.x, (_hit.point.y+0.1f), _hit.point.z);
+                Instantiate(MousePing, MousePing.transform);
                 //Rotation
 
                 Quaternion _rotationToLookAt = Quaternion.LookRotation(_hit.point - transform.position);
-                float _rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, _rotationToLookAt.eulerAngles.y, ref _rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
+                float _rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, _rotationToLookAt.eulerAngles.y, ref _rotateVelocity, RotateSpeedMovement * (Time.deltaTime * 5));
 
                 transform.eulerAngles = new Vector3(0, _rotationY, 0);
             }

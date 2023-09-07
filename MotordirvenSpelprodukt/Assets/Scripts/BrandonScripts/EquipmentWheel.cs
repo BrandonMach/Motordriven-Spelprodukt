@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class EquipmentWheel : MonoBehaviour
 {
-    public Transform center;
-    public Transform selectObject;
-    public GameObject unequipSprite;
+    public Transform Center;
+    public Transform SelectObject;
+    public GameObject UnequipSprite;
 
-    public GameObject equipmentMenuRoot;
-    bool isEquipmentMenuActive;
+    public GameObject EquipmentMenuRoot;
+    bool _isEquipmentMenuActive;
 
-    public TextMeshProUGUI selectionText;
+    public TextMeshProUGUI SelectionText;
 
-    public GameObject[] equipedItems;
+    public GameObject[] EquipedItems;
     void Start()
     {
-        isEquipmentMenuActive = false;
+        _isEquipmentMenuActive = false;
     }
 
     // Update is called once per frame
@@ -26,34 +26,34 @@ public class EquipmentWheel : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            isEquipmentMenuActive = !isEquipmentMenuActive;
+            _isEquipmentMenuActive = !_isEquipmentMenuActive;
 
-            if (isEquipmentMenuActive)
+            if (_isEquipmentMenuActive)
             {
-                equipmentMenuRoot.SetActive(true);
+                EquipmentMenuRoot.SetActive(true);
             }
             else
             {
-                equipmentMenuRoot.SetActive(false);
+                EquipmentMenuRoot.SetActive(false);
             }
         }
 
 
-        if (isEquipmentMenuActive)
+        if (_isEquipmentMenuActive)
         {
             //Calculate angle
 
-            Vector2 delta = center.position - Input.mousePosition; //Eller Handkontroll, kolla upp så att et funkar
+            Vector2 delta = Center.position - Input.mousePosition; //Eller Handkontroll, kolla upp så att et funkar
             float angle = Mathf.Atan2(delta.x, delta.y) * Mathf.Rad2Deg;
             angle += 180;
 
-            Debug.LogError(angle);
+            //Debug.LogError(angle);
 
 
             if (angle >= 46 && angle < 135)
             {
-                selectObject.eulerAngles = new Vector3(0, 0, 270);
-                selectionText.text = "Right Hand";
+                SelectObject.eulerAngles = new Vector3(0, 0, 270);
+                SelectionText.text = "Right Hand";
                 CheckIfEquiped(0);
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -62,8 +62,8 @@ public class EquipmentWheel : MonoBehaviour
             }
             else if (angle >= 136 && angle < 226)
             {
-                selectObject.eulerAngles = new Vector3(0, 0, 180);
-                selectionText.text = "Armour";
+                SelectObject.eulerAngles = new Vector3(0, 0, 180);
+                SelectionText.text = "Armour";
                 CheckIfEquiped(1);
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -72,8 +72,8 @@ public class EquipmentWheel : MonoBehaviour
             }
             else if (angle >= 227 && angle < 315)
             {
-                selectObject.eulerAngles = new Vector3(0, 0, 90);
-                selectionText.text = "Left Hand";
+                SelectObject.eulerAngles = new Vector3(0, 0, 90);
+                SelectionText.text = "Left Hand";
                 CheckIfEquiped(2);
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -82,8 +82,8 @@ public class EquipmentWheel : MonoBehaviour
             }
             else
             {
-                selectObject.eulerAngles = new Vector3(0, 0, 0);
-                selectionText.text = "Headgear";
+                SelectObject.eulerAngles = new Vector3(0, 0, 0);
+                SelectionText.text = "Headgear";
                 CheckIfEquiped(3);
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -97,26 +97,26 @@ public class EquipmentWheel : MonoBehaviour
     void ToggelEquip(int itemindex)
     {
 
-        if (equipedItems[itemindex].GetComponent<Equipment>().isEquiped)
+        if (EquipedItems[itemindex].GetComponent<Equipment>().IsEquiped)
         {
-            equipedItems[itemindex].SetActive(false);
+            EquipedItems[itemindex].SetActive(false);
         }
-        else if (!equipedItems[itemindex].GetComponent<Equipment>().isEquiped)
+        else if (!EquipedItems[itemindex].GetComponent<Equipment>().IsEquiped)
         {
-            equipedItems[itemindex].SetActive(true);
+            EquipedItems[itemindex].SetActive(true);
         }
-        equipedItems[itemindex].GetComponent<Equipment>().isEquiped = !equipedItems[itemindex].GetComponent<Equipment>().isEquiped;
+        EquipedItems[itemindex].GetComponent<Equipment>().IsEquiped = !EquipedItems[itemindex].GetComponent<Equipment>().IsEquiped;
     }
 
     void CheckIfEquiped(int itemindex)
     {
-        if (equipedItems[itemindex].GetComponent<Equipment>().isEquiped)
+        if (EquipedItems[itemindex].GetComponent<Equipment>().IsEquiped)
         {
-            unequipSprite.SetActive(true);
+            UnequipSprite.SetActive(true);
         }
-        else if (!equipedItems[itemindex].GetComponent<Equipment>().isEquiped)
+        else if (!EquipedItems[itemindex].GetComponent<Equipment>().IsEquiped)
         {
-            unequipSprite.SetActive(false);
+            UnequipSprite.SetActive(false);
         }
 
 

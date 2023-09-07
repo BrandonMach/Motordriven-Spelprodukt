@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
-    public bool isEquiped;
+    public bool IsEquiped;
 
     void Start()
     {
-        isEquiped = true;
+        IsEquiped = true;
     }
 
     // Update is called once per frame

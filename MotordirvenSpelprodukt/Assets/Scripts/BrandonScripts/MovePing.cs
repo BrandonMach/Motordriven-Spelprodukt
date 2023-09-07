@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovePing : MonoBehaviour
 {
-    public float timeAlive = 3;
+    public float TimeAlive = 3;
     float startTime = 0;
 
     void Start()
@@ -16,7 +16,7 @@ public class MovePing : MonoBehaviour
     void Update()
     {
         startTime += Time.deltaTime;
-        if (startTime >= timeAlive)
+        if (startTime >= TimeAlive)
         {
             Destroy(gameObject);
         }
