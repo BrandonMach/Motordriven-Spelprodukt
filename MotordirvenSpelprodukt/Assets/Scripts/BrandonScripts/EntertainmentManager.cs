@@ -6,7 +6,8 @@ using TMPro;
 public class EntertainmentManager : MonoBehaviour
 {
     //For Testing
-    public TextMeshProUGUI EntertainmentText; 
+    public TextMeshProUGUI EntertainmentText;
+    public TextMeshProUGUI CrowdText;
 
 
     [SerializeField] float _entertainmentPoints;
@@ -20,13 +21,9 @@ public class EntertainmentManager : MonoBehaviour
     //ETP = Entartainment Points
 
     [SerializeField] private float _maxETP = 100;
+    private float _ETPThreashold;
     private float _startETP;
     private float _currentThreshold;
-
-
-
-
-
 
 
     [Header("Conditions")]
@@ -38,8 +35,7 @@ public class EntertainmentManager : MonoBehaviour
     {
 
         _startETP = _maxETP / 2;
-
-        //EntertainmentThreshold = _currentThreshold;
+        _ETPThreashold = _maxETP / 2;
         _entertainmentPoints = _startETP;
 
         //Start from midde for now
@@ -66,6 +62,16 @@ public class EntertainmentManager : MonoBehaviour
             OutOfCombatDecreaseOverTime();
         }
 
+        if(_entertainmentPoints < _ETPThreashold)
+        {
+            CrowdText.text = "Booooooo!!";
+        }
+        else
+        {
+            CrowdText.text = "Let's GOOOOO!!";
+            CrowdText.color = Color.black;
+        }
+
         _indicatorArrowrRotateAngle = (180 / _maxETP) * _entertainmentPoints;
 
         _entertainmentPoints =  Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
@@ -76,16 +82,6 @@ public class EntertainmentManager : MonoBehaviour
     void OutOfCombatDecreaseOverTime()
     {
         _indicatorArrowrRotateAngle = Mathf.Clamp(_indicatorArrowrRotateAngle, 0, 180);
-
-        float pointsDecrease = 180 / _maxETP;
-
-        //if(_indicatorArrowrRotateAngle > 0)
-        //{
-        //    _indicatorArrowrRotateAngle -= (Time.deltaTime * pointsDecrease);
-        //    Debug.Log(_indicatorArrowrRotateAngle);
-
-        //    _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
-        //}
 
         _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
 
