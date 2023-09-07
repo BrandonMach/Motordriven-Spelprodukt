@@ -26,22 +26,33 @@ public class EntertainmentManager : MonoBehaviour
     private float _currentThreshold;
 
 
+    public GameObject[] EnemyGameObjects;
+    public GameObject PlayerCharacter;
+    [SerializeField] [Range(0, 10)] float _scanEnemyArea;
+    [SerializeField] float _timeOutOfCombatCounter = 0;
+    [SerializeField] float _timeOutOfCombatThreshold = 10;
+
+
+
+
     [Header("Conditions")]
 
-    [SerializeField] private bool _outOfCombat;
+    [SerializeField] private bool _isOutOfCombat; //OOC
 
 
     void Start()
     {
 
+        EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
+
+
+
+        //ETP
         _startETP = _maxETP / 2;
         _ETPThreashold = _maxETP / 2;
         _entertainmentPoints = _startETP;
-
-        //Start from midde for now
         _indicatorArrowrRotateAngle = 90;
         _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
-        //EntertainmentText.text = Mathf.Round(_entertainmentPoints).ToString();
     }
 
     // Update is called once per frame
@@ -54,10 +65,10 @@ public class EntertainmentManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            _outOfCombat = !_outOfCombat;
+            _isOutOfCombat = !_isOutOfCombat;
         }
 
-        if (_outOfCombat)
+        if (_isOutOfCombat)
         {
             OutOfCombatDecreaseOverTime();
         }
@@ -77,6 +88,37 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints =  Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
+
+
+        //Scan for enemies
+
+        foreach (GameObject enemies in EnemyGameObjects)
+        {
+            float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
+            if(dist <= _scanEnemyArea)
+            {
+                _timeOutOfCombatCounter = 0; //Lägg till att man måste attackera en enemy innan man sätter den till 0 i real game
+                _isOutOfCombat = false;
+                //Debug.Log("Enemy close enough");
+            }
+            else
+            {
+                _timeOutOfCombatCounter += Time.deltaTime;
+
+                if(_timeOutOfCombatCounter >= _timeOutOfCombatThreshold)
+                {
+                    Debug.Log("Out of Combat");
+                    _isOutOfCombat = true;
+
+                }
+            }
+        }
+
+       
+
+
+
+
     }
 
     void OutOfCombatDecreaseOverTime()
@@ -87,5 +129,11 @@ public class EntertainmentManager : MonoBehaviour
 
         _entertainmentPoints -= (Time.deltaTime); //Every second ETP -1
 
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);
     }
 }
