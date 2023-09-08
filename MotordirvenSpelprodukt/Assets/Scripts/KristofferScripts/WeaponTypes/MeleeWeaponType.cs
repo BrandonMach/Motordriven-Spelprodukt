@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "MeleeWeaponType")]
+[CreateAssetMenu(menuName = "WeaponType/MeleeWeaponType")]
 public class MeleeWeaponType : Weapontype
 {
     

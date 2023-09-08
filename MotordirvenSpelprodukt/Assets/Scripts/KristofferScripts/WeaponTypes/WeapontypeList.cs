@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="WeapontypeList")]
+[CreateAssetMenu(menuName = "WeaponType/WeapontypeList")]
 public class WeapontypeList : ScriptableObject
 {
     [SerializeField] private List<Weapontype> weapontypes;
