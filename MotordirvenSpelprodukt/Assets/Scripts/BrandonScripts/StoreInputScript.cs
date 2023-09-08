@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StoreInputScript : MonoBehaviour
 {
 
+    //For testing
+
+    public bool IsSpamming;
+
+
     [SerializeField] KeyCode[] _attackInputs;
     public List<KeyCode> _lastUsedInputs = new List<KeyCode>();
-    string _keySpammed;
+    public int _spamThreshold; //Should be private in final build
+
 
     void Start()
     {
@@ -21,59 +28,34 @@ public class StoreInputScript : MonoBehaviour
         {
             if (Input.GetKeyDown(_attackInputs[i])) 
             {
-                Debug.Log("Pressed");
-                _lastUsedInputs.Add(_attackInputs[i]);
+                if(_lastUsedInputs.Count == _spamThreshold) //remove first inputed key
+                {
+                    _lastUsedInputs.RemoveAt(0);
+                }          
+                _lastUsedInputs.Add(_attackInputs[i]); //add latest key
                 
-            }
-               
-        }
-        
-
-        if(CheckSpamInput(_lastUsedInputs, _lastUsedInputs.Count, 5))
-        {
-            Debug.LogError("Spamming Attack " + _keySpammed);
+            }        
         }
 
-        
+        CheckSpamInput(_lastUsedInputs);
+
         
            
     }
 
-    bool CheckLast3Input(List<KeyCode> inputList, int listLenght)
+    void CheckSpamInput(List<KeyCode> inputList)
     {
-        
+        var occurrences = inputList.GroupBy(x => x).ToDictionary(y => y.Key, z => z.Count());
 
-        return false;
-    }
-
-    bool CheckSpamInput(List<KeyCode> inputList, int listLenght,int range)
-    {
-
-        for (int i = 0; i < listLenght; i++)
+        foreach (var item in occurrences)
         {
-            int j = i + 1;
-            int k = j + 1;
-            int l = k + 1;
-            int o = l + 1;
-            int searchRange = range;
-
-            while(searchRange > 0 && j < listLenght)
+            if(item.Value == _spamThreshold) //If spam threshold is all the same key player has spammed
             {
-                if (inputList[i] == inputList[j])
-                {
-                    _keySpammed = inputList[i].ToString();
-
-                    return true;
-                }
-
-                j++;
-                searchRange--;
+                Debug.Log("Spammed attack button: " + item.Key + item.Value + " times.");
+                IsSpamming = true;
             }
-
         }
-
-        return false;
-
-
     }
+
+   
 }

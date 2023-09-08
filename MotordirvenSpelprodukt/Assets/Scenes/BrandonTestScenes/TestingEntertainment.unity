@@ -1805,6 +1805,7 @@ GameObject:
   - component: {fileID: 1432420031}
   - component: {fileID: 1432420030}
   - component: {fileID: 1432420035}
+  - component: {fileID: 1432420036}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1946,6 +1947,22 @@ MonoBehaviour:
   _timeOutOfCombatThreshold: 7
   _inputSequence: 76000000620000006e000000
   _isOutOfCombat: 0
+--- !u!114 &1432420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432420029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb899d698cf876489a81c636e646f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsSpamming: 0
+  _attackInputs: 76000000620000006e0000006d000000
+  _lastUsedInputs: 
+  _spamThreshold: 3
 --- !u!1 &1455704407
 GameObject:
   m_ObjectHideFlags: 0
