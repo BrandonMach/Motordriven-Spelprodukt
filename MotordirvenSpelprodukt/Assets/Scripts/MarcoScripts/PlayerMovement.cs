@@ -5,24 +5,22 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private GameInput _gameInput;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private Camera _mainCamera;
-    [SerializeField] private PlayerAnimation _playerAnimation;
-    [SerializeField] private Player _playerScript;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private PlayerAnimation playerAnimation;
 
-    private CharacterController _characterController;
+    private CharacterController characterController;
 
-    //Used for making the movement correct based on the cameras position
-    private Vector3 _camForward;
-    private Vector3 _camRight;
+    private Vector3 camForward;
+    private Vector3 camRight;
 
-    private bool _isMoving = false; 
+    private bool isMoving = false; 
     
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
 
     }
 
@@ -36,31 +34,31 @@ public class PlayerMovement : MonoBehaviour
     {
         GetCameraValues();
 
-        Vector2 inputvector = _gameInput.GetMovementVectorNormalized();
-        Vector3 moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
-        _characterController.Move(moveDirection * _moveSpeed * Time.deltaTime);
+        Vector2 inputvector = gameInput.GetMovementVectorNormalized();
+        Vector3 moveDirection = inputvector.x * camRight + inputvector.y * camForward;
+        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
 
   
 
 
-        _isMoving = moveDirection != Vector3.zero;
-        if (_isMoving)
+        isMoving = moveDirection != Vector3.zero;
+        if (isMoving)
         {
             Quaternion currentRotation = transform.rotation;
             Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-            transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, _rotationSpeed * Time.deltaTime);
+            transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, rotationSpeed * Time.deltaTime);
         }
-        _playerAnimation.Animate(moveDirection);
+        playerAnimation.Animate(moveDirection);
     }
         
     private void GetCameraValues()
     {
-        _camForward = _mainCamera.transform.forward;
-        _camRight = _mainCamera.transform.right;
+        camForward = mainCamera.transform.forward;
+        camRight = mainCamera.transform.right;
 
-        _camForward.y = 0;
-        _camRight.y = 0;
-        _camForward = _camForward.normalized;
-        _camRight = _camRight.normalized;
+        camForward.y = 0;
+        camRight.y = 0;
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
     }
 }
