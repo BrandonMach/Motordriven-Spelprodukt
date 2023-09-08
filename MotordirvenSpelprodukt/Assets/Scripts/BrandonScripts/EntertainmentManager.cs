@@ -62,7 +62,7 @@ public class EntertainmentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        _indicatorArrowrRotateAngle = (180 / _maxETP) * _entertainmentPoints;
         CheckIfOutOfCombat();
 
 
