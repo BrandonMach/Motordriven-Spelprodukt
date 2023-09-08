@@ -39,18 +39,30 @@ public class StoreInputScript : MonoBehaviour
            
     }
 
-    bool CheckSpamInput(List<KeyCode> inputList, int listLenght,int spamRate)
+    bool CheckLast3Input(List<KeyCode> inputList, int listLenght)
     {
+        
+
+        return false;
+    }
+
+    bool CheckSpamInput(List<KeyCode> inputList, int listLenght,int range)
+    {
+
         for (int i = 0; i < listLenght; i++)
         {
             int j = i + 1;
-            int searchRange = spamRate;
+            int k = j + 1;
+            int l = k + 1;
+            int o = l + 1;
+            int searchRange = range;
 
             while(searchRange > 0 && j < listLenght)
             {
-                if(inputList[i] == inputList[j])
+                if (inputList[i] == inputList[j])
                 {
                     _keySpammed = inputList[i].ToString();
+
                     return true;
                 }
 
