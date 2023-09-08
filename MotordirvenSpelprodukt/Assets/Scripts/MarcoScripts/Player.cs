@@ -5,8 +5,10 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-
     // Start is called before the first frame update
+    [SerializeField] GameInput _gameInput;
+
+
     void Start()
     {
         
