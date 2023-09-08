@@ -7,7 +7,9 @@ public class Weapon : ScriptableObject
 {
     [SerializeField] private string weaponName;
     [SerializeField] private Weapontype weaponType;
+    [SerializeField] private GameObject weaponPrefab; 
     [SerializeField] private int weaponLevel=1;
+    [Header("Values to be observed")]
     [SerializeField] private float weaponDamage;
     [SerializeField] private float attackSpeed;
     [SerializeField] private float range;
@@ -20,13 +22,10 @@ public class Weapon : ScriptableObject
     private void UpdateWeaponDamage() { weaponDamage = weaponType.GetDamage()*damageOffset * weaponLevel; }   
     private void UpdateRange() { range = weaponType.GetRange() * rangeOffset; }
     private void UpdateSpeed() { attackSpeed = weaponType.GetAttackSpeed() * speedOffset; }
-    public void SetUpWeapon(Weapontype type, int level)
+    public void SetUpWeapon(Weapontype type, int level, float damageOffset, float rangeOffset, float speedOffset)
     {
         weaponLevel = level;
         weaponType = type;
-    }
-    public void SetOffSet(float damageOffset, float rangeOffset, float speedOffset)
-    {
         this.damageOffset = damageOffset;
         this.rangeOffset = rangeOffset;
         this.speedOffset = speedOffset;
@@ -34,9 +33,11 @@ public class Weapon : ScriptableObject
         UpdateRange();
         UpdateSpeed();
     }
+
     public float GetDamage() { return weaponDamage; }
     public float GetRange() { return range; }
     public float GetSpeed() { return attackSpeed; }
     public string GetName(){return weaponName;}
     public Animation GetAnimation() { return weaponType.GetAnimation(); }
+    public GameObject GetPrefab() { return weaponPrefab; }
 }
