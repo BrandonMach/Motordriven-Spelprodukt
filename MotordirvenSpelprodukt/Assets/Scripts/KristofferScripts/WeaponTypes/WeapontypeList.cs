@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "WeaponType/WeapontypeList")]
 public class WeapontypeList : ScriptableObject
 {
-    [SerializeField] private List<Weapontype> weapontypes;
+    [SerializeField] private List<Weapontype> _weapontypes;
 
     public List<Weapontype> GetTypeList()
     {
-        return weapontypes;
+        return _weapontypes;
     }
 }
