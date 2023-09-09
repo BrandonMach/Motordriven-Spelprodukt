@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Weapon",menuName ="Weapon")]
 public class Weapon : ScriptableObject
@@ -22,7 +23,7 @@ public class Weapon : ScriptableObject
     private void UpdateWeaponDamage() { _weaponDamage = _weaponType.GetDamage()*_damageOffset * _weaponLevel; }   
     private void UpdateRange() { _range = _weaponType.GetRange() * _rangeOffset; }
     private void UpdateSpeed() { _attackSpeed = _weaponType.GetAttackSpeed() * _speedOffset; }
-    public void SetUpWeapon(Weapontype type, int level, float damageOffset, float rangeOffset, float speedOffset)
+    public void SetUpWeapon(Weapontype type, int level, float damageOffset=1, float rangeOffset=1, float speedOffset=1)
     {
         _weaponLevel = level;
         _weaponType = type;
@@ -33,11 +34,12 @@ public class Weapon : ScriptableObject
         UpdateRange();
         UpdateSpeed();
     }
-
+    public void SetName(string weaponName) { _weaponName = weaponName; }
+    public Image GetImage() { return _weaponType.GetImage(); }
     public float GetDamage() { return _weaponDamage; }
     public float GetRange() { return _range; }
     public float GetSpeed() { return _attackSpeed; }
-    public string GetName(){return _weaponName;}
+    public string GetName(){return _weaponName;}  
     public Animation GetAnimation() { return _weaponType.GetAnimation(); }
     public GameObject GetPrefab() { return _weaponPrefab; }
 }
