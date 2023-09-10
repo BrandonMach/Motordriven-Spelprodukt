@@ -11,7 +11,7 @@ public class MOBACamera : MonoBehaviour
     [SerializeField]
     private CameraEvent cameraEvent;
     [SerializeField]
-    private Transform player;           // Remove later! (player should use camera event!)
+    private Transform player;           // TODO: Remove later! (player should use camera event!)
 
 
     Transform targetTransform;
@@ -20,9 +20,9 @@ public class MOBACamera : MonoBehaviour
 
     public enum CameraState
     {
-        STASIS,
-        FOLLOWPLAYER,
-        FOCUSTARGET
+        Stasis,
+        FollowPlayer,
+        FocusTarget
     }
 
     #region Register/unregister event handlers
@@ -43,16 +43,15 @@ public class MOBACamera : MonoBehaviour
     {
         targetTransform = player.transform;       // By default follow player. Let Game Manager class handle this (remove later)
         transform.localEulerAngles = viewData.angleOffset;
-        cameraState = CameraState.FOLLOWPLAYER;
+        cameraState = CameraState.FollowPlayer;
 
-        NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
-        cameraSpeed = agent != null ? agent.speed : 1;
+        cameraSpeed = 5;      // TODO: Needs access to the player movement speed
     }
 
     private void LateUpdate()
     {
-        if (cameraState == CameraState.STASIS) return;
-        if (cameraState == CameraState.FOLLOWPLAYER) UpdateCameraPos();
+        if (cameraState == CameraState.Stasis) return;
+        if (cameraState == CameraState.FollowPlayer) UpdateCameraPos();
     }
 
     private void UpdateCameraPos()
@@ -67,12 +66,12 @@ public class MOBACamera : MonoBehaviour
     private void ResumePlayerFocus()
     {
         targetTransform = player.transform;
-        cameraState = CameraState.FOLLOWPLAYER;
+        cameraState = CameraState.FollowPlayer;
     }
 
     private void LookAt(Transform targetTransform)
     {
         this.targetTransform = targetTransform;
-        cameraState = CameraState.FOCUSTARGET;
+        cameraState = CameraState.FocusTarget;
     }
 }
