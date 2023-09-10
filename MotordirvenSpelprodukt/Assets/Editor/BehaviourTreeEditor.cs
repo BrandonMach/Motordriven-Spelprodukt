@@ -4,6 +4,8 @@ using UnityEngine.UIElements;
 
 public class BehaviourTreeEditor : EditorWindow
 {
+    BehaviourTreeView treeView;
+    InspectorView inspectorView;
     [SerializeField]
     private VisualTreeAsset m_VisualTreeAsset = default;
 
@@ -25,5 +27,17 @@ public class BehaviourTreeEditor : EditorWindow
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
         root.styleSheets.Add(styleSheet);
+
+        treeView = root.Q<BehaviourTreeView>();
+        inspectorView = root.Q<InspectorView>();
+    }
+
+    private void OnSelectionChange()
+    {
+        BehaviourTree tree = Selection.activeObject as BehaviourTree;
+        if(tree)
+        {
+            treeView.PopulateView(tree);
+        }
     }
 }
