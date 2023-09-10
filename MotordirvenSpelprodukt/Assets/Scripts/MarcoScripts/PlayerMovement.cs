@@ -5,28 +5,49 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private GameInput gameInput;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private Camera mainCamera;
-    [SerializeField] private PlayerAnimation playerAnimation;
+    public enum InputMode
+    {
+        TwoStick,
+        OneStick
+    }
 
-    private CharacterController characterController;
+    [SerializeField] private InputMode _currentInputMode;
 
-    private Vector3 camForward;
-    private Vector3 camRight;
+    [SerializeField] private GameInput _gameInput;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private PlayerAnimation _playerAnimation;
 
-    private bool isMoving = false; 
+    private CharacterController _characterController;
+
+    Vector3 _moveDirection;
+
+    private Vector3 _camForward;
+    private Vector3 _camRight;
+
+    private bool _isMoving = false; 
     
     private void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        _characterController = GetComponent<CharacterController>();
 
     }
 
     void Update()
     {
         Move();
+        switch (_currentInputMode)
+        {
+            case InputMode.TwoStick:
+                RotateWithInput();
+                break;
+            case InputMode.OneStick:
+                Rotate();
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -34,31 +55,47 @@ public class PlayerMovement : MonoBehaviour
     {
         GetCameraValues();
 
-        Vector2 inputvector = gameInput.GetMovementVectorNormalized();
-        Vector3 moveDirection = inputvector.x * camRight + inputvector.y * camForward;
-        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+        Vector2 inputvector = _gameInput.GetMovementVectorNormalized();
+        _moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
+        _characterController.Move(_moveDirection * _moveSpeed * Time.deltaTime);
 
-  
+        _isMoving = _moveDirection != Vector3.zero;
+     
+        _playerAnimation.Animate(_moveDirection);
 
+    }
 
-        isMoving = moveDirection != Vector3.zero;
-        if (isMoving)
+    private void Rotate()
+    {
+        if (_isMoving)
         {
             Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-            transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, rotationSpeed * Time.deltaTime);
+            Quaternion newRotation = Quaternion.LookRotation(_moveDirection);
+            transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, _rotationSpeed * Time.deltaTime);
         }
-        playerAnimation.Animate(moveDirection);
+    }
+
+    private void RotateWithInput()
+    {
+        if (_isMoving)
+        {
+            Vector2 inputVector = _gameInput.GetDirectionVectorNormalized();
+            _moveDirection = inputVector.x * _camRight + inputVector.y * _camForward;
+
+            Quaternion currentRotation = transform.rotation;
+            Quaternion newRotation = Quaternion.LookRotation(_moveDirection);
+            transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, _rotationSpeed * Time.deltaTime);
+        }
     }
         
     private void GetCameraValues()
     {
-        camForward = mainCamera.transform.forward;
-        camRight = mainCamera.transform.right;
+        _camForward = _mainCamera.transform.forward;
+        _camRight = _mainCamera.transform.right;
 
-        camForward.y = 0;
-        camRight.y = 0;
-        camForward = camForward.normalized;
-        camRight = camRight.normalized;
+        _camForward.y = 0;
+        _camRight.y = 0;
+        _camForward = _camForward.normalized;
+        _camRight = _camRight.normalized;
     }
 }
