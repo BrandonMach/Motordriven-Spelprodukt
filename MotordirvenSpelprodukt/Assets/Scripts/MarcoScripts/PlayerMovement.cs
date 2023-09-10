@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.HID;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public enum InputMode
+    public enum RotateMode
     {
         TwoStick,
         OneStick
     }
 
+    public enum InputMode
+    {
+        Controller,
+        MnK
+    }
+
+    [SerializeField] private RotateMode _currentRotateMode;
     [SerializeField] private InputMode _currentInputMode;
 
     [SerializeField] private GameInput _gameInput;
@@ -26,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _camForward;
     private Vector3 _camRight;
 
+    private Vector3 _lookPos;
+    private Vector3 _rotateDirection;
+
     private bool _isMoving = false; 
     
     private void Start()
@@ -37,17 +48,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Move();
-        switch (_currentInputMode)
+        switch (_currentRotateMode)
         {
-            case InputMode.TwoStick:
+            case RotateMode.TwoStick:
                 RotateWithInput();
                 break;
-            case InputMode.OneStick:
+            case RotateMode.OneStick:
                 Rotate();
                 break;
             default:
                 break;
         }
+
+        _playerAnimation.Animate(_moveDirection, _rotateDirection);
 
     }
 
@@ -57,12 +70,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 inputvector = _gameInput.GetMovementVectorNormalized();
         _moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
-        _characterController.Move(_moveDirection * _moveSpeed * Time.deltaTime);
+
+        _characterController.SimpleMove(_moveDirection * _moveSpeed);
 
         _isMoving = _moveDirection != Vector3.zero;
-     
-        _playerAnimation.Animate(_moveDirection);
-
     }
 
     private void Rotate()
@@ -77,15 +88,45 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotateWithInput()
     {
-        if (_isMoving)
-        {
-            Vector2 inputVector = _gameInput.GetDirectionVectorNormalized();
-            _moveDirection = inputVector.x * _camRight + inputVector.y * _camForward;
 
-            Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = Quaternion.LookRotation(_moveDirection);
+        
+
+        switch (_currentInputMode)
+        {
+            case InputMode.Controller:
+                Vector3 input = _gameInput.GetDirectionVectorNormalized();
+                _rotateDirection = input.x * _camRight + input.y * _camForward;
+                break;
+            case InputMode.MnK:
+
+                Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Plane groundPlane = new Plane(Vector3.up, transform.position);
+                float rayLength;
+
+                if (groundPlane.Raycast(cameraRay, out rayLength))
+                {
+                    //Get the point in worldspace where we have our mouse and calculate the direction from the player
+                    Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+                    _lookPos = pointToLook;
+                    _rotateDirection = pointToLook - transform.position;
+                    _rotateDirection.Normalize();
+                }
+
+                break;
+            default:
+                break;
+        }
+
+        Quaternion currentRotation = transform.rotation;
+        Quaternion newRotation = Quaternion.LookRotation(_rotateDirection);
+
+        bool isRotating = currentRotation != newRotation && _rotateDirection != Vector3.zero;
+        if (isRotating)
+        {
             transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, _rotationSpeed * Time.deltaTime);
         }
+
+
     }
         
     private void GetCameraValues()
@@ -97,5 +138,11 @@ public class PlayerMovement : MonoBehaviour
         _camRight.y = 0;
         _camForward = _camForward.normalized;
         _camRight = _camRight.normalized;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(_lookPos, 2);
     }
 }

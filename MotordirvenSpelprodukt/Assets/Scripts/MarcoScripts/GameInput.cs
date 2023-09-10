@@ -23,4 +23,10 @@ public class GameInput : MonoBehaviour
         Vector2 inputVector = _playerInputActions.Player.Look.ReadValue<Vector2>();
         return inputVector.normalized;
     }
+
+    public Vector2 GetMousePosition()
+    {
+        Vector2 inputVector = _playerInputActions.Player.MousePos.ReadValue<Vector2>();
+        return inputVector;
+    }
 }
