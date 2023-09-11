@@ -38,9 +38,16 @@ public class ComboTestScript : MonoBehaviour
 
 
 
-        foreach (var item in cbList)
+        for (int i = 0; i < cbList.Count; i++)
         {
-            _comboTreeInfoText.text = item.ToString();
+            for (int j = 0; j < cbList[i].Length; j++)
+            {
+                ComboTree += ", "+  cbList[i].GetValue(j).ToString();
+            }
+
+            
+            _comboTreeInfoText.text += "Combo: "+(ComboTree.Remove(0, 1)) +"\n";
+            ComboTree = "";
         }
 
     }
