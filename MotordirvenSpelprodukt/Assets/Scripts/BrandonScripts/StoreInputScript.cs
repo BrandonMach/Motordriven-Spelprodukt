@@ -8,7 +8,7 @@ public class StoreInputScript : MonoBehaviour
 
     //For testing
 
-    public bool IsSpamming;
+    [SerializeField] private bool _isSpamming;
 
 
     [SerializeField] KeyCode[] _attackInputs;
@@ -45,14 +45,18 @@ public class StoreInputScript : MonoBehaviour
 
     void CheckSpamInput(List<KeyCode> inputList)
     {
-        var occurrences = inputList.GroupBy(x => x).ToDictionary(y => y.Key, z => z.Count());
+        var occurrences = inputList.GroupBy(x => x).ToDictionary(y => y.Key, z => z.Count()); //Groupes by all the same inputs and counts the occurrences
 
         foreach (var item in occurrences)
         {
-            if(item.Value == _spamThreshold) //If spam threshold is all the same key player has spammed
+            if(item.Value == _spamThreshold) //If the occurences of one input is same as Spamthreshold 
             {
                 Debug.Log("Spammed attack button: " + item.Key + item.Value + " times.");
-                IsSpamming = true;
+                _isSpamming = true;
+            }
+            else
+            {
+                _isSpamming = false;
             }
         }
     }
