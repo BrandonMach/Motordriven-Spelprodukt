@@ -21,6 +21,16 @@ namespace LevelDesign
             Gizmos.color = Color.green;
             foreach (var obj in pos) Gizmos.DrawCube(obj, new Vector3(1, 2, 1));
         }
+
+        static void DrawPebbles(Vector3[] pos)
+        {
+            // TODO
+        }
+
+        static void DrawGrass(Vector3[] pos)
+        {
+            // TODO
+        }
     }
 }
 
