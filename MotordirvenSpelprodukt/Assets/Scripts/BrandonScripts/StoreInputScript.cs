@@ -15,10 +15,11 @@ public class StoreInputScript : MonoBehaviour
     public List<KeyCode> _lastUsedInputs = new List<KeyCode>();
     public int _spamThreshold; //Should be private in final build
 
+    [SerializeField] private EntertainmentManager _etpManager;
 
     void Start()
     {
-        
+        _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>(); //Canvas of now, name may need to change
     }
 
     
@@ -26,18 +27,26 @@ public class StoreInputScript : MonoBehaviour
     {
         for (int i = 0; i < _attackInputs.Length; i++)
         {
-            if (Input.GetKeyDown(_attackInputs[i])) 
+            if (Input.GetKeyDown(_attackInputs[i])) //Checks if attack input has been pressed
             {
-                if(_lastUsedInputs.Count == _spamThreshold) //remove first inputed key
+                if (_lastUsedInputs.Count == _spamThreshold) //remove first inputed key
                 {
                     _lastUsedInputs.RemoveAt(0);
                 }          
                 _lastUsedInputs.Add(_attackInputs[i]); //add latest key
-                
+
+                CheckSpamInput(_lastUsedInputs);
+
+                if (_isSpamming)
+                {
+                    //Decrease ETP
+                    _etpManager.DecreseETP(10);
+                }
+
             }        
         }
 
-        CheckSpamInput(_lastUsedInputs);
+        
 
         
            
@@ -45,7 +54,7 @@ public class StoreInputScript : MonoBehaviour
 
     void CheckSpamInput(List<KeyCode> inputList)
     {
-        var occurrences = inputList.GroupBy(x => x).ToDictionary(y => y.Key, z => z.Count()); //Groupes by all the same inputs and counts the occurrences
+        Dictionary<KeyCode,int> occurrences = inputList.GroupBy(x => x).ToDictionary(y => y.Key, z => z.Count()); //Groupes by all the same inputs and counts the occurrences
 
         foreach (var item in occurrences)
         {
@@ -59,7 +68,5 @@ public class StoreInputScript : MonoBehaviour
                 _isSpamming = false;
             }
         }
-    }
-
-   
+    }  
 }
