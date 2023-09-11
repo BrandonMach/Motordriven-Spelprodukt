@@ -8,11 +8,8 @@ public class MOBACamera : MonoBehaviour
     CameraViewData viewData;
 
     [Header("Event & Target")]
-    [SerializeField]
-    private CameraEvent cameraEvent;
-    [SerializeField]
-    private Transform player;           // Remove later! (player should use camera event!)
-
+    [SerializeField] private CameraEvent cameraEvent;
+    [SerializeField] private Transform player;           // Remove later! (player should use camera event!)
 
     Transform targetTransform;
     float cameraSpeed;
@@ -44,9 +41,7 @@ public class MOBACamera : MonoBehaviour
         targetTransform = player.transform;       // By default follow player. Let Game Manager class handle this (remove later)
         transform.localEulerAngles = viewData.angleOffset;
         cameraState = CameraState.FOLLOWPLAYER;
-
-        NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
-        cameraSpeed = agent != null ? agent.speed : 1;
+        cameraSpeed = 5;    // TODO: Get access to player movement speed
     }
 
     private void LateUpdate()
