@@ -14,7 +14,6 @@ public class PDSTest : MonoBehaviour
     [SerializeField] private Vector2 regionSize = Vector2.one;
     [SerializeField] private int maxSamplingCount = 30;
 
-
     List<Vector2> points;
 
     private void OnValidate()
