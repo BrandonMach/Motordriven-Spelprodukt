@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class Weapontype : ScriptableObject
 {
-    [SerializeField] private Image image;
-    [SerializeField] private float baseDamage;
-    [SerializeField] private float weaponRange;
-    [SerializeField] private float attackSpeed;
-    [SerializeField] private Animation weaponAnimation;
-    public Image GetImage(){return image;}
-    public Animation GetAnimation(){return weaponAnimation;}
-    public float GetDamage(){return baseDamage;}
-    public float GetRange() { return weaponRange; }
-    public float GetAttackSpeed(){return attackSpeed;}
+    [SerializeField] private Image _image;
+    [SerializeField] private float _baseDamage;
+    [SerializeField] private float _weaponRange;
+    [SerializeField] private float _attackSpeed;
+    [SerializeField] private Animation _weaponAnimation;
+    public Image GetImage(){return _image;}
+    public Animation GetAnimation(){return _weaponAnimation;}
+    public float GetDamage(){return _baseDamage;}
+    public float GetRange() { return _weaponRange; }
+    public float GetAttackSpeed(){return _attackSpeed;}
 }
