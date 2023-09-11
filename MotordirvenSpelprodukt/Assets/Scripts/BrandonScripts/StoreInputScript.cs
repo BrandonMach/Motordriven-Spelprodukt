@@ -9,6 +9,9 @@ public class StoreInputScript : MonoBehaviour
     //For testing
 
     [SerializeField] private bool _isSpamming;
+    ArrayList comboList = new ArrayList();
+
+
 
 
     [SerializeField] KeyCode[] _attackInputs;
@@ -20,6 +23,7 @@ public class StoreInputScript : MonoBehaviour
     void Start()
     {
         _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>(); //Canvas of now, name may need to change
+
     }
 
     

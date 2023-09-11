@@ -33,16 +33,16 @@ public class EntertainmentManager : MonoBehaviour
     [SerializeField] float _timeOutOfCombatCounter = 0;
     [SerializeField] float _timeOutOfCombatThreshold;
 
-    [Header("Combo Sequence")]
-    public KeyCode[] _inputSequence;
-    int _indexOfINputSequence = 0;
+    //[Header("Combo Sequence")]
+    //public KeyCode[] _inputSequence;
+    //int _indexOfINputSequence = 0;
 
-    [SerializeField] private float _comboWindowTimer = 0;
+    //[SerializeField] private float _comboWindowTimer = 0;
 
     [Header("Conditions")]
 
     [SerializeField] private bool _isOutOfCombat; //OOC
-    [SerializeField] private bool _startComboWindowTimer;
+   // [SerializeField] private bool _startComboWindowTimer;
     
 
     void Start()
@@ -100,35 +100,35 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
 
-        //Combo sequence Test
+        ////Combo sequence Test
 
-        if(_indexOfINputSequence < _inputSequence.Length)
-        {
-            if (Input.GetKeyDown(_inputSequence[_indexOfINputSequence]))  
-            {
+        //if(_indexOfINputSequence < _inputSequence.Length)
+        //{
+        //    if (Input.GetKeyDown(_inputSequence[_indexOfINputSequence]))  
+        //    {
 
-                _startComboWindowTimer = true;
-                _comboWindowTimer = 0;
-
-
-                Debug.Log(_inputSequence[_indexOfINputSequence]);
-                _indexOfINputSequence++;
+        //        _startComboWindowTimer = true;
+        //        _comboWindowTimer = 0;
 
 
-                if (_indexOfINputSequence == _inputSequence.Length) //Combo achived
-                {
-                    _indexOfINputSequence = 0;
-                    Debug.Log("Combo sequence achived");
-                    _entertainmentPoints += 25;
-                }
+        //        Debug.Log(_inputSequence[_indexOfINputSequence]);
+        //        _indexOfINputSequence++;
 
-            }
-        }
 
-        if (_startComboWindowTimer)
-        {
-            StartComboWindowCheck();
-        }
+        //        if (_indexOfINputSequence == _inputSequence.Length) //Combo achived
+        //        {
+        //            _indexOfINputSequence = 0;
+        //            Debug.Log("Combo sequence achived");
+        //            _entertainmentPoints += 25;
+        //        }
+
+        //    }
+        //}
+
+        //if (_startComboWindowTimer)
+        //{
+        //    StartComboWindowCheck();
+        //}
 
 
 
@@ -138,18 +138,18 @@ public class EntertainmentManager : MonoBehaviour
 
     }
 
-    void StartComboWindowCheck()
-    {
-        float comboWindow = 1;
-        _comboWindowTimer += Time.deltaTime;
+    //void StartComboWindowCheck()
+    //{
+    //    float comboWindow = 1;
+    //    _comboWindowTimer += Time.deltaTime;
 
-        if (_comboWindowTimer >= comboWindow)
-        {
-            _comboWindowTimer = 0;
-            _indexOfINputSequence = 0;
-            //Debug.LogError("Combo Broken");
-        }
-    }
+    //    if (_comboWindowTimer >= comboWindow)
+    //    {
+    //        _comboWindowTimer = 0;
+    //        _indexOfINputSequence = 0;
+    //        //Debug.LogError("Combo Broken");
+    //    }
+    //}
 
     void UpdateETPArrow()
     {
@@ -199,6 +199,10 @@ public class EntertainmentManager : MonoBehaviour
     public void DecreseETP(int amoutToDecrese)
     {
         _entertainmentPoints -= amoutToDecrese;
+    }
+    public void increaseETP(int amoutToIncrease)
+    {
+        _entertainmentPoints += amoutToIncrease;
     }
 
     private void OnDrawGizmosSelected()
