@@ -21,5 +21,10 @@ public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler, IPointerUp
         _img.sprite = _default;
     }
 
+    public void IWasClicked()
+    {
+        Debug.Log("Clicked!");
+    }
+
 
 }
