@@ -79,6 +79,8 @@
 
 #description {
     font-size: 12px;
+    white-space: normal;
+    max-width: 150px;
 }
 
 #divider {
@@ -101,4 +103,28 @@
 .root #input {
     background-color: rgb(255, 81, 84);
     min-height: 20px;
+}
+
+#node-state {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.running #node-state {
+    background-color: rgb(255, 181, 0);
+}
+
+.success #node-state {
+    background-color: rgba(72, 255, 0, 0.63);
+}
+
+.failure #node-state {
+    background-color: rgb(251, 25, 25);
 }

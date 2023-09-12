@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BehaviourTreeRunner : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BehaviourTreeRunner : MonoBehaviour
     void Start()
     {
         tree = tree.Clone();
+        tree.Bind(GetComponent<NavMeshAgent>());
     }
 
     // Update is called once per frame

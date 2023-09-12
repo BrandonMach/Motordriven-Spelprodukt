@@ -5,8 +5,16 @@
     </uie:Toolbar>
     <SplitView>
         <ui:VisualElement name="left-panel" style="flex-grow: 1; background-color: rgb(56, 56, 56);">
-            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-background-image-tint-color: rgb(25, 25, 25); background-image: none; background-color: rgb(37, 37, 37); color: rgb(255, 255, 255); -unity-text-outline-color: rgba(56, 56, 56, 0);" />
-            <InspectorView />
+            <SplitView orientation="Vertical" fixed-pane-initial-dimension="178">
+                <ui:VisualElement name="inspector-container" style="flex-grow: 1;">
+                    <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-background-image-tint-color: rgb(25, 25, 25); background-image: none; background-color: rgb(37, 37, 37); color: rgb(255, 255, 255); -unity-text-outline-color: rgba(56, 56, 56, 0);" />
+                    <InspectorView />
+                </ui:VisualElement>
+                <ui:VisualElement name="blackboard-container" style="flex-grow: 1;">
+                    <ui:Label tabindex="-1" text="Blackboard" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37); color: rgb(255, 255, 255);" />
+                    <ui:IMGUIContainer />
+                </ui:VisualElement>
+            </SplitView>
         </ui:VisualElement>
         <ui:VisualElement name="right-panel" style="flex-grow: 1;">
             <ui:Label tabindex="-1" text="Tree View" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(56, 56, 56); color: rgb(255, 255, 255);" />
