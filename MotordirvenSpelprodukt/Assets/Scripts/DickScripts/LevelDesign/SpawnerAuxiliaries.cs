@@ -50,6 +50,16 @@ namespace LevelDesign
             return null;
         }
 
+        public static Rect SpawnSurfaceInRect(SpawnSurface s)
+        {
+            float centerX = s.centerPoint.x;
+            float centerZ = s.centerPoint.y;
+            float halfWidth = s.width / 2;
+            float halfHeight = s.height / 2;
+            Vector2 min = new Vector2(centerX - halfWidth, centerZ - halfHeight);
+            return new Rect(min.x, min.y, s.width, s.height);
+        }
+
         private static int PrefabCountByType(ObjectData[] data, GameObjectType type)
         {
             foreach (var obj in data)

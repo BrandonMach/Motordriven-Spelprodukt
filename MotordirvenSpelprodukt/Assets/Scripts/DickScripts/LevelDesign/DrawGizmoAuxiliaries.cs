@@ -6,6 +6,29 @@ namespace LevelDesign
 {
     public static class DrawGizmoAuxiliaries
     {
+        public static void DrawSpawnSurfaces(SpawnSurface[] surfaces)
+        {
+            Gizmos.color = Color.red;
+            for (int i = 0; i < surfaces.Length; i++)
+            {
+                float halfwidth = surfaces[i].width / 2;
+                float halfheight = surfaces[i].height / 2;
+                float centerX = surfaces[i].centerPoint.x;
+                float centerZ = surfaces[i].centerPoint.y;
+                float y = surfaces[i].altitude;
+
+                Vector3 tl = new Vector3(centerX - halfwidth, y, centerZ + halfheight);
+                Vector3 tr = new Vector3(centerX + halfwidth, y, centerZ + halfheight);
+                Vector3 bl = new Vector3(centerX - halfwidth, y, centerZ - halfheight);
+                Vector3 br = new Vector3(centerX + halfwidth, y, centerZ - halfheight);
+
+                Gizmos.DrawLine(tl, tr);
+                Gizmos.DrawLine(bl, br);
+                Gizmos.DrawLine(tl, bl);
+                Gizmos.DrawLine(tr, br);
+            }
+        }
+
         public static void DrawShapeByType(Vector3[] pos, GameObjectType type)
         {
             switch (type)

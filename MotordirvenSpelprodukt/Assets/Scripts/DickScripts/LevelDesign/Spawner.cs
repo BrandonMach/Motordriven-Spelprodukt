@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 namespace LevelDesign
@@ -7,11 +8,14 @@ namespace LevelDesign
     public class Spawner : MonoBehaviour
     {
         [Header("Spawn data")]
-        [SerializeField] private SpawnData placementData;   // Data will be stored here by the pcg system
-        
+        [SerializeField] private SpawnSurfaceData spawnSurfaces;
+        [SerializeField] private SpawnData spawns;   // Data will be stored here by the pcg system
+
         [Header("Debug")]
         [SerializeField] private bool promptPlacement;
 
+
+        private Rect spawnPlane;
         List<GameObject> spawnedObjs;
 
         private void OnValidate()
@@ -19,20 +23,29 @@ namespace LevelDesign
             if (!promptPlacement) return;
 
             string errorMessage = string.Empty;
-            if (!SpawnObjectsByType(placementData, GameObjectType.Tree, ref errorMessage)) Debug.LogError(errorMessage);
+            if (!SpawnObjectsByType(spawns, GameObjectType.Tree, ref errorMessage)) Debug.LogError(errorMessage);
         }
 
         private void OnDrawGizmos()
         {
-            if (placementData == null) return;
             DrawGizmoOnType(GameObjectType.Tree);
+            DrawSpawnSurfaces();
         }
 
+        #region Gizmo Debug
         private void DrawGizmoOnType(GameObjectType type)
         {
-            Vector3[] spawnPos = SpawnerAuxiliaries.SpawnPositionsByType(placementData.data, type);
+            if (spawns == null) return;
+            Vector3[] spawnPos = SpawnerAuxiliaries.SpawnPositionsByType(spawns.data, type);
             DrawGizmoAuxiliaries.DrawShapeByType(spawnPos, type);
         }
+
+        private void DrawSpawnSurfaces()
+        {
+            if (spawnSurfaces == null) return;
+            DrawGizmoAuxiliaries.DrawSpawnSurfaces(spawnSurfaces.data);
+        }
+        #endregion
 
         private bool SpawnObjectsByType(SpawnData placements, GameObjectType type, ref string errorMessage)
         {

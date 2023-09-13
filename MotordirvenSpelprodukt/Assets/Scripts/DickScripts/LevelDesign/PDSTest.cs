@@ -8,6 +8,11 @@ public class PDSTest : MonoBehaviour
 {
     [Header("Debug settings")]
     [SerializeField] private float displayRadius = 1f;
+    [SerializeField] private bool promptGeneration;
+
+    [Header("Spawn data")]
+    [SerializeField] private SpawnSurfaceData spawnSurfaces;
+    [SerializeField] private int numOfSpawns;
 
     [Header("Poisson Disc Sampling")]
     [SerializeField] private float radius = 1f;
@@ -18,12 +23,27 @@ public class PDSTest : MonoBehaviour
 
     private void OnValidate()
     {
-       points = PoissonDiscSampling.GeneratePoints(radius, regionSize, maxSamplingCount); 
+        if (promptGeneration)
+            GeneratePointsOnSurface();
     }
+
+    private void GeneratePointsOnSurface()
+    {
+        points = new List<Vector2>();
+
+        Rect[] rects = new Rect[spawnSurfaces.data.Length];
+        for (int i = 0; i < spawnSurfaces.data.Length; i++)
+        {
+            rects[i] = SpawnerAuxiliaries.SpawnSurfaceInRect(spawnSurfaces.data[i]);
+            points = PoissonDiscSampling.GenerateSpawnPoints(radius, rects[i], maxSamplingCount);
+        }
+    }
+
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(regionSize / 2, regionSize);
+        if (spawnSurfaces != null)
+            DrawGizmoAuxiliaries.DrawSpawnSurfaces(spawnSurfaces.data);
 
 
         if (points != null)
