@@ -2,19 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
+    [Header("Player Weapon")]
+    [SerializeField] private Weapon _weapon;
+    [Header("Shop Menu")]
     [SerializeField] private int _currency;
     [SerializeField] private TextMeshProUGUI _currencyText;
-    [SerializeField] private Weapon weapon;
+    [Header("Upgrade Menu")]
+    [SerializeField] private Image _weaponImage;
+    [SerializeField] private TextMeshProUGUI _weaponName;
+    [SerializeField] private TextMeshProUGUI _weaponLevel;
+    [SerializeField] private TextMeshProUGUI _weaponDamage;
+    [SerializeField] private TextMeshProUGUI _weaponUpgradeCost;
+
     private void Awake()
     {
         UpdateText();
+        Weapontype sword = new Weapontype();
+        _weapon = new Weapon();
+        _weapon.SetUpWeapon(sword,0,0,0,0);
+        UpdateUpgradeView();
+        Debug.Log(_weapon.GetName());
     }
     public void MakePurshase(GenerateWeapon g)
     {
-        weapon = TryPurshase(g);
+        _weapon = TryPurshase(g);
+        UpdateUpgradeView();
+        Debug.Log(_weapon.GetName());
     }
     public Weapon TryPurshase(GenerateWeapon g)
     {
@@ -24,6 +41,7 @@ public class ShopSystem : MonoBehaviour
             {
                 _currency-=g.Price();
                 UpdateText();
+                                   
                 return g.Purshase();
             }               
         }
@@ -32,5 +50,28 @@ public class ShopSystem : MonoBehaviour
     private void UpdateText()
     {
         _currencyText.text = _currency.ToString();
+    }
+    private void UpdateUpgradeView()
+    {
+        if(_weapon.GetWeaponType().GetImage()!=null)
+        {
+            _weaponImage = _weapon.GetWeaponType().GetImage();
+        }
+        _weaponName.text = _weapon.GetName();
+        _weaponLevel.text = _weapon.GetLevel().ToString();
+        _weaponDamage.text = _weapon.GetDamage().ToString();
+        _weaponUpgradeCost.text = ((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2).ToString();
+    }
+    public void UpgradeWeapon()
+    {
+        if(_currency< (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2))
+        { }
+        else
+        {
+            _currency -= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2);
+            _weapon.UpgradeWeapon();
+            UpdateUpgradeView();
+            UpdateText();
+        }      
     }
 }

@@ -20,7 +20,6 @@ public class ShopPanel : MonoBehaviour
         {
             int r = Random.Range(0, _weaponList.Count);
             int r2 = Random.Range(1, 4);
-            Debug.Log(r + " " +_weaponList[r].name);
             p.GenerateWeaponPanel(_weaponList[r],r2);           
         }
     }
