@@ -11,24 +11,45 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField] private Image _img;
     [SerializeField] private Sprite _default, _pressed;
     [SerializeField] private TextMeshProUGUI _textMeshPro;
+    //[SerializeField] private BoxCollider boxCollider;
 
     private bool isMouseOver;
-    private float hoverCharacterSpacing = 0.20f;
+    private float hoverCharacterSpacing = 20.0f;
     private float originalCharacterSpacing = 0.0f;
-    [SerializeField]  private BoxCollider2D collider;
 
     // TODO: add AudioClip _compressClip, _uncompressClip; add AudioSource _source : When click audio will be added as a feature
 
     private void Start()
     {
-        
+        //boxCollider = GetComponent<BoxCollider>();
     }
 
     private void Update()
     {
-        SpaceCharacters();
+        
 
     }
+
+    //private bool IsMouseOverBoxCollider()
+    //{
+    //    //if (boxCollider == null)
+    //    //{
+    //    //    Debug.LogWarning("BoxCollider not found.");
+    //    //    return false;
+    //    //}
+
+    //    // Cast a ray from the mouse pointer
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    RaycastHit hit;
+
+    //    // Perform a raycast and check if it hits the BoxCollider
+    //    if (Physics.Raycast(ray, out hit) && hit.collider == boxCollider)
+    //    {
+    //        return true;
+    //    }
+
+    //    return false;
+    //}
 
     private void SpaceCharacters()
     {
@@ -43,38 +64,19 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
     }
 
-    private void MouseHover()
-    {
-        bool hovered = false;
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        foreach (RaycastHit hit in Physics.RaycastAll(ray))
-        {
-            if (hit.collider == collider)
-            {
-                hovered = true;
-                break;
-            }
-        }
-    }
-
     private void OnMouseEnter()
     {
-        //_textMeshPro.characterSpacing = 20;
+        _textMeshPro.characterSpacing = 20;
         Debug.Log("Entered!");
 
         isMouseOver = true;
     }
 
-    private void OnMouseExit()
-    {
-        _textMeshPro.characterSpacing = 0;
-        Debug.Log("Exited!");
-    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         //_img.sprite = _pressed;
+        Debug.Log("Clicked!");
     }
 
     public void OnPointerUp(PointerEventData eventData)
