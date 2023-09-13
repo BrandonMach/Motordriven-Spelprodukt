@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class MainMenu : MenuAbstract, IMenu
+public class VideoMenu : MenuAbstract, IMenu
 {
-    //[SerializeField] private GameObject _prevMenu;
-    //[SerializeField] private GameObject _menuOption1;
-    //[SerializeField] private GameObject _menuOption2;
-    //[SerializeField] private GameObject _menuOption3;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-    public void Update()
+    // Update is called once per frame
+    void Update()
     {
         base.Update();
     }
 
-    public void ClickNewGame()
+    public void SetQuality(int qualityIndex)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     public void ClickESC()

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class OptionsMenu : MonoBehaviour
+public class OptionsMenu : MenuAbstract, IMenu
 {
 
-    [SerializeField] private GameObject _mainMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -13,21 +13,28 @@ public class OptionsMenu : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        base.Update();
     }
 
-    void ClickEnter()
+    public void ClickESC()
     {
+        base.ClickESC();
+    }
 
+    public void ClickMenuOption1()
+    {
+        base.ClickMenuOption1();
+    }
 
-        if (Input.GetKeyDown(KeyCode.Return) && !_mainMenu.activeSelf)
-        {
-            _mainMenu.SetActive(true);
-            gameObject.SetActive(false);
+    public void ClickMenuOption2()
+    {
+        base.ClickMenuOption2();
+    }
 
-        }
+    public void ClickMenuOption3()
+    {
+        base.ClickMenuOption3();
     }
 }
