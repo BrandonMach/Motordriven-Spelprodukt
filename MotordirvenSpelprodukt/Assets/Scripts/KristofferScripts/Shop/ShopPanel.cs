@@ -14,13 +14,16 @@ public class ShopPanel : MonoBehaviour
     }
     private void Start()
     {
+        Generate();
+    }
+    public void Generate()
+    {
         _weaponList = _weaponTypeList.GetTypeList();
-        Debug.Log(_weaponList.Count);
         foreach (GenerateWeapon p in panelList)
         {
             int r = Random.Range(0, _weaponList.Count);
             int r2 = Random.Range(1, 4);
-            p.GenerateWeaponPanel(_weaponList[r],r2);           
+            p.GenerateWeaponPanel(_weaponList[r], r2);
         }
     }
 }

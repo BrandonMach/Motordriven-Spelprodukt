@@ -17,6 +17,10 @@ public class ShopSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _weaponLevel;
     [SerializeField] private TextMeshProUGUI _weaponDamage;
     [SerializeField] private TextMeshProUGUI _weaponUpgradeCost;
+    [Header("Reroll Setup")]
+    [SerializeField] private TextMeshProUGUI _rerollButtonText;
+    private int rerollCounter=1;
+    private int rerollBaseline = 10;
 
     private void Awake()
     {
@@ -25,13 +29,12 @@ public class ShopSystem : MonoBehaviour
         _weapon = new Weapon();
         _weapon.SetUpWeapon(sword,0,0,0,0);
         UpdateUpgradeView();
-        Debug.Log(_weapon.GetName());
+        _rerollButtonText.text = (rerollCounter * rerollBaseline).ToString();
     }
     public void MakePurshase(GenerateWeapon g)
     {
         _weapon = TryPurshase(g);
         UpdateUpgradeView();
-        Debug.Log(_weapon.GetName());
     }
     public Weapon TryPurshase(GenerateWeapon g)
     {
@@ -64,14 +67,24 @@ public class ShopSystem : MonoBehaviour
     }
     public void UpgradeWeapon()
     {
-        if(_currency< (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2))
-        { }
-        else
+        if(_currency>= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2))
         {
             _currency -= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2);
             _weapon.UpgradeWeapon();
             UpdateUpgradeView();
             UpdateText();
         }      
+    }
+    public void RerollShop()
+    {
+        if(_currency>=rerollCounter*rerollBaseline)
+        {
+            GetComponent<ShopPanel>().Generate();
+            _currency -= rerollCounter*rerollBaseline;
+            rerollCounter++;
+            _rerollButtonText.text = (rerollCounter * rerollBaseline).ToString();
+            UpdateText();
+        }
+        
     }
 }

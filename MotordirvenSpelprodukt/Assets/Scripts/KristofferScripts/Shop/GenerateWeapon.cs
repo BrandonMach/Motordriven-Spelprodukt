@@ -16,9 +16,11 @@ public class GenerateWeapon : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _buttonText;
     private Weapon _weapon;
     private bool _purshased;
+    private List<string> _naming;
     private void Awake()
     {
         _weapon = new Weapon();
+        _naming = new List<string>();
     }
     public void GenerateWeaponPanel(Weapontype type, int level)
     {
@@ -27,18 +29,35 @@ public class GenerateWeapon : MonoBehaviour
             1f, 
             1f, 
             1f);
-        _weapon.SetName(GenerateName());
+        _weapon.SetName(GenerateName(type));
         UpdatePanel(level);
     }
 
-    private string GenerateName()
+    private string GenerateName(Weapontype type)
     {
-        return "deb";
+        _naming.Clear();
+        TextAsset textAsset = Resources.Load<TextAsset>(type.GetNameList());
+        if (textAsset != null)
+        {
+            string[] lines = textAsset.text.Split('\n');
+            foreach(string line in lines)
+            {
+                string trimmedLine = line.Trim();
+                if (!string.IsNullOrEmpty(trimmedLine))
+                {
+                   _naming.Add(trimmedLine);
+                }
+            }
+            int r = Random.Range(0, _naming.Count);
+            Debug.Log(r);
+            return _naming[r] + " " + type.name;
+        }
+        return "";
     }
     private void UpdatePanel(int level)
     {
         if(_weapon.GetWeaponType().GetImage()!=null){_weaponImage = _weapon.GetWeaponType().GetImage(); }
-        _weaponNameText.text = _weapon.GetName() + " " + _weapon.GetWeaponType().name;
+        _weaponNameText.text = _weapon.GetName();
         _weaponLevelText.text = "Level " + level.ToString();      
         _weaponDamageText.text = _weapon.GetDamage().ToString() + " Dmg";
         _weaponSpeedText.text = _weapon.GetSpeed().ToString() + " Spd";

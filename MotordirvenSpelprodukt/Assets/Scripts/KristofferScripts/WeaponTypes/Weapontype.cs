@@ -12,6 +12,7 @@ public class Weapontype : ScriptableObject
     [SerializeField] private int _baseCost;
     [SerializeField] private GameObject _prefab;
     [SerializeField] private Animation _weaponAnimation;
+    [SerializeField] private string _nameList;
     public Image GetImage(){return _image;}
     public Animation GetAnimation(){return _weaponAnimation;}
     public float GetDamage(){return _baseDamage;}
@@ -19,4 +20,5 @@ public class Weapontype : ScriptableObject
     public float GetAttackSpeed(){return _attackSpeed;}
     public float GetBaseCost(){return _baseCost;}
     public GameObject GetPrefab() { return _prefab; }
+    public string GetNameList() { return _nameList; }
 }
