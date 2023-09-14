@@ -6,15 +6,7 @@ namespace LevelDesign
 {
     public static class SpawnerAuxiliaries
     { 
-        public static int RandomPrefabIndex(int prefabCount) => Random.Range(0, prefabCount);
-        public static bool NumOfPrefabs(SpawnData data, GameObjectType type, ref int prefabCount, ref string errorMessage)
-        {
-            prefabCount = PrefabCountByType(data.data, type);
-            if (prefabCount == -1) errorMessage = "No prefabs found in spawn data";
-            return string.IsNullOrEmpty(errorMessage);
-        }
-
-        public static Vector3[] SpawnPositionsByType(ObjectData[] data, GameObjectType type)
+        public static Vector3[] SpawnPositionsByType(ObjectData[] data, LayerType type)
         {
             foreach (var obj in data)
                 if (obj.type == type)
@@ -23,7 +15,7 @@ namespace LevelDesign
             return null;
         }
 
-        public static Vector3[] SpawnRotationsByType(ObjectData[] data, GameObjectType type)
+        public static Vector3[] SpawnRotationsByType(ObjectData[] data, LayerType type)
         {
             foreach (var obj in data)
                 if (obj.type == type)
@@ -32,7 +24,7 @@ namespace LevelDesign
             return null;
         }
 
-        public static Vector3[] SpawnScalesByType(ObjectData[] data, GameObjectType type)
+        public static Vector3[] SpawnScalesByType(ObjectData[] data, LayerType type)
         {
             foreach (var obj in data)
                 if (type == obj.type)
@@ -41,16 +33,7 @@ namespace LevelDesign
             return null;
         }
 
-        public static GameObject PrefabByTypeAndIndex(ObjectData[] data, GameObjectType type, int index)
-        {
-            foreach (var obj in data)
-                if (type == obj.type)
-                    return obj.prefabs[index];
-
-            return null;
-        }
-
-        public static Rect SpawnSurfaceInRect(SpawnSurface s)
+        public static Rect SurfaceToRect(SpawnSurface s)
         {
             float centerX = s.centerPoint.x;
             float centerZ = s.centerPoint.y;
@@ -60,14 +43,7 @@ namespace LevelDesign
             return new Rect(min.x, min.y, s.width, s.height);
         }
 
-        private static int PrefabCountByType(ObjectData[] data, GameObjectType type)
-        {
-            foreach (var obj in data)
-                if (obj.type == type)
-                    return obj.prefabs.Length;
-
-            return -1;
-        }
+       
     }
 }
 

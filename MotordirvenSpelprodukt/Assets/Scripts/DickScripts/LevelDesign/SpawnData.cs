@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LevelDesign
 {
-    public enum GameObjectType
+    public enum LayerType
     {
         Tree,
         Pebble,
@@ -22,8 +22,7 @@ namespace LevelDesign
     [Serializable]
     public struct ObjectData
     {
-        public GameObjectType type;
-        public GameObject[] prefabs;
+        public LayerType type;
         public Vector3[] spawnPositions;
         public Vector3[] spawnRotations;
         public Vector3[] spawnScales;

@@ -29,11 +29,11 @@ namespace LevelDesign
             }
         }
 
-        public static void DrawShapeByType(Vector3[] pos, GameObjectType type)
+        public static void DrawShapeByType(Vector3[] pos, LayerType type)
         {
             switch (type)
             {
-                case GameObjectType.Tree:
+                case LayerType.Tree:
                     DrawTree(pos);
                     break;
             }

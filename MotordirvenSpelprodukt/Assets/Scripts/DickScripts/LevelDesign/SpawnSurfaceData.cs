@@ -8,6 +8,7 @@ namespace LevelDesign
     [CreateAssetMenu(menuName = "LevelDesign/SpawnSurfaceData", fileName = "spawnSurfaceData")]
     public class SpawnSurfaceData : ScriptableObject
     {
+        public LayerType type;
         public SpawnSurface[] data;
     }
 

@@ -8,14 +8,14 @@ namespace LevelDesign
     public class Spawner : MonoBehaviour
     {
         [Header("Spawn data")]
-        [SerializeField] private SpawnSurfaceData spawnSurfaces;
         [SerializeField] private SpawnData spawns;   // Data will be stored here by the pcg system
+        [SerializeField] private GameObject[] treePrefabs;
+        [SerializeField] private GameObject[] pebblePrefabs;
+
 
         [Header("Debug")]
         [SerializeField] private bool promptPlacement;
 
-
-        private Rect spawnPlane;
         List<GameObject> spawnedObjs;
 
         private void OnValidate()
@@ -23,31 +23,31 @@ namespace LevelDesign
             if (!promptPlacement) return;
 
             string errorMessage = string.Empty;
-            if (!SpawnObjectsByType(spawns, GameObjectType.Tree, ref errorMessage)) Debug.LogError(errorMessage);
+            if (!SpawnObjectsByType(spawns, LayerType.Tree, ref errorMessage)) Debug.LogError(errorMessage);
         }
 
         private void OnDrawGizmos()
         {
-            DrawGizmoOnType(GameObjectType.Tree);
-            DrawSpawnSurfaces();
+            DrawGizmoOnType(LayerType.Tree);
+            //DrawSpawnSurfaces();
         }
 
         #region Gizmo Debug
-        private void DrawGizmoOnType(GameObjectType type)
+        private void DrawGizmoOnType(LayerType type)
         {
             if (spawns == null) return;
             Vector3[] spawnPos = SpawnerAuxiliaries.SpawnPositionsByType(spawns.data, type);
             DrawGizmoAuxiliaries.DrawShapeByType(spawnPos, type);
         }
 
-        private void DrawSpawnSurfaces()
-        {
-            if (spawnSurfaces == null) return;
-            DrawGizmoAuxiliaries.DrawSpawnSurfaces(spawnSurfaces.data);
-        }
+        //private void DrawSpawnSurfaces()
+        //{
+        //    if (spawnSurfaces == null) return;
+        //    DrawGizmoAuxiliaries.DrawSpawnSurfaces(spawnSurfaces.data);
+        //}
         #endregion
 
-        private bool SpawnObjectsByType(SpawnData placements, GameObjectType type, ref string errorMessage)
+        private bool SpawnObjectsByType(SpawnData placements, LayerType type, ref string errorMessage)
         {
             spawnedObjs = new List<GameObject>();
 
@@ -60,10 +60,9 @@ namespace LevelDesign
 
             for (int i = 0; i < spawnPos.Length; i++)
             {
-                int prefabCount = 0;
-                if (!SpawnerAuxiliaries.NumOfPrefabs(placements, type, ref prefabCount, ref errorMessage)) return false;
+                if (!PrefabExistForSpawn(type, ref errorMessage)) return false;
 
-                GameObject obj = Instantiate(SpawnerAuxiliaries.PrefabByTypeAndIndex(placements.data, type, SpawnerAuxiliaries.RandomPrefabIndex(prefabCount)));
+                GameObject obj = Instantiate(GetRandomPrefabByType(type));
                 obj.transform.position = spawnPos[i];
                 obj.transform.rotation = Quaternion.Euler(spawnRots[i]);
                 obj.transform.localScale = spawnScales[i];
@@ -72,6 +71,35 @@ namespace LevelDesign
             }
 
             return true;
+        }
+
+
+        private bool PrefabExistForSpawn(LayerType type, ref string errorMessage)
+        {
+            switch(type)
+            {
+                case LayerType.Tree:
+                    if (treePrefabs.Length < 0) errorMessage = "No tree prefabs found";
+                    break;
+                case LayerType.Pebble:
+                    if (pebblePrefabs.Length < 0) errorMessage = "No pebble prefabs found";
+                    break;
+            }
+
+            return string.IsNullOrEmpty(errorMessage);
+        }
+
+        private GameObject GetRandomPrefabByType(LayerType type)
+        {
+            switch (type)
+            {
+                case LayerType.Tree:
+                    return treePrefabs[Random.Range(0, treePrefabs.Length)];
+                case LayerType.Pebble:
+                    return pebblePrefabs[Random.Range(0, pebblePrefabs.Length)];
+            }
+
+            return null;
         }
     }
 }
