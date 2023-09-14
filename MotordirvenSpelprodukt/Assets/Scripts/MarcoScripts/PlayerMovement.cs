@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private PlayerAnimation _playerAnimation;
-    [SerializeField] private Player _playerScript;
 
     private CharacterController _characterController;
 
@@ -43,23 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _playerScript.OnChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
-    }
 
-    private void PlayerScript_OnChangeControllerTypeButtonPressed(object sender, System.EventArgs e)
-    {
-        Debug.Log("HEY");
-        switch (_currentRotateMode)
-        {
-            case RotateMode.TwoStick:
-                _currentRotateMode = RotateMode.OneStick;
-                break;
-            case RotateMode.OneStick:
-                _currentRotateMode= RotateMode.TwoStick;
-                break;
-            default:
-                break;
-        }
     }
 
     void Update()
