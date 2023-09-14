@@ -949,6 +949,7 @@ GameObject:
   - component: {fileID: 1437713465}
   - component: {fileID: 1437713464}
   - component: {fileID: 1437713468}
+  - component: {fileID: 1437713469}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1014,6 +1015,7 @@ MonoBehaviour:
   _rotationSpeed: 5
   _mainCamera: {fileID: 963194227}
   _playerAnimation: {fileID: 1437713464}
+  _playerScript: {fileID: 1437713469}
 --- !u!4 &1437713467
 Transform:
   m_ObjectHideFlags: 0
@@ -1057,6 +1059,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1437713469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437713463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a37376fbc42f2246a65e50600126ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameInput: {fileID: 1796412708}
 --- !u!1001 &1461836563
 PrefabInstance:
   m_ObjectHideFlags: 0
