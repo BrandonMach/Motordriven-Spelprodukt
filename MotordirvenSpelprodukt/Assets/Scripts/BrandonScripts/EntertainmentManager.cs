@@ -33,16 +33,17 @@ public class EntertainmentManager : MonoBehaviour
     [SerializeField] float _timeOutOfCombatCounter = 0;
     [SerializeField] float _timeOutOfCombatThreshold;
 
-    [Header("Combo Sequence")]
-    public KeyCode[] _inputSequence;
-    int _indexOfINputSequence = 0;
-    
+    //[Header("Combo Sequence")]
+    //public KeyCode[] _inputSequence;
+    //int _indexOfINputSequence = 0;
 
+    //[SerializeField] private float _comboWindowTimer = 0;
 
     [Header("Conditions")]
 
     [SerializeField] private bool _isOutOfCombat; //OOC
-
+   // [SerializeField] private bool _startComboWindowTimer;
+    
 
     void Start()
     {
@@ -55,14 +56,17 @@ public class EntertainmentManager : MonoBehaviour
         _startETP = _maxETP / 2;
         _ETPThreashold = _maxETP / 2;
         _entertainmentPoints = _startETP;
-        _indicatorArrowrRotateAngle = 90;
+        //_indicatorArrowrRotateAngle = 90;
+
         _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
     }
 
     // Update is called once per frame
     void Update()
     {
-        _indicatorArrowrRotateAngle = (180 / _maxETP) * _entertainmentPoints;
+        UpdateETPArrow();
+        _indicatorArrowrRotateAngle = Mathf.Clamp(_indicatorArrowrRotateAngle, 0, 180);
+
         CheckIfOutOfCombat();
 
 
@@ -91,48 +95,67 @@ public class EntertainmentManager : MonoBehaviour
             CrowdText.color = Color.black;
         }
 
-        _indicatorArrowrRotateAngle = (180 / _maxETP) * _entertainmentPoints;
+        //_indicatorArrowrRotateAngle = (180 / _maxETP) * _entertainmentPoints;
 
         _entertainmentPoints =  Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
 
-        //Combo sequence
+        ////Combo sequence Test
 
-        if(_indexOfINputSequence < _inputSequence.Length)
-        {
-            if (Input.GetKeyDown(_inputSequence[_indexOfINputSequence]))  
-            {
-                Debug.Log(_inputSequence[_indexOfINputSequence]);
-                _indexOfINputSequence++;
-               
-                //Timer, if no correct input i made start over
+        //if(_indexOfINputSequence < _inputSequence.Length)
+        //{
+        //    if (Input.GetKeyDown(_inputSequence[_indexOfINputSequence]))  
+        //    {
 
+        //        _startComboWindowTimer = true;
+        //        _comboWindowTimer = 0;
 
 
-                if (_indexOfINputSequence == _inputSequence.Length)
-                {
-                    _indexOfINputSequence = 0;
-                    Debug.Log("Combo sequence achived");
-                    _entertainmentPoints += 25;
-                }
-
-            }
-        }
-
-        
+        //        Debug.Log(_inputSequence[_indexOfINputSequence]);
+        //        _indexOfINputSequence++;
 
 
+        //        if (_indexOfINputSequence == _inputSequence.Length) //Combo achived
+        //        {
+        //            _indexOfINputSequence = 0;
+        //            Debug.Log("Combo sequence achived");
+        //            _entertainmentPoints += 25;
+        //        }
+
+        //    }
+        //}
+
+        //if (_startComboWindowTimer)
+        //{
+        //    StartComboWindowCheck();
+        //}
 
 
 
         //For testing
         OOCPopUp.SetActive(_isOutOfCombat);
-       
 
 
+    }
 
+    //void StartComboWindowCheck()
+    //{
+    //    float comboWindow = 1;
+    //    _comboWindowTimer += Time.deltaTime;
 
+    //    if (_comboWindowTimer >= comboWindow)
+    //    {
+    //        _comboWindowTimer = 0;
+    //        _indexOfINputSequence = 0;
+    //        //Debug.LogError("Combo Broken");
+    //    }
+    //}
+
+    void UpdateETPArrow()
+    {
+        _indicatorArrowrRotateAngle = 180 + (-180 / _maxETP) * _entertainmentPoints;
+        _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
     }
 
     void CheckIfOutOfCombat()
@@ -166,12 +189,21 @@ public class EntertainmentManager : MonoBehaviour
 
     void OutOfCombatDecreaseOverTime()
     {
-        _indicatorArrowrRotateAngle = Mathf.Clamp(_indicatorArrowrRotateAngle, 0, 180);
+        //_indicatorArrowrRotateAngle = Mathf.Clamp(_indicatorArrowrRotateAngle, 0, 180);
 
-        _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
+        //_indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
 
         _entertainmentPoints -= (Time.deltaTime); //Every second ETP -1
 
+    }
+
+    public void DecreseETP(int amoutToDecrese)
+    {
+        _entertainmentPoints -= amoutToDecrese;
+    }
+    public void increaseETP(int amoutToIncrease)
+    {
+        _entertainmentPoints += amoutToIncrease;
     }
 
     private void OnDrawGizmosSelected()
