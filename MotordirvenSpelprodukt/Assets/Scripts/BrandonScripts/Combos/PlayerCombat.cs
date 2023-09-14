@@ -11,11 +11,13 @@ public class PlayerCombat : MonoBehaviour
     int _comboCounter;
 
     [SerializeField] Animator _anim;
+    Animator og;
     //Weapon
 
     void Start()
     {
         //_anim = GetComponent<Animator>();
+        og = _anim;
     }
 
     // Update is called once per frame
@@ -39,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
             if(Time.time - _lastClickedTime >= 0.2f)
             {
                 _anim.runtimeAnimatorController = Combo[_comboCounter].AnimatorOV;
-                _anim.Play("Attack", 0,0);
+                _anim.Play("Attack", 2,0);
                 //Damage
                 //Knockback
                 //VFX
@@ -57,15 +59,15 @@ public class PlayerCombat : MonoBehaviour
 
     void ExitAttack() //Checksi if end of animation 
     {
-        if(_anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) //If animation is 90% done
+        if(_anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             Invoke("EndCombo", 1);
-
         }
     }   
     void EndCombo()
     {
         _comboCounter = 0;
         _lastComboEnd = Time.time;
+        _anim.runtimeAnimatorController = og.runtimeAnimatorController;
     }
 }
