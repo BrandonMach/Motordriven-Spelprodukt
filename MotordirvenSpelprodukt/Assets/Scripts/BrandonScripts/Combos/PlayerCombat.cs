@@ -41,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
             if(Time.time - _lastClickedTime >= 0.2f)
             {
                 _anim.runtimeAnimatorController = Combo[_comboCounter].AnimatorOV;
-                _anim.Play("Attack", 2,0);
+                _anim.Play("Attack", 3,0);
                 //Damage
                 //Knockback
                 //VFX
