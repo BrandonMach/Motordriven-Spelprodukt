@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShopPanel : MonoBehaviour
 {
     [SerializeField] private WeapontypeList _weaponTypeList;
-    [SerializeField] private List<GenerateWeapon> panelList;
+    [SerializeField] private List<GenerateWeaponPanel> panelList;
     private List<Weapontype> _weaponList;
     private void Awake()
     {
@@ -14,16 +14,11 @@ public class ShopPanel : MonoBehaviour
     }
     private void Start()
     {
-        Generate();
-    }
-    public void Generate()
-    {
         _weaponList = _weaponTypeList.GetTypeList();
-        foreach (GenerateWeapon p in panelList)
+        foreach (GenerateWeaponPanel p in panelList)
         {
-            int r = Random.Range(0, _weaponList.Count);
-            int r2 = Random.Range(1, 4);
-            p.GenerateWeaponPanel(_weaponList[r], r2);
+            int r = Random.Range(0, panelList.Count);
+            p.GenerateWeapon(_weaponList[r],r);           
         }
     }
 }

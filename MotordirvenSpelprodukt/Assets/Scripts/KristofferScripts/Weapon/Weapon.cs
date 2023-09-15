@@ -8,6 +8,7 @@ public class Weapon : ScriptableObject
 {
     [SerializeField] private string _weaponName;
     [SerializeField] private Weapontype _weaponType;
+    [SerializeField] private GameObject _weaponPrefab; 
     [SerializeField] private int _weaponLevel=1;
     [Header("Values to be observed")]
     [SerializeField] private float _weaponDamage;
@@ -34,10 +35,11 @@ public class Weapon : ScriptableObject
         UpdateSpeed();
     }
     public void SetName(string weaponName) { _weaponName = weaponName; }
+    public Image GetImage() { return _weaponType.GetImage(); }
     public float GetDamage() { return _weaponDamage; }
     public float GetRange() { return _range; }
     public float GetSpeed() { return _attackSpeed; }
-    public string GetName(){return _weaponName;}
-    public int GetLevel() { return _weaponLevel; }
-    public Weapontype GetWeaponType() { return _weaponType; }   
+    public string GetName(){return _weaponName;}  
+    public Animation GetAnimation() { return _weaponType.GetAnimation(); }
+    public GameObject GetPrefab() { return _weaponPrefab; }
 }
