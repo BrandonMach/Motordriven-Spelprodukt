@@ -30,7 +30,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] TextMeshProUGUI _comboTreeInfoText;
 
     [Header("Combo Sequence")]
-    public KeyCode[] _inputSequence;
+   
 
     [SerializeField] private float _comboWindowTimer = 0;
 
@@ -52,7 +52,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        
+        _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
         og = _anim;
 
 
@@ -85,26 +85,52 @@ public class PlayerCombat : MonoBehaviour
         _text.text = WeaponAnimation[_weaponTypeIndex].WeaponTypeName; //Display weapon name
         _currentWeaponType = WeaponAnimation[_weaponTypeIndex];
 
-        if (Input.GetKeyDown(KeyCode.L))
+
+
+
+        for (int i = 0; i < _attackInputs.Length; i++)
         {
-            Attack();
+            if (Input.GetKeyDown(_attackInputs[i])) //Checks if attack input has been pressed
+            {
+
+                //_comboCounter = _lastUsedInputs.Count;
+                //Attack();
+
+                _startComboWindowTimer = true;
+                _comboWindowTimer = 0;
+
+
+                if (_lastUsedInputs.Count == 3) //remove first inputed key, Only 3 input lenght Combos
+                {
+                    _lastUsedInputs.RemoveAt(0);
+                }
+                _lastUsedInputs.Add(_attackInputs[i]); //add latest key
+
+
+                KeyCode[] comboAttempt = _lastUsedInputs.ToArray();
+
+
+
+                for (int j = 0; j < ComboList.Count; j++)
+                {
+                    if (Enumerable.SequenceEqual(ComboList[j]._buttonSequence, comboAttempt))
+                    {
+
+
+
+                        Debug.LogError("Combo matched");
+                        _etpManager.increaseETP(15);
+                    }
+                }
+            }
         }
 
+        
 
-
-        //for (int i = 0; i < ComboList.Count; i++)
-        //{
-
-        //    for (int j = 0; j < ComboList[i]._buttonSequence.Count; j++)
-        //    {
-        //        if (Input.GetKeyDown(ComboList[i]._buttonSequence[_comboCounter]))
-        //        {
-                    
-        //        }
-        //    }
-        //}
-
-
+        if (_startComboWindowTimer)
+        {
+            StartComboWindowCheck();
+        }
 
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -158,7 +184,6 @@ public class PlayerCombat : MonoBehaviour
     {
         _comboCounter = 0;
         _lastComboEnd = Time.time;
-        _anim.runtimeAnimatorController = og.runtimeAnimatorController;
     }
 
     void ChangeWeaponAnimaitonType()
@@ -174,6 +199,19 @@ public class PlayerCombat : MonoBehaviour
             {
                 _weaponTypeIndex = 0;
             }
+        }
+    }
+
+    void StartComboWindowCheck()
+    {
+        float comboWindow = 1;
+        _comboWindowTimer += Time.deltaTime;
+
+        if (_comboWindowTimer >= comboWindow)
+        {
+            _comboWindowTimer = 0;
+            _lastUsedInputs.Clear();
+            //Debug.LogError("Combo Broken");
         }
     }
 }
