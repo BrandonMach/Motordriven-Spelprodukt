@@ -135,39 +135,21 @@ public class PlayerCombat : MonoBehaviour
             if (Input.GetKeyDown(_attackInputs[i])) //Checks if attack input has been pressed
             {
 
-                //_startComboWindowTimer = true;
-                //_comboWindowTimer = 0;
-                
+                _startComboWindowTimer = true;
+                _comboWindowTimer = 0;
+
                 if (_comboCounter == 2)
                 {
-                    
-
+                    CheckComboPath(_comboCounter, i);
                 }
                 else if(_comboCounter == 1)
                 {
-                    foreach (var item in _remainingCombos)
-                    {
-                        if (_attackInputs[i] == item._buttonSequence[_comboCounter])
-                        {
-                            TempRemainingCombos.Add(item);
-                            Attack(i);
-                        }
-                    }
-                    _comboCounter++;
-                    
+                    CheckComboPath(_comboCounter, i);
+
                 }
                 else if (_comboCounter == 0)
                 {
-                    foreach (var item in ComboList)
-                    {
-                        if (_attackInputs[i] == item._buttonSequence[_comboCounter])
-                        {
-                            _remainingCombos.Add(item);
-                            Attack(i);
-                        }
-                    }
-                    _comboCounter++;
-                    
+                    CheckComboPath(_comboCounter, i);                   
                 }
 
 
@@ -182,12 +164,6 @@ public class PlayerCombat : MonoBehaviour
         }
 
 
-
-
-
-
-
-
         if (_startComboWindowTimer)
         {
             StartComboWindowCheck();
@@ -200,35 +176,45 @@ public class PlayerCombat : MonoBehaviour
         }
 
 
-
-
-
-
-
         ExitAttack();
+    }
+
+
+    void CheckComboPath(int comboCounter, int attackButtonIndex )
+    {
+        List<AttackMovesSO> comboPath = new List<AttackMovesSO>();
+        foreach (var item in ComboList)
+        {
+            if (_attackInputs[attackButtonIndex] == item._buttonSequence[_comboCounter])
+            {
+                comboPath.Add(item);
+                Attack(attackButtonIndex);
+            }
+        }
+        _comboCounter++;
     }
 
 
 
     void Attack(int attackType)
     {
-        var yo = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
+        var _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].LightAnimationType; //Change what weapon animation List to pick the animation clips from
         if (attackType != 0)
         {
-            yo= WeaponAnimation[_weaponTypeIndex].HeavyAnimationType;
+            _setWeaponTypeAnimations= WeaponAnimation[_weaponTypeIndex].HeavyAnimationType;
         }
         else
         {
-            yo= WeaponAnimation[_weaponTypeIndex].LightAnimationType;
+            _setWeaponTypeAnimations= WeaponAnimation[_weaponTypeIndex].LightAnimationType;
         }
 
-        if(Time.time - _lastComboEnd > 0.5f && _comboCounter <= yo.Count)
+        if(Time.time - _lastComboEnd > 0.5f && _comboCounter <= _setWeaponTypeAnimations.Count)
         {
             CancelInvoke("EndCombo");
 
             if(Time.time - _lastClickedTime >= 0.2f)
             {
-                _anim.runtimeAnimatorController = yo[_comboCounter].AnimatorOV;
+                _anim.runtimeAnimatorController = _setWeaponTypeAnimations[_comboCounter].AnimatorOV; //Override the animation controller based on how far into te combo you are.
                 _anim.Play("Attack", 3,0);
                 //Damage
                 //Knockback
@@ -237,7 +223,7 @@ public class PlayerCombat : MonoBehaviour
                 //_comboCounter++;
                 _lastClickedTime = Time.time;
 
-                if(_comboCounter +1> yo.Count)
+                if(_comboCounter +1> _setWeaponTypeAnimations.Count)
                 {
                     _comboCounter = 0;
                 }
