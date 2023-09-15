@@ -15,7 +15,7 @@ public class PlayerCombat : MonoBehaviour
 
     float _lastClickedTime;
     float _lastComboEnd;
-    int _comboCounter;
+    public int _comboCounter;
 
     [SerializeField] Animator _anim;
     Animator og;
@@ -45,6 +45,11 @@ public class PlayerCombat : MonoBehaviour
     EntertainmentManager _etpManager;
     public List<KeyCode> _lastUsedInputs = new List<KeyCode>();
 
+    //-----------
+    public List<KeyCode> _comboTracker = new List<KeyCode>();
+    public List<AttackMovesSO> _remainingCombos = new List<AttackMovesSO>();
+    public List<AttackMovesSO> TempRemainingCombos = new List<AttackMovesSO>();
+
     string ComboTree;
 
 
@@ -57,8 +62,10 @@ public class PlayerCombat : MonoBehaviour
 
 
 
-        //Combos
-
+        //Assign button names
+        _lightAttack = _attackInputs[0];
+        _heavyAttack = _attackInputs[1];
+        _specialAttack = _attackInputs[2];
 
 
         for (int i = 0; i < ComboList.Count; i++)
@@ -93,9 +100,6 @@ public class PlayerCombat : MonoBehaviour
             if (Input.GetKeyDown(_attackInputs[i])) //Checks if attack input has been pressed
             {
 
-                //_comboCounter = _lastUsedInputs.Count;
-                //Attack();
-
                 _startComboWindowTimer = true;
                 _comboWindowTimer = 0;
 
@@ -113,10 +117,8 @@ public class PlayerCombat : MonoBehaviour
 
                 for (int j = 0; j < ComboList.Count; j++)
                 {
-                    if (Enumerable.SequenceEqual(ComboList[j]._buttonSequence, comboAttempt))
+                    if (Enumerable.SequenceEqual(ComboList[j]._buttonSequence, comboAttempt)) //Checks if combo matches
                     {
-
-
 
                         Debug.LogError("Combo matched");
                         _etpManager.increaseETP(15);
@@ -125,7 +127,66 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-        
+
+
+
+        for (int i = 0; i < _attackInputs.Length; i++)
+        {
+            if (Input.GetKeyDown(_attackInputs[i])) //Checks if attack input has been pressed
+            {
+
+                //_startComboWindowTimer = true;
+                //_comboWindowTimer = 0;
+                
+                if (_comboCounter == 2)
+                {
+                    
+
+                }
+                else if(_comboCounter == 1)
+                {
+                    foreach (var item in _remainingCombos)
+                    {
+                        if (_attackInputs[i] == item._buttonSequence[_comboCounter])
+                        {
+                            TempRemainingCombos.Add(item);
+                            Attack(i);
+                        }
+                    }
+                    _comboCounter++;
+                    
+                }
+                else if (_comboCounter == 0)
+                {
+                    foreach (var item in ComboList)
+                    {
+                        if (_attackInputs[i] == item._buttonSequence[_comboCounter])
+                        {
+                            _remainingCombos.Add(item);
+                            Attack(i);
+                        }
+                    }
+                    _comboCounter++;
+                    
+                }
+
+
+
+
+                //Kolla om inpute är den fösta inputen i en av combo routes
+                //Lägg in tangente i en lista som sparas
+                //När nästa tangent klickas kolla om den är den andra tangenten i en av combo routesen
+                //Lägg till den tangenten om den är 
+                //När tradje tangenten klickas kolla om det är Special tangenten
+            }
+        }
+
+
+
+
+
+
+
 
         if (_startComboWindowTimer)
         {
@@ -135,7 +196,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Attack();
+            //Attack();
         }
 
 
@@ -147,7 +208,9 @@ public class PlayerCombat : MonoBehaviour
         ExitAttack();
     }
 
-    void Attack()
+
+
+    void Attack(int attackType)
     {
 
         if(Time.time - _lastComboEnd > 0.5f && _comboCounter <= WeaponAnimation[_weaponTypeIndex].AnimationType.Count)
@@ -156,13 +219,13 @@ public class PlayerCombat : MonoBehaviour
 
             if(Time.time - _lastClickedTime >= 0.2f)
             {
-                _anim.runtimeAnimatorController = WeaponAnimation[_weaponTypeIndex].AnimationType[_comboCounter].AnimatorOV;
+                _anim.runtimeAnimatorController = WeaponAnimation[_weaponTypeIndex].AnimationType[attackType].AnimatorOV;
                 _anim.Play("Attack", 3,0);
                 //Damage
                 //Knockback
                 //VFX
 
-                _comboCounter++;
+                //_comboCounter++;
                 _lastClickedTime = Time.time;
 
                 if(_comboCounter +1> WeaponAnimation[_weaponTypeIndex].AnimationType.Count)
@@ -184,6 +247,8 @@ public class PlayerCombat : MonoBehaviour
     {
         _comboCounter = 0;
         _lastComboEnd = Time.time;
+        _remainingCombos.Clear();
+        TempRemainingCombos.Clear();
     }
 
     void ChangeWeaponAnimaitonType()
