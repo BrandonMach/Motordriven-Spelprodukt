@@ -212,14 +212,23 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack(int attackType)
     {
+        var yo = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
+        if (attackType != 0)
+        {
+            yo= WeaponAnimation[_weaponTypeIndex].HeavyAnimationType;
+        }
+        else
+        {
+            yo= WeaponAnimation[_weaponTypeIndex].LightAnimationType;
+        }
 
-        if(Time.time - _lastComboEnd > 0.5f && _comboCounter <= WeaponAnimation[_weaponTypeIndex].AnimationType.Count)
+        if(Time.time - _lastComboEnd > 0.5f && _comboCounter <= yo.Count)
         {
             CancelInvoke("EndCombo");
 
             if(Time.time - _lastClickedTime >= 0.2f)
             {
-                _anim.runtimeAnimatorController = WeaponAnimation[_weaponTypeIndex].AnimationType[attackType].AnimatorOV;
+                _anim.runtimeAnimatorController = yo[_comboCounter].AnimatorOV;
                 _anim.Play("Attack", 3,0);
                 //Damage
                 //Knockback
@@ -228,7 +237,7 @@ public class PlayerCombat : MonoBehaviour
                 //_comboCounter++;
                 _lastClickedTime = Time.time;
 
-                if(_comboCounter +1> WeaponAnimation[_weaponTypeIndex].AnimationType.Count)
+                if(_comboCounter +1> yo.Count)
                 {
                     _comboCounter = 0;
                 }
