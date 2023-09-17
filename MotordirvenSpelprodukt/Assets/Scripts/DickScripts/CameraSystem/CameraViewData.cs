@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "CameraView", fileName = "ViewData")]
+[CreateAssetMenu(menuName = "CameraSystem/ViewData", fileName = "CameraViewData")]
 public class CameraViewData : ScriptableObject
 {
     [SerializeField, TextArea(1, 3)]
