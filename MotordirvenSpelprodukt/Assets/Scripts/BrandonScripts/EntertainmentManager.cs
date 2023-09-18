@@ -204,6 +204,7 @@ public class EntertainmentManager : MonoBehaviour
     public void increaseETP(int amoutToIncrease)
     {
         _entertainmentPoints += amoutToIncrease;
+        Debug.LogError("#");
     }
 
     private void OnDrawGizmosSelected()
