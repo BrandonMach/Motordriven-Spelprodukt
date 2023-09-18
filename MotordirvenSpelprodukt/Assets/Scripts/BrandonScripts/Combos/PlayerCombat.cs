@@ -121,7 +121,7 @@ public class PlayerCombat : MonoBehaviour
                     {
 
                         Debug.LogError("Combo matched");
-                        _etpManager.increaseETP(15);
+                        //_etpManager.increaseETP(15);
                     }
                 }
             }

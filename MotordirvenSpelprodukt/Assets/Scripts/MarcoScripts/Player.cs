@@ -15,6 +15,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
+        _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
+    }
+
+    private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
+    {
+        Debug.Log("Attack method In player");
     }
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)

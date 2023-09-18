@@ -64,36 +64,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""HeavyAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""945bb889-064b-499b-8136-cdabe36ba27e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""BasicAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""4c23a743-ad17-41a0-b12d-6de00cb9d1a3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SpecialAttack1"",
-                    ""type"": ""Button"",
-                    ""id"": ""bf2d801f-4d5c-4531-921d-d8a7c7a4b5ed"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""f3ec50d7-132a-483b-9739-d19612d7712e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""6200a0ec-0bba-4c12-9f35-6ce37dc8f54c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -213,45 +195,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""11d7977b-10dc-440f-8350-04adfe1b0353"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""HeavyAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2858a771-ed2d-4bdc-b96b-6990ace8c9f3"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BasicAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""afa84251-06dc-4b79-b190-7e834b6fc407"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SpecialAttack1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""694574d9-2495-4e6c-a613-dc13b926d543"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dd00b6d-4554-4fc5-b22f-1c05c1b43e47"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bf27b35-2276-4aa3-a811-5634b0d8fcee"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -266,10 +237,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
-        m_Player_BasicAttack = m_Player.FindAction("BasicAttack", throwIfNotFound: true);
-        m_Player_SpecialAttack1 = m_Player.FindAction("SpecialAttack1", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -335,10 +304,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_HeavyAttack;
-    private readonly InputAction m_Player_BasicAttack;
-    private readonly InputAction m_Player_SpecialAttack1;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_LightAttack;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -347,10 +314,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
-        public InputAction @BasicAttack => m_Wrapper.m_Player_BasicAttack;
-        public InputAction @SpecialAttack1 => m_Wrapper.m_Player_SpecialAttack1;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -372,18 +337,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @HeavyAttack.started += instance.OnHeavyAttack;
-            @HeavyAttack.performed += instance.OnHeavyAttack;
-            @HeavyAttack.canceled += instance.OnHeavyAttack;
-            @BasicAttack.started += instance.OnBasicAttack;
-            @BasicAttack.performed += instance.OnBasicAttack;
-            @BasicAttack.canceled += instance.OnBasicAttack;
-            @SpecialAttack1.started += instance.OnSpecialAttack1;
-            @SpecialAttack1.performed += instance.OnSpecialAttack1;
-            @SpecialAttack1.canceled += instance.OnSpecialAttack1;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @LightAttack.started += instance.OnLightAttack;
+            @LightAttack.performed += instance.OnLightAttack;
+            @LightAttack.canceled += instance.OnLightAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -400,18 +359,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @HeavyAttack.started -= instance.OnHeavyAttack;
-            @HeavyAttack.performed -= instance.OnHeavyAttack;
-            @HeavyAttack.canceled -= instance.OnHeavyAttack;
-            @BasicAttack.started -= instance.OnBasicAttack;
-            @BasicAttack.performed -= instance.OnBasicAttack;
-            @BasicAttack.canceled -= instance.OnBasicAttack;
-            @SpecialAttack1.started -= instance.OnSpecialAttack1;
-            @SpecialAttack1.performed -= instance.OnSpecialAttack1;
-            @SpecialAttack1.canceled -= instance.OnSpecialAttack1;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @LightAttack.started -= instance.OnLightAttack;
+            @LightAttack.performed -= instance.OnLightAttack;
+            @LightAttack.canceled -= instance.OnLightAttack;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -435,9 +388,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnMousePos(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnHeavyAttack(InputAction.CallbackContext context);
-        void OnBasicAttack(InputAction.CallbackContext context);
-        void OnSpecialAttack1(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnLightAttack(InputAction.CallbackContext context);
     }
 }

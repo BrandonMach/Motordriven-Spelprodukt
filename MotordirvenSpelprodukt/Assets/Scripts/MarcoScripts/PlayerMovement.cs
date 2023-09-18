@@ -48,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerScript_OnChangeControllerTypeButtonPressed(object sender, System.EventArgs e)
     {
-        Debug.Log("HEY");
         switch (_currentRotateMode)
         {
             case RotateMode.TwoStick:
@@ -97,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_isMoving)
         {
+            _rotateDirection = _moveDirection.x * _camRight + _moveDirection.y * _camForward;
             Quaternion currentRotation = transform.rotation;
             Quaternion newRotation = Quaternion.LookRotation(_moveDirection);
             transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, _rotationSpeed * Time.deltaTime);

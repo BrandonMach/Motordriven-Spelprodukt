@@ -12,7 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetFloat("VelocityZ", Vector3.Dot(moveDirection, transform.forward), 0.1f, Time.deltaTime);
         animator.SetFloat("VelocityX", Vector3.Dot(moveDirection, transform.right), 0.1f, Time.deltaTime);
-        animator.SetFloat("TurnDirection", Vector3.Dot(rotateDirection, transform.right), 0.1f, Time.deltaTime);
+        animator.SetFloat("Lean", Vector3.Dot(rotateDirection, transform.right), 0.1f, Time.deltaTime);
 
         if (moveDirection.x <= float.Epsilon && moveDirection.z <= float.Epsilon)
         {

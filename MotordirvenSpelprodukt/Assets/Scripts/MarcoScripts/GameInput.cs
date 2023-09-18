@@ -10,12 +10,22 @@ public class GameInput : MonoBehaviour
     private PlayerInputActions _playerInputActions;
 
     public event EventHandler OnInteractActionPressed;
+
+    public event EventHandler OnLightAttackButtonPressed;
+
     private void Awake()
     {
         _playerInputActions = new PlayerInputActions();
         _playerInputActions.Player.Enable();
 
         _playerInputActions.Player.Interact.performed += Interact_performed;
+        _playerInputActions.Player.LightAttack.performed += LightAttack_performed;
+
+    }
+
+    private void LightAttack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnLightAttackButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
