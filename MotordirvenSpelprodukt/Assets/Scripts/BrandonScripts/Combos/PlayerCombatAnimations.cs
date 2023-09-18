@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombatAnimations : MonoBehaviour
 {
 
     //public List<AttackSO> Combo;
