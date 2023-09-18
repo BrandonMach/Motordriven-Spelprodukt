@@ -32,7 +32,8 @@ public class AudioMenu : MenuAbstract, IMenu
 
     public void ClickMenuOption3()
     {
-        throw new System.NotImplementedException();
+        _prevMenu.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update

@@ -80,6 +80,7 @@ public class VideoMenu : MenuAbstract, IMenu
 
     public void ClickMenuOption3()
     {
-        base.ClickMenuOption3();
+        _prevMenu.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
