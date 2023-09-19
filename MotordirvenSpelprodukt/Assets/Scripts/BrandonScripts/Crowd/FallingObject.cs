@@ -31,8 +31,8 @@ public class FallingObjectType : MonoBehaviour
         rb = GetComponentInParent<Rigidbody>();
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {
-            Vector3 spawnPosition = new Vector3(transform.position.x,0.001f, transform.position.z);
-            Instantiate(Indicator, spawnPosition, Indicator.transform.rotation);
+            Vector3 position = new Vector3(transform.position.x,0.001f, transform.position.z);
+            Instantiate(Indicator, position, Indicator.transform.rotation);
         }
             
 
