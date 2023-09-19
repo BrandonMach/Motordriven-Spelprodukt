@@ -17,9 +17,9 @@ public class DebugLogNode : ActionNode
     {
         Debug.Log($"OnUpdate{message}");
 
-        Debug.Log($"Blackboard:{blackboard.moveToPosition}");
+        //Debug.Log($"Blackboard:{blackboard.moveToPosition}");
 
-        blackboard.moveToPosition.x += 1;
+        //blackboard.moveToPosition.x += 1;
 
         return State.Success;
     }
