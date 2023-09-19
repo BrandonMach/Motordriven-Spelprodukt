@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1665,8 +1665,8 @@ GameObject:
   - component: {fileID: 1069985220}
   - component: {fileID: 1069985219}
   - component: {fileID: 1069985218}
-  - component: {fileID: 1069985222}
   - component: {fileID: 1069985223}
+  - component: {fileID: 1069985224}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1725,11 +1725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c2f4cb3528b7f47b38f000c09d0010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInput: {fileID: 2020401689}
-  moveSpeed: 5
-  rotationSpeed: 10
-  mainCamera: {fileID: 476340577}
-  playerAnimation: {fileID: 1069985218}
+  _currentRotateMode: 0
+  _currentInputMode: 0
+  _gameInput: {fileID: 2020401689}
+  _moveSpeed: 5
+  _rotationSpeed: 5
+  _mainCamera: {fileID: 476340577}
+  _playerAnimation: {fileID: 1069985218}
+  _playerScript: {fileID: 1069985223}
 --- !u!4 &1069985221
 Transform:
   m_ObjectHideFlags: 0
@@ -1746,41 +1749,6 @@ Transform:
   - {fileID: 268187424}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1069985222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069985217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99c5fde3926dd4948ad271a3aaa37f72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponAnimation:
-  - {fileID: 11400000, guid: bb82c0def8faf22428b491a4ca435e3c, type: 2}
-  - {fileID: 11400000, guid: 64f6239076273e647aaabc36f1a1464d, type: 2}
-  _currentWeaponType: {fileID: 0}
-  _text: {fileID: 1926709611}
-  _comboCounter: 0
-  _anim: {fileID: 268187423}
-  _attackInputs: 76000000620000006e000000
-  _comboTreeInfoText: {fileID: 1132449737}
-  _comboWindowTimer: 0
-  _startComboWindowTimer: 0
-  ComboList:
-  - {fileID: 11400000, guid: 343567b7eecaabe468cd8a0e9db983bd, type: 2}
-  - {fileID: 11400000, guid: 5c7e56e414077b0408f6847e4b5dc22b, type: 2}
-  - {fileID: 11400000, guid: 0539022898a17aa48b23a0f57ecb8ef8, type: 2}
-  - {fileID: 11400000, guid: 8761f4b419d47124a8ab5c0b632e52a4, type: 2}
-  - {fileID: 11400000, guid: babc618668b374f46babf074ec52151d, type: 2}
-  - {fileID: 11400000, guid: f2833c6f747f2fb458e1c7babad8127a, type: 2}
-  - {fileID: 11400000, guid: 168304ca13f6cad419cc30fcea3e3f5d, type: 2}
-  - {fileID: 11400000, guid: 6cba68cafa8b5394d89b97b089af39f1, type: 2}
-  - {fileID: 11400000, guid: 1a3ec058991780249929754206bb73b5, type: 2}
-  - {fileID: 11400000, guid: 2f74501c1daaf7a4daf5c957205eeb37, type: 2}
-  _lastUsedInputs: 
 --- !u!114 &1069985223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,6 +1761,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a37376fbc42f2246a65e50600126ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameInput: {fileID: 2020401689}
+--- !u!114 &1069985224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069985217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96bd7cefa8d9bd345b23c253ab582aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponAnimation: []
+  _currentWeaponType: {fileID: 0}
+  _text: {fileID: 0}
+  _comboCounter: 0
+  _anim: {fileID: 0}
+  _attackInputs: 
+  _comboTreeInfoText: {fileID: 0}
+  _comboWindowTimer: 0
+  _startComboWindowTimer: 0
+  ComboList: []
+  _lastUsedInputs: 
 --- !u!1 &1132449735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2226,11 +2218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb899d698cf876489a81c636e646f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isSpamming: 0
   _attackInputs: 76000000620000006e000000
   _lastUsedInputs: 
-  _spamThreshold: 7
-  _etpManager: {fileID: 1432420035}
 --- !u!114 &1432420037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2243,12 +2232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71f3f2685ac14347b51a19ac839c19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackInputs: 76000000620000006e0000006d000000
-  _comboTreeInfoText: {fileID: 1132449737}
-  _inputSequence: 000000000000000000000000
-  _comboWindowTimer: 0
-  _startComboWindowTimer: 0
-  _lastUsedInputs: 
 --- !u!1 &1455704407
 GameObject:
   m_ObjectHideFlags: 0
