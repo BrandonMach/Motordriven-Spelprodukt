@@ -167,7 +167,7 @@ public class PlayerCombatAnimations : MonoBehaviour
             if (Time.time - _lastClickedTime >= 0.2f)
             {
                 _anim.runtimeAnimatorController = _setWeaponTypeAnimations[_comboCounter].AnimatorOV; //Override the animation controller based on how far into te combo you are.
-                _anim.Play("Attack", 3, 0);
+                _anim.Play("Attack", 4, 0);
                 //Damage
                 //Knockback
                 //VFX
@@ -185,7 +185,7 @@ public class PlayerCombatAnimations : MonoBehaviour
 
     void ExitAttack() //Checksi if end of animation 
     {
-        if (_anim.GetCurrentAnimatorStateInfo(3).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(3).IsTag("Attack"))
+        if (_anim.GetCurrentAnimatorStateInfo(4).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(3).IsTag("Attack"))
         {
             Invoke("EndCombo", 1);
         }
