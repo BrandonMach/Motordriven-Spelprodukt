@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8706723546133897368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305dd7df19c72ac49a8d8b1ec3e151e2, type: 3}
+  m_Name: ChaseRange
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 4910855fd1edbd1459e044265f4933bd
+  position: {x: -629.5288, y: 177.9821}
+  agent: {fileID: 0}
+  description: "Checks if the player is far away to chase. \nIf close it fails."
+  ChaseDistance: 0
 --- !u!114 &-7249399269017114935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +34,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: bda74e2bba1943946915b46a8f712a4a
-  position: {x: 270.00003, y: 169.06258}
+  position: {x: 780.99994, y: 201}
   agent: {fileID: 0}
   description: 
   child: {fileID: 6123999868172868726}
@@ -34,7 +53,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 76328865b1433454193936e325b9a03e
-  position: {x: 844.4821, y: 632.9999}
+  position: {x: 1354.9297, y: 661.55365}
   agent: {fileID: 0}
   description: 
   children: []
@@ -53,10 +72,10 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5e9ddb7c9f83ba24399530efdd6c96db
-  position: {x: -320.108, y: 69.99993}
+  position: {x: -430.52884, y: 177.9821}
   agent: {fileID: 0}
   description: 
-  MoveSpeed: 0
+  MoveSpeed: 5
 --- !u!114 &-5032837463678387828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +91,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 823b86720caa997489bdd5ca5cacd78a
-  position: {x: 564.38684, y: 829}
+  position: {x: 1074.9297, y: 857.5538}
   agent: {fileID: 0}
   description: 
   children: []
@@ -91,10 +110,29 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 728d665a4bde6a04c8c259d6fb514af9
-  position: {x: 673.10077, y: 1101.0001}
+  position: {x: 1183.9296, y: 1129.5537}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
+--- !u!114 &-3293893600549813036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c82cb4e54eff04b9ebe5d7ec0bb257, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 42e5df8a3e6f81748b4c33276268436d
+  position: {x: -480, y: -268.31613}
+  agent: {fileID: 0}
+  description: 
+  child: {fileID: -1071388216250630101}
 --- !u!114 &-3180679342921797331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +148,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ecd786559cf2a2b4bb492ec9daffec32
-  position: {x: -530.1347, y: 829.0001}
+  position: {x: -19.070374, y: 857.5538}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
@@ -129,7 +167,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 775c229f964d91046945b01935fb4006
-  position: {x: -320.00003, y: 828.99994}
+  position: {x: 190.92972, y: 857.5538}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
@@ -148,7 +186,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8a6596cfc8df5d74aa60473d180bb3b8
-  position: {x: 843.9998, y: 829.08276}
+  position: {x: 1354.9297, y: 857.5538}
   agent: {fileID: 0}
   description: 
   PlayerCharacter: {fileID: 0}
@@ -169,12 +207,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c954bce8f6d9fd84d8096c766602c4bc
-  position: {x: -186.4725, y: -169.28001}
+  position: {x: -479.52887, y: -61.017868}
   agent: {fileID: 0}
   description: 
   children:
+  - {fileID: -854074388693966376}
+  - {fileID: -8706723546133897368}
   - {fileID: -6129113348647237572}
---- !u!114 &-1051056691443420383
+--- !u!114 &-854074388693966376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,16 +223,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba0f0ec31574be34685c882281e51ecf, type: 3}
-  m_Name: ChaseNode
+  m_Script: {fileID: 11500000, guid: 473dffcfec4ab194eb9947d68d5fe789, type: 3}
+  m_Name: CheckOutOfCombat
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: f87afab0145e4ce49a3d512a0da2f72d
-  position: {x: 38.99999, y: 70}
+  guid: 1397b60dbdcb348428453eebc190ad56
+  position: {x: -860.5289, y: 177.9821}
   agent: {fileID: 0}
-  description: 
-  MoveSpeed: 0
+  description: Checks if the player is out of combat.
 --- !u!114 &-117324888553350646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +247,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 483caa44606d3ea4da5df93613b23d83
-  position: {x: -335.9999, y: 633.00006}
+  position: {x: 174.92966, y: 661.55365}
   agent: {fileID: 0}
   description: 
   children: []
@@ -239,9 +278,7 @@ MonoBehaviour:
   - {fileID: -117324888553350646}
   - {fileID: -6152208392237039005}
   - {fileID: 8889536618134275966}
-  - {fileID: 817823286028275386}
   - {fileID: -3180679342921797331}
-  - {fileID: -1051056691443420383}
   - {fileID: 8375195611438527996}
   - {fileID: -2796541422642994007}
   - {fileID: 29640536328756448}
@@ -250,6 +287,9 @@ MonoBehaviour:
   - {fileID: -5032837463678387828}
   - {fileID: -4912737445024457842}
   - {fileID: 1879566032690211743}
+  - {fileID: -3293893600549813036}
+  - {fileID: -8706723546133897368}
+  - {fileID: -854074388693966376}
 --- !u!114 &29640536328756448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +305,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 9663a7e023d8e384b90b3382f0c55b85
-  position: {x: 1030.6909, y: 829}
+  position: {x: 1541.9294, y: 857.5538}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
@@ -284,30 +324,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 332e552899fe2f940a6b7ebd1690e9f6
-  position: {x: 270.00003, y: -9.257471}
+  position: {x: 780.99994, y: 23.000048}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: -7249399269017114935}
---- !u!114 &817823286028275386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba0f0ec31574be34685c882281e51ecf, type: 3}
-  m_Name: ChaseNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 48528c118c5d9504487007baeaa65da9
-  position: {x: -143.41855, y: 70.00004}
-  agent: {fileID: 0}
-  description: 
-  MoveSpeed: 0
 --- !u!114 &1571396268232460118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,12 +344,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b0ca087d6a1040a45a4c7990f8a6f3ae
-  position: {x: 79.999985, y: -343.31}
+  position: {x: 79.99997, y: -410.5}
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: -1071388216250630101}
-  - {fileID: 6558294589225163298}
+  - {fileID: -3293893600549813036}
 --- !u!114 &1879566032690211743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +364,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a129277e663d7ff4cafd041ca725630d
-  position: {x: 420.00003, y: 1101.0172}
+  position: {x: 930.92975, y: 1129.5537}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
@@ -363,7 +383,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 63be93f86d7afe94293734501c61614a
-  position: {x: 195.00009, y: 829}
+  position: {x: 705.92975, y: 857.5538}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
@@ -382,7 +402,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 35ac0e028587f8b48941d1e2914536c1
-  position: {x: 269.99994, y: 334.47916}
+  position: {x: 780.99994, y: 366.0001}
   agent: {fileID: 0}
   description: 
   children:
@@ -404,7 +424,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f03ec28ccff80e2409431cf10d77ae7f
-  position: {x: 270.42252, y: -168.99991}
+  position: {x: 780.99994, y: -136.99998}
   agent: {fileID: 0}
   description: 
   child: {fileID: 216383833281786892}
@@ -442,7 +462,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2995311da4705df47b3349e31f1d9c15
-  position: {x: 381.65512, y: 829}
+  position: {x: 892.9296, y: 857.5538}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
@@ -461,7 +481,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8d0c4b81c163f374d9020bd63444421a
-  position: {x: -110.999985, y: 828.99994}
+  position: {x: 399.9297, y: 857.5538}
   agent: {fileID: 0}
   description: 
   MoveSpeed: 0
@@ -480,7 +500,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 9cd5f9d620cd6584687ef3d26508ef9f
-  position: {x: 270.00003, y: 632.9999}
+  position: {x: 780.92957, y: 661.55365}
   agent: {fileID: 0}
   description: 
   children: []
