@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private Camera _mainCamera;
-    [SerializeField] private PlayerAnimation _playerAnimation;
+    [SerializeField] private PlayerMovementAnimation _playerAnimation;
     [SerializeField] private Player _playerScript;
 
     private CharacterController _characterController;
