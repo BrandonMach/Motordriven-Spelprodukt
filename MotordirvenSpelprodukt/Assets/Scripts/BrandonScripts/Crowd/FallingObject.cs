@@ -35,12 +35,12 @@ public class FallingObjectType : MonoBehaviour
     // Time when the movement started.
     private float _startTime;
     private Vector3 _startPos;
-    public  float JourneyLength;
-    public float DistCovered;
+    public  float _journeyLength;
+    public float _distCovered;
 
     void Start()
     {
-        rb = GetComponentInParent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {
             //Arena area
@@ -59,16 +59,16 @@ public class FallingObjectType : MonoBehaviour
         _startPos = new Vector3(throwPosX, 10, throwPosZ);
 
         transform.position= _startPos; 
-        JourneyLength = Vector3.Distance(_startPos, _targetPosition);
+        _journeyLength = Vector3.Distance(_startPos, _targetPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        DistCovered = (Time.time - _startTime) * _speed;
+        _distCovered = (Time.time - _startTime) * _speed;
        
         // Fraction of journey completed equals current distance divided by total distance.
-        float fractionOfJourney = DistCovered / JourneyLength;
+        float fractionOfJourney = _distCovered / _journeyLength;
 
         transform.position = Vector3.Lerp(_startPos, _targetPosition, fractionOfJourney);
       
@@ -85,16 +85,11 @@ public class FallingObjectType : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-
-       
-        
         if (other.gameObject.tag == ("Player"))
         {
             if (Type == ObjectType.Tomato)
             {
-                Debug.Log("Tomato");
-                
-                
+                Debug.Log("Tomato");   
             }
             else if (Type == ObjectType.HealthPotion)
             {
@@ -116,8 +111,17 @@ public class FallingObjectType : MonoBehaviour
     {
         if (other.gameObject.tag == "Target")
         {
-            Destroy(this.gameObject);
-            Destroy(other.gameObject);
+            if (Type == ObjectType.HealthPotion)
+            {
+                HoverObject();
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+                Destroy(other.gameObject);
+            }
+            
         }
     }
 
