@@ -50,7 +50,7 @@ public class PlayerCombatAnimations : MonoBehaviour
     void Start()
     {
         _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
-        _animLayer = _anim.GetLayerIndex("Combat");
+        _animLayer = _anim.GetLayerIndex("Attack");
 
         //Write out combo tree
         for (int i = 0; i < ComboList.Count; i++)
