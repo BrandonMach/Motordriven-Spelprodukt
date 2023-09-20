@@ -185,7 +185,7 @@ public class PlayerCombatAnimations : MonoBehaviour
 
     void ExitAttack() //Checksi if end of animation 
     {
-        if (_anim.GetCurrentAnimatorStateInfo(4).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(3).IsTag("Attack"))
+        if (_anim.GetCurrentAnimatorStateInfo(4).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(4).IsTag("Attack"))
         {
             Invoke("EndCombo", 1);
         }
@@ -220,6 +220,7 @@ public class PlayerCombatAnimations : MonoBehaviour
         {
             _comboWindowTimer = 0;
             _lastUsedInputs.Clear();
+
 
             //Debug.LogError("Combo Broken");
         }

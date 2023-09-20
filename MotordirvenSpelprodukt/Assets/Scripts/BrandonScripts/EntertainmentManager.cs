@@ -45,11 +45,6 @@ public class EntertainmentManager : MonoBehaviour
     [SerializeField] float _timeOutOfCombatCounter = 0;
     [SerializeField] float _timeOutOfCombatThreshold;
 
-    //[Header("Combo Sequence")]
-    //public KeyCode[] _inputSequence;
-    //int _indexOfINputSequence = 0;
-
-    //[SerializeField] private float _comboWindowTimer = 0;
 
     [Header("Conditions")]
 
