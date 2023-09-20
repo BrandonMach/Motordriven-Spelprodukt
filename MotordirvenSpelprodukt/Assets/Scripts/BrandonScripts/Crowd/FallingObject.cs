@@ -30,29 +30,48 @@ public class FallingObjectType : MonoBehaviour
 
     Vector3 _targetPosition;
 
+    public float _speed = 1.0F;
+
+    // Time when the movement started.
+    private float _startTime;
+    private Vector3 _startPos;
+
     [SerializeField] [Range(0, 1f)] private float lerpPct = 0.1f;
+    private float journeyLength;
 
     void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {
+            //Arena area
+            float posX = Random.Range(-10, 10);
+            float posZ = Random.Range(-10, 10);
 
-            int pos = Random.Range(0, 10);
-            _targetPosition = new Vector3(pos, 0.001f, pos);
+
+            _targetPosition = new Vector3(posX, 0.001f, posZ);
             Instantiate(Indicator, _targetPosition, Indicator.transform.rotation);
         }
 
-        transform.position = new Vector3(20, 20, 0);
+        _startTime = Time.time;
 
+        float throwPosX = Random.Range(-10, 10);
+        float throwPosZ = Random.Range(-10, 10);
+        _startPos = new Vector3(throwPosX, 10, throwPosZ);
+
+        transform.position= _startPos; 
+        journeyLength = Vector3.Distance(_startPos, _targetPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
+        float distCovered = (Time.time - _startTime) * _speed;
+       
+        // Fraction of journey completed equals current distance divided by total distance.
+        float fractionOfJourney = distCovered / journeyLength;
 
-
-        transform.position = Vector3.Lerp(transform.position, (_targetPosition), lerpPct);
+        transform.position = Vector3.Lerp(_startPos, _targetPosition, fractionOfJourney);
         //transform.rotation = Vector3.Lerp(transform.position, _targetPosition, lerpPct);
         
         if(Type == ObjectType.HealthPotion)
@@ -61,7 +80,7 @@ public class FallingObjectType : MonoBehaviour
         }
         
 
-
+        
     }
 
 
