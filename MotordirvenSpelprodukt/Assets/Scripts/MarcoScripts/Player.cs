@@ -6,7 +6,10 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public GameInput GameInput { get { return _gameInput; } }
+
     [SerializeField] private GameInput _gameInput;
+
 
     public event EventHandler OnChangeControllerTypeButtonPressed;
 

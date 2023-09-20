@@ -20,8 +20,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private RotateMode _currentRotateMode;
     [SerializeField] private InputMode _currentInputMode;
-
-    [SerializeField] private GameInput _gameInput;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private Camera _mainCamera;
@@ -44,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _playerScript.OnChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
+
     }
 
     private void PlayerScript_OnChangeControllerTypeButtonPressed(object sender, System.EventArgs e)
@@ -84,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GetCameraValues();
 
-        Vector2 inputvector = _gameInput.GetMovementVectorNormalized();
+        Vector2 inputvector = _playerScript.GameInput.GetMovementVectorNormalized();
         _moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
 
         _characterController.SimpleMove(_moveDirection * _moveSpeed);
@@ -111,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         switch (_currentInputMode)
         {
             case InputMode.Controller:
-                Vector3 input = _gameInput.GetDirectionVectorNormalized();
+                Vector3 input = _playerScript.GameInput.GetDirectionVectorNormalized();
                 _rotateDirection = input.x * _camRight + input.y * _camForward;
                 break;
             case InputMode.MnK:

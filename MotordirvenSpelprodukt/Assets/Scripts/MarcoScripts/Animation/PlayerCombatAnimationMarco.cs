@@ -68,9 +68,9 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     void Update()
     {
         //Temporary switch weapon and different combo animation should play. Animation is changed in WeaponAnimtion
+        // NOTE: I will change the method below to an event
         ChangeWeaponTypeAnimation();
 
-        _text.text = WeaponAnimation[_weaponTypeIndex].WeaponTypeName; //Display weapon name
         _currentWeaponType = WeaponAnimation[_weaponTypeIndex];
 
 
@@ -196,6 +196,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
 
     void ChangeWeaponTypeAnimation()
     {
+        //Create Event for this key 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_weaponTypeIndex < WeaponAnimation.Count - 1)
