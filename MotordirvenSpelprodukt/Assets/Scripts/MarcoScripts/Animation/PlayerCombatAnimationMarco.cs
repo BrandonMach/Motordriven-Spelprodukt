@@ -17,8 +17,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     float _lastComboEnd;
     public int _comboCounter;
 
-    [SerializeField] Animator _anim;
-    Animator og;
+    [SerializeField] Animator _animator;
     //Weapon
 
 
@@ -48,7 +47,6 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     void Start()
     {
         _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
-        og = _anim;
 
 
         //Write out combo tree
@@ -166,8 +164,8 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
 
             if (Time.time - _lastClickedTime >= 0.2f)
             {
-                _anim.runtimeAnimatorController = _setWeaponTypeAnimations[_comboCounter].AnimatorOV; //Override the animation controller based on how far into te combo you are.
-                _anim.Play("Attack", 4, 0);
+                _animator.runtimeAnimatorController = _setWeaponTypeAnimations[_comboCounter].AnimatorOV; //Override the animation controller based on how far into te combo you are.
+                _animator.Play("Attack", 4, 0);
                 //Damage
                 //Knockback
                 //VFX
@@ -185,7 +183,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
 
     void ExitAttack() //Checksi if end of animation 
     {
-        if (_anim.GetCurrentAnimatorStateInfo(4).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(3).IsTag("Attack"))
+        if (_animator.GetCurrentAnimatorStateInfo(4).normalizedTime > 0.9f && _animator.GetCurrentAnimatorStateInfo(3).IsTag("Attack"))
         {
             Invoke("EndCombo", 1);
         }
