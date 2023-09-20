@@ -26,32 +26,53 @@ public class FallingObjectType : MonoBehaviour
 
     Rigidbody rb;
 
+    Vector3 _targetPosition;
+
+    [SerializeField] [Range(0, 1f)] private float lerpPct = 0.5f;
+
     void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {
-            Vector3 position = new Vector3(transform.position.x,0.001f, transform.position.z);
-            Instantiate(Indicator, position, Indicator.transform.rotation);
+
+            int pos = Random.Range(0, 10);
+            _targetPosition = new Vector3(pos, 0.001f, pos);
+            Instantiate(Indicator, _targetPosition, Indicator.transform.rotation);
         }
-            
+
+        transform.position = new Vector3(15, 15, 0);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        HoverObject();
+
+
+        transform.position = Vector3.Lerp(transform.position, (_targetPosition), Time.deltaTime);
+        //transform.rotation = Vector3.Lerp(transform.position, _targetPosition, lerpPct);
+
+        if(Type == ObjectType.HealthPotion)
+        {
+            HoverObject();
+        }
+        
+
+
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
+
+        Debug.Log("Landar" + transform.position);
         if (collision.gameObject.tag == ("Player"))
         {
             if (Type == ObjectType.Tomato)
             {
                 Debug.Log("Tomato");
+                
                 
             }
             else if (Type == ObjectType.HealthPotion)
