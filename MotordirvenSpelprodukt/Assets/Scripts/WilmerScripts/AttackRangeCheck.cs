@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseRange : ActionNode
+public class AttackRangeCheck : ActionNode
 {
-    public float ChaseDistance;
-
+    public float AttackRange = 20.0f;
     protected override void OnStart()
     {
-
+        
     }
 
     protected override void OnStop()
@@ -18,27 +17,25 @@ public class ChaseRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if (player != null && enemy != null)
+        if (player != null)
         {
-
+            // Calculate the distance between the enemy and the player
             float distanceToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
-            if (distanceToPlayer > ChaseDistance)
+
+            // Check if the player is within attack range
+            if (distanceToPlayer <= AttackRange)
             {
                 return State.Success;
             }
             else
             {
-
-                return State.Running;
+                return State.Failure; // Player is out of attack range
             }
         }
         else
         {
-
-            return State.Failure;
+            return State.Failure; // Player not found
         }
-
     }
+
 }
-
-
