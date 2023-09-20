@@ -47,7 +47,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
+        //_etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
         og = _anim;
 
 
@@ -132,7 +132,7 @@ public class PlayerCombat : MonoBehaviour
         if (_comboCounter == 2)
         {
             Debug.LogError("Combo matched");
-            _etpManager.increaseETP(15);
+            //_etpManager.increaseETP(15);
         }
         else
         {
@@ -167,7 +167,7 @@ public class PlayerCombat : MonoBehaviour
             if (Time.time - _lastClickedTime >= 0.2f)
             {
                 _anim.runtimeAnimatorController = _setWeaponTypeAnimations[_comboCounter].AnimatorOV; //Override the animation controller based on how far into te combo you are.
-                _anim.Play("Attack", 3, 0);
+                _anim.CrossFade("Attack", 0.5f, 3, 0);
                 //Damage
                 //Knockback
                 //VFX
@@ -183,6 +183,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+
     void ExitAttack() //Checksi if end of animation 
     {
         if (_anim.GetCurrentAnimatorStateInfo(3).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(3).IsTag("Attack"))
@@ -190,11 +191,14 @@ public class PlayerCombat : MonoBehaviour
             Invoke("EndCombo", 1);
         }
     }
+
+
     void EndCombo()
     {
         _comboCounter = 0;
         _lastComboEnd = Time.time;
     }
+
 
     void ChangeWeaponTypeAnimation()
     {
@@ -210,6 +214,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
+
 
     void StartComboWindowCheck()
     {

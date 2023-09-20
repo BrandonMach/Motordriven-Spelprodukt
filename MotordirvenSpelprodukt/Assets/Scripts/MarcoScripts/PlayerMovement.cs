@@ -16,18 +16,26 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 camForward;
     private Vector3 camRight;
 
-    private bool isMoving = false; 
+    private bool isMoving = false;
+
+    private Animator animator;
+    private int combatLayerIndex = 1;
     
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-        Move();
+        AnimatorStateInfo combatLayerInfo = animator.GetCurrentAnimatorStateInfo(combatLayerIndex);
+        if(combatLayerInfo.IsTag("LocomotionTree"))
+        {
 
+           
+        }
+        Move();
     }
 
     private void Move()

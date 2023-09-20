@@ -13,4 +13,9 @@ public class PlayerAnimation : MonoBehaviour
 
         animator.SetFloat("Lean", Vector3.Dot(moveDirection, transform.right), 0.1f, Time.deltaTime);
     }
+
+    public void Update()
+    {
+       
+    }
 }
