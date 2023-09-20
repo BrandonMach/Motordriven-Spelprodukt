@@ -1,69 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StoreInputScript : MonoBehaviour
 {
 
+    //For testing
+
+    [SerializeField] private bool _isSpamming;
+    ArrayList comboList = new ArrayList();
+
+
+
+
     [SerializeField] KeyCode[] _attackInputs;
     public List<KeyCode> _lastUsedInputs = new List<KeyCode>();
-    string _keySpammed;
-    [SerializeField] private int _spamThreshold;
+    public int _spamThreshold; //Should be private in final build
+
+    [SerializeField] private EntertainmentManager _etpManager;
 
     void Start()
     {
-        
+        _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>(); //Canvas of now, name may need to change
+
     }
 
-    
+
     void Update()
     {
         for (int i = 0; i < _attackInputs.Length; i++)
         {
-            if (Input.GetKeyDown(_attackInputs[i])) 
+            if (Input.GetKeyDown(_attackInputs[i])) //Checks if attack input has been pressed
             {
-                Debug.Log("Pressed");
-                _lastUsedInputs.Add(_attackInputs[i]);
-
-                if (CheckSpamInput(_lastUsedInputs, _lastUsedInputs.Count, _spamThreshold))
+                if (_lastUsedInputs.Count == _spamThreshold) //remove first inputed key
                 {
-                    Debug.LogError("Spamming Attack " + _keySpammed);
+                    _lastUsedInputs.RemoveAt(0);
                 }
+                _lastUsedInputs.Add(_attackInputs[i]); //add latest key
+
+                CheckSpamInput(_lastUsedInputs);
+
+                if (_isSpamming)
+                {
+                    _etpManager.DecreseETP(10);
+                }
+
             }
-               
         }
-        
-
-       
-
-        
-        
-           
     }
 
-    bool CheckSpamInput(List<KeyCode> inputList, int listLenght,int spamRate)
+    void CheckSpamInput(List<KeyCode> inputList)
     {
-        for (int i = 0; i < listLenght; i++)
+        Dictionary<KeyCode, int> occurrences = inputList.GroupBy(x => x).ToDictionary(y => y.Key, z => z.Count()); //Groupes by all the same inputs and counts the occurrences
+
+        foreach (var item in occurrences)
         {
-            int j = i + 1;
-            int searchRange = spamRate;
-
-            while(searchRange > 0 && j < listLenght)
+            if (item.Value == _spamThreshold) //If the occurences of one input is same as Spamthreshold 
             {
-                if(inputList[i] == inputList[j])
-                {
-                    _keySpammed = inputList[i].ToString();
-                    return true;
-                }
-
-                j++;
-                searchRange--;
+                Debug.Log("Spammed attack button: " + item.Key + item.Value + " times.");
+                _isSpamming = true;
             }
-
+            else
+            {
+                _isSpamming = false;
+            }
         }
-
-        return false;
-
-
     }
 }

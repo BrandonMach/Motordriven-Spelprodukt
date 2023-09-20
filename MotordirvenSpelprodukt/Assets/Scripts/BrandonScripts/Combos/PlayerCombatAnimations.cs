@@ -18,8 +18,8 @@ public class PlayerCombatAnimations : MonoBehaviour
     public int _comboCounter;
 
     [SerializeField] Animator _anim;
-    Animator og;
-    //Weapon
+    private int _animLayer;
+    
 
 
 
@@ -28,6 +28,8 @@ public class PlayerCombatAnimations : MonoBehaviour
     [SerializeField] KeyCode[] _attackInputs; //Static attack inputs
 
     [SerializeField] TextMeshProUGUI _comboTreeInfoText;
+
+    //-----------------------------------------------------------------
 
     [Header("Combo Sequence")]
     [SerializeField] private float _comboWindowTimer = 0;
@@ -48,8 +50,7 @@ public class PlayerCombatAnimations : MonoBehaviour
     void Start()
     {
         _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
-        og = _anim;
-
+        _animLayer = _anim.GetLayerIndex("Combat");
 
         //Write out combo tree
         for (int i = 0; i < ComboList.Count; i++)
@@ -167,7 +168,7 @@ public class PlayerCombatAnimations : MonoBehaviour
             if (Time.time - _lastClickedTime >= 0.2f)
             {
                 _anim.runtimeAnimatorController = _setWeaponTypeAnimations[_comboCounter].AnimatorOV; //Override the animation controller based on how far into te combo you are.
-                _anim.Play("Attack", 4, 0);
+                _anim.Play("Attack", _animLayer, 0);
                 //Damage
                 //Knockback
                 //VFX
@@ -185,7 +186,7 @@ public class PlayerCombatAnimations : MonoBehaviour
 
     void ExitAttack() //Checksi if end of animation 
     {
-        if (_anim.GetCurrentAnimatorStateInfo(4).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(4).IsTag("Attack"))
+        if (_anim.GetCurrentAnimatorStateInfo(_animLayer).normalizedTime > 0.9f && _anim.GetCurrentAnimatorStateInfo(_animLayer).IsTag("Attack"))
         {
             Invoke("EndCombo", 1);
         }
