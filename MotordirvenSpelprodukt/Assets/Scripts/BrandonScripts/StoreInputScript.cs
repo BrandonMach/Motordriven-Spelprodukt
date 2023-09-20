@@ -8,6 +8,7 @@ public class StoreInputScript : MonoBehaviour
     [SerializeField] KeyCode[] _attackInputs;
     public List<KeyCode> _lastUsedInputs = new List<KeyCode>();
     string _keySpammed;
+    [SerializeField] private int _spamThreshold;
 
     void Start()
     {
@@ -23,16 +24,17 @@ public class StoreInputScript : MonoBehaviour
             {
                 Debug.Log("Pressed");
                 _lastUsedInputs.Add(_attackInputs[i]);
-                
+
+                if (CheckSpamInput(_lastUsedInputs, _lastUsedInputs.Count, _spamThreshold))
+                {
+                    Debug.LogError("Spamming Attack " + _keySpammed);
+                }
             }
                
         }
         
 
-        if(CheckSpamInput(_lastUsedInputs, _lastUsedInputs.Count, 5))
-        {
-            Debug.LogError("Spamming Attack " + _keySpammed);
-        }
+       
 
         
         
