@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class FallingObjectType : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class FallingObjectType : MonoBehaviour
 
     public ObjectType Type;
     public GameObject Indicator;
+    
 
     public LayerMask Ground;
 
@@ -28,7 +30,7 @@ public class FallingObjectType : MonoBehaviour
 
     Vector3 _targetPosition;
 
-    [SerializeField] [Range(0, 1f)] private float lerpPct = 0.5f;
+    [SerializeField] [Range(0, 1f)] private float lerpPct = 0.1f;
 
     void Start()
     {
@@ -41,7 +43,7 @@ public class FallingObjectType : MonoBehaviour
             Instantiate(Indicator, _targetPosition, Indicator.transform.rotation);
         }
 
-        transform.position = new Vector3(15, 15, 0);
+        transform.position = new Vector3(20, 20, 0);
 
     }
 
@@ -50,9 +52,9 @@ public class FallingObjectType : MonoBehaviour
     {
 
 
-        transform.position = Vector3.Lerp(transform.position, (_targetPosition), Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, (_targetPosition), lerpPct);
         //transform.rotation = Vector3.Lerp(transform.position, _targetPosition, lerpPct);
-
+        
         if(Type == ObjectType.HealthPotion)
         {
             HoverObject();
@@ -85,8 +87,12 @@ public class FallingObjectType : MonoBehaviour
                 Debug.Log("Cannonball");
             }
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
 
-
+        
 
     }
 

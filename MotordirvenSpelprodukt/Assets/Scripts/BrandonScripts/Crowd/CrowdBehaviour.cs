@@ -43,7 +43,7 @@ public class CrowdBehaviour : MonoBehaviour
         {
             Instantiate(fallingObject, _playerPos.position + new Vector3(0, 10, 0), transform.rotation);
         }
-
+        
 
     }
 
