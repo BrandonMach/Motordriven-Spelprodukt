@@ -30,14 +30,13 @@ public class FallingObjectType : MonoBehaviour
 
     Vector3 _targetPosition;
 
-    public float _speed = 1.0F;
+    public float _speed = 1.0f;
 
     // Time when the movement started.
     private float _startTime;
     private Vector3 _startPos;
-
-    [SerializeField] [Range(0, 1f)] private float lerpPct = 0.1f;
-    private float journeyLength;
+    public  float JourneyLength;
+    public float DistCovered;
 
     void Start()
     {
@@ -60,19 +59,19 @@ public class FallingObjectType : MonoBehaviour
         _startPos = new Vector3(throwPosX, 10, throwPosZ);
 
         transform.position= _startPos; 
-        journeyLength = Vector3.Distance(_startPos, _targetPosition);
+        JourneyLength = Vector3.Distance(_startPos, _targetPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distCovered = (Time.time - _startTime) * _speed;
+        DistCovered = (Time.time - _startTime) * _speed;
        
         // Fraction of journey completed equals current distance divided by total distance.
-        float fractionOfJourney = distCovered / journeyLength;
+        float fractionOfJourney = DistCovered / JourneyLength;
 
         transform.position = Vector3.Lerp(_startPos, _targetPosition, fractionOfJourney);
-        //transform.rotation = Vector3.Lerp(transform.position, _targetPosition, lerpPct);
+      
         
         if(Type == ObjectType.HealthPotion)
         {
@@ -84,11 +83,12 @@ public class FallingObjectType : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
 
-        Debug.Log("Landar" + transform.position);
-        if (collision.gameObject.tag == ("Player"))
+       
+        
+        if (other.gameObject.tag == ("Player"))
         {
             if (Type == ObjectType.Tomato)
             {
@@ -106,13 +106,19 @@ public class FallingObjectType : MonoBehaviour
                 Debug.Log("Cannonball");
             }
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        
 
         
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Target")
+        {
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+        }
     }
 
 

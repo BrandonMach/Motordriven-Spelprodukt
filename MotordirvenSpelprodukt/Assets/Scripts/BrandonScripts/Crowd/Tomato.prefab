@@ -156,7 +156,8 @@ MonoBehaviour:
   MaxDistance: 2
   MaxForce: 5
   _speed: 10
-  lerpPct: 0.05
+  JourneyLength: 0
+  DistCovered: 0
 --- !u!96 &3359493809205392698
 TrailRenderer:
   serializedVersion: 3
@@ -178,7 +179,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,7 +210,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.52586746
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -217,8 +218,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.65808827
-        value: 0.25862068
+        time: 0.7389751
+        value: 0.11206764
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -230,8 +231,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0.018630981, a: 1}
-      key1: {r: 0.9652143, g: 1, b: 0.10849059, a: 1}
+      key0: {r: 0.5176471, g: 0.24705884, b: 0.23529413, a: 1}
+      key1: {r: 0.5176471, g: 0.24705884, b: 0.23529413, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -255,7 +256,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 1
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -267,6 +268,6 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
