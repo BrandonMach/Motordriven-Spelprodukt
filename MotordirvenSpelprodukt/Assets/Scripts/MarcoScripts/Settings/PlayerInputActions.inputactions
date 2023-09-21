@@ -15,18 +15,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "e02a88f2-5e46-4ea1-8c8c-fdd56159895a",
-                    "expectedControlType": "Vector2",
+                    "name": "LightAttack",
+                    "type": "Button",
+                    "id": "4a80452f-5e5f-4934-a096-d3130fb6819b",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
-                    "name": "MousePos",
+                    "name": "HeavyAttack",
+                    "type": "Button",
+                    "id": "1a0db192-e2cf-405b-ab02-10a0041d86d4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
                     "type": "Value",
-                    "id": "d85ab597-0282-4ca3-911f-cf51ec644e2b",
+                    "id": "bdfa04b0-da35-45b8-b243-c86aeb1b5fd1",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -35,25 +44,7 @@
                 {
                     "name": "Interact",
                     "type": "Button",
-                    "id": "7d71c235-42d8-46fc-91c3-15b8bb8ff09a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "f3ec50d7-132a-483b-9739-d19612d7712e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LightAttack",
-                    "type": "Button",
-                    "id": "6200a0ec-0bba-4c12-9f35-6ce37dc8f54c",
+                    "id": "0fc2d188-4c64-4a08-9e20-52dc4a375dd4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -129,62 +120,7 @@
                 },
                 {
                     "name": "",
-                    "id": "1468fd54-16cb-4286-97ba-c566648b05f0",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4578f0a4-c3ec-4ffe-9f8b-bbbf96389fa8",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MousePos",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "744de621-1efa-4945-88cf-040382c6621e",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dd3479ad-703c-4180-b2d2-da37b031d6d7",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "694574d9-2495-4e6c-a613-dc13b926d543",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6dd00b6d-4554-4fc5-b22f-1c05c1b43e47",
+                    "id": "f0ebeeda-4ced-4ed5-ba4d-8b0017c6e6ef",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -195,12 +131,67 @@
                 },
                 {
                     "name": "",
-                    "id": "2bf27b35-2276-4aa3-a811-5634b0d8fcee",
+                    "id": "d4586ca6-a012-41f6-8110-3780f3612601",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "LightAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95596f20-fa80-4b42-921e-f5f2b11544ed",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7652c1a7-9259-42a8-8655-8ed6b25a8682",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ea36a46-2cca-4ef5-9edf-ee36b4ba2f5b",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b2267f0-3122-49cd-a744-6d771fc23d5a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd4afaf8-ce3f-4c0f-9b18-a3f57702ceaa",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

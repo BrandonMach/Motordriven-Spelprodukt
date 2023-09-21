@@ -1,9 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System;
-
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnInteractActionPressed;
 
     public event EventHandler OnLightAttackButtonPressed;
+    public event EventHandler OnHeavyAttackButtonPressed;
 
     private void Awake()
     {
@@ -20,14 +20,18 @@ public class GameInput : MonoBehaviour
 
         _playerInputActions.Player.Interact.performed += Interact_performed;
         _playerInputActions.Player.LightAttack.performed += LightAttack_performed;
+        _playerInputActions.Player.HeavyAttack.performed += HeavyAttack_performed;       
+    }
 
+    private void HeavyAttack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnHeavyAttackButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void LightAttack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnLightAttackButtonPressed?.Invoke(this, EventArgs.Empty);
     }
-
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnInteractActionPressed?.Invoke(this, EventArgs.Empty);
@@ -38,16 +42,9 @@ public class GameInput : MonoBehaviour
         Vector2 inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
         return inputVector.normalized;
     }
-
     public Vector2 GetDirectionVectorNormalized()
     {
         Vector2 inputVector = _playerInputActions.Player.Look.ReadValue<Vector2>();
         return inputVector.normalized;
-    }
-
-    public Vector2 GetMousePosition()
-    {
-        Vector2 inputVector = _playerInputActions.Player.MousePos.ReadValue<Vector2>();
-        return inputVector;
     }
 }
