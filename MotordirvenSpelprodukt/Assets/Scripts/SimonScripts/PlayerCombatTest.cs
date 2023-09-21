@@ -55,7 +55,7 @@ public class PlayerCombatTest : MonoBehaviour
             Debug.LogError("Combo matched");
             //_etpManager.increaseETP(15);
             currentCombo = "";
-            timeBetweenInputs = 100;
+            timeBetweenInputs = 1.5f;
         }
     }
 
@@ -63,6 +63,11 @@ public class PlayerCombatTest : MonoBehaviour
     {
         inputTimer += Time.deltaTime;
 
+        HandleAnimationLayers();
+    }
+
+    private void HandleAnimationLayers()
+    {
         if (weight != desiredWeight)
         {
             weight -= (1 * weightChanger);
@@ -71,7 +76,7 @@ public class PlayerCombatTest : MonoBehaviour
             {
                 weight = 0.01f;
             }
-            else if(weight > 1f)
+            else if (weight > 1f)
             {
                 weight = 0.99f;
             }
@@ -94,4 +99,16 @@ public class PlayerCombatTest : MonoBehaviour
         weightChanger = -0.025f;
         weight = 0.01f;
     }
+    //public void Test()
+    //{
+    //    if (animator.GetFloat("test") == 0)
+    //    {
+    //        animator.SetFloat("test", 1);
+    //    }
+    //    else
+    //    {
+    //        animator.SetFloat("test", 0);
+    //    }
+    //    //animator.SetFloat("test", 1);
+    //}
 }
