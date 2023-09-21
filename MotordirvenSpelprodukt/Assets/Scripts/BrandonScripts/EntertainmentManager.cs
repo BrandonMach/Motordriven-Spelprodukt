@@ -12,6 +12,10 @@ public class EntertainmentManager : MonoBehaviour
 
 
     [SerializeField] float _entertainmentPoints;
+    public float GetETP()
+    {
+        return _entertainmentPoints;
+    }
 
 
     [Header("UI Arrow")]
@@ -22,9 +26,17 @@ public class EntertainmentManager : MonoBehaviour
     //ETP = Entartainment Points
 
     [SerializeField] private float _maxETP = 100;
-    private float _ETPThreashold;
+    private float _ETPThreshold;
+    public float GetETPThreshold()
+    {
+        return _ETPThreshold;
+    }
     private float _startETP;
     private float _currentThreshold;
+
+   
+
+
 
     [Header("OOC- Out Of Combat")]
     public GameObject[] EnemyGameObjects;
@@ -54,7 +66,7 @@ public class EntertainmentManager : MonoBehaviour
 
         //ETP
         _startETP = _maxETP / 2;
-        _ETPThreashold = _maxETP / 2;
+        _ETPThreshold = _maxETP / 2;
         _entertainmentPoints = _startETP;
         //_indicatorArrowrRotateAngle = 90;
 
@@ -85,7 +97,7 @@ public class EntertainmentManager : MonoBehaviour
             OutOfCombatDecreaseOverTime();
         }
 
-        if(_entertainmentPoints < _ETPThreashold)
+        if(_entertainmentPoints < _ETPThreshold)
         {
             CrowdText.text = "Booooooo!!";
         }
@@ -101,56 +113,12 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
 
-        ////Combo sequence Test
-
-        //if(_indexOfINputSequence < _inputSequence.Length)
-        //{
-        //    if (Input.GetKeyDown(_inputSequence[_indexOfINputSequence]))  
-        //    {
-
-        //        _startComboWindowTimer = true;
-        //        _comboWindowTimer = 0;
-
-
-        //        Debug.Log(_inputSequence[_indexOfINputSequence]);
-        //        _indexOfINputSequence++;
-
-
-        //        if (_indexOfINputSequence == _inputSequence.Length) //Combo achived
-        //        {
-        //            _indexOfINputSequence = 0;
-        //            Debug.Log("Combo sequence achived");
-        //            _entertainmentPoints += 25;
-        //        }
-
-        //    }
-        //}
-
-        //if (_startComboWindowTimer)
-        //{
-        //    StartComboWindowCheck();
-        //}
-
-
 
         //For testing
         OOCPopUp.SetActive(_isOutOfCombat);
 
 
     }
-
-    //void StartComboWindowCheck()
-    //{
-    //    float comboWindow = 1;
-    //    _comboWindowTimer += Time.deltaTime;
-
-    //    if (_comboWindowTimer >= comboWindow)
-    //    {
-    //        _comboWindowTimer = 0;
-    //        _indexOfINputSequence = 0;
-    //        //Debug.LogError("Combo Broken");
-    //    }
-    //}
 
     void UpdateETPArrow()
     {
@@ -204,6 +172,7 @@ public class EntertainmentManager : MonoBehaviour
     public void increaseETP(int amoutToIncrease)
     {
         _entertainmentPoints += amoutToIncrease;
+        
     }
 
     private void OnDrawGizmosSelected()
