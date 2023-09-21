@@ -86,7 +86,8 @@ public class PlayerCombatTest : MonoBehaviour
             {
                 weight = 0.99f;
             }
-            animator.SetLayerWeight(LayerMask.NameToLayer("CombatTree"), weight);
+           
+            animator.SetLayerWeight(animator.GetLayerIndex("CombatTree"), weight);
         }
     }
 
