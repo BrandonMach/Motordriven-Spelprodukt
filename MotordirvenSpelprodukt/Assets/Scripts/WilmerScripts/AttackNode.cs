@@ -17,7 +17,7 @@ public class AttackNode : ActionNode
     // Start is called before the first frame update
     protected override void OnStart()
     {
-
+        
 
     }
 
@@ -35,6 +35,7 @@ public class AttackNode : ActionNode
             // You can add your attack logic or call a method to attack the player
             _lastAttackTime = Time.time;
             Debug.Log($"AAAAAAAAttack!");
+            //Call TakeDamage() in player
             return State.Success; // Attack successful
         }
         else

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AttackRangeCheck : ActionNode
 {
-    public float AttackRange = 20.0f;
+
+    
     protected override void OnStart()
     {
         
@@ -23,7 +24,7 @@ public class AttackRangeCheck : ActionNode
             float distanceToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
 
             // Check if the player is within attack range
-            if (distanceToPlayer <= AttackRange)
+            if (distanceToPlayer <= minionScript.AttackRange)
             {
                 return State.Success;
             }

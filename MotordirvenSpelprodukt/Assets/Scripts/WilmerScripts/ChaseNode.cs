@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class ChaseNode : ActionNode
 {
-
-    public int MoveSpeed;
-    
+    public MinionScript minionScript;
 
     protected override void OnStart()
     {
@@ -29,8 +27,8 @@ public class ChaseNode : ActionNode
         direction.Normalize();
 
         // Move the AI towards the player
-        enemy.transform.Translate(MoveSpeed * Time.deltaTime * direction);
-
+        enemy.transform.Translate(minionScript.MovementSpeed * Time.deltaTime * direction);
+        
         return State.Success;
 
     }
