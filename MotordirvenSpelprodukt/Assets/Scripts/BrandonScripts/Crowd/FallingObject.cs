@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class FallingObjectType : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class FallingObjectType : MonoBehaviour
 
     public ObjectType Type;
     public GameObject Indicator;
+    
 
     public LayerMask Ground;
 
@@ -26,33 +28,70 @@ public class FallingObjectType : MonoBehaviour
 
     Rigidbody rb;
 
+    Vector3 _targetPosition;
+
+    public float _speed = 1.0f;
+
+    // Time when the movement started.
+    private float _startTime;
+    private Vector3 _startPos;
+    public  float _journeyLength;
+    public float _distCovered;
+
     void Start()
     {
-        rb = GetComponentInParent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {
-            Vector3 position = new Vector3(transform.position.x,0.001f, transform.position.z);
-            Instantiate(Indicator, position, Indicator.transform.rotation);
-        }
-            
+            //Arena area
+            float posX = Random.Range(-10, 10);
+            float posZ = Random.Range(-10, 10);
 
+
+            _targetPosition = new Vector3(posX, 0.001f, posZ);
+            Instantiate(Indicator, _targetPosition, Indicator.transform.rotation);
+        }
+
+        _startTime = Time.time;
+
+        float throwPosX = Random.Range(-10, 10);
+        float throwPosZ = Random.Range(-10, 10);
+        _startPos = new Vector3(throwPosX, 10, throwPosZ);
+
+        transform.position= _startPos; 
+        _journeyLength = Vector3.Distance(_startPos, _targetPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        HoverObject();
+        _distCovered = (Time.time - _startTime) * _speed;
+       
+        // Fraction of journey completed equals current distance divided by total distance.
+        float fractionOfJourney = _distCovered / _journeyLength;
+
+        transform.position = Vector3.Lerp(_startPos, _targetPosition, fractionOfJourney);
+      
+        
+        if(Type == ObjectType.HealthPotion)
+        {
+           // HoverObject();
+            //float y = Mathf.PingPong(Time.time * 2, 1) * 6 - 3;
+            //transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        }
+        
+
+        
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        if (collision.gameObject.tag == ("Player"))
+        if (other.gameObject.tag == ("Player"))
         {
             if (Type == ObjectType.Tomato)
             {
-                Debug.Log("Tomato");
-                
+                Debug.Log("Tomato");   
             }
             else if (Type == ObjectType.HealthPotion)
             {
@@ -64,22 +103,47 @@ public class FallingObjectType : MonoBehaviour
                 Debug.Log("Cannonball");
             }
         }
+        
 
+        
 
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Target")
+        {
+            if (Type == ObjectType.HealthPotion)
+            {
+                HoverObject();
+               
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+                Destroy(other.gameObject);
+            }
+            
+        }
     }
 
 
     void HoverObject()
     {
-        float distance = RaycastDownwardsFromMe();
 
-        float fractionalPosition = (MaxDistance - distance) / (MaxDistance - MinDistance);
-        if (fractionalPosition < 0) fractionalPosition = 0;
-        if (fractionalPosition > 1) fractionalPosition = 1;
-        float force = fractionalPosition * MaxForce;
 
-        rb.AddForceAtPosition(Vector3.up * force, transform.position);
+        float y = Mathf.PingPong(Time.time * 2, 1) * 6 - 3;
+        transform.position = new Vector3(transform.position.x, y, transform.position.z);
+
+        //float distance = RaycastDownwardsFromMe();
+
+        //float fractionalPosition = (MaxDistance - distance) / (MaxDistance - MinDistance);
+        //if (fractionalPosition < 0) fractionalPosition = 0;
+        //if (fractionalPosition > 1) fractionalPosition = 1;
+        //float force = fractionalPosition * MaxForce;
+
+        //rb.AddForceAtPosition(Vector3.up * force, transform.position);
     }
 
     float RaycastDownwardsFromMe()
