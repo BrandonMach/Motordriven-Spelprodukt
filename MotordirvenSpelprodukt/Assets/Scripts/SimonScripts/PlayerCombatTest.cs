@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class PlayerCombatTest : MonoBehaviour
 {
-    [SerializeField] private GameInput gameInput;
+    //[SerializeField] private GameInput gameInput;
+    [SerializeField] private Player player;
     [SerializeField] private Animator animator;
     private EntertainmentManager _etpManager;
-    private string currentCombo = "";
+    private string currentCombo = ""; //
     private float desiredWeight = 0;
     private float weight = 0;
     private float weightChanger = -0.025f;
@@ -20,19 +21,23 @@ public class PlayerCombatTest : MonoBehaviour
     {
         //_etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
         animator.SetTrigger("Awake");
-        gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
-        gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
+        player.OnAttackPressed += Player_OnAttack;
+        //player.OnAttackPressed += Player_OnHeavyAttackPressed;
     }
 
-    private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
-    {      
-        HandleInput("L");
-    }
-
-    private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
+    private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        HandleInput("H");
+        HandleInput(e.attackType);
     }
+    //private void Player_OnHeavyAttackPressed(object sender, EventArgs e)
+    //{
+    //    HandleInput("H");
+    //}
+
+    //private void Player_OnLightAttackPressed(object sender, EventArgs e)
+    //{
+    //    HandleInput("L");
+    //}
 
     private void HandleInput(string attackType)
     {
@@ -40,7 +45,7 @@ public class PlayerCombatTest : MonoBehaviour
         
         if (inputTimer > timeBetweenInputs)
         {
-            currentCombo += attackType;
+            currentCombo += attackType; // Adds character to string combo
             Debug.Log(currentCombo);
             AnimateAttack();
             inputTimer = 0;
@@ -49,7 +54,8 @@ public class PlayerCombatTest : MonoBehaviour
 
     private void AnimateAttack()
     {
-        animator.SetTrigger(currentCombo);
+        // CurrentCombo = "LL"
+        animator.SetTrigger("Trigger_" + currentCombo);
         if (currentCombo.Length == 3 || currentCombo == "LH" || currentCombo == "HL")
         {
             Debug.LogError("Combo matched");
@@ -80,7 +86,7 @@ public class PlayerCombatTest : MonoBehaviour
             {
                 weight = 0.99f;
             }
-            animator.SetLayerWeight(4, weight);
+            animator.SetLayerWeight(LayerMask.NameToLayer("CombatTree"), weight);
         }
     }
 

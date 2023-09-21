@@ -159,6 +159,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(_lookPos, 2);
+        //Gizmos.DrawSphere(_lookPos, 2);
     }
 }
