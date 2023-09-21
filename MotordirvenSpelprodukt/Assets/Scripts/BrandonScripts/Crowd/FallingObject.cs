@@ -75,7 +75,9 @@ public class FallingObjectType : MonoBehaviour
         
         if(Type == ObjectType.HealthPotion)
         {
-            HoverObject();
+           // HoverObject();
+            //float y = Mathf.PingPong(Time.time * 2, 1) * 6 - 3;
+            //transform.position = new Vector3(transform.position.x, y, transform.position.z);
         }
         
 
@@ -114,6 +116,7 @@ public class FallingObjectType : MonoBehaviour
             if (Type == ObjectType.HealthPotion)
             {
                 HoverObject();
+               
                 Destroy(other.gameObject);
             }
             else
@@ -128,14 +131,19 @@ public class FallingObjectType : MonoBehaviour
 
     void HoverObject()
     {
-        float distance = RaycastDownwardsFromMe();
 
-        float fractionalPosition = (MaxDistance - distance) / (MaxDistance - MinDistance);
-        if (fractionalPosition < 0) fractionalPosition = 0;
-        if (fractionalPosition > 1) fractionalPosition = 1;
-        float force = fractionalPosition * MaxForce;
 
-        rb.AddForceAtPosition(Vector3.up * force, transform.position);
+        float y = Mathf.PingPong(Time.time * 2, 1) * 6 - 3;
+        transform.position = new Vector3(transform.position.x, y, transform.position.z);
+
+        //float distance = RaycastDownwardsFromMe();
+
+        //float fractionalPosition = (MaxDistance - distance) / (MaxDistance - MinDistance);
+        //if (fractionalPosition < 0) fractionalPosition = 0;
+        //if (fractionalPosition > 1) fractionalPosition = 1;
+        //float force = fractionalPosition * MaxForce;
+
+        //rb.AddForceAtPosition(Vector3.up * force, transform.position);
     }
 
     float RaycastDownwardsFromMe()
