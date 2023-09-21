@@ -6,7 +6,10 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public GameInput GameInput { get { return _gameInput; } }
+
     [SerializeField] private GameInput _gameInput;
+
 
     public event EventHandler OnChangeControllerTypeButtonPressed;
 
@@ -20,7 +23,6 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
-        Debug.Log("Attack method In player");
     }
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
