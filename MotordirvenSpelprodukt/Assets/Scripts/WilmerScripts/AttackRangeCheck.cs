@@ -24,7 +24,7 @@ public class AttackRangeCheck : ActionNode
             float distanceToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
 
             // Check if the player is within attack range
-            if (distanceToPlayer <= minionScript.AttackRange)
+            if (distanceToPlayer <= 5/*minionScript.AttackRange*/)
             {
                 return State.Success;
             }
