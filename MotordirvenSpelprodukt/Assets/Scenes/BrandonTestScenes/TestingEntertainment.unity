@@ -555,6 +555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_English_Govenor_01
       objectReference: {fileID: 0}
+    - target: {fileID: 195416, guid: 21a82b88f4e365a4cb4277cd43b7fe21, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400256, guid: 21a82b88f4e365a4cb4277cd43b7fe21, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.962
@@ -1660,6 +1664,53 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2.05, z: 1}
   m_Center: {x: 0, y: 1.19, z: 0}
+--- !u!114 &1069985228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069985217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246ea2dd462e2554e89f9b4d08326444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1069985229}
+  animator: {fileID: 1069985230}
+  timeBetweenInputs: 1.5
+--- !u!114 &1069985229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6983715570975962233, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+  m_PrefabInstance: {fileID: 2382071628787264005}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069985217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a37376fbc42f2246a65e50600126ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1069985230
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069985217}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a50cd06a0668d1a418d586a2944e3ed5, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0bdcb84109fbf904591552705cf36e39, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1132449735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3852,6 +3903,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3122107952525352693, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1069985230}
     - target: {fileID: 3921070419429540266, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: _gameInput
       value: 
@@ -3872,6 +3927,10 @@ PrefabInstance:
       propertyPath: _text
       value: 
       objectReference: {fileID: 1926709611}
+    - target: {fileID: 5233421936491570130, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5233421936491570130, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: _comboTreeInfoText
       value: 
@@ -3920,6 +3979,10 @@ PrefabInstance:
       propertyPath: _gameInput
       value: 
       objectReference: {fileID: 2020401689}
+    - target: {fileID: 8514825548396917335, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3927,6 +3990,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1069985227}
+    - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1069985228}
+    - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1069985230}
   m_SourcePrefab: {fileID: 100100000, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
