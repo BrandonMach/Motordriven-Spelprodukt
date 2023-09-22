@@ -22,6 +22,7 @@ public class SimonComboCopy : MonoBehaviour
     float comboWindow = 2;
 
     [Header("Weapon")]
+    [SerializeField] Transform _weaponHandPos;
     public List<Weapontype> WeaponAnimation;
     [SerializeField] Weapontype _currentWeaponType;
     private int _weaponTypeIndex = 0;
@@ -33,6 +34,8 @@ public class SimonComboCopy : MonoBehaviour
         animator.SetTrigger("Awake");
         player.OnAttackPressed += Player_OnAttack;
         //player.OnAttackPressed += Player_OnHeavyAttackPressed;
+        _currentWeaponType = WeaponAnimation[_weaponTypeIndex];
+        Instantiate(_currentWeaponType.GetPrefab(), _weaponHandPos.position , _currentWeaponType.GetPrefab().transform.rotation);
     }
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
@@ -89,7 +92,8 @@ public class SimonComboCopy : MonoBehaviour
         inputTimer += Time.deltaTime;
 
         HandleAnimationLayers();
-        if (Input.GetKeyDown(KeyCode.M))
+
+        if (Input.GetKeyDown(KeyCode.M)) //För testing
         {
             if (_weaponTypeIndex < WeaponAnimation.Count - 1)
             {
@@ -99,9 +103,10 @@ public class SimonComboCopy : MonoBehaviour
             {
                 _weaponTypeIndex = 0;
             }
+
             
         }
-        HandleWeapon();
+        HandleWeapon(); // Override vilken vapen animation man ska ha beroende på vapen
 
         if (_startComboWindowTimer)
         {
@@ -113,22 +118,6 @@ public class SimonComboCopy : MonoBehaviour
     {
         var _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex];
         animator.runtimeAnimatorController = _setWeaponTypeAnimations.WeaponAnimations.AnimatorOV;
-
-
-        //switch (attackType) //Switch what weapon animation List to pick the animation clips from
-        //{
-        //    case 0:
-        //        _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
-        //        animator.runtimeAnimatorController = _setWeaponTypeAnimations[currentCombo.Length].AnimatorOV;
-        //        break;
-        //    case 1:
-        //        _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].HeavyAnimationType;
-        //        animator.runtimeAnimatorController = _setWeaponTypeAnimations[currentCombo.Length].AnimatorOV;
-        //        break;
-        //    case 3:
-        //        ///Special attack
-        //        break;
-        //}
     }
 
     private void HandleAnimationLayers()
