@@ -91,9 +91,18 @@ public class SimonComboCopy : MonoBehaviour
         HandleAnimationLayers();
         if (Input.GetKeyDown(KeyCode.M))
         {
+            if (_weaponTypeIndex < WeaponAnimation.Count - 1)
+            {
+                _weaponTypeIndex++;
+            }
+            else
+            {
+                _weaponTypeIndex = 0;
+            }
             HandleWeapon();
         }
         
+
         if (_startComboWindowTimer)
         {
             StartComboWindowCheck();
@@ -102,8 +111,8 @@ public class SimonComboCopy : MonoBehaviour
 
     private void HandleWeapon(/*int attackType*/)
     {
-        var _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
-        animator.runtimeAnimatorController = _setWeaponTypeAnimations[0].AnimatorOV;
+        var _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex];
+        animator.runtimeAnimatorController = _setWeaponTypeAnimations.WeaponAnimations.AnimatorOV;
 
 
         //switch (attackType) //Switch what weapon animation List to pick the animation clips from
