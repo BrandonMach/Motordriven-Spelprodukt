@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SimonComboCopy : MonoBehaviour
@@ -20,12 +21,21 @@ public class SimonComboCopy : MonoBehaviour
     [SerializeField] private bool _startComboWindowTimer;
     float comboWindow = 2;
 
+    [Header("Weapon")]
+    [SerializeField] Transform _weaponHandPos;
+    public List<Weapontype> WeaponAnimation;
+    [SerializeField] Weapontype _currentWeaponType;
+    private int _weaponTypeIndex = 0;
+    [SerializeField] private TextMeshProUGUI _text;
+
     void Start()
     {
         //_etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
         animator.SetTrigger("Awake");
         player.OnAttackPressed += Player_OnAttack;
         //player.OnAttackPressed += Player_OnHeavyAttackPressed;
+        _currentWeaponType = WeaponAnimation[_weaponTypeIndex];
+        Instantiate(_currentWeaponType.GetPrefab(), _weaponHandPos.position , _currentWeaponType.GetPrefab().transform.rotation);
     }
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
@@ -65,7 +75,7 @@ public class SimonComboCopy : MonoBehaviour
         if (currentCombo.Length == 3 || currentCombo == "LH" || currentCombo == "HL")
         {
             Debug.LogError("Combo matched");
-            //_etpManager.increaseETP(15);
+            _etpManager.increaseETP(15);
             currentCombo = "";
             timeBetweenInputs = 1.5f;
             
@@ -75,14 +85,39 @@ public class SimonComboCopy : MonoBehaviour
 
     private void Update()
     {
+        _text.text = WeaponAnimation[_weaponTypeIndex].GetNameList(); //Display weapon name
+        _currentWeaponType = WeaponAnimation[_weaponTypeIndex];
+
+
         inputTimer += Time.deltaTime;
 
         HandleAnimationLayers();
+
+        if (Input.GetKeyDown(KeyCode.M)) //För testing
+        {
+            if (_weaponTypeIndex < WeaponAnimation.Count - 1)
+            {
+                _weaponTypeIndex++;
+            }
+            else
+            {
+                _weaponTypeIndex = 0;
+            }
+
+            
+        }
+        HandleWeapon(); // Override vilken vapen animation man ska ha beroende på vapen
 
         if (_startComboWindowTimer)
         {
             StartComboWindowCheck();
         }
+    }
+
+    private void HandleWeapon(/*int attackType*/)
+    {
+        var _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex];
+        animator.runtimeAnimatorController = _setWeaponTypeAnimations.WeaponAnimations.AnimatorOV;
     }
 
     private void HandleAnimationLayers()

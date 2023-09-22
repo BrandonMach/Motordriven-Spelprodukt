@@ -8,4 +8,5 @@ public class MeleeWeaponType : Weapontype
     //[SerializeField] private guardCapability;
     //[SerializeField] private dodgeRange;
     
+    
 }
