@@ -21,6 +21,8 @@ public class ShopSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _rerollButtonText;
     private int rerollCounter=1;
     private int rerollBaseline = 10;
+    [Header("Test Resources")]
+    private GameObject _gPrefab;
 
     private void Awake()
     {
@@ -58,16 +60,28 @@ public class ShopSystem : MonoBehaviour
     {
         if(_weapon.GetImage()!=null)
         {
+            _weaponImage.enabled = true;
             _weaponImage.sprite = _weapon.GetImage();
+            _weaponName.text = _weapon.GetName();
+            _weaponLevel.text = _weapon.GetLevel().ToString();
+            _weaponDamage.text = _weapon.GetDamage().ToString();
+            _weaponUpgradeCost.text = ((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2).ToString();
+            _gPrefab = Instantiate(Resources.Load("WeaponResources/" + _weapon.GetPath())) as GameObject;
         }
-        _weaponName.text = _weapon.GetName();
-        _weaponLevel.text = _weapon.GetLevel().ToString();
-        _weaponDamage.text = _weapon.GetDamage().ToString();
-        _weaponUpgradeCost.text = ((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2).ToString();
+        else
+        {          
+            _weaponImage.enabled = false;
+            _weaponName.text = "";
+            _weaponLevel.text = "";
+            _weaponDamage.text = "";
+            _weaponUpgradeCost.text = "Slot Empty";
+            _gPrefab = null;
+        }
+        
     }
     public void UpgradeWeapon()
     {
-        if(_currency>= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2))
+        if(_currency>= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2) && _weaponImage!=null)
         {
             _currency -= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2);
             _weapon.UpgradeWeapon();

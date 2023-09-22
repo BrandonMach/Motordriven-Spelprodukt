@@ -17,15 +17,14 @@ public class GenerateWeapon : MonoBehaviour
     [SerializeField] private WeaponDictionary _weaponDictionary;
     private Weapon _weapon;
     private bool _purshased;
-    private List<string> _naming;
     private void Awake()
     {
-        _weapon = new Weapon();
-        _naming = new List<string>();
+        _weapon = new Weapon();        
     }
     public void GenerateWeaponPanel(Weapontype type, int level)
-    {
+    {       
         _purshased = false;
+        _weaponImage.enabled = true;
         _weapon.SetUpWeapon(type,level, 
             1f, 
             1f, 
@@ -37,7 +36,7 @@ public class GenerateWeapon : MonoBehaviour
 
     private string GenerateName(Weapontype type)
     {
-        _naming.Clear();
+        List<string> _naming = new List<string>();
         TextAsset textAsset = Resources.Load<TextAsset>(type.GetNameList());
         if (textAsset != null)
         {
@@ -60,7 +59,6 @@ public class GenerateWeapon : MonoBehaviour
         ImagePrefab prefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType());
         if(prefab!=null)
         {
-            Debug.Log(prefab.GetImage());
             _weapon.SetImage(prefab.GetImage());
             _weapon.SetPrefabPath(prefab.GetPath());
         }
@@ -79,7 +77,7 @@ public class GenerateWeapon : MonoBehaviour
     public int Price(){ return (int)_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel(); }    
     public Weapon Purshase()
     {
-        _weaponImage = null;
+        _weaponImage.enabled=false;
         _weaponNameText.text = "";
         _weaponLevelText.text = "";
         _weaponDamageText.text = "";
