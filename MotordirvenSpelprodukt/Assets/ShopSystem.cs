@@ -56,9 +56,9 @@ public class ShopSystem : MonoBehaviour
     }
     private void UpdateUpgradeView()
     {
-        if(_weapon.GetWeaponType().GetImage()!=null)
+        if(_weapon.GetImage()!=null)
         {
-            _weaponImage = _weapon.GetWeaponType().GetImage();
+            _weaponImage.sprite = _weapon.GetImage();
         }
         _weaponName.text = _weapon.GetName();
         _weaponLevel.text = _weapon.GetLevel().ToString();
