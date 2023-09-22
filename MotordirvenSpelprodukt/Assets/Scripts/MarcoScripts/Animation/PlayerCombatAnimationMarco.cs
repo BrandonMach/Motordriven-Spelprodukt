@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class PlayerCombatAnimationMarco : MonoBehaviour
 {
-    //[SerializeField] private GameInput gameInput;
     [SerializeField] private Player _player;
     [SerializeField] private Animator _animator;
+
     private string _currentCombo = ""; //
     private float _desiredWeight = 0;
     private float _weight = 0;
     private float _weightChanger = -0.025f;
     private float _inputTimer = 0;
-    public float _timeBetweenInputs = 1.5f;
+    public float _timeBetweenInputs = 0f;
 
 
     private void Awake()
@@ -23,9 +23,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
-        //_etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
         _player.OnAttackPressed += Player_OnAttack;
-        //player.OnAttackPressed += Player_OnHeavyAttackPressed;
 
         _inputTimer = _timeBetweenInputs;
     }
@@ -33,17 +31,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
         HandleInput(e.attackType1);
-        Debug.Log(e.attackType1);
     }
-    //private void Player_OnHeavyAttackPressed(object sender, EventArgs e)
-    //{
-    //    HandleInput("H");
-    //}
-
-    //private void Player_OnLightAttackPressed(object sender, EventArgs e)
-    //{
-    //    HandleInput("L");
-    //}
 
     private void HandleInput(Player.OnAttackPressedEventArgs.AttackType attackType)
     {
@@ -62,9 +50,8 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
                 default:
                     break;
             }
-            _currentCombo += attackType; // Adds character to string combo
-            Debug.Log(_currentCombo);
-            AnimateAttack();
+            _animator.SetTrigger("Trigger_" + _currentCombo);
+            //AnimateAttack();
             _inputTimer = 0;
         }
     }
@@ -76,9 +63,8 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
         if (_currentCombo.Length == 3 || _currentCombo == "LH" || _currentCombo == "HL")
         {
             Debug.LogError("Combo matched");
-            //_etpManager.increaseETP(15);
             _currentCombo = "";
-            _timeBetweenInputs = 1.5f;
+            _timeBetweenInputs = 0;
         }
     }
 
@@ -86,7 +72,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     {
         _inputTimer += Time.deltaTime;
 
-        HandleAnimationLayers();
+        //HandleAnimationLayers();
     }
 
     private void HandleAnimationLayers()
@@ -123,16 +109,4 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
         _weightChanger = -0.025f;
         _weight = 0.01f;
     }
-    //public void Test()
-    //{
-    //    if (animator.GetFloat("test") == 0)
-    //    {
-    //        animator.SetFloat("test", 1);
-    //    }
-    //    else
-    //    {
-    //        animator.SetFloat("test", 0);
-    //    }
-    //    //animator.SetFloat("test", 1);
-    //}
 }
