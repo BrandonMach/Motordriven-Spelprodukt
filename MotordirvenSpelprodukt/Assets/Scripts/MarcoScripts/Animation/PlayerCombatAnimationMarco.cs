@@ -32,7 +32,8 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        HandleInput(e.attackType);
+        HandleInput(e.attackType1);
+        Debug.Log(e.attackType1);
     }
     //private void Player_OnHeavyAttackPressed(object sender, EventArgs e)
     //{
@@ -44,12 +45,23 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     //    HandleInput("L");
     //}
 
-    private void HandleInput(string attackType)
+    private void HandleInput(Player.OnAttackPressedEventArgs.AttackType attackType)
     {
         // If combat layer is disabled, allow new input.
 
         if (_inputTimer >= _timeBetweenInputs)
         {
+            switch (attackType)
+            {
+                case Player.OnAttackPressedEventArgs.AttackType.Light:
+                    _currentCombo += "L";
+                    break;
+                case Player.OnAttackPressedEventArgs.AttackType.Heavy:
+                    _currentCombo += "H";
+                    break;
+                default:
+                    break;
+            }
             _currentCombo += attackType; // Adds character to string combo
             Debug.Log(_currentCombo);
             AnimateAttack();

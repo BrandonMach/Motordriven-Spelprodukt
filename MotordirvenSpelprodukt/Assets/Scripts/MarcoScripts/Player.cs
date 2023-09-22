@@ -30,10 +30,10 @@ public class Player : MonoBehaviour
             Heavy
         }
 
-        public AttackType attackType;
+        public AttackType attackType1;
         public float weaponDamage;
         public float weaponRange;
-        //public string attackType;
+        public string attackType;
     }
 
 
@@ -47,12 +47,13 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
-        OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Light });
+        Debug.Log("Light");
+        OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { weaponDamage = damage, weaponRange = range, attackType1 = OnAttackPressedEventArgs.AttackType.Light});
     }
 
     private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
     {
-        OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Heavy});
+        OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { weaponDamage = damage, weaponRange = range, attackType1 = OnAttackPressedEventArgs.AttackType.Heavy});
     }
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
