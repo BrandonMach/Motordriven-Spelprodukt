@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SimonComboCopy : MonoBehaviour
@@ -19,6 +20,12 @@ public class SimonComboCopy : MonoBehaviour
     [SerializeField] private float _comboWindowTimer = 0;
     [SerializeField] private bool _startComboWindowTimer;
     float comboWindow = 2;
+
+    [Header("Weapon")]
+    public List<Weapontype> WeaponAnimation;
+    [SerializeField] Weapontype _currentWeaponType;
+    private int _weaponTypeIndex = 0;
+    [SerializeField] private TextMeshProUGUI _text;
 
     void Start()
     {
@@ -75,14 +82,44 @@ public class SimonComboCopy : MonoBehaviour
 
     private void Update()
     {
+        _text.text = WeaponAnimation[_weaponTypeIndex].GetNameList(); //Display weapon name
+        _currentWeaponType = WeaponAnimation[_weaponTypeIndex];
+
+
         inputTimer += Time.deltaTime;
 
         HandleAnimationLayers();
-
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            HandleWeapon();
+        }
+        
         if (_startComboWindowTimer)
         {
             StartComboWindowCheck();
         }
+    }
+
+    private void HandleWeapon(/*int attackType*/)
+    {
+        var _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
+        animator.runtimeAnimatorController = _setWeaponTypeAnimations[0].AnimatorOV;
+
+
+        //switch (attackType) //Switch what weapon animation List to pick the animation clips from
+        //{
+        //    case 0:
+        //        _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
+        //        animator.runtimeAnimatorController = _setWeaponTypeAnimations[currentCombo.Length].AnimatorOV;
+        //        break;
+        //    case 1:
+        //        _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].HeavyAnimationType;
+        //        animator.runtimeAnimatorController = _setWeaponTypeAnimations[currentCombo.Length].AnimatorOV;
+        //        break;
+        //    case 3:
+        //        ///Special attack
+        //        break;
+        //}
     }
 
     private void HandleAnimationLayers()

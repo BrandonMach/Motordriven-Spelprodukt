@@ -13,6 +13,10 @@ public class Weapontype : ScriptableObject
     [SerializeField] private GameObject _prefab;
     [SerializeField] private Animation _weaponAnimation;
     [SerializeField] private string _nameList;
+
+    [SerializeField] public List<AttackSO> LightAnimationType;
+    [SerializeField] public List<AttackSO> HeavyAnimationType;
+
     public Image GetImage(){return _image;}
     public Animation GetAnimation(){return _weaponAnimation;}
     public float GetDamage(){return _baseDamage;}
