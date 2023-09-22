@@ -1,226 +1,126 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using System.Linq;
 
 public class PlayerCombatAnimationMarco : MonoBehaviour
 {
-
-    //public List<AttackSO> Combo;
-    public List<TestWeapon> WeaponAnimation;
-    [SerializeField] TestWeapon _currentWeaponType;
-    private int _weaponTypeIndex = 0;
-    [SerializeField] private TextMeshProUGUI _text;
-
-    float _lastClickedTime;
-    float _lastComboEnd;
-    public int _comboCounter;
-
-    [SerializeField] Animator _animator;
-    //Weapon
+    //[SerializeField] private GameInput gameInput;
+    [SerializeField] private Player _player;
+    [SerializeField] private Animator _animator;
+    private string _currentCombo = ""; //
+    private float _desiredWeight = 0;
+    private float _weight = 0;
+    private float _weightChanger = -0.025f;
+    private float _inputTimer = 0;
+    public float _timeBetweenInputs = 1.5f;
 
 
-
-    [Header("Combos")]
-
-    [SerializeField] KeyCode[] _attackInputs; //Static attack inputs
-
-    [SerializeField] TextMeshProUGUI _comboTreeInfoText;
-
-    [Header("Combo Sequence")]
-    [SerializeField] private float _comboWindowTimer = 0;
-
-    [SerializeField] private bool _startComboWindowTimer;
-
-
-    public List<AttackMovesSO> ComboList = new List<AttackMovesSO>();
-
-    EntertainmentManager _etpManager;
-    public List<KeyCode> _lastUsedInputs = new List<KeyCode>();
-
-    string ComboTree;
-
-
-
-
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
-        _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
+        _player = GetComponent<Player>();
+        //_etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
+        _player.OnAttackPressed += Player_OnAttack;
+        //player.OnAttackPressed += Player_OnHeavyAttackPressed;
 
-
-        //Write out combo tree
-        for (int i = 0; i < ComboList.Count; i++)
-        {
-            for (int j = 0; j < ComboList[i]._buttonSequence.Count; j++)
-            {
-                ComboTree += ", " + ComboList[i]._buttonSequence[j].ToString();
-            }
-
-            _comboTreeInfoText.text += "Combo " + (i + 1) + ": " + (ComboTree.Remove(0, 1)) + "\n";
-            ComboTree = "";
-
-        }
-
+        _inputTimer = _timeBetweenInputs;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        //Temporary switch weapon and different combo animation should play. Animation is changed in WeaponAnimtion
-        // NOTE: I will change the method below to an event
-        ChangeWeaponTypeAnimation();
+        HandleInput(e.attackType);
+    }
+    //private void Player_OnHeavyAttackPressed(object sender, EventArgs e)
+    //{
+    //    HandleInput("H");
+    //}
 
-        _currentWeaponType = WeaponAnimation[_weaponTypeIndex];
+    //private void Player_OnLightAttackPressed(object sender, EventArgs e)
+    //{
+    //    HandleInput("L");
+    //}
 
+    private void HandleInput(string attackType)
+    {
+        // If combat layer is disabled, allow new input.
 
-        for (int i = 0; i < _attackInputs.Length; i++)
+        if (_inputTimer >= _timeBetweenInputs)
         {
-            if (Input.GetKeyDown(_attackInputs[i])) //Checks if attack input has been pressed
-            {
-
-                _startComboWindowTimer = true;
-                _comboWindowTimer = 0;
-
-                switch (_comboCounter)
-                {
-                    case 0:
-                        CheckComboPath(_comboCounter, i);
-                        break;
-                    case 1:
-                        CheckComboPath(_comboCounter, i);
-                        break;
-                    case 2:
-                        CheckComboPath(_comboCounter, i);
-                        break;
-                }
-
-                //Kolla om inpute är den fösta inputen i en av combo routes
-                //Lägg in tangente i en lista som sparas
-                //När nästa tangent klickas kolla om den är den andra tangenten i en av combo routesen
-                //Lägg till den tangenten om den är 
-                //När tradje tangenten klickas kolla om det är Special tangenten
-            }
+            _currentCombo += attackType; // Adds character to string combo
+            Debug.Log(_currentCombo);
+            AnimateAttack();
+            _inputTimer = 0;
         }
-        ExitAttack();
-
-        if (_startComboWindowTimer)
-        {
-            StartComboWindowCheck();
-        }
-
-
-
     }
 
-
-    void CheckComboPath(int comboCounter, int attackButtonIndex)
+    private void AnimateAttack()
     {
-        List<AttackMovesSO> comboPath = new List<AttackMovesSO>();
-        foreach (var item in ComboList)
-        {
-            if (_attackInputs[attackButtonIndex] == item._buttonSequence[_comboCounter])
-            {
-                comboPath.Add(item);
-                Attack(attackButtonIndex);
-                ExitAttack();
-            }
-        }
-
-        if (_comboCounter == 2)
+        // CurrentCombo = "LL"
+        _animator.SetTrigger("Trigger_" + _currentCombo);
+        if (_currentCombo.Length == 3 || _currentCombo == "LH" || _currentCombo == "HL")
         {
             Debug.LogError("Combo matched");
-            _etpManager.increaseETP(15);
+            //_etpManager.increaseETP(15);
+            _currentCombo = "";
+            _timeBetweenInputs = 1.5f;
         }
-        else
-        {
-            _comboCounter++;
-        }
-
     }
 
-
-
-    void Attack(int attackType)
+    private void Update()
     {
-        List<AttackSO> _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
+        _inputTimer += Time.deltaTime;
 
-        switch (attackType) //Switch what weapon animation List to pick the animation clips from
+        HandleAnimationLayers();
+    }
+
+    private void HandleAnimationLayers()
+    {
+        if (_weight != _desiredWeight)
         {
-            case 0:
-                _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].LightAnimationType;
-                break;
-            case 1:
-                _setWeaponTypeAnimations = WeaponAnimation[_weaponTypeIndex].HeavyAnimationType;
-                break;
-            case 3:
-                ///Special attack
-                break;
-        }
+            _weight -= (1 * _weightChanger);
 
-        if (Time.time - _lastComboEnd > 0.5f && _comboCounter <= _setWeaponTypeAnimations.Count)
-        {
-            CancelInvoke("EndCombo");
-
-            if (Time.time - _lastClickedTime >= 0.2f)
+            if (_weight < 0f)
             {
-                _animator.runtimeAnimatorController = _setWeaponTypeAnimations[_comboCounter].AnimatorOV; //Override the animation controller based on how far into te combo you are.
-                _animator.Play("Attack", 4, 0);
-                //Damage
-                //Knockback
-                //VFX
-
-                //_comboCounter++;
-                _lastClickedTime = Time.time;
-
-                if (_comboCounter + 1 > _setWeaponTypeAnimations.Count)
-                {
-                    _comboCounter = 0;
-                }
+                _weight = 0.01f;
             }
-        }
-    }
-
-    void ExitAttack() //Checksi if end of animation 
-    {
-        if (_animator.GetCurrentAnimatorStateInfo(4).normalizedTime > 0.9f && _animator.GetCurrentAnimatorStateInfo(3).IsTag("Attack"))
-        {
-            Invoke("EndCombo", 1);
-        }
-    }
-    void EndCombo()
-    {
-        _comboCounter = 0;
-        _lastComboEnd = Time.time;
-    }
-
-    void ChangeWeaponTypeAnimation()
-    {
-        //Create Event for this key 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_weaponTypeIndex < WeaponAnimation.Count - 1)
+            else if (_weight > 1f)
             {
-                _weaponTypeIndex++;
+                _weight = 0.99f;
             }
-            else
-            {
-                _weaponTypeIndex = 0;
-            }
+
+            _animator.SetLayerWeight(_animator.GetLayerIndex("CombatTree"), _weight);
         }
     }
 
-    void StartComboWindowCheck()
+    public void DisableCombatLayer()
     {
-        float comboWindow = 1;
-        _comboWindowTimer += Time.deltaTime;
-
-        if (_comboWindowTimer >= comboWindow)
-        {
-            _comboWindowTimer = 0;
-            _lastUsedInputs.Clear();
-
-            //Debug.LogError("Combo Broken");
-        }
+        Debug.Log("DisableCombatLayer : Combo=" + _currentCombo);
+        _desiredWeight = 0.01f;
+        _weightChanger = 0.025f;
+        _weight = 0.99f;
     }
+
+    public void EnableCombatLayer()
+    {
+        Debug.Log("EnableCombatLayer: Combo=" + _currentCombo);
+        _desiredWeight = 0.99f;
+        _weightChanger = -0.025f;
+        _weight = 0.01f;
+    }
+    //public void Test()
+    //{
+    //    if (animator.GetFloat("test") == 0)
+    //    {
+    //        animator.SetFloat("test", 1);
+    //    }
+    //    else
+    //    {
+    //        animator.SetFloat("test", 0);
+    //    }
+    //    //animator.SetFloat("test", 1);
+    //}
 }
