@@ -34,7 +34,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     [SerializeField] private bool _startComboWindowTimer;
 
 
-    public List<AttackMovesSO> ComboList = new List<AttackMovesSO>();
+    //public List<AttackMovesSO> ComboList = new List<AttackMovesSO>();
 
     EntertainmentManager _etpManager;
     public List<KeyCode> _lastUsedInputs = new List<KeyCode>();
@@ -49,18 +49,18 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
         _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
 
 
-        //Write out combo tree
-        for (int i = 0; i < ComboList.Count; i++)
-        {
-            for (int j = 0; j < ComboList[i]._buttonSequence.Count; j++)
-            {
-                ComboTree += ", " + ComboList[i]._buttonSequence[j].ToString();
-            }
+        ////Write out combo tree
+        //for (int i = 0; i < ComboList.Count; i++)
+        //{
+        //    for (int j = 0; j < ComboList[i]._buttonSequence.Count; j++)
+        //    {
+        //        ComboTree += ", " + ComboList[i]._buttonSequence[j].ToString();
+        //    }
 
-            _comboTreeInfoText.text += "Combo " + (i + 1) + ": " + (ComboTree.Remove(0, 1)) + "\n";
-            ComboTree = "";
+        //    _comboTreeInfoText.text += "Combo " + (i + 1) + ": " + (ComboTree.Remove(0, 1)) + "\n";
+        //    ComboTree = "";
 
-        }
+        //}
 
     }
 
@@ -116,16 +116,16 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
 
     void CheckComboPath(int comboCounter, int attackButtonIndex)
     {
-        List<AttackMovesSO> comboPath = new List<AttackMovesSO>();
-        foreach (var item in ComboList)
-        {
-            if (_attackInputs[attackButtonIndex] == item._buttonSequence[_comboCounter])
-            {
-                comboPath.Add(item);
-                Attack(attackButtonIndex);
-                ExitAttack();
-            }
-        }
+        //List<AttackMovesSO> comboPath = new List<AttackMovesSO>();
+        //foreach (var item in ComboList)
+        //{
+        //    if (_attackInputs[attackButtonIndex] == item._buttonSequence[_comboCounter])
+        //    {
+        //        comboPath.Add(item);
+        //        Attack(attackButtonIndex);
+        //        ExitAttack();
+        //    }
+        //}
 
         if (_comboCounter == 2)
         {

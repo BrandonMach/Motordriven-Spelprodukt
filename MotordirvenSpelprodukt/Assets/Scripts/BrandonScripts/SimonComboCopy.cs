@@ -72,7 +72,7 @@ public class SimonComboCopy : MonoBehaviour
         if (currentCombo.Length == 3 || currentCombo == "LH" || currentCombo == "HL")
         {
             Debug.LogError("Combo matched");
-            //_etpManager.increaseETP(15);
+            _etpManager.increaseETP(15);
             currentCombo = "";
             timeBetweenInputs = 1.5f;
             
@@ -99,9 +99,9 @@ public class SimonComboCopy : MonoBehaviour
             {
                 _weaponTypeIndex = 0;
             }
-            HandleWeapon();
+            
         }
-        
+        HandleWeapon();
 
         if (_startComboWindowTimer)
         {
