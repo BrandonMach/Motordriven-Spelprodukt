@@ -15,6 +15,18 @@ public abstract class Node : ScriptableObject
     [HideInInspector] public Blackboard blackboard;
     [HideInInspector] public NavMeshAgent agent;
     [TextArea] public string description;
+    protected MinionScript enemyScript;
+
+    //public GameObject Player
+    //{
+    //    get { return player; }
+    //    set { player = value; }
+    //}
+    public MinionScript EnemyScript
+    {
+        //get { return enemyScript; }
+        set { enemyScript = value; }
+    }
 
     public State Update()
     {

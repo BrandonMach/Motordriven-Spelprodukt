@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 4feeb6cae9035a64c99f1827f05c4984, type: 2}
+  enemyScript: {fileID: 39384023}
 --- !u!65 &39384018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -396,6 +397,8 @@ MonoBehaviour:
   MovementSpeed: 5
   AttackSpeed: 2
   AttackRange: 5
+  AttackCooldown: 2
+  LastAttackTime: 0
 --- !u!1 &439694484
 GameObject:
   m_ObjectHideFlags: 0

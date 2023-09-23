@@ -7,10 +7,14 @@ using UnityEngine.AI;
 public class BehaviourTreeRunner : MonoBehaviour
 {
     public BehaviourTree tree;
+    private MinionScript enemyScript;
     // Start is called before the first frame update
     void Start()
     {
-        tree = tree.Clone();
+        enemyScript = GetComponent<MinionScript>();
+
+        tree = tree.Clone(enemyScript);
+        
         tree.Bind(GetComponent<NavMeshAgent>());
     }
 

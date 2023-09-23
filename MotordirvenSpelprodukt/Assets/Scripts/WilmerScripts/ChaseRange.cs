@@ -18,10 +18,10 @@ public class ChaseRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if (player != null && enemy != null)
+        if (playerScript != null && enemyScript != null)
         {
 
-            float distanceToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
+            float distanceToPlayer = Vector3.Distance(enemyScript.transform.position, playerScript.transform.position);
             if (distanceToPlayer > ChaseDistance)
             {
                 return State.Success;

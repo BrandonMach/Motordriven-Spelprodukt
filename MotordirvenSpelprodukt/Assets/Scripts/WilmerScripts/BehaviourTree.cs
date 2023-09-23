@@ -19,6 +19,8 @@ public class BehaviourTree : ScriptableObject
 
     public Node.State Update()
     {
+        
+
         if(rootNode.state == Node.State.Running)
         {
             treeState = rootNode.Update();
@@ -138,14 +140,17 @@ public class BehaviourTree : ScriptableObject
         }
     }
 
-    public BehaviourTree Clone()
+    public BehaviourTree Clone(MinionScript enemyScript)
     {
         BehaviourTree tree = Instantiate(this);
+        
         tree.rootNode = tree.rootNode.Clone();
         tree.nodes = new List<Node>();
         Traverse(tree.rootNode, (n) =>
         {
+            n.EnemyScript = enemyScript;
             tree.nodes.Add(n);
+            
         });
         return tree;
     }

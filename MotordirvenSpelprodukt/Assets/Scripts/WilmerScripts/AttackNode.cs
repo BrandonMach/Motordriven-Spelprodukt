@@ -12,8 +12,8 @@ public class AttackNode : ActionNode
 
     
 
-    public float AttackCooldown = 1.0f;
-    private float _lastAttackTime;
+    //public float AttackCooldown = 1.0f;
+    //private float _lastAttackTime;
     // Start is called before the first frame update
     protected override void OnStart()
     {
@@ -29,11 +29,11 @@ public class AttackNode : ActionNode
     protected override State OnUpdate()
     {
         // Check if enough time has passed since the last attack
-        if (Time.time - _lastAttackTime >= AttackCooldown)
+        if (Time.time - enemyScript.LastAttackTime >= enemyScript.AttackCooldown)
         {
             // Perform the attack here
             // You can add your attack logic or call a method to attack the player
-            _lastAttackTime = Time.time;
+            enemyScript.LastAttackTime = Time.time;
             Debug.Log($"AAAAAAAAttack!");
             //Call TakeDamage() in player
             return State.Success; // Attack successful

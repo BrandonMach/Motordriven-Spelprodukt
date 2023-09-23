@@ -21,13 +21,13 @@ public class ChaseNode : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector3 direction = player.transform.position - enemy.transform.position;
+        Vector3 direction = playerScript.transform.position - enemyScript.transform.position;
 
         // Normalize the direction to get a unit vector
         direction.Normalize();
 
         // Move the AI towards the player
-        enemy.transform.Translate(/*minionScript.MovementSpeed */ 5 * Time.deltaTime * direction);
+        enemyScript.transform.Translate(enemyScript.MovementSpeed  * Time.deltaTime * direction);
         
         return State.Success;
 

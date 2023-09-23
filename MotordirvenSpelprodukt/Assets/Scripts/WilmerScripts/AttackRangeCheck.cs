@@ -18,10 +18,10 @@ public class AttackRangeCheck : ActionNode
 
     protected override State OnUpdate()
     {
-        if (player != null)
+        if (playerScript != null)
         {
             // Calculate the distance between the enemy and the player
-            float distanceToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
+            float distanceToPlayer = Vector3.Distance(enemyScript.transform.position, playerScript.transform.position);
 
             // Check if the player is within attack range
             if (distanceToPlayer <= 5/*minionScript.AttackRange*/)

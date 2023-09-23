@@ -6,15 +6,14 @@ using UnityEngine;
 public abstract class ActionNode : Node
 {
     protected Player playerScript;
-    protected GameObject player;
-    protected GameObject enemy;
+    
+    //protected GameObject enemy;
     //protected MinionScript minionScript;
+    
 
     public void OnEnable()
     {
-        player = GameObject.FindWithTag("Player");
-        enemy = GameObject.FindWithTag("EnemyTesting");
-        //minionScript.GetComponent<MinionScript>().enabled = true;
-        
+        playerScript = GameObject.Find("Player").GetComponent<Player>();
+
     }
 }

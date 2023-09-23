@@ -10,9 +10,11 @@ public class MinionScript : MonoBehaviour
     public float MovementSpeed;
     public float AttackSpeed;
     public float AttackRange;
+    public float AttackCooldown;
+    public float LastAttackTime;
     void Start()
     {
-        
+        //AttackCooldown = 1.0f;
     }
 
     // Update is called once per frame
@@ -24,5 +26,13 @@ public class MinionScript : MonoBehaviour
     public void OnDestroy()
     {
         //Death animation
+    }
+    public void TakeDamage()
+    {
+        
+    }
+    public void DealDamage()
+    {
+
     }
 }
