@@ -51,20 +51,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
                     break;
             }
             _animator.SetTrigger("Trigger_" + _currentCombo);
-            //AnimateAttack();
             _inputTimer = 0;
-        }
-    }
-
-    private void AnimateAttack()
-    {
-        // CurrentCombo = "LL"
-        _animator.SetTrigger("Trigger_" + _currentCombo);
-        if (_currentCombo.Length == 3 || _currentCombo == "LH" || _currentCombo == "HL")
-        {
-            Debug.LogError("Combo matched");
-            _currentCombo = "";
-            _timeBetweenInputs = 0;
         }
     }
 
@@ -72,7 +59,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
     {
         _inputTimer += Time.deltaTime;
 
-        //HandleAnimationLayers();
+        HandleAnimationLayers();
     }
 
     private void HandleAnimationLayers()
