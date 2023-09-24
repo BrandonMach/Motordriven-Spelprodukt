@@ -42,7 +42,7 @@ public class SimonComboCopy : MonoBehaviour
     {
         _startComboWindowTimer = true;
         _comboWindowTimer = 0;
-        HandleInput(e.attackType);
+        //HandleInput(e.attackType);
         
     }
     //private void Player_OnHeavyAttackPressed(object sender, EventArgs e)

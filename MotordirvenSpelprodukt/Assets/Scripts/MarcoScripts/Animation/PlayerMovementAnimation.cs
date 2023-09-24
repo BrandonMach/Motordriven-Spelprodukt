@@ -14,11 +14,6 @@ public class PlayerMovementAnimation : MonoBehaviour
         animator.SetFloat("VelocityX", Vector3.Dot(moveDirection, transform.right), 0.1f, Time.deltaTime);
         animator.SetFloat("Lean", Vector3.Dot(rotateDirection, transform.right), 0.1f, Time.deltaTime);
 
-        if (moveDirection.x <= float.Epsilon && moveDirection.z <= float.Epsilon)
-        {
-        }
-
-
         bool isMoving = Mathf.Abs(moveDirection.x) >= float.Epsilon && Mathf.Abs(moveDirection.z) >= float.Epsilon;
 
         if (_wasMoving != isMoving)
