@@ -39,8 +39,8 @@ public class PlayerCombat : MonoBehaviour
     {
         _range = e.weaponRange;
         _damage = e.weaponDamage;
-        _multiplier = e.CurrentAttack.DamageMultiplier;
-        _effect = e.CurrentAttack.CurrentAttackEffect;
+        _multiplier = e.CurrentAttackSO.DamageMultiplier;
+        _effect = e.CurrentAttackSO.CurrentAttackEffect;
     }
 
     private void OnDrawGizmos()
