@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
 {
     // Placeholder för nuvarande vapnets värden
     //-----------------------------------------
-    float damage;
-    float range;
+    float damage = 1;
+    float range = 1;
     //-----------------------------------------
 
 

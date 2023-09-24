@@ -33,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
     {
         Collider[] test = Physics.OverlapSphere(transform.position, _range);
        
+        
     }
 
     private void RecieveAttackEvent(Player.OnAttackPressedEventArgs e)
@@ -46,7 +47,7 @@ public class PlayerCombat : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, _range);
+        Gizmos.DrawWireSphere(transform.position + transform.forward * 1.5f, 1.5f);
     }
 
 

@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RMScript : MonoBehaviour
+public class RMScript : EnemyScript
 {
     // Start is called before the first frame update
-    public float CurrentHealth;
-    public float MaxHealth;
-    public float MovementSpeed;
-    public float AttackSpeed;
-    public float AttackRange;
-    public float AttackCooldown;
-    public float LastAttackTime;
     public float FleeDistance;
+
     void Start()
     {
         
@@ -28,12 +22,5 @@ public class RMScript : MonoBehaviour
     {
         //Death animation
     }
-    public void TakeDamage()
-    {
 
-    }
-    public void DealDamage()
-    {
-
-    }
 }
