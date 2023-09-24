@@ -32,14 +32,23 @@ public class PlayerCombat : MonoBehaviour
     private void HandleAttack(Player.OnAttackPressedEventArgs e)
     {
         Collider[] test = Physics.OverlapSphere(transform.position, _range);
-       
-        
+
+        for (int i = 0; i < test.Length; i++)
+        {
+            IDamagable enemy = test[i].GetComponent<IDamagable>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage();
+            }
+        }
     }
 
     private void RecieveAttackEvent(Player.OnAttackPressedEventArgs e)
     {
-        _range = e.weaponSO.GetRange();
-        _damage = e.weaponSO.GetDamage();
+        //_range = e.weaponSO.GetRange();
+        //_damage = e.weaponSO.GetDamage();
+        _range = 1.5f;
+        _damage = 25f;
         _multiplier = e.CurrentAttackSO.DamageMultiplier;
         _effect = e.CurrentAttackSO.CurrentAttackEffect;
     }
@@ -47,7 +56,7 @@ public class PlayerCombat : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + transform.forward * 1.5f, 1.5f);
+        Gizmos.DrawWireSphere(transform.position + (transform.forward * 1.5f), 1.5f);
     }
 
 

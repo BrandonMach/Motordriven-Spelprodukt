@@ -555,6 +555,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1346671109005214, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1400036251531862, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -573,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1576745369443220, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1596602677342128, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
       propertyPath: m_IsActive
@@ -1737,6 +1741,7 @@ GameObject:
   - component: {fileID: 698528713}
   - component: {fileID: 698528712}
   - component: {fileID: 698528711}
+  - component: {fileID: 698528715}
   m_Layer: 0
   m_Name: PlaceHolder Enemy 2
   m_TagString: EnemyTesting
@@ -1826,12 +1831,24 @@ Transform:
   m_GameObject: {fileID: 698528710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.14, y: 1.54, z: 2.99}
+  m_LocalPosition: {x: -3.14, y: 0.9, z: 2.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &698528715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698528710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2bb924d2f2b804aa23ce2efc3a85cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &711486982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,6 +2433,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e1071b8fbf24f364db3bea07f6042ab2, type: 2}
   - {fileID: 11400000, guid: 43e969ffebb1ff149a7be37c3c809337, type: 2}
   - {fileID: 11400000, guid: 233b0df4a8412894993379db940e4fbc, type: 2}
+  _currentWeapon: {fileID: 0}
 --- !u!114 &1069985224
 MonoBehaviour:
   m_ObjectHideFlags: 0
