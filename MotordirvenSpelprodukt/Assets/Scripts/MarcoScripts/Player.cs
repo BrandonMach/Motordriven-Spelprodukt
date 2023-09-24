@@ -16,7 +16,14 @@ public class Player : MonoBehaviour
     public GameInput GameInput { get { return _gameInput; } }
 
     [SerializeField] private GameInput _gameInput;
+    [SerializeField] float _timeBetweenInputs = 0f;
+    [SerializeField] private CurrentAttackSO[] _AttackSOArray;
 
+    private CurrentAttackSO _currentAttackSO;
+
+    private float _inputTimer = 0;
+
+    private string _input;
 
     public event EventHandler OnChangeControllerTypeButtonPressed;
     public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
@@ -29,11 +36,10 @@ public class Player : MonoBehaviour
             Light,
             Heavy
         }
-
-        public AttackType attackType1;
+        public CurrentAttackSO CurrentAttack;
+        public AttackType attackType;
         public float weaponDamage;
         public float weaponRange;
-        public string attackType;
     }
 
 
@@ -43,17 +49,44 @@ public class Player : MonoBehaviour
         _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
         _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
         _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
+
+        _input = "";
+
     }
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
         Debug.Log("Light");
-        OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { weaponDamage = damage, weaponRange = range, attackType1 = OnAttackPressedEventArgs.AttackType.Light});
+      
+
+        if (_inputTimer >= _timeBetweenInputs)
+        {
+            _input += "L";
+            if (GetCurrentAttackSO(_input) == null)
+            {
+                _input = "L";
+            }
+            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttack = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Light });
+            _inputTimer = 0;
+        }
     }
 
     private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
     {
-        OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { weaponDamage = damage, weaponRange = range, attackType1 = OnAttackPressedEventArgs.AttackType.Heavy});
+  
+
+        if (_inputTimer >= _timeBetweenInputs)
+        {
+            _input += "H";
+
+            if (GetCurrentAttackSO(_input) == null)
+            {
+                _input = "H";
+            }
+
+            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttack = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Heavy });
+            _inputTimer = 0;
+        }
     }
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
@@ -65,5 +98,17 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private CurrentAttackSO GetCurrentAttackSO(string name)
+    {
+        foreach (CurrentAttackSO currentAttackSO in _AttackSOArray)
+        {
+            if (currentAttackSO.name.ToLower() == name.ToLower())
+            {
+                return currentAttackSO;
+            }
+        }
+        return null;
     }
 }
