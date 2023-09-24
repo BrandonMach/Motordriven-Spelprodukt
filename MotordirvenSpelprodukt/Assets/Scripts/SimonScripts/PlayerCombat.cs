@@ -38,8 +38,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void RecieveAttackEvent(Player.OnAttackPressedEventArgs e)
     {
-        _range = e.weaponRange;
-        _damage = e.weaponDamage;
+        _range = e.weaponSO.GetRange();
+        _damage = e.weaponSO.GetDamage();
         _multiplier = e.CurrentAttackSO.DamageMultiplier;
         _effect = e.CurrentAttackSO.CurrentAttackEffect;
     }
