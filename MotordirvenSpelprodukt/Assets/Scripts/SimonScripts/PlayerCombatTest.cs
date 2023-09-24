@@ -91,21 +91,21 @@ public class PlayerCombatTest : MonoBehaviour
         }
     }
 
-    public void DisableCombatLayer()
-    {
-        Debug.Log("DisableCombatLayer : Combo=" + currentCombo);
-        desiredWeight = 0.01f;
-        weightChanger = 0.025f;
-        weight = 0.99f;
-    }
+    //public void DisableCombatLayer()
+    //{
+    //    Debug.Log("DisableCombatLayer : Combo=" + currentCombo);
+    //    desiredWeight = 0.01f;
+    //    weightChanger = 0.025f;
+    //    weight = 0.99f;
+    //}
 
-    public void EnableCombatLayer()
-    {
-        Debug.Log("EnableCombatLayer: Combo=" + currentCombo);
-        desiredWeight = 0.99f;
-        weightChanger = -0.025f;
-        weight = 0.01f;
-    }
+    //public void EnableCombatLayer()
+    //{
+    //    Debug.Log("EnableCombatLayer: Combo=" + currentCombo);
+    //    desiredWeight = 0.99f;
+    //    weightChanger = -0.025f;
+    //    weight = 0.01f;
+    //}
     //public void Test()
     //{
     //    if (animator.GetFloat("test") == 0)
