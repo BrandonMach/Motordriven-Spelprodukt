@@ -30,7 +30,7 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        Debug.Log(e.CurrentAttack.CurrentAttackEffect.ToString());
+        Debug.Log(e.CurrentAttackSO.CurrentAttackEffect.ToString());
         HandleInput(e.attackType);
     }
 

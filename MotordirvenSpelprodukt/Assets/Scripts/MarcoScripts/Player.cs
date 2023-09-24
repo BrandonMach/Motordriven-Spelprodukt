@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
             Light,
             Heavy
         }
-        public CurrentAttackSO CurrentAttack;
+        public CurrentAttackSO CurrentAttackSO;
         public AttackType attackType;
         public float weaponDamage;
         public float weaponRange;
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
             {
                 _input = "L";
             }
-            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttack = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Light });
+            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Light });
             _inputTimer = 0;
         }
     }
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
                 _input = "H";
             }
 
-            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttack = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Heavy });
+            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Heavy });
             _inputTimer = 0;
         }
     }
