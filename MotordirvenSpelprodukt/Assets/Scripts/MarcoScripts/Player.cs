@@ -12,12 +12,12 @@ public class Player : MonoBehaviour
     float range;
     //-----------------------------------------
 
-
     public GameInput GameInput { get { return _gameInput; } }
 
     [SerializeField] private GameInput _gameInput;
-    [SerializeField] float _timeBetweenInputs = 0f;
+    [SerializeField] private float _timeBetweenInputs = 0f;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
+    [SerializeField] private Weapon _currentWeapon;
 
     private CurrentAttackSO _currentAttackSO;
 
@@ -38,8 +38,7 @@ public class Player : MonoBehaviour
         }
         public CurrentAttackSO CurrentAttackSO;
         public AttackType attackType;
-        public float weaponDamage;
-        public float weaponRange;
+        public Weapon weaponSO;
     }
 
 
@@ -66,7 +65,7 @@ public class Player : MonoBehaviour
             {
                 _input = "L";
             }
-            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Light });
+            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Light, weaponSO = _currentWeapon });
             _inputTimer = 0;
         }
     }
@@ -84,7 +83,7 @@ public class Player : MonoBehaviour
                 _input = "H";
             }
 
-            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), weaponDamage = damage, weaponRange = range, attackType = OnAttackPressedEventArgs.AttackType.Heavy });
+            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Heavy, weaponSO = _currentWeapon });
             _inputTimer = 0;
         }
     }
