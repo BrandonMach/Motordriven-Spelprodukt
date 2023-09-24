@@ -140,7 +140,7 @@ public class BehaviourTree : ScriptableObject
         }
     }
 
-    public BehaviourTree Clone(MinionScript enemyScript)
+    public BehaviourTree Clone(/*MeleeMinionScript enemyScript*/ GameObject enemyObject)
     {
         BehaviourTree tree = Instantiate(this);
         
@@ -148,7 +148,8 @@ public class BehaviourTree : ScriptableObject
         tree.nodes = new List<Node>();
         Traverse(tree.rootNode, (n) =>
         {
-            n.EnemyScript = enemyScript;
+            n.EnemyObject = enemyObject;
+            //n.EnemyScript = enemyScript;
             tree.nodes.Add(n);
             
         });

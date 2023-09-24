@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseRange : ActionNode
+public class MMChaseRange : ActionNode
 {
-    public float ChaseDistance;
+    //public float ChaseDistance;
 
     protected override void OnStart()
     {
-
+        meleeMinionScript = enemyObject.GetComponent<MMScript>();
     }
 
     protected override void OnStop()
@@ -18,11 +18,11 @@ public class ChaseRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if (playerScript != null && enemyScript != null)
+        if (playerScript != null && meleeMinionScript != null)
         {
 
-            float distanceToPlayer = Vector3.Distance(enemyScript.transform.position, playerScript.transform.position);
-            if (distanceToPlayer > ChaseDistance)
+            float distanceToPlayer = Vector3.Distance(meleeMinionScript.transform.position, playerScript.transform.position);
+            if (distanceToPlayer > meleeMinionScript.ChaseDistance)
             {
                 return State.Success;
             }

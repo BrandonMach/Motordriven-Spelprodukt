@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinionScript : MonoBehaviour
+public class RMScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public float CurrentHealth;
@@ -12,15 +12,16 @@ public class MinionScript : MonoBehaviour
     public float AttackRange;
     public float AttackCooldown;
     public float LastAttackTime;
+    public float FleeDistance;
     void Start()
     {
-        //AttackCooldown = 1.0f;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnDestroy()
@@ -29,7 +30,7 @@ public class MinionScript : MonoBehaviour
     }
     public void TakeDamage()
     {
-        
+
     }
     public void DealDamage()
     {

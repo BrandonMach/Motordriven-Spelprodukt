@@ -122,12 +122,15 @@ public class BehaviourTreeView : GraphView
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
+        
         //base.BuildContextualMenu(evt);
         {
+            
             var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
             foreach (var type in types)
             {
                 evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+
             }
         }
         {
@@ -145,6 +148,7 @@ public class BehaviourTreeView : GraphView
             }
         }
     }
+
     void CreateNode(System.Type type)
     {
         Node node = tree.CreateNode(type);

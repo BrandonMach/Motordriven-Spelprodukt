@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackRangeCheck : ActionNode
+public class MMAttackCheck : ActionNode
 {
 
     
     protected override void OnStart()
     {
-        
+        meleeMinionScript = enemyObject.GetComponent<MMScript>();
     }
 
     protected override void OnStop()
@@ -21,10 +21,10 @@ public class AttackRangeCheck : ActionNode
         if (playerScript != null)
         {
             // Calculate the distance between the enemy and the player
-            float distanceToPlayer = Vector3.Distance(enemyScript.transform.position, playerScript.transform.position);
+            float distanceToPlayer = Vector3.Distance(meleeMinionScript.transform.position, playerScript.transform.position);
 
             // Check if the player is within attack range
-            if (distanceToPlayer <= 5/*minionScript.AttackRange*/)
+            if (distanceToPlayer <= meleeMinionScript.AttackRange)
             {
                 return State.Success;
             }

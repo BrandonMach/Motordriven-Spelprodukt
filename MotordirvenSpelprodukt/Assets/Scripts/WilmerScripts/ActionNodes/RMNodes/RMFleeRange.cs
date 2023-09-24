@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Taunt : ActionNode
+public class RMFleeRange : ActionNode
 {
     protected override void OnStart()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     protected override void OnStop()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     protected override State OnUpdate()
     {
-        // Taunt 
-        return State.Success;
+        throw new System.NotImplementedException();
     }
 
-
+    
 }
