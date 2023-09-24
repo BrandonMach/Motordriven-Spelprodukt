@@ -27,7 +27,7 @@ public class PlayerCombatTest : MonoBehaviour
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        HandleInput(e.attackType);
+        //HandleInput(e.attackType);
     }
     //private void Player_OnHeavyAttackPressed(object sender, EventArgs e)
     //{
