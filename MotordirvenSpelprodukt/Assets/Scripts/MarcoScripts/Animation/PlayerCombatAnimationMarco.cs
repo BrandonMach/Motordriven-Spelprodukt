@@ -42,15 +42,16 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
             switch (attackType)
             {
                 case Player.OnAttackPressedEventArgs.AttackType.Light:
-                    _currentCombo += "L";
+                    //_currentCombo += "L";
+                    _animator.SetTrigger("Trigger_L");
                     break;
                 case Player.OnAttackPressedEventArgs.AttackType.Heavy:
-                    _currentCombo += "H";
+                    //_currentCombo += "H";
+                    _animator.SetTrigger("Trigger_H");
                     break;
                 default:
                     break;
             }
-            _animator.SetTrigger("Trigger_" + _currentCombo);
             _inputTimer = 0;
         }
     }
