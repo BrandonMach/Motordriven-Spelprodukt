@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ChaseNode : ActionNode
+public class MMChaseNode : ActionNode
 {
-
-    public int MoveSpeed;
     
 
     protected override void OnStart()
     {
+        meleeMinionScript = enemyObject.GetComponent<MMScript>();
 
-        
 
     }
 
@@ -23,14 +21,14 @@ public class ChaseNode : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector3 direction = player.transform.position - enemy.transform.position;
+        Vector3 direction = playerScript.transform.position - meleeMinionScript.transform.position;
 
         // Normalize the direction to get a unit vector
         direction.Normalize();
 
         // Move the AI towards the player
-        enemy.transform.Translate(MoveSpeed * Time.deltaTime * direction);
-
+        meleeMinionScript.transform.Translate(meleeMinionScript.MovementSpeed  * Time.deltaTime * direction);
+        
         return State.Success;
 
     }
