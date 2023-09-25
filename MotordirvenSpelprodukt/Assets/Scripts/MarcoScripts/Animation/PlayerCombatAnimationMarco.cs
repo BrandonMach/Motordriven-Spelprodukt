@@ -5,15 +5,25 @@ using UnityEngine;
 
 public class PlayerCombatAnimationMarco : MonoBehaviour
 {
+    public float _timeBetweenInputs = 0f;
+
     [SerializeField] private Player _player;
     [SerializeField] private Animator _animator;
+
+    [Header("Combo Sequence")]
+    [SerializeField] private float _comboWindowTimer = 0;
+    [SerializeField] private bool _startComboWindowTimer;
+    [SerializeField] private float comboWindow = 2;
+
+
 
     private string _currentCombo = ""; //
     private float _desiredWeight = 0;
     private float _weight = 0;
     private float _weightChanger = -0.025f;
     private float _inputTimer = 0;
-    public float _timeBetweenInputs = 0f;
+
+
 
 
     private void Awake()
@@ -30,8 +40,11 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        Debug.Log(e.CurrentAttackSO.CurrentAttackEffect.ToString());
+        Debug.Log("ATTACK");
+
         HandleInput(e.attackType);
+        _startComboWindowTimer = true;
+        _comboWindowTimer = 0;
     }
 
     private void HandleInput(Player.OnAttackPressedEventArgs.AttackType attackType)
@@ -62,6 +75,11 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
         _inputTimer += Time.deltaTime;
 
         HandleAnimationLayers();
+    }
+
+    private void LateUpdate()
+    {
+        StartComboWindowCheck();
     }
 
     private void HandleAnimationLayers()
@@ -97,5 +115,26 @@ public class PlayerCombatAnimationMarco : MonoBehaviour
         _desiredWeight = 0.99f;
         _weightChanger = -0.025f;
         _weight = 0.01f;
+    }
+
+    void StartComboWindowCheck()
+    {
+
+        _comboWindowTimer += Time.deltaTime;
+        if (_startComboWindowTimer && _comboWindowTimer > 1.5)
+        {
+            EndCombo();
+        }
+        if (_comboWindowTimer >= comboWindow)
+        {
+        }
+    }
+
+    void EndCombo()
+    {
+        Debug.Log("EndingCombo");
+        _comboWindowTimer = 0;
+        _animator.SetTrigger("ComboBroken");
+        _startComboWindowTimer = false;
     }
 }

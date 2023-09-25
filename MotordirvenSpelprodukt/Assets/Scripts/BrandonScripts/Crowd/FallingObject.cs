@@ -15,7 +15,9 @@ public class FallingObjectType : MonoBehaviour
     }
 
     public ObjectType Type;
-    public GameObject Indicator;
+    public GameObject IndicatorPrefab;
+    private GameObject _indicator;
+    [SerializeField] GameObject _splashEffects;
     
 
     public LayerMask Ground;
@@ -28,7 +30,8 @@ public class FallingObjectType : MonoBehaviour
 
     Rigidbody rb;
 
-    Vector3 _targetPosition;
+    Vector3 _targetIndicatorPosition;
+    Vector3 _playerPosition;
 
     public float _speed = 1.0f;
 
@@ -40,16 +43,18 @@ public class FallingObjectType : MonoBehaviour
 
     void Start()
     {
+        _playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         rb = GetComponent<Rigidbody>();
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {
             //Arena area
-            float posX = Random.Range(-10, 10);
-            float posZ = Random.Range(-10, 10);
+            float posX = Random.Range(-2, 2);
+            float posZ = Random.Range(-2, 2);
 
 
-            _targetPosition = new Vector3(posX, 0.001f, posZ);
-            Instantiate(Indicator, _targetPosition, Indicator.transform.rotation);
+            _targetIndicatorPosition = new Vector3(posX + _playerPosition.x, 0.001f, posZ + _playerPosition.z);
+            _indicator = Instantiate(IndicatorPrefab, _targetIndicatorPosition, IndicatorPrefab.transform.rotation);
+            //_indicator.transform.SetParent(this.transform);
         }
 
         _startTime = Time.time;
@@ -59,7 +64,7 @@ public class FallingObjectType : MonoBehaviour
         _startPos = new Vector3(throwPosX, 10, throwPosZ);
 
         transform.position= _startPos; 
-        _journeyLength = Vector3.Distance(_startPos, _targetPosition);
+        _journeyLength = Vector3.Distance(_startPos, _targetIndicatorPosition);
     }
 
     // Update is called once per frame
@@ -70,9 +75,10 @@ public class FallingObjectType : MonoBehaviour
         // Fraction of journey completed equals current distance divided by total distance.
         float fractionOfJourney = _distCovered / _journeyLength;
 
-        transform.position = Vector3.Lerp(_startPos, _targetPosition, fractionOfJourney);
-      
+        transform.position = Vector3.Lerp(_startPos, _targetIndicatorPosition, fractionOfJourney);
         
+
+
         if(Type == ObjectType.HealthPotion)
         {
            // HoverObject();
@@ -91,7 +97,11 @@ public class FallingObjectType : MonoBehaviour
         {
             if (Type == ObjectType.Tomato)
             {
-                Debug.Log("Tomato");   
+                Destroy(gameObject);
+                Debug.Log("Tomato");
+                Debug.LogError("Player take damage");
+                Destroy(_indicator);
+
             }
             else if (Type == ObjectType.HealthPotion)
             {
@@ -103,29 +113,43 @@ public class FallingObjectType : MonoBehaviour
                 Debug.Log("Cannonball");
             }
         }
-        
 
-        
 
+
+        if(other.gameObject.tag == ("Ground"))
+        {
+            Debug.Log("hej");
+            if (Type == ObjectType.Tomato)
+            {
+                
+                Debug.Log("Tomato Splash");
+
+                Instantiate(_splashEffects, _targetIndicatorPosition, _splashEffects.transform.rotation);
+
+                Destroy(gameObject);
+                Destroy(_indicator);
+
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Target")
-        {
-            if (Type == ObjectType.HealthPotion)
-            {
-                HoverObject();
+        //if (other.gameObject.tag == "Target")
+        //{
+        //    if (Type == ObjectType.HealthPotion)
+        //    {
+        //        HoverObject();
                
-                Destroy(other.gameObject);
-            }
-            else
-            {
-                Destroy(this.gameObject);
-                Destroy(other.gameObject);
-            }
+        //        Destroy(other.gameObject);
+        //    }
+        //    else
+        //    {
+        //        Destroy(this.gameObject);
+        //        Destroy(other.gameObject);
+        //    }
             
-        }
+        //}
     }
 
 
@@ -151,7 +175,7 @@ public class FallingObjectType : MonoBehaviour
         RaycastHit rch;
         if (Physics.Raycast(transform.position, -transform.up, out rch, MaxDistance))
         {
-            Indicator.transform.position = rch.transform.position;
+            IndicatorPrefab.transform.position = rch.transform.position;
             
             return rch.distance;
         }
