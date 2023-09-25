@@ -15,19 +15,19 @@ public abstract class Node : ScriptableObject
     [HideInInspector] public Blackboard blackboard;
     [HideInInspector] public NavMeshAgent agent;
     [TextArea] public string description;
-    protected MMScript meleeMinionScript;
+    protected MMScript _meleeMinionScript;
     //protected RangedMinionScript rangedMinionScript;
-    protected GameObject enemyObject;
+    protected GameObject _enemyObject;
 
     public GameObject EnemyObject
     {
         //get { return enemyScript; }
-        set { enemyObject = value; }
+        set { _enemyObject = value; }
     }
     public MMScript MeleeMinionScript
     {
         //get { return enemyScript; }
-        set { meleeMinionScript = value; }
+        set { _meleeMinionScript = value; }
     }
 
     public State Update()

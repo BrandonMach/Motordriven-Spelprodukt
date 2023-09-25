@@ -8,7 +8,7 @@ public class MMChaseRange : ActionNode
 
     protected override void OnStart()
     {
-        meleeMinionScript = enemyObject.GetComponent<MMScript>();
+        _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
     }
 
     protected override void OnStop()
@@ -18,11 +18,11 @@ public class MMChaseRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if (playerScript != null && meleeMinionScript != null)
+        if (_playerScript != null && _meleeMinionScript != null)
         {
 
-            float distanceToPlayer = Vector3.Distance(meleeMinionScript.transform.position, playerScript.transform.position);
-            if (distanceToPlayer > meleeMinionScript.ChaseDistance)
+            float distanceToPlayer = Vector3.Distance(_meleeMinionScript.transform.position, _playerScript.transform.position);
+            if (distanceToPlayer > _meleeMinionScript.ChaseDistance)
             {
                 return State.Success;
             }

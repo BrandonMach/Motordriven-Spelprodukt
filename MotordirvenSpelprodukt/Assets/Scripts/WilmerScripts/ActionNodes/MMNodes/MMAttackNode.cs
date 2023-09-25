@@ -10,7 +10,7 @@ public class MMAttackNode : ActionNode
     // Start is called before the first frame update
     protected override void OnStart()
     {
-        meleeMinionScript = enemyObject.GetComponent<MMScript>();
+        _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
 
     }
 
@@ -22,11 +22,11 @@ public class MMAttackNode : ActionNode
     protected override State OnUpdate()
     {
         // Check if enough time has passed since the last attack
-        if (Time.time - meleeMinionScript.LastAttackTime >= meleeMinionScript.AttackCooldown)
+        if (Time.time - _meleeMinionScript.LastAttackTime >= _meleeMinionScript.AttackCooldown)
         {
             // Perform the attack here
             // You can add your attack logic or call a method to attack the player
-            meleeMinionScript.LastAttackTime = Time.time;
+            _meleeMinionScript.LastAttackTime = Time.time;
             Debug.Log($"AAAAAAAAttack!");
             Debug.Log($"AAAAAAAAttack!");
             Debug.Log($"AAAAAAAAttack!");

@@ -5,15 +5,11 @@ using UnityEngine;
 
 public abstract class ActionNode : Node
 {
-    protected Player playerScript;
-    
-    //protected GameObject enemy;
-    //protected MinionScript minionScript;
-    
+    protected Player _playerScript;
 
     public void OnEnable()
     {
-        playerScript = GameObject.Find("Player").GetComponent<Player>();
+        _playerScript = GameObject.Find("Player").GetComponent<Player>();
 
     }
 }

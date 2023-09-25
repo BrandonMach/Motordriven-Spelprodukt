@@ -9,7 +9,7 @@ public class MMScript : EnemyScript
     public float ChaseDistance;
     void Start()
     {
-        
+        _movementSpeed = 10;
     }
 
     // Update is called once per frame
