@@ -9,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
     private float _range;
     private float _damage;
     private float _multiplier;
+    private Vector3 _colliderPos;
     private CurrentAttackSO.AttackEffect _effect;
 
     void Start()
@@ -31,17 +32,21 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleAttack(Player.OnAttackPressedEventArgs e)
     {
-        Collider[] test = Physics.OverlapSphere(transform.position, _range);
+        // TODO:
+        // Set animation event to the animations to check when an attack should check for collisions.
 
-        for (int i = 0; i < test.Length; i++)
+        Collider[] enemyHits = Physics.OverlapSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
+
+        for (int i = 0; i < enemyHits.Length; i++)
         {
-            IDamagable enemy = test[i].GetComponent<IDamagable>();
+            IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
                 enemy.TakeDamage();
             }
         }
     }
+
 
     private void RecieveAttackEvent(Player.OnAttackPressedEventArgs e)
     {
@@ -56,7 +61,8 @@ public class PlayerCombat : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + (transform.forward * 1.5f), 1.5f);
+        //Vector3 drawPos = new Vector3(transform.position.)
+        Gizmos.DrawWireSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
     }
 
 
@@ -104,6 +110,6 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }
