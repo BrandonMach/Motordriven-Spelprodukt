@@ -24,7 +24,7 @@ public class CrowdBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        fallingArea = new Rect(0, 3, 10, 2);
         this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
 
         if (_etManager.GetETP() > _etManager.GetETPThreshold() && !_playCheering) //Bool för att den bara sla spelas en gång
@@ -41,7 +41,9 @@ public class CrowdBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Instantiate(fallingObject, _playerPos.position + new Vector3(0, 10, 0), transform.rotation);
+            float randonThrowPosX = Random.Range(-10, 10);
+            float randonThrowPosY = Random.Range(-10, 10);
+            Instantiate(fallingObject, _playerPos.position + new Vector3(randonThrowPosX, 10, randonThrowPosY), transform.rotation);
         }
         
 
@@ -55,5 +57,12 @@ public class CrowdBehaviour : MonoBehaviour
     void PlayBooo()
     {
         _booing.Play();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(_playerPos.position + new Vector3(0,10,0), new Vector3(9,2,9));
+        
     }
 }
