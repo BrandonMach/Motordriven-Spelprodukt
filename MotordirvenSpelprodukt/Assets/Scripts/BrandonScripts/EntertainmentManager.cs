@@ -11,6 +11,10 @@ public class EntertainmentManager : MonoBehaviour
     public GameObject OOCPopUp;
 
 
+    public GameObject KingCamera;
+    private bool _activateKingCam;
+
+
     [SerializeField] float _entertainmentPoints;
     public float GetETP()
     {
@@ -77,10 +81,11 @@ public class EntertainmentManager : MonoBehaviour
         CheckIfOutOfCombat();
 
 
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    _entertainmentPoints += 25;
-        //}
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _activateKingCam = !_activateKingCam;
+            KingCamera.SetActive(_activateKingCam);
+        }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
