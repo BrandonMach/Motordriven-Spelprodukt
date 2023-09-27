@@ -23,8 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private Camera _mainCamera;
-    [SerializeField] private PlayerMovementAnimation _playerAnimation;
-    [SerializeField] private Player _playerScript;
+
+    private Player _playerScript;
 
     private CharacterController _characterController;
 
@@ -32,12 +32,18 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 _camForward;
     private Vector3 _camRight;
-
-    private Vector3 _lookPos;
     private Vector3 _rotateDirection;
 
-    private bool _isMoving = false; 
-    
+    private PlayerAnimation _playerAnimation;
+
+    private bool _isMoving = false;
+
+    private void Awake()
+    {
+        _playerAnimation = GetComponent<PlayerAnimation>();
+        _playerScript = GetComponent<Player>();
+    }
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -123,7 +129,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     //Get the point in worldspace where we have our mouse and calculate the direction from the player
                     Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-                    _lookPos = pointToLook;
                     _rotateDirection = pointToLook - transform.position;
                     _rotateDirection.Normalize();
                 }
@@ -154,11 +159,5 @@ public class PlayerMovement : MonoBehaviour
         _camRight.y = 0;
         _camForward = _camForward.normalized;
         _camRight = _camRight.normalized;
-    }
-
-
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawSphere(_lookPos, 2);
     }
 }
