@@ -34,7 +34,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
 
     public void TakeDamage()
     {
-
+        Debug.Log(this.name + "Took damage from player");
     }
 
     public void GetPushedBack()
