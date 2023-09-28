@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class MMScript : EnemyScript
@@ -10,6 +11,11 @@ public class MMScript : EnemyScript
     void Start()
     {
         _movementSpeed = 10;
+        _attackRange = 4;
+        _attackCooldown = 2;
+        ChaseDistance = 2;
+        _currentHealth = 100;
+        _maxHealth = 100;
     }
 
     // Update is called once per frame
@@ -22,5 +28,6 @@ public class MMScript : EnemyScript
     {
         //Death animation
     }
+    
 
 }
