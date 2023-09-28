@@ -6,7 +6,7 @@ public class CMPChaseRange : ActionNode
 {
     protected override void OnStart()
     {
-        _campionScript = _enemyObject.GetComponent<CMPScript>();
+        _championScript = _enemyObject.GetComponent<CMPScript>();
     }
 
     protected override void OnStop()
@@ -16,21 +16,23 @@ public class CMPChaseRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if(_playerScript != null && _campionScript != null)
+        if (_playerScript != null && _championScript != null)
         {
 
-            float distanceToPlayer = Vector3.Distance(_campionScript.transform.position, _playerScript.transform.position);
-            if(distanceToPlayer > _campionScript.ChaseDistance)
+            float distanceToPlayer = Vector3.Distance(_championScript.transform.position, _playerScript.transform.position);
+            if (distanceToPlayer > _championScript.ChaseDistance)
             {
                 return State.Success;
             }
             else
             {
-                return State.Failure;
+
+                return State.Running;
             }
         }
         else
         {
+
             return State.Failure;
         }
     }

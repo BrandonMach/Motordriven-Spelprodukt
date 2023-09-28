@@ -6,7 +6,7 @@ public class CMPChaseNode : ActionNode
 {
     protected override void OnStart()
     {
-        _campionScript = _enemyObject.GetComponent<CMPScript>();
+        _championScript = _enemyObject.GetComponent<CMPScript>();
     }
 
     protected override void OnStop()
@@ -16,13 +16,18 @@ public class CMPChaseNode : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector3 direction = _playerScript.transform.position - _campionScript.transform.position;
+        Vector3 direction = _playerScript.transform.position - _championScript.transform.position;
 
         // Normalize the direction to get a unit vector
         direction.Normalize();
 
-        // Move the AI towards the player
-        _campionScript.transform.Translate(_campionScript.MovementSpeed * Time.deltaTime * direction);
+        //Rotate the Champion towards the players position
+        _championScript.transform.rotation = Quaternion.Slerp(_championScript.transform.rotation, Quaternion.LookRotation(direction), 5*Time.deltaTime);
+
+
+        // Move the AI forward, since the AI is facing towards the player
+        _championScript.transform.position += _championScript.transform.forward * _championScript.MovementSpeed * Time.deltaTime;
+
 
         return State.Success;
     }

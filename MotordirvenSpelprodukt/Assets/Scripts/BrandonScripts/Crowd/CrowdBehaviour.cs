@@ -59,10 +59,4 @@ public class CrowdBehaviour : MonoBehaviour
         _booing.Play();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(_playerPos.position + new Vector3(0,10,0), new Vector3(9,2,9));
-        
-    }
 }
