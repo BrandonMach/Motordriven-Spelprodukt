@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: fce421bc937da424fa0aba5088ef3487
-  position: {x: -693.00024, y: 69.99997}
+  position: {x: -644.9165, y: 69.999916}
   agent: {fileID: 0}
   description: Check if player is within ChaseRange
 --- !u!114 &-1178503268250652897
@@ -57,6 +57,8 @@ MonoBehaviour:
   - {fileID: -7149390369101673850}
   - {fileID: 9099744171966322423}
   - {fileID: 6051116233716263924}
+  - {fileID: 6059471995194333448}
+  - {fileID: 5208420848249550649}
 --- !u!114 &4138930101004133558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,9 +74,28 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b3a928afa6e604a4f8fbc2442e2bab8b
-  position: {x: -383.0001, y: 85}
+  position: {x: -417.98013, y: 84.99999}
   agent: {fileID: 0}
   description: 'Champion Chases player '
+--- !u!114 &5208420848249550649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af9b67483b480241995ca095d99fa20, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: f980e1b0d95680541b5c445e09f9eb5f
+  position: {x: -98.95824, y: -130.00006}
+  agent: {fileID: 0}
+  description: 
+  children: []
 --- !u!114 &6051116233716263924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,10 +111,31 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5f1c478b9dcc8b84ca2acc7a63f8ee13
-  position: {x: -305, y: -299.83997}
+  position: {x: -305, y: -377.0835}
   agent: {fileID: 0}
   description: 
-  child: {fileID: 9099744171966322423}
+  child: {fileID: 6059471995194333448}
+--- !u!114 &6059471995194333448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af9b67483b480241995ca095d99fa20, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 52ffb8b7c11f4fb4494d0761736b0c05
+  position: {x: -305.00003, y: -267.23068}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 9099744171966322423}
+  - {fileID: 5208420848249550649}
 --- !u!114 &9099744171966322423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +151,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ab657977f6961284bb2cdd215b1e9c20
-  position: {x: -535, y: -146.47998}
+  position: {x: -533.00006, y: -130.08351}
   agent: {fileID: 0}
   description: 
   children:
