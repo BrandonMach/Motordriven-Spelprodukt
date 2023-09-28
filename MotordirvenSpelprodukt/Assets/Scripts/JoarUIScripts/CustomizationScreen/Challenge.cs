@@ -7,16 +7,18 @@ public class Challenge : MonoBehaviour
 {
     [SerializeField] public string ChallengeName;
     [SerializeField] public string Description;
-    [SerializeField] private int _requirement;
-    private bool _isCompleted;
-
-    public event Action<int> OnChallengeCompleted;
+    [SerializeField] public int Requirement;
+    [SerializeField] public int Reward;
+    public bool IsCompleted;
+    
 
     public Challenge(string name, string description, int requirement)
     {
         ChallengeName = name;
         Description = description;
-        _requirement = requirement;
-        _isCompleted = false;
+        Requirement = requirement;
+        IsCompleted = false;
+
+        ChallengeManager.AddChallenge(this);
     }
 }

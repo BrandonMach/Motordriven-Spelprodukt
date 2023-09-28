@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CustomButton : Button
 {
-    [Header("Text")]
+    [Header("Used for the Button Text")]
     [SerializeField] public TextMeshProUGUI TMP;
     [SerializeField] public Challenge Challenge;
 
