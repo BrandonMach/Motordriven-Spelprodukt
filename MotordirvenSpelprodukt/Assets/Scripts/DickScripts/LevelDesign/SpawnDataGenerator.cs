@@ -33,6 +33,7 @@ namespace LevelDesign
             // Currently only one procedural generation method is implemented (run PSD by default)
             if (promptGeneration && surfaces?.Length > 0) RunPSD();
             if (saveSpawnPoints && spawnPoints?.Count > 0) SaveData();
+            if (showSpawnData) LoadData();
 
            UpdateInspectorButtons();
         }
@@ -45,10 +46,6 @@ namespace LevelDesign
                 saveSpawnPoints = false;
                 promptGeneration = false;
                 showSpawnData = false;
-
-                // Update Gizmo
-                drawSpawnData = !drawSpawnData;
-                if (!drawSpawnData && spawnPoints?.Count > 0) spawnPoints.Clear();
             }
             else if (saveSpawnPoints)
             {
@@ -88,26 +85,6 @@ namespace LevelDesign
             }
         }
 
-        private void SaveData()
-        {
-            int i = 0;
-            spawnData.data = new ObjectData[spawnPoints.Count];
-
-            foreach (KeyValuePair<LayerType, List<Vector3>> pair in spawnPoints)
-            {
-                Vector3[] pos = ListToArray(pair.Value);
-                ObjectData obj = new ObjectData
-                {
-                    type = pair.Key,
-                    spawnPositions = pos,
-                    spawnRotations = RandomRotations(pos.Length),
-                    spawnScales = VectorOnes(pos.Length),          // Use prefab's default scale!
-                };
-
-                spawnData.data[i] = obj;
-                i++;
-            }
-        }
         private Vector3[] RandomRotations(int length)
         {
             Vector3[] rot = new Vector3[length];
@@ -150,6 +127,41 @@ namespace LevelDesign
                 pos[i] = points[i];
 
             return pos;
+        }
+
+        private void SaveData()
+        {
+            int i = 0;
+            spawnData.data = new ObjectData[spawnPoints.Count];
+
+            foreach (KeyValuePair<LayerType, List<Vector3>> pair in spawnPoints)
+            {
+                Vector3[] pos = ListToArray(pair.Value);
+                ObjectData obj = new ObjectData
+                {
+                    type = pair.Key,
+                    spawnPositions = pos,
+                    spawnRotations = RandomRotations(pos.Length),
+                    spawnScales = VectorOnes(pos.Length),          // Use prefab's default scale!
+                };
+
+                spawnData.data[i] = obj;
+                i++;
+            }
+        }
+
+        private void LoadData()
+        {
+            spawnPoints = new Dictionary<LayerType, List<Vector3>>();
+
+            for (int i = 0;i < spawnData.data.Length;i++)
+            {
+                LayerType type = spawnData.data[i].type;
+                Vector3[] pos = spawnData.data[i].spawnPositions;
+                List<Vector3> positions = new List<Vector3>();
+                positions.AddRange(pos);
+                spawnPoints.Add(type, positions);
+            }
         }
         #endregion
     }

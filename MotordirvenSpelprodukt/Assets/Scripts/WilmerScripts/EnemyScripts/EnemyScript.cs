@@ -32,18 +32,28 @@ public class EnemyScript : MonoBehaviour, IDamagable
         
     }
 
-    public void TakeDamage()
+    public void TakeDamage(/*int damage*/)
     {
         Debug.Log(this.name + "Took damage from player");
     }
 
-    public void GetPushedBack()
+    public void GetPushedBack(/*int damage*/)
+    {
+        //PushedBack
+        TakeDamage(/*damage*/);
+    }
+
+    public void TakeBleedDamage(/*int damage*/)
+    {
+
+    }
+    public void GetSlowed(/*int damage*/)
+    {
+
+    }
+    public void GetStunned(/*int damage*/)
     {
 
     }
 
-    public void TakeBleedDamage()
-    {
-
-    }
 }

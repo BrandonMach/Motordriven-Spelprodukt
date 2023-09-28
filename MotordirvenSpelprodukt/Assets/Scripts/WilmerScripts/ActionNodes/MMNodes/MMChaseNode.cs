@@ -9,7 +9,7 @@ public class MMChaseNode : ActionNode
 
     protected override void OnStart()
     {
-        meleeMinionScript = enemyObject.GetComponent<MMScript>();
+        _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
 
 
     }
@@ -21,13 +21,13 @@ public class MMChaseNode : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector3 direction = playerScript.transform.position - meleeMinionScript.transform.position;
+        Vector3 direction = _playerScript.transform.position - _meleeMinionScript.transform.position;
 
         // Normalize the direction to get a unit vector
         direction.Normalize();
 
         // Move the AI towards the player
-        meleeMinionScript.transform.Translate(meleeMinionScript.MovementSpeed  * Time.deltaTime * direction);
+        _meleeMinionScript.transform.Translate(_meleeMinionScript.MovementSpeed  * Time.deltaTime * direction);
         
         return State.Success;
 
