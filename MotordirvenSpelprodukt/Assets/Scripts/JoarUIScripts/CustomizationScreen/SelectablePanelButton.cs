@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CustomButton : Button
+public class SelectablePanelButton : Button
 {
     Color _normalColor = new Color(96, 96, 96);
     Color _pressedColor = new Color(200, 200, 200);
