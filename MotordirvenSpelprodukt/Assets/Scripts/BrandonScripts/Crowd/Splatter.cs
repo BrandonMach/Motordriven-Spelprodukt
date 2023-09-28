@@ -5,16 +5,9 @@ using UnityEngine;
 public class Splatter : MonoBehaviour
 {
     public Sprite[] Sprites;
-    float timeAlive = 2f;
-    float startTime = 0;
 
-    float fadeDelay = 10f;
+    float fadeDelay = 0.7f;
     float currentAlpha = 1;
-    float requiredAlpha = 0;
-
-    [Range(0,1)] public float yo;
-
-    [SerializeField] Color _newColor;
 
     SpriteRenderer _spriteRenderer;
 
@@ -29,7 +22,7 @@ public class Splatter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentAlpha -=Time.deltaTime * 0.7f;
+        currentAlpha -=Time.deltaTime * fadeDelay;
 
         _spriteRenderer.color = new Color(255, 255, 255, currentAlpha);
 
