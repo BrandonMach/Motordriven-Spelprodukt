@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CMPScript : EnemyScript
 {
-    public float HealthPoints;
+    
 
     public float DamageBuff;
 
@@ -14,7 +14,12 @@ public class CMPScript : EnemyScript
 
     void Start()
     {
-        
+        _movementSpeed = 10;
+        _attackRange = 4;
+        _attackCooldown = 2;
+        ChaseDistance = 2;
+        _currentHealth = 100;
+        _maxHealth = 100;
     }
 
     // Update is called once per frame
