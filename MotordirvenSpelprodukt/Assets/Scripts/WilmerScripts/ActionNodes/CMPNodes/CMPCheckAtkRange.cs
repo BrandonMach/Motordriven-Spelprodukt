@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CMPCheckAtkRange : MonoBehaviour
+public class CMPCheckAtkRange : ActionNode
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void OnStart()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnStop()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    protected override State OnUpdate()
+    {
+        throw new System.NotImplementedException();
     }
 }
