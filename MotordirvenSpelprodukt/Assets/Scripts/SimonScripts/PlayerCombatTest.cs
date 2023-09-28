@@ -27,7 +27,7 @@ public class PlayerCombatTest : MonoBehaviour
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        HandleInput(e.attackType);
+        //HandleInput(e.attackType);
     }
     //private void Player_OnHeavyAttackPressed(object sender, EventArgs e)
     //{
@@ -91,21 +91,21 @@ public class PlayerCombatTest : MonoBehaviour
         }
     }
 
-    public void DisableCombatLayer()
-    {
-        Debug.Log("DisableCombatLayer : Combo=" + currentCombo);
-        desiredWeight = 0.01f;
-        weightChanger = 0.025f;
-        weight = 0.99f;
-    }
+    //public void DisableCombatLayer()
+    //{
+    //    Debug.Log("DisableCombatLayer : Combo=" + currentCombo);
+    //    desiredWeight = 0.01f;
+    //    weightChanger = 0.025f;
+    //    weight = 0.99f;
+    //}
 
-    public void EnableCombatLayer()
-    {
-        Debug.Log("EnableCombatLayer: Combo=" + currentCombo);
-        desiredWeight = 0.99f;
-        weightChanger = -0.025f;
-        weight = 0.01f;
-    }
+    //public void EnableCombatLayer()
+    //{
+    //    Debug.Log("EnableCombatLayer: Combo=" + currentCombo);
+    //    desiredWeight = 0.99f;
+    //    weightChanger = -0.025f;
+    //    weight = 0.01f;
+    //}
     //public void Test()
     //{
     //    if (animator.GetFloat("test") == 0)

@@ -6,7 +6,7 @@ using UnityEngine;
 public class AttackSO : ScriptableObject
 {
     public AnimatorOverrideController AnimatorOV;
-    public float AttackBaseDamage;
+    //public float AttackBaseDamage;
 
     //VFX
 
