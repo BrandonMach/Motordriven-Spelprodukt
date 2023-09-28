@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
@@ -165,3 +166,4 @@ public class BehaviourTree : ScriptableObject
         });
     }
 }
+#endif
