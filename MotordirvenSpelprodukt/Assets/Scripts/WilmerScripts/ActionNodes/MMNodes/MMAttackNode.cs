@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -36,6 +37,7 @@ public class MMAttackNode : ActionNode
             Debug.Log($"AAAAAAAAttack!");
             Debug.Log($"AAAAAAAAttack!");
             Debug.Log($"AAAAAAAAttack!");
+            
             //Call TakeDamage() in player
             return State.Success; // Attack successful
         }
@@ -45,4 +47,4 @@ public class MMAttackNode : ActionNode
         }
     }
 }
-
+#endif

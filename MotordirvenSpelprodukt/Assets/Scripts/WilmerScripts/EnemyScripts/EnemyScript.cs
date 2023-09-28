@@ -7,7 +7,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     protected float _currentHealth;
     protected float _maxHealth;
     protected float _movementSpeed;
-    protected float _attackSpeed;
+    protected float _attackSpeed; //?
     protected float _attackRange;
     protected float _attackCooldown;
     protected float _lastAttackTime;
