@@ -8,6 +8,7 @@ public class SwitchCamera : MonoBehaviour
     [SerializeField] private CinemachineBrain _cinemachineBrain;
     [SerializeField] private CinemachineVirtualCamera _vcamPlayer;
     [SerializeField] private CinemachineVirtualCamera _vcamKing;
+    [SerializeField] private GameObject _grayTint;
 
 
     private bool playerCamera = true;
@@ -45,13 +46,14 @@ public class SwitchCamera : MonoBehaviour
 
         if (playerCamera)
         {
+            _grayTint.SetActive(true);
             // cause IsBlending has little bit delay so it's need to wait
             yield return new WaitUntil(() => _cinemachineBrain.IsBlending);
 
             // wait until blending is finished
 
             yield return new WaitUntil(() => !_cinemachineBrain.IsBlending);
-
+            _grayTint.SetActive(false);
             Time.timeScale = 1;
         }
        
