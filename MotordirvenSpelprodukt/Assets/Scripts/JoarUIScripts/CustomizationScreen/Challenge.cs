@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Challenge : MonoBehaviour
 {
-    [SerializeField] private string _name;
-    [SerializeField] private string _description;
+    [SerializeField] public string ChallengeName;
+    [SerializeField] public string Description;
     [SerializeField] private int _requirement;
     private bool _isCompleted;
 
@@ -14,8 +14,8 @@ public class Challenge : MonoBehaviour
 
     public Challenge(string name, string description, int requirement)
     {
-        _name = name;
-        _description = description;
+        ChallengeName = name;
+        Description = description;
         _requirement = requirement;
         _isCompleted = false;
     }

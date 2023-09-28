@@ -13,7 +13,8 @@ public class CustomButtonEditor : ButtonEditor
     {
         CustomButton targetCustomButton = (CustomButton)target;
 
-        targetCustomButton.Text = (TextMeshProUGUI)EditorGUILayout.ObjectField("Text:", targetCustomButton.Text, typeof(TextMeshProUGUI), true); 
+        targetCustomButton.TMP = (TextMeshProUGUI)EditorGUILayout.ObjectField("TMP:", targetCustomButton.TMP, typeof(TextMeshProUGUI), true);
+        targetCustomButton.Challenge = (Challenge)EditorGUILayout.ObjectField("Challenge:", targetCustomButton.Challenge, typeof(Challenge), true);
 
         base.OnInspectorGUI();
     }

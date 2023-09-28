@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class CustomButton : Button
 {
     [Header("Text")]
-    [SerializeField] public TextMeshProUGUI Text;
+    [SerializeField] public TextMeshProUGUI TMP;
+    [SerializeField] public Challenge Challenge;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        TMP.text = ($"{Challenge.ChallengeName} : {Challenge.Description}");
     }
 
     // Update is called once per frame
