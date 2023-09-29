@@ -10,7 +10,11 @@ public class CMPScript : EnemyScript
 
     public float ChaseDistance;
 
-    public Animator anim;
+    public Animator Anim;
+
+    public int AttackIndex;
+
+    public bool CanAttack;
 
     void Start()
     {
@@ -20,6 +24,7 @@ public class CMPScript : EnemyScript
         ChaseDistance = 2;
         _currentHealth = 100;
         _maxHealth = 100;
+        CanAttack = true;
     }
 
     // Update is called once per frame

@@ -6,16 +6,32 @@ public class CMPCheckAtkRange : ActionNode
 {
     protected override void OnStart()
     {
-        throw new System.NotImplementedException();
+        _championScript = _enemyObject.GetComponent<CMPScript>();
     }
 
     protected override void OnStop()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     protected override State OnUpdate()
     {
-        throw new System.NotImplementedException();
+        if(_playerScript != null && _championScript.CanAttack)
+        {
+            float distanceToPlayer = Vector3.Distance(_championScript.transform.position, _playerScript.transform.position);
+
+            if (distanceToPlayer <= _championScript.AttackRange)
+            {
+                return State.Success;
+            }
+            else
+            {
+                return State.Failure; //Player is not in attack range
+            }
+        }
+        else
+        {
+            return State.Failure; //no player is found
+        }
     }
 }

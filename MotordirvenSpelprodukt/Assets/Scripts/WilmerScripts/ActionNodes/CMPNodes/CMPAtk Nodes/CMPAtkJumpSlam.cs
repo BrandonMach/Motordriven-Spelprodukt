@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CMPAtkJumpSlam : MonoBehaviour
+public class CMPAtkJumpSlam : ActionNode
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void OnStart()
+    {
+        _championScript = _enemyObject.GetComponent<CMPScript>();
+        if (_championScript.CanAttack && _championScript.AttackIndex == 2)
+        {
+            _championScript.Anim.SetInteger("Attack Index", 2);
+            
+        }
+    }
+
+    protected override void OnStop()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override State OnUpdate()
     {
-        
+        if (_championScript.AttackIndex == 2)
+        {
+            _championScript.CanAttack = false;
+            return State.Success;
+        }
+        else
+        {
+            return State.Failure;
+        }
     }
 }
