@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: aa88039e94dfca440b6c7240a5257e64
-  position: {x: 350.92426, y: 102.00003}
+  position: {x: -412.99997, y: 333.99988}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-7044714271345039249
@@ -115,7 +115,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1bc7e0cd4506d1749b7e54be9eaab43a
-  position: {x: -114.075745, y: 315.99997}
+  position: {x: -254.79507, y: 435.99994}
   agent: {fileID: 0}
   description: Checks if the player is far away to
 --- !u!114 &-1142895084472170525
@@ -133,7 +133,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1dff6041762a6914998a05823a60fa89
-  position: {x: -1552.6362, y: 7.999939}
+  position: {x: -1111.4365, y: -15.000072}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-1071388216250630101
@@ -151,11 +151,10 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c954bce8f6d9fd84d8096c766602c4bc
-  position: {x: -106.075806, y: 42.999992}
+  position: {x: -104.79501, y: 177.99992}
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: -854074388693966376}
   - {fileID: -1721814991297767680}
   - {fileID: 5669087746917351681}
 --- !u!114 &-860314941154656880
@@ -177,8 +176,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: -1071388216250630101}
-  - {fileID: -8579383527619393737}
+  - {fileID: 8469591081742309704}
   - {fileID: -4939700824684562748}
 --- !u!114 &-854074388693966376
 MonoBehaviour:
@@ -195,7 +193,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1397b60dbdcb348428453eebc190ad56
-  position: {x: -410.0758, y: 315.99997}
+  position: {x: -746.9999, y: 318.99997}
   agent: {fileID: 0}
   description: Checks if the player is out of combat.
 --- !u!114 &11400000
@@ -228,6 +226,8 @@ MonoBehaviour:
   - {fileID: -1142895084472170525}
   - {fileID: 1360478854901253811}
   - {fileID: -7044714271345039249}
+  - {fileID: 8469591081742309704}
+  - {fileID: 231991476673510906}
 --- !u!114 &88780500182078266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +246,27 @@ MonoBehaviour:
   position: {x: 707.9243, y: 272.00006}
   agent: {fileID: 0}
   description: MeleeMinion attackrangecheck
+--- !u!114 &231991476673510906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af9b67483b480241995ca095d99fa20, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: a7aac34be119c044d9fc94b10f961698
+  position: {x: -487.99994, y: 172.00003}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: -854074388693966376}
+  - {fileID: -8579383527619393737}
 --- !u!114 &1360478854901253811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +282,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: dbc00052443901f43955d6667c6cc667
-  position: {x: -1188.6364, y: 18.999908}
+  position: {x: -747.4366, y: -4.0001316}
   agent: {fileID: 0}
   description: 
   duration: 0
@@ -280,7 +301,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b0ca087d6a1040a45a4c7990f8a6f3ae
-  position: {x: -1365.6362, y: -174.00002}
+  position: {x: -924.4366, y: -197.00014}
   agent: {fileID: 0}
   description: 
   children:
@@ -301,7 +322,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a8865b4c9d2647f44b6da66f97bd401e
-  position: {x: 150.92432, y: 315.99997}
+  position: {x: 85.20494, y: 450.99994}
   agent: {fileID: 0}
   description: 
 --- !u!114 &7641833027176375030
@@ -323,3 +344,24 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   child: {fileID: -3293893600549813036}
+--- !u!114 &8469591081742309704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 46b3035e993e5f644ab4e9998cac791d
+  position: {x: -254.79507, y: 1.9999251}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 231991476673510906}
+  - {fileID: -1071388216250630101}
