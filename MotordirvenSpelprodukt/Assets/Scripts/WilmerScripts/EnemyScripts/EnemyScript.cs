@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     protected float _attackRange;
     protected float _attackCooldown;
     protected float _lastAttackTime;
+    protected bool _stunned;
 
     public float Currenthealth { get { return _currentHealth; } }
     public float MaxHealth { get { return _maxHealth; } }
@@ -19,6 +20,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     public float AttackRange { get { return _attackRange; } }
     public float AttackCooldown { get { return _attackCooldown; } }
     public float LastAttackTime { get { return _lastAttackTime; } set { _lastAttackTime = value; } }
+    public bool Stunned { get { return _stunned; } set { _stunned = value; } }
 
     // Start is called before the first frame update
     void Start()
@@ -32,18 +34,19 @@ public class EnemyScript : MonoBehaviour, IDamagable
         
     }
 
-    public void TakeDamage(/*int damage*/)
+    public void TakeDamage(float damage)
     {
         Debug.Log(this.name + "Took damage from player");
+        _currentHealth -= damage;
     }
 
-    public void GetPushedBack(/*int damage*/)
+    public void GetPushedBack(int damage)
     {
         //PushedBack
-        TakeDamage(/*damage*/);
+        //TakeDamage(damage);
     }
 
-    public void TakeBleedDamage(/*int damage*/)
+    public void TakeBleedDamage(int damage)
     {
 
     }
@@ -53,7 +56,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     }
     public void GetStunned(/*int damage*/)
     {
-
+        Stunned = true;
     }
 
 }

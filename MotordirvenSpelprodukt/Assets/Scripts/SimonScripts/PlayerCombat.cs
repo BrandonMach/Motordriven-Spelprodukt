@@ -42,7 +42,7 @@ public class PlayerCombat : MonoBehaviour
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
-                enemy.TakeDamage();
+                enemy.TakeDamage(1.0f);
             }
         }
     }
