@@ -15,9 +15,30 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: aa88039e94dfca440b6c7240a5257e64
-  position: {x: -182.51106, y: 43.00006}
+  position: {x: 350.92426, y: 102.00003}
   agent: {fileID: 0}
   description: 
+--- !u!114 &-7044714271345039249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: ffde3ee3bd26b1441b13599dd1eeb82c
+  position: {x: -413, y: -427.92}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 1571396268232460118}
+  - {fileID: -860314941154656880}
 --- !u!114 &-4994970522489366196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,7 +54,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7ad523064999e8a4fbc6fc48609c099b
-  position: {x: 472, y: 189.79745}
+  position: {x: 949.9243, y: 272.00006}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-4939700824684562748
@@ -51,7 +72,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 88ccc39be722c8a4eab2ae882808e646
-  position: {x: 321.99985, y: -3.9999237}
+  position: {x: 799.92426, y: 78.00002}
   agent: {fileID: 0}
   description: 
   children:
@@ -72,10 +93,10 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 42e5df8a3e6f81748b4c33276268436d
-  position: {x: 80.00003, y: -598.76794}
+  position: {x: -413.00003, y: -602.3223}
   agent: {fileID: 0}
   description: 
-  child: {fileID: 1571396268232460118}
+  child: {fileID: -7044714271345039249}
   RestartOnFailure: 1
   RestartOnSuccess: 1
   maxRepeats: 0
@@ -94,9 +115,27 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1bc7e0cd4506d1749b7e54be9eaab43a
-  position: {x: -678, y: 316.0001}
+  position: {x: -114.075745, y: 315.99997}
   agent: {fileID: 0}
   description: Checks if the player is far away to
+--- !u!114 &-1142895084472170525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9637e99c88014f4a9cee4a0d516814c, type: 3}
+  m_Name: AffectCheck
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1dff6041762a6914998a05823a60fa89
+  position: {x: -1552.6362, y: 7.999939}
+  agent: {fileID: 0}
+  description: 
 --- !u!114 &-1071388216250630101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +151,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c954bce8f6d9fd84d8096c766602c4bc
-  position: {x: -670.00006, y: 42.99986}
+  position: {x: -106.075806, y: 42.999992}
   agent: {fileID: 0}
   description: 
   children:
@@ -134,12 +173,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a10a71265d549b34dbdd1a5c173cd3d9
-  position: {x: -412.96573, y: -173.99994}
+  position: {x: 150.92432, y: -174.00003}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: -1071388216250630101}
   - {fileID: -8579383527619393737}
+  - {fileID: -4939700824684562748}
 --- !u!114 &-854074388693966376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +195,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1397b60dbdcb348428453eebc190ad56
-  position: {x: -974.45374, y: 316.00003}
+  position: {x: -410.0758, y: 315.99997}
   agent: {fileID: 0}
   description: Checks if the player is out of combat.
 --- !u!114 &11400000
@@ -185,7 +225,9 @@ MonoBehaviour:
   - {fileID: 88780500182078266}
   - {fileID: -4939700824684562748}
   - {fileID: -4994970522489366196}
-  - {fileID: 3632423822834490821}
+  - {fileID: -1142895084472170525}
+  - {fileID: 1360478854901253811}
+  - {fileID: -7044714271345039249}
 --- !u!114 &88780500182078266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,9 +243,28 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ef02a50f116801a4d9ffcb73ef700556
-  position: {x: 230.00006, y: 189.99991}
+  position: {x: 707.9243, y: 272.00006}
   agent: {fileID: 0}
   description: MeleeMinion attackrangecheck
+--- !u!114 &1360478854901253811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf236e5d6770d548b4c9bab7476903b, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: dbc00052443901f43955d6667c6cc667
+  position: {x: -1188.6364, y: 18.999908}
+  agent: {fileID: 0}
+  description: 
+  duration: 0
 --- !u!114 &1571396268232460118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,32 +280,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b0ca087d6a1040a45a4c7990f8a6f3ae
-  position: {x: 79.99997, y: -410.5}
+  position: {x: -1365.6362, y: -174.00002}
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: -860314941154656880}
-  - {fileID: 3632423822834490821}
---- !u!114 &3632423822834490821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
-  m_Name: Selector
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 061b32f416833624199210344df4ff2a
-  position: {x: 313.00006, y: -126.999916}
-  agent: {fileID: 0}
-  description: 
-  children:
-  - {fileID: -4939700824684562748}
+  - {fileID: -1142895084472170525}
+  - {fileID: 1360478854901253811}
 --- !u!114 &5669087746917351681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +301,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a8865b4c9d2647f44b6da66f97bd401e
-  position: {x: -413, y: 316}
+  position: {x: 150.92432, y: 315.99997}
   agent: {fileID: 0}
   description: 
 --- !u!114 &7641833027176375030
@@ -278,7 +319,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2130e61d11d1ab34fb7d80f05d611e39
-  position: {x: 79.99989, y: -772.428}
+  position: {x: -413.0001, y: -788.10016}
   agent: {fileID: 0}
   description: 
   child: {fileID: -3293893600549813036}

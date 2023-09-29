@@ -43,6 +43,7 @@ public class PlayerCombat : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(1.0f);
+                enemy.GetStunned(2.0f);
             }
         }
     }
