@@ -9,8 +9,7 @@ public abstract class ActionNode : Node
 
     public void OnEnable()
     {
-        //_playerScript = GameObject.Find("Player").GetComponent<Player>();
-        _playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
 
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectorNode : CompositeNode
+public class Selector : CompositeNode
 {
     int current;
     protected override void OnStart()
@@ -17,15 +17,23 @@ public class SelectorNode : CompositeNode
 
     protected override State OnUpdate()
     {
-
-        foreach (var child in children)
+        var child = children[current];
+        switch (child.Update())
         {
-            if (child.Update() != State.Failure)
-            {
-                return child.Update();
-            }
+            case State.Running:
+                return State.Running;
+                break;
+            case State.Failure:
+                return State.Failure;
+                current++;
+                break;
+            case State.Success:
+                return State.Success;
+                break;
         }
 
-        return State.Failure;
+        return current == children.Count ? State.Success : State.Failure;
     }
+
+    
 }
