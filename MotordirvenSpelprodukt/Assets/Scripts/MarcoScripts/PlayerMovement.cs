@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        _playerAnimation.Animate(_moveDirection, _rotateDirection);
+        _playerAnimation.Locomotion(_moveDirection, _rotateDirection);
 
     }
 

@@ -132,11 +132,10 @@ public class PlayerAnimation : MonoBehaviour
         _startComboWindowTimer = false;
     }
 
-    public void Animate(Vector3 moveDirection, Vector3 rotateDirection)
+    public void Locomotion(Vector3 moveDirection, Vector3 rotateDirection)
     {
         _animator.SetFloat("VelocityZ", Vector3.Dot(moveDirection, transform.forward), 0.1f, Time.deltaTime);
         _animator.SetFloat("VelocityX", Vector3.Dot(moveDirection, transform.right), 0.1f, Time.deltaTime);
-        _animator.SetFloat("Lean", Vector3.Dot(rotateDirection, transform.right), 0.1f, Time.deltaTime);
 
         bool isMoving = Mathf.Abs(moveDirection.x) >= float.Epsilon && Mathf.Abs(moveDirection.z) >= float.Epsilon;
 
