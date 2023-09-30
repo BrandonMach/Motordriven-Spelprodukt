@@ -76,16 +76,10 @@ public class EntertainmentManager : MonoBehaviour
 
         CheckIfOutOfCombat();
 
-
-        //if (Input.GetKeyDown(KeyCode.L))
+        //if (Input.GetKeyDown(KeyCode.I))
         //{
-        //    _entertainmentPoints += 25;
+        //    _isOutOfCombat = !_isOutOfCombat;
         //}
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            _isOutOfCombat = !_isOutOfCombat;
-        }
 
         if (_isOutOfCombat)
         {

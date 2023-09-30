@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class WaitNode : ActionNode
 {
-    public float duration = 1;
+    public float duration;
     float startTime;
 
     protected override void OnStart()
     {
+        _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         startTime = Time.time;
+        duration = _meleeMinionScript.StunDuration;
     }
 
     protected override void OnStop()
@@ -19,10 +21,13 @@ public class WaitNode : ActionNode
 
     protected override State OnUpdate()
     {
+        
         if(Time.time - startTime > duration)
         {
+            _meleeMinionScript.Stunned = false;
             return State.Success;
         }
-        return State.Running;
+        else return State.Running;
+        
     }
 }

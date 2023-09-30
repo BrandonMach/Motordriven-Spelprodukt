@@ -14,26 +14,30 @@ public class SequencerNode : CompositeNode
 
     protected override void OnStop()
     {
-        
+       
     }
 
     protected override State OnUpdate()
     {
-        var child = children[current];
-        switch (child.Update())
+
+
+        for (int i = current; i < children.Count; ++i)
         {
-            case State.Running:
-                return State.Running;
-                break;
-            case State.Failure:
-                return State.Failure;
-                break;
-            case State.Success:
-                current++;
-                break;
+            current = i;
+            var child = children[current];
+
+            switch (child.Update())
+            {
+                case State.Running:
+                    return State.Running;
+                case State.Failure:
+                    return State.Failure;
+                case State.Success:
+                    continue;
+            }
         }
 
-        return current == children.Count ? State.Success : State.Running;
+        return State.Success;
     }
 
 }
