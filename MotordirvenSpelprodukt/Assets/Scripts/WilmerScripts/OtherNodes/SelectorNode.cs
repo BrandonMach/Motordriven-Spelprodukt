@@ -16,19 +16,29 @@ public class Selector : CompositeNode
     }
     protected override State OnUpdate()
     {
-        for (int i = current; i < children.Count; ++i)
-        {
-            current = i;
-            var child = children[current];
+        //for (int i = current; i < children.Count; ++i)
+        //{
+        //    current = i;
+        //    var child = children[current];
 
-            switch (child.Update())
+        //    switch (child.Update())
+        //    {
+        //        case State.Running:
+        //            return State.Running;
+        //        case State.Success:
+        //            return State.Success;
+        //        case State.Failure:
+        //            continue;
+        //    }
+        //}
+
+        //return State.Failure;
+
+        foreach (var item in children)
+        {
+            if(item.Update() != State.Failure)
             {
-                case State.Running:
-                    return State.Running;
-                case State.Success:
-                    return State.Success;
-                case State.Failure:
-                    continue;
+                return item.Update();
             }
         }
 

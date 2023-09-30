@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
   m_Name: Selector
   m_EditorClassIdentifier: 
-  state: 0
+  state: 1
   started: 0
   guid: ffde3ee3bd26b1441b13599dd1eeb82c
   position: {x: -413, y: -427.92}
@@ -91,12 +91,12 @@ MonoBehaviour:
   m_Name: RepeatNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 42e5df8a3e6f81748b4c33276268436d
   position: {x: -413.00003, y: -602.3223}
   agent: {fileID: 0}
   description: 
-  child: {fileID: -7044714271345039249}
+  child: {fileID: 8973012896470366955}
   RestartOnFailure: 1
   RestartOnSuccess: 1
   maxRepeats: 0
@@ -223,11 +223,12 @@ MonoBehaviour:
   - {fileID: 88780500182078266}
   - {fileID: -4939700824684562748}
   - {fileID: -4994970522489366196}
-  - {fileID: -1142895084472170525}
+  - {fileID: 0}
   - {fileID: 1360478854901253811}
   - {fileID: -7044714271345039249}
   - {fileID: 8469591081742309704}
   - {fileID: 231991476673510906}
+  - {fileID: 8973012896470366955}
 --- !u!114 &88780500182078266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +306,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: -1142895084472170525}
+  - {fileID: 0}
   - {fileID: 1360478854901253811}
 --- !u!114 &5669087746917351681
 MonoBehaviour:
@@ -338,7 +339,7 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 2130e61d11d1ab34fb7d80f05d611e39
   position: {x: -413.0001, y: -788.10016}
   agent: {fileID: 0}
@@ -365,3 +366,22 @@ MonoBehaviour:
   children:
   - {fileID: 231991476673510906}
   - {fileID: -1071388216250630101}
+--- !u!114 &8973012896470366955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 9af89dafb58463e4382c7fc0727efa0e
+  position: {x: -388.59424, y: -353.71326}
+  agent: {fileID: 0}
+  description: 
+  children: []
