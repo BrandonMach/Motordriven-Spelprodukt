@@ -109,7 +109,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0a54383ca0aaf5341a12da53d1aec03f
-  position: {x: -202, y: 35}
+  position: {x: -150, y: 69.999985}
   agent: {fileID: 0}
   description: 'Check if player is within Boss Attack range
 
@@ -138,9 +138,12 @@ MonoBehaviour:
   - {fileID: 5208420848249550649}
   - {fileID: -385010641028635050}
   - {fileID: 3244629654220676489}
-  - {fileID: -3122068507966689287}
+  - {fileID: 0}
   - {fileID: -6604755763967968114}
   - {fileID: -4350983564122673296}
+  - {fileID: 6253816905044877560}
+  - {fileID: 8111295899418565614}
+  - {fileID: 3864704414842925088}
 --- !u!114 &3244629654220676489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,9 +159,27 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 682f576303e7aae488a6b7ac4c904307
-  position: {x: 34, y: 49}
+  position: {x: 51, y: 85}
   agent: {fileID: 0}
   description: Champion chooses what attack to use
+--- !u!114 &3864704414842925088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91ed1dadf5f571408e582d531aad1f2, type: 3}
+  m_Name: CMPAtkClubSwingDown
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b498fd2da8b38d344984eda9bbc7a5cf
+  position: {x: 149.49997, y: 291}
+  agent: {fileID: 0}
+  description: 
 --- !u!114 &4138930101004133558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +219,10 @@ MonoBehaviour:
   children:
   - {fileID: -385010641028635050}
   - {fileID: 3244629654220676489}
-  - {fileID: -3122068507966689287}
+  - {fileID: 0}
+  - {fileID: -385010641028635050}
+  - {fileID: 3244629654220676489}
+  - {fileID: 6253816905044877560}
 --- !u!114 &6051116233716263924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,12 +236,15 @@ MonoBehaviour:
   m_Name: RepeatNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 5f1c478b9dcc8b84ca2acc7a63f8ee13
   position: {x: -305, y: -377.0835}
   agent: {fileID: 0}
   description: 
   child: {fileID: 6059471995194333448}
+  RestartOnFailure: 0
+  RestartOnSuccess: 0
+  maxRepeats: 0
 --- !u!114 &6059471995194333448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,14 +258,55 @@ MonoBehaviour:
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 52ffb8b7c11f4fb4494d0761736b0c05
   position: {x: -305.00003, y: -267.23068}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: 9099744171966322423}
+  - {fileID: 9099744171966322423}
   - {fileID: 5208420848249550649}
+  - {fileID: 5208420848249550649}
+--- !u!114 &6253816905044877560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: a96bf0d18f0873d4cbe04901a1add574
+  position: {x: 309, y: 76}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 3864704414842925088}
+  - {fileID: 8111295899418565614}
+--- !u!114 &8111295899418565614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b29dac44cc8d2b43b9d71195beb0787, type: 3}
+  m_Name: CMPAtkJumpSlam
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d329c7e70e4368549b0909f0ab5b92a7
+  position: {x: 482.24002, y: 291}
+  agent: {fileID: 0}
+  description: 
 --- !u!114 &9099744171966322423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,11 +320,13 @@ MonoBehaviour:
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: ab657977f6961284bb2cdd215b1e9c20
   position: {x: -533.00006, y: -130.08351}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: -7149390369101673850}
+  - {fileID: -7149390369101673850}
+  - {fileID: 4138930101004133558}
   - {fileID: 4138930101004133558}

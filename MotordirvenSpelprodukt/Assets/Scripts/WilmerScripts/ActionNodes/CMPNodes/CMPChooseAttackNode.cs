@@ -10,7 +10,7 @@ public class CMPChooseAttackNode : ActionNode
         _championScript = _enemyObject.GetComponent<CMPScript>();
         chooseAttack = Random.Range(1, 3);
 
-        _championScript.AttackIndex = Random.Range(1, 3);
+        _championScript.AttackIndex = 1; // Random.Range(1, 3);
 
 
         //switch (chooseAttack)

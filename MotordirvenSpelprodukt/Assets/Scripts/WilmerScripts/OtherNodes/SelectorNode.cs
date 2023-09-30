@@ -17,22 +17,34 @@ public class Selector : CompositeNode
 
     protected override State OnUpdate()
     {
-        var child = children[current];
-        switch (child.Update())
-        {
-            case State.Running:
-                return State.Running;
-                break;
-            case State.Failure:
-                return State.Failure;
-                current++;
-                break;
-            case State.Success:
-                return State.Success;
-                break;
-        }
+        //var child = children[current];
+        //switch (child.Update())
+        //{
+        //    case State.Running:
+        //        return State.Running;
+        //        break;
+        //    case State.Failure:
+        //        return State.Failure;
+        //        current++;
+        //        break;
+        //    case State.Success:
+        //        return State.Success;
+        //        break;
+        //}
 
-        return current == children.Count ? State.Success : State.Failure;
+        //return current == children.Count ? State.Success : State.Failure;
+
+
+
+        foreach (var child in children)
+        {
+            if(child.Update() != State.Failure)
+            {
+                return State.Failure;
+            }
+        }
+        return State.Failure;
+
     }
 
     
