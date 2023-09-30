@@ -40,7 +40,7 @@ public class Selector : CompositeNode
         {
             if(child.Update() != State.Failure)
             {
-                return State.Failure;
+                return child.Update();
             }
         }
         return State.Failure;

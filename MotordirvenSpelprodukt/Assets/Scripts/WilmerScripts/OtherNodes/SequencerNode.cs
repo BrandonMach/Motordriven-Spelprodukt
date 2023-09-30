@@ -34,6 +34,16 @@ public class SequencerNode : CompositeNode
         }
 
         return current == children.Count ? State.Success : State.Running;
+
+
+        //foreach (var child2 in children)
+        //{
+        //    if(child2.Update() == State.Failure)
+        //    {
+        //        return State.Failure;
+        //    }
+        //}
+        //return State.Success;
     }
 
 }
