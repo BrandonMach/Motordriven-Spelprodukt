@@ -1823,7 +1823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c781b6e9c0ac562459670ad76b1711ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: bd14614bb76c2b94687b46d66b66c340, type: 2}
+  tree: {fileID: 11400000, guid: 10715cab7b9197143a854cf81910001c, type: 2}
   enemyObject: {fileID: 9196105541308673974}
 --- !u!114 &7029345431797924393
 MonoBehaviour:
@@ -1838,8 +1838,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageBuff: 0
-  ChaseDistance: 2
-  anim: {fileID: 0}
+  ChaseDistance: 3
+  Anim: {fileID: 7221807225490009802}
+  AttackIndex: 0
+  CanAttack: 0
+  StopChase: 0
 --- !u!95 &7221807225490009802
 Animator:
   serializedVersion: 5

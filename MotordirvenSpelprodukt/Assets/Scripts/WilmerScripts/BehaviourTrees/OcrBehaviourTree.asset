@@ -18,6 +18,7 @@ MonoBehaviour:
   position: {x: 502, y: 889}
   agent: {fileID: 0}
   description: 
+  duration: 0
 --- !u!114 &-7596930664986710570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,7 +34,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 9e7e884aadf27d6489836171975e351a
-  position: {x: -515.173, y: 638.00006}
+  position: {x: -353, y: 638}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-6501887954848921244
@@ -92,7 +93,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7567123c024b6644baa2639ea80821a9
-  position: {x: 411, y: 385.85504}
+  position: {x: 344, y: 437.60004}
   agent: {fileID: 0}
   description: 
   children:
@@ -132,7 +133,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0609c8b908cb10645926ee47ee918e9e
-  position: {x: -162.00003, y: 649}
+  position: {x: -143, y: 638}
   agent: {fileID: 0}
   description: 
 --- !u!114 &11400000
@@ -154,7 +155,6 @@ MonoBehaviour:
   - {fileID: 697766454184188738}
   - {fileID: 1606889413815288344}
   - {fileID: -4928812810248711920}
-  - {fileID: 6009625802187834935}
   - {fileID: -7596930664986710570}
   - {fileID: -1772561330637509913}
   - {fileID: -2586723080058972199}
@@ -163,6 +163,8 @@ MonoBehaviour:
   - {fileID: 1547318638814214752}
   - {fileID: -8286850051065195188}
   - {fileID: 434144137662881605}
+  - {fileID: 2043741900465948765}
+  - {fileID: 830290302452348644}
 --- !u!114 &434144137662881605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +183,7 @@ MonoBehaviour:
   position: {x: 1061.6952, y: 889.00006}
   agent: {fileID: 0}
   description: 
+  duration: 0
 --- !u!114 &697766454184188738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +206,24 @@ MonoBehaviour:
   RestartOnFailure: 1
   RestartOnSuccess: 1
   maxRepeats: 0
+--- !u!114 &830290302452348644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0294173e64038cc489d2c81356347a5f, type: 3}
+  m_Name: CMPStopChase
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: cf1c43d8aec6f4144b0c4757b2d7796c
+  position: {x: -550, y: 638}
+  agent: {fileID: 0}
+  description: Funkar inte nu. Kommenterat bort all kod
 --- !u!114 &1547318638814214752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +242,7 @@ MonoBehaviour:
   position: {x: 821, y: 889}
   agent: {fileID: 0}
   description: 
+  duration: 0
 --- !u!114 &1606889413815288344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,9 +262,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: 6009625802187834935}
+  - {fileID: 2043741900465948765}
   - {fileID: -4928812810248711920}
---- !u!114 &6009625802187834935
+--- !u!114 &2043741900465948765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,8 +278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 4a1c687e351e3984ba7a0d12c340e5dc
-  position: {x: -332.96017, y: 386}
+  guid: e08e59a50b21bb245ac2d5b2de3b3164
+  position: {x: -293.00003, y: 390.99997}
   agent: {fileID: 0}
   description: 
   children:
@@ -278,6 +300,6 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c186e432e5ff92d4a9eaaf40198e43ce
-  position: {x: 382.4861, y: 673}
+  position: {x: 381, y: 686}
   agent: {fileID: 0}
   description: 

@@ -7,6 +7,7 @@ public class CMPChaseNode : ActionNode
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
+        //_championScript.Anim.SetTrigger("Walking");
     }
 
     protected override void OnStop()
@@ -27,6 +28,8 @@ public class CMPChaseNode : ActionNode
 
         // Move the AI forward, since the AI is facing towards the player
         _championScript.transform.position += _championScript.transform.forward * _championScript.MovementSpeed * Time.deltaTime;
+
+       
 
 
         return State.Success;

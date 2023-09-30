@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CMPAtkClubSwingDown : ActionNode
 {
+
     protected override void OnStart()
     {
+        
         _championScript = _enemyObject.GetComponent<CMPScript>();
 
-        if (_championScript.CanAttack && _championScript.AttackIndex == 1)
+        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 1)
         {
-            _championScript.Anim.SetInteger("Attack Index", 1);
+            
+            
+            _championScript.AnimationPlaying = true;
+            //_championScript.Anim.SetInteger("Attack Index", 1);
+            _championScript.Anim.Play("Heavy Swing");
             
         }
         
@@ -26,8 +32,18 @@ public class CMPAtkClubSwingDown : ActionNode
     {
         if (_championScript.AttackIndex == 1)
         {
-            _championScript.CanAttack = false;
-            return State.Success;
+
+            float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (NTime > 1.0f)
+            {
+               
+               // _championScript.AnimationPlaying = false;
+                return State.Success;
+            }
+            else
+            {
+                return State.Running;
+            }
         }
         else
         {

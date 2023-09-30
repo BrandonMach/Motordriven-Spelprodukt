@@ -30,12 +30,12 @@ public class CrowdBehaviour : MonoBehaviour
         if (_etManager.GetETP() > _etManager.GetETPThreshold() && !_playCheering) //Bool för att den bara sla spelas en gång
         {
             _playCheering = true;
-            PlayCheer();
+            //PlayCheer();
         }
         if(_etManager.GetETP() < _etManager.GetETPThreshold() && !_playBooing)
         {
             _playBooing = true;
-            PlayBooo();
+            //PlayBooo();
         }
 
 

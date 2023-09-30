@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CMPCheckAtkRange : ActionNode
 {
+    Vector3 lockposition;
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
+        lockposition = _championScript.transform.position;
     }
 
     protected override void OnStop()
@@ -16,7 +18,7 @@ public class CMPCheckAtkRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if(_playerScript != null && _championScript.CanAttack)
+        if(_playerScript != null /*&& _championScript.CanAttack*/)
         {
             float distanceToPlayer = Vector3.Distance(_championScript.transform.position, _playerScript.transform.position);
 
