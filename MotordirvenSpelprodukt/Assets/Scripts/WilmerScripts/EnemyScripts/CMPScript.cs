@@ -22,7 +22,7 @@ public class CMPScript : EnemyScript
 
     void Start()
     {
-        _movementSpeed = 10;
+        _movementSpeed = 2;
         _attackRange = 4;
         _attackCooldown = 2;
         ChaseDistance = 4;

@@ -10,14 +10,15 @@ public class CMPAtkJumpSlam : ActionNode
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
-        if (!_championScript.AnimationPlaying && _championScript.AttackIndex == 2)
-        {
-            _championScript.Anim.SetInteger("Attack Index", 2);
-            
-        }
+        float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-        startTime = 0;
-        duration = _championScript.Anim.runtimeAnimatorController.animationClips.Length;
+        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 2 && NTime > 1.0f)
+        {
+            _championScript.AnimationPlaying = true;
+            //_championScript.Anim.SetInteger("Attack Index", 1);
+            _championScript.Anim.Play("Attack2");
+
+        }
 
     }
 
@@ -28,20 +29,14 @@ public class CMPAtkJumpSlam : ActionNode
 
     protected override State OnUpdate()
     {
-        //if (_championScript.AttackIndex == 2)
-        //{
-        //    //_championScript.CanAttack = false;
-        //    return State.Success;
-        //}
-        //else
-        //{
-        //    return State.Failure;
-        //}
-
-        if(_championScript.AttackIndex == 2)
+        if (_championScript.AttackIndex == 2)
         {
-            if (startTime >= duration)
+
+            float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (NTime > 1.0f)
             {
+
+                // _championScript.AnimationPlaying = false;
                 return State.Success;
             }
             else

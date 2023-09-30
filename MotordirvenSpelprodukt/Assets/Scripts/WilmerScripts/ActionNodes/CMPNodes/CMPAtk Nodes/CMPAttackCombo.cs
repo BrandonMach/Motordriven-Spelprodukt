@@ -10,14 +10,15 @@ public class CMPAttackCombo : ActionNode
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
+        float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-        if (/*_championScript.CanAttack && */_championScript.AttackIndex == 3)
+        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 3 && NTime > 1.0f)
         {
-            _championScript.Anim.SetInteger("Attack Index", 3);
+            _championScript.AnimationPlaying = true;
+            //_championScript.Anim.SetInteger("Attack Index", 1);
+            _championScript.Anim.Play("Attack3");
 
         }
-        startTime = 0;
-        duration = _championScript.Anim.runtimeAnimatorController.animationClips.Length;
     }
 
     protected override void OnStop()
@@ -27,21 +28,14 @@ public class CMPAttackCombo : ActionNode
 
     protected override State OnUpdate()
     {
-        //if (_championScript.AttackIndex == 3)
-        //{
-        //    return State.Success;
-        //}
-        //else
-        //{
-        //    return State.Failure;
-        //}
-
-        startTime += Time.deltaTime;
-
-        if(_championScript.AttackIndex == 3)
+        if (_championScript.AttackIndex == 3)
         {
-            if (startTime >= duration)
+
+            float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (NTime > 1.0f)
             {
+
+                // _championScript.AnimationPlaying = false;
                 return State.Success;
             }
             else
