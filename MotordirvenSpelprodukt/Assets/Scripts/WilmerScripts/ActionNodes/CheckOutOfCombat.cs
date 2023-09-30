@@ -24,6 +24,7 @@ public class CheckOutOfCombat : ActionNode
         //{
         //    return State.Success;
         //}
-        return State.Success;
+        //return State.Success;
+        return State.Failure;
     }
 }

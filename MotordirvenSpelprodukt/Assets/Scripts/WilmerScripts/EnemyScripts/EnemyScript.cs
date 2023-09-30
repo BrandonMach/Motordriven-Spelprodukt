@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     protected float _attackRange;
     protected float _attackCooldown;
     protected float _lastAttackTime;
+    protected float _stunDuration;
     protected bool _stunned;
 
     public float Currenthealth { get { return _currentHealth; } }
@@ -18,6 +19,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     public float MovementSpeed { get { return _movementSpeed; } }
     public float AttackSpeed { get { return _attackSpeed; } }
     public float AttackRange { get { return _attackRange; } }
+    public float StunDuration { get { return _stunDuration; } }
     public float AttackCooldown { get { return _attackCooldown; } }
     public float LastAttackTime { get { return _lastAttackTime; } set { _lastAttackTime = value; } }
     public bool Stunned { get { return _stunned; } set { _stunned = value; } }
@@ -54,9 +56,10 @@ public class EnemyScript : MonoBehaviour, IDamagable
     {
 
     }
-    public void GetStunned(/*int damage*/)
+    public void GetStunned(float stunSuration)
     {
         Stunned = true;
+        _stunDuration = stunSuration;
     }
 
 }
