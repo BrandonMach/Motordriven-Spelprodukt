@@ -8,7 +8,7 @@ public class PlayerKnockback : MonoBehaviour
 
     public float KnockbackForce;
     public float KnockbackTime;
-    private float _knockbackCounter;
+    private float _knockbackCounter = 0;
     Player _player;
     PlayerMovement _playerMovment;
 
@@ -21,12 +21,9 @@ public class PlayerKnockback : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_knockbackCounter <= 0) //No knockback
+        if(_knockbackCounter > 0) //No knockback
         {
             _player.Knockbacked(_player, EventArgs.Empty);
-        }
-        else
-        {
             _knockbackCounter -= Time.deltaTime;
         }
     }
