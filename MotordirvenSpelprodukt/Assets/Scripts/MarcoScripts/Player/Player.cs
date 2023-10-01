@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IHasProgress
 {
     // Placeholder för nuvarande vapnets värden
     //-----------------------------------------
@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public event EventHandler OnStartEvade;
     public event EventHandler OnDisableMovement;
     public event EventHandler OnEnableMovement;
+
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
     public class OnAttackPressedEventArgs : EventArgs
@@ -37,6 +39,10 @@ public class Player : MonoBehaviour
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
 
+    [Header("Health settings")]
+    [SerializeField] float _maxHealth;
+
+    private float _currentHealth;
     private CurrentAttackSO _currentAttackSO;
 
     private PlayerDash _playerDash;
@@ -59,9 +65,13 @@ public class Player : MonoBehaviour
         _gameInput.OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
 
         _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
-        
+
+        _currentHealth = _maxHealth;
         _input = "";
 
+        InitializeHealth();
+
+        Debug.Log("Health: " +  _currentHealth);
     }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
@@ -85,9 +95,6 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
-        Debug.Log("Light");
-      
-
         if (_inputTimer >= _timeBetweenInputs)
         {
             _input += "L";
@@ -121,14 +128,18 @@ public class Player : MonoBehaviour
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
     {
         OnChangeControllerTypeButtonPressed?.Invoke(this, e);
+        TakeDamage();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
+    private void InitializeHealth()
+    {
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = _currentHealth / _maxHealth });
+    }
     private CurrentAttackSO GetCurrentAttackSO(string name)
     {
         foreach (CurrentAttackSO currentAttackSO in _AttackSOArray)
@@ -139,5 +150,15 @@ public class Player : MonoBehaviour
             }
         }
         return null;
+    }
+
+
+    //Will be replaced with the damagable interface method
+    private void TakeDamage()
+    {
+        _currentHealth -= 20;
+        Debug.Log("Health: " + _currentHealth);
+
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized =  _currentHealth / _maxHealth });
     }
 }
