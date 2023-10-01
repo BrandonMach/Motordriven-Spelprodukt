@@ -9,6 +9,7 @@ public class PlayerDash : MonoBehaviour
 
     private Player _player;
     private Rigidbody _rigidBody;
+    private PlayerMovement _playerMovement;
 
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashTime;
@@ -19,6 +20,7 @@ public class PlayerDash : MonoBehaviour
 
     private void Awake()
     {
+        _playerMovement = GetComponent<PlayerMovement>();
         _player = GetComponent<Player>();
         _rigidBody = GetComponent<Rigidbody>();
 

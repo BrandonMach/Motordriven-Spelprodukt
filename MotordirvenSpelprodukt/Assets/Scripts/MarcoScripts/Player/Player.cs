@@ -43,18 +43,19 @@ public class Player : MonoBehaviour, IHasProgress
     [SerializeField] float _maxHealth;
 
     private float _currentHealth;
-    private CurrentAttackSO _currentAttackSO;
 
+    private CurrentAttackSO _currentAttackSO;
     private PlayerDash _playerDash;
+    private PlayerMovement _playerMovement;
 
     private float _inputTimer = 0;
 
     private string _input;
 
 
-
     private void Awake()
     {
+        _playerMovement = new PlayerMovement();
         _playerDash = GetComponent<PlayerDash>();
     }
     void Start()
@@ -76,10 +77,13 @@ public class Player : MonoBehaviour, IHasProgress
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
- 
-        OnDisableMovement?.Invoke(this, EventArgs.Empty);
-        
-        OnStartEvade?.Invoke(this, EventArgs.Empty);
+
+        if (_playerMovement.IsMoving())
+        {
+            OnDisableMovement?.Invoke(this, EventArgs.Empty);
+
+            OnStartEvade?.Invoke(this, EventArgs.Empty);
+        }      
     }
 
     public void Knockbacked(object sender, EventArgs e)

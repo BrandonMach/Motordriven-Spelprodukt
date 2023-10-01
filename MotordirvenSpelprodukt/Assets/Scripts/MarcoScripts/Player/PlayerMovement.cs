@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         if (_canMove)
@@ -117,6 +118,12 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public bool IsMoving()
+    {
+        Debug.Log(_isMoving);
+        return _isMoving;
     }
 
     private void GetMoveDir()
@@ -197,4 +204,6 @@ public class PlayerMovement : MonoBehaviour
         _camForward = _camForward.normalized;
         _camRight = _camRight.normalized;
     }
+
+
 }
