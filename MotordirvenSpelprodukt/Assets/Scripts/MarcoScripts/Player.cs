@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     private string _input;
 
     public event EventHandler OnChangeControllerTypeButtonPressed;
+    public event EventHandler OnStartRoll;
     public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
     //public EventHandler <OnLightAttackPressedEventArgs> OnLightAttackPressed;
 
@@ -48,9 +49,15 @@ public class Player : MonoBehaviour
         _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
         _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
         _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
+        _gameInput.OnRollButtonPressed += GameInput_OnRollButtonPressed;
 
         _input = "";
 
+    }
+
+    private void GameInput_OnRollButtonPressed(object sender, EventArgs e)
+    {
+        OnStartRoll?.Invoke(this, EventArgs.Empty);
     }
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
