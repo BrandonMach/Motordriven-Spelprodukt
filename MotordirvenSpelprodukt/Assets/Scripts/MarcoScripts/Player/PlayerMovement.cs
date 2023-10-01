@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController _characterController;
 
-    Vector3 _moveDirection;
+    public Vector3 _moveDirection;
 
     private Vector3 _camForward;
     private Vector3 _camRight;

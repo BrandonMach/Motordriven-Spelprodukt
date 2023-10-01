@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,13 @@ public class PlayerKnockback : MonoBehaviour
     public float KnockbackForce;
     public float KnockbackTime;
     private float _knockbackCounter;
-    PlayerMovement pMovment;
+    Player _player;
+    PlayerMovement _playerMovment;
 
     void Start()
     {
-        pMovment = GetComponent<PlayerMovement>();
+        _player = GetComponent<Player>();
+        _playerMovment = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -20,8 +23,7 @@ public class PlayerKnockback : MonoBehaviour
     {
         if(_knockbackCounter <= 0) //No knockback
         {
-            //Can move input bla bla...Måste prat med Marco om detta
-            //Borde vara PlayerMovement script
+            _player.Knockbacked(_player, EventArgs.Empty);
         }
         else
         {
@@ -35,7 +37,7 @@ public class PlayerKnockback : MonoBehaviour
         //pMovment. Videon
 
         direction = new Vector3(1, 1, 1);
-
+        _playerMovment._moveDirection = direction * KnockbackForce;
         
     }
 }
