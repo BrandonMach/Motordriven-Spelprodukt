@@ -17,14 +17,14 @@ public class ProgressBarUI : MonoBehaviour
 
     private void Start()
     {
-        _hasProgress = _hasProgressGameObject.GetComponent<IHasProgress>();
+        _hasProgress = _hasProgressGameObject.GetComponent<IHasProgress>(); //Lägger in objectet som ska påverka Ehalthbar UI element
 
         if (_hasProgress == null)
         {
             Debug.LogError("Game Object: " + _hasProgressGameObject + " does not implement IHasProgress");
         }
 
-        _hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
+        _hasProgress.OnProgressChanged += HasProgress_OnProgressChanged; //när OnProgressChanges Invokes 
 
         _targetFillAmount = _slider.value;
     }

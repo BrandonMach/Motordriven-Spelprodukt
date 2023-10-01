@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour, IHasProgress
+public class Player : MonoBehaviour
 {
     // Placeholder för nuvarande vapnets värden
     //-----------------------------------------
@@ -18,7 +18,6 @@ public class Player : MonoBehaviour, IHasProgress
     public event EventHandler OnDisableMovement;
     public event EventHandler OnEnableMovement;
 
-    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
     public class OnAttackPressedEventArgs : EventArgs
@@ -70,7 +69,6 @@ public class Player : MonoBehaviour, IHasProgress
         _currentHealth = _maxHealth;
         _input = "";
 
-        InitializeHealth();
 
         Debug.Log("Health: " +  _currentHealth);
     }
@@ -132,7 +130,7 @@ public class Player : MonoBehaviour, IHasProgress
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
     {
         OnChangeControllerTypeButtonPressed?.Invoke(this, e);
-        TakeDamage();
+        
     }
 
     void Update()
@@ -140,10 +138,7 @@ public class Player : MonoBehaviour, IHasProgress
 
     }
 
-    private void InitializeHealth()
-    {
-        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = _currentHealth / _maxHealth });
-    }
+    
     private CurrentAttackSO GetCurrentAttackSO(string name)
     {
         foreach (CurrentAttackSO currentAttackSO in _AttackSOArray)
@@ -157,12 +152,5 @@ public class Player : MonoBehaviour, IHasProgress
     }
 
 
-    //Will be replaced with the damagable interface method
-    private void TakeDamage()
-    {
-        _currentHealth -= 20;
-        Debug.Log("Health: " + _currentHealth);
-
-        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized =  _currentHealth / _maxHealth });
-    }
+    
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ChampionWeaponManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     void Start()
     {
-        
+         
     }
 
     // Update is called once per frame
@@ -21,8 +21,12 @@ public class ChampionWeaponManager : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             Vector3 hitDirection = other.transform.position - transform.position;
+            float kbForce = 500;
+
             Debug.Log("Player got hit buy ChampionAttack");
-            other.GetComponent<HealthManager>().TakeDamage(10);
+
+            other.GetComponent<HealthManager>().TakeDamage(10, hitDirection,kbForce);
+           
 
         }
     }
