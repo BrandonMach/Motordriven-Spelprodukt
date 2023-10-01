@@ -20,6 +20,13 @@ public class CMPScript : EnemyScript
 
     RuntimeAnimatorController ac;
 
+
+    [Header ("Attacks")]
+    [SerializeField] private Transform _weaponHolderTransform;
+
+    private Collider _weaponCollider;
+
+    private GameObject _objWeapon;
     void Start()
     {
         _movementSpeed = 2;
@@ -31,6 +38,13 @@ public class CMPScript : EnemyScript
         CanAttack = true;
 
         ac = Anim.runtimeAnimatorController;
+
+
+
+        _objWeapon = _weaponHolderTransform.GetChild(0).gameObject;
+        _weaponCollider = _objWeapon.GetComponent<Collider>();
+
+        _weaponCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -39,18 +53,15 @@ public class CMPScript : EnemyScript
         
     }
 
-    public float GetAnimationLenght(string AnimationName)
+
+    public void ActivateAttackHitBox()
     {
-        for (int i = 0; i < ac.animationClips.Length; i++)
-        {
-            Debug.LogError(ac.animationClips[i].name);
+        _weaponCollider.enabled = true;
 
-            if(ac.animationClips[i].name == AnimationName)
-            {
-                return ac.animationClips[i].length;
-            }
-        }
+    }
 
-        return float.NaN;
+    public void DeactivateAttackHitBox()
+    {
+        _weaponCollider.enabled = false;
     }
 }
