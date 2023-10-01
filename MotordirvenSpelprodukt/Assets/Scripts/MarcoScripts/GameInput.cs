@@ -12,7 +12,7 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnLightAttackButtonPressed;
     public event EventHandler OnHeavyAttackButtonPressed;
-    public event EventHandler OnRollButtonPressed;
+    public event EventHandler OnEvadeButtonPressed;
 
     private void Awake()
     {
@@ -22,13 +22,13 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.Interact.performed += Interact_performed;
         _playerInputActions.Player.LightAttack.performed += LightAttack_performed;
         _playerInputActions.Player.HeavyAttack.performed += HeavyAttack_performed;
-        _playerInputActions.Player.Roll.performed += Roll_performed;
+        _playerInputActions.Player.Evade.performed += Evade_performed;
 
     }
 
-    private void Roll_performed(InputAction.CallbackContext obj)
+    private void Evade_performed(InputAction.CallbackContext obj)
     {
-        OnRollButtonPressed?.Invoke(this, EventArgs.Empty);
+        OnEvadeButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void HeavyAttack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

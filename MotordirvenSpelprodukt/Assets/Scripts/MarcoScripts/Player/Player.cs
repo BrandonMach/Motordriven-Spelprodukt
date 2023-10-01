@@ -13,23 +13,12 @@ public class Player : MonoBehaviour
     //-----------------------------------------
 
     public GameInput GameInput { get { return _gameInput; } }
-
-    [SerializeField] private GameInput _gameInput;
-    [SerializeField] private float _timeBetweenInputs = 0f;
-    [SerializeField] private CurrentAttackSO[] _AttackSOArray;
-    [SerializeField] private Weapon _currentWeapon;
-
-    private CurrentAttackSO _currentAttackSO;
-
-    private float _inputTimer = 0;
-
-    private string _input;
-
     public event EventHandler OnChangeControllerTypeButtonPressed;
-    public event EventHandler OnStartRoll;
-    public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
-    //public EventHandler <OnLightAttackPressedEventArgs> OnLightAttackPressed;
+    public event EventHandler OnStartEvade;
+    public event EventHandler OnDisableMovement;
+    public event EventHandler OnEnableMovement;
 
+    public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
     public class OnAttackPressedEventArgs : EventArgs
     {
         public enum AttackType
@@ -43,21 +32,49 @@ public class Player : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
+    [SerializeField] private GameInput _gameInput;
+    [SerializeField] private float _timeBetweenInputs = 0f;
+    [SerializeField] private CurrentAttackSO[] _AttackSOArray;
+    [SerializeField] private Weapon _currentWeapon;
+
+    private CurrentAttackSO _currentAttackSO;
+
+    private PlayerDash _playerDash;
+
+    private float _inputTimer = 0;
+
+    private string _input;
+
+
+
+    private void Awake()
+    {
+        _playerDash = GetComponent<PlayerDash>();
+    }
     void Start()
     {
         _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
         _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
         _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
-        _gameInput.OnRollButtonPressed += GameInput_OnRollButtonPressed;
+        _gameInput.OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
 
+        _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
+        
         _input = "";
 
     }
 
-    private void GameInput_OnRollButtonPressed(object sender, EventArgs e)
+    private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
-        OnStartRoll?.Invoke(this, EventArgs.Empty);
+ 
+        OnDisableMovement?.Invoke(this, EventArgs.Empty);
+        
+        OnStartEvade?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
+    {
+        OnEnableMovement?.Invoke(this, EventArgs.Empty);
     }
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
