@@ -9,16 +9,19 @@ public class PlayerDash : MonoBehaviour
 
     private Player _player;
     private Rigidbody _rigidBody;
+    private PlayerMovement _playerMovement;
 
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashTime;
     [SerializeField] float _startDashTime;
+    [SerializeField] float _rotationSpeed;
 
     private bool _isDashing;
 
 
     private void Awake()
     {
+        _playerMovement = GetComponent<PlayerMovement>();
         _player = GetComponent<Player>();
         _rigidBody = GetComponent<Rigidbody>();
 
@@ -35,6 +38,10 @@ public class PlayerDash : MonoBehaviour
     void Update()
     {
      
+    }
+
+    private void FixedUpdate()
+    {
         HandleRoll();
     }
 
@@ -42,6 +49,8 @@ public class PlayerDash : MonoBehaviour
     {
         if (_isDashing)
         {
+            _rigidBody.rotation = Quaternion.Slerp(_rigidBody.rotation, Quaternion.LookRotation(_rigidBody.velocity.normalized),_rotationSpeed * Time.fixedDeltaTime);
+
             if (_dashTime <= 0)
             {
                 _dashTime = _startDashTime;

@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         if (_canMove)
@@ -185,7 +186,10 @@ public class PlayerMovement : MonoBehaviour
     {
          transform.rotation = Quaternion.Slerp(transform.rotation, _newRotation, _rotationSpeed * Time.fixedDeltaTime);
     }
-
+    public bool IsMoving()
+    {
+        return _isMoving;
+    }
 
     private void GetCameraValues()
     {
