@@ -21,6 +21,14 @@ public class CMPCheckAtkRange : ActionNode
         if(_playerScript != null /*&& _championScript.CanAttack*/)
         {
             float distanceToPlayer = Vector3.Distance(_championScript.transform.position, _playerScript.transform.position);
+            Vector3 direction = _playerScript.transform.position - _championScript.transform.position;
+
+            // Normalize the direction to get a unit vector
+            direction.Normalize();
+
+            //Rotate the Champion towards the players position
+            _championScript.transform.rotation = Quaternion.Slerp(_championScript.transform.rotation, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
+
 
             if (distanceToPlayer <= _championScript.AttackRange)
             {

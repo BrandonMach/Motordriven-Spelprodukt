@@ -86,6 +86,11 @@ public class Player : MonoBehaviour
         OnDisableMovement?.Invoke(this, EventArgs.Empty);
     }
 
+    public void KnockbackedFinish(object sender, EventArgs e)
+    {
+        OnEnableMovement?.Invoke(this, EventArgs.Empty);
+    }
+
     private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
     {
         OnEnableMovement?.Invoke(this, EventArgs.Empty);
