@@ -20,8 +20,10 @@ public class ChampionWeaponManager : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            Vector3 hitDirection = other.transform.position - transform.position;
             Debug.Log("Player got hit buy ChampionAttack");
-            other.GetComponent<Transform>().position += -transform.forward * Time.deltaTime * 100;
+            other.GetComponent<HealthManager>().TakeDamage(10);
+
         }
     }
 }

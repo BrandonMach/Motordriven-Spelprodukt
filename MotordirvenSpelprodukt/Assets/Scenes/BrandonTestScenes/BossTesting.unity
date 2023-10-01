@@ -1360,6 +1360,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7184652832142874426, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
   m_PrefabInstance: {fileID: 1675365509}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &594442240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594442231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealthPoints: 0
+  CurrentHealthPoints: 0
 --- !u!1 &627774421
 GameObject:
   m_ObjectHideFlags: 0
@@ -4295,10 +4309,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 734340086676630134, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _dashTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 734340086676630134, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _startDashTime
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 679606968}
+    - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: KnockbackTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: KnockbackForce
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5205301312611777585, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: comboWindow
       value: 1
@@ -5394,7 +5424,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7924081380696824368, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 594442240}
   m_SourcePrefab: {fileID: 100100000, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
 --- !u!1 &1783087277
 GameObject:
