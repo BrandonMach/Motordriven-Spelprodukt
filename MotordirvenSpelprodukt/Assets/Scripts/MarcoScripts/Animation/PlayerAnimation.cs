@@ -47,13 +47,11 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Player_OnStartEvade(object sender, EventArgs e)
     {
-        Debug.Log("Hello");
         _animator.SetTrigger("Evade");
     }
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-        Debug.Log("ATTACK");
 
         HandleInput(e.attackType);
         _startComboWindowTimer = true;
@@ -140,7 +138,6 @@ public class PlayerAnimation : MonoBehaviour
 
     void EndCombo()
     {
-        Debug.Log("EndingCombo");
         _comboWindowTimer = 0;
         _animator.SetTrigger("ComboBroken");
         _startComboWindowTimer = false;
