@@ -15,7 +15,6 @@ public class CMPAtkJumpSlam : ActionNode
         if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 2 && NTime > 1.0f)
         {
             _championScript.AnimationPlaying = true;
-            //_championScript.Anim.SetInteger("Attack Index", 1);
             _championScript.Anim.Play("Attack2");
 
         }
