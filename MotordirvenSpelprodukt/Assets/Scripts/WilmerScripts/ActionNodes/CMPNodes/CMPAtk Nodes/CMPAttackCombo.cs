@@ -5,12 +5,12 @@ using UnityEngine;
 public class CMPAttackCombo : ActionNode
 {
 
-    public float duration;
-    float startTime;
+    
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
         float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        _championScript.Damage = 15; //Set specific attack damage
 
         if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 3 && NTime > 1.0f)
         {

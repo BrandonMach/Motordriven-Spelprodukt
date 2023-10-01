@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ChampionWeaponManager : MonoBehaviour
 {
-    
+    [SerializeField] CMPScript _championScript;
     void Start()
     {
-         
+      
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class ChampionWeaponManager : MonoBehaviour
 
             Debug.Log("Player got hit buy ChampionAttack");
 
-            other.GetComponent<HealthManager>().TakeDamage(10, hitDirection,kbForce);
+            other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage, hitDirection,kbForce);
            
 
         }
