@@ -10,6 +10,7 @@ public class HealthManager : MonoBehaviour
 
     void Start()
     {
+       
         CurrentHealthPoints = MaxHealthPoints;
     }
 
@@ -19,9 +20,15 @@ public class HealthManager : MonoBehaviour
         
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector3 hitDirection, float knockBackForce)
     {
         CurrentHealthPoints -= damage;
+        if(this.gameObject.tag == "Player")
+        {
+            PlayerKnockback _playerKnockback = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerKnockback>();
+            _playerKnockback.Knockback(hitDirection, knockBackForce);
+        }
+       
     }
 
     public void HealDamage(float damageHealed)
