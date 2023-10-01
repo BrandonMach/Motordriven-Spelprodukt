@@ -27,6 +27,11 @@ public class CMPScript : EnemyScript
     private Collider _weaponCollider;
 
     private GameObject _objWeapon;
+
+    //Orc special attack Slam Attack
+    public Collider _mainColider;
+    public Collider _slamPushHitbox; //Fixa namnet
+
     void Start()
     {
         _movementSpeed = 2;
@@ -45,6 +50,11 @@ public class CMPScript : EnemyScript
         _weaponCollider = _objWeapon.GetComponent<Collider>();
 
         _weaponCollider.enabled = false;
+
+
+
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Ground").GetComponent<Collider>(), _slamPushHitbox);
+        _slamPushHitbox.enabled = false;
     }
 
     // Update is called once per frame
@@ -63,5 +73,18 @@ public class CMPScript : EnemyScript
     public void DeactivateAttackHitBox()
     {
         _weaponCollider.enabled = false;
+    }
+
+    //Orc Attack
+    public void ActivateSlamAttack()
+    {
+        //Ignore player hitbox
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), _mainColider);
+    }
+
+    public void DeactivateSlamAttack()
+    {
+        _slamPushHitbox.enabled = true;
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), _mainColider,false);
     }
 }

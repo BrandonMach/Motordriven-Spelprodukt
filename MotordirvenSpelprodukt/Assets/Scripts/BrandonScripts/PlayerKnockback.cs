@@ -28,6 +28,8 @@ public class PlayerKnockback : MonoBehaviour
             _player.Knockbacked(_player, EventArgs.Empty);
             _knockbackCounter -= Time.deltaTime;
         }
+        _player.KnockbackedFinish(_player, EventArgs.Empty);
+
     }
 
     public void Knockback(Vector3 direction, float knockbackForce)
