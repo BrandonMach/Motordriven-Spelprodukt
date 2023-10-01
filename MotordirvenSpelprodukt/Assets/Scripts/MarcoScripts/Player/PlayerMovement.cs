@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.HID;
@@ -26,29 +27,48 @@ public class PlayerMovement : MonoBehaviour
 
     private Player _playerScript;
 
+    private Rigidbody _rigidbody;
+
     private CharacterController _characterController;
 
     Vector3 _moveDirection;
 
     private Vector3 _camForward;
     private Vector3 _camRight;
-    private Vector3 _rotateDirection;
+    private Vector3 _rotateInputDirection;
 
     private PlayerAnimation _playerAnimation;
 
+    private Quaternion _newRotation;
+
     private bool _isMoving = false;
+    private bool _canMove = true;
 
     private void Awake()
     {
         _playerAnimation = GetComponent<PlayerAnimation>();
         _playerScript = GetComponent<Player>();
+        _characterController = GetComponent<CharacterController>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
+        
         _playerScript.OnChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
+        _playerScript.OnDisableMovement += PlayerScript_OnDisableMovement;
+        _playerScript.OnEnableMovement += PlayerScript_OnEnableMovement;
 
+    }
+
+    private void PlayerScript_OnEnableMovement(object sender, System.EventArgs e)
+    {
+        _canMove = true;
+    }
+
+    private void PlayerScript_OnDisableMovement(object sender, System.EventArgs e)
+    {
+        _canMove = false;
     }
 
     private void PlayerScript_OnChangeControllerTypeButtonPressed(object sender, System.EventArgs e)
@@ -68,56 +88,71 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Move();
-        switch (_currentRotateMode)
+        if (_canMove)
         {
-            case RotateMode.TwoStick:
-                RotateWithInput();
-                break;
-            case RotateMode.OneStick:
-                Rotate();
-                break;
-            default:
-                break;
+            GetMoveDir();
+            _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
         }
 
-        _playerAnimation.Locomotion(_moveDirection, _rotateDirection);
 
     }
 
-    private void Move()
+    private void FixedUpdate()
+    {
+        if (_canMove)
+        {
+            Move();
+
+
+            switch (_currentRotateMode)
+            {
+                case RotateMode.TwoStick:
+                    RotateWithInput();
+                    break;
+                case RotateMode.OneStick:
+                    //RotateTowardsMovement();
+                    SetRotateDirectionTowardsMovement();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void GetMoveDir()
     {
         GetCameraValues();
 
         Vector2 inputvector = _playerScript.GameInput.GetMovementVectorNormalized();
         _moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
 
-        _characterController.SimpleMove(_moveDirection * _moveSpeed);
+        //_characterController.SimpleMove(_moveDirection * _moveSpeed);
+  
+    }
 
+    private void Move()
+    {
+        _rigidbody.velocity = new Vector3(_moveDirection.x * _moveSpeed, _rigidbody.velocity.y, _moveDirection.z * _moveSpeed);
         _isMoving = _moveDirection != Vector3.zero;
     }
 
-    private void Rotate()
+    private void SetRotateDirectionTowardsMovement()
     {
         if (_isMoving)
         {
-            _rotateDirection = _moveDirection.x * _camRight + _moveDirection.y * _camForward;
-            Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = Quaternion.LookRotation(_moveDirection);
-            transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, _rotationSpeed * Time.deltaTime);
+            _rotateInputDirection = _moveDirection.x * _camRight + _moveDirection.y * _camForward;
+            _newRotation = Quaternion.LookRotation(_moveDirection); 
+            Rotate();
         }
     }
 
     private void RotateWithInput()
     {
-
-        
-
         switch (_currentInputMode)
         {
             case InputMode.Controller:
                 Vector3 input = _playerScript.GameInput.GetDirectionVectorNormalized();
-                _rotateDirection = input.x * _camRight + input.y * _camForward;
+                _rotateInputDirection = input.x * _camRight + input.y * _camForward;
                 break;
             case InputMode.MnK:
 
@@ -129,27 +164,29 @@ public class PlayerMovement : MonoBehaviour
                 {
                     //Get the point in worldspace where we have our mouse and calculate the direction from the player
                     Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-                    _rotateDirection = pointToLook - transform.position;
-                    _rotateDirection.Normalize();
+                    _rotateInputDirection = pointToLook - transform.position;
+                    _rotateInputDirection.Normalize();
                 }
-
                 break;
             default:
                 break;
         }
 
-        Quaternion currentRotation = transform.rotation;
-        Quaternion newRotation = Quaternion.LookRotation(_rotateDirection);
+        _newRotation = Quaternion.LookRotation(_rotateInputDirection);
 
-        bool isRotating = currentRotation != newRotation && _rotateDirection != Vector3.zero;
+        bool isRotating = transform.rotation != _newRotation && _rotateInputDirection != Vector3.zero;
         if (isRotating)
         {
-            transform.localRotation = Quaternion.Slerp(currentRotation, newRotation, _rotationSpeed * Time.deltaTime);
+            Rotate();
         }
-
-
     }
-        
+
+    private void Rotate()
+    {
+         transform.rotation = Quaternion.Slerp(transform.rotation, _newRotation, _rotationSpeed * Time.fixedDeltaTime);
+    }
+
+
     private void GetCameraValues()
     {
         _camForward = _mainCamera.transform.forward;

@@ -35,6 +35,20 @@ public class PlayerAnimation : MonoBehaviour
     {
         _player = GetComponent<Player>();
         _player.OnAttackPressed += Player_OnAttack;
+        _player.OnStartEvade += Player_OnStartEvade;
+        _player.OnEnableMovement += Player_OnEnableMovement;
+    }
+
+    private void Player_OnEnableMovement(object sender, EventArgs e)
+    {
+        //_animator.SetTrigger("StopEvade");
+
+    }
+
+    private void Player_OnStartEvade(object sender, EventArgs e)
+    {
+        Debug.Log("Hello");
+        _animator.SetTrigger("Evade");
     }
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
