@@ -6,6 +6,8 @@ public class HealthManager : MonoBehaviour
 {
     public float MaxHealthPoints;
     public float CurrentHealthPoints;
+
+
     void Start()
     {
         CurrentHealthPoints = MaxHealthPoints;

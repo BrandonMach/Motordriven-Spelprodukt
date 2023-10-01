@@ -72,6 +72,12 @@ public class Player : MonoBehaviour
         OnStartEvade?.Invoke(this, EventArgs.Empty);
     }
 
+    public void Knockbacked(object sender, EventArgs e)
+    {
+
+        OnDisableMovement?.Invoke(this, EventArgs.Empty);
+    }
+
     private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
     {
         OnEnableMovement?.Invoke(this, EventArgs.Empty);
