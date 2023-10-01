@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviour,IHasProgress
 {
     public float MaxHealthPoints;
     public float CurrentHealthPoints;
 
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     void Start()
     {
@@ -27,6 +29,8 @@ public class HealthManager : MonoBehaviour
         {
             PlayerKnockback _playerKnockback = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerKnockback>();
             _playerKnockback.Knockback(hitDirection, knockBackForce);
+            OnProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints/MaxHealthPoints});
+            
         }
        
     }
