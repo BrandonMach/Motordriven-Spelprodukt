@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        _playerMovement = new PlayerMovement();
+        _playerMovement = GetComponent<PlayerMovement>();
         _playerDash = GetComponent<PlayerDash>();
     }
     void Start()

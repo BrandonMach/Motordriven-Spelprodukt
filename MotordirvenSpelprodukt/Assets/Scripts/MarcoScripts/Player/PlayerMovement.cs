@@ -120,12 +120,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public bool IsMoving()
-    {
-        Debug.Log(_isMoving);
-        return _isMoving;
-    }
-
     private void GetMoveDir()
     {
         GetCameraValues();
@@ -192,7 +186,10 @@ public class PlayerMovement : MonoBehaviour
     {
          transform.rotation = Quaternion.Slerp(transform.rotation, _newRotation, _rotationSpeed * Time.fixedDeltaTime);
     }
-
+    public bool IsMoving()
+    {
+        return _isMoving;
+    }
 
     private void GetCameraValues()
     {
@@ -204,6 +201,4 @@ public class PlayerMovement : MonoBehaviour
         _camForward = _camForward.normalized;
         _camRight = _camRight.normalized;
     }
-
-
 }

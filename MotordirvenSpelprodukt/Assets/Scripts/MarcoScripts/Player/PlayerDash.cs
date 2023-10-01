@@ -14,6 +14,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashTime;
     [SerializeField] float _startDashTime;
+    [SerializeField] float _rotationSpeed;
 
     private bool _isDashing;
 
@@ -37,6 +38,10 @@ public class PlayerDash : MonoBehaviour
     void Update()
     {
      
+    }
+
+    private void FixedUpdate()
+    {
         HandleRoll();
     }
 
@@ -44,6 +49,8 @@ public class PlayerDash : MonoBehaviour
     {
         if (_isDashing)
         {
+            _rigidBody.rotation = Quaternion.Slerp(_rigidBody.rotation, Quaternion.LookRotation(_rigidBody.velocity.normalized),_rotationSpeed * Time.fixedDeltaTime);
+
             if (_dashTime <= 0)
             {
                 _dashTime = _startDashTime;
