@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Challenge : MonoBehaviour
@@ -9,6 +10,7 @@ public class Challenge : MonoBehaviour
     [SerializeField] public string Description;
     [SerializeField] public int Requirement;
     [SerializeField] public int Reward;
+    [SerializeField] private TextMeshProUGUI _text; 
     public bool IsCompleted;
     
 
@@ -19,6 +21,11 @@ public class Challenge : MonoBehaviour
         Requirement = requirement;
         IsCompleted = false;
 
-        ChallengeManager.AddChallenge(this);
+        //ChallengeManager.AddChallenge(this);
+    }
+
+    public void ChangeActiveText()
+    {
+        _text.text = ChallengeName;
     }
 }
