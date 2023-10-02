@@ -41,6 +41,10 @@ public class EnemyScript : MonoBehaviour, IDamagable
     {
         Debug.Log(this.name + "Took damage from player");
         _currentHealth -= damage;
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     public void GetPushedBack(int damage)
@@ -64,4 +68,8 @@ public class EnemyScript : MonoBehaviour, IDamagable
        
     }
 
+    public void Die()
+    {
+
+    }
 }
