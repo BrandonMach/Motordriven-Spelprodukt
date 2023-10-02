@@ -35,12 +35,12 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleAttack(Player.OnAttackPressedEventArgs e)
     {
-        if (_registerHit)
-        {
+        //if (_registerHit)
+        //{
             // TODO:
             // Set animation event to the animations to check when an attack should check for collisions.
             _effect = e.CurrentAttackSO.CurrentAttackEffect;
-
+            //Cast a collider
             Collider[] enemyHits = Physics.OverlapSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
 
             for (int i = 0; i < enemyHits.Length; i++)
@@ -69,11 +69,11 @@ public class PlayerCombat : MonoBehaviour
                             break;
                     }
 
-                    enemy.TakeDamage(1.0f);
+                    enemy.TakeDamage(50.0f);
                     _registerHit = false;
                 }
             } 
-        }
+        //}
     }
 
 

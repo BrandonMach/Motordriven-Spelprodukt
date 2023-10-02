@@ -15,6 +15,9 @@ public class EnemyScript : MonoBehaviour, IDamagable
     protected bool _stunned;
     private ParticleSystem stunEffect;
 
+    [Header("Dismembrent")]
+    public DismemberentEnemyScript _dismembrentScript;
+
     public float Currenthealth { get { return _currentHealth; } }
     public float MaxHealth { get { return _maxHealth; } }
     public float MovementSpeed { get { return _movementSpeed; } }
@@ -28,7 +31,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     void Start()
     {
-
+        _dismembrentScript = GetComponent<DismemberentEnemyScript>();
     }
 
     // Update is called once per frame
@@ -40,9 +43,12 @@ public class EnemyScript : MonoBehaviour, IDamagable
     public void TakeDamage(float damage)
     {
         Debug.Log(this.name + "Took damage from player");
+       
         _currentHealth -= damage;
+        Debug.LogWarning(_currentHealth);
         if (_currentHealth <= 0)
         {
+            _dismembrentScript.GetKilled();
             Die();
         }
     }
