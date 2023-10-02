@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     protected float _lastAttackTime;
     protected float _stunDuration;
     protected bool _stunned;
+    private ParticleSystem stunEffect;
 
     public float Currenthealth { get { return _currentHealth; } }
     public float MaxHealth { get { return _maxHealth; } }
@@ -27,7 +28,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -60,6 +61,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
     {
         Stunned = true;
         _stunDuration = stunSuration;
+       
     }
 
 }
