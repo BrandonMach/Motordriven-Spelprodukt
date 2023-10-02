@@ -57,11 +57,9 @@ public class GenerateWeapon : MonoBehaviour
     }
     private void GenerateModel()
     {
-        Debug.Log("here");
         ImagePrefab prefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType());
         if (prefab != null)
         {
-            Debug.Log("here2");
             _weapon.SetImage(prefab.GetImage());
             _weapon.SetPrefabPath(prefab.GetPath());
         }
@@ -70,7 +68,6 @@ public class GenerateWeapon : MonoBehaviour
     {
         if(_weapon.GetImage()!=null)
         {
-            Debug.Log("here3");
             _weaponImage.sprite = _weapon.GetImage(); 
         }
         _weaponNameText.text = _weapon.GetName();

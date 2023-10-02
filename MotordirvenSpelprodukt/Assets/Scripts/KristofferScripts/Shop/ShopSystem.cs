@@ -60,7 +60,7 @@ public class ShopSystem : MonoBehaviour
     {
         if(_weapon.GetImage()!=null)
         {
-            _weaponImage = _weapon.GetWeaponType().GetImage();
+            _weaponImage.sprite = _weapon.GetImage();
             _weapon.GeneratePrefab();
         }
         _weaponName.text = _weapon.GetName();
