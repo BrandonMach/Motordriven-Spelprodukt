@@ -11,10 +11,12 @@ public class PlayerCombat : MonoBehaviour
     private float _multiplier;
     private Vector3 _colliderPos;
     private CurrentAttackSO.AttackEffect _effect;
+    [SerializeField] private ParticleSystem stunEffect;
 
     void Start()
     {
         player.OnAttackPressed += Player_OnAttack;
+        //stunEffect = Resources.Load<ParticleSystem>("ObjStunnedEffect");
     }
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
@@ -34,6 +36,7 @@ public class PlayerCombat : MonoBehaviour
     {
         // TODO:
         // Set animation event to the animations to check when an attack should check for collisions.
+        _effect = e.CurrentAttackSO.CurrentAttackEffect;
 
         Collider[] enemyHits = Physics.OverlapSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
 
@@ -41,9 +44,29 @@ public class PlayerCombat : MonoBehaviour
         {
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
-            {
+            {                              
+                switch (_effect)
+                {
+                    case CurrentAttackSO.AttackEffect.None:
+                        break;
+                    case CurrentAttackSO.AttackEffect.Pushback:
+                        break;
+                    case CurrentAttackSO.AttackEffect.bleed:
+
+                        break;
+                    case CurrentAttackSO.AttackEffect.AreaDamage:                      
+                        break;
+                    case CurrentAttackSO.AttackEffect.Stun:
+                        enemy.GetStunned(2.0f);
+                        Vector3 pos = (enemy as MonoBehaviour).transform.position;
+                        pos = new Vector3(pos.x, pos.y + 1, pos.z);
+                        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0));
+                        break;
+                    default:
+                        break;
+                }
+
                 enemy.TakeDamage(1.0f);
-                enemy.GetStunned(2.0f);
             }
         }
     }

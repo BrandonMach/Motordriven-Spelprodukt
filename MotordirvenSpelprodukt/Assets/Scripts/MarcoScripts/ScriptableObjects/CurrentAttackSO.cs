@@ -11,7 +11,8 @@ public class CurrentAttackSO : ScriptableObject
         None,
         Pushback,
         bleed,
-        AreaDamage
+        AreaDamage,
+        Stun
     }
     public AttackEffect CurrentAttackEffect;
     public float DamageMultiplier;
