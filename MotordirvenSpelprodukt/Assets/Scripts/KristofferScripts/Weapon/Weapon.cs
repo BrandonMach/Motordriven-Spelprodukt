@@ -9,6 +9,8 @@ public class Weapon : ScriptableObject
     [SerializeField] private string _weaponName;
     [SerializeField] private Weapontype _weaponType;
     [SerializeField] private int _weaponLevel=1;
+    [SerializeField] private string _prefabPath;
+    [SerializeField] private Sprite _image;
     [Header("Values to be observed")]
     [SerializeField] private float _weaponDamage;
     [SerializeField] private float _attackSpeed;
@@ -33,11 +35,19 @@ public class Weapon : ScriptableObject
         UpdateRange();
         UpdateSpeed();
     }
+    public void GeneratePrefab()
+    {
+        Instantiate(Resources.Load("WeaponResources/" + _prefabPath)) ;       
+    }
     public void SetName(string weaponName) { _weaponName = weaponName; }
+    public void SetImage(Sprite weaponImage) { _image = weaponImage; }
+    public void SetPrefabPath(string str) { _prefabPath = str; }
     public float GetDamage() { return _weaponDamage; }
     public float GetRange() { return _range; }
     public float GetSpeed() { return _attackSpeed; }
     public string GetName(){return _weaponName;}
     public int GetLevel() { return _weaponLevel; }
+    public Sprite GetImage() { return _image; }
+    public string GetPath() { return _prefabPath; }
     public Weapontype GetWeaponType() { return _weaponType; }   
 }

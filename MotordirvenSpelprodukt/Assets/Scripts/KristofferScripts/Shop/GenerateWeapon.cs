@@ -14,6 +14,7 @@ public class GenerateWeapon : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _weaponSpeedText;
     [SerializeField] private TextMeshProUGUI _weaponRangeText;
     [SerializeField] private TextMeshProUGUI _buttonText;
+    [SerializeField] private WeaponDictionary _weaponDictionary;
     private Weapon _weapon;
     private bool _purshased;
     private List<string> _naming;
@@ -30,6 +31,7 @@ public class GenerateWeapon : MonoBehaviour
             1f, 
             1f);
         _weapon.SetName(GenerateName(type));
+        GenerateModel();
         UpdatePanel(level);
     }
 
@@ -49,14 +51,28 @@ public class GenerateWeapon : MonoBehaviour
                 }
             }
             int r = Random.Range(0, _naming.Count);
-            Debug.Log(r);
             return _naming[r] + " " + type.name;
         }
         return "";
     }
+    private void GenerateModel()
+    {
+        Debug.Log("here");
+        ImagePrefab prefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType());
+        if (prefab != null)
+        {
+            Debug.Log("here2");
+            _weapon.SetImage(prefab.GetImage());
+            _weapon.SetPrefabPath(prefab.GetPath());
+        }
+    }
     private void UpdatePanel(int level)
     {
-        if(_weapon.GetWeaponType().GetImage()!=null){_weaponImage = _weapon.GetWeaponType().GetImage(); }
+        if(_weapon.GetImage()!=null)
+        {
+            Debug.Log("here3");
+            _weaponImage.sprite = _weapon.GetImage(); 
+        }
         _weaponNameText.text = _weapon.GetName();
         _weaponLevelText.text = "Level " + level.ToString();      
         _weaponDamageText.text = _weapon.GetDamage().ToString() + " Dmg";
@@ -67,7 +83,7 @@ public class GenerateWeapon : MonoBehaviour
     public int Price(){ return (int)_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel(); }    
     public Weapon Purshase()
     {
-        _weaponImage = null;
+        _weaponImage.sprite = null;
         _weaponNameText.text = "";
         _weaponLevelText.text = "";
         _weaponDamageText.text = "";
