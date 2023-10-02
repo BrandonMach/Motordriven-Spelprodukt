@@ -21,6 +21,8 @@ public class ShopSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _rerollButtonText;
     private int rerollCounter=1;
     private int rerollBaseline = 10;
+    [Header("Prefab Test")]
+    private GameObject _gPrefab;
 
     private void Awake()
     {
@@ -56,14 +58,16 @@ public class ShopSystem : MonoBehaviour
     }
     private void UpdateUpgradeView()
     {
-        if(_weapon.GetWeaponType().GetImage()!=null)
+        if(_weapon.GetImage()!=null)
         {
             _weaponImage = _weapon.GetWeaponType().GetImage();
+            _weapon.GeneratePrefab();
         }
         _weaponName.text = _weapon.GetName();
         _weaponLevel.text = _weapon.GetLevel().ToString();
         _weaponDamage.text = _weapon.GetDamage().ToString();
         _weaponUpgradeCost.text = ((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2).ToString();
+        
     }
     public void UpgradeWeapon()
     {
