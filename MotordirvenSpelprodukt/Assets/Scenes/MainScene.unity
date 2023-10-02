@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2773,6 +2773,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7924081380696824368, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 824605125}
+    - targetCorrespondingSourceObject: {fileID: 7924081380696824368, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 824605131}
   m_SourcePrefab: {fileID: 100100000, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
 --- !u!4 &693082073 stripped
 Transform:
@@ -3477,9 +3480,34 @@ MonoBehaviour:
   _shockwaveTransform: {fileID: 1934385881}
   _animator: {fileID: 824605121}
   _weaponTrail: {fileID: 1762977453}
-  _shockWave: {fileID: 2115701968}
-  _debree: {fileID: 1401860442}
-  _crack: {fileID: 1802287320}
+  _shockWave: {fileID: 5020680880238806514, guid: d6b87871f64d04f4187faabe910a4469, type: 3}
+  _debree: {fileID: 7868083130125147100, guid: 7b91017bf76e5ec41b9094f6fca0f8e6, type: 3}
+  _crack: {fileID: 8841194621737564412, guid: a72995fa076a761488530ef2352833cd, type: 3}
+--- !u!114 &824605129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5597014018079178594, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+  m_PrefabInstance: {fileID: 693082072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824605114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a37376fbc42f2246a65e50600126ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &824605131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824605114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0327d773691f9e041add1c413067e59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 824605129}
+  stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
 --- !u!1 &827541194
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,11 +4874,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375597403}
   m_CullTransparentMesh: 1
---- !u!198 &1401860442 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7868083130125147100, guid: 7b91017bf76e5ec41b9094f6fca0f8e6, type: 3}
-  m_PrefabInstance: {fileID: 9629881}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1435716332
 GameObject:
   m_ObjectHideFlags: 0
@@ -6262,11 +6285,6 @@ RectTransform:
   m_AnchoredPosition: {x: 54, y: 45}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!198 &1802287320 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8841194621737564412, guid: a72995fa076a761488530ef2352833cd, type: 3}
-  m_PrefabInstance: {fileID: 742493183}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1813880410
 GameObject:
   m_ObjectHideFlags: 0
@@ -6973,7 +6991,7 @@ Transform:
   m_GameObject: {fileID: 1934385880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.089999996, y: 0.10000001, z: 2.9538817}
+  m_LocalPosition: {x: 0.089999996, y: 0.10000001, z: 0.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7464,11 +7482,6 @@ PrefabInstance:
 --- !u!4 &2115701966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8333263673141121157, guid: d6b87871f64d04f4187faabe910a4469, type: 3}
-  m_PrefabInstance: {fileID: 2115701965}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2115701968 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5020680880238806514, guid: d6b87871f64d04f4187faabe910a4469, type: 3}
   m_PrefabInstance: {fileID: 2115701965}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2134426962
