@@ -14,6 +14,8 @@ public class ChallengeManager : MonoBehaviour
         {
             ActiveChallenges.Add(challenge);
         }
+
+        Debug.Log("Challenge added to ActiveChallenges (List)");
     }
 
     public static void RemoveChallenge(Challenge challenge)
