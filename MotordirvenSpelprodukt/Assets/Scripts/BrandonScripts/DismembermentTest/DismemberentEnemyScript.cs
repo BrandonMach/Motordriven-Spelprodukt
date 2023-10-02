@@ -24,7 +24,11 @@ public class DismemberentEnemyScript : MonoBehaviour
         //För testing
         if (Input.GetKeyDown(KeyCode.N))
         {
-            _limbs[Random.Range(0, _limbs.Count)].GetHit();
+            _limbs[Random.Range(0, _limbs.Count)].Dismember();
+            //foreach (var item in _limbs)
+            //{
+            //    item.Dismember();
+            //}
         }
     }
 
@@ -50,6 +54,7 @@ public class DismemberentEnemyScript : MonoBehaviour
 
     public void GetKilled()
     {
+        _limbs[Random.Range(0, _limbs.Count)].Dismember();
         ActivateRagdoll();
     }
 }

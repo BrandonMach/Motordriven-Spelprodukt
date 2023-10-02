@@ -28,7 +28,7 @@ public class DismembermentLimbsScript : MonoBehaviour
         
     }
 
-    public void GetHit() //Dismembrent function i Idamage eller i health sckriptet gör get hoit kalla på detta
+    public void Dismember() //Dismembrent function i Idamage eller i health sckriptet gör get hoit kalla på detta
     {
         if(_childLimbs.Length > 0)
         {
@@ -36,7 +36,7 @@ public class DismembermentLimbsScript : MonoBehaviour
             {
                 if(limb != null)
                 {
-                    limb.GetHit();
+                    limb.Dismember();
                 }
             }
         }
@@ -57,7 +57,6 @@ public class DismembermentLimbsScript : MonoBehaviour
 
         transform.localScale = Vector3.zero; //Scale down the limn to Zero
 
-        dismsmebrentScript.GetKilled();
         Destroy(this);
     }
 }
