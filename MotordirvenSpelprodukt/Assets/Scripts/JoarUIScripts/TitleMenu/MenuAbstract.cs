@@ -10,7 +10,7 @@ public abstract class MenuAbstract : MonoBehaviour, IMenu
     [SerializeField] protected GameObject _menuOption3;
 
 
-    public virtual void ClickESC()
+    public void ClickESC()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -19,19 +19,19 @@ public abstract class MenuAbstract : MonoBehaviour, IMenu
         }
     }
 
-    public virtual void ClickMenuOption1()
+    public void ClickMenuOption1()
     {
         _menuOption1.SetActive(true);
         gameObject.SetActive(false);
     }
 
-    public virtual void ClickMenuOption2()
+    public void ClickMenuOption2()
     {
         _menuOption2.SetActive(true);
         gameObject.SetActive(false);
     }
 
-    public virtual void ClickMenuOption3()
+    public void ClickMenuOption3()
     {
         _menuOption3.SetActive(true);
         gameObject.SetActive(false);
