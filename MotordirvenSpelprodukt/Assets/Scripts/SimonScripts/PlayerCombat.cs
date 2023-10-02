@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour
     private float _damage;
     private float _multiplier;
     private Vector3 _colliderPos;
+    private bool _registerHit;
     private CurrentAttackSO.AttackEffect _effect;
     [SerializeField] private ParticleSystem stunEffect;
 
@@ -34,40 +35,44 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleAttack(Player.OnAttackPressedEventArgs e)
     {
-        // TODO:
-        // Set animation event to the animations to check when an attack should check for collisions.
-        _effect = e.CurrentAttackSO.CurrentAttackEffect;
-
-        Collider[] enemyHits = Physics.OverlapSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
-
-        for (int i = 0; i < enemyHits.Length; i++)
+        if (_registerHit)
         {
-            IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
-            if (enemy != null)
-            {                              
-                switch (_effect)
+            // TODO:
+            // Set animation event to the animations to check when an attack should check for collisions.
+            _effect = e.CurrentAttackSO.CurrentAttackEffect;
+
+            Collider[] enemyHits = Physics.OverlapSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
+
+            for (int i = 0; i < enemyHits.Length; i++)
+            {
+                IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
+                if (enemy != null)
                 {
-                    case CurrentAttackSO.AttackEffect.None:
-                        break;
-                    case CurrentAttackSO.AttackEffect.Pushback:
-                        break;
-                    case CurrentAttackSO.AttackEffect.bleed:
+                    switch (_effect)
+                    {
+                        case CurrentAttackSO.AttackEffect.None:
+                            break;
+                        case CurrentAttackSO.AttackEffect.Pushback:
+                            break;
+                        case CurrentAttackSO.AttackEffect.bleed:
 
-                        break;
-                    case CurrentAttackSO.AttackEffect.AreaDamage:                      
-                        break;
-                    case CurrentAttackSO.AttackEffect.Stun:
-                        enemy.GetStunned(2.0f);
-                        Vector3 pos = (enemy as MonoBehaviour).transform.position;
-                        pos = new Vector3(pos.x, pos.y + 1, pos.z);
-                        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0));
-                        break;
-                    default:
-                        break;
+                            break;
+                        case CurrentAttackSO.AttackEffect.AreaDamage:
+                            break;
+                        case CurrentAttackSO.AttackEffect.Stun:
+                            enemy.GetStunned(2.0f);
+                            Vector3 pos = (enemy as MonoBehaviour).transform.position;
+                            pos = new Vector3(pos.x, pos.y + 1, pos.z);
+                            Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0));
+                            break;
+                        default:
+                            break;
+                    }
+
+                    enemy.TakeDamage(1.0f);
+                    _registerHit = false;
                 }
-
-                enemy.TakeDamage(1.0f);
-            }
+            } 
         }
     }
 
@@ -87,6 +92,11 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.color = Color.green;
         //Vector3 drawPos = new Vector3(transform.position.)
         Gizmos.DrawWireSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
+    }
+
+    public void RegisterAttack()
+    {
+        _registerHit = true;
     }
 
 
