@@ -13,6 +13,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnLightAttackButtonPressed;
     public event EventHandler OnHeavyAttackButtonPressed;
     public event EventHandler OnEvadeButtonPressed;
+    public event EventHandler OnPauseButtonPressed;
 
     private void Awake()
     {
@@ -23,7 +24,13 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.LightAttack.performed += LightAttack_performed;
         _playerInputActions.Player.HeavyAttack.performed += HeavyAttack_performed;
         _playerInputActions.Player.Evade.performed += Evade_performed;
+        _playerInputActions.Player.Pause.performed += Pause_performed; 
 
+    }
+
+    private void Pause_performed(InputAction.CallbackContext obj)
+    {
+        OnPauseButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void Evade_performed(InputAction.CallbackContext obj)

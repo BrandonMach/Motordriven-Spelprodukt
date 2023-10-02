@@ -6,25 +6,45 @@ public class PauseMenu : MenuAbstract, IMenu
 {
     public static bool GameIsPaused = false;
 
-    [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] GameObject _pauseMenuUI;
+    [SerializeField] GameInput _gameInput;
+
+    private void Start()
+    {
+        _gameInput.OnPauseButtonPressed += GameInput_OnPauseButtonPressed;
+    }
+
+    private void GameInput_OnPauseButtonPressed(object sender, System.EventArgs e)
+    {
+        if (GameIsPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        ClickESC(); 
+        //ClickESC(); 
+
+
     }
 
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = true;
     }
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        _pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;    // Freezes the game
         GameIsPaused = true;
     }

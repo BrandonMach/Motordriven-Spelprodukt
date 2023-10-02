@@ -66,11 +66,9 @@ public class PlayerAnimation : MonoBehaviour
         switch (attackType)
         {
             case Player.OnAttackPressedEventArgs.AttackType.Light:
-                //_currentCombo += "L";
                 _animator.SetTrigger("Trigger_L");
                 break;
             case Player.OnAttackPressedEventArgs.AttackType.Heavy:
-                //_currentCombo += "H";
                 _animator.SetTrigger("Trigger_H");
                 break;
             default:
