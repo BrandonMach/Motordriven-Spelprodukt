@@ -17,7 +17,7 @@ public class MainMenu : MenuAbstract, IMenu
 
     public void ClickNewGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public override void ClickESC()

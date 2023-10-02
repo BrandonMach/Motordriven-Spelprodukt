@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MenuAbstract, IMenu
 {
@@ -79,5 +80,7 @@ public class PauseMenu : MenuAbstract, IMenu
     public override void ClickMenuOption3()
     {
         // TODO : Load TitleScreenScene
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

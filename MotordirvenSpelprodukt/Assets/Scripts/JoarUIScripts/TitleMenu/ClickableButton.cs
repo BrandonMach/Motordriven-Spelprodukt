@@ -21,7 +21,7 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void Start()
     {
-        //boxCollider = GetComponent<BoxCollider>();
+      
     }
 
     private void Update()
@@ -30,26 +30,6 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     }
 
-    //private bool IsMouseOverBoxCollider()
-    //{
-    //    //if (boxCollider == null)
-    //    //{
-    //    //    Debug.LogWarning("BoxCollider not found.");
-    //    //    return false;
-    //    //}
-
-    //    // Cast a ray from the mouse pointer
-    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //    RaycastHit hit;
-
-    //    // Perform a raycast and check if it hits the BoxCollider
-    //    if (Physics.Raycast(ray, out hit) && hit.collider == boxCollider)
-    //    {
-    //        return true;
-    //    }
-
-    //    return false;
-    //}
 
     private void SpaceCharacters()
     {
@@ -66,8 +46,16 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void OnMouseEnter()
     {
-        _textMeshPro.characterSpacing = 20;
-        Debug.Log("Entered!");
+        _textMeshPro.characterSpacing = hoverCharacterSpacing;
+        //Debug.Log("Entered!");
+
+        isMouseOver = true;
+    }
+
+    private void OnMouseExit()
+    {
+        _textMeshPro.characterSpacing = originalCharacterSpacing;
+        //Debug.Log("Exit!");
 
         isMouseOver = true;
     }
