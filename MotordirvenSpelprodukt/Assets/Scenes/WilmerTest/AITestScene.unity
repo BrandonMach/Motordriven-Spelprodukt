@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c781b6e9c0ac562459670ad76b1711ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: 4feeb6cae9035a64c99f1827f05c4984, type: 2}
+  tree: {fileID: 11400000, guid: 0eb6cd18091fd0a40a5f2a71402fffb6, type: 2}
   enemyObject: {fileID: 39384016}
 --- !u!65 &39384018
 BoxCollider:
@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dismembrentScript: {fileID: 0}
   ChaseDistance: 2
 --- !u!1 &249348063
 GameObject:
@@ -1083,8 +1084,7 @@ MonoBehaviour:
   _moveSpeed: 10
   _rotationSpeed: 5
   _mainCamera: {fileID: 5604192}
-  _playerAnimation: {fileID: 1409594764}
-  _playerScript: {fileID: 1409594768}
+  _moveDirection: {x: 0, y: 0, z: 0}
 --- !u!4 &1409594767
 Transform:
   m_ObjectHideFlags: 0
@@ -1117,6 +1117,7 @@ MonoBehaviour:
   _timeBetweenInputs: 0
   _AttackSOArray: []
   _currentWeapon: {fileID: 0}
+  _maxHealth: 0
 --- !u!1 &1476649866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,6 +1345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac284029a1350a40a4accb7569c5f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dismembrentScript: {fileID: 0}
   FleeDistance: 0
 --- !u!95 &1767215069 stripped
 Animator:
