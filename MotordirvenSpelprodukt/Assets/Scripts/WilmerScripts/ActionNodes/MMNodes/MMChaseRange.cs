@@ -19,10 +19,11 @@ public class MMChaseRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if (_playerScript != null && _meleeMinionScript != null)
+        float distanceToPlayer = Vector3.Distance(_meleeMinionScript.transform.position, _playerScript.transform.position);
+        if (_playerScript != null && _meleeMinionScript != null && distanceToPlayer > _meleeMinionScript.AttackRange)
         {
 
-            float distanceToPlayer = Vector3.Distance(_meleeMinionScript.transform.position, _playerScript.transform.position);
+            
             if (distanceToPlayer > _meleeMinionScript.ChaseDistance)
             {
                 return State.Success;

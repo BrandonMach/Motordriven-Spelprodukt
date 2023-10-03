@@ -25,7 +25,8 @@ public class ChampionWeaponManager : MonoBehaviour
 
             Debug.Log("Player got hit buy ChampionAttack");
 
-            other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage, hitDirection,kbForce);
+            other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage);
+            other.GetComponent<HealthManager>().Knockback(hitDirection, kbForce);
            
 
         }
