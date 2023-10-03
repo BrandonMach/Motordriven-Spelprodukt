@@ -10,12 +10,13 @@ public class WeaponVisualEffects : MonoBehaviour
 
     [SerializeField] private ParticleSystem _weaponTrail;
 
-    [SerializeField] private ParticleSystem _shockWave;
+    [SerializeField] private ParticleSystem _shockWaveCircle;
 
     [SerializeField] private ParticleSystem _debree;
 
     [SerializeField] private ParticleSystem _crack;
 
+    [SerializeField] private ParticleSystem _shockWaveFill;
 
     public void StartWeaponTrail()
     {
@@ -24,15 +25,17 @@ public class WeaponVisualEffects : MonoBehaviour
 
     public void StartShockWave()
     {
+        // TODO:
+        // Object pool with particle effects for better performance
         Vector3 shockwavePos = new Vector3(_shockwaveTransform.position.x, 0.25f, _shockwaveTransform.position.z);
         Quaternion shockwaveRot = _shockwaveTransform.rotation;
 
-        Instantiate(_shockWave, shockwavePos, shockwaveRot);
+        Instantiate(_shockWaveCircle, shockwavePos, shockwaveRot);
+        Instantiate(_shockWaveFill, shockwavePos, shockwaveRot);
         Instantiate(_debree, shockwavePos, shockwaveRot);
         Instantiate(_crack, new Vector3(shockwavePos.x, 0f, shockwavePos.z), shockwaveRot);
 
-        //_shockWave.Play();
-        //_debree.Play();
-        //_crack.Play();
+        // Destroy objects after finished playing, until object pool is implemented.
+
     }
 }

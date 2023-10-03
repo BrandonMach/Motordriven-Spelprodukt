@@ -7,6 +7,7 @@ public class AffectCheck : ActionNode
     protected override void OnStart()
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
+        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     protected override void OnStop()
