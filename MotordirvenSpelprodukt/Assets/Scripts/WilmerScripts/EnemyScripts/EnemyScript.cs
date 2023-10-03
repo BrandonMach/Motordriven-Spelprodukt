@@ -50,6 +50,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hpmanger.TakeDamage(damage);
+        
      
     }
 
@@ -61,6 +62,7 @@ public class EnemyScript : MonoBehaviour
 
     public void GetStunned(float stunSuration)
     {
+        //hpmanger.GetStunned();
         Stunned = true;
         _stunDuration = stunSuration;
        
