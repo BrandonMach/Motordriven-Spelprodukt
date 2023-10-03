@@ -26,7 +26,7 @@ public class EnemyScript : MonoBehaviour
     public float MovementSpeed { get { return _movementSpeed; } }
     public float AttackSpeed { get { return _attackSpeed; } }
     public float AttackRange { get { return _attackRange; } }
-    public float StunDuration { get { return _stunDuration; } }
+    public float StunDuration { get { return _stunDuration; } set { _stunDuration = value; } }
     public float AttackCooldown { get { return _attackCooldown; } }
     public float LastAttackTime { get { return _lastAttackTime; } set { _lastAttackTime = value; } }
     public bool Stunned { get { return _stunned; } set { _stunned = value; } }
