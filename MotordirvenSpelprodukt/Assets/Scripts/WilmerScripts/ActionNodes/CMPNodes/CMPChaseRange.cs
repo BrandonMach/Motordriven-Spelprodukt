@@ -7,6 +7,7 @@ public class CMPChaseRange : ActionNode
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
+        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     protected override void OnStop()
