@@ -7,9 +7,9 @@ public abstract class ActionNode : Node
 {
     protected Player _playerScript;
 
-    //private void Awake()
-    //{
-    //    _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+    private void Awake()
+    {
+        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
 
-    //}
+    }
 }

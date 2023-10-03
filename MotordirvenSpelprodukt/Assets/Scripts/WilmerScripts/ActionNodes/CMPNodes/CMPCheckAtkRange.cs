@@ -9,7 +9,6 @@ public class CMPCheckAtkRange : ActionNode
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
         lockposition = _championScript.transform.position;
-        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     protected override void OnStop()

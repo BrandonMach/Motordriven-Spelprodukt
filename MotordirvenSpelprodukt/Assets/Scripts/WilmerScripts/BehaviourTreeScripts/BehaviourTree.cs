@@ -1,13 +1,10 @@
-
+#if UNITY_EDITOR
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
-#if UNITY_EDITOR
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEditor;
-#endif
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.AI;
@@ -15,10 +12,8 @@ using UnityEngine.AI;
 [CreateAssetMenu()]
 public class BehaviourTree : ScriptableObject
 {
-    //[SerializeReference]
     public Node rootNode;
     public Node.State treeState = Node.State.Running;
-    //[SerializeReference]
     public List<Node> nodes = new List<Node>();
     public Blackboard blackboard = new Blackboard();
 
@@ -35,7 +30,7 @@ public class BehaviourTree : ScriptableObject
 
         
     }
-#if UNITY_EDITOR
+
     public Node CreateNode(System.Type type)
     {
         Node node = ScriptableObject.CreateInstance(type) as Node;
@@ -113,7 +108,6 @@ public class BehaviourTree : ScriptableObject
             EditorUtility.SetDirty(composite);
         }
     }
-#endif
     public List<Node> GetChildren(Node parent)
     {
         List<Node> children = new List<Node>();
@@ -136,7 +130,6 @@ public class BehaviourTree : ScriptableObject
 
         return children;
     }
-//#endif
 
     public void Traverse(Node node, System.Action<Node> visiter)
     {
@@ -173,3 +166,4 @@ public class BehaviourTree : ScriptableObject
         });
     }
 }
+#endif

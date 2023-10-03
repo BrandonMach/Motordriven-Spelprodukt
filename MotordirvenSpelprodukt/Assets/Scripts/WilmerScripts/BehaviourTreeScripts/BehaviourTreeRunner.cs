@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using System.Security;
@@ -7,6 +8,7 @@ using UnityEngine.AI;
 public class BehaviourTreeRunner : MonoBehaviour
 {
     public BehaviourTree tree;
+    //private MeleeMinionScript enemyScript;
     public GameObject enemyObject;
     // Start is called before the first frame update
     void Start()
@@ -24,3 +26,4 @@ public class BehaviourTreeRunner : MonoBehaviour
         tree.Update();
     }
 }
+#endif
