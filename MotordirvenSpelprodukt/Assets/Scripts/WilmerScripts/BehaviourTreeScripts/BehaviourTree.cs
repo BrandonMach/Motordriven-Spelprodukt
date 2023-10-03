@@ -15,10 +15,10 @@ using UnityEngine.AI;
 [CreateAssetMenu()]
 public class BehaviourTree : ScriptableObject
 {
-    [SerializeReference]
+    //[SerializeReference]
     public Node rootNode;
     public Node.State treeState = Node.State.Running;
-    [SerializeReference]
+    //[SerializeReference]
     public List<Node> nodes = new List<Node>();
     public Blackboard blackboard = new Blackboard();
 
