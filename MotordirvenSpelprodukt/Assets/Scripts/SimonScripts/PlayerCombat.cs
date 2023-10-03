@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private LayerMask _enemyLayerMask;
     private string _currentCombo;
     private float _range;
     private float _impactPosOffset =1.5f;
@@ -13,6 +14,7 @@ public class PlayerCombat : MonoBehaviour
     private Vector3 _colliderPos;
     private CurrentAttackSO.AttackEffect _effect;
     private Vector3 _checkPos;
+
     [SerializeField] private ParticleSystem stunEffect;
 
     void Start()
@@ -57,7 +59,7 @@ public class PlayerCombat : MonoBehaviour
                 break;
         }
 
-        Collider[] enemyHits = Physics.OverlapSphere(_checkPos, _range);
+        Collider[] enemyHits = Physics.OverlapSphere(_checkPos, _range, _enemyLayerMask);
 
         for (int i = 0; i < enemyHits.Length; i++)
         {
