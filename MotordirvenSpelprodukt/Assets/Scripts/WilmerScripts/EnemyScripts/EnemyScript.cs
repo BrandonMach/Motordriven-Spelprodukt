@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour, IDamagable
+public class EnemyScript : MonoBehaviour 
 {
     protected float _currentHealth;
     protected float _maxHealth;
@@ -15,8 +16,10 @@ public class EnemyScript : MonoBehaviour, IDamagable
     protected bool _stunned;
     private ParticleSystem stunEffect;
 
-    [Header("Dismembrent")]
-    public DismemberentEnemyScript _dismembrentScript;
+
+    public HealthManager hpmanger;
+
+    
 
     public float Currenthealth { get { return _currentHealth; } }
     public float MaxHealth { get { return _maxHealth; } }
@@ -31,7 +34,11 @@ public class EnemyScript : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     void Start()
     {
-        _dismembrentScript = GetComponent<DismemberentEnemyScript>();
+        //if (HasDismembrent)
+        //{
+        //    _dismembrentScript = GetComponent<DismemberentEnemyScript>();
+        //}
+        
     }
 
     // Update is called once per frame
@@ -42,15 +49,8 @@ public class EnemyScript : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(this.name + "Took damage from player");
-       
-        _currentHealth -= damage;
-        Debug.LogWarning(_currentHealth);
-        if (_currentHealth <= 0)
-        {
-            _dismembrentScript.GetKilled();
-            Die();
-        }
+        hpmanger.TakeDamage(damage);
+     
     }
 
     public void GetPushedBack(int damage)
@@ -59,14 +59,6 @@ public class EnemyScript : MonoBehaviour, IDamagable
         //TakeDamage(damage);
     }
 
-    public void TakeBleedDamage(int damage)
-    {
-
-    }
-    public void GetSlowed(/*int damage*/)
-    {
-
-    }
     public void GetStunned(float stunSuration)
     {
         Stunned = true;
@@ -74,8 +66,5 @@ public class EnemyScript : MonoBehaviour, IDamagable
        
     }
 
-    public void Die()
-    {
-
-    }
+   
 }
