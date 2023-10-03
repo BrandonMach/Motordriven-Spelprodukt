@@ -21,7 +21,7 @@ public class ChampionWeaponManager : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             Vector3 hitDirection = other.transform.position - transform.position;
-            float kbForce = 500;
+            float kbForce = 50;
 
             Debug.Log("Player got hit buy ChampionAttack");
 

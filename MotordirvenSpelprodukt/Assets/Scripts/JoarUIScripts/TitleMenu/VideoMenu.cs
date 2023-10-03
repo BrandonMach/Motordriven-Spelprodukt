@@ -68,17 +68,17 @@ public class VideoMenu : MenuAbstract, IMenu
         base.ClickESC();
     }
 
-    public void ClickMenuOption1()
+    public override void ClickMenuOption1()
     {
         base.ClickMenuOption1();
     }
 
-    public void ClickMenuOption2()
+    public override void ClickMenuOption2()
     {
         base.ClickMenuOption2();
     }
 
-    public void ClickMenuOption3()
+    public override void ClickMenuOption3()
     {
         _prevMenu.SetActive(true);
         gameObject.SetActive(false);

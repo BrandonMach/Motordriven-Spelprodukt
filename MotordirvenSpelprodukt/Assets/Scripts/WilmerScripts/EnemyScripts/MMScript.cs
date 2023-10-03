@@ -10,10 +10,10 @@ public class MMScript : EnemyScript
     public float ChaseDistance;
     void Start()
     {
-        _movementSpeed = 5;
-        _attackRange = 4;
+        _movementSpeed = 2;
+        _attackRange = 2;
         _attackCooldown = 2;
-        ChaseDistance = 2;
+        ChaseDistance = 1;
         _currentHealth = 100;
         _maxHealth = 100;
     }
