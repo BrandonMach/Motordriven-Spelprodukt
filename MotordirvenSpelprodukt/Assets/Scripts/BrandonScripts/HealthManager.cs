@@ -30,7 +30,6 @@ public class HealthManager : MonoBehaviour,IHasProgress
             PlayerKnockback _playerKnockback = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerKnockback>();
             _playerKnockback.Knockback(hitDirection, knockBackForce);
             OnProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints/MaxHealthPoints});
-            
         }
        
     }
