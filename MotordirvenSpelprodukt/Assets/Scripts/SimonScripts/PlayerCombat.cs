@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour
     private bool _registerHit;
     private CurrentAttackSO.AttackEffect _effect;
     [SerializeField] private ParticleSystem stunEffect;
-
+    [SerializeField] private LayerMask _enemylayer;
     void Start()
     {
         player.OnAttackPressed += Player_OnAttack;
@@ -41,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
             // Set animation event to the animations to check when an attack should check for collisions.
             _effect = e.CurrentAttackSO.CurrentAttackEffect;
             //Cast a collider
-            Collider[] enemyHits = Physics.OverlapSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range);
+            Collider[] enemyHits = Physics.OverlapSphere(transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y), _range, _enemylayer);
 
             for (int i = 0; i < enemyHits.Length; i++)
             {
