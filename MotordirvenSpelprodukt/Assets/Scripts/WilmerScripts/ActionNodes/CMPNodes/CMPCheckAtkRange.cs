@@ -30,18 +30,19 @@ public class CMPCheckAtkRange : ActionNode
             _championScript.transform.rotation = Quaternion.Slerp(_championScript.transform.rotation, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
 
 
-            if (distanceToPlayer <= _championScript.AttackRange)
-            {
-                return State.Success;
-            }
-            else
-            {
-                return State.Failure; //Player is not in attack range
-            }
+            //if (distanceToPlayer <= _championScript.AttackRange)
+            //{
+            //    return State.Success;
+            //}
+            //else
+            //{
+            //    return State.Failure; //Player is not in attack range
+            //}
         }
-        else
-        {
-            return State.Failure; //no player is found
-        }
+        //else
+        //{
+        //    return State.Success; //no player is found
+        //}
+        return State.Success;
     }
 }

@@ -16,10 +16,11 @@ public class CMPChaseRange : ActionNode
 
     protected override State OnUpdate()
     {
-        if (_playerScript != null && _championScript != null)
+        float distanceToPlayer = Vector3.Distance(_championScript.transform.position, _playerScript.transform.position);
+        if (_playerScript != null && _championScript != null && distanceToPlayer > _championScript.AttackRange) //Inte i attack range
         {
 
-            float distanceToPlayer = Vector3.Distance(_championScript.transform.position, _playerScript.transform.position);
+           // float distanceToPlayer = Vector3.Distance(_championScript.transform.position, _playerScript.transform.position);
             if (distanceToPlayer > _championScript.ChaseDistance)
             {
                 return State.Success;
