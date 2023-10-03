@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5909304741565312604}
   - component: {fileID: 5515049148136220596}
   - component: {fileID: -3204919219763798168}
-  m_Layer: 0
+  - component: {fileID: 2560816938689745748}
+  m_Layer: 7
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: EnemyTesting
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,5 +134,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpmanger: {fileID: 0}
+  hpmanger: {fileID: 2560816938689745748}
   ChaseDistance: 2
+--- !u!114 &2560816938689745748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094717258480921013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealthPoints: 100
+  CurrentHealthPoints: 0
+  HasDismembrent: 0

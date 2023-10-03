@@ -8,6 +8,7 @@ public class CMPChaseNode : ActionNode
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
         //_championScript.Anim.SetTrigger("Walking");
+        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     protected override void OnStop()
