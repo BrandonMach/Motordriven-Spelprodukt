@@ -84,7 +84,7 @@ public class PlayerCombat : MonoBehaviour
                         break;
                 }
 
-                enemy.TakeDamage(1.0f);
+                enemy.TakeDamage(50.0f);
             }
         }
         Gizmos.color = Color.green;
