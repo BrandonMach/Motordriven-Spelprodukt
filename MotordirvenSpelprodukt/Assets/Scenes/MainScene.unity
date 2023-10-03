@@ -3888,7 +3888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dismembrentScript: {fileID: 0}
+  HasDismembrent: 0
   ChaseDistance: 2
 --- !u!54 &1130804722
 Rigidbody:
@@ -4998,7 +4998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dismembrentScript: {fileID: 0}
+  HasDismembrent: 0
   ChaseDistance: 2
 --- !u!54 &1510223370
 Rigidbody:
@@ -6067,6 +6067,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7029345431797924393, guid: 21ed93d6ff784f24cbaabf7abfb19134, type: 3}
+      propertyPath: _slamHitbox
+      value: 
+      objectReference: {fileID: 78768719}
     - target: {fileID: 7029345431797924393, guid: 21ed93d6ff784f24cbaabf7abfb19134, type: 3}
       propertyPath: _mainColider
       value: 
