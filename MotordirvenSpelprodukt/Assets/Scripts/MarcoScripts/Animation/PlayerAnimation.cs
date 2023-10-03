@@ -10,12 +10,10 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Player _player;
 
     [Header("Combo Sequence")]
-    [SerializeField] private float _comboWindowTimer = 0;
     [SerializeField] private bool _startComboWindowTimer;
-    [SerializeField] private float comboWindow = 2;
 
 
-
+    private float _comboWindowTimer = 0;
     private string _currentCombo = ""; //
     private float _desiredWeight = 0;
     private float _weight = 0;
@@ -52,9 +50,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
     {
-
-        HandleInput(e.attackType);
         _startComboWindowTimer = true;
+        HandleInput(e.attackType);
         _comboWindowTimer = 0;
     }
 
@@ -62,18 +59,20 @@ public class PlayerAnimation : MonoBehaviour
     {
         // If combat layer is disabled, allow new input.
 
-   
-        switch (attackType)
+        if (_startComboWindowTimer)
         {
-            case Player.OnAttackPressedEventArgs.AttackType.Light:
-                _animator.SetTrigger("Trigger_L");
-                break;
-            case Player.OnAttackPressedEventArgs.AttackType.Heavy:
-                _animator.SetTrigger("Trigger_H");
-                break;
-            default:
-                break;
-        }        
+            switch (attackType)
+            {
+                case Player.OnAttackPressedEventArgs.AttackType.Light:
+                    _animator.SetTrigger("Trigger_L");
+                    break;
+                case Player.OnAttackPressedEventArgs.AttackType.Heavy:
+                    _animator.SetTrigger("Trigger_H");
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void Update()
@@ -124,13 +123,13 @@ public class PlayerAnimation : MonoBehaviour
     void StartComboWindowCheck()
     {
 
-        _comboWindowTimer += Time.deltaTime;
-        if (_startComboWindowTimer && _comboWindowTimer > 1.5)
+        if (_startComboWindowTimer)
         {
-            EndCombo();
-        }
-        if (_comboWindowTimer >= comboWindow)
-        {
+            _comboWindowTimer += Time.deltaTime;
+            if (_comboWindowTimer > _timeBetweenInputs)
+            {
+                EndCombo();
+            }
         }
     }
 
@@ -138,6 +137,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         _comboWindowTimer = 0;
         _animator.SetTrigger("ComboBroken");
+        _animator.ResetTrigger("Trigger_L");
+        _animator.ResetTrigger("Trigger_H");
         _startComboWindowTimer = false;
     }
 
