@@ -1,9 +1,11 @@
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+#if UNITY_EDITOR
 using static UnityEditor.Experimental.GraphView.GraphView;
+#endif
 
 public class MMAttackNode : ActionNode
 {
@@ -12,6 +14,7 @@ public class MMAttackNode : ActionNode
     protected override void OnStart()
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
+        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
 
     }
 
@@ -47,4 +50,4 @@ public class MMAttackNode : ActionNode
         }
     }
 }
-#endif
+//#endif
