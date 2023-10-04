@@ -11,7 +11,7 @@ public class CMPAtkJumpSlam : ActionNode
         _championScript = _enemyObject.GetComponent<CMPScript>();
         float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         _championScript.Damage = 40; //Set specific attack damage
-
+        
         if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 2 && NTime > 1.0f)
         {
             _championScript.AnimationPlaying = true;

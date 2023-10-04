@@ -5,9 +5,10 @@ using UnityEngine;
 public class ChampionWeaponManager : MonoBehaviour
 {
     [SerializeField] CMPScript _championScript;
+    EntertainmentManager _etpmanager;
     void Start()
     {
-      
+        _etpmanager = GameObject.FindGameObjectWithTag("ETPManager").GetComponent<EntertainmentManager>();
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class ChampionWeaponManager : MonoBehaviour
 
             other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage);
             other.GetComponent<HealthManager>().Knockback(hitDirection, kbForce);
-           
+            _etpmanager.DecreseETP(_championScript.ETPDecreaseValue);
 
         }
     }
