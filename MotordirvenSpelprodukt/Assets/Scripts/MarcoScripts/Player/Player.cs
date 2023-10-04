@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     private string _input;
 
-
+    EntertainmentManager _etpManager;
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
 
 
         Debug.Log("Health: " +  _currentHealth);
+        _etpManager = GameObject.FindGameObjectWithTag("ETPManager").GetComponent<EntertainmentManager>();
     }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
@@ -150,6 +151,11 @@ public class Player : MonoBehaviour
         {
             if (currentAttackSO.name.ToLower() == name.ToLower())
             {
+                if (currentAttackSO.Last)//dhasdasbdjabdkanbdkandbasdj
+                {
+                    
+                    _etpManager.increaseETP(20);
+                }
                 return currentAttackSO;
             }
         }

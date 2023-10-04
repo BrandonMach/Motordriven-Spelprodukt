@@ -81,7 +81,6 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     public void GetStunned(float stunDuration)
     {
-        Debug.LogError("Hej");
         if (this.gameObject.tag == "EnemyTesting")
         {
             this.gameObject.GetComponent<EnemyScript>().Stunned = true;
