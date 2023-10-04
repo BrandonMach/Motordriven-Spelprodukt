@@ -22,7 +22,7 @@ public class PresentationTransition : MonoBehaviour
             Orc.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2)) //AI
+        if (Input.GetKeyDown(KeyCode.Alpha9)) //AI
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }

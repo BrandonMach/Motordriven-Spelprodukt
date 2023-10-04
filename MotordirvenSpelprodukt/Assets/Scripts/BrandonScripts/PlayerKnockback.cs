@@ -23,23 +23,23 @@ public class PlayerKnockback : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_knockbackCounter > 0) //No knockback
-        {
-            _player.Knockbacked(_player, EventArgs.Empty);
-            _knockbackCounter -= Time.deltaTime;
-        }
-        _player.KnockbackedFinish(_player, EventArgs.Empty);
+        //if(_knockbackCounter > 0) //No knockback
+        //{
+        //    _player.Knockbacked(_player, EventArgs.Empty);
+        //    _knockbackCounter -= Time.deltaTime;
+        //}
+        //_player.KnockbackedFinish(_player, EventArgs.Empty);
 
     }
 
     public void Knockback(Vector3 direction, float knockbackForce)
     {
-        _knockbackCounter = KnockbackTime; //Player cant move
-        //pMovment. Videon
+       // _knockbackCounter = KnockbackTime; //Player cant move
+       // //pMovment. Videon
 
-       // direction = new Vector3(1, 1, 1);
-        //_playerMovment._moveDirection = direction * KnockbackForce;
-        rb.AddForce(direction.normalized * knockbackForce, ForceMode.Impulse);
+       //// direction = new Vector3(1, 1, 1);
+       // //_playerMovment._moveDirection = direction * KnockbackForce;
+       // rb.AddForce(direction.normalized * knockbackForce, ForceMode.Impulse);
         
     }
 }
