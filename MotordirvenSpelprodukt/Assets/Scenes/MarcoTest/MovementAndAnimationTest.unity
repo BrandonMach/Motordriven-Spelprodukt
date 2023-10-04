@@ -272,6 +272,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7924081380696824368, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
   m_PrefabInstance: {fileID: 572543189}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &320460594 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5268763437340454699, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+  m_PrefabInstance: {fileID: 572543189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &572543189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,8 +286,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 734340086676630134, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _dashTime
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 734340086676630134, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _dashSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 734340086676630134, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _cooldownTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 734340086676630134, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _rotationSpeed
@@ -292,6 +305,14 @@ PrefabInstance:
       propertyPath: _startDashTime
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 820869868523116726, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _shockWave
+      value: 
+      objectReference: {fileID: 1577381065}
+    - target: {fileID: 820869868523116726, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _weaponTrail
+      value: 
+      objectReference: {fileID: 320460594}
     - target: {fileID: 892571332320288670, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: m_Constraints
       value: 112
@@ -300,10 +321,18 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1266560293631029085, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5118350049508287232, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _timeBetweenInputs
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5597014018079178594, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _gameInput
       value: 
@@ -311,6 +340,10 @@ PrefabInstance:
     - target: {fileID: 5597014018079178594, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597014018079178594, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _timeBetweenInputs
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7184652832142874426, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -567,7 +600,6 @@ MonoBehaviour:
   _menuOption2: {fileID: 0}
   _menuOption3: {fileID: 0}
   _pauseMenuUI: {fileID: 0}
-  _gameInput: {fileID: 1796412708}
 --- !u!4 &745618070
 Transform:
   m_ObjectHideFlags: 0
@@ -954,6 +986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealthPoints: 200
   CurrentHealthPoints: 0
+  HasDismembrent: 0
 --- !u!1 &1181815559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,6 +1181,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1577381065 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3298657136214789779, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+  m_PrefabInstance: {fileID: 572543189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1796412707
 GameObject:
   m_ObjectHideFlags: 0
