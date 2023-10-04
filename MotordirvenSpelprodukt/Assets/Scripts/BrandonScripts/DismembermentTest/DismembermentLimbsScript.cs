@@ -12,6 +12,7 @@ public class DismembermentLimbsScript : MonoBehaviour
 
     //For testing
     DismemberentEnemyScript dismsmebrentScript;
+    float limbTimerAlive = 1.5f;
 
     void Start()
     {
