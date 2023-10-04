@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
 
-        if (_playerMovement.IsMoving())
+        if (_playerMovement.IsMoving() && _playerDash.IsDashAvailable())
         {
             OnDisableMovement?.Invoke(this, EventArgs.Empty);
 
@@ -141,7 +141,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
+        if (_inputTimer < _timeBetweenInputs)
+        {
+            _inputTimer += Time.deltaTime;
+        }
     }
 
     
