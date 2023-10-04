@@ -35,7 +35,6 @@ public class PlayerKnockback : MonoBehaviour
     public void Knockback(Vector3 direction, float knockbackForce)
     {
        // _knockbackCounter = KnockbackTime; //Player cant move
-       // //pMovment. Videon
 
        //// direction = new Vector3(1, 1, 1);
        // //_playerMovment._moveDirection = direction * KnockbackForce;
