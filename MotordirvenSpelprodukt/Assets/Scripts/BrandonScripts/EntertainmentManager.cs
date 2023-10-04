@@ -154,7 +154,7 @@ public class EntertainmentManager : MonoBehaviour
 
     }
 
-    public void DecreseETP(int amoutToDecrese)
+    public void DecreseETP(float amoutToDecrese)
     {
         _entertainmentPoints -= amoutToDecrese;
     }

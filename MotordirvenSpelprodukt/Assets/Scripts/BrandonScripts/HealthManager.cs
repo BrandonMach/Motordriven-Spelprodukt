@@ -14,6 +14,11 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
     private DismemberentEnemyScript _dismembrentScript;
     public bool HasDismembrent;
 
+    public bool Dead;
+    float _destroydelay = 2.5f;
+
+    public bool GodMode;
+
     void Start()
     {
        
@@ -23,7 +28,14 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
     // Update is called once per frame
     void Update()
     {
-        
+        if (!GodMode && Dead)
+        {
+            _destroydelay -= Time.deltaTime;
+            if(_destroydelay <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void TakeDamage(float damage, Vector3 hitDirection, float knockBackForce)
@@ -63,7 +75,7 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
                 _dismembrentScript.GetKilled();
             }
 
-
+            Die();
         }
     }
 
@@ -81,7 +93,7 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     public void Die()
     {
-        
+        Dead = true;
     }
 
     public void Knockback(Vector3 hitDirection, float knockBackForce)

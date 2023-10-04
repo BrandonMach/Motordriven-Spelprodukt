@@ -11,9 +11,9 @@ public class MMScript : EnemyScript
     void Start()
     {
         _movementSpeed = 2;
-        _attackRange = 2;
+        _attackRange = 4;
         _attackCooldown = 2;
-        ChaseDistance = 1;
+        ChaseDistance = 3;
         _currentHealth = 100;
         _maxHealth = 100;
     }

@@ -33,6 +33,7 @@ public class CMPScript : EnemyScript
     public GameObject _slamHitbox;
 
     public float Damage;
+    public float ETPDecreaseValue;
 
     void Start()
     {

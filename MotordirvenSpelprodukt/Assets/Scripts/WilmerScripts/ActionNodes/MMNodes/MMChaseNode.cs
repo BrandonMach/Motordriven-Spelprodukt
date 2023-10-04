@@ -27,9 +27,13 @@ public class MMChaseNode : ActionNode
         // Normalize the direction to get a unit vector
         direction.Normalize();
 
-        // Move the AI towards the player
-        _meleeMinionScript.transform.Translate(_meleeMinionScript.MovementSpeed  * Time.deltaTime * direction);
-        
+        //Rotate the Champion towards the players position
+        _meleeMinionScript.transform.rotation = Quaternion.Slerp(_meleeMinionScript.transform.rotation, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
+
+
+        // Move the AI forward, since the AI is facing towards the player
+        _meleeMinionScript.transform.position += _meleeMinionScript.transform.forward * _meleeMinionScript.MovementSpeed * Time.deltaTime;
+
         return State.Success;
 
     }

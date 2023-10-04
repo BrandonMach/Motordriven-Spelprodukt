@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour
 
 
     public HealthManager hpmanger;
+   
 
     
 
@@ -30,6 +31,7 @@ public class EnemyScript : MonoBehaviour
     public float AttackCooldown { get { return _attackCooldown; } }
     public float LastAttackTime { get { return _lastAttackTime; } set { _lastAttackTime = value; } }
     public bool Stunned { get { return _stunned; } set { _stunned = value; } }
+    
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,8 @@ public class EnemyScript : MonoBehaviour
         //    _dismembrentScript = GetComponent<DismemberentEnemyScript>();
         //}
         
+
+
     }
 
     // Update is called once per frame

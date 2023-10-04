@@ -11,7 +11,7 @@ public class CMPAtkClubSwingDown : ActionNode
         _championScript = _enemyObject.GetComponent<CMPScript>();
         float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         _championScript.Damage = 20; //Set specific attack damage
-
+        _championScript.ETPDecreaseValue = 10;
         if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 1 && NTime > 1.0f)
         {   
             _championScript.AnimationPlaying = true;
