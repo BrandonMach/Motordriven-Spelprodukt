@@ -46,6 +46,6 @@ public abstract class MenuAbstract : MonoBehaviour, IMenu
     // Update is called once per frame
     protected void Update()
     {
-       //ClickESC();
+       ClickESC();
     }
 }

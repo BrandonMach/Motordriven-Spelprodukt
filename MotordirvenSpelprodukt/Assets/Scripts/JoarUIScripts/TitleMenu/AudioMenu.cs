@@ -17,7 +17,7 @@ public class AudioMenu : MenuAbstract, IMenu
 
     public void ClickESC()
     {
-        throw new System.NotImplementedException();
+        base.ClickESC();
     }
 
     public void ClickMenuOption1()
