@@ -19,8 +19,8 @@ public class EntertainmentManager : MonoBehaviour
 
 
     [Header("UI Arrow")]
-    [SerializeField] private Transform _indicatorArrow;
-    private float _indicatorArrowrRotateAngle;
+    [SerializeField] private RectTransform _indicatorArrow;
+    [SerializeField] [Range(-360, 360)] float _arrowPosition;
 
 
     //ETP = Entartainment Points
@@ -64,15 +64,14 @@ public class EntertainmentManager : MonoBehaviour
         _ETPThreshold = _maxETP / 2;
         _entertainmentPoints = _startETP;
         //_indicatorArrowrRotateAngle = 90;
-
-        _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
     }
 
     // Update is called once per frame
     void Update()
     {
+        _arrowPosition = Mathf.Clamp(_arrowPosition ,- 360, 360);
+        
         UpdateETPArrow();
-        _indicatorArrowrRotateAngle = Mathf.Clamp(_indicatorArrowrRotateAngle, 0, 180);
 
         CheckIfOutOfCombat();
 
@@ -111,8 +110,7 @@ public class EntertainmentManager : MonoBehaviour
 
     void UpdateETPArrow()
     {
-        _indicatorArrowrRotateAngle = 180 + (-180 / _maxETP) * _entertainmentPoints;
-        _indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
+        _indicatorArrow.localPosition = new Vector3(-360 +(720/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, 0);
     }
 
     void CheckIfOutOfCombat()
