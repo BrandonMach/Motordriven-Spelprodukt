@@ -69,9 +69,10 @@ public class EntertainmentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _arrowPosition = Mathf.Clamp(_arrowPosition ,- 360, 360);
+        _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
         
         UpdateETPArrow();
+        
 
         CheckIfOutOfCombat();
 
