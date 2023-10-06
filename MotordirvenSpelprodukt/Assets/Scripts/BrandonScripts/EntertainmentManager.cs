@@ -20,7 +20,6 @@ public class EntertainmentManager : MonoBehaviour
 
     [Header("UI Arrow")]
     [SerializeField] private RectTransform _indicatorArrow;
-    [SerializeField] [Range(-360, 360)] float _arrowPosition;
 
 
     //ETP = Entartainment Points
@@ -32,7 +31,6 @@ public class EntertainmentManager : MonoBehaviour
         return _ETPThreshold;
     }
     private float _startETP;
-    private float _currentThreshold;
 
    
 
@@ -96,9 +94,6 @@ public class EntertainmentManager : MonoBehaviour
             CrowdText.color = Color.black;
         }
 
-        //_indicatorArrowrRotateAngle = (180 / _maxETP) * _entertainmentPoints;
-
-        _entertainmentPoints =  Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
 
@@ -145,12 +140,7 @@ public class EntertainmentManager : MonoBehaviour
 
     void OutOfCombatDecreaseOverTime()
     {
-        //_indicatorArrowrRotateAngle = Mathf.Clamp(_indicatorArrowrRotateAngle, 0, 180);
-
-        //_indicatorArrow.eulerAngles = new Vector3(0, 0, _indicatorArrowrRotateAngle);
-
         _entertainmentPoints -= (Time.deltaTime); //Every second ETP -1
-
     }
 
     public void DecreseETP(float amoutToDecrese)
@@ -166,7 +156,6 @@ public class EntertainmentManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);
-        
+        Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);      
     }
 }
