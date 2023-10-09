@@ -106,7 +106,7 @@ public class PlayerCombat : MonoBehaviour
     {
         enemy.GetStunned(2.0f);
         Vector3 pos = (enemy as MonoBehaviour).transform.position;
-        pos = new Vector3(pos.x, pos.y + 1, pos.z);
+        pos = new Vector3(pos.x, pos.y + (enemy as MonoBehaviour).transform.localScale.y + 1, pos.z);
         Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0));
     }
 

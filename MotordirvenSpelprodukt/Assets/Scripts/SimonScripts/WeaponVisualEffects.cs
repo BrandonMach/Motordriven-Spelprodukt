@@ -33,7 +33,7 @@ public class WeaponVisualEffects : MonoBehaviour
         Instantiate(_shockWaveCircle, shockwavePos, shockwaveRot);
         Instantiate(_shockWaveFill, shockwavePos, shockwaveRot);
         Instantiate(_debree, shockwavePos, shockwaveRot);
-        Instantiate(_crack, new Vector3(shockwavePos.x, 0f, shockwavePos.z), shockwaveRot);
+        Instantiate(_crack, new Vector3(shockwavePos.x, 0.25f, shockwavePos.z), shockwaveRot);
 
         // Destroy objects after finished playing, until object pool is implemented.
 
