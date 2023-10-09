@@ -19,6 +19,7 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     public bool GodMode;
 
+    public SlowMo _slowMo;
     void Start()
     {
        
@@ -33,7 +34,9 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
             _destroydelay -= Time.deltaTime;
             if(_destroydelay <= 0)
             {
+                
                 Destroy(gameObject);
+                
             }
         }
     }
@@ -92,6 +95,7 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     public void Die()
     {
+        _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
         Dead = true;
     }
 

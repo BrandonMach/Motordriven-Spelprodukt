@@ -50,6 +50,18 @@ public class EquipmentWheel : MonoBehaviour
             //Debug.LogError(angle);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             if (angle >= 46 && angle < 135)
             {
                 SelectObject.eulerAngles = new Vector3(0, 0, 270);
