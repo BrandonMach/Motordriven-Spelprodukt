@@ -15,11 +15,13 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
     public bool HasDismembrent;
 
     public bool Dead;
-    float _destroydelay = 2.5f;
+    public float _destroydelay = 2.5f;
 
     public bool GodMode;
 
+    public bool hasSlowMo;
     public SlowMo _slowMo;
+    
     void Start()
     {
        
@@ -95,7 +97,11 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     public void Die()
     {
-        _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
+        if (hasSlowMo)
+        {
+            _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
+        }
+        
         Dead = true;
     }
 
