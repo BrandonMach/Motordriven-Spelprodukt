@@ -12,7 +12,9 @@ public class KMScript : EnemyScript
     [Header("Attack")]
     [SerializeField] private Collider expolisionHitbox;
     [SerializeField] public float _diveRange;
-
+    public ParticleSystem _explosion;
+    [SerializeField] public bool PlayerInpact;
+    
 
     void Start()
     {
@@ -34,11 +36,20 @@ public class KMScript : EnemyScript
 
     public void ActivateExpolsion()
     {
+        
         expolisionHitbox.enabled = true;
+        
     }
     public void ExplodeDie()
     {
-        expolisionHitbox.enabled = true;
-        hpmanger.TakeDamage(100);
+
+        if (!PlayerInpact)
+        {
+            expolisionHitbox.enabled = true;
+            Instantiate(_explosion, transform);
+            hpmanger.TakeDamage(100);
+        }
+        
+        
     }
 }

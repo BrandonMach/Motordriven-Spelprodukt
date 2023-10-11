@@ -6,6 +6,7 @@ public class KamekazeAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     int tempDamage = 20;
+    
     void Start()
     {
         
@@ -21,8 +22,13 @@ public class KamekazeAttack : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            KMScript _kmScript = gameObject.GetComponentInParent<KMScript>();
+            _kmScript.PlayerInpact = true;
+            Instantiate(_kmScript._explosion, transform.parent);
             other.GetComponent<HealthManager>().TakeDamage(tempDamage);
             this.GetComponentInParent<HealthManager>().TakeDamage(100);
+           
         }
+        
     }
 }
