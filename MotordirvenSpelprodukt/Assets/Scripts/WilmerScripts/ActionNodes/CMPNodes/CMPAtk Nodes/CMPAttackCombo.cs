@@ -9,14 +9,15 @@ public class CMPAttackCombo : ActionNode
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
-        float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        
         _championScript.Damage = 15; //Set specific attack damage
         _championScript.ETPDecreaseValue = 10;
-        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 3 && NTime > 1.0f)
+        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 3 && _championScript.NTime > 1.0f)
         {
             _championScript.AnimationPlaying = true;
             //_championScript.Anim.SetInteger("Attack Index", 1);
             _championScript.Anim.Play("Attack3");
+            _championScript.CanChase = false;
 
         }
     }
@@ -31,8 +32,8 @@ public class CMPAttackCombo : ActionNode
         if (_championScript.AttackIndex == 3)
         {
 
-            float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if (NTime > 1.0f)
+            
+            if (_championScript.NTime > 1.0f)
             {
 
                 // _championScript.AnimationPlaying = false;

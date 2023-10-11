@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 9ffe7ff2507b1a1459b53822a5c67f24
-  position: {x: 502, y: 889}
+  position: {x: 479.49994, y: 908.2239}
   agent: {fileID: 0}
   description: Check if attack has been randomly choosen
 --- !u!114 &-7596930664986710570
@@ -51,12 +51,15 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 801ea5ec3664fb44d9649f6c7b31ece3
-  position: {x: 685.75696, y: 649}
+  position: {x: 705, y: 673}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: -8286850051065195188}
+  - {fileID: -8286850051065195188}
   - {fileID: 1547318638814214752}
+  - {fileID: 1547318638814214752}
+  - {fileID: 434144137662881605}
   - {fileID: 434144137662881605}
 --- !u!114 &-6316607354710563641
 MonoBehaviour:
@@ -73,7 +76,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 39e37602ebfdf82469b0695c293277b3
-  position: {x: -11.565324, y: -254.43669}
+  position: {x: -68, y: -299.75848}
   agent: {fileID: 0}
   description: 
   child: {fileID: 697766454184188738}
@@ -97,7 +100,10 @@ MonoBehaviour:
   description: 
   children:
   - {fileID: -2586723080058972199}
+  - {fileID: -2586723080058972199}
   - {fileID: 7658674035191668665}
+  - {fileID: 7658674035191668665}
+  - {fileID: -6501887954848921244}
   - {fileID: -6501887954848921244}
 --- !u!114 &-2586723080058972199
 MonoBehaviour:
@@ -114,9 +120,28 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e5c8e75a896b85341a1822faaccb3ddd
-  position: {x: 134.99998, y: 673}
+  position: {x: 139.56265, y: 708}
   agent: {fileID: 0}
   description: 
+--- !u!114 &-2076776044227163259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ac453e72153b949a6dfcbc50425a46, type: 3}
+  m_Name: CMPAnimationWait
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: e1bbe3266de793c4390863035ac23420
+  position: {x: -676, y: 603}
+  agent: {fileID: 0}
+  description: 
+  duration: 0
 --- !u!114 &-1772561330637509913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +188,9 @@ MonoBehaviour:
   - {fileID: -8286850051065195188}
   - {fileID: 434144137662881605}
   - {fileID: 2043741900465948765}
-  - {fileID: 830290302452348644}
-  - {fileID: 3516473332075474042}
+  - {fileID: 5208248866919576293}
+  - {fileID: -2076776044227163259}
+  - {fileID: 5262290966058906743}
 --- !u!114 &434144137662881605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,10 +224,10 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3abfb9d4252840240822533328dec90a
-  position: {x: -12.000048, y: -80.3975}
+  position: {x: -68, y: -81.32252}
   agent: {fileID: 0}
   description: 
-  child: {fileID: 3516473332075474042}
+  child: {fileID: 5262290966058906743}
   RestartOnFailure: 1
   RestartOnSuccess: 1
   maxRepeats: 0
@@ -220,9 +246,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: cf1c43d8aec6f4144b0c4757b2d7796c
-  position: {x: -550, y: 638}
+  position: {x: -557.6045, y: 686}
+  blackboard: {}
   agent: {fileID: 0}
   description: Funkar inte nu. Kommenterat bort all kod
+  _meleeMinionScript: {fileID: 0}
+  _enemyObject: {fileID: 0}
+  _championScript: {fileID: 0}
+  _playerScript: {fileID: 0}
 --- !u!114 &1547318638814214752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,10 +287,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0459a474efe44ca46ab0127e57fb92c4
-  position: {x: -217.99997, y: 95.00001}
+  position: {x: -794.06146, y: 370}
   agent: {fileID: 0}
   description: 
-  children: []
+  children:
+  - {fileID: 5208248866919576293}
+  - {fileID: -2076776044227163259}
 --- !u!114 &2043741900465948765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,13 +308,35 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e08e59a50b21bb245ac2d5b2de3b3164
-  position: {x: -246.7125, y: 369.9975}
+  position: {x: -233.31197, y: 417}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: -7596930664986710570}
+  - {fileID: -7596930664986710570}
+  - {fileID: -7596930664986710570}
   - {fileID: -1772561330637509913}
---- !u!114 &3516473332075474042
+  - {fileID: -1772561330637509913}
+  - {fileID: -1772561330637509913}
+--- !u!114 &5208248866919576293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2186319802f5c1b4ba792d4c6015fed1, type: 3}
+  m_Name: CMPStatusEffect
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 9ae6e9c30abb2614d8cd48397b7e3ff7
+  position: {x: -1013.7237, y: 602.9999}
+  agent: {fileID: 0}
+  description: 
+--- !u!114 &5262290966058906743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,11 +350,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 6749f5d426e2e93448a35139dcfe5caf
-  position: {x: 135.00003, y: 122.37576}
+  guid: 32790432d3588714caea0014a8a5f874
+  position: {x: -68.00005, y: 138.63657}
   agent: {fileID: 0}
   description: 
   children:
+  - {fileID: 1606889413815288344}
   - {fileID: 2043741900465948765}
   - {fileID: -4928812810248711920}
 --- !u!114 &7658674035191668665

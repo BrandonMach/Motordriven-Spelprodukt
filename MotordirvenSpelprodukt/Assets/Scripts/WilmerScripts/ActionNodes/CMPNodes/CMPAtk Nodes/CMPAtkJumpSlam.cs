@@ -9,13 +9,14 @@ public class CMPAtkJumpSlam : ActionNode
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
-        float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        
         _championScript.Damage = 40; //Set specific attack damage
         _championScript.ETPDecreaseValue = 10;
-        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 2 && NTime > 1.0f)
+        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 2 && _championScript.NTime > 1.0f)
         {
             _championScript.AnimationPlaying = true;
             _championScript.Anim.Play("Attack2");
+            _championScript.CanChase = false;
 
         }
 
@@ -31,8 +32,8 @@ public class CMPAtkJumpSlam : ActionNode
         if (_championScript.AttackIndex == 2)
         {
 
-            float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if (NTime > 1.0f)
+            
+            if (_championScript.NTime > 1.0f)
             {
 
                 // _championScript.AnimationPlaying = false;
