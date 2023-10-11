@@ -25,11 +25,10 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
 
-    // If we decide to have other items in inventory than weapons, create a baseclass Item that weapon and other items inherit
-    private List<Weapon> _inventoryList = new List<Weapon>();
+    private List<Item> _inventoryList = new List<Item>();
     private int _capacity = 25;
 
-    public List<Weapon> InventoryList { get => _inventoryList; set => _inventoryList = value; }
+    public List<Item> InventoryList { get => _inventoryList; set => _inventoryList = value; }
     public int Capacity { get => _capacity; set => _capacity = value; }
 
     public bool Add(Item item)
@@ -44,12 +43,11 @@ public class Inventory : MonoBehaviour
         {
             _inventoryList.Add(weapon);
         }
-        else if (item is Armour armour)
-        {
-            _inventoryList.Add(armour);
-        }
 
-        
+        //else if (item is Potion potion)
+        //{
+        //    // Example
+        //}
 
         if (onItemChangedCallback != null)
         {
@@ -59,9 +57,17 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public void RemoveWeapon(Weapon weapon)
+    public void Remove(Item item)
     {
-        _inventoryList.Remove(weapon);
+        if (item is Weapon weapon)
+        {
+            _inventoryList.Remove(weapon);
+        }
+
+        //else if (item is Potion potion)
+        //{
+        //    // Example
+        //}
 
         if (onItemChangedCallback != null)
         {
