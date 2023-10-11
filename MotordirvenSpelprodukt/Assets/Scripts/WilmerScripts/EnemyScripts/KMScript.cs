@@ -25,7 +25,7 @@ public class KMScript : EnemyScript
         ChaseDistance = 2;
         _currentHealth = 100;
         _maxHealth = 100;
-        _diveRange = 8;
+        
     }
 
     // Update is called once per frame
