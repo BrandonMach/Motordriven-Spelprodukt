@@ -4,20 +4,41 @@ using UnityEngine;
 
 public class KMScript : EnemyScript
 {
+
+    public Animator Anim;
     public float ChaseDistance;
+
+
+    [Header("Attack")]
+    [SerializeField] private Collider expolisionHitbox;
+    [SerializeField] public float _diveRange;
+
+
     void Start()
     {
+        expolisionHitbox.enabled = false;
         _movementSpeed = 5; //Ramp up speed kan testas
         _attackRange = 0.2f; //?? kanske inte  behövs
         _attackCooldown = 2; //Kanske inte behövs
         ChaseDistance = 2;
         _currentHealth = 100;
         _maxHealth = 100;
+        _diveRange = 8;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ActivateExpolsion()
+    {
+        expolisionHitbox.enabled = true;
+    }
+    public void ExplodeDie()
+    {
+        expolisionHitbox.enabled = true;
+        hpmanger.TakeDamage(100);
     }
 }
