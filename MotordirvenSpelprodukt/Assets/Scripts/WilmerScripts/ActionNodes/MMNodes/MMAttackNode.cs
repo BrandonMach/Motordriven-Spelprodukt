@@ -15,7 +15,18 @@ public class MMAttackNode : ActionNode
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+        
 
+        if (_meleeMinionScript.NTime > 1.0f)
+        {
+            _meleeMinionScript.AnimationPlaying = true;
+            //_championScript.Anim.SetInteger("Attack Index", 1);
+            _meleeMinionScript.Anim.Play("Attack");
+            _meleeMinionScript.CanChase = false;
+
+        }
+
+        Debug.LogWarning("HEjejejjeeje");
     }
 
     protected override void OnStop()
@@ -25,29 +36,33 @@ public class MMAttackNode : ActionNode
 
     protected override State OnUpdate()
     {
-        // Check if enough time has passed since the last attack
-        if (Time.time - _meleeMinionScript.LastAttackTime >= _meleeMinionScript.AttackCooldown)
+
+        if (_meleeMinionScript.NTime > 1.0f)
         {
-            // Perform the attack here
-            // You can add your attack logic or call a method to attack the player
-            _meleeMinionScript.LastAttackTime = Time.time;
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            Debug.Log($"AAAAAAAAttack!");
-            
-            //Call TakeDamage() in player
-            return State.Success; // Attack successful
+
+            // _championScript.AnimationPlaying = false;
+            return State.Success;
         }
         else
         {
-            return State.Failure; // Attack on cooldown
+            return State.Running;
         }
+
+        // Check if enough time has passed since the last attack
+        //if (Time.time - _meleeMinionScript.LastAttackTime >= _meleeMinionScript.AttackCooldown)
+        //{
+        //    // Perform the attack here
+        //    // You can add your attack logic or call a method to attack the player
+        //    _meleeMinionScript.LastAttackTime = Time.time;
+
+
+        //    //Call TakeDamage() in player
+        //    return State.Success; // Attack successful
+        //}
+        //else
+        //{
+        //    return State.Failure; // Attack on cooldown
+        //}
     }
 }
 //#endif
