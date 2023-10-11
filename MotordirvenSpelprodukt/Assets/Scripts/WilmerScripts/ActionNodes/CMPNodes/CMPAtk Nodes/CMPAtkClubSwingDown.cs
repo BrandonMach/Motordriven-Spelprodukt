@@ -9,13 +9,14 @@ public class CMPAtkClubSwingDown : ActionNode
     {
         
         _championScript = _enemyObject.GetComponent<CMPScript>();
-        float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        //float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         _championScript.Damage = 20; //Set specific attack damage
         _championScript.ETPDecreaseValue = 10;
-        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 1 && NTime > 1.0f)
+        if (/*!_championScript.AnimationPlaying &&*/ _championScript.AttackIndex == 1 && _championScript.NTime > 1.0f)
         {   
             _championScript.AnimationPlaying = true;
             _championScript.Anim.Play("Attack1");
+            _championScript.CanChase = false;
         }
         
 
@@ -31,8 +32,8 @@ public class CMPAtkClubSwingDown : ActionNode
         if (_championScript.AttackIndex == 1)
         {
 
-            float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if (NTime > 1.0f)
+            //float NTime = _championScript.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (_championScript.NTime > 1.0f)
             {
                
                // _championScript.AnimationPlaying = false;

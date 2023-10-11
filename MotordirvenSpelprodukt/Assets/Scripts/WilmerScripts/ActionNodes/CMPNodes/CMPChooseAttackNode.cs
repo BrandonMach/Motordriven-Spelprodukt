@@ -8,7 +8,7 @@ public class CMPChooseAttackNode : ActionNode
     protected override void OnStart()
     {
         _championScript = _enemyObject.GetComponent<CMPScript>();
-        chooseAttack = Random.Range(1, 3);
+        //chooseAttack = Random.Range(1, 3);
 
         _championScript.AttackIndex = Random.Range(1, 4);
 
