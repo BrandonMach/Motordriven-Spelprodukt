@@ -67,6 +67,7 @@ public class EntertainmentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting"); //Inte den finaste lösningen
         _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
         
         UpdateETPArrow();
