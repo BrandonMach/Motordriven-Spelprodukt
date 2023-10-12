@@ -6,7 +6,8 @@ public class CheckOutOfCombat : ActionNode
 {
     protected override void OnStart()
     {
-        
+        _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
+        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     protected override void OnStop()
@@ -16,15 +17,15 @@ public class CheckOutOfCombat : ActionNode
 
     protected override State OnUpdate()
     {
-        //if (playerIsOutOfCombat)
-        //{
-        //    return State.Failure;
-        //}
-        //else
-        //{
-        //    return State.Success;
-        //}
+        if (_playerScript.playerIsOutOfCombat)
+        {
+            return State.Failure;
+        }
+        else
+        {
+            return State.Success;
+        }
         //return State.Success;
-        return State.Failure;
+        //return State.Failure;
     }
 }
