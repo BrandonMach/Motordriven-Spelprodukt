@@ -51,7 +51,7 @@ public class SelectablePanel : MonoBehaviour
     {
 
     }
-    public void InventoryPanelClicked()
+    public void InventoryPanelClicked() 
     {
         SetCurrentPanel(0);
     }
