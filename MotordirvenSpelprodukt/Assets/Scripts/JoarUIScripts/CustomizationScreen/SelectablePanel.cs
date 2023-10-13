@@ -20,8 +20,7 @@ public class SelectablePanel : MonoBehaviour
         {
             _inventoryPanel,
             _abilitiesPanel,
-            _challengesPanel,
-            _shopPanel
+            _challengesPanel
         };
     }
 
@@ -54,19 +53,37 @@ public class SelectablePanel : MonoBehaviour
     public void InventoryPanelClicked() 
     {
         SetCurrentPanel(0);
+        DeactivateShop();
     }
     public void AbilitiesPanelClicked()
     {
         SetCurrentPanel(1);
+        DeactivateShop();
     }
 
     public void ChallengesPanelClicked()
     {
         SetCurrentPanel(2);
+        DeactivateShop();
     }
 
     public void ShopPanelClicked()
     {
-        SetCurrentPanel(3);
+        SetCurrentPanel(0);
+        ActivateShop();
+        
+    }
+
+    private void ActivateShop()
+    {
+        if (!_shopPanel.activeSelf)
+        {
+            _shopPanel.SetActive(true);
+        }
+    }
+
+    private void DeactivateShop()
+    {
+        _shopPanel.SetActive(false);
     }
 }
