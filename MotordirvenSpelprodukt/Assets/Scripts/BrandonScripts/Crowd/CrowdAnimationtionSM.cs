@@ -23,18 +23,29 @@ namespace CrowdAnim.Animation
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            //_lastPoseChangeDuration += Time.deltaTime;
+            _lastPoseChangeDuration += Time.deltaTime;
 
-            //if(_lastPoseChangeDuration >= _poseChangeFrequency && stateInfo.length >=1)
+            //if (_lastPoseChangeDuration >= _poseChangeFrequency && stateInfo.length >= 1)
             //{
             //    _startPose = animator.GetFloat("Pose");
             //    _endPose = Random.Range(0f, 1f);
 
             //    _lastPoseChangeDuration = 0;
             //}
+           
             
-                
-            
+
+            //if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            //{
+            //    _startPose = animator.GetFloat("Pose");
+            //    _endPose = Random.Range(0f, 1f);
+
+            //    _lastPoseChangeDuration = 0;
+            //    animator.SetFloat("Pose", Mathf.Lerp(_startPose, _endPose, _lastPoseChangeDuration / _poseChangeFrequency));
+
+            //}
+
+
             animator.SetFloat("ETP", _etpManager.CrowdBehaviour);
             
 
@@ -49,10 +60,11 @@ namespace CrowdAnim.Animation
 
             
 
-            //animator.SetFloat("Pose", Mathf.Lerp(_startPose, _endPose, _lastPoseChangeDuration / _poseChangeFrequency));
-
+           
             base.OnStateUpdate(animator, stateInfo, layerIndex);
         }
+
+       
     }
 }
 

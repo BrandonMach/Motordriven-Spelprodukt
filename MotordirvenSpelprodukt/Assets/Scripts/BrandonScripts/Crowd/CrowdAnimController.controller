@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da23d7fa4eef8894c84054082dcdb5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _etpManager: {fileID: 0}
 --- !u!1101 &-7851916041287981420
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da23d7fa4eef8894c84054082dcdb5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _etpManager: {fileID: 0}
 --- !u!1107 &-6249871410369333458
 AnimatorStateMachine:
   serializedVersion: 6
@@ -334,13 +336,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ETP
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -366,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da23d7fa4eef8894c84054082dcdb5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _etpManager: {fileID: 0}
 --- !u!1102 &7939369471045886931
 AnimatorState:
   serializedVersion: 6
