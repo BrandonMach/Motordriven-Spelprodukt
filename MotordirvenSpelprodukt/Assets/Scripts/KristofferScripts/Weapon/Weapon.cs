@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Weapon",menuName ="Weapon")]
-public class Weapon : ScriptableObject
+public class Weapon : Item
 {
     [SerializeField] private string _weaponName;
     [SerializeField] private Weapontype _weaponType;

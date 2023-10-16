@@ -35,6 +35,10 @@ public class CMPScript : EnemyScript
     public float Damage;
     public float ETPDecreaseValue;
 
+    public float NTime;
+    public bool CanChase;
+
+
     void Start()
     {
         _movementSpeed = 2;
@@ -60,7 +64,7 @@ public class CMPScript : EnemyScript
     // Update is called once per frame
     void Update()
     {
-        
+       NTime = Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
 
 

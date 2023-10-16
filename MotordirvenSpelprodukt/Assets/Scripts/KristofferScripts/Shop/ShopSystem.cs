@@ -36,7 +36,10 @@ public class ShopSystem : MonoBehaviour
     public void MakePurshase(GenerateWeapon g)
     {
         _weapon = TryPurshase(g);
+
         UpdateUpgradeView();
+
+        Inventory.Instance.Add(_weapon);
     }
     public Weapon TryPurshase(GenerateWeapon g)
     {
