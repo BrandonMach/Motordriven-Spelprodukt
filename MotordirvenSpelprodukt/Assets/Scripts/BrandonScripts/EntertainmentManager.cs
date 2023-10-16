@@ -26,15 +26,15 @@ public class EntertainmentManager : MonoBehaviour
 
     [SerializeField] private float _maxETP = 100;
     private float _ETPThreshold;
-    private float _ETPAngryThreshold;
+    
     public float GetAngryThreshold()
     {
-        return _ETPAngryThreshold;
+        return (_maxETP * 0.33f);
     }
-    private float _ETPExcitedThreshold;
+
     public float GetExcitedThreshold()
     {
-        return _ETPExcitedThreshold;
+        return (_maxETP * 0.66f);
     }
     public float GetETPThreshold()
     {

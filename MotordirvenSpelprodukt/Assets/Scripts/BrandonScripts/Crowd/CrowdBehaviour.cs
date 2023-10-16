@@ -24,7 +24,11 @@ public class CrowdBehaviour : MonoBehaviour
         Excited,
         Angry
     }
-    public CrowdEmotion Emotion;
+    public CrowdEmotion _emotion;
+    public CrowdEmotion GetCrowdEmotion()
+    {
+        return _emotion;
+    }
     void Start()
     {
         
@@ -37,23 +41,26 @@ public class CrowdBehaviour : MonoBehaviour
         fallingArea = new Rect(0, 3, 10, 2);
         this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
 
-        if (_etManager.GetETP() > _etManager.GetExcitedThreshold() && !_playCheering) //Bool för att den bara sla spelas en gång
+        if (_etManager.GetETP() > _etManager.GetExcitedThreshold() /*&& !_playCheering*/) //Bool för att den bara sla spelas en gång
         {
+            //Swicth music track
             _playCheering = true;
-            Emotion = CrowdEmotion.Excited;
+            _emotion = CrowdEmotion.Excited;
             //PlayCheer();
         }
-        else if(_etManager.GetETP() < _etManager.GetAngryThreshold() && !_playBooing)
+        else if(_etManager.GetETP() < _etManager.GetAngryThreshold() /*&& !_playBooing*/)
         {
+            //Swicth music track
             _playBooing = true;
-            Emotion = CrowdEmotion.Angry;
+            _emotion = CrowdEmotion.Angry;
             //PlayBooo();
         }
         else
         {
+            //Swicth music track
             _playCheering = false;
             _playBooing = false;
-            Emotion = CrowdEmotion.Normal;
+            _emotion = CrowdEmotion.Normal;
 
         }
 

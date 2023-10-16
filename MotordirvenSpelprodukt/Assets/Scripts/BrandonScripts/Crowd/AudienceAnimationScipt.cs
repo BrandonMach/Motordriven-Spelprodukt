@@ -5,18 +5,34 @@ using UnityEngine;
 public class AudienceAnimationScipt : MonoBehaviour
 {
     [SerializeField] Animator _anim;
-    CrowdBehaviour.CrowdEmotion _emotion;
+    CrowdBehaviour _crowdManager;
     void Start()
     {
-        _emotion = CrowdBehaviour.CrowdEmotion.Normal;
+        _anim = gameObject.GetComponent<Animator>();
+        _crowdManager = GameObject.FindGameObjectWithTag("Crowd").GetComponent<CrowdBehaviour>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_emotion== CrowdBehaviour.CrowdEmotion.Angry)
+        if (_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Angry)
         {
-            Debug.Log("Angry");
+            _anim.SetInteger("Emotion", -1);
+        }
+
+        else if (_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Excited)
+        {
+            _anim.SetInteger("Emotion", 1);
+        }
+
+        else if(_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Normal)
+        {
+            _anim.SetInteger("Emotion", 0);
+        }
+
+        if(_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
+        {
+            _anim.SetFloat("AnimationIndex", Random.Range(0f, 1f));
         }
     }
 }
