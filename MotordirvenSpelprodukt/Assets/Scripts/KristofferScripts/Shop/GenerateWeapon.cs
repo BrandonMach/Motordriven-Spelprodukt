@@ -72,9 +72,9 @@ public class GenerateWeapon : MonoBehaviour
         }
         _weaponNameText.text = _weapon.GetName();
         _weaponLevelText.text = "Level " + level.ToString();      
-        _weaponDamageText.text = _weapon.GetDamage().ToString() + " Dmg";
-        _weaponSpeedText.text = _weapon.GetSpeed().ToString() + " Spd";
-        _weaponRangeText.text = _weapon.GetRange().ToString() + " Range";
+        _weaponDamageText.text = _weapon.GetDamage().ToString();
+        _weaponSpeedText.text = _weapon.GetSpeed().ToString();          // Tog bort + " dmg/spd/rng" pga att det syns på annat vis i UI
+        _weaponRangeText.text = _weapon.GetRange().ToString();
         _buttonText.text = (_weapon.GetWeaponType().GetBaseCost()*level).ToString();
     }
     public int Price(){ return (int)_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel(); }    
