@@ -26,6 +26,16 @@ public class EntertainmentManager : MonoBehaviour
 
     [SerializeField] private float _maxETP = 100;
     private float _ETPThreshold;
+    private float _ETPAngryThreshold;
+    public float GetAngryThreshold()
+    {
+        return _ETPAngryThreshold;
+    }
+    private float _ETPExcitedThreshold;
+    public float GetExcitedThreshold()
+    {
+        return _ETPExcitedThreshold;
+    }
     public float GetETPThreshold()
     {
         return _ETPThreshold;
@@ -87,21 +97,21 @@ public class EntertainmentManager : MonoBehaviour
             OutOfCombatDecreaseOverTime();
         }
 
-        if(_entertainmentPoints < (_maxETP*0.33))
-        {
-            CrowdText.text = "Booooooo!!";
-            CrowdBehaviour = 0.25f;
-        }
-        else if(_entertainmentPoints > (_maxETP * 0.66))
-        {
-            CrowdText.text = "Let's GOOOOO!!";
-            CrowdText.color = Color.black;
-            CrowdBehaviour = 0.75f;
-        }
-        else
-        {
-            CrowdBehaviour = 0.5f;
-        }
+        //if(_entertainmentPoints < (_maxETP*0.33))
+        //{
+        //    CrowdText.text = "Booooooo!!";
+        //    CrowdBehaviour = 0.25f;
+        //}
+        //else if(_entertainmentPoints > (_maxETP * 0.66))
+        //{
+        //    CrowdText.text = "Let's GOOOOO!!";
+        //    CrowdText.color = Color.black;
+        //    CrowdBehaviour = 0.75f;
+        //}
+        //else
+        //{
+        //    CrowdBehaviour = 0.5f;
+        //}
 
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
