@@ -6,20 +6,20 @@ public class AudienceAnimationScipt : MonoBehaviour
 {
     [SerializeField] Animator _anim;
     CrowdBehaviour _crowdManager;
-    public bool PlayerFans;
-    private int fansMultipier;
+    public bool ChallengerFans;
+    private int _fansMultipier;
     void Start()
     {
         _anim = gameObject.GetComponent<Animator>();
         _crowdManager = GameObject.FindGameObjectWithTag("Crowd").GetComponent<CrowdBehaviour>();
 
-        if (PlayerFans)
+        if (ChallengerFans)
         {
-            fansMultipier = 1;
+            _fansMultipier = 1;
         }
         else
         {
-            fansMultipier = -1;
+            _fansMultipier = -1;
         }
     }
 
@@ -31,12 +31,12 @@ public class AudienceAnimationScipt : MonoBehaviour
 
         if (_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Angry)
         {
-            _anim.SetInteger("Emotion", -1 *fansMultipier);
+            _anim.SetInteger("Emotion", -1 *_fansMultipier);
         }
 
         else if (_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Excited)
         {
-            _anim.SetInteger("Emotion", 1* fansMultipier);
+            _anim.SetInteger("Emotion", 1* _fansMultipier);
         }
 
         else if(_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Normal)
