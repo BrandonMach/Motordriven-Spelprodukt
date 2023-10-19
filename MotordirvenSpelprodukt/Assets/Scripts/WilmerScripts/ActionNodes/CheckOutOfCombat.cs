@@ -17,15 +17,15 @@ public class CheckOutOfCombat : ActionNode
 
     protected override State OnUpdate()
     {
-        if (_playerScript.playerIsOutOfCombat)
-        {
-            return State.Failure;
-        }
-        else
-        {
-            return State.Success;
-        }
+        //if (_playerScript.playerIsOutOfCombat)
+        //{
+        //    return State.Failure;
+        //}
+        //else
+        //{
+        //    return State.Success;
+        //}
         //return State.Success;
-        //return State.Failure;
+        return State.Failure;
     }
 }
