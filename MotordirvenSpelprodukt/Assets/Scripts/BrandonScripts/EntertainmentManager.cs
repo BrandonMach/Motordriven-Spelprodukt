@@ -42,9 +42,6 @@ public class EntertainmentManager : MonoBehaviour
     }
     private float _startETP;
 
-   
-
-
 
     [Header("OOC- Out Of Combat")]
     public GameObject[] EnemyGameObjects;
@@ -59,14 +56,12 @@ public class EntertainmentManager : MonoBehaviour
     [SerializeField] private bool _isOutOfCombat; //OOC
     // [SerializeField] private bool _startComboWindowTimer;
     
-    [Header("Crowd Animation")]
-    public float CrowdBehaviour;
 
     void Start()
     {
 
         EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
-
+       
 
 
         //ETP
@@ -96,22 +91,6 @@ public class EntertainmentManager : MonoBehaviour
         {
             OutOfCombatDecreaseOverTime();
         }
-
-        //if(_entertainmentPoints < (_maxETP*0.33))
-        //{
-        //    CrowdText.text = "Booooooo!!";
-        //    CrowdBehaviour = 0.25f;
-        //}
-        //else if(_entertainmentPoints > (_maxETP * 0.66))
-        //{
-        //    CrowdText.text = "Let's GOOOOO!!";
-        //    CrowdText.color = Color.black;
-        //    CrowdBehaviour = 0.75f;
-        //}
-        //else
-        //{
-        //    CrowdBehaviour = 0.5f;
-        //}
 
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
