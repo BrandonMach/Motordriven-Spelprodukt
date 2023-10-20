@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator _kingAnim;
     [SerializeField] EntertainmentManager _etp;
 
-    public static int _playerCoins; //Ska vara private sen, public för tetsing 
+    public static int PlayerCoins; //Static så att anadra scener kan få access
 
     // Variables for Challenges
     ChallengeManager _challengeManager;
@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
         _kingAnim.SetBool("Approved", false);
 
         //För testing
-        _playerCoins = 89;
-        Debug.Log("Coins" + _playerCoins);
+        PlayerCoins = 89;
+        Debug.Log("Coins" + PlayerCoins);
 
         _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         
@@ -64,6 +64,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
-        _playerCoins += completedChallenge.Reward;
+        PlayerCoins += completedChallenge.Reward;
     }
 }
