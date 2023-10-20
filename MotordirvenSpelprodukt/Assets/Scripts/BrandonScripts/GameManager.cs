@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] SwitchCamera CamManager;
     private bool _kingCam;
     [SerializeField] Animator _kingAnim;
-    [SerializeField] EntertainmentManager _etp;
+    [SerializeField] EntertainmentManager _etp; 
 
     int _playerCoins;
 
