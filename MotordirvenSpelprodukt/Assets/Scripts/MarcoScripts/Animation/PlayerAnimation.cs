@@ -14,7 +14,7 @@ public class PlayerAnimation : MonoBehaviour
 
 
     private float _comboWindowTimer = 0;
-    private string _currentCombo = ""; //
+    private string _currentCombo = "";
     private float _desiredWeight = 0;
     private float _weight = 0;
     private float _weightChanger = -0.025f;
