@@ -16,10 +16,33 @@ public class CrowdBehaviour : MonoBehaviour
 
     bool _playCheering;
     bool _playBooing;
+
+    public AudioSource[] Themes;
+    public AudioSource NormalTheme, ExcitedTheme, AngryTheme; 
+    public enum CrowdEmotion
+    {
+        Normal,
+        Excited,
+        Angry
+    }
+    public CrowdEmotion _emotion;
+    public CrowdEmotion LatestEmotion;
+    public CrowdEmotion GetCrowdEmotion()
+    {
+        return _emotion;
+    }
     void Start()
     {
-        
+
+        NormalTheme = Themes[0];
+        ExcitedTheme = Themes[1];
+        AngryTheme = Themes[2];
+
+        NormalTheme.volume = 0.2f;
+        ExcitedTheme.volume = 0;
+        AngryTheme.volume = 0;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -27,15 +50,49 @@ public class CrowdBehaviour : MonoBehaviour
         fallingArea = new Rect(0, 3, 10, 2);
         this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
 
-        if (_etManager.GetETP() > _etManager.GetETPThreshold() && !_playCheering) //Bool för att den bara sla spelas en gång
+        if (_etManager.GetETP() > _etManager.GetExcitedThreshold() /*&& !_playCheering*/) //Bool för att den bara sla spelas en gång
         {
+            
             _playCheering = true;
+            _emotion = CrowdEmotion.Excited;
+
+            //Swicth music track, before latest motion
+
+            //StopAllCoroutines();
+            StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
+            LatestEmotion = _emotion;
+           
+
             //PlayCheer();
         }
-        if(_etManager.GetETP() < _etManager.GetETPThreshold() && !_playBooing)
+        else if(_etManager.GetETP() < _etManager.GetAngryThreshold() /*&& !_playBooing*/)
         {
+            //Swicth music track
             _playBooing = true;
+            _emotion = CrowdEmotion.Angry;
+
+
+            //Swicth music track, before latest motion
+            //StopAllCoroutines();
+            StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
+            LatestEmotion = _emotion;
+            
             //PlayBooo();
+        }
+        else
+        {
+            //Swicth music track
+            _playCheering = false;
+            _playBooing = false;
+            _emotion = CrowdEmotion.Normal;
+
+
+            //Swicth music track, before latest motion
+            //StopAllCoroutines();
+            StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
+            LatestEmotion = _emotion;
+
+
         }
 
 
@@ -57,6 +114,63 @@ public class CrowdBehaviour : MonoBehaviour
     void PlayBooo()
     {
         _booing.Play();
+    }
+
+    private IEnumerator FadeTheme (AudioSource newTheme, CrowdEmotion LatestEmotion)
+    {
+
+        float timeToFade = 1.25f;
+        float timeElapsed = 0;
+
+        if(LatestEmotion != _emotion)
+        {
+            if (LatestEmotion == CrowdEmotion.Excited)
+            {
+                //ExcitedTheme.Stop();
+                //newTheme.Play();
+
+                while (timeElapsed < timeToFade)
+                {
+                    newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
+                    ExcitedTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
+                }
+            }
+            if (LatestEmotion == CrowdEmotion.Angry)
+            {
+                //AngryTheme.Stop();
+                //newTheme.Play();
+
+                while (timeElapsed < timeToFade)
+                {
+                    newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
+                    AngryTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
+                }
+            }
+
+            if (LatestEmotion == CrowdEmotion.Normal)
+            {
+                //NormalTheme.Stop();
+                //newTheme.Play();
+
+                while (timeElapsed < timeToFade)
+                {
+                    newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
+                    NormalTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
+                }
+            }
+        }
+
+
+      
+
+        
+
     }
 
 }

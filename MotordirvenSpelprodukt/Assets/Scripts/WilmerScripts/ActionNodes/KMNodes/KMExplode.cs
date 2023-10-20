@@ -22,7 +22,7 @@ public class KMExplode : ActionNode
         if(Vector3.Distance(_kamikazeScript.transform.position, _playerScript.transform.position) <= _kamikazeScript._diveRange)
         {
             _kamikazeScript.Anim.Play("Dive");
-            Debug.Log("Kamikaze");
+            //Debug.Log("Kamikaze");
             return State.Success;
         }
         else

@@ -26,14 +26,21 @@ public class EntertainmentManager : MonoBehaviour
 
     [SerializeField] private float _maxETP = 100;
     private float _ETPThreshold;
+    
+    public float GetAngryThreshold()
+    {
+        return (_maxETP * 0.33f);
+    }
+
+    public float GetExcitedThreshold()
+    {
+        return (_maxETP * 0.66f);
+    }
     public float GetETPThreshold()
     {
         return _ETPThreshold;
     }
     private float _startETP;
-
-   
-
 
 
     [Header("OOC- Out Of Combat")]
@@ -47,14 +54,14 @@ public class EntertainmentManager : MonoBehaviour
     [Header("Conditions")]
 
     [SerializeField] private bool _isOutOfCombat; //OOC
-   // [SerializeField] private bool _startComboWindowTimer;
+    // [SerializeField] private bool _startComboWindowTimer;
     
 
     void Start()
     {
 
         EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
-
+       
 
 
         //ETP
@@ -83,16 +90,6 @@ public class EntertainmentManager : MonoBehaviour
         if (_isOutOfCombat)
         {
             OutOfCombatDecreaseOverTime();
-        }
-
-        if(_entertainmentPoints < _ETPThreshold)
-        {
-            CrowdText.text = "Booooooo!!";
-        }
-        else
-        {
-            CrowdText.text = "Let's GOOOOO!!";
-            CrowdText.color = Color.black;
         }
 
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
