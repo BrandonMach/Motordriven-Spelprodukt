@@ -21,7 +21,7 @@ public class Challenge : MonoBehaviour
         Requirement = requirement;
         IsCompleted = false;
 
-        //ChallengeManager.AddChallenge(this);
+        ChallengeManager.Instance.AddChallenge(this);
     }
 
     public void ChangeActiveText()
