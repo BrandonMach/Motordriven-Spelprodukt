@@ -27,5 +27,6 @@ public class KingDecision : MonoBehaviour
     public void GoToShop()
     {
         //testar gå till concept save money
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 }

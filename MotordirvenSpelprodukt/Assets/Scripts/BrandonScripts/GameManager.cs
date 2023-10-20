@@ -35,7 +35,12 @@ public class GameManager : MonoBehaviour
 
         _kingAnim.SetBool("Approved", false);
 
+        //För testing
+        _playerCoins = 89;
+        Debug.Log("Coins" + _playerCoins);
+
         _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        
     }
 
     // Update is called once per frame
