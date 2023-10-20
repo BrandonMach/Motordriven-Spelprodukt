@@ -24,7 +24,9 @@ public class FreedomPathScript : MonoBehaviour
     private float _stagePriceMultiplier = 1.3f;
     void Start()
     {
-        GameManager.PlayerCoins = 80;
+        GameManager.PlayerCoins = 80;//Testing
+
+
         _freedomPriceText.text = "Freedom Price Pot:" + FreedomPrice;
         _tempPlayerCoins = GameManager.PlayerCoins;
         _tempFreedomPrice = FreedomPrice;
@@ -33,7 +35,6 @@ public class FreedomPathScript : MonoBehaviour
         _ogErrorTeextColor = _errorPanel.GetComponentInChildren<TextMeshProUGUI>().color;
     }
 
-    // Update is called once per frame
     void Update()
     {
         _currencyText.text = "Currency: " + _tempPlayerCoins;
@@ -47,7 +48,6 @@ public class FreedomPathScript : MonoBehaviour
             _errorPanel.GetComponent<Image>().color = Color.Lerp(_ogErrorPanelColor, transparent, startTime);
             _errorPanel.GetComponentInChildren<TextMeshProUGUI>().color= Color.Lerp(_ogErrorTeextColor, transparent, startTime);
   
-           
             if(startTime >= 1.2f)
             {        
                 _errorPanel.SetActive(false);
@@ -56,21 +56,27 @@ public class FreedomPathScript : MonoBehaviour
             }
             
         }
+
+        if(FreedomPrice >= 0)
+        {
+            Debug.Log("You win, you bought your freedom");
+        }
     }
 
 
     public void PayforFreedom(int amount)
     {
         
-        if ((_tempPlayerCoins - amount) >=0 && _tempFreedomPrice >= 0 && (GameManager.PlayerCoins -amount) >=0)
-        {
-            _freedomPriceText.color = Color.red;
-            _freedomPriceText.text = "Freedom Price Pot:" + (_tempFreedomPrice - amount).ToString();
-            _tempFreedomPrice -= amount;
-            _tempPlayerCoins -= amount;
-
-            amountWaged += amount;
-
+        if ((_tempPlayerCoins - amount) >= 0 && _tempFreedomPrice >= 0 && (GameManager.PlayerCoins - amount) >= 0)
+        {  
+            if ((_tempFreedomPrice - amount) >= 0)
+            {
+                _freedomPriceText.color = Color.red;
+                _freedomPriceText.text = "Freedom Price Pot: " + (_tempFreedomPrice - amount).ToString();
+                _tempFreedomPrice -= amount;
+                _tempPlayerCoins -= amount;
+                amountWaged += amount;
+            }            
         }
         else
         {
