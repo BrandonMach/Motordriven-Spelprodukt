@@ -4177,10 +4177,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1415826164}
     m_Modifications:
-    - target: {fileID: 127682, guid: 21a82b88f4e365a4cb4277cd43b7fe21, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 195416, guid: 21a82b88f4e365a4cb4277cd43b7fe21, type: 3}
       propertyPath: m_Name
       value: '"King"'
@@ -4223,10 +4219,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400256, guid: 21a82b88f4e365a4cb4277cd43b7fe21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2244687697228685125, guid: 21a82b88f4e365a4cb4277cd43b7fe21, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6395,6 +6387,7 @@ MonoBehaviour:
   _scanEnemyArea: 7.19
   _timeOutOfCombatCounter: 0
   _timeOutOfCombatThreshold: 7
+  MatchFinished: 0
   _isOutOfCombat: 0
 --- !u!114 &1635896048
 MonoBehaviour:
@@ -7796,6 +7789,7 @@ MonoBehaviour:
   CamManager: {fileID: 0}
   _kingAnim: {fileID: 0}
   _etp: {fileID: 0}
+  _playerCoins: 0
 --- !u!1 &1829395728
 GameObject:
   m_ObjectHideFlags: 0

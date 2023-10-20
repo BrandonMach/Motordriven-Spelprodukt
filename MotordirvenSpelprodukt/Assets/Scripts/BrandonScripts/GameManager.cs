@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Object _champion;
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator _kingAnim;
     [SerializeField] EntertainmentManager _etp;
 
-    int _playerCoins;
+    public static int _playerCoins; //Ska vara private sen, public för tetsing 
 
     // Variables for Challenges
     ChallengeManager _challengeManager;
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     float _challengeTimerChampion;
     bool _isChampionDead;
     bool _isChallengeRequirementsMet;
+
+
 
     void Start()
     {
@@ -38,18 +41,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
-
         if(_champion == null && !_kingCam)
         {
+            _etp.MatchFinished = true;
             _kingCam = true;
             CamManager.GoToKingCam();
             Debug.Log("Champion Is dead");
             _kingAnim.SetBool("Approved", true);
-            _kingAnim.SetFloat("ETP",(_etp.GetETP()/100));
+            _kingAnim.SetFloat("ETP", (_etp.GetETP() / 100)); //Selects what animation to play based on ETP
         }
+
+        //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
     }
+
+
+    
 
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
