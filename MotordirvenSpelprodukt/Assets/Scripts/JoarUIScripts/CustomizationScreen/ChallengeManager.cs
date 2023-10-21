@@ -12,6 +12,9 @@ public class ChallengeManager : MonoBehaviour
     private static ChallengeManager _instance;
     public static ChallengeManager Instance { get => _instance; set => _instance = value; }
 
+    public List<Challenge> AvailableChallenges = new List<Challenge>();
+    public List<Challenge> ActiveChallenges;
+
     private void Awake()
     {
         if (_instance != null)
@@ -21,12 +24,12 @@ public class ChallengeManager : MonoBehaviour
         }
         _instance = this;
 
+        DontDestroyOnLoad(gameObject);
+
+        ActiveChallenges = new List<Challenge>();
     }
     #endregion
 
-
-    public List<Challenge> AvailableChallenges = new List<Challenge>();
-    public List<Challenge> ActiveChallenges = new List<Challenge>();
     public event Action<Challenge> OnChallengeCompleted;
 
     [SerializeField] TextMeshProUGUI _activeChallengesText;
@@ -48,8 +51,7 @@ public class ChallengeManager : MonoBehaviour
                 _activeChallengesText.text += challenge.ChallengeName + ", ";
             }
         }  
-        
-
+       
     }
 
     private void RemoveText()
@@ -138,4 +140,12 @@ public class ChallengeManager : MonoBehaviour
 
         ReverseIterateRemove();
     }
+
+    public bool BerserkerChallengeCheck()
+    {
+        return true;
+    }
+
+
+   
 }

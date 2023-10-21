@@ -21,10 +21,13 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     public bool hasSlowMo;
     public SlowMo _slowMo;
+
+    private GameManager _gameManager;
     
     void Start()
     {
-       
+        _gameManager = GameManager.Instance; // Singleton
+
         CurrentHealthPoints = MaxHealthPoints;
     }
 
@@ -103,6 +106,9 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
         }
         
         Dead = true;
+
+        _gameManager.KillCount++;
+
     }
 
     public void Knockback(Vector3 hitDirection, float knockBackForce)

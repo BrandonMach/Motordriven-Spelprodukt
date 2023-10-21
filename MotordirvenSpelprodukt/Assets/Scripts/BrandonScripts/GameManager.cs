@@ -1,15 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
 public class GameManager : MonoBehaviour
 {
+
+    #region Singleton
+
+    private static GameManager _instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one instance of GameManager found");
+            return;
+        }
+        Instance = this;
+
+    }
+
+    #endregion
+
     [SerializeField] Object _champion;
     [SerializeField] SwitchCamera CamManager;
     private bool _kingCam;
     [SerializeField] Animator _kingAnim;
-    [SerializeField] EntertainmentManager _etp; 
+    [SerializeField] EntertainmentManager _etp;
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
@@ -30,11 +49,16 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
+    public static GameManager Instance { get => _instance; set => _instance = value; }
+    public int KillCount { get => _killCount; set => _killCount = value; }
+
+
 
 
     void Start()
     {
         _challengeManager = ChallengeManager.Instance; // Singleton
+        _gameStartTimer = 0;
 
         _champion = GameObject.FindObjectOfType<CMPScript>();
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
@@ -48,7 +72,7 @@ public class GameManager : MonoBehaviour
         PlayerCoins = 89;
         Debug.Log("Coins" + PlayerCoins);
 
-        _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         
     }
 
@@ -66,16 +90,22 @@ public class GameManager : MonoBehaviour
         }
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
+
+
+        // Testing challenges
+        CheckChallengesCompletion();
+        ChallengeTimersUpdate();
     }
 
 
- 
-
+    #region ChallengeMethods
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
         PlayerCoins += completedChallenge.Reward;
         _challengeManager.DeActivateChallenge(completedChallenge);
         _challengeManager.RemoveChallenge(completedChallenge);
+        Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
+        Debug.Log("PlayerCoins = " + PlayerCoins);
     }
 
     public void CheckChallengesCompletion()
@@ -84,7 +114,7 @@ public class GameManager : MonoBehaviour
         {
             if (challenge is TimeChallenge timeChallenge)
             {
-                if (timeChallenge.TimeForCompletion <= _gameStartTimer && timeChallenge.IsCompleted)
+                if (timeChallenge.TimeForCompletion >= _gameStartTimer && timeChallenge.Requirement >= _killCount)
                 {
                     HandleChallengeCompleted(timeChallenge);
                 }
@@ -96,5 +126,9 @@ public class GameManager : MonoBehaviour
     {
         _gameStartTimer += Time.deltaTime;
     }
+
+    #endregion
+
+
 
 }
