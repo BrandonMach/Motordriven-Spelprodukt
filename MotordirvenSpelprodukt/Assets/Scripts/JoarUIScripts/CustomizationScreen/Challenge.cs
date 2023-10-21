@@ -10,7 +10,7 @@ public class Challenge : MonoBehaviour
     [SerializeField] public string Description;
     [SerializeField] public int Requirement;
     [SerializeField] public int Reward;
-    [SerializeField] private TextMeshProUGUI _text; 
+    [SerializeField] public TextMeshProUGUI Text; 
     public bool IsCompleted;
     
 
@@ -21,11 +21,11 @@ public class Challenge : MonoBehaviour
         Requirement = requirement;
         IsCompleted = false;
 
-        ChallengeManager.Instance.AddChallenge(this);
+        //ChallengeManager.Instance.ActivateChallenge(this);
     }
 
     public void ChangeActiveText()
     {
-        _text.text = ChallengeName;
+        Text.text = ChallengeName;
     }
 }
