@@ -86,7 +86,7 @@ public class ChallengeManager : MonoBehaviour
             if (_activeChallengesCounter < _maxActiveChallenges)
             {
                 ActivateChallenge(challenge);
-                UpdateActivesChallengesTMP();
+                //UpdateActivesChallengesTMP();
             }
             else
             {
