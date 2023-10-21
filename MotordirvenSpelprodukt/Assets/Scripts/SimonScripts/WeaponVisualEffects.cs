@@ -18,6 +18,18 @@ public class WeaponVisualEffects : MonoBehaviour
 
     [SerializeField] private ParticleSystem _shockWaveFill;
 
+    [SerializeField] private LayerMask _groundLayer;
+
+    private ParticleSystem.MainModule _debreeParticleMainModule;
+    private Color _debreeParticleStartColor;
+    private Vector3 _shockwavePos;
+
+    private void Start()
+    {
+        _debreeParticleMainModule = _debree.main;
+        _debreeParticleStartColor = _debreeParticleMainModule.startColor.color;
+
+    }
     public void StartWeaponTrail()
     {
         _weaponTrail.Play();
@@ -27,15 +39,34 @@ public class WeaponVisualEffects : MonoBehaviour
     {
         // TODO:
         // Object pool with particle effects for better performance
-        Vector3 shockwavePos = new Vector3(_shockwaveTransform.position.x, 0.25f, _shockwaveTransform.position.z);
+        _shockwavePos = new Vector3(_shockwaveTransform.position.x, 0.25f, _shockwaveTransform.position.z);
         Quaternion shockwaveRot = _shockwaveTransform.rotation;
 
-        Instantiate(_shockWaveCircle, shockwavePos, shockwaveRot);
-        Instantiate(_shockWaveFill, shockwavePos, shockwaveRot);
-        Instantiate(_debree, shockwavePos, shockwaveRot);
-        Instantiate(_crack, new Vector3(shockwavePos.x, 0.25f, shockwavePos.z), shockwaveRot);
+        Instantiate(_shockWaveCircle, _shockwavePos, shockwaveRot);
+        Instantiate(_shockWaveFill, _shockwavePos, shockwaveRot);
+        GetDebreeColorFromRaycast(1, 0.5f);
+        Instantiate(_debree, _shockwavePos, shockwaveRot);
+        Instantiate(_crack, new Vector3(_shockwavePos.x, 0.25f, _shockwavePos.z), shockwaveRot);
 
         // Destroy objects after finished playing, until object pool is implemented.
+    }
 
+    void GetDebreeColorFromRaycast(float distance, float yOffset)
+    {
+        RaycastHit hit;
+        //Check if we hit something on the ground layer with the raycast
+        if (Physics.Raycast(_shockwavePos + yOffset * Vector3.up, -transform.up, out hit, distance, _groundLayer))
+        {
+            // If there is a renderer on the object change the color of the particle system accordingly
+            MeshRenderer renderer = hit.collider.gameObject.GetComponent<MeshRenderer>();
+            if (renderer != null)
+            {
+                _debreeParticleMainModule.startColor = new Color(renderer.material.color.r * 0.8f, renderer.material.color.g * 0.8f, renderer.material.color.b * 0.8f);
+            }
+        }
+        else
+        {
+            _debreeParticleMainModule.startColor = _debreeParticleStartColor;
+        }
     }
 }
