@@ -1,20 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
 public class GameManager : MonoBehaviour
 {
+
+    #region Singleton
+
+    private static GameManager _instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one instance of GameManager found");
+            return;
+        }
+        Instance = this;
+
+    }
+
+    #endregion
+
     [SerializeField] Object _champion;
     [SerializeField] SwitchCamera CamManager;
     private bool _kingCam;
     [SerializeField] Animator _kingAnim;
-    [SerializeField] EntertainmentManager _etp; 
+    [SerializeField] EntertainmentManager _etp;
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
-    // Variables for Challenges
-    ChallengeManager _challengeManager;
+    #region ChallengeVariables
+
+    private ChallengeManager _challengeManager;
+
+    float _gameStartTimer;
+    float _challengeTimer;
+    bool _isTimerActive;
 
     int _killCount;
     float _challengeTimerMinion;
@@ -22,11 +46,20 @@ public class GameManager : MonoBehaviour
     bool _isChampionDead;
     bool _isChallengeRequirementsMet;
 
+    #endregion
+
+
+    public static GameManager Instance { get => _instance; set => _instance = value; }
+    public int KillCount { get => _killCount; set => _killCount = value; }
+
+
 
 
     void Start()
     {
-        
+        _challengeManager = ChallengeManager.Instance; // Singleton
+        _gameStartTimer = 0;
+
         _champion = GameObject.FindObjectOfType<CMPScript>();
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _kingAnim = GameObject.FindWithTag("King").GetComponent<Animator>();
@@ -39,7 +72,7 @@ public class GameManager : MonoBehaviour
         PlayerCoins = 89;
         Debug.Log("Coins" + PlayerCoins);
 
-        _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         
     }
 
@@ -57,13 +90,45 @@ public class GameManager : MonoBehaviour
         }
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
+
+
+        // Testing challenges
+        CheckChallengesCompletion();
+        ChallengeTimersUpdate();
     }
 
 
-    
-
+    #region ChallengeMethods
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
         PlayerCoins += completedChallenge.Reward;
+        _challengeManager.DeActivateChallenge(completedChallenge);
+        _challengeManager.RemoveChallenge(completedChallenge);
+        Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
+        Debug.Log("PlayerCoins = " + PlayerCoins);
     }
+
+    public void CheckChallengesCompletion()
+    {
+        foreach (Challenge challenge in _challengeManager.ActiveChallenges)
+        {
+            if (challenge is TimeChallenge timeChallenge)
+            {
+                if (timeChallenge.TimeForCompletion >= _gameStartTimer && timeChallenge.Requirement >= _killCount)
+                {
+                    HandleChallengeCompleted(timeChallenge);
+                }
+            }
+        }
+    }
+
+    public void ChallengeTimersUpdate()
+    {
+        _gameStartTimer += Time.deltaTime;
+    }
+
+    #endregion
+
+
+
 }
