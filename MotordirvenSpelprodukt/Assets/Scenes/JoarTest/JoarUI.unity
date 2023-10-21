@@ -12889,7 +12889,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bareknuckle Killer : Kill at least 10 minions without wielding a weapon'
+  m_text: ' : '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19987,6 +19987,17 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: -80.52, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &989162070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6044904510672093273, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+  m_PrefabInstance: {fileID: 1995402562778173929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1006409891
 GameObject:
   m_ObjectHideFlags: 0
@@ -20329,8 +20340,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1648497310}
     - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _text
+      value: 
+      objectReference: {fileID: 1424621115}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: Reward
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _reward
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: Description
@@ -20341,8 +20360,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _description
+      value: Kill 10 enemies in 20 seconds
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _requirement
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: ChallengeName
       value: Time Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _challengeName
+      value: Berserker
       objectReference: {fileID: 0}
     - target: {fileID: 6044904510672093273, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: m_text
@@ -30070,6 +30101,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410397014}
   m_CullTransparentMesh: 1
+--- !u!114 &1424621115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6044904510672093273, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+  m_PrefabInstance: {fileID: 1012087529}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1432767434
 GameObject:
   m_ObjectHideFlags: 0
@@ -30957,7 +30999,7 @@ PrefabInstance:
     - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: _text
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1540636624}
     - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: Reward
       value: 100
@@ -30973,6 +31015,10 @@ PrefabInstance:
     - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: ChallengeName
       value: Time Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _challengeName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6044904510672093273, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: m_text
@@ -32150,6 +32196,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1540636624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6044904510672093273, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+  m_PrefabInstance: {fileID: 1455281688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1548287128
 GameObject:
   m_ObjectHideFlags: 0
@@ -45227,6 +45284,18 @@ PrefabInstance:
       propertyPath: Text
       value: 
       objectReference: {fileID: 1648497310}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _text
+      value: 
+      objectReference: {fileID: 989162070}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _description
+      value: Challenge Description
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113925974459767129, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
+      propertyPath: _challengeName
+      value: Challenge Name
+      objectReference: {fileID: 0}
     - target: {fileID: 8043747885503377444, guid: 2183185826f3799448743fa4b83b5dee, type: 3}
       propertyPath: m_Name
       value: ChallengeButtonPrefab

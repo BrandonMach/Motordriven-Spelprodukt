@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         PlayerCoins = 89;
         Debug.Log("Coins" + PlayerCoins);
 
-        _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        ChallengeManager.Instance.OnChallengeCompleted += HandleChallengeCompleted;
         
     }
 
