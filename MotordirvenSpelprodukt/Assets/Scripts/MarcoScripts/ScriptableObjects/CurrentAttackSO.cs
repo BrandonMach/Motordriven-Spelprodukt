@@ -25,6 +25,7 @@ public class CurrentAttackSO : ScriptableObject
     public AttackType currentAttackType;
     public AttackEffect CurrentAttackEffect;
     public float DamageMultiplier;
+    public float Force;
 
     public bool Last;
     public string Name;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ICanAttack, IDamagable
 {
     // Placeholder för nuvarande vapnets värden
     //-----------------------------------------
@@ -19,18 +19,19 @@ public class Player : MonoBehaviour
     public event EventHandler OnEnableMovement;
 
     public event EventHandler ComboBroken;
+    public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
+    public event EventHandler<OnAttackPressedAnimationEventArgs> OnAttackAnimationPressed;
 
-    public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
-    public class OnAttackPressedEventArgs : EventArgs
+
+
+    public class OnAttackPressedAnimationEventArgs : EventArgs
     {
         public enum AttackType
         {
             Light,
             Heavy
         }
-        public CurrentAttackSO CurrentAttackSO;
         public AttackType attackType;
-        public Weapon weaponSO;
     }
 
 
@@ -41,8 +42,7 @@ public class Player : MonoBehaviour
 
     [Header("Health settings")]
     [SerializeField] float _maxHealth;
-
-    private float _currentHealth;
+    HealthManager _healthManager;
 
     private CurrentAttackSO _currentAttackSO;
     private PlayerDash _playerDash;
@@ -53,8 +53,10 @@ public class Player : MonoBehaviour
     private string _input;
 
     EntertainmentManager _etpManager;
+
     private void Awake()
     {
+        _healthManager = GetComponent<HealthManager>();
         _playerMovement = GetComponent<PlayerMovement>();
         _playerDash = GetComponent<PlayerDash>();
     }
@@ -67,11 +69,9 @@ public class Player : MonoBehaviour
 
         _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
 
-        _currentHealth = _maxHealth;
         _input = "";
 
 
-        Debug.Log("Health: " +  _currentHealth);
         _etpManager = GameObject.FindGameObjectWithTag("ETPManager").GetComponent<EntertainmentManager>();
     }
 
@@ -88,7 +88,6 @@ public class Player : MonoBehaviour
 
     public void Knockbacked(object sender, EventArgs e)
     {
-
         OnDisableMovement?.Invoke(this, EventArgs.Empty);
     }
 
@@ -110,7 +109,7 @@ public class Player : MonoBehaviour
             if (GetCurrentAttackSO(_input + "L") != null)
             {
                 _input += "L";
-                OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Light, weaponSO = _currentWeapon });
+                OnAttackAnimationPressed?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = OnAttackPressedAnimationEventArgs.AttackType.Light });
                 _inputTimer = 0;
             }
            
@@ -126,10 +125,16 @@ public class Player : MonoBehaviour
             if (GetCurrentAttackSO(_input + "H") != null)
             {
                 _input += "H";
-                OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Heavy, weaponSO = _currentWeapon });
+                OnAttackAnimationPressed?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = OnAttackPressedAnimationEventArgs.AttackType.Heavy });
                 _inputTimer = 0;
             }
         }
+    }
+
+    // Will be called by animation event
+    private void OnPlayerAttack()
+    {
+        OnRegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = _currentWeapon });
     }
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
@@ -174,6 +179,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float damage, Attack attack)
+    {
+        _healthManager.ReduceHealth(damage);  
+    }
 
-    
+
+    private void OnDestroy()
+    {
+        _gameInput.OnInteractActionPressed -= GameInput_OnInteractActionPressed;
+        _gameInput.OnLightAttackButtonPressed -= GameInput_OnLightAttackButtonPressed;
+        _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
+        _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
+        _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
+
+    }
 }

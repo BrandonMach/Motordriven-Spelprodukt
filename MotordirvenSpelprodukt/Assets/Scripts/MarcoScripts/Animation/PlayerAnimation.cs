@@ -32,7 +32,7 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
-        _player.OnAttackPressed += Player_OnAttack;
+        _player.OnAttackAnimationPressed += Player_OnAttack;
         _player.OnStartEvade += Player_OnStartEvade;
         _player.OnEnableMovement += Player_OnEnableMovement;
         _player.ComboBroken += Player_OnComboBroken;
@@ -54,14 +54,14 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetTrigger("Evade");
     }
 
-    private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
+    private void Player_OnAttack(object sender, Player.OnAttackPressedAnimationEventArgs e)
     {
         _startComboWindowTimer = true;
         HandleInput(e.attackType);
         _comboWindowTimer = 0;
     }
 
-    private void HandleInput(Player.OnAttackPressedEventArgs.AttackType attackType)
+    private void HandleInput(Player.OnAttackPressedAnimationEventArgs.AttackType attackType)
     {
         // If combat layer is disabled, allow new input.
 
@@ -69,10 +69,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             switch (attackType)
             {
-                case Player.OnAttackPressedEventArgs.AttackType.Light:
+                case Player.OnAttackPressedAnimationEventArgs.AttackType.Light:
                     _animator.SetTrigger("Trigger_L");
                     break;
-                case Player.OnAttackPressedEventArgs.AttackType.Heavy:
+                case Player.OnAttackPressedAnimationEventArgs.AttackType.Heavy:
                     _animator.SetTrigger("Trigger_H");
                     break;
                 default:

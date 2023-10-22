@@ -14,8 +14,6 @@ public class MMScript : EnemyScript
         _attackRange = 4;
         _attackCooldown = 2;
         ChaseDistance = 3;
-        _currentHealth = 100;
-        _maxHealth = 100;
     }
 
     // Update is called once per frame

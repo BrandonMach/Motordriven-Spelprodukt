@@ -4,15 +4,16 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    public void TakeDamage(float damage);
-    public void GetStunned(float stunDuration);
-    public void Die();
-    public void HealDamage(float damageHealed);
+    public void TakeDamage(float damage, Attack attack);
 
-    public void KnockUp(float force);
+    //public void GetStunned(float stunDuration);
+    //public void Die();
+    //public void HealDamage(float damageHealed);
 
-    /// <summary>
-    /// Calculates the direction of the knockback and applies an impulse to the target rigidbody
-    /// </summary>
-    public void Knockback(Vector3 attackerPos, Vector3 receiverPos, float knockBackForce);
+    //public void KnockUp(float force);
+
+    ///// <summary>
+    ///// Calculates the direction of the knockback and applies an impulse to the target rigidbody
+    ///// </summary>
+    //public void Knockback(Vector3 attackerPos, float knockBackForce);
 }
