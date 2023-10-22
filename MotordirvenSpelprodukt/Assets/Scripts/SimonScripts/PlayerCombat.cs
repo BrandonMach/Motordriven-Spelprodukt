@@ -13,7 +13,9 @@ public class PlayerCombat : MonoBehaviour
     private float _multiplier;
     private Vector3 _colliderPos;
     private CurrentAttackSO.AttackEffect _effect;
+    private CurrentAttackSO.AttackType _attackType;
     private Vector3 _checkPos;
+    private string debugCurrentAttackMessage;
 
     [SerializeField] private ParticleSystem stunEffect;
 
@@ -36,28 +38,21 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.color = Color.red;
         // Temporary fix until _range can be passed on via event.
         // SHOULD BE REMOVED LATER.
-        switch (_effect)
+        Debug.Log(debugCurrentAttackMessage);
+        switch (_attackType)
         {
-            case CurrentAttackSO.AttackEffect.None:
-                break;
-            case CurrentAttackSO.AttackEffect.Pushback:
-                break;
-            case CurrentAttackSO.AttackEffect.bleed: // Should be swapped to None here and on L scriptable object.
-                // Normal attack, check infront of player.
-                // Sphere starts at front edge of player and diameter = _range
-                _range = 1.5f;
-                _checkPos = (transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y));
-                break;
-            case CurrentAttackSO.AttackEffect.AreaDamage:
-            case CurrentAttackSO.AttackEffect.Stun:
-                // Area attack, check around player 
-                // Sphere is centered around player 
+            case CurrentAttackSO.AttackType.AOE:
                 _range = 5;
                 _checkPos = (transform.position + (transform.forward * _impactPosOffset) + (transform.up * transform.localScale.y));
+                break;
+            case CurrentAttackSO.AttackType.Directional:
+                _range = 1.5f;
+                _checkPos = (transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y));
                 break;
             default:
                 break;
         }
+
 
         Collider[] enemyHits = Physics.OverlapSphere(_checkPos, _range, _enemyLayerMask);
 
@@ -71,11 +66,15 @@ public class PlayerCombat : MonoBehaviour
                     case CurrentAttackSO.AttackEffect.None:
                         break;
                     case CurrentAttackSO.AttackEffect.Pushback:
+                        //TODO: Calculate direction
+                        float knockbackForce = 500f;
+                        enemy.Knockback(transform.position, (enemy as MonoBehaviour).transform.position, knockbackForce);
                         break;
-                    case CurrentAttackSO.AttackEffect.bleed:
-
+                    case CurrentAttackSO.AttackEffect.StunAndPushback:
                         break;
-                    case CurrentAttackSO.AttackEffect.AreaDamage:
+                    case CurrentAttackSO.AttackEffect.Knockup:
+                        break;
+                    case CurrentAttackSO.AttackEffect.Bleed:
                         break;
                     case CurrentAttackSO.AttackEffect.Stun:
                         HandelStun(enemy);
@@ -84,11 +83,13 @@ public class PlayerCombat : MonoBehaviour
                         break;
                 }
 
+
                 enemy.TakeDamage(50.0f);
             }
         }
         Gizmos.color = Color.green;
     }
+
 
 
     private void RecieveAttackEvent(Player.OnAttackPressedEventArgs e)
@@ -99,6 +100,8 @@ public class PlayerCombat : MonoBehaviour
         _damage = 25f;
         _multiplier = e.CurrentAttackSO.DamageMultiplier;
         _effect = e.CurrentAttackSO.CurrentAttackEffect;
+        _attackType = e.CurrentAttackSO.currentAttackType;
+        debugCurrentAttackMessage = e.CurrentAttackSO.name;
     }
     
 

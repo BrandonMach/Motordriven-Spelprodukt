@@ -35,26 +35,31 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
         {
             _destroydelay -= Time.deltaTime;
             if(_destroydelay <= 0)
-            {
-                
-                Destroy(gameObject);
-                
+            {           
+                Destroy(gameObject);             
             }
         }
     }
 
-    public void TakeDamage(float damage, Vector3 hitDirection, float knockBackForce)
-    {
-        //CurrentHealthPoints -= damage;
-        //if(this.gameObject.tag == "Player")
-        //{
-        //    PlayerKnockback _playerKnockback = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerKnockback>();
-        //    _playerKnockback.Knockback(hitDirection, knockBackForce);
-        //    OnProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints/MaxHealthPoints});
+    //public void TakeDamage(float damage, Vector3 hitDirection, float knockBackForce)
+    //{
+    //    //CurrentHealthPoints -= damage;
+    //    //if(this.gameObject.tag == "Player")
+    //    //{
+    //    //    PlayerKnockback _playerKnockback = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerKnockback>();
+    //    //    _playerKnockback.Knockback(hitDirection, knockBackForce);
+    //    //    OnProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints/MaxHealthPoints});
             
-        //}
+    //    //}
        
+    //}
+
+
+    public void PushBack()
+    {
+
     }
+
 
     public void HealDamage(float damageHealed)
     {
@@ -65,6 +70,7 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
             CurrentHealthPoints = MaxHealthPoints;
         }
     }
+
 
     public void TakeDamage(float damage)
     {
@@ -105,14 +111,12 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
         Dead = true;
     }
 
-    public void Knockback(Vector3 hitDirection, float knockBackForce)
+
+
+    public void Knockback(Vector3 attackerPos, Vector3 receiverPos, float knockBackForce)
     {
-        if (this.gameObject.tag == "Player")
-        {
-            PlayerKnockback _playerKnockback = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerKnockback>();
-            _playerKnockback.Knockback(hitDirection, knockBackForce);
-           
-        }
-        
+        Vector3 knockbackDirection = (attackerPos - receiverPos).normalized;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);       
     }
 }

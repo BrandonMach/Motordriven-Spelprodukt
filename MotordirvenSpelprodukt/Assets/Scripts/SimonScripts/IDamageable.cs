@@ -8,5 +8,9 @@ public interface IDamagable
     public void GetStunned(float stunDuration);
     public void Die();
     public void HealDamage(float damageHealed);
-    public void Knockback(Vector3 hitDirection, float knockBackForce);
+
+    /// <summary>
+    /// Calculates the direction of the knockback and applies an impulse to the target rigidbody
+    /// </summary>
+    public void Knockback(Vector3 attackerPos, Vector3 receiverPos, float knockBackForce);
 }
