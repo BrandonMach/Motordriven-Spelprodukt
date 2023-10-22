@@ -42,11 +42,12 @@ public class PlayerCombat : MonoBehaviour
         switch (_attackType)
         {
             case CurrentAttackSO.AttackType.AOE:
-                _range = 5;
+                //_range = 5;
+                _range *= 3;
                 _checkPos = (transform.position + (transform.forward * _impactPosOffset) + (transform.up * transform.localScale.y));
                 break;
             case CurrentAttackSO.AttackType.Directional:
-                _range = 1.5f;
+                //_range = 1.5f;
                 _checkPos = (transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y));
                 break;
             default:
@@ -98,10 +99,10 @@ public class PlayerCombat : MonoBehaviour
 
     private void RecieveAttackEvent(Player.OnAttackPressedEventArgs e)
     {
-        //_range = e.weaponSO.GetRange();
-        //_damage = e.weaponSO.GetDamage();
-        _range = 1.5f;
-        _damage = 25f;
+        _range = e.weaponSO.GetRange();
+        _damage = e.weaponSO.GetDamage();
+        //_range = 1.5f;
+        //_damage = 25f;
         _multiplier = e.CurrentAttackSO.DamageMultiplier;
         _effect = e.CurrentAttackSO.CurrentAttackEffect;
         _attackType = e.CurrentAttackSO.currentAttackType;
