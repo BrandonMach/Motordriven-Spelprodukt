@@ -35,6 +35,12 @@ public class PlayerAnimation : MonoBehaviour
         _player.OnAttackPressed += Player_OnAttack;
         _player.OnStartEvade += Player_OnStartEvade;
         _player.OnEnableMovement += Player_OnEnableMovement;
+        _player.ComboBroken += Player_OnComboBroken;
+    }
+
+    private void Player_OnComboBroken(object sender, EventArgs e)
+    {
+        EndCombo();
     }
 
     private void Player_OnEnableMovement(object sender, EventArgs e)
@@ -128,7 +134,7 @@ public class PlayerAnimation : MonoBehaviour
             _comboWindowTimer += Time.deltaTime;
             if (_comboWindowTimer > _timeBetweenInputs)
             {
-                EndCombo();
+                //EndCombo();
             }
         }
     }
