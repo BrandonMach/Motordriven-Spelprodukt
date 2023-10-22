@@ -64,11 +64,13 @@ public class PlayerCombat : MonoBehaviour
                 switch (_effect)
                 {
                     case CurrentAttackSO.AttackEffect.None:
+                        float knockbackForce = 10f;
+                        enemy.Knockback(transform.position, (enemy as MonoBehaviour).transform.position, knockbackForce);
+                        //enemy.KnockUp(knockbackForce);
                         break;
                     case CurrentAttackSO.AttackEffect.Pushback:
                         //TODO: Calculate direction
-                        float knockbackForce = 500f;
-                        enemy.Knockback(transform.position, (enemy as MonoBehaviour).transform.position, knockbackForce);
+
                         break;
                     case CurrentAttackSO.AttackEffect.StunAndPushback:
                         break;
@@ -77,7 +79,9 @@ public class PlayerCombat : MonoBehaviour
                     case CurrentAttackSO.AttackEffect.Bleed:
                         break;
                     case CurrentAttackSO.AttackEffect.Stun:
-                        HandelStun(enemy);
+                        float knockUpForce = 15;
+                        enemy.KnockUp(knockUpForce);
+                        //HandelStun(enemy);
                         break;
                     default:
                         break;

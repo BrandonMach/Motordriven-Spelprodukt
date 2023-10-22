@@ -115,11 +115,15 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     }
 
-
+    public void KnockUp(float force)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.up * force, ForceMode.Impulse);
+    }
 
     public void Knockback(Vector3 attackerPos, Vector3 receiverPos, float knockBackForce)
     {
-        Vector3 knockbackDirection = (attackerPos - receiverPos).normalized;
+        Vector3 knockbackDirection = (receiverPos - attackerPos).normalized;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);       
     }

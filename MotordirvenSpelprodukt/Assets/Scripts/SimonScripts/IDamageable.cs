@@ -9,6 +9,8 @@ public interface IDamagable
     public void Die();
     public void HealDamage(float damageHealed);
 
+    public void KnockUp(float force);
+
     /// <summary>
     /// Calculates the direction of the knockback and applies an impulse to the target rigidbody
     /// </summary>
