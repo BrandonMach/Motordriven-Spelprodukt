@@ -21,11 +21,13 @@ public class ChampionWeaponManager : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {         
+            
+
             float kbForce = 50;          
             Vector3 playerPos = other.transform.position;
 
-            other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage);
-            other.GetComponent<HealthManager>().Knockback(playerPos, transform.position, kbForce);
+            //other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage);
+            //other.GetComponent<HealthManager>().Knockback(playerPos, kbForce);
             _etpmanager.DecreseETP(_championScript.ETPDecreaseValue);
             Debug.Log("Player got hit buy ChampionAttack");
         }

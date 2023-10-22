@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class AttackManager : MonoBehaviour
 {
-    [SerializeField] private Player player;
+
     [SerializeField] private LayerMask _enemyLayerMask;
     private string _currentCombo;
     private float _range;
-    private float _impactPosOffset =1.5f;
+    private float _impactPosOffset = 1.5f;
     private float _damage;
     private float _multiplier;
     private Vector3 _colliderPos;
@@ -16,24 +16,27 @@ public class PlayerCombat : MonoBehaviour
     private CurrentAttackSO.AttackType _attackType;
     private Vector3 _checkPos;
     private string debugCurrentAttackMessage;
+    private ICanAttack attacker;
 
     [SerializeField] private ParticleSystem stunEffect;
 
     void Start()
     {
-        player.OnAttackPressed += Player_OnAttack;
+        attacker = GetComponent<ICanAttack>();
+
+        attacker.OnRegisterAttack += Attacker_OnAttack;
         //stunEffect = Resources.Load<ParticleSystem>("ObjStunnedEffect");
     }
 
-    private void Player_OnAttack(object sender, Player.OnAttackPressedEventArgs e)
+    private void Attacker_OnAttack(object sender, OnAttackPressedEventArgs e)
     {
         RecieveAttackEvent(e);
-        //HandleAttack(e);
+        HandleAttack(e);
     }
 
 
 
-    private void HandleAttack()
+    private void HandleAttack(OnAttackPressedEventArgs e)
     {
         Gizmos.color = Color.red;
         // Temporary fix until _range can be passed on via event.
@@ -62,42 +65,12 @@ public class PlayerCombat : MonoBehaviour
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
-                switch (_effect)
-                {
-                    case CurrentAttackSO.AttackEffect.None:
-                        float knockbackForce = 10f;
-                        enemy.Knockback(transform.position, (enemy as MonoBehaviour).transform.position, knockbackForce);
-                        //enemy.KnockUp(knockbackForce);
-                        break;
-                    case CurrentAttackSO.AttackEffect.Pushback:
-                        //TODO: Calculate direction
-
-                        break;
-                    case CurrentAttackSO.AttackEffect.StunAndPushback:
-                        break;
-                    case CurrentAttackSO.AttackEffect.Knockup:
-                        break;
-                    case CurrentAttackSO.AttackEffect.Bleed:
-                        break;
-                    case CurrentAttackSO.AttackEffect.Stun:
-                        float knockUpForce = 15;
-                        enemy.KnockUp(knockUpForce);
-                        //HandelStun(enemy);
-                        break;
-                    default:
-                        break;
-                }
-
-
-                enemy.TakeDamage(50.0f);
+                enemy.TakeDamage(50.0f, new Attack { AttackSO = e.CurrentAttackSO, Position = transform.position});
             }
         }
-        Gizmos.color = Color.green;
     }
 
-
-
-    private void RecieveAttackEvent(Player.OnAttackPressedEventArgs e)
+    private void RecieveAttackEvent(OnAttackPressedEventArgs e)
     {
         _range = e.weaponSO.GetRange();
         _damage = e.weaponSO.GetDamage();
@@ -108,21 +81,15 @@ public class PlayerCombat : MonoBehaviour
         _attackType = e.CurrentAttackSO.currentAttackType;
         debugCurrentAttackMessage = e.CurrentAttackSO.name;
     }
-    
-
-    private void HandelStun(IDamagable enemy)
-    {
-        enemy.GetStunned(2.0f);
-        Vector3 pos = (enemy as MonoBehaviour).transform.position;
-        pos = new Vector3(pos.x, pos.y + (enemy as MonoBehaviour).transform.localScale.y + 1, pos.z);
-        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0));
-    }
 
 
-    public void RegisterAttack()
-    {
-        HandleAttack();
-    }
+    //private void HandelStun(IDamagable enemy)
+    //{
+    //    //enemy.TakeDamage(2.0f, new Attack { AttackEffect = , Position = transform.position });
+    //    Vector3 pos = (enemy as MonoBehaviour).transform.position;
+    //    pos = new Vector3(pos.x, pos.y + (enemy as MonoBehaviour).transform.localScale.y + 1, pos.z);
+    //    Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
+    //}
 
 
     private void OnDrawGizmos()
