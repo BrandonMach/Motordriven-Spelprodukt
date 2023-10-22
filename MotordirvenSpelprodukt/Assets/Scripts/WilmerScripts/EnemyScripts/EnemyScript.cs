@@ -58,19 +58,20 @@ public class EnemyScript : MonoBehaviour
      
     }
 
-    public void GetPushedBack(int damage)
-    {
-        //PushedBack
-        //TakeDamage(damage);
-    }
+    //public void GetPushedBack(int damage)
+    //{
+    //    //PushedBack
+    //    //TakeDamage(damage);
 
-    public void GetStunned(float stunSuration)
-    {
-        //hpmanger.GetStunned();
-        Stunned = true;
-        _stunDuration = stunSuration;
+    //}
+
+    //public void GetStunned(float stunSuration)
+    //{
+    //    //hpmanger.GetStunned();
+    //    Stunned = true;
+    //    _stunDuration = stunSuration;
        
-    }
+    //}
 
    
 }

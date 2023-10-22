@@ -23,6 +23,11 @@ public class SwitchCamera : MonoBehaviour
        
     }
 
+    public void GoToKingCam()
+    {
+        StartCoroutine(ChangeCameraAndDoSomething());
+    }
+
     void SwitchCameraPriority()
     {
         if (playerCamera)

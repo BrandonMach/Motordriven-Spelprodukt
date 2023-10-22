@@ -25,6 +25,10 @@ public class EntertainmentManager : MonoBehaviour
     //ETP = Entartainment Points
 
     [SerializeField] private float _maxETP = 100;
+    public float GetMaxETP()
+    {
+        return _maxETP;
+    }
     private float _ETPThreshold;
     
     public float GetAngryThreshold()
@@ -42,9 +46,6 @@ public class EntertainmentManager : MonoBehaviour
     }
     private float _startETP;
 
-   
-
-
 
     [Header("OOC- Out Of Combat")]
     public GameObject[] EnemyGameObjects;
@@ -52,21 +53,19 @@ public class EntertainmentManager : MonoBehaviour
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
     [SerializeField] float _timeOutOfCombatCounter = 0;
     [SerializeField] float _timeOutOfCombatThreshold;
-
+    public bool MatchFinished;
 
     [Header("Conditions")]
 
     [SerializeField] private bool _isOutOfCombat; //OOC
     // [SerializeField] private bool _startComboWindowTimer;
     
-    [Header("Crowd Animation")]
-    public float CrowdBehaviour;
 
     void Start()
     {
 
         EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
-
+       
 
 
         //ETP
@@ -83,41 +82,20 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
         
         UpdateETPArrow();
-        
 
-        CheckIfOutOfCombat();
-
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    _isOutOfCombat = !_isOutOfCombat;
-        //}
-
-        if (_isOutOfCombat)
+        if (!MatchFinished)
         {
-            OutOfCombatDecreaseOverTime();
+            CheckIfOutOfCombat();
+
+            if (_isOutOfCombat)
+            {
+                OutOfCombatDecreaseOverTime();
+            }
         }
 
-        //if(_entertainmentPoints < (_maxETP*0.33))
-        //{
-        //    CrowdText.text = "Booooooo!!";
-        //    CrowdBehaviour = 0.25f;
-        //}
-        //else if(_entertainmentPoints > (_maxETP * 0.66))
-        //{
-        //    CrowdText.text = "Let's GOOOOO!!";
-        //    CrowdText.color = Color.black;
-        //    CrowdBehaviour = 0.75f;
-        //}
-        //else
-        //{
-        //    CrowdBehaviour = 0.5f;
-        //}
-
+        //For testing
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
-
-
-        //For testing
         OOCPopUp.SetActive(_isOutOfCombat);
 
 
