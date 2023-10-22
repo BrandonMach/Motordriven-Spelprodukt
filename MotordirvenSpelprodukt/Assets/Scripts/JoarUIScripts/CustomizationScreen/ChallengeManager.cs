@@ -115,7 +115,7 @@ public class ChallengeManager : MonoBehaviour
         Debug.Log("Challenge Removed from ActiveChallenges (List)" + challenge.ChallengeName);
     }
 
-    private void ReverseIterateRemove()
+    public void ReverseIterateRemove()
     {
         for (int i = ActiveChallenges.Count - 1; i >= 0; i--)
         {

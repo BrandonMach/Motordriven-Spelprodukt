@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Coins" + PlayerCoins);
 
         //Not used at the moment
-        _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         
     }
 
@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
         PlayerCoins += completedChallenge.Reward;
+        completedChallenge.IsCompleted = true;
         _challengeManager.DeActivateChallenge(completedChallenge);
         _challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
@@ -112,7 +113,15 @@ public class GameManager : MonoBehaviour
 
     public void CheckChallengesCompletion()
     {
-        foreach (Challenge challenge in _challengeManager.ActiveChallenges)
+        if (_challengeManager == null || _challengeManager.ActiveChallenges.Count == 0)
+        {
+            return;
+        }
+
+        //Used for safe modifying of _challengeManager.ActiveChallenges during run-time
+        List<Challenge> copyOfActiveChallenges = new List<Challenge>(_challengeManager.ActiveChallenges);
+
+        foreach (Challenge challenge in copyOfActiveChallenges)
         {
             if (challenge is TimeChallenge timeChallenge)
             {
