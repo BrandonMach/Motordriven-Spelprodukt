@@ -26,7 +26,7 @@ public class MMAttackNode : ActionNode
 
         }
 
-        Debug.LogWarning("HEjejejjeeje");
+
     }
 
     protected override void OnStop()
