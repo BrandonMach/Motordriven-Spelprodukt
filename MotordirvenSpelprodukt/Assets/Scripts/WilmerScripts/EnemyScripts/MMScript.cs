@@ -39,8 +39,6 @@ public class MMScript : EnemyScript
         _attackRange = 6;
         _attackCooldown = 2;
         ChaseDistance = 4;
-        _currentHealth = 100;
-        _maxHealth = 100;
         CanAttack = true;
         Anim = GetComponent<Animator>();
         ac = Anim.runtimeAnimatorController;
