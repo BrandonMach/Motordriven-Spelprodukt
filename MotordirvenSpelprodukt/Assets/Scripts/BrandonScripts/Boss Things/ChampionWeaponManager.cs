@@ -20,16 +20,14 @@ public class ChampionWeaponManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
-        {
-            Vector3 hitDirection = other.transform.position - transform.position;
-            float kbForce = 50;
-
-            Debug.Log("Player got hit buy ChampionAttack");
+        {         
+            float kbForce = 50;          
+            Vector3 playerPos = other.transform.position;
 
             other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage);
-            other.GetComponent<HealthManager>().Knockback(hitDirection, kbForce);
+            other.GetComponent<HealthManager>().Knockback(playerPos, transform.position, kbForce);
             _etpmanager.DecreseETP(_championScript.ETPDecreaseValue);
-
+            Debug.Log("Player got hit buy ChampionAttack");
         }
     }
 }
