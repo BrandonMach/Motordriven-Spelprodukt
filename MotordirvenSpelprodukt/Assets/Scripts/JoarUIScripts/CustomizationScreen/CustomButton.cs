@@ -10,7 +10,7 @@ public class CustomButton : Button
     [SerializeField] public TextMeshProUGUI TMP;
     [SerializeField] public Challenge Challenge;
 
-    // Start is called before the first frame update
+    // Start is called before the first frame update 
     void Start()
     {
         TMP.text = ($"{Challenge.ChallengeName} : {Challenge.Description}");
