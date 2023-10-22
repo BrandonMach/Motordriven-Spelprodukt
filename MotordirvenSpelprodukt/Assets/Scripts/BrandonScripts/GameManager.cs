@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
         PlayerCoins = 89;
         Debug.Log("Coins" + PlayerCoins);
 
-        //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        //Not used at the moment
+        _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         
     }
 
@@ -114,7 +115,7 @@ public class GameManager : MonoBehaviour
         {
             if (challenge is TimeChallenge timeChallenge)
             {
-                if (timeChallenge.TimeForCompletion >= _gameStartTimer && timeChallenge.Requirement >= _killCount)
+                if (timeChallenge.TimeForCompletion >= _gameStartTimer && _killCount >= timeChallenge.Requirement)
                 {
                     HandleChallengeCompleted(timeChallenge);
                 }

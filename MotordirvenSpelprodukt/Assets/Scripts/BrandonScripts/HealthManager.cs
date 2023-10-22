@@ -108,6 +108,7 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
         Dead = true;
 
         _gameManager.KillCount++;
+        Debug.Log("Kill count: " + _gameManager.KillCount);
 
     }
 
