@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AffectCheck : ActionNode
+public class MMStatusEffect : ActionNode
 {
     protected override void OnStart()
     {
@@ -12,7 +12,7 @@ public class AffectCheck : ActionNode
 
     protected override void OnStop()
     {
-        
+
     }
 
     protected override State OnUpdate()
@@ -20,7 +20,7 @@ public class AffectCheck : ActionNode
         if (_playerScript != null && _meleeMinionScript != null)
         {
 
-            if (_meleeMinionScript.Stunned /*!_meleeMinionScript.CanChase*/)
+            if (!_meleeMinionScript.CanChase)
             {
                 return State.Success;
             }
@@ -36,6 +36,4 @@ public class AffectCheck : ActionNode
             return State.Failure;
         }
     }
-
-
 }
