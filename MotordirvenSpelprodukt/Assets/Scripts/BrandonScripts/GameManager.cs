@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    // Is only to be instantiated once, but can be reachable throughout the project with GameManager.Instance;
     #region Singleton
 
     private static GameManager _instance;

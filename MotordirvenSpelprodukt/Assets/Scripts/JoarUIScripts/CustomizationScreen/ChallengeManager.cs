@@ -6,14 +6,12 @@ using UnityEngine;
 
 public class ChallengeManager : MonoBehaviour
 {
-    // Is only to be instantiated in the CustomizationScreen, but can be reachable throughout the project with ChallengeManager.Instance.
+    // Is only to be instantiated in the CustomizationScreen, but can be reachable throughout the project with ChallengeManager.Instance;
     #region Singleton
 
     private static ChallengeManager _instance;
     public static ChallengeManager Instance { get => _instance; set => _instance = value; }
-
-    public List<Challenge> AvailableChallenges = new List<Challenge>();
-    public List<Challenge> ActiveChallenges;
+ 
 
     private void Awake()
     {
@@ -29,6 +27,9 @@ public class ChallengeManager : MonoBehaviour
         ActiveChallenges = new List<Challenge>();
     }
     #endregion
+
+    public List<Challenge> AvailableChallenges = new List<Challenge>();
+    public List<Challenge> ActiveChallenges;
 
     public event Action<Challenge> OnChallengeCompleted;
 
