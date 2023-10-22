@@ -24,7 +24,7 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
     
     void Start()
     {
-       
+
         CurrentHealthPoints = MaxHealthPoints;
     }
 
@@ -109,6 +109,10 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
         }
         
         Dead = true;
+
+        GameManager.Instance.KillCount++;
+        Debug.Log("Killer count: " + GameManager.Instance.KillCount);
+
     }
 
 
