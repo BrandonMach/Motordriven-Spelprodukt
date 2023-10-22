@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public event EventHandler OnDisableMovement;
     public event EventHandler OnEnableMovement;
 
+    public event EventHandler ComboBroken;
 
     public EventHandler<OnAttackPressedEventArgs> OnAttackPressed;
     public class OnAttackPressedEventArgs : EventArgs
@@ -105,13 +106,14 @@ public class Player : MonoBehaviour
     {
         if (_inputTimer >= _timeBetweenInputs)
         {
-            _input += "L";
-            if (GetCurrentAttackSO(_input) == null)
+            
+            if (GetCurrentAttackSO(_input + "L") != null)
             {
-                _input = "L";
+                _input += "L";
+                OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Light, weaponSO = _currentWeapon });
+                _inputTimer = 0;
             }
-            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Light, weaponSO = _currentWeapon });
-            _inputTimer = 0;
+           
         }
     }
 
@@ -121,15 +123,12 @@ public class Player : MonoBehaviour
 
         if (_inputTimer >= _timeBetweenInputs)
         {
-            _input += "H";
-
-            if (GetCurrentAttackSO(_input) == null)
+            if (GetCurrentAttackSO(_input + "H") != null)
             {
-                _input = "H";
+                _input += "H";
+                OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Heavy, weaponSO = _currentWeapon });
+                _inputTimer = 0;
             }
-
-            OnAttackPressed?.Invoke(this, new OnAttackPressedEventArgs {CurrentAttackSO = GetCurrentAttackSO(_input), attackType = OnAttackPressedEventArgs.AttackType.Heavy, weaponSO = _currentWeapon });
-            _inputTimer = 0;
         }
     }
 
@@ -154,15 +153,25 @@ public class Player : MonoBehaviour
         {
             if (currentAttackSO.name.ToLower() == name.ToLower())
             {
-                if (currentAttackSO.Last)//dhasdasbdjabdkanbdkandbasdj
+                if (currentAttackSO.Last)
                 {
-                    
                     _etpManager.increaseETP(20);
                 }
                 return currentAttackSO;
             }
         }
         return null;
+    }
+
+    //Function will be called using animation events
+    private void OnComboBroken(string combo)
+    {
+       
+        if (_input == combo)
+        {
+            _input = "";
+            ComboBroken?.Invoke(this, EventArgs.Empty);
+        }
     }
 
 
