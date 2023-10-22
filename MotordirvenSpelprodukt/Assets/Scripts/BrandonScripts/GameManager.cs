@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Is only to be instantiated once, but can be reachable throughout the project with GameManager.Instance;
+    // Is only to be instantiated once, but can be reachable throughout the project with GameManager.Instance.
     #region Singleton
 
     private static GameManager _instance;
@@ -24,14 +24,6 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] Object _champion;
-    [SerializeField] SwitchCamera CamManager;
-    private bool _kingCam;
-    [SerializeField] Animator _kingAnim;
-    [SerializeField] EntertainmentManager _etp;
-
-    public static int PlayerCoins; //Static så att anadra scener kan få access
-
     #region ChallengeVariables
 
     private ChallengeManager _challengeManager;
@@ -47,6 +39,15 @@ public class GameManager : MonoBehaviour
     bool _isChallengeRequirementsMet;
 
     #endregion
+
+    [SerializeField] Object _champion;
+    [SerializeField] SwitchCamera CamManager;
+    private bool _kingCam;
+    [SerializeField] Animator _kingAnim;
+    [SerializeField] EntertainmentManager _etp;
+
+    public static int PlayerCoins; //Static så att anadra scener kan få access
+
 
 
     public static GameManager Instance { get => _instance; set => _instance = value; }

@@ -21,12 +21,9 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
 
     public bool hasSlowMo;
     public SlowMo _slowMo;
-
-    private GameManager _gameManager;
     
     void Start()
     {
-        _gameManager = GameManager.Instance; // Singleton
 
         CurrentHealthPoints = MaxHealthPoints;
     }
@@ -107,8 +104,8 @@ public class HealthManager : MonoBehaviour,IHasProgress, IDamagable
         
         Dead = true;
 
-        _gameManager.KillCount++;
-        Debug.Log("Kill count: " + _gameManager.KillCount);
+        GameManager.Instance.KillCount++;
+        Debug.Log("Killer count: " + GameManager.Instance.KillCount);
 
     }
 
