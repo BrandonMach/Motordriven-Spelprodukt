@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour 
+public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 {
-    protected float _currentHealth;
-    protected float _maxHealth;
+    [SerializeField] protected HealthManager _healthManager;
+    [SerializeField] private CurrentAttackSO[] _attackSOArray;
+    [SerializeField] private Weapon _weapon;
+
+
     protected float _movementSpeed;
     protected float _attackSpeed; //?
     protected float _attackRange;
@@ -17,13 +20,9 @@ public class EnemyScript : MonoBehaviour
     private ParticleSystem stunEffect;
 
 
-    public HealthManager hpmanger;
-   
+    public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
 
-    
 
-    public float Currenthealth { get { return _currentHealth; } }
-    public float MaxHealth { get { return _maxHealth; } }
     public float MovementSpeed { get { return _movementSpeed; } }
     public float AttackSpeed { get { return _attackSpeed; } }
     public float AttackRange { get { return _attackRange; } }
@@ -36,6 +35,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //if (HasDismembrent)
         //{
         //    _dismembrentScript = GetComponent<DismemberentEnemyScript>();
@@ -51,26 +51,53 @@ public class EnemyScript : MonoBehaviour
         
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Attack attack)
     {
-        hpmanger.TakeDamage(damage);
+        _healthManager.ReduceHealth(damage);
+        switch (attack.AttackSO.CurrentAttackEffect)
+        {
+            case CurrentAttackSO.AttackEffect.None:
+                float knockbackForce = 10f;
+                GetKnockedback(attack.Position, knockbackForce);
+                //enemy.KnockUp(knockbackForce);
+                break;
+            case CurrentAttackSO.AttackEffect.Pushback:
+                //TODO: Calculate direction
+
+                break;
+            case CurrentAttackSO.AttackEffect.StunAndPushback:
+                break;
+            case CurrentAttackSO.AttackEffect.Knockup:
+                break;
+            case CurrentAttackSO.AttackEffect.Bleed:
+                break;
+            case CurrentAttackSO.AttackEffect.Stun:
+                float knockUpForce = 15;
+                //enemy.KnockUp(knockUpForce);
+                //HandelStun(enemy);
+                break;
+            default:
+                break;
+        }
+
         
-     
     }
 
-    public void GetPushedBack(int damage)
+    protected void GetKnockedup(float force)
     {
-        //PushedBack
-        //TakeDamage(damage);
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.up * force, ForceMode.Impulse);
     }
 
-    public void GetStunned(float stunSuration)
+    protected void GetKnockedback(Vector3 attackerPos, float knockBackForce)
     {
-        //hpmanger.GetStunned();
-        Stunned = true;
-        _stunDuration = stunSuration;
-       
+        Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
     }
 
-   
+    protected virtual void OnAttack()
+    {
+        OnRegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });
+    }
 }

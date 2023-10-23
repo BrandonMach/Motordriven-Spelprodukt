@@ -10,15 +10,26 @@ public class CurrentAttackSO : ScriptableObject
     {
         None,
         Pushback,
-        bleed,
-        AreaDamage,
+        StunAndPushback,
+        Knockup,
+        Bleed,
         Stun
     }
+
+    public enum AttackType
+    {
+        AOE,
+        Directional
+    }
+
+    public AttackType currentAttackType;
     public AttackEffect CurrentAttackEffect;
     public float DamageMultiplier;
+    public float Force;
 
     public bool Last;
     public string Name;
+
  
 }
 

@@ -45,8 +45,6 @@ public class CMPScript : EnemyScript
         _attackRange = 6;
         _attackCooldown = 2;
         ChaseDistance = 4;
-        _currentHealth = 100;
-        _maxHealth = 100;
         CanAttack = true;
 
         ac = Anim.runtimeAnimatorController;
@@ -92,4 +90,11 @@ public class CMPScript : EnemyScript
         _slamHitbox.SetActive(false);
         Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), _mainColider,false);
     }
+
+    protected override void OnAttack()
+    {
+        base.OnAttack();
+    }
+
+
 }

@@ -23,8 +23,6 @@ public class KMScript : EnemyScript
         _attackRange = 0.2f; //?? kanske inte  behövs
         _attackCooldown = 2; //Kanske inte behövs
         ChaseDistance = 2;
-        _currentHealth = 100;
-        _maxHealth = 100;
         
     }
 
@@ -47,7 +45,7 @@ public class KMScript : EnemyScript
         {
             expolisionHitbox.enabled = true;
             Instantiate(_explosion, transform);
-            hpmanger.TakeDamage(100);
+            //hpmanger.TakeDamage(100);
         }
         
         
