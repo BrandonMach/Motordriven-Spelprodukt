@@ -126,9 +126,6 @@ public class CrowdBehaviour : MonoBehaviour
         {
             if (LatestEmotion == CrowdEmotion.Excited)
             {
-                //ExcitedTheme.Stop();
-                //newTheme.Play();
-
                 while (timeElapsed < timeToFade)
                 {
                     newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
@@ -139,9 +136,6 @@ public class CrowdBehaviour : MonoBehaviour
             }
             if (LatestEmotion == CrowdEmotion.Angry)
             {
-                //AngryTheme.Stop();
-                //newTheme.Play();
-
                 while (timeElapsed < timeToFade)
                 {
                     newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
@@ -153,9 +147,6 @@ public class CrowdBehaviour : MonoBehaviour
 
             if (LatestEmotion == CrowdEmotion.Normal)
             {
-                //NormalTheme.Stop();
-                //newTheme.Play();
-
                 while (timeElapsed < timeToFade)
                 {
                     newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
@@ -165,12 +156,6 @@ public class CrowdBehaviour : MonoBehaviour
                 }
             }
         }
-
-
-      
-
-        
-
     }
 
 }
