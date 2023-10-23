@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour, ICanAttack, IDamagable
 {
+
+    public static Player PlayerInstance;
+
     // Placeholder för nuvarande vapnets värden
     //-----------------------------------------
     float damage = 1;
@@ -23,9 +26,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     public event EventHandler ComboBroken;
     public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
     public event EventHandler<OnAttackPressedAnimationEventArgs> OnAttackAnimationPressed;
-
-
-
 
 
     public class OnAttackPressedAnimationEventArgs : EventArgs
@@ -63,6 +63,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         _healthManager = GetComponent<HealthManager>();
         _playerMovement = GetComponent<PlayerMovement>();
         _playerDash = GetComponent<PlayerDash>();
+
+        if (PlayerInstance != null)
+        {
+            PlayerInstance = this;
+        }
     }
     void Start()
     {
