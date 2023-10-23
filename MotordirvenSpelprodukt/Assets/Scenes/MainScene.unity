@@ -620,8 +620,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   stunEffect: {fileID: 0}
+--- !u!114 &139608327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1468190722848689837, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
+  m_PrefabInstance: {fileID: 2750316555146964288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139608317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &172127949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,6 +1598,10 @@ PrefabInstance:
     - target: {fileID: 1397593005379782676, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: GodMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1397593005379782676, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _maxHealthPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _mainCamera
@@ -7029,8 +7044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
-  CurrentHealthPoints: 0
+  _maxHealthPoints: 0
   HasDismembrent: 0
   Dead: 0
   _destroydelay: 2.5
@@ -7049,14 +7063,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpmanger: {fileID: 2106179419}
+  _healthManager: {fileID: 0}
+  _attackSOArray: []
+  _weapon: {fileID: 0}
   ChaseDistance: 4
   CanAttack: 0
   StopChase: 0
   AnimationPlaying: 0
-  Anim: {fileID: 2106179423}
+  Anim: {fileID: 0}
   _weaponHolderTransform: {fileID: 0}
-  Damage: 10
+  Damage: 0
   ETPDecreaseValue: 0
   NTime: 0
   CanChase: 0
@@ -7110,11 +7126,6 @@ CapsuleCollider:
   m_Height: 2.35
   m_Direction: 1
   m_Center: {x: 0, y: 0.92, z: 0}
---- !u!95 &2106179423 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95842207964945976, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
-  m_PrefabInstance: {fileID: 1703537474}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2111990765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7543,9 +7554,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2029219277761584927, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
+    - target: {fileID: 2029219277761584927, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
       propertyPath: hpmanger
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2029219277761584927, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
+      propertyPath: _healthManager
+      value: 
+      objectReference: {fileID: 139608327}
+    - target: {fileID: 2029219277761584927, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
+      propertyPath: _attackSOArray.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029219277761584927, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
+      propertyPath: _attackSOArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
     - target: {fileID: 6933379958135683023, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

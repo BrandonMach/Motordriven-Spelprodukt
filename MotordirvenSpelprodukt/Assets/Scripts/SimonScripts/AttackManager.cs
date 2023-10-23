@@ -65,7 +65,7 @@ public class AttackManager : MonoBehaviour
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
-                enemy.TakeDamage(50.0f, new Attack { AttackSO = e.CurrentAttackSO, Position = transform.position});
+                enemy.TakeDamage(_damage, new Attack { AttackSO = e.CurrentAttackSO, Position = transform.position});
             }
         }
     }
