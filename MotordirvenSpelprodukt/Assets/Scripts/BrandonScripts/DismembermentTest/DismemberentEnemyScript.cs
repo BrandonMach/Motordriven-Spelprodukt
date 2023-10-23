@@ -9,11 +9,13 @@ public class DismemberentEnemyScript : MonoBehaviour
 
     [SerializeField] List<Rigidbody> _ragdollRigids;
     [SerializeField] List<DismembermentLimbsScript> _limbs;
+    [SerializeField] BoxCollider _mainCollider;
     void Start()
     {
         _anim = GetComponent<Animator>();
         _ragdollRigids = new List<Rigidbody>(transform.GetComponentsInChildren <Rigidbody>());
         _ragdollRigids.Remove(GetComponent<Rigidbody>());
+        DeactivateRagdoll();
 
         DeactivateRagdoll();
     }
@@ -29,14 +31,23 @@ public class DismemberentEnemyScript : MonoBehaviour
             //{
             //    item.Dismember();
             //}
+            ActivateRagdoll();
         }
+    }
+
+    public void PlayerDismember()
+    {
+        _limbs[Random.Range(0, _limbs.Count)].Dismember();
+        ActivateRagdoll();
     }
 
     void ActivateRagdoll()
     {
+        _mainCollider.enabled = false;
         _anim.enabled = false;
         foreach (var ragdollparts in _ragdollRigids)
         {
+            ragdollparts.gameObject.GetComponent<Collider>().enabled = true;
             ragdollparts.useGravity = true;
             ragdollparts.isKinematic = false;
         }
@@ -47,6 +58,7 @@ public class DismemberentEnemyScript : MonoBehaviour
         _anim.enabled = true;
         foreach (var ragdollparts in _ragdollRigids)
         {
+            ragdollparts.gameObject.GetComponent<Collider>().enabled = false;
             ragdollparts.useGravity = false;
             ragdollparts.isKinematic = true;
         }

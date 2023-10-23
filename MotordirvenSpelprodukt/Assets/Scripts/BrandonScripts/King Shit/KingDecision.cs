@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class KingDecision : MonoBehaviour
 {
     // Start is called before the first frame update
+    public DismemberentEnemyScript _playerDismemberent;
+    [SerializeField] SwitchCamera CamManager;
     void Start()
     {
-        
+        CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
+        _playerDismemberent = GameObject.FindWithTag("Player").GetComponent<DismemberentEnemyScript>();
     }
 
     // Update is called once per frame
@@ -18,15 +21,27 @@ public class KingDecision : MonoBehaviour
     }
 
 
-    public void GoToLoseScreen()
+    //King playes lose animation
+    public void ExectutePlayer()
     {
+        CamManager.GoToExecute();
         LoseScreenScript.KingExecution = true;
+        _playerDismemberent.PlayerDismember();
+        StartCoroutine(LoseScreen());        
+    }
+
+    private IEnumerator LoseScreen()
+    {
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
+
+    //King playes win animation
     public void GoToShop()
     {
         //testar gå till concept save money
+
         SceneManager.LoadScene(3, LoadSceneMode.Single);
     }
 }

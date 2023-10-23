@@ -25,9 +25,7 @@ public class ChampionWeaponManager : MonoBehaviour
 
             float kbForce = 50;          
             Vector3 playerPos = other.transform.position;
-
-            //other.GetComponent<HealthManager>().TakeDamage(_championScript.Damage);
-            //other.GetComponent<HealthManager>().Knockback(playerPos, kbForce);
+            other.GetComponent<HealthManager>().ReduceHealth(_championScript.Damage);
             _etpmanager.DecreseETP(_championScript.ETPDecreaseValue);
             Debug.Log("Player got hit buy ChampionAttack");
         }
