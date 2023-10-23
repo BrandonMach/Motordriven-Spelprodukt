@@ -9,6 +9,7 @@ public class DismemberentEnemyScript : MonoBehaviour
 
     [SerializeField] List<Rigidbody> _ragdollRigids;
     [SerializeField] List<DismembermentLimbsScript> _limbs;
+    [SerializeField] BoxCollider _mainCollider;
     void Start()
     {
         _anim = GetComponent<Animator>();
@@ -29,11 +30,13 @@ public class DismemberentEnemyScript : MonoBehaviour
             //{
             //    item.Dismember();
             //}
+            ActivateRagdoll();
         }
     }
 
     void ActivateRagdoll()
     {
+        _mainCollider.enabled = false;
         _anim.enabled = false;
         foreach (var ragdollparts in _ragdollRigids)
         {
