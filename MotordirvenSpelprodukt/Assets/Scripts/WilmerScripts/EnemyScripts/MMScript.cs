@@ -31,7 +31,7 @@ public class MMScript : EnemyScript
     public float ETPDecreaseValue;
 
     public float NTime;
-    public bool CanChase;
+    //public bool CanChase;
 
     void Start()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     private bool _kingCam;
     [SerializeField] Animator _kingAnim;
     [SerializeField] EntertainmentManager _etp;
+    [SerializeField] GameObject _player;
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
         _gameStartTimer = 0;
 
         _champion = GameObject.FindObjectOfType<CMPScript>();
+        _player = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _kingAnim = GameObject.FindWithTag("King").GetComponent<Animator>();
         _etp = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
@@ -70,7 +73,7 @@ public class GameManager : MonoBehaviour
         _kingAnim.SetBool("Approved", false);
 
         //För testing
-        PlayerCoins = 89;
+        PlayerCoins = 50;
         Debug.Log("Coins" + PlayerCoins);
 
         //Not used at the moment
@@ -92,6 +95,11 @@ public class GameManager : MonoBehaviour
         }
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
+
+        if(_player == null)
+        {
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
+        }
 
 
         // Testing challenges

@@ -7,7 +7,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class HealthManager : MonoBehaviour,IHasProgress
 {
     [SerializeField] float _maxHealthPoints;
-
+    [SerializeField] private float _bleedDuration = 6.0f;
     public float CurrentHealthPoints { get; private set; }
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
@@ -18,7 +18,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public bool Dead;
     public float _destroydelay = 2.5f;
-
+    
     public bool GodMode;
 
     public bool hasSlowMo;
@@ -43,18 +43,16 @@ public class HealthManager : MonoBehaviour,IHasProgress
         }
     }
 
-    //public void TakeDamage(float damage, Vector3 hitDirection, float knockBackForce)
-    //{
-    //    //CurrentHealthPoints -= damage;
-    //    //if(this.gameObject.tag == "Player")
-    //    //{
-    //    //    PlayerKnockback _playerKnockback = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerKnockback>();
-    //    //    _playerKnockback.Knockback(hitDirection, knockBackForce);
-    //    //    OnProgressChanged?.Invoke(this,new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints/MaxHealthPoints});
-            
-    //    //}
-       
-    //}
+
+    public IEnumerator Bleed(float bleedDamage, float startBleedTime)
+    {
+        while ((Time.time - startBleedTime) < _bleedDuration)
+        {
+            ReduceHealth(bleedDamage);
+            Debug.Log("Health reduced by " + bleedDamage);
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
 
 
     public void HealDamage(float damageHealed)

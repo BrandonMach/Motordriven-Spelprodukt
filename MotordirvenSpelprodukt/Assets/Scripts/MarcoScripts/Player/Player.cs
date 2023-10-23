@@ -13,6 +13,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     //-----------------------------------------
 
     public GameInput GameInput { get { return _gameInput; } }
+
+
     public event EventHandler OnChangeControllerTypeButtonPressed;
     public event EventHandler OnStartEvade;
     public event EventHandler OnDisableMovement;
@@ -21,6 +23,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     public event EventHandler ComboBroken;
     public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
     public event EventHandler<OnAttackPressedAnimationEventArgs> OnAttackAnimationPressed;
+
+
 
 
 
@@ -86,15 +90,15 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         }      
     }
 
-    public void Knockbacked(object sender, EventArgs e)
-    {
-        OnDisableMovement?.Invoke(this, EventArgs.Empty);
-    }
+    //public void Knockbacked(object sender, EventArgs e)
+    //{
+    //    OnDisableMovement?.Invoke(this, EventArgs.Empty);
+    //}
 
-    public void KnockbackedFinish(object sender, EventArgs e)
-    {
-        OnEnableMovement?.Invoke(this, EventArgs.Empty);
-    }
+    //public void KnockbackedFinish(object sender, EventArgs e)
+    //{
+    //    OnEnableMovement?.Invoke(this, EventArgs.Empty);
+    //}
 
     private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
     {
@@ -179,7 +183,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         }
     }
 
-    public void TakeDamage(float damage, Attack attack)
+    public void TakeDamage(Attack attack)
     {
         _healthManager.ReduceHealth(damage);  
     }

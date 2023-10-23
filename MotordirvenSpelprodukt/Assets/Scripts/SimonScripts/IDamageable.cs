@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    public void TakeDamage(float damage, Attack attack);
-
+    public void TakeDamage(Attack attack);
     //public void GetStunned(float stunDuration);
     //public void Die();
     //public void HealDamage(float damageHealed);

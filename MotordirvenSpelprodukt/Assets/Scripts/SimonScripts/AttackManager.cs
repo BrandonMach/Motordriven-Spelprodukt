@@ -57,7 +57,6 @@ public class AttackManager : MonoBehaviour
                 break;
         }
 
-
         Collider[] enemyHits = Physics.OverlapSphere(_checkPos, _range, _enemyLayerMask);
 
         for (int i = 0; i < enemyHits.Length; i++)
@@ -65,7 +64,7 @@ public class AttackManager : MonoBehaviour
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
-                enemy.TakeDamage(_damage, new Attack { AttackSO = e.CurrentAttackSO, Position = transform.position});
+                enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, Position = transform.position, Damage = _damage});
             }
         }
     }
@@ -74,22 +73,12 @@ public class AttackManager : MonoBehaviour
     {
         _range = e.weaponSO.GetRange();
         _damage = e.weaponSO.GetDamage();
-        //_range = 1.5f;
-        //_damage = 25f;
         _multiplier = e.CurrentAttackSO.DamageMultiplier;
         _effect = e.CurrentAttackSO.CurrentAttackEffect;
         _attackType = e.CurrentAttackSO.currentAttackType;
         debugCurrentAttackMessage = e.CurrentAttackSO.name;
     }
 
-
-    //private void HandelStun(IDamagable enemy)
-    //{
-    //    //enemy.TakeDamage(2.0f, new Attack { AttackEffect = , Position = transform.position });
-    //    Vector3 pos = (enemy as MonoBehaviour).transform.position;
-    //    pos = new Vector3(pos.x, pos.y + (enemy as MonoBehaviour).transform.localScale.y + 1, pos.z);
-    //    Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
-    //}
 
 
     private void OnDrawGizmos()

@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 public class OnAttackPressedEventArgs
 {
-
     public CurrentAttackSO CurrentAttackSO;
-    public Weapon weaponSO;
-    
+    public Weapon weaponSO;  
 }
 
