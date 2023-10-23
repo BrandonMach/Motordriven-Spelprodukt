@@ -19,8 +19,10 @@ public class MMStatusEffect : ActionNode
     {
         if (_playerScript != null && _meleeMinionScript != null)
         {
-
-            if (!_meleeMinionScript.CanChase)
+            //while !OnGround   wait
+            //while Impaired    wait
+            //while !CanChase   wait
+            if (!_meleeMinionScript.CanChase || _meleeMinionScript.Impaired || !_meleeMinionScript.OnGround)
             {
                 return State.Success;
             }

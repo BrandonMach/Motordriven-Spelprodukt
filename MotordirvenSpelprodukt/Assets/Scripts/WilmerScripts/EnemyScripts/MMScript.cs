@@ -13,19 +13,13 @@ public class MMScript : EnemyScript
     public bool AnimationPlaying = false;
     public Animator Anim;
 
-    RuntimeAnimatorController ac;
 
+    RuntimeAnimatorController ac;
 
     [Header("Attacks")]
     [SerializeField] private Transform _weaponHolderTransform;
 
-    private Collider _weaponCollider;
 
-    //private GameObject _objWeapon;
-
-    ////Orc special attack Slam Attack
-    //public Collider _mainColider;
-    //public GameObject _slamHitbox;
 
     public float Damage;
     public float ETPDecreaseValue;
@@ -40,37 +34,25 @@ public class MMScript : EnemyScript
         _attackCooldown = 2;
         ChaseDistance = 4;
         CanAttack = true;
+        CanChase = true;
+        Impaired = true;
         Anim = GetComponent<Animator>();
         ac = Anim.runtimeAnimatorController;
 
-
-
-        //_objWeapon = _weaponHolderTransform.GetChild(0).gameObject;
-        //_weaponCollider = _objWeapon.GetComponent<Collider>();
-
-        //_weaponCollider.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         NTime = Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        OnGround = Physics.CheckSphere(sphereCheck.position, sphereCheckRadius, groundLayer);
     }
 
     public void OnDestroy()
     {
         //Death animation
     }
-    public void ActivateAttackHitBox()
-    {
-        //_weaponCollider.enabled = true;
 
-    }
-
-    public void DeactivateAttackHitBox()
-    {
-        //_weaponCollider.enabled = false;
-    }
 
 
 }

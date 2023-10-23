@@ -23,12 +23,19 @@ public class MMWaitNode : ActionNode
     protected override State OnUpdate()
     {
 
-        if (Time.time - startTime > _duration)
+        while (!_meleeMinionScript.CanChase || !_meleeMinionScript.OnGround || _meleeMinionScript.Impaired)
         {
-            _meleeMinionScript.CanChase = true;
+            _meleeMinionScript.OnGround = true;
+            _meleeMinionScript.OnGround = true;
+            _meleeMinionScript.Impaired = true;
             return State.Success;
         }
-        else return State.Running;
+        //if (Time.time - startTime > _duration)
+        //{
+        //    _meleeMinionScript.CanChase = true;
+        //    return State.Success;
+        //}
+        return State.Running;
 
     }
 }

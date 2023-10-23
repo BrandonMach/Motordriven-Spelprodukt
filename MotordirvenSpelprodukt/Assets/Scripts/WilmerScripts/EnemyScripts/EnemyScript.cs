@@ -20,6 +20,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected bool _onGround;
     protected bool _impaired;
     protected bool _isAttacking;
+
     private float startBleedTime;
     
 
@@ -98,6 +99,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected void GetKnockedUp(float force)
     {
         _canChase = true;
+        _onGround = false;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.up * force, ForceMode.Impulse);
     }
@@ -105,6 +107,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected void GetPushedback(Vector3 attackerPos, float knockBackForce)
     {
         _canChase = true;
+        _impaired = true;
         Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
@@ -114,6 +117,6 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void OnAttack()
     {
-        OnRegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });
+        OnRegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });                       
     }
 }
