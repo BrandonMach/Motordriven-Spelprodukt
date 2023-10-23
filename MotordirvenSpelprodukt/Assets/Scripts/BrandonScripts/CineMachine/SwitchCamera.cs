@@ -83,6 +83,7 @@ public class SwitchCamera : MonoBehaviour
     private IEnumerator executeCam()
     {
         Player.transform.position = new Vector3(0, 0, 0);
+        Player.transform.rotation = new Quaternion(0, 180, 0, 0);
         Time.timeScale = 0;
         SwitchToExecute();
         // cause IsBlending has little bit delay so it's need to wait

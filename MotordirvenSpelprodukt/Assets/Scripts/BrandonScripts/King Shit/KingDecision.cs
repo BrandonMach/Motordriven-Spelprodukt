@@ -22,11 +22,17 @@ public class KingDecision : MonoBehaviour
 
 
     //King playes lose animation
-    public void GoToLoseScreen()
+    public void ExectutePlayer()
     {
         CamManager.GoToExecute();
         LoseScreenScript.KingExecution = true;
-        _playerDismemberent.PlayerDismember();      
+        _playerDismemberent.PlayerDismember();
+        StartCoroutine(LoseScreen());        
+    }
+
+    private IEnumerator LoseScreen()
+    {
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 

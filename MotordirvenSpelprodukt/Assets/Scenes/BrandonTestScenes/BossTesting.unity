@@ -667,6 +667,7 @@ MonoBehaviour:
   CamManager: {fileID: 0}
   _kingAnim: {fileID: 0}
   _etp: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!4 &97768752
 Transform:
   m_ObjectHideFlags: 0
@@ -3178,7 +3179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2254275742234642237, guid: b69ca0ee6720e31449463d4ba9a31d49, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2485512199311158366, guid: b69ca0ee6720e31449463d4ba9a31d49, type: 3}
       propertyPath: _camera
@@ -3234,11 +3235,11 @@ PrefabInstance:
       objectReference: {fileID: 879465601}
     - target: {fileID: 7013227217381958798, guid: b69ca0ee6720e31449463d4ba9a31d49, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7013227217381958798, guid: b69ca0ee6720e31449463d4ba9a31d49, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7998698208786021785, guid: b69ca0ee6720e31449463d4ba9a31d49, type: 3}
       propertyPath: _healthManager
@@ -7065,6 +7066,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1e2f22f465943094c91334ca445f5a3c, type: 3}
       propertyPath: m_Name
       value: colosseum
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e2f22f465943094c91334ca445f5a3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e2f22f465943094c91334ca445f5a3c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

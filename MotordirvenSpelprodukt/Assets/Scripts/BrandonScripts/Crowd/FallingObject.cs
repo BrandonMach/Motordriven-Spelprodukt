@@ -116,9 +116,8 @@ public class FallingObjectType : MonoBehaviour
 
 
 
-        if(other.gameObject.tag == ("Ground"))
+        if(other.gameObject.tag == ("Ground") || other.gameObject.tag == ("EnemyTesting"))
         {
-            Debug.Log("hej");
             if (Type == ObjectType.Tomato)
             {
                 
@@ -135,21 +134,6 @@ public class FallingObjectType : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.gameObject.tag == "Target")
-        //{
-        //    if (Type == ObjectType.HealthPotion)
-        //    {
-        //        HoverObject();
-               
-        //        Destroy(other.gameObject);
-        //    }
-        //    else
-        //    {
-        //        Destroy(this.gameObject);
-        //        Destroy(other.gameObject);
-        //    }
-            
-        //}
     }
 
 
