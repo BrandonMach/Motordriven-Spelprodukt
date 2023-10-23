@@ -22,7 +22,7 @@ public class ChallengeManager : MonoBehaviour
         }
         _instance = this;
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         ActiveChallenges = new List<Challenge>();
     }
