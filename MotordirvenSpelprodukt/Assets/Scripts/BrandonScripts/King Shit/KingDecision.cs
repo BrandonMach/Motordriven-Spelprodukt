@@ -21,12 +21,12 @@ public class KingDecision : MonoBehaviour
     public void GoToLoseScreen()
     {
         LoseScreenScript.KingExecution = true;
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
     public void GoToShop()
     {
         //testar gå till concept save money
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
+        SceneManager.LoadScene(3, LoadSceneMode.Single);
     }
 }

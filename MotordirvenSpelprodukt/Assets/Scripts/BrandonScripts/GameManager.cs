@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         _kingAnim.SetBool("Approved", false);
 
         //För testing
-        PlayerCoins = 89;
+        PlayerCoins = 50;
         Debug.Log("Coins" + PlayerCoins);
 
         //Not used at the moment

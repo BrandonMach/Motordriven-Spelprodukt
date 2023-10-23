@@ -94,6 +94,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
+        Debug.Log("Knockback Force: " + knockBackForce);
     }
 
     protected virtual void OnAttack()
