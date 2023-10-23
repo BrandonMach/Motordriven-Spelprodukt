@@ -7,13 +7,12 @@ using UnityEngine.AI;
 public class BehaviourTreeRunner : MonoBehaviour
 {
     public BehaviourTree tree;
-    public GameObject enemyObject;
+
     // Start is called before the first frame update
     void Start()
     {
         
-
-        tree = tree.Clone(enemyObject);
+        tree = tree.Clone(this.gameObject);
         
         tree.Bind(GetComponent<NavMeshAgent>());
     }
