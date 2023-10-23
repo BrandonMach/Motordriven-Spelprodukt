@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FreedomPathScript : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class FreedomPathScript : MonoBehaviour
     private float _stagePriceMultiplier = 1.3f;
     void Start()
     {
-        GameManager.PlayerCoins = 80;//Testing
+       
 
 
         _freedomPriceText.text = "Freedom Price Pot:" + FreedomPrice;
@@ -106,5 +107,10 @@ public class FreedomPathScript : MonoBehaviour
         _tempFreedomPrice = FreedomPrice;
         _tempPlayerCoins = GameManager.PlayerCoins;
         amountWaged = 0;
+    }
+
+    public void GoToInventory()
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }
