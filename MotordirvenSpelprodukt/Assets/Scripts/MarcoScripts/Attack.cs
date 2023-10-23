@@ -9,7 +9,6 @@ public class Attack
 {
     public CurrentAttackSO AttackSO;
     public Vector3 Position;
-
-
+    public float Damage;
 }
 

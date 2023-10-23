@@ -21,7 +21,7 @@ public class MMAttackNode : ActionNode
         {
             _meleeMinionScript.AnimationPlaying = true;
             //_championScript.Anim.SetInteger("Attack Index", 1);
-            _meleeMinionScript.Anim.Play("Attack");
+            _meleeMinionScript.Anim.SetTrigger("LightAttack");
             _meleeMinionScript.CanChase = false;
 
         }

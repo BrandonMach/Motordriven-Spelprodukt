@@ -16,6 +16,7 @@ public class Weapon : Item
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _range;
     private float _damageOffset=1, _rangeOffset=1, _speedOffset=1;   
+    // Lägg till en bleed damage property på vapnet?
     public void UpgradeWeapon()
     {
         _weaponLevel++;

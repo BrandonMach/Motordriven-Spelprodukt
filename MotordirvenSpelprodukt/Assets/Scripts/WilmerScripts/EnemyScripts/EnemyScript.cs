@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] protected HealthManager _healthManager;
     [SerializeField] private CurrentAttackSO[] _attackSOArray;
     [SerializeField] private Weapon _weapon;
-
+    [SerializeField] private ParticleSystem stunEffect;
 
     protected float _movementSpeed;
     protected float _attackSpeed; //?
@@ -16,9 +16,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected float _attackCooldown;
     protected float _lastAttackTime;
     protected float _stunDuration;
-    protected bool _stunned;
-    private ParticleSystem stunEffect;
-
+    protected bool _canChase;
+    protected bool _onGround;
+    protected bool _impaired;
+    protected bool _isAttacking;
+    private float startBleedTime;
+    
 
     public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
 
@@ -29,73 +32,85 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     public float StunDuration { get { return _stunDuration; } set { _stunDuration = value; } }
     public float AttackCooldown { get { return _attackCooldown; } }
     public float LastAttackTime { get { return _lastAttackTime; } set { _lastAttackTime = value; } }
-    public bool Stunned { get { return _stunned; } set { _stunned = value; } }
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        //if (HasDismembrent)
-        //{
-        //    _dismembrentScript = GetComponent<DismemberentEnemyScript>();
-        //}
-        
+    public bool CanChase { get { return _canChase; } set { _canChase = value; } }
+    public bool Impaired { get { return _impaired; } set { _impaired = value; } }
+    public bool OnGround { get { return _onGround; } set { _onGround = value; } }
 
 
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void TakeDamage(float damage, Attack attack)
-    {
-        _healthManager.ReduceHealth(damage);
+    public void TakeDamage(Attack attack)
+    {        
         switch (attack.AttackSO.CurrentAttackEffect)
         {
             case CurrentAttackSO.AttackEffect.None:
-                float knockbackForce = 10f;
-                GetKnockedback(attack.Position, knockbackForce);
-                //enemy.KnockUp(knockbackForce);
                 break;
+
             case CurrentAttackSO.AttackEffect.Pushback:
                 //TODO: Calculate direction
+                GetPushedback(attack.Position, attack.AttackSO.Force);
+                break;
 
-                break;
             case CurrentAttackSO.AttackEffect.StunAndPushback:
+                GetStunned(StunDuration);
+                GetPushedback(attack.Position, attack.AttackSO.Force);
                 break;
+
             case CurrentAttackSO.AttackEffect.Knockup:
-                break;
-            case CurrentAttackSO.AttackEffect.Bleed:
-                break;
-            case CurrentAttackSO.AttackEffect.Stun:
                 float knockUpForce = 15;
-                //enemy.KnockUp(knockUpForce);
-                //HandelStun(enemy);
+                GetKnockedUp(knockUpForce);
+                break;
+
+            case CurrentAttackSO.AttackEffect.Bleed:
+                StartBleedCoroutine(attack);
+                break;
+
+            case CurrentAttackSO.AttackEffect.Stun:
+                GetStunned(attack.AttackSO.StunDuration);
                 break;
             default:
                 break;
         }
 
-        
+        _healthManager.ReduceHealth(attack.Damage);
     }
 
-    protected void GetKnockedup(float force)
+
+    private void StartBleedCoroutine(Attack attack)
     {
+        float bleedDamage = attack.Damage * attack.AttackSO.DamageMultiplier; // Temporary, will be replaced by weapon bleed multiplier
+        startBleedTime = Time.time;
+        StartCoroutine(_healthManager.Bleed(bleedDamage, startBleedTime));
+    }
+
+
+    protected void GetStunned(float stunDuration)
+    {
+        _canChase = true;
+        _stunDuration = stunDuration;
+
+        //enemy.TakeDamage(2.0f, new Attack { AttackEffect = , Position = transform.position });
+        Vector3 pos = transform.position;
+        pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
+        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
+    }
+
+
+    protected void GetKnockedUp(float force)
+    {
+        _canChase = true;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.up * force, ForceMode.Impulse);
     }
 
-    protected void GetKnockedback(Vector3 attackerPos, float knockBackForce)
+    protected void GetPushedback(Vector3 attackerPos, float knockBackForce)
     {
+        _canChase = true;
         Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
-        Debug.Log("Knockback Force: " + knockBackForce);
+        Debug.Log(this.GetType().ToString() + "Enemy knocked back with force: " + knockBackForce);
     }
+
 
     protected virtual void OnAttack()
     {

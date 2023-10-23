@@ -26,10 +26,8 @@ public class CurrentAttackSO : ScriptableObject
     public AttackEffect CurrentAttackEffect;
     public float DamageMultiplier;
     public float Force;
-
+    public float StunDuration;
     public bool Last;
     public string Name;
-
- 
 }
 

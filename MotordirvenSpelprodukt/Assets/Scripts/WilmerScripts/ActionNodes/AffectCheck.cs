@@ -20,7 +20,7 @@ public class AffectCheck : ActionNode
         if (_playerScript != null && _meleeMinionScript != null)
         {
 
-            if (_meleeMinionScript.Stunned /*!_meleeMinionScript.CanChase*/)
+            if (_meleeMinionScript.CanChase /*!_meleeMinionScript.CanChase*/)
             {
                 return State.Success;
             }

@@ -12,6 +12,7 @@ public class MMWaitNode : ActionNode
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         startTime = Time.time;
         _duration = _meleeMinionScript.Anim.GetCurrentAnimatorStateInfo(0).length;
+        _meleeMinionScript.Anim.SetTrigger("Idle");
     }
 
     protected override void OnStop()

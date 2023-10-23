@@ -11,7 +11,7 @@ public class MMChaseNode : ActionNode
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
-
+        _meleeMinionScript.Anim.SetTrigger("Walking");
 
     }
 
@@ -28,7 +28,8 @@ public class MMChaseNode : ActionNode
         direction.Normalize();
 
         //Rotate the Champion towards the players position
-        _meleeMinionScript.transform.rotation = Quaternion.Slerp(_meleeMinionScript.transform.rotation, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
+        //_meleeMinionScript.transform.rotation = Mathf.Lerp(_meleeMinionScript.transform.rotation.y, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
+        _meleeMinionScript.transform.LookAt(_playerScript.transform);
 
 
         // Move the AI forward, since the AI is facing towards the player
