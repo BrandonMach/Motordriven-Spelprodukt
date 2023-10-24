@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 1475117630241535359}
   - component: {fileID: 1750998570860437719}
   - component: {fileID: 1958713740649098323}
+  - component: {fileID: 2638773746553092781}
   m_Layer: 7
   m_Name: EnemyBase
   m_TagString: EnemyTesting
@@ -239,10 +240,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.35
+  m_Radius: 0.4
+  m_Height: 2.95
   m_Direction: 1
-  m_Center: {x: 0, y: 0.92, z: 0}
+  m_Center: {x: 0, y: 1.44, z: 0}
 --- !u!114 &7783520723240619086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +314,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &2638773746553092781
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4630754298611515477}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &5275780431916342954
 GameObject:
   m_ObjectHideFlags: 0

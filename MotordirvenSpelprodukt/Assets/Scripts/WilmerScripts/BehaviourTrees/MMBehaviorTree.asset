@@ -54,7 +54,25 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f8bf7e9588ae99c44b76e7bf691cffc4
-  position: {x: -818.9999, y: 837.99994}
+  position: {x: -976.28815, y: 1157.0001}
+  agent: {fileID: 0}
+  description: 
+--- !u!114 &-6301378159474487932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec082756ac4cd48b48814726abcce3, type: 3}
+  m_Name: MMStatusEffect
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 69f9bc489af95ba47b1e214e58e02539
+  position: {x: -1080.7186, y: 584.9999}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-5305602486680045790
@@ -76,8 +94,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: -750562561723321262}
+  - {fileID: -6301378159474487932}
   - {fileID: 8735630225427087329}
+  - {fileID: 2340990223212990358}
 --- !u!114 &-4819753597248553202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +112,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: d8e8f0b18728e3f41b1b26c8fc0d86b5
-  position: {x: -594.0001, y: 837.99994}
+  position: {x: -751.2882, y: 1157.0001}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-4347686367045645252
@@ -150,7 +169,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 9ce7ab931c139254a8a1c30c569d1187
-  position: {x: -668.88324, y: 585}
+  position: {x: -826.28815, y: 904}
   agent: {fileID: 0}
   description: 
   children:
@@ -188,6 +207,8 @@ MonoBehaviour:
   - {fileID: -4819753597248553202}
   - {fileID: -6444477804286531239}
   - {fileID: 8735630225427087329}
+  - {fileID: -6301378159474487932}
+  - {fileID: 2340990223212990358}
 --- !u!114 &411775821950429018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +243,24 @@ MonoBehaviour:
   started: 0
   guid: 2196e8b13ca18d34aaab2a3f0c97e78f
   position: {x: 731, y: 928.0001}
+  agent: {fileID: 0}
+  description: 
+--- !u!114 &2340990223212990358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8f90b9625e42a4eac75c51151d6872, type: 3}
+  m_Name: MMWaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 61f7f16412571bf4783bc16a8e70edb4
+  position: {x: -299.99994, y: 632.0002}
   agent: {fileID: 0}
   description: 
 --- !u!114 &3686161655450971546

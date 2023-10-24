@@ -8,8 +8,8 @@ public class MMScript : EnemyScript
     // Start is called before the first frame update
 
     public float ChaseDistance;
-    public bool CanAttack;
-    public bool StopChase;
+
+
     public bool AnimationPlaying = false;
     public Animator Anim;
 
@@ -29,13 +29,12 @@ public class MMScript : EnemyScript
 
     void Start()
     {
-        _movementSpeed = 2;
-        _attackRange = 6;
+        _movementSpeed = 0.2f;
+        _attackRange = 0.5f;
         _attackCooldown = 2;
-        ChaseDistance = 4;
-        CanAttack = true;
-        CanChase = true;
-        Impaired = true;
+        ChaseDistance = 2;
+
+        
         Anim = GetComponent<Animator>();
         ac = Anim.runtimeAnimatorController;
 
@@ -44,8 +43,14 @@ public class MMScript : EnemyScript
     // Update is called once per frame
     void Update()
     {
+        base.Update();
+
         NTime = Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        OnGround = Physics.CheckSphere(sphereCheck.position, sphereCheckRadius, groundLayer);
+        if(NTime > 1.0f)
+        {
+            CurrentImpairement = Impairement.none;
+        }
+        //OnGround = Physics.CheckSphere(sphereCheck.position, sphereCheckRadius, groundLayer);
     }
 
     public void OnDestroy()

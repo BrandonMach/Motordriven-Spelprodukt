@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
@@ -9,6 +10,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] private CurrentAttackSO[] _attackSOArray;
     [SerializeField] private Weapon _weapon;
     [SerializeField] private ParticleSystem stunEffect;
+    [SerializeField] private Transform sphereCheck;
 
     protected float _movementSpeed;
     protected float _attackSpeed; //?
@@ -17,15 +19,16 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected float _lastAttackTime;
     protected float _stunDuration;
     protected bool _canChase;
-    protected bool _onGround;
+    protected bool _onGround = true;
     protected bool _impaired;
-    protected bool _isAttacking;
 
+ 
     private float startBleedTime;
-    
+    private float groundCheckTimer;
 
     public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
-
+    public enum Impairement { none, stunned, airborne, inAttack, pushed }
+    public Impairement CurrentImpairement = Impairement.none;
 
     public float MovementSpeed { get { return _movementSpeed; } }
     public float AttackSpeed { get { return _attackSpeed; } }
@@ -37,7 +40,24 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     public bool Impaired { get { return _impaired; } set { _impaired = value; } }
     public bool OnGround { get { return _onGround; } set { _onGround = value; } }
 
+    protected virtual void Update()
+    {
 
+        if (/*!_onGround*/CurrentImpairement == Impairement.airborne)
+        {
+            groundCheckTimer += Time.deltaTime;
+            if (groundCheckTimer > 0.3f)
+            {
+                _onGround = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+                if(_onGround)
+                {
+                    CurrentImpairement = Impairement.none;
+                }
+            }
+
+        }
+
+    }
 
     public void TakeDamage(Attack attack)
     {        
@@ -49,6 +69,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
             case CurrentAttackSO.AttackEffect.Pushback:
                 //TODO: Calculate direction
                 GetPushedback(attack.Position, attack.AttackSO.Force);
+
                 break;
 
             case CurrentAttackSO.AttackEffect.StunAndPushback:
@@ -58,7 +79,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
             case CurrentAttackSO.AttackEffect.Knockup:
                 float knockUpForce = 15;
-                GetKnockedUp(knockUpForce);
+                GetKnockedUp(knockUpForce/*, attack.AttackSO.Force*/);
                 break;
 
             case CurrentAttackSO.AttackEffect.Bleed:
@@ -86,8 +107,10 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected void GetStunned(float stunDuration)
     {
-        _canChase = true;
+        //_canChase = false;
         _stunDuration = stunDuration;
+
+        CurrentImpairement = Impairement.stunned;
 
         //enemy.TakeDamage(2.0f, new Attack { AttackEffect = , Position = transform.position });
         Vector3 pos = transform.position;
@@ -98,19 +121,21 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected void GetKnockedUp(float force)
     {
-        _canChase = true;
-        _onGround = false;
+        //_canChase = true;
+        //_onGround = false;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.up * force, ForceMode.Impulse);
+        CurrentImpairement = Impairement.airborne;
     }
 
     protected void GetPushedback(Vector3 attackerPos, float knockBackForce)
     {
-        _canChase = true;
-        _impaired = true;
+        //_canChase = true;
+        //_impaired = true;
         Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
+        CurrentImpairement = Impairement.pushed;
         Debug.Log(this.GetType().ToString() + "Enemy knocked back with force: " + knockBackForce);
     }
 
