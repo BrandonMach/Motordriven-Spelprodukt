@@ -89,6 +89,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 _dismembrentScript.GetKilled();
             }
 
+
+            //if the killing blow remove healthbar
             Die();
         }
     }
