@@ -1,10 +1,14 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMODUnity;
 
 public class EntertainmentManager : MonoBehaviour
 {
+    public static EntertainmentManager Instance;
+
     //For Testing
     public TextMeshProUGUI EntertainmentText;
     public TextMeshProUGUI CrowdText;
@@ -58,16 +62,26 @@ public class EntertainmentManager : MonoBehaviour
     [Header("Conditions")]
 
     [SerializeField] private bool _isOutOfCombat; //OOC
+
+    public event System.EventHandler OutOfCombat;
+    public event System.EventHandler InCombat;
+
+
     // [SerializeField] private bool _startComboWindowTimer;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     void Start()
     {
 
         EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
        
-
-
         //ETP
         _startETP = _maxETP / 2;
         _ETPThreshold = _maxETP / 2;
@@ -97,8 +111,6 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
         OOCPopUp.SetActive(_isOutOfCombat);
-
-
     }
 
     void UpdateETPArrow()
@@ -113,7 +125,7 @@ public class EntertainmentManager : MonoBehaviour
         foreach (GameObject enemies in EnemyGameObjects)
         {
             float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
-            if (dist > _scanEnemyArea)
+            if (dist > _scanEnemyArea && !_isOutOfCombat)
             {
                 _timeOutOfCombatCounter += Time.deltaTime;
 
@@ -121,6 +133,7 @@ public class EntertainmentManager : MonoBehaviour
                 {
                     Debug.Log("Out of Combat");
                     _isOutOfCombat = true;
+                    OnOutOfCombat();
                 }
             }
             else
@@ -128,7 +141,7 @@ public class EntertainmentManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Q)) //"Switch _isOutOfCombat to false when attacking is detected, Placeholder for now"
                 {
                     _isOutOfCombat = false;
-
+                    OnInCombat();
                 }
                 _timeOutOfCombatCounter = 0;
             }
@@ -154,5 +167,15 @@ public class EntertainmentManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);      
+    }
+
+    private void OnOutOfCombat()
+    {
+        OutOfCombat?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnInCombat()
+    {
+        InCombat.Invoke(this, EventArgs.Empty);
     }
 }

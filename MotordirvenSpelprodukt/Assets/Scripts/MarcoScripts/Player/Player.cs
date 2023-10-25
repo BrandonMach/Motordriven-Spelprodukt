@@ -6,11 +6,14 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour, ICanAttack, IDamagable
 {
+
+    public static Player Instance;
     // Placeholder för nuvarande vapnets värden
     //-----------------------------------------
     float damage = 1;
     float range = 1;
     //-----------------------------------------
+
 
     public GameInput GameInput { get { return _gameInput; } }
 
@@ -23,8 +26,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     public event EventHandler ComboBroken;
     public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
     public event EventHandler<OnAttackPressedAnimationEventArgs> OnAttackAnimationPressed;
-
-
 
 
 
@@ -60,6 +61,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         _healthManager = GetComponent<HealthManager>();
         _playerMovement = GetComponent<PlayerMovement>();
         _playerDash = GetComponent<PlayerDash>();

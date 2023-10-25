@@ -41,7 +41,8 @@ public class AttackManager : MonoBehaviour
         Gizmos.color = Color.red;
         // Temporary fix until _range can be passed on via event.
         // SHOULD BE REMOVED LATER.
-        Debug.Log(debugCurrentAttackMessage);
+
+
         switch (_attackType)
         {
             case CurrentAttackSO.AttackType.AOE:
@@ -61,11 +62,11 @@ public class AttackManager : MonoBehaviour
 
         for (int i = 0; i < enemyHits.Length; i++)
         {
-            IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, Position = transform.position, Damage = _damage});
-            }
+                IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, Position = transform.position, Damage = _damage });
+                }
         }
     }
 

@@ -33,7 +33,7 @@ public class MMWaitNode : ActionNode
                 break;
 
             case EnemyScript.Impairement.inAttack:
-                return State.Success;
+                //return State.Failure;
                 break;
             case EnemyScript.Impairement.pushed:
                 _meleeMinionScript.Anim.SetTrigger("Idle");

@@ -24,7 +24,6 @@ public class WaitNode : ActionNode
         
         if(Time.time - startTime > duration)
         {
-            _meleeMinionScript.CanChase = false;
             return State.Success;
         }
         else return State.Running;
