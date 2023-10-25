@@ -68,6 +68,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         {
             PlayerInstance = this;
         }
+
     }
     void Start()
     {
