@@ -28,7 +28,7 @@ public class MMChaseNode : ActionNode
         direction.Normalize();
 
         //Rotate the Champion towards the players position
-        //_meleeMinionScript.transform.rotation = Mathf.Lerp(_meleeMinionScript.transform.rotation.y, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
+
         _meleeMinionScript.transform.LookAt(_playerScript.transform);
 
 

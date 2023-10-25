@@ -8,24 +8,18 @@ public class MMScript : EnemyScript
     // Start is called before the first frame update
 
     public float ChaseDistance;
-    public bool CanAttack;
-    public bool StopChase;
+
+
     public bool AnimationPlaying = false;
     public Animator Anim;
 
-    RuntimeAnimatorController ac;
 
+    RuntimeAnimatorController ac;
 
     [Header("Attacks")]
     [SerializeField] private Transform _weaponHolderTransform;
 
-    private Collider _weaponCollider;
 
-    //private GameObject _objWeapon;
-
-    ////Orc special attack Slam Attack
-    //public Collider _mainColider;
-    //public GameObject _slamHitbox;
 
     public float Damage;
     public float ETPDecreaseValue;
@@ -35,42 +29,35 @@ public class MMScript : EnemyScript
 
     void Start()
     {
-        _movementSpeed = 2;
-        _attackRange = 6;
+        _movementSpeed = 0.2f;
+        _attackRange = 0.5f;
         _attackCooldown = 2;
-        ChaseDistance = 4;
-        CanAttack = true;
+        ChaseDistance = 2;
+
+        
         Anim = GetComponent<Animator>();
         ac = Anim.runtimeAnimatorController;
 
-
-
-        //_objWeapon = _weaponHolderTransform.GetChild(0).gameObject;
-        //_weaponCollider = _objWeapon.GetComponent<Collider>();
-
-        //_weaponCollider.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        base.Update();
+
         NTime = Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        if(NTime > 1.0f)
+        {
+            CurrentImpairement = Impairement.none;
+        }
+        //OnGround = Physics.CheckSphere(sphereCheck.position, sphereCheckRadius, groundLayer);
     }
 
     public void OnDestroy()
     {
         //Death animation
     }
-    public void ActivateAttackHitBox()
-    {
-        //_weaponCollider.enabled = true;
 
-    }
-
-    public void DeactivateAttackHitBox()
-    {
-        //_weaponCollider.enabled = false;
-    }
 
 
 }

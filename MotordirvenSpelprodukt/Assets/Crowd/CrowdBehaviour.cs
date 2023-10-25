@@ -38,9 +38,9 @@ public class CrowdBehaviour : MonoBehaviour
         //ExcitedTheme = Themes[1];
         //AngryTheme = Themes[2];
 
-        //NormalTheme.volume = 0.2f;
-        //ExcitedTheme.volume = 0;
-        //AngryTheme.volume = 0;
+        NormalTheme.volume = 0.2f;
+        ExcitedTheme.volume = 0;
+        AngryTheme.volume = 0;
     }
 
 

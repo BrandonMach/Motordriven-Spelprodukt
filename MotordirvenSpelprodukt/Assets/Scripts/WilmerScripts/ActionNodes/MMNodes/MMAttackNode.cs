@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static EnemyScript;
 #if UNITY_EDITOR
 using static UnityEditor.Experimental.GraphView.GraphView;
 #endif
@@ -15,12 +16,11 @@ public class MMAttackNode : ActionNode
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
-        
+        _meleeMinionScript.CurrentImpairement = Impairement.inAttack;
 
         if (_meleeMinionScript.NTime > 1.0f)
         {
             _meleeMinionScript.AnimationPlaying = true;
-            //_championScript.Anim.SetInteger("Attack Index", 1);
             _meleeMinionScript.Anim.SetTrigger("LightAttack");
             _meleeMinionScript.CanChase = false;
 
@@ -41,6 +41,7 @@ public class MMAttackNode : ActionNode
         {
 
             // _championScript.AnimationPlaying = false;
+            _meleeMinionScript.CurrentImpairement = Impairement.none;
             return State.Success;
         }
         else
@@ -65,4 +66,4 @@ public class MMAttackNode : ActionNode
         //}
     }
 }
-//#endif
+

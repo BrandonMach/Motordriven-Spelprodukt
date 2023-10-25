@@ -12,7 +12,8 @@ public class MMWaitNode : ActionNode
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         startTime = Time.time;
         _duration = _meleeMinionScript.Anim.GetCurrentAnimatorStateInfo(0).length;
-        _meleeMinionScript.Anim.SetTrigger("Idle");
+
+        
     }
 
     protected override void OnStop()
@@ -23,12 +24,43 @@ public class MMWaitNode : ActionNode
     protected override State OnUpdate()
     {
 
-        if (Time.time - startTime > _duration)
+        switch (_meleeMinionScript.CurrentImpairement)
         {
-            _meleeMinionScript.CanChase = true;
-            return State.Success;
+
+            case EnemyScript.Impairement.stunned:
+                _duration = _meleeMinionScript.StunDuration;
+                _meleeMinionScript.Anim.SetTrigger("Idle");
+                break;
+
+            case EnemyScript.Impairement.inAttack:
+                return State.Success;
+                break;
+            case EnemyScript.Impairement.pushed:
+                _meleeMinionScript.Anim.SetTrigger("Idle");
+                break;
+            default:
+                break;
         }
-        else return State.Running;
+
+        //if (!_meleeMinionScript.CanChase || !_meleeMinionScript.OnGround || _meleeMinionScript.Impaired)
+        //{
+
+        //    return State.Running;
+        //}
+
+        //if (Time.time - startTime > _meleeMinionScript.StunDuration)
+        //{
+        //    _meleeMinionScript.CanChase = true;
+        //    return State.Success;
+        //}
+        while (Time.time - startTime < _duration)
+        {
+            
+            return State.Running;
+        }
+        _meleeMinionScript.CurrentImpairement = EnemyScript.Impairement.none;
+        //return State.Success;
+        return State.Failure;
 
     }
 }
