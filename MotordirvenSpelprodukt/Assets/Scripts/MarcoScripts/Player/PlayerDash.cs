@@ -7,7 +7,8 @@ public class PlayerDash : MonoBehaviour
 {
     public EventHandler EvadePerformed;
 
-  
+    public bool IsDashing { get; private set; }
+
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashTime;
     [SerializeField] float _rotationSpeed;
@@ -20,7 +21,6 @@ public class PlayerDash : MonoBehaviour
 
     private float _currentDashTime;
     private float _currentCooldownTime;
-    private bool _isDashing;
 
 
     private void Awake()
@@ -36,7 +36,7 @@ public class PlayerDash : MonoBehaviour
     {
         _currentCooldownTime = 0;
 
-        _player.OnStartEvade += Player_OnStartRoll;
+        _player.StartEvade += Player_OnStartRoll;
     }
 
 
@@ -54,7 +54,7 @@ public class PlayerDash : MonoBehaviour
     private void HandleRoll()
     {
 
-        if (_isDashing)
+        if (IsDashing)
         {
             _rigidBody.rotation = Quaternion.Slerp(_rigidBody.rotation, Quaternion.LookRotation(_rigidBody.velocity.normalized),_rotationSpeed * Time.fixedDeltaTime);
 
@@ -63,7 +63,7 @@ public class PlayerDash : MonoBehaviour
                 _currentDashTime = _dashTime;
                 _rigidBody.velocity = Vector3.zero;
                 EvadePerformed?.Invoke(this, EventArgs.Empty);
-                _isDashing = false;
+                IsDashing = false;
             }
             else
             {
@@ -74,7 +74,7 @@ public class PlayerDash : MonoBehaviour
 
     private void HandleTimers()
     {
-        if (_isDashing)
+        if (IsDashing)
         {
             if (_currentDashTime > 0)
             {
@@ -94,7 +94,7 @@ public class PlayerDash : MonoBehaviour
     {
         if (_currentCooldownTime <= 0)
         {
-            _isDashing = true;
+            IsDashing = true;
             _currentCooldownTime = _cooldownTime;
         }
   

@@ -8,26 +8,18 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 {
 
     public static Player Instance;
-    // Placeholder för nuvarande vapnets värden
-    //-----------------------------------------
-    float damage = 1;
-    float range = 1;
-    //-----------------------------------------
-
 
     public GameInput GameInput { get { return _gameInput; } }
 
 
-    public event EventHandler OnChangeControllerTypeButtonPressed;
-    public event EventHandler OnStartEvade;
-    public event EventHandler OnDisableMovement;
-    public event EventHandler OnEnableMovement;
+    public event EventHandler ChangeControllerTypeButtonPressed;
+    public event EventHandler StartEvade;
+    public event EventHandler DisableMovement;
+    public event EventHandler EnableMovement;
 
     public event EventHandler ComboBroken;
-    public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
-    public event EventHandler<OnAttackPressedAnimationEventArgs> OnAttackAnimationPressed;
-
-
+    public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
+    public event EventHandler<OnAttackPressedAnimationEventArgs> ChangeAttackAnimation;
 
     public class OnAttackPressedAnimationEventArgs : EventArgs
     {
@@ -41,23 +33,21 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
 
     [SerializeField] private GameInput _gameInput;
-    [SerializeField] private float _timeBetweenInputs = 0f;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
 
     [Header("Health settings")]
     [SerializeField] float _maxHealth;
-    HealthManager _healthManager;
 
-    private CurrentAttackSO _currentAttackSO;
+    private HealthManager _healthManager;
     private PlayerDash _playerDash;
     private PlayerMovement _playerMovement;
+    private EntertainmentManager _entertainmentManager;
 
-    private float _inputTimer = 0;
 
     private string _input;
+    private bool _canAttack = true;
 
-    EntertainmentManager _etpManager;
 
     private void Awake()
     {
@@ -80,9 +70,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
 
         _input = "";
-
-
-        _etpManager = GameObject.FindGameObjectWithTag("ETPManager").GetComponent<EntertainmentManager>();
+        _entertainmentManager = EntertainmentManager.Instance;
     }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
@@ -90,75 +78,32 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
         if (_playerMovement.IsMoving() && _playerDash.IsDashAvailable())
         {
-            OnDisableMovement?.Invoke(this, EventArgs.Empty);
-
-            OnStartEvade?.Invoke(this, EventArgs.Empty);
+            OnDisableMovement();
+            OnStartEvade();
         }      
     }
 
     //public void Knockbacked(object sender, EventArgs e)
     //{
-    //    OnDisableMovement?.Invoke(this, EventArgs.Empty);
+    //    OnDisableMovement();
     //}
 
     //public void KnockbackedFinish(object sender, EventArgs e)
     //{
-    //    OnEnableMovement?.Invoke(this, EventArgs.Empty);
+    //    OnEnableMovement();
     //}
 
     private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
     {
-        OnEnableMovement?.Invoke(this, EventArgs.Empty);
+        OnEnableMovement();
+        OnComboBroken();
     }
 
-    private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
-    {
-        if (_inputTimer >= _timeBetweenInputs)
-        {
-            
-            if (GetCurrentAttackSO(_input + "L") != null)
-            {
-                _input += "L";
-                OnAttackAnimationPressed?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = OnAttackPressedAnimationEventArgs.AttackType.Light });
-                _inputTimer = 0;
-            }
-           
-        }
-    }
-
-    private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
-    {
   
-
-        if (_inputTimer >= _timeBetweenInputs)
-        {
-            if (GetCurrentAttackSO(_input + "H") != null)
-            {
-                _input += "H";
-                OnAttackAnimationPressed?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = OnAttackPressedAnimationEventArgs.AttackType.Heavy });
-                _inputTimer = 0;
-            }
-        }
-    }
-
-    // Will be called by animation event
-    private void OnPlayerAttack()
-    {
-        OnRegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = _currentWeapon });
-    }
-
-    private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
-    {
-        OnChangeControllerTypeButtonPressed?.Invoke(this, e);
-        
-    }
 
     void Update()
     {
-        if (_inputTimer < _timeBetweenInputs)
-        {
-            _inputTimer += Time.deltaTime;
-        }
+        
     }
 
     
@@ -168,30 +113,14 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         {
             if (currentAttackSO.name.ToLower() == name.ToLower())
             {
-                if (currentAttackSO.Last)
+                if (currentAttackSO.Last && _entertainmentManager != null)
                 {
-                    _etpManager.increaseETP(20);
+                    _entertainmentManager.increaseETP(20);
                 }
                 return currentAttackSO;
             }
         }
         return null;
-    }
-
-    //Function will be called using animation events
-    private void OnComboBroken(string combo)
-    {
-       
-        if (_input == combo)
-        {
-            _input = "";
-            ComboBroken?.Invoke(this, EventArgs.Empty);
-        }
-    }
-
-    public void TakeDamage(Attack attack)
-    {
-        _healthManager.ReduceHealth(damage);  
     }
 
 
@@ -203,5 +132,101 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
 
+    }
+
+    public void TakeDamage(Attack attack)
+    {
+        _healthManager.ReduceHealth(attack.Damage);
+    }
+
+
+    private void AnimationEvent_ComboBroken(string combo)
+    {
+
+        if (_input == combo)
+        {
+            OnComboBroken();
+        }
+    }
+
+    private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
+    {
+        if (!_canAttack)
+        {
+            return;
+        }
+       
+
+        if (GetCurrentAttackSO(_input + "L") != null)
+        {
+            _input += "L";
+            OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType.Light);
+        }
+    }
+
+    private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
+    {
+        if (!_canAttack)
+        {
+            return;
+        }
+
+        if (GetCurrentAttackSO(_input + "H") != null)
+        {
+            _input += "H";
+            OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType.Heavy);
+
+        }
+    }
+
+    // Will be called by animation event
+    private void AnimationEvent_OnPlayerAttacked()
+    {
+        if (!_playerDash.IsDashing)
+        {
+            OnEnableMovement();
+            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = _currentWeapon });
+            _canAttack = true;
+        }
+
+    }
+
+    private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
+    {
+        ChangeControllerTypeButtonPressed?.Invoke(this, e);
+
+    }
+    private void OnDisableMovement()
+    {
+        DisableMovement?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnEnableMovement()
+    {
+        EnableMovement?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnStartEvade()
+    {
+        StartEvade?.Invoke(this, EventArgs.Empty);
+    }
+
+
+    private void OnComboBroken()
+    {
+        _input = "";
+        ComboBroken?.Invoke(this, EventArgs.Empty);
+        _canAttack = true;
+    }
+
+    private void OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType attack)
+    {
+        if (!_playerDash.IsDashing)
+        {
+            OnDisableMovement();
+            ChangeAttackAnimation?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = attack });
+            _canAttack = false;
+        }
+        
     }
 }

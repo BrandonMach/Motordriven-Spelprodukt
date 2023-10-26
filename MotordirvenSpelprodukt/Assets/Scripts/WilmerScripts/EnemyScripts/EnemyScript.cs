@@ -30,7 +30,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     private float startBleedTime;
     private float groundCheckTimer;
 
-    public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
+    public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
     public enum Impairement { none, stunned, airborne, inAttack, pushed }
     public Impairement CurrentImpairement = Impairement.none;
 
@@ -158,7 +158,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void OnAttack()
     {
-        OnRegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });                       
+        RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });                       
     }
 
     protected virtual void OnDestroy()

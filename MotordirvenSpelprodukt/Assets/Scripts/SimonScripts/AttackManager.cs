@@ -24,7 +24,7 @@ public class AttackManager : MonoBehaviour
     {
         attacker = GetComponent<ICanAttack>();
 
-        attacker.OnRegisterAttack += Attacker_OnAttack;
+        attacker.RegisterAttack += Attacker_OnAttack;
         //stunEffect = Resources.Load<ParticleSystem>("ObjStunnedEffect");
     }
 
