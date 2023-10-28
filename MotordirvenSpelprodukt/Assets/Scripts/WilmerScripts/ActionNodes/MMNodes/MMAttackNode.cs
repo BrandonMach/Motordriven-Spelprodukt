@@ -18,15 +18,12 @@ public class MMAttackNode : ActionNode
         _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
         _meleeMinionScript.CurrentImpairement = Impairement.inAttack;
 
-        if (_meleeMinionScript.NTime > 1.0f)
+        _meleeMinionScript.Anim.SetTrigger("LightAttack");
+
+        if (_meleeMinionScript.AIMovementScript.GoTowardsPlayer == true)
         {
-            _meleeMinionScript.AnimationPlaying = true;
-            _meleeMinionScript.Anim.SetTrigger("LightAttack");
-            _meleeMinionScript.CanChase = false;
-
+            _meleeMinionScript.AIMovementScript.GoTowardsPlayer = false;
         }
-
-
     }
 
     protected override void OnStop()
@@ -36,34 +33,7 @@ public class MMAttackNode : ActionNode
 
     protected override State OnUpdate()
     {
-
-        if (_meleeMinionScript.NTime > 1.0f)
-        {
-
-            // _championScript.AnimationPlaying = false;
-            _meleeMinionScript.CurrentImpairement = Impairement.none;
-            return State.Success;
-        }
-        else
-        {
-            return State.Running;
-        }
-
-        // Check if enough time has passed since the last attack
-        //if (Time.time - _meleeMinionScript.LastAttackTime >= _meleeMinionScript.AttackCooldown)
-        //{
-        //    // Perform the attack here
-        //    // You can add your attack logic or call a method to attack the player
-        //    _meleeMinionScript.LastAttackTime = Time.time;
-
-
-        //    //Call TakeDamage() in player
-        //    return State.Success; // Attack successful
-        //}
-        //else
-        //{
-        //    return State.Failure; // Attack on cooldown
-        //}
+        return State.Success;
     }
 }
 

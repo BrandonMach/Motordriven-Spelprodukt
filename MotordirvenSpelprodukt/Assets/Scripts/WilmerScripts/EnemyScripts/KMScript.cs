@@ -14,10 +14,10 @@ public class KMScript : EnemyScript
     [SerializeField] public float _diveRange;
     public ParticleSystem _explosion;
     [SerializeField] public bool PlayerInpact;
-    
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         expolisionHitbox.enabled = false;
         _movementSpeed = 5; //Ramp up speed kan testas
         _attackRange = 0.2f; //?? kanske inte  behövs

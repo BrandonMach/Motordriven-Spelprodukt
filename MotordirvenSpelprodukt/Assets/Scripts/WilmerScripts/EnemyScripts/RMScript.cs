@@ -7,9 +7,9 @@ public class RMScript : EnemyScript
     // Start is called before the first frame update
     public float FleeDistance;
 
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame

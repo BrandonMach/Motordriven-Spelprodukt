@@ -9,12 +9,7 @@ public class MMScript : EnemyScript
 
     public float ChaseDistance;
 
-
-    public bool AnimationPlaying = false;
     public Animator Anim;
-
-
-    RuntimeAnimatorController ac;
 
     [Header("Attacks")]
     [SerializeField] private Transform _weaponHolderTransform;
@@ -23,21 +18,18 @@ public class MMScript : EnemyScript
 
     public float Damage;
     public float ETPDecreaseValue;
-
-    public float NTime;
     //public bool CanChase;
 
-    void Start()
+    protected override void Start()
     {
-        _movementSpeed = 0.2f;
-        _attackRange = 0.5f;
+        base.Start();
+
+        _attackRange = 2f;
         _attackCooldown = 2;
-        ChaseDistance = 2;
+        ChaseDistance = 2f;
 
         
         Anim = GetComponent<Animator>();
-        ac = Anim.runtimeAnimatorController;
-
     }
 
     // Update is called once per frame
@@ -45,17 +37,13 @@ public class MMScript : EnemyScript
     {
         base.Update();
 
-        NTime = Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        if(NTime > 1.0f)
-        {
-            CurrentImpairement = Impairement.none;
-        }
+
         //OnGround = Physics.CheckSphere(sphereCheck.position, sphereCheckRadius, groundLayer);
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
-        //Death animation
+        base.OnDestroy();
     }
 
 

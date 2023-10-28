@@ -17,24 +17,25 @@ public class AffectCheck : ActionNode
 
     protected override State OnUpdate()
     {
-        if (_playerScript != null && _meleeMinionScript != null)
-        {
+        //if (_playerScript != null && _meleeMinionScript != null)
+        //{
 
-            if (_meleeMinionScript.CanChase /*!_meleeMinionScript.CanChase*/)
-            {
-                return State.Success;
-            }
-            else
-            {
+        //    if (_meleeMinionScript.CanChase /*!_meleeMinionScript.CanChase*/)
+        //    {
+        //        return State.Success;
+        //    }
+        //    else
+        //    {
 
-                return State.Failure;
-            }
-        }
-        else
-        {
+        //        return State.Failure;
+        //    }
+        //}
+        //else
+        //{
 
-            return State.Failure;
-        }
+        //    return State.Failure;
+        //}
+        return State.Success;
     }
 
 

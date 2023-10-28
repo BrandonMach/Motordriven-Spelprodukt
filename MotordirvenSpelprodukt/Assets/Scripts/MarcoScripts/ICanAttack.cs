@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface ICanAttack
 {
-    public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
+    public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
 }
