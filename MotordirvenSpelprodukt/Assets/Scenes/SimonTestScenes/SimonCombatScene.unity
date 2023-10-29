@@ -231,14 +231,13 @@ MonoBehaviour:
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
   stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
   sphereCheck: {fileID: 0}
+  _movementSpeed: 5
   CurrentImpairement: 0
   ChaseDistance: 4
-  AnimationPlaying: 0
   Anim: {fileID: 0}
   _weaponHolderTransform: {fileID: 0}
   Damage: 10
   ETPDecreaseValue: 0
-  NTime: 0
 --- !u!54 &5530686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -617,14 +616,13 @@ MonoBehaviour:
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
   stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
   sphereCheck: {fileID: 0}
+  _movementSpeed: 5
   CurrentImpairement: 0
   ChaseDistance: 4
-  AnimationPlaying: 0
   Anim: {fileID: 0}
   _weaponHolderTransform: {fileID: 0}
   Damage: 10
   ETPDecreaseValue: 0
-  NTime: 0
 --- !u!54 &53807423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2221,6 +2219,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: _moveSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 1919048871}
@@ -2231,6 +2233,10 @@ PrefabInstance:
     - target: {fileID: 1958434798552517297, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: KnockbackForce
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827986891026583736, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5205301312611777585, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
       propertyPath: comboWindow
@@ -3770,7 +3776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &739483792
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -11697,14 +11703,13 @@ MonoBehaviour:
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
   stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
   sphereCheck: {fileID: 0}
+  _movementSpeed: 5
   CurrentImpairement: 0
   ChaseDistance: 4
-  AnimationPlaying: 0
   Anim: {fileID: 0}
   _weaponHolderTransform: {fileID: 0}
   Damage: 10
   ETPDecreaseValue: 0
-  NTime: 0
 --- !u!54 &1493456985
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12961,6 +12966,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8023903025633316390, guid: 3e7f5858f7bb2514896e45d58b9a965e, type: 3}
   m_PrefabInstance: {fileID: 1762131353}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1771440891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1771440893}
+  - component: {fileID: 1771440892}
+  m_Layer: 0
+  m_Name: ParticleSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1771440892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771440891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed43da9891aac3f42826c94114be837d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shockwavePositionOffset: {x: 0.09, y: 0, z: 0.89}
+  _shockWaveEffectPoolSize: 10
+  _shockWaveCircle: {fileID: 3236920123269949831, guid: 4ae30022440c6f343992e45afc669217, type: 3}
+  _debree: {fileID: 1391179462096714199, guid: edc72b84ddd22db4f9434c3f17a3a10c, type: 3}
+  _crack: {fileID: 8841194621737564412, guid: a72995fa076a761488530ef2352833cd, type: 3}
+  _shockWaveFill: {fileID: 8991353270889253201, guid: ea92eb090d92c4c478e29716befc4076, type: 3}
+  _hitBloodEffect: {fileID: 0}
+  _stabbedBloodEffect: {fileID: 0}
+  _bleedEffect: {fileID: 0}
+  _heavyBleedEffect: {fileID: 0}
+  stunEffectPoolSize: 2
+  _stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
+  _stunEffectPool: []
+--- !u!4 &1771440893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771440891}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.69, z: 4.232}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1774586194 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2254275742234642237, guid: b69ca0ee6720e31449463d4ba9a31d49, type: 3}
@@ -13141,7 +13203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &1829151994
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19352,14 +19414,13 @@ MonoBehaviour:
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
   stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
   sphereCheck: {fileID: 0}
+  _movementSpeed: 5
   CurrentImpairement: 0
   ChaseDistance: 4
-  AnimationPlaying: 0
   Anim: {fileID: 0}
   _weaponHolderTransform: {fileID: 0}
   Damage: 10
   ETPDecreaseValue: 0
-  NTime: 0
 --- !u!54 &2106179421
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19957,6 +20018,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StunEffects
       objectReference: {fileID: 0}
+    - target: {fileID: 8051535275682818636, guid: 67a37ace71c687141858156abed2c5e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20157,3 +20222,4 @@ SceneRoots:
   - {fileID: 125725706655055421}
   - {fileID: 739483794}
   - {fileID: 1829151996}
+  - {fileID: 1771440893}

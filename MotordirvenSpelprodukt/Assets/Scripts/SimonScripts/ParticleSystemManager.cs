@@ -8,10 +8,12 @@ public class ParticleSystemManager : MonoBehaviour
     public static ParticleSystemManager Instance { get; private set; }
 
     [Header("Weapon effects")]
-    [SerializeField] private ParticleSystem _weaponTrail;
+    //[SerializeField] private ParticleSystem _weaponTrail;
 
     [Header("Shockwave effects")]
-    [SerializeField] private int _shockWaveEffectPoolSize;
+    [SerializeField] private Vector3 _shockwavePositionOffset;
+    //[SerializeField] private Quaternion _shockwaveRotation;
+    [SerializeField] private int _shockWaveEffectPoolSize = 5;
     [SerializeField] private ParticleSystem _shockWaveCircle;
     [SerializeField] private ParticleSystem _debree;
     [SerializeField] private ParticleSystem _crack;
@@ -28,17 +30,20 @@ public class ParticleSystemManager : MonoBehaviour
     [SerializeField] private ParticleSystem _stunEffect;
 
 
-    private List<ShockwaveEffect> shockwaveEffectsList = new List<ShockwaveEffect>(); // Done
+    public List<ShockwaveEffect> _shockwaveEffectsPool = new List<ShockwaveEffect>(); // Done
+    public List<ParticleSystem> _stunEffectPool = new List<ParticleSystem>(); // Done
 
-    private List<ParticleSystem> _stunEffectList = new List<ParticleSystem>(); // Done
-    private List<ParticleSystem> _hitBloodEffectList = new List<ParticleSystem>();
-    private List<ParticleSystem> _stabbedBloodEffectList = new List<ParticleSystem>();
-    private List<ParticleSystem> _bleedEffectList = new List<ParticleSystem>();
-    private List<ParticleSystem> _heavyEffectList = new List<ParticleSystem>();
+    //private List<ParticleSystem> _weaponTrailPool = new List<ParticleSystem>();
+
+    //private List<ParticleSystem> _hitBloodEffectList = new List<ParticleSystem>();
+    //private List<ParticleSystem> _stabbedBloodEffectList = new List<ParticleSystem>();
+    //private List<ParticleSystem> _bleedEffectList = new List<ParticleSystem>();
+    //private List<ParticleSystem> _heavyEffectList = new List<ParticleSystem>();
     
 
     private void Awake()
     {
+        // Make sure there is only one instance, otherwhise remove the other one.
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -48,29 +53,48 @@ public class ParticleSystemManager : MonoBehaviour
             Instance = this;
         }
 
-        InitiateShockWavePool();
+        InitializeShockWavePool();
+        InitializeStunEffectPool();
     }
+    
 
-
-    private void InitiateShockWavePool()
+    private void InitializeShockWavePool()
     {
-        for (int i = 0; i < _shockWaveEffectPoolSize; i++)
-        {
-            shockwaveEffectsList.Add(new ShockwaveEffect
-            {
-                ShockWaveCircle = _shockWaveCircle,
-                Debree = _debree,
-                Crack = _crack,
-                ShockWaveFill = _shockWaveFill
-            });
-        }
+        //for (int i = 0; i < _shockWaveEffectPoolSize; i++)
+        //{
+        //    ShockwaveEffect e = new ShockwaveEffect
+        //    {
+        //        ShockWaveCircle = _shockWaveCircle,
+        //        Debree = _debree,
+        //        Crack = _crack,
+        //        ShockWaveFill = _shockWaveFill
+        //    };
+            
+        //    _shockwaveEffectsPool.Add(Instantiate(e, transform.position, Quaternion.identity));
+        //}
     }
 
-    private void InitiateStunEffectPool()
+
+    private void InitializeStunEffectPool()
     {
         for (int i = 0; i < stunEffectPoolSize; i++)
         {
-            //_stunEffectList
+            _stunEffectPool.Add(_stunEffect);
         }
+    }
+
+
+    public void PlayStunEffect(Vector3 particlePos, Quaternion rot, Transform parent)
+    {
+        _stunEffectPool[0].transform.SetPositionAndRotation(particlePos, rot);
+        _stunEffectPool[0].transform.parent = parent;
+        _stunEffectPool[0].Play();
+    }
+
+    public void PlayShockWaveEffect(Vector3 attackerPos)
+    {
+        Vector3 particlePos = attackerPos + _shockwavePositionOffset;
+        _shockwaveEffectsPool[0].SetTransform(particlePos);
+        _shockwaveEffectsPool[0].Play();
     }
 }

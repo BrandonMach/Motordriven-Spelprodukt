@@ -95,12 +95,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
             case CurrentAttackSO.AttackEffect.Pushback:
                 //TODO: Calculate direction
-                GetPushedback(attack.Position, attack.AttackSO.Force);
+                GetPushedback(attack.AttackerPosition, attack.AttackSO.Force);
                 break;
 
             case CurrentAttackSO.AttackEffect.StunAndPushback:
-                GetStunned(StunDuration);
-                GetPushedback(attack.Position, attack.AttackSO.Force);
+                GetStunned(StunDuration, attack.AttackerPosition);
+                GetPushedback(attack.AttackerPosition, attack.AttackSO.Force);
                 break;
 
             case CurrentAttackSO.AttackEffect.Knockup:
@@ -113,7 +113,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                 break;
 
             case CurrentAttackSO.AttackEffect.Stun:
-                GetStunned(attack.AttackSO.StunDuration);
+                GetStunned(attack.AttackSO.StunDuration, attack.AttackerPosition);
                 break;
             default:
                 break;
@@ -130,7 +130,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         StartCoroutine(_healthManager.Bleed(bleedDamage, startBleedTime));
     }
 
-    protected void GetStunned(float stunDuration)
+    protected void GetStunned(float stunDuration, Vector3 attackerPos)
     {
         _stunDuration = stunDuration;
 
@@ -139,6 +139,10 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
         Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
+
+
+        ParticleSystemManager.Instance.PlayStunEffect(pos, Quaternion.Euler(-90, 0, 0), transform);
+        ParticleSystemManager.Instance.PlayShockWaveEffect(attackerPos);
     }
 
     protected void GetKnockedUp(float force)

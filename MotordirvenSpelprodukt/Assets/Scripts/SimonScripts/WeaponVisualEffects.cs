@@ -39,14 +39,14 @@ public class WeaponVisualEffects : MonoBehaviour
     {
         // TODO:
         // Object pool with particle effects for better performance
-        _shockwavePos = new Vector3(_shockwaveTransform.position.x, 0, _shockwaveTransform.position.z);
-        Quaternion shockwaveRot = _shockwaveTransform.rotation;
+        //_shockwavePos = new Vector3(_shockwaveTransform.position.x, 0, _shockwaveTransform.position.z);
+        //Quaternion shockwaveRot = _shockwaveTransform.rotation;
 
-        Instantiate(_shockWaveCircle, _shockwavePos, shockwaveRot);
-        Instantiate(_shockWaveFill, _shockwavePos, shockwaveRot);
-        GetDebreeColorFromRaycast(2, 0.5f);
-        Instantiate(_debree, _shockwavePos, shockwaveRot);
-        Instantiate(_crack, new Vector3(_shockwavePos.x, 0f, _shockwavePos.z), shockwaveRot);
+        //Instantiate(_shockWaveCircle, _shockwavePos, shockwaveRot);
+        //Instantiate(_shockWaveFill, _shockwavePos, shockwaveRot);
+        //GetDebreeColorFromRaycast(2, 0.5f);
+        //Instantiate(_debree, _shockwavePos, shockwaveRot);
+        //Instantiate(_crack, new Vector3(_shockwavePos.x, 0f, _shockwavePos.z), shockwaveRot);
 
         // Destroy objects after finished playing, until object pool is implemented.
     }
