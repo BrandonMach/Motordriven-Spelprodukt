@@ -12,21 +12,25 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] private ParticleSystem stunEffect;
     [SerializeField] private Transform sphereCheck;
 
-    protected float _movementSpeed;
+    [SerializeField] protected float _movementSpeed = 5;
     protected float _attackSpeed; //?
     protected float _attackRange;
     protected float _attackCooldown;
     protected float _lastAttackTime;
     protected float _stunDuration;
-    protected bool _canChase;
+    //protected bool _canChase;
     protected bool _onGround = true;
     protected bool _impaired;
+    protected bool _outOfCombat;
+
+    public Rigidbody Rigidbody { get; protected set; }
+    public AIMovement AIMovementScript { get; protected set; }
 
  
     private float startBleedTime;
     private float groundCheckTimer;
 
-    public event EventHandler<OnAttackPressedEventArgs> OnRegisterAttack;
+    public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
     public enum Impairement { none, stunned, airborne, inAttack, pushed }
     public Impairement CurrentImpairement = Impairement.none;
 
@@ -36,17 +40,41 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     public float StunDuration { get { return _stunDuration; } set { _stunDuration = value; } }
     public float AttackCooldown { get { return _attackCooldown; } }
     public float LastAttackTime { get { return _lastAttackTime; } set { _lastAttackTime = value; } }
-    public bool CanChase { get { return _canChase; } set { _canChase = value; } }
+    //public bool CanChase { get { return _canChase; } set { _canChase = value; } }
     public bool Impaired { get { return _impaired; } set { _impaired = value; } }
     public bool OnGround { get { return _onGround; } set { _onGround = value; } }
+
+    private void Awake()
+    {
+        AIMovementScript = GetComponent<AIMovement>();
+    }
+    protected virtual void Start()
+    {
+        Rigidbody = GetComponent<Rigidbody>();
+        EntertainmentManager.Instance.OutOfCombat += Instance_OnOutOfCombat;
+        EntertainmentManager.Instance.InCombat += Instance_OnInCombat;
+    }
+
+    private void Instance_OnInCombat(object sender, EventArgs e)
+    {
+        _outOfCombat = true;
+        Debug.Log("OutOfCombat");
+
+    }
+
+    private void Instance_OnOutOfCombat(object sender, EventArgs e)
+    {
+        Debug.Log("InCombat");
+        _outOfCombat = false;
+    }
 
     protected virtual void Update()
     {
 
-        if (/*!_onGround*/CurrentImpairement == Impairement.airborne)
+        if (CurrentImpairement == Impairement.airborne)
         {
             groundCheckTimer += Time.deltaTime;
-            if (groundCheckTimer > 0.3f)
+            if (groundCheckTimer > 1f)
             {
                 _onGround = Physics.Raycast(transform.position, Vector3.down, 0.1f);
                 if(_onGround)
@@ -54,7 +82,6 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                     CurrentImpairement = Impairement.none;
                 }
             }
-
         }
 
     }
@@ -69,7 +96,6 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
             case CurrentAttackSO.AttackEffect.Pushback:
                 //TODO: Calculate direction
                 GetPushedback(attack.Position, attack.AttackSO.Force);
-
                 break;
 
             case CurrentAttackSO.AttackEffect.StunAndPushback:
@@ -104,37 +130,27 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         StartCoroutine(_healthManager.Bleed(bleedDamage, startBleedTime));
     }
 
-
     protected void GetStunned(float stunDuration)
     {
-        //_canChase = false;
         _stunDuration = stunDuration;
 
         CurrentImpairement = Impairement.stunned;
 
-        //enemy.TakeDamage(2.0f, new Attack { AttackEffect = , Position = transform.position });
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
         Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
     }
 
-
     protected void GetKnockedUp(float force)
     {
-        //_canChase = true;
-        //_onGround = false;
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.up * force, ForceMode.Impulse);
+        Rigidbody.AddForce(Vector3.up * force, ForceMode.Impulse);
         CurrentImpairement = Impairement.airborne;
     }
 
     protected void GetPushedback(Vector3 attackerPos, float knockBackForce)
     {
-        //_canChase = true;
-        //_impaired = true;
         Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
+        Rigidbody.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
         CurrentImpairement = Impairement.pushed;
         Debug.Log(this.GetType().ToString() + "Enemy knocked back with force: " + knockBackForce);
     }
@@ -142,6 +158,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void OnAttack()
     {
-        OnRegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });                       
+        RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });                       
+    }
+
+    protected virtual void OnDestroy()
+    {
+        EntertainmentManager.Instance.OutOfCombat -= Instance_OnOutOfCombat;
+        EntertainmentManager.Instance.InCombat -= Instance_OnInCombat;
     }
 }

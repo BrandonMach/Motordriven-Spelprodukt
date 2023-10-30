@@ -39,8 +39,10 @@ public class CMPScript : EnemyScript
     public bool CanChase;
 
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _movementSpeed = 2;
         _attackRange = 6;
         _attackCooldown = 2;

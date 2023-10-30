@@ -21,6 +21,8 @@ public abstract class Node : ScriptableObject
     protected CMPScript _championScript;
     protected KMScript _kamikazeScript;
 
+
+
     public GameObject EnemyObject
     {
         //get { return enemyScript; }

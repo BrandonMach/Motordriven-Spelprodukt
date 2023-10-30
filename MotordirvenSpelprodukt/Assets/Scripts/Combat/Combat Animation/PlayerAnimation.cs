@@ -10,10 +10,9 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Player _player;
 
     [Header("Combo Sequence")]
-    [SerializeField] private bool _startComboWindowTimer;
+    //[SerializeField] private bool _startComboWindowTimer;
 
 
-    private float _comboWindowTimer = 0;
     private string _currentCombo = "";
     private float _desiredWeight = 0;
     private float _weight = 0;
@@ -32,10 +31,11 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
-        _player.OnAttackAnimationPressed += Player_OnAttack;
-        _player.OnStartEvade += Player_OnStartEvade;
-        _player.OnEnableMovement += Player_OnEnableMovement;
+        _player.ChangeAttackAnimation += Player_ChangeAttackAnimation;
+        _player.StartEvade += Player_StartEvade;
+        _player.EnableMovement += Player_OnEnableMovement;
         _player.ComboBroken += Player_OnComboBroken;
+
     }
 
     private void Player_OnComboBroken(object sender, EventArgs e)
@@ -45,50 +45,39 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Player_OnEnableMovement(object sender, EventArgs e)
     {
-        //_animator.SetTrigger("StopEvade");
 
     }
 
-    private void Player_OnStartEvade(object sender, EventArgs e)
+    private void Player_StartEvade(object sender, EventArgs e)
     {
         _animator.SetTrigger("Evade");
     }
 
-    private void Player_OnAttack(object sender, Player.OnAttackPressedAnimationEventArgs e)
+    private void Player_ChangeAttackAnimation(object sender, Player.OnAttackPressedAnimationEventArgs e)
     {
-        _startComboWindowTimer = true;
-        HandleInput(e.attackType);
-        _comboWindowTimer = 0;
+        //_startComboWindowTimer = true;
+        HandleAttackAnimation(e.attackType);
     }
 
-    private void HandleInput(Player.OnAttackPressedAnimationEventArgs.AttackType attackType)
+    private void HandleAttackAnimation(Player.OnAttackPressedAnimationEventArgs.AttackType attackType)
     {
-        // If combat layer is disabled, allow new input.
-
-        if (_startComboWindowTimer)
+    
+        switch (attackType)
         {
-            switch (attackType)
-            {
-                case Player.OnAttackPressedAnimationEventArgs.AttackType.Light:
-                    _animator.SetTrigger("Trigger_L");
-                    break;
-                case Player.OnAttackPressedAnimationEventArgs.AttackType.Heavy:
-                    _animator.SetTrigger("Trigger_H");
-                    break;
-                default:
-                    break;
-            }
+            case Player.OnAttackPressedAnimationEventArgs.AttackType.Light:
+                _animator.SetTrigger("Trigger_L");
+                break;
+            case Player.OnAttackPressedAnimationEventArgs.AttackType.Heavy:
+                _animator.SetTrigger("Trigger_H");
+                break;
+            default:
+                break;
         }
     }
 
     private void Update()
     {
         HandleAnimationLayers();
-    }
-
-    private void LateUpdate()
-    {
-        StartComboWindowCheck();
     }
 
     private void HandleAnimationLayers()
@@ -110,42 +99,11 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    public void DisableCombatLayer()
-    {
-        Debug.Log("DisableCombatLayer : Combo=" + _currentCombo);
-        _desiredWeight = 0.01f;
-        _weightChanger = 0.025f;
-        _weight = 0.99f;
-    }
-
-    public void EnableCombatLayer()
-    {
-        Debug.Log("EnableCombatLayer: Combo=" + _currentCombo);
-        _desiredWeight = 0.99f;
-        _weightChanger = -0.025f;
-        _weight = 0.01f;
-    }
-
-    void StartComboWindowCheck()
-    {
-
-        if (_startComboWindowTimer)
-        {
-            _comboWindowTimer += Time.deltaTime;
-            if (_comboWindowTimer > _timeBetweenInputs)
-            {
-                //EndCombo();
-            }
-        }
-    }
-
     void EndCombo()
     {
-        _comboWindowTimer = 0;
         _animator.SetTrigger("ComboBroken");
         _animator.ResetTrigger("Trigger_L");
         _animator.ResetTrigger("Trigger_H");
-        _startComboWindowTimer = false;
     }
 
     public void Locomotion(Vector3 moveDirection, Vector3 rotateDirection)

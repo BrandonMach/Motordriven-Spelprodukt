@@ -55,9 +55,9 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         
-        _playerScript.OnChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
-        _playerScript.OnDisableMovement += PlayerScript_OnDisableMovement;
-        _playerScript.OnEnableMovement += PlayerScript_OnEnableMovement;
+        _playerScript.ChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
+        _playerScript.DisableMovement += PlayerScript_OnDisableMovement;
+        _playerScript.EnableMovement += PlayerScript_OnEnableMovement;
 
     }
 
@@ -89,11 +89,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (_canMove)
-        {
-            GetMoveDir();
-            _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
-        }
+ 
+        GetMoveDir();
+        
+        _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
+
 
 
     }
@@ -125,10 +125,15 @@ public class PlayerMovement : MonoBehaviour
         GetCameraValues();
 
         Vector2 inputvector = _playerScript.GameInput.GetMovementVectorNormalized();
-        _moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
 
-        //_characterController.SimpleMove(_moveDirection * _moveSpeed);
-  
+        if (!_canMove)
+        {
+            _moveDirection = Vector3.zero;
+        }
+        else
+        {
+            _moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
+        }
     }
 
     private void Move()

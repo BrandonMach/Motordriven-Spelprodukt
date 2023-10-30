@@ -32,9 +32,9 @@ public class BehaviourTree : ScriptableObject
             treeState = rootNode.Update();
         }
         return treeState;
-
-        
     }
+
+
 #if UNITY_EDITOR
     public Node CreateNode(System.Type type)
     {

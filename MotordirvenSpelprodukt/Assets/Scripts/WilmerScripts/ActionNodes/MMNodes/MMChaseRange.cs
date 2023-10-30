@@ -9,7 +9,7 @@ public class MMChaseRange : ActionNode
     protected override void OnStart()
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
-        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _playerScript = Player.Instance;
     }
 
     protected override void OnStop()
