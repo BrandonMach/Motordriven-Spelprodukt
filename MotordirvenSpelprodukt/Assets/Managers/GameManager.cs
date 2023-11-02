@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Set your _gameManager variable to this instance in order to achieve the Singleton pattern.
+    /// Example: _gameManager = GameManager.Instance
+    /// </summary>
+    public static GameManager Instance { get => _instance; set => _instance = value; }
+
     #endregion
 
     #region ChallengeVariables
@@ -49,10 +55,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _player;
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
-
-
-
-    public static GameManager Instance { get => _instance; set => _instance = value; }
+    
     public int KillCount { get => _killCount; set => _killCount = value; }
 
 
@@ -60,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _challengeManager = ChallengeManager.Instance; // Singleton
+        _challengeManager = ChallengeManager.Instance;
         _gameStartTimer = 0;
 
         _champion = GameObject.FindObjectOfType<CMPScript>();
