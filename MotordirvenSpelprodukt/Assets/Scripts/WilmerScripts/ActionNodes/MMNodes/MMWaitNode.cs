@@ -32,6 +32,9 @@ public class MMWaitNode : ActionNode
                 _meleeMinionScript.Anim.SetTrigger("Idle");
                 break;
 
+            case EnemyScript.Impairement.airborne:
+                return State.Success;
+                break;
             case EnemyScript.Impairement.inAttack:
                 //return State.Failure;
                 break;
@@ -55,8 +58,9 @@ public class MMWaitNode : ActionNode
         //}
         while (Time.time - startTime < _duration)
         {
-            
+
             return State.Running;
+
         }
         _meleeMinionScript.CurrentImpairement = EnemyScript.Impairement.none;
         //return State.Success;
