@@ -3554,6 +3554,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7924081380696824368, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
   m_PrefabInstance: {fileID: 584357961}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &584357964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5597014018079178594, guid: 2077a40a2333fba458f28a9a3f64169a, type: 3}
+  m_PrefabInstance: {fileID: 584357961}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584357963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a37376fbc42f2246a65e50600126ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &636978313
 GameObject:
   m_ObjectHideFlags: 0
@@ -6688,6 +6699,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1468190722848689837, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
+      propertyPath: GodMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468190722848689837, guid: 48ad3087b1a6f0e4cb3f19e402bd3968, type: 3}
       propertyPath: MaxHealthPoints
       value: 10
       objectReference: {fileID: 0}
@@ -6942,7 +6957,8 @@ MonoBehaviour:
   CamManager: {fileID: 0}
   _kingAnim: {fileID: 0}
   _etp: {fileID: 0}
-  _player: {fileID: 0}
+  _playerGO: {fileID: 0}
+  _player: {fileID: 584357964}
 --- !u!4 &1288564633
 Transform:
   m_ObjectHideFlags: 0

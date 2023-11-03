@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ChallengeManager : MonoBehaviour
 {
@@ -22,11 +23,13 @@ public class ChallengeManager : MonoBehaviour
         }
         _instance = this;
 
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         ActiveChallenges = new List<Challenge>();
     }
     #endregion
+
+    GameManager _gameManager = GameManager.Instance;
 
     public List<Challenge> AvailableChallenges = new List<Challenge>();
     public List<Challenge> ActiveChallenges;
@@ -142,11 +145,4 @@ public class ChallengeManager : MonoBehaviour
         ReverseIterateRemove();
     }
 
-    public bool BerserkerChallengeCheck()
-    {
-        return true;
-    }
-
-
-   
 }
