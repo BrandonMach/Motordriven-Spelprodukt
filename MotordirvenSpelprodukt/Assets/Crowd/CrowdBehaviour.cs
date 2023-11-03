@@ -26,6 +26,7 @@ public class CrowdBehaviour : MonoBehaviour
         Excited,
         Angry
     }
+
     public CrowdEmotion _emotion;
     public CrowdEmotion LatestEmotion;
     public CrowdEmotion GetCrowdEmotion()
@@ -34,11 +35,11 @@ public class CrowdBehaviour : MonoBehaviour
     }
     void Start()
     {
-        _etManager.OnETPNormal += Normal;
-        _etManager.OnETPAngry += Angry;
-        _etManager.OnETPExited += Normal;
+        //Subscribes to events
+        _etManager.OnETPNormal += NormalCrowd;
+        _etManager.OnETPAngry += AngryCrowd;
+        _etManager.OnETPExited += NormalCrowd;
        
-
         //NormalTheme = Themes[0];
         //ExcitedTheme = Themes[1];
         //AngryTheme = Themes[2];
@@ -64,7 +65,7 @@ public class CrowdBehaviour : MonoBehaviour
 
     }
 
-    private void Excited(object sender, System.EventArgs e)
+    private void ExcitedCrowd(object sender, System.EventArgs e)
     {
         _playCheering = true;
         _emotion = CrowdEmotion.Excited;
@@ -75,7 +76,7 @@ public class CrowdBehaviour : MonoBehaviour
         StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
-    private void Angry(object sender, System.EventArgs e)
+    private void AngryCrowd(object sender, System.EventArgs e)
     {
         if (_throwObject)
         {
@@ -94,7 +95,7 @@ public class CrowdBehaviour : MonoBehaviour
         LatestEmotion = _emotion;
     }
 
-    private void Normal(object sender, System.EventArgs e)
+    private void NormalCrowd(object sender, System.EventArgs e)
     {
         //Swicth music track
         _playCheering = false;

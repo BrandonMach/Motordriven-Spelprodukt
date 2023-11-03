@@ -16,7 +16,7 @@ public class KingDecision : MonoBehaviour
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _playerDismemberent = GameObject.FindWithTag("Player").GetComponent<DismemberentEnemyScript>();
-        _etp = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
+        _etp = EntertainmentManager.Instance;
 
         _anim = GetComponent<Animator>();
         gameManager.OnChampionKilled += PlayDecisionAnimation;

@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         _champion = GameObject.FindObjectOfType<CMPScript>();
         _player = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
-        _etp = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
+        _etp = EntertainmentManager.Instance;
         Debug.Log(_champion.name);
 
 
