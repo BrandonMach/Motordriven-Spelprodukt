@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -51,10 +52,10 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] Object _champion;
+    [SerializeField] UnityEngine.Object _champion;
     [SerializeField] SwitchCamera CamManager;
     private bool _kingCam;
-    [SerializeField] Animator _kingAnim;
+
     [SerializeField] EntertainmentManager _etp;
     [SerializeField] GameObject _playerGO;
     [SerializeField] Player _player;
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public event EventHandler OnChampionKilled;
 
 
     void Start()
@@ -87,11 +88,8 @@ public class GameManager : MonoBehaviour
         _champion = GameObject.FindObjectOfType<CMPScript>();
         _playerGO = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
-        _kingAnim = GameObject.FindWithTag("King").GetComponent<Animator>();
-        _etp = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
+        _etp = EntertainmentManager.Instance;
         Debug.Log(_champion.name);
-
-        _kingAnim.SetBool("Approved", false);
 
         //För testing
         PlayerCoins = 50;
@@ -110,10 +108,11 @@ public class GameManager : MonoBehaviour
             _etp.MatchFinished = true;
             _kingCam = true;
             CamManager.GoToKingCam();
-            Debug.Log("Champion Is dead");
+            OnChampionKilled?.Invoke(this, EventArgs.Empty);
+
             _championIsDead = true;
-            _kingAnim.SetBool("Approved", true);
-            _kingAnim.SetFloat("ETP", (_etp.GetETP() / 100)); //Selects what animation to play based on ETP
+            Debug.Log("Champion Is dead");
+
         }
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
