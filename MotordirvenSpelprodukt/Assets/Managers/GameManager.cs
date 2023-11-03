@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] Object _champion;
+    [SerializeField] UnityEngine.Object _champion;
     [SerializeField] SwitchCamera CamManager;
     private bool _kingCam;
     [SerializeField] Animator _kingAnim;
@@ -57,6 +58,11 @@ public class GameManager : MonoBehaviour
     public static int PlayerCoins; //Static så att anadra scener kan få access
     
     public int KillCount { get => _killCount; set => _killCount = value; }
+
+
+
+    //Event the King subscribes to
+    public event EventHandler OnChampionKilled;
 
 
 
@@ -82,7 +88,13 @@ public class GameManager : MonoBehaviour
         //Not used at the moment
         //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         
+        
     }
+
+    //private void Check_OnChampionKilled(object sender, EventArgs e)
+    //{
+    //    Debug.LogError("asdsa");
+    //}
 
     // Update is called once per frame
     void Update()
@@ -92,9 +104,10 @@ public class GameManager : MonoBehaviour
             _etp.MatchFinished = true;
             _kingCam = true;
             CamManager.GoToKingCam();
-            Debug.Log("Champion Is dead");
-            _kingAnim.SetBool("Approved", true);
-            _kingAnim.SetFloat("ETP", (_etp.GetETP() / 100)); //Selects what animation to play based on ETP
+            OnChampionKilled?.Invoke(this, EventArgs.Empty); // Check if event has any subscirbers 
+            //Debug.Log("Champion Is dead");
+            //_kingAnim.SetBool("Approved", true);
+            //_kingAnim.SetFloat("ETP", (_etp.GetETP() / 100)); //Selects what animation to play based on ETP
         }
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
@@ -103,6 +116,11 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+            
+        //    OnChampionKilled?.Invoke(this,EventArgs.Empty ); // Check if event has any subscirbers 
+        //}
 
 
         // Testing challenges
