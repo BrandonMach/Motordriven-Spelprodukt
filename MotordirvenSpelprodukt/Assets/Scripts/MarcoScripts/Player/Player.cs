@@ -151,6 +151,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
+        _entertainmentManager.PlayerInCombat();
         if (!_canAttack)
         {
             return;
@@ -166,6 +167,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
     {
+        
+        _entertainmentManager.PlayerInCombat();
         if (!_canAttack)
         {
             return;
