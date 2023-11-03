@@ -67,6 +67,11 @@ public class EntertainmentManager : MonoBehaviour
     public event System.EventHandler InCombat;
 
 
+    //ETP events
+    public event System.EventHandler OnETPExited;
+    public event System.EventHandler OnETPAngry;
+    public event System.EventHandler OnETPNormal;
+
     // [SerializeField] private bool _startComboWindowTimer;
 
     private void Awake()
@@ -94,7 +99,9 @@ public class EntertainmentManager : MonoBehaviour
     {
         EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting"); //Inte den finaste lösningen
         _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
-        
+
+        CheckETPChanges();
+
         UpdateETPArrow();
 
         if (!MatchFinished)
@@ -111,6 +118,23 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
 
         OOCPopUp.SetActive(_isOutOfCombat);
+    }
+
+
+    void CheckETPChanges()
+    {
+        if(GetETP() > GetExcitedThreshold())
+        {
+            OnETPExited?.Invoke(this, EventArgs.Empty);
+        }
+        else if (GetETP() < GetAngryThreshold())
+        {
+            OnETPAngry?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            OnETPNormal?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     void UpdateETPArrow()

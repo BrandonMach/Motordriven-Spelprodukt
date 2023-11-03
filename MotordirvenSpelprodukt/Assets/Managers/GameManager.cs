@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] UnityEngine.Object _champion;
     [SerializeField] SwitchCamera CamManager;
     private bool _kingCam;
-    [SerializeField] Animator _kingAnim;
+
     [SerializeField] EntertainmentManager _etp;
     [SerializeField] GameObject _player;
 
@@ -75,11 +75,9 @@ public class GameManager : MonoBehaviour
         _champion = GameObject.FindObjectOfType<CMPScript>();
         _player = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
-        _kingAnim = GameObject.FindWithTag("King").GetComponent<Animator>();
         _etp = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
         Debug.Log(_champion.name);
 
-        _kingAnim.SetBool("Approved", false);
 
         //För testing
         PlayerCoins = 50;
@@ -91,12 +89,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    //private void Check_OnChampionKilled(object sender, EventArgs e)
-    //{
-    //    Debug.LogError("asdsa");
-    //}
-
-    // Update is called once per frame
     void Update()
     {
         if(_champion == null && !_kingCam)
@@ -104,24 +96,15 @@ public class GameManager : MonoBehaviour
             _etp.MatchFinished = true;
             _kingCam = true;
             CamManager.GoToKingCam();
-            OnChampionKilled?.Invoke(this, EventArgs.Empty); // Check if event has any subscirbers 
-            //Debug.Log("Champion Is dead");
-            //_kingAnim.SetBool("Approved", true);
-            //_kingAnim.SetFloat("ETP", (_etp.GetETP() / 100)); //Selects what animation to play based on ETP
+            OnChampionKilled?.Invoke(this, EventArgs.Empty); // Calls event 
         }
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
-
         if(_player == null)
         {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-            
-        //    OnChampionKilled?.Invoke(this,EventArgs.Empty ); // Check if event has any subscirbers 
-        //}
-
+        
 
         // Testing challenges
         CheckChallengesCompletion();

@@ -34,6 +34,10 @@ public class CrowdBehaviour : MonoBehaviour
     }
     void Start()
     {
+        _etManager.OnETPNormal += Normal;
+        _etManager.OnETPAngry += Angry;
+        _etManager.OnETPExited += Normal;
+       
 
         //NormalTheme = Themes[0];
         //ExcitedTheme = Themes[1];
@@ -51,58 +55,6 @@ public class CrowdBehaviour : MonoBehaviour
         fallingArea = new Rect(0, 3, 10, 2);
         this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
 
-        if (_etManager.GetETP() > _etManager.GetExcitedThreshold() /*&& !_playCheering*/) //Bool för att den bara sla spelas en gång
-        {
-            
-            _playCheering = true;
-            _emotion = CrowdEmotion.Excited;
-
-            //Swicth music track, before latest motion
-
-            //StopAllCoroutines();
-            StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
-            LatestEmotion = _emotion;
-           
-
-            //PlayCheer();
-        }
-        else if(_etManager.GetETP() < _etManager.GetAngryThreshold() /*&& !_playBooing*/)
-        {
-
-            if (_throwObject)
-            {
-                StartCoroutine(ThrowTomato());
-                //_throwObject = true;
-            }
-            
-            //Swicth music track
-            _playBooing = true;
-            _emotion = CrowdEmotion.Angry;
-
-
-            //Swicth music track, before latest motion
-            //StopAllCoroutines();
-            StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
-            LatestEmotion = _emotion;
-            
-            //PlayBooo();
-        }
-        else
-        {
-            //Swicth music track
-            _playCheering = false;
-            _playBooing = false;
-            _emotion = CrowdEmotion.Normal;
-
-
-            //Swicth music track, before latest motion
-            //StopAllCoroutines();
-            StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
-            LatestEmotion = _emotion;
-
-
-        }
-
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -111,6 +63,52 @@ public class CrowdBehaviour : MonoBehaviour
         
 
     }
+
+    private void Excited(object sender, System.EventArgs e)
+    {
+        _playCheering = true;
+        _emotion = CrowdEmotion.Excited;
+
+        //Swicth music track, before latest motion
+
+        //StopAllCoroutines();
+        StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
+        LatestEmotion = _emotion;
+    }
+    private void Angry(object sender, System.EventArgs e)
+    {
+        if (_throwObject)
+        {
+            StartCoroutine(ThrowTomato());
+            //_throwObject = true;
+        }
+
+        //Swicth music track
+        _playBooing = true;
+        _emotion = CrowdEmotion.Angry;
+
+
+        //Swicth music track, before latest motion
+        //StopAllCoroutines();
+        StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
+        LatestEmotion = _emotion;
+    }
+
+    private void Normal(object sender, System.EventArgs e)
+    {
+        //Swicth music track
+        _playCheering = false;
+        _playBooing = false;
+        _emotion = CrowdEmotion.Normal;
+
+
+        //Swicth music track, before latest motion
+        //StopAllCoroutines();
+        StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
+        LatestEmotion = _emotion;
+    }
+
+
 
     private IEnumerator ThrowTomato()
     {

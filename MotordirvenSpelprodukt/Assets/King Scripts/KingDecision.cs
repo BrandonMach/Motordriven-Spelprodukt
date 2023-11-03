@@ -19,7 +19,8 @@ public class KingDecision : MonoBehaviour
         _etp = GameObject.Find("Canvas").GetComponent<EntertainmentManager>();
 
         _anim = GetComponent<Animator>();
-        gameManager.OnChampionKilled += PlayDecisionAnimation; 
+        gameManager.OnChampionKilled += PlayDecisionAnimation;
+        //_anim.SetBool("Approved", false);
     }
 
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class KingDecision : MonoBehaviour
     {
         
     }
+
     private void PlayDecisionAnimation(object sender, EventArgs e)
     {
         Debug.Log("Champion Is dead");
