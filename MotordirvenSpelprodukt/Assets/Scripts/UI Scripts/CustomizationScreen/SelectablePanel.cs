@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SelectablePanel : MonoBehaviour
@@ -9,6 +10,8 @@ public class SelectablePanel : MonoBehaviour
     [SerializeField] private GameObject _abilitiesPanel;
     [SerializeField] private GameObject _challengesPanel;
     [SerializeField] private GameObject _shopPanel;
+    [SerializeField] private GameObject _panelInfo;
+    [SerializeField] private TextMeshProUGUI _panelInfoText;
 
     private GameObject[] _panels;
     private int _currentPanelIndex = 0;
@@ -22,6 +25,8 @@ public class SelectablePanel : MonoBehaviour
             _abilitiesPanel,
             _challengesPanel
         };
+
+        InventoryPanelClicked();
     }
 
     private void TogglePanel(int panelIndex)
@@ -54,23 +59,27 @@ public class SelectablePanel : MonoBehaviour
     {
         SetCurrentPanel(0);
         DeactivateShop();
+        SetPanelInfoText("Inventory");
     }
     public void AbilitiesPanelClicked()
     {
         SetCurrentPanel(1);
         DeactivateShop();
+        SetPanelInfoText("Abilities");
     }
 
     public void ChallengesPanelClicked()
     {
         SetCurrentPanel(2);
         DeactivateShop();
+        SetPanelInfoText("Challenges");
     }
 
     public void ShopPanelClicked()
     {
         SetCurrentPanel(0);
         ActivateShop();
+        SetPanelInfoText("Shop");
         
     }
 
@@ -85,5 +94,10 @@ public class SelectablePanel : MonoBehaviour
     private void DeactivateShop()
     {
         _shopPanel.SetActive(false);
+    }
+
+    private void SetPanelInfoText(string text)
+    {
+        _panelInfoText.text = text;
     }
 }
