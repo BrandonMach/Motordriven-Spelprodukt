@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -666,6 +666,7 @@ MonoBehaviour:
   _champion: {fileID: 0}
   CamManager: {fileID: 0}
   _etp: {fileID: 0}
+  _playerGO: {fileID: 0}
   _player: {fileID: 0}
 --- !u!4 &97768752
 Transform:
@@ -8463,6 +8464,18 @@ PrefabInstance:
       propertyPath: _gameInput
       value: 
       objectReference: {fileID: 575277078}
+    - target: {fileID: 7848307779740091625, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848307779740091625, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064398764332070987, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 5461979197022512400}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8479,6 +8492,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a71641eba3f6d4ba656c78820fc8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &5461979197022512400 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8199499030154146345, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+  m_PrefabInstance: {fileID: 4634542877628727314}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
