@@ -30,9 +30,9 @@ public class AIMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GoTowardsPlayer)
-        {
-            _rigidbody.velocity = new Vector3(transform.forward.x * _enemyScript.MovementSpeed, _rigidbody.velocity.y, transform.forward.z * _enemyScript.MovementSpeed);
-        }
+        //if (GoTowardsPlayer)
+        //{
+        //    _rigidbody.velocity = new Vector3(transform.forward.x * _enemyScript.MovementSpeed, _rigidbody.velocity.y, transform.forward.z * _enemyScript.MovementSpeed);
+        //}
     }
 }
