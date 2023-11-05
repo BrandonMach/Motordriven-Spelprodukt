@@ -48,6 +48,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     private string _input;
     private bool _canAttack = true;
 
+    /// <summary>
+    /// Used for testing challenge "KillStreak"
+    /// </summary>
+    public bool HasTakenDamage { get; set; }
+
 
     private void Awake()
     {
@@ -137,6 +142,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     public void TakeDamage(Attack attack)
     {
         _healthManager.ReduceHealth(attack.Damage);
+        HasTakenDamage = true;
     }
 
 
@@ -151,6 +157,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
+
+        _entertainmentManager?.PlayerInCombat();
         if (!_canAttack)
         {
             return;
@@ -166,6 +174,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
     {
+        
+        _entertainmentManager?.PlayerInCombat();
         if (!_canAttack)
         {
             return;

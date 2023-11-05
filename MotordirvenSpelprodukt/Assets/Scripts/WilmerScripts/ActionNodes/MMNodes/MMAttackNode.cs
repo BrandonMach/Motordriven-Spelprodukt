@@ -10,20 +10,14 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MMAttackNode : ActionNode
 {
-    // MeleeMinionAttackNode
-    // Start is called before the first frame update
+
+    
     protected override void OnStart()
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
-        _meleeMinionScript.CurrentImpairement = Impairement.inAttack;
+        
 
-        _meleeMinionScript.Anim.SetTrigger("LightAttack");
-
-        if (_meleeMinionScript.AIMovementScript.GoTowardsPlayer == true)
-        {
-            _meleeMinionScript.AIMovementScript.GoTowardsPlayer = false;
-        }
     }
 
     protected override void OnStop()
@@ -33,7 +27,27 @@ public class MMAttackNode : ActionNode
 
     protected override State OnUpdate()
     {
-        return State.Success;
+
+
+        if (_meleeMinionScript.AttackCooldownTimer < _meleeMinionScript.AttackCooldown)
+        {
+
+            _meleeMinionScript.Anim.SetTrigger("Idle");
+            _meleeMinionScript.CurrentImpairement = Impairement.none;
+            return State.Running;
+
+        }
+        else
+        {
+            _meleeMinionScript.CurrentImpairement = Impairement.inAttack;
+            int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
+            _meleeMinionScript.AttackCooldownTimer = 0;
+            if(randomValue == 1) _meleeMinionScript.Anim.SetTrigger("LightAttack");
+            else if(randomValue == 2) _meleeMinionScript.Anim.SetTrigger("HeavyAttack");
+
+            return State.Success;
+        }
+
     }
 }
 

@@ -5,12 +5,12 @@ using UnityEngine;
 public class MMWaitNode : ActionNode
 {
     private float _duration;
-    float startTime;
+    float startTime = 0;
 
-    protected override void OnStart()
+    protected override void OnStart()   // Kallas varje gång noden nås
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
-        startTime = Time.time;
+        
         _duration = _meleeMinionScript.Anim.GetCurrentAnimatorStateInfo(0).length;
 
         
@@ -24,43 +24,29 @@ public class MMWaitNode : ActionNode
     protected override State OnUpdate()
     {
 
+        startTime += Time.fixedDeltaTime;
+
         switch (_meleeMinionScript.CurrentImpairement)
         {
 
             case EnemyScript.Impairement.stunned:
                 _duration = _meleeMinionScript.StunDuration;
                 _meleeMinionScript.Anim.SetTrigger("Idle");
-                break;
+                return State.Success;
 
-            case EnemyScript.Impairement.inAttack:
-                //return State.Failure;
-                break;
             case EnemyScript.Impairement.pushed:
                 _meleeMinionScript.Anim.SetTrigger("Idle");
-                break;
-            default:
-                break;
+                return State.Success;
+
+            case EnemyScript.Impairement.airborne:
+                _meleeMinionScript.Anim.SetTrigger("Idle");
+                return State.Success;
+            case EnemyScript.Impairement.inAttack:
+                return State.Success;
         }
 
-        //if (!_meleeMinionScript.CanChase || !_meleeMinionScript.OnGround || _meleeMinionScript.Impaired)
-        //{
-
-        //    return State.Running;
-        //}
-
-        //if (Time.time - startTime > _meleeMinionScript.StunDuration)
-        //{
-        //    _meleeMinionScript.CanChase = true;
-        //    return State.Success;
-        //}
-        while (Time.time - startTime < _duration)
-        {
-            
-            return State.Running;
-        }
-        _meleeMinionScript.CurrentImpairement = EnemyScript.Impairement.none;
-        //return State.Success;
         return State.Failure;
+
 
     }
 }

@@ -25,6 +25,8 @@ public class KamekazeAttack : MonoBehaviour
             KMScript _kmScript = gameObject.GetComponentInParent<KMScript>();
             _kmScript.PlayerInpact = true;
             Instantiate(_kmScript._explosion, transform.parent);
+            other.GetComponent<HealthManager>().ReduceHealth(tempDamage);
+            this.GetComponentInParent<HealthManager>().ReduceHealth(100);
             //other.GetComponent<HealthManager>().TakeDamage(tempDamage, new Attack { AttackEffect = CurrentAttackSO.AttackEffect.} );
             //this.GetComponentInParent<HealthManager>().TakeDamage(100);
            
