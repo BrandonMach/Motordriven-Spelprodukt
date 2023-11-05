@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3819,7 +3819,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 772040312726353770, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
       propertyPath: _diveRange
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 772040312726353770, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
       propertyPath: _explosion
@@ -3872,6 +3872,14 @@ PrefabInstance:
     - target: {fileID: 7127255468259950107, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
       propertyPath: m_Name
       value: KamikazieMinion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127255468259950107, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865163389547846588, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5656,7 +5664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168392184729428396, guid: e56980056fa031243a3441f1ebf65236, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 5168392184729428396, guid: e56980056fa031243a3441f1ebf65236, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5664,7 +5672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168392184729428396, guid: e56980056fa031243a3441f1ebf65236, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.99
       objectReference: {fileID: 0}
     - target: {fileID: 5168392184729428396, guid: e56980056fa031243a3441f1ebf65236, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8558,6 +8566,10 @@ PrefabInstance:
       propertyPath: _gameInput
       value: 
       objectReference: {fileID: 575277078}
+    - target: {fileID: 8199499030154146345, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8599,7 +8611,6 @@ SceneRoots:
   - {fileID: 143060244}
   - {fileID: 710019290}
   - {fileID: 2143220253}
-  - {fileID: 1302655339}
   - {fileID: 1776844540}
   - {fileID: 4634542877628727314}
   - {fileID: 1894548284}
@@ -8607,4 +8618,5 @@ SceneRoots:
   - {fileID: 1271739051}
   - {fileID: 209471585}
   - {fileID: 885737929}
+  - {fileID: 1302655339}
   - {fileID: 1329108147}
