@@ -32,42 +32,21 @@ public class MMWaitNode : ActionNode
             case EnemyScript.Impairement.stunned:
                 _duration = _meleeMinionScript.StunDuration;
                 _meleeMinionScript.Anim.SetTrigger("Idle");
-                break;
-
-            case EnemyScript.Impairement.airborne:
-                
                 return State.Success;
-                break;
-            case EnemyScript.Impairement.inAttack:
-                if (startTime > 2.0f/*_duration*/)
-                {
 
-                    //return State.Running;
-                    startTime = 0;
-                    return State.Failure;
-
-                }
-                return State.Success;
-                break;
             case EnemyScript.Impairement.pushed:
                 _meleeMinionScript.Anim.SetTrigger("Idle");
-                break;
-            //default:
-            //    break;
+                return State.Success;
+
+            case EnemyScript.Impairement.airborne:
+                _meleeMinionScript.Anim.SetTrigger("Idle");
+                return State.Success;
+            case EnemyScript.Impairement.inAttack:
+                return State.Success;
         }
 
+        return State.Failure;
 
-        if (startTime < 2.0f/*_duration*/)
-        {
-
-            //return State.Running;
-            startTime = Time.time;
-            return State.Failure;
-
-        }
-        else _meleeMinionScript.CurrentImpairement = EnemyScript.Impairement.none;
-        //return State.Success;
-        return State.Success;
 
     }
 }

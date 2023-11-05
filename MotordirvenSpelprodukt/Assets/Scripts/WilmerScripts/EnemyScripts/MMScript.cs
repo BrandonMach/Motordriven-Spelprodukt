@@ -8,6 +8,7 @@ public class MMScript : EnemyScript
     // Start is called before the first frame update
 
     public float ChaseDistance;
+    
 
     public Animator Anim;
 
@@ -36,9 +37,10 @@ public class MMScript : EnemyScript
     void Update()
     {
         base.Update();
+        
+        
 
 
-        //OnGround = Physics.CheckSphere(sphereCheck.position, sphereCheckRadius, groundLayer);
     }
 
     protected override void OnDestroy()
