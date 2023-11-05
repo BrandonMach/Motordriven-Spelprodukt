@@ -110,14 +110,19 @@ public class GameManager : MonoBehaviour
     {
         if(_champion == null && !_kingCam)
         {
-            if(_etp.GetETP() > _etp.GetExcitedThreshold())
+            if(_etp.GetETP() > (_etp.GetMaxETP()/2))
             {
+                
                 KilledChampions++;
                 Debug.LogError("Champions Killed" + KilledChampions);
                 if(KilledChampions == AmountOfChampionsToKill)
                 {
                     Debug.Log("You killed all champions");
                 }
+            }
+            else
+            {
+                _playerGO.gameObject.GetComponent<Rigidbody>().useGravity = false;
             }
 
             _etp.MatchFinished = true;
@@ -142,6 +147,7 @@ public class GameManager : MonoBehaviour
         CheckChallengesCompletion();
         ChallengeTimersUpdate();
     }
+
 
 
     #region ChallengeMethods
