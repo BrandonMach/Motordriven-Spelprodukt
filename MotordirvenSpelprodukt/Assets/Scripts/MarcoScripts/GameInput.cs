@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
+
+    public static GameInput Instance;
     private PlayerInputActions _playerInputActions;
 
     public event EventHandler OnInteractActionPressed;
@@ -17,6 +19,14 @@ public class GameInput : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         _playerInputActions = new PlayerInputActions();
         _playerInputActions.Player.Enable();
 
