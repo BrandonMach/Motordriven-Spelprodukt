@@ -6,8 +6,6 @@ public class WeaponVisualEffects : MonoBehaviour
 {
     [SerializeField] private Transform _shockwaveTransform;
 
-    [SerializeField] private Animator _animator;
-
     [SerializeField] private ParticleSystem _weaponTrail;
 
     [SerializeField] private ParticleSystem _shockWaveCircle;
