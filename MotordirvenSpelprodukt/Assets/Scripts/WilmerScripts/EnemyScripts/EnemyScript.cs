@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 {
     [SerializeField] protected HealthManager _healthManager;
+    [SerializeField] protected Animator anim;
     [SerializeField] private CurrentAttackSO[] _attackSOArray;
     [SerializeField] private Weapon _weapon;
     [SerializeField] private ParticleSystem stunEffect;
@@ -47,6 +48,8 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     public bool Impaired { get { return _impaired; } set { _impaired = value; } }
     public bool OnGround { get { return _onGround; } set { _onGround = value; } }
     public bool OutOfCombat { get { return _outOfCombat; } set { _outOfCombat = value; } }
+    public Animator Anim { get { return anim; } set { anim = value; } }
+
 
     private void Awake()
     {
@@ -182,6 +185,13 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         Rigidbody.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
         CurrentImpairement = Impairement.pushed;
         Debug.Log(this.GetType().ToString() + "Enemy knocked back with force: " + knockBackForce);
+        anim.SetTrigger("PushBack");
+    }
+
+
+    public void TriggerGetUpAnim()
+    {
+        anim.SetTrigger("GetUp");
     }
 
 

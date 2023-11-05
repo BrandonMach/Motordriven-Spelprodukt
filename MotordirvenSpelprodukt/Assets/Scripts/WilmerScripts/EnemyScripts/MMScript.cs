@@ -10,7 +10,7 @@ public class MMScript : EnemyScript
     public float ChaseDistance;
     
 
-    public Animator Anim;
+   
 
     [Header("Attacks")]
     [SerializeField] private Transform _weaponHolderTransform;
