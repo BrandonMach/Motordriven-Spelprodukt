@@ -70,6 +70,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void Update()
     {
+        
 
         if (CurrentImpairement == Impairement.airborne)
         {

@@ -5,12 +5,12 @@ using UnityEngine;
 public class MMWaitNode : ActionNode
 {
     private float _duration;
-    float startTime;
+    float startTime = 0;
 
-    protected override void OnStart()
+    protected override void OnStart()   // Kallas varje gång noden nås
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
-        startTime = Time.time;
+        
         _duration = _meleeMinionScript.Anim.GetCurrentAnimatorStateInfo(0).length;
 
         
@@ -24,6 +24,8 @@ public class MMWaitNode : ActionNode
     protected override State OnUpdate()
     {
 
+        startTime += Time.fixedDeltaTime;
+
         switch (_meleeMinionScript.CurrentImpairement)
         {
 
@@ -33,38 +35,39 @@ public class MMWaitNode : ActionNode
                 break;
 
             case EnemyScript.Impairement.airborne:
+                
                 return State.Success;
                 break;
             case EnemyScript.Impairement.inAttack:
-                //return State.Failure;
+                if (startTime > 2.0f/*_duration*/)
+                {
+
+                    //return State.Running;
+                    startTime = 0;
+                    return State.Failure;
+
+                }
+                return State.Success;
                 break;
             case EnemyScript.Impairement.pushed:
                 _meleeMinionScript.Anim.SetTrigger("Idle");
                 break;
-            default:
-                break;
+            //default:
+            //    break;
         }
 
-        //if (!_meleeMinionScript.CanChase || !_meleeMinionScript.OnGround || _meleeMinionScript.Impaired)
-        //{
 
-        //    return State.Running;
-        //}
-
-        //if (Time.time - startTime > _meleeMinionScript.StunDuration)
-        //{
-        //    _meleeMinionScript.CanChase = true;
-        //    return State.Success;
-        //}
-        while (Time.time - startTime < _duration)
+        if (startTime < 2.0f/*_duration*/)
         {
 
-            return State.Running;
+            //return State.Running;
+            startTime = Time.time;
+            return State.Failure;
 
         }
-        _meleeMinionScript.CurrentImpairement = EnemyScript.Impairement.none;
+        else _meleeMinionScript.CurrentImpairement = EnemyScript.Impairement.none;
         //return State.Success;
-        return State.Failure;
+        return State.Success;
 
     }
 }

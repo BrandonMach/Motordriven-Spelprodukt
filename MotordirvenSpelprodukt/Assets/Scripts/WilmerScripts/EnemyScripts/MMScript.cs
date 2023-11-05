@@ -24,9 +24,9 @@ public class MMScript : EnemyScript
     {
         base.Start();
 
-        _attackRange = 2f;
+        _attackRange = 4f;
         _attackCooldown = 2;
-        ChaseDistance = 2f;
+        ChaseDistance = 4f;
 
         
         Anim = GetComponent<Animator>();
