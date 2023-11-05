@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AIMovement : MonoBehaviour
 {
@@ -32,7 +33,6 @@ public class AIMovement : MonoBehaviour
         if (GoTowardsPlayer)
         {
             _rigidbody.velocity = new Vector3(transform.forward.x * _enemyScript.MovementSpeed, _rigidbody.velocity.y, transform.forward.z * _enemyScript.MovementSpeed);
-
         }
     }
 }
