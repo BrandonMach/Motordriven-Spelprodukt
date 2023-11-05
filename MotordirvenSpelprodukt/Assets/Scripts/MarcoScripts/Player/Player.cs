@@ -32,7 +32,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     }
 
 
-    
+    [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
 
@@ -43,11 +43,16 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     private PlayerDash _playerDash;
     private PlayerMovement _playerMovement;
     private EntertainmentManager _entertainmentManager;
-    private GameInput _gameInput;
+
 
     private string _input;
     private bool _canAttack = true;
-   
+
+    /// <summary>
+    /// Used for testing challenge "KillStreak"
+    /// </summary>
+    public bool HasTakenDamage { get; set; }
+
 
     private void Awake()
     {
@@ -62,8 +67,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     }
     void Start()
     {
-        _gameInput = GameInput.Instance;
-
         _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
         _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
         _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
@@ -81,9 +84,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         if (_playerMovement.IsMoving() && _playerDash.IsDashAvailable())
         {
             OnDisableMovement();
-            StartEvade?.Invoke(this, EventArgs.Empty);
-
-        }
+            OnStartEvade();
+        }      
     }
 
     //public void Knockbacked(object sender, EventArgs e)
@@ -140,6 +142,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     public void TakeDamage(Attack attack)
     {
         _healthManager.ReduceHealth(attack.Damage);
+        HasTakenDamage = true;
     }
 
 
@@ -154,6 +157,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
+        _entertainmentManager.PlayerInCombat();
         if (!_canAttack)
         {
             return;
@@ -169,6 +173,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
     {
+        
+        _entertainmentManager.PlayerInCombat();
         if (!_canAttack)
         {
             return;
@@ -187,7 +193,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     {
         if (!_playerDash.IsDashing)
         {
-            //OnEnableMovement();
+            OnEnableMovement();
             RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = _currentWeapon });
             _canAttack = true;
         }
@@ -209,11 +215,16 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         EnableMovement?.Invoke(this, EventArgs.Empty);
     }
 
+    private void OnStartEvade()
+    {
+        StartEvade?.Invoke(this, EventArgs.Empty);
+    }
+
+
     private void OnComboBroken()
     {
         _input = "";
         ComboBroken?.Invoke(this, EventArgs.Empty);
-        OnEnableMovement();
         _canAttack = true;
     }
 

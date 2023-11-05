@@ -27,8 +27,6 @@ public class AudienceAnimationScipt : MonoBehaviour
     void Update()
     {
 
-
-
         if (_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Angry)
         {
             _anim.SetInteger("Emotion", -1 *_fansMultipier);

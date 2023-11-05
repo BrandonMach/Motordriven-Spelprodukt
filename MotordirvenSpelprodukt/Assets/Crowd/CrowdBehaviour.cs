@@ -12,6 +12,7 @@ public class CrowdBehaviour : MonoBehaviour
 
     public Rect fallingArea;
     public GameObject fallingObject;
+    bool _throwObject = true;
 
 
     bool _playCheering;
@@ -25,6 +26,7 @@ public class CrowdBehaviour : MonoBehaviour
         Excited,
         Angry
     }
+
     public CrowdEmotion _emotion;
     public CrowdEmotion LatestEmotion;
     public CrowdEmotion GetCrowdEmotion()
@@ -33,7 +35,11 @@ public class CrowdBehaviour : MonoBehaviour
     }
     void Start()
     {
-
+        //Subscribes to events
+        _etManager.OnETPNormal += NormalCrowd;
+        _etManager.OnETPAngry += AngryCrowd;
+        _etManager.OnETPExited += NormalCrowd;
+       
         //NormalTheme = Themes[0];
         //ExcitedTheme = Themes[1];
         //AngryTheme = Themes[2];
@@ -50,60 +56,70 @@ public class CrowdBehaviour : MonoBehaviour
         fallingArea = new Rect(0, 3, 10, 2);
         this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
 
-        if (_etManager.GetETP() > _etManager.GetExcitedThreshold() /*&& !_playCheering*/) //Bool för att den bara sla spelas en gång
-        {
-            
-            _playCheering = true;
-            _emotion = CrowdEmotion.Excited;
-
-            //Swicth music track, before latest motion
-
-            //StopAllCoroutines();
-            StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
-            LatestEmotion = _emotion;
-           
-
-            //PlayCheer();
-        }
-        else if(_etManager.GetETP() < _etManager.GetAngryThreshold() /*&& !_playBooing*/)
-        {
-            //Swicth music track
-            _playBooing = true;
-            _emotion = CrowdEmotion.Angry;
-
-
-            //Swicth music track, before latest motion
-            //StopAllCoroutines();
-            StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
-            LatestEmotion = _emotion;
-            
-            //PlayBooo();
-        }
-        else
-        {
-            //Swicth music track
-            _playCheering = false;
-            _playBooing = false;
-            _emotion = CrowdEmotion.Normal;
-
-
-            //Swicth music track, before latest motion
-            //StopAllCoroutines();
-            StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
-            LatestEmotion = _emotion;
-
-
-        }
-
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            float randonThrowPosX = Random.Range(-10, 10);
-            float randonThrowPosY = Random.Range(-10, 10);
-            Instantiate(fallingObject, _playerPos.position + new Vector3(randonThrowPosX, 10, randonThrowPosY), transform.rotation);
+            ThrowTomato();
         }
         
 
+    }
+
+    private void ExcitedCrowd(object sender, System.EventArgs e)
+    {
+        _playCheering = true;
+        _emotion = CrowdEmotion.Excited;
+
+        //Swicth music track, before latest motion
+
+        //StopAllCoroutines();
+        StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
+        LatestEmotion = _emotion;
+    }
+    private void AngryCrowd(object sender, System.EventArgs e)
+    {
+        if (_throwObject)
+        {
+            StartCoroutine(ThrowTomato());
+            //_throwObject = true;
+        }
+
+        //Swicth music track
+        _playBooing = true;
+        _emotion = CrowdEmotion.Angry;
+
+
+        //Swicth music track, before latest motion
+        //StopAllCoroutines();
+        StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
+        LatestEmotion = _emotion;
+    }
+
+    private void NormalCrowd(object sender, System.EventArgs e)
+    {
+        //Swicth music track
+        _playCheering = false;
+        _playBooing = false;
+        _emotion = CrowdEmotion.Normal;
+
+
+        //Swicth music track, before latest motion
+        //StopAllCoroutines();
+        StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
+        LatestEmotion = _emotion;
+    }
+
+
+
+    private IEnumerator ThrowTomato()
+    {
+        _throwObject = false;
+        float randonThrowPosX = Random.Range(-10, 10);
+        float randonThrowPosY = Random.Range(-10, 10);
+        Instantiate(fallingObject, _playerPos.position + new Vector3(randonThrowPosX, 20, randonThrowPosY), transform.rotation);
+        yield return new WaitForSeconds(2);
+        _throwObject = true;
+        
     }
 
     void PlayCheer()
