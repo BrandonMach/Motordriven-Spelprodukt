@@ -20,6 +20,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public float _destroydelay = 2.5f;
     
     public bool GodMode;
+    public bool Explode;
 
     public bool hasSlowMo;
     public SlowMo _slowMo;
@@ -35,11 +36,19 @@ public class HealthManager : MonoBehaviour,IHasProgress
     {
         if (!GodMode && Dead)
         {
-            _destroydelay -= Time.deltaTime;
-            if(_destroydelay <= 0)
-            {           
-                Destroy(gameObject);             
+            if (Explode)
+            {
+                Destroy(gameObject);
             }
+            else
+            {
+                _destroydelay -= Time.deltaTime;
+                if (_destroydelay <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            
         }
     }
 
@@ -80,6 +89,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 _dismembrentScript.GetKilled();
             }
 
+
+            //if the killing blow remove healthbar
             Die();
         }
     }
@@ -103,7 +114,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
         Dead = true;
 
         GameManager.Instance.KillCount++;
-        Debug.Log("Killer count: " + GameManager.Instance.KillCount);
+        Debug.Log("Killcount: " + GameManager.Instance.KillCount);
 
     }
 

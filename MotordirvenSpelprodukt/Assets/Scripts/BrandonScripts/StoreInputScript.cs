@@ -22,7 +22,7 @@ public class StoreInputScript : MonoBehaviour
 
     void Start()
     {
-        _etpManager = GameObject.Find("Canvas").GetComponent<EntertainmentManager>(); //Canvas of now, name may need to change
+        _etpManager = EntertainmentManager.Instance; //Canvas of now, name may need to change
 
     }
 

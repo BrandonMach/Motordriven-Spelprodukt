@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class CustomizationMenu : MonoBehaviour
+public class SpawnEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,11 +14,5 @@ public class CustomizationMenu : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void ClickEnterArena()
-    {
-
-        SceneManager.LoadScene(1,LoadSceneMode.Single);
     }
 }

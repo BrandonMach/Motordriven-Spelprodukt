@@ -62,10 +62,16 @@ public class EntertainmentManager : MonoBehaviour
     [Header("Conditions")]
 
     [SerializeField] private bool _isOutOfCombat; //OOC
+    public bool PlayerNearEnemies;
 
     public event System.EventHandler OutOfCombat;
     public event System.EventHandler InCombat;
 
+
+    //ETP events
+    public event System.EventHandler OnETPExited;
+    public event System.EventHandler OnETPAngry;
+    public event System.EventHandler OnETPNormal;
 
     // [SerializeField] private bool _startComboWindowTimer;
 
@@ -86,7 +92,6 @@ public class EntertainmentManager : MonoBehaviour
         _startETP = _maxETP / 2;
         _ETPThreshold = _maxETP / 2;
         _entertainmentPoints = _startETP;
-        //_indicatorArrowrRotateAngle = 90;
     }
 
     // Update is called once per frame
@@ -94,13 +99,14 @@ public class EntertainmentManager : MonoBehaviour
     {
         EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting"); //Inte den finaste lösningen
         _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
-        
+
+        CheckETPChanges();
+
         UpdateETPArrow();
 
         if (!MatchFinished)
         {
             CheckIfOutOfCombat();
-
             if (_isOutOfCombat)
             {
                 OutOfCombatDecreaseOverTime();
@@ -109,8 +115,25 @@ public class EntertainmentManager : MonoBehaviour
 
         //For testing
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
-
+        //OTC pop up
         OOCPopUp.SetActive(_isOutOfCombat);
+    }
+
+
+    void CheckETPChanges()
+    {
+        if(GetETP() > GetExcitedThreshold())
+        {
+            OnETPExited?.Invoke(this, EventArgs.Empty);
+        }
+        else if (GetETP() < GetAngryThreshold())
+        {
+            OnETPAngry?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            OnETPNormal?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     void UpdateETPArrow()
@@ -121,12 +144,12 @@ public class EntertainmentManager : MonoBehaviour
     void CheckIfOutOfCombat()
     {
         //Scan for enemies
-
         foreach (GameObject enemies in EnemyGameObjects)
         {
             float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
             if (dist > _scanEnemyArea && !_isOutOfCombat)
             {
+                PlayerNearEnemies = false; 
                 _timeOutOfCombatCounter += Time.deltaTime;
 
                 if (_timeOutOfCombatCounter >= _timeOutOfCombatThreshold)
@@ -137,15 +160,24 @@ public class EntertainmentManager : MonoBehaviour
                 }
             }
             else
-            {
-                if (Input.GetKeyDown(KeyCode.Q)) //"Switch _isOutOfCombat to false when attacking is detected, Placeholder for now"
-                {
-                    _isOutOfCombat = false;
-                    OnInCombat();
-                }
+            {      
                 _timeOutOfCombatCounter = 0;
             }
+
+            if (dist < _scanEnemyArea  /* attack hits enemy*/)
+            {
+                PlayerNearEnemies = true;
+            }
         }
+    }
+
+    public void PlayerInCombat()
+    {
+        if (PlayerNearEnemies)
+        {
+            _isOutOfCombat = false;
+            OnInCombat();
+        }       
     }
 
     void OutOfCombatDecreaseOverTime()
