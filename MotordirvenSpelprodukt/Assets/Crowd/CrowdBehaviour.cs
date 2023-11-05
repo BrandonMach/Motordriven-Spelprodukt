@@ -38,7 +38,7 @@ public class CrowdBehaviour : MonoBehaviour
         //Subscribes to events
         _etManager.OnETPNormal += NormalCrowd;
         _etManager.OnETPAngry += AngryCrowd;
-        _etManager.OnETPExited += NormalCrowd;
+        _etManager.OnETPExited += ExcitedCrowd;
        
         //NormalTheme = Themes[0];
         //ExcitedTheme = Themes[1];
