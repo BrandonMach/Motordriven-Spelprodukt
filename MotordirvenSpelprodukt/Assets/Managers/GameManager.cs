@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+        Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 1.5f, _championStartPos.position.z);
+        Quaternion championRotation = Quaternion.Euler(_championList[KilledChampions].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
+
+        Instantiate(_championList[KilledChampions], championSpawnPos, championRotation);
+
     }
 
     /// <summary>
@@ -62,8 +67,14 @@ public class GameManager : MonoBehaviour
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
-    public int AmountOfChampionsToKill;
+    //Champion Path 
+    [Header("Champion Path")]
+    public int AmountOfChampionsToKill; //CHampion road-map
     public static int KilledChampions;
+    [SerializeField] private List<GameObject> _championList;
+    [SerializeField] private Transform _championStartPos;
+
+
 
     //public int KillCount { get => _killCount; set => _killCount = value; }
     public int KillCount
@@ -81,6 +92,7 @@ public class GameManager : MonoBehaviour
     }
 
     public event EventHandler OnChampionKilled;
+
 
 
     void Start()
@@ -102,6 +114,7 @@ public class GameManager : MonoBehaviour
         _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
 
         AmountOfChampionsToKill = 2;
+       
         
     }
 
