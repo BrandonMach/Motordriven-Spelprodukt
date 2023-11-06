@@ -8,7 +8,11 @@ public class InventorySlot : MonoBehaviour
     Item _item;
 
     public Image Icon { get => _icon; set => _icon = value; }
-
+    private TooltipTrigger trigger;
+    private void Awake()
+    {
+        trigger = GetComponent<TooltipTrigger>();
+    }
     public void AddItem(Item newItem)
     {
         if (newItem is Weapon weapon)
@@ -20,6 +24,7 @@ public class InventorySlot : MonoBehaviour
                 _icon.sprite = weapon.GetImage();
                 _icon.enabled = true;
             }
+            TooltipSetup(weapon);
         }
     }
 
@@ -28,5 +33,10 @@ public class InventorySlot : MonoBehaviour
         _item = null;
         _icon.sprite = null;
         _icon.enabled = false;
+    }
+    private void TooltipSetup(Weapon weapon)
+    {
+        trigger.header = weapon.GetName();       
+        trigger.content = "Level: " + weapon.GetLevel() + "\n" + "Damage:" + weapon.GetDamage();
     }
 }
