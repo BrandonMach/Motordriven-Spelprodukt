@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     #region Singleton
 
     private static GameManager _instance;
-
+    public static GameManager Instance { get => _instance; set => _instance = value; }
     private void Awake()
     {
         if (Instance != null)
@@ -33,13 +33,13 @@ public class GameManager : MonoBehaviour
     /// Set your _gameManager variable to this instance in order to achieve the Singleton pattern.
     /// Example: _gameManager = GameManager.Instance
     /// </summary>
-    public static GameManager Instance { get => _instance; set => _instance = value; }
 
     #endregion
 
     #region ChallengeVariables
 
     private ChallengeManager _challengeManager;
+
 
     float _gameStartTimer;
     float _challengeTimer;
@@ -67,6 +67,10 @@ public class GameManager : MonoBehaviour
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
+    //Enemy List
+    public static GameObject[] EnemyGameObjects;
+    private SpawnEnemy _spawnEnemy;
+
     //Champion Path 
     [Header("Champion Path")]
     public int AmountOfChampionsToKill; //CHampion road-map
@@ -93,7 +97,13 @@ public class GameManager : MonoBehaviour
 
     public event EventHandler OnChampionKilled;
 
+    public void UpdateEnemyList()
+    {
+        //Subscribe to spawn enemy event
+        
 
+        EnemyGameObjects =   GameObject.FindGameObjectsWithTag("EnemyTesting");
+    }
 
     void Start()
     {
@@ -112,6 +122,11 @@ public class GameManager : MonoBehaviour
 
         //Not used
         //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        _spawnEnemy = SpawnEnemy.Instance;
+
+
+        //_spawnEnemy.OnSpawnNewEnemy += UpdateEnemyList;
+     
 
         AmountOfChampionsToKill = 2;
        
@@ -121,7 +136,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_champion == null && !_kingCam)
+       // EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
+
+        if (_champion == null && !_kingCam)
         {
             if(_etp.GetETP() > (_etp.GetMaxETP()/2))
             {

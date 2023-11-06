@@ -24,7 +24,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public bool hasSlowMo;
     public SlowMo _slowMo;
-    
+
+
     void Start()
     {
 
@@ -46,10 +47,16 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 if (_destroydelay <= 0)
                 {
                     Destroy(gameObject);
+                    
                 }
             }
             
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.UpdateEnemyList();
     }
 
 
@@ -106,6 +113,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void Die()
     {
+        
         if (hasSlowMo)
         {
             _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
@@ -115,6 +123,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
         GameManager.Instance.KillCount++;
         Debug.Log("Killcount: " + GameManager.Instance.KillCount);
+
+
 
     }
 
