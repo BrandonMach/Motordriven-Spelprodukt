@@ -51,35 +51,35 @@ public class FMODController : MonoBehaviour
             //Debug.Log(result);
         }
 
-        float etp = _entertainmentManager.GetETP();
-        Debug.Log("ETP: " + etp);
+        //float etp = _entertainmentManager.GetETP();
+        //Debug.Log("ETP: " + etp);
 
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    _intensity -= 0.33f;
-        //    _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            _intensity -= 33.33f;
+            _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
 
-        //    Debug.Log($"ChangedParamValue: {changedParamValue}");
-        //}
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    _intensity += 0.33f;
-        //    _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
+            Debug.Log($"ChangedParamValue: {changedParamValue}");
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            _intensity += 33.33f;
+            _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
 
-        //    Debug.Log($"ChangedParamValue: {changedParamValue}");
-        //}
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    _intensity = _entertainmentManager.GetETPThreshold();
-        //    _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
+            Debug.Log($"ChangedParamValue: {changedParamValue}");
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            _intensity = _entertainmentManager.GetETPThreshold();
+            _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
 
-        //    Debug.Log($"ChangedParamValue: {changedParamValue}");
-        //}
+            Debug.Log($"ChangedParamValue: {changedParamValue}");
+        }
     }
 
     private void UpdateIntensityParameter()
     {
-        _intensity = _entertainmentManager.GetETP();
+        //_intensity = _entertainmentManager.GetETP();
         _fmodEventInstance.setParameterByName("Intensity", _intensity);
 
         _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
