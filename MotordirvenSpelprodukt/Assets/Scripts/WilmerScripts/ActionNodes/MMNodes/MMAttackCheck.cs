@@ -22,21 +22,21 @@ public class MMAttackCheck : ActionNode
         if (_playerScript != null)
         {
             // Calculate the distance between the enemy and the player
-            float distanceToPlayer = Vector3.Distance(_meleeMinionScript.transform.position, _playerScript.transform.position);
+            //float distanceToPlayer = Vector3.Distance(_meleeMinionScript.transform.position, _playerScript.transform.position);
 
             // Check if the player is within attack range
-            if (distanceToPlayer <= _meleeMinionScript.AttackRange)
+            if (_meleeMinionScript.distanceToPlayer <= _meleeMinionScript.AttackRange)
             {
-                return State.Success;
+                return State.Failure;
             }
             else
             {
-                return State.Failure; // Player is out of attack range
+                return State.Success; // Player is out of attack range
             }
         }
         else
         {
-            return State.Failure; // Player not found
+            return State.Success; // Player not found
         }
     }
 

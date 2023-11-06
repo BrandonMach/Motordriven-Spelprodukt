@@ -31,18 +31,19 @@ public class MMWaitNode : ActionNode
 
             case EnemyScript.Impairement.stunned:
                 _duration = _meleeMinionScript.StunDuration;
-                _meleeMinionScript.Anim.SetTrigger("Idle");
+                //_meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
 
             case EnemyScript.Impairement.pushed:
-                _meleeMinionScript.Anim.SetTrigger("Idle");
+                //_meleeMinionScript.Anim.SetTrigger("Idle");
+                
                 return State.Success;
 
             case EnemyScript.Impairement.airborne:
-                _meleeMinionScript.Anim.SetTrigger("Idle");
+                //_meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
             case EnemyScript.Impairement.inAttack:
-                _meleeMinionScript.Anim.SetTrigger("Idle");
+                //_meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
         }
 

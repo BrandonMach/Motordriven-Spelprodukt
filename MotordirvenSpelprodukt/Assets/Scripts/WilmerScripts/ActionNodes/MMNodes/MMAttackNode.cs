@@ -29,25 +29,23 @@ public class MMAttackNode : ActionNode
     {
 
 
-        if (_meleeMinionScript.AttackCooldownTimer < _meleeMinionScript.AttackCooldown)
-        {
-
-            _meleeMinionScript.Anim.SetTrigger("Idle");
-            //_meleeMinionScript.CurrentImpairement = Impairement.none;
-            Debug.Log("In none");
-            return State.Failure;
-
-        }
-        else
-        {
+        //if (_meleeMinionScript.TimeSinceLastAttack < _meleeMinionScript.TimeBetweenAttacks)
+        //{
+        //    _meleeMinionScript.Anim.SetTrigger("Idle");
+        //    //_meleeMinionScript.CurrentImpairement = Impairement.none;
+        //    Debug.Log("In none");
+        //    return State.Failure;
+        //}
+        //else
+        //{
             _meleeMinionScript.CurrentImpairement = Impairement.inAttack;
             int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
-            _meleeMinionScript.AttackCooldownTimer = 0;
+            //_meleeMinionScript.TimeSinceLastAttack = 0;
             if(randomValue == 1) _meleeMinionScript.Anim.SetTrigger("LightAttack");
             else if(randomValue == 2) _meleeMinionScript.Anim.SetTrigger("HeavyAttack");
             Debug.LogWarning("IN Attack");
             return State.Success;
-        }
+        //}
     }
 }
 
