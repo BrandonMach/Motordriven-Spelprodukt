@@ -33,7 +33,6 @@ public class PlayerAnimation : MonoBehaviour
         _player = GetComponent<Player>();
         _player.ChangeAttackAnimation += Player_ChangeAttackAnimation;
         _player.StartEvade += Player_StartEvade;
-        _player.EnableMovement += Player_OnEnableMovement;
         _player.ComboBroken += Player_OnComboBroken;
 
     }
@@ -41,11 +40,6 @@ public class PlayerAnimation : MonoBehaviour
     private void Player_OnComboBroken(object sender, EventArgs e)
     {
         EndCombo();
-    }
-
-    private void Player_OnEnableMovement(object sender, EventArgs e)
-    {
-
     }
 
     private void Player_StartEvade(object sender, EventArgs e)

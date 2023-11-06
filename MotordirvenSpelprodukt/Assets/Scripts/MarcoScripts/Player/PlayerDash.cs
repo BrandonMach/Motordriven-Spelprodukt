@@ -17,6 +17,7 @@ public class PlayerDash : MonoBehaviour
     private Player _player;
     private Rigidbody _rigidBody;
     private PlayerMovement _playerMovement;
+    private Vector3 _rollDirection;
 
 
     private float _currentDashTime;
@@ -35,7 +36,6 @@ public class PlayerDash : MonoBehaviour
     void Start()
     {
         _currentCooldownTime = 0;
-
         _player.StartEvade += Player_OnStartRoll;
     }
 
@@ -67,7 +67,14 @@ public class PlayerDash : MonoBehaviour
             }
             else
             {
-                _rigidBody.velocity = _rigidBody.velocity.normalized * _dashSpeed;
+                if (_rigidBody.velocity != Vector3.zero)
+                {
+                    _rigidBody.velocity = _rigidBody.velocity.normalized * _dashSpeed;
+                }
+                else
+                {
+                    _rigidBody.velocity = transform.forward * _dashSpeed;
+                }
             }
         }
     }

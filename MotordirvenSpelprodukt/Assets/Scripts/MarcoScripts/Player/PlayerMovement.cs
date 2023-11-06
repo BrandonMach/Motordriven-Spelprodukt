@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
         MnK
     }
 
+    public Vector3 _moveDirection {  get; private set; }
+
+
     [SerializeField] private RotateMode _currentRotateMode;
     [SerializeField] private InputMode _currentInputMode;
     [SerializeField] private float _moveSpeed;
@@ -31,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController _characterController;
 
-    public Vector3 _moveDirection;
 
     private Vector3 _camForward;
     private Vector3 _camRight;
@@ -68,7 +70,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerScript_OnDisableMovement(object sender, System.EventArgs e)
     {
+        if (!_playerScript.IsDashing)
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
         _canMove = false;
+
     }
 
     private void PlayerScript_OnChangeControllerTypeButtonPressed(object sender, System.EventArgs e)
@@ -93,9 +100,6 @@ public class PlayerMovement : MonoBehaviour
         GetMoveDir();
         
         _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
-
-
-
     }
 
     private void FixedUpdate()

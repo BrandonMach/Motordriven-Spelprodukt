@@ -31,6 +31,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         public AttackType attackType;
     }
 
+    public bool IsDashing { get; private set; }
 
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
@@ -81,8 +82,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
 
-        if (_playerMovement.IsMoving() && _playerDash.IsDashAvailable())
+        if (_playerDash.IsDashAvailable())
         {
+            IsDashing = true;
+            _input += "E";
             OnDisableMovement();
             OnStartEvade();
         }      
@@ -100,6 +103,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
     {
+        IsDashing = false;
         OnEnableMovement();
         OnComboBroken();
     }
@@ -168,7 +172,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         if (GetCurrentAttackSO(_input + "L") != null)
         {
             _input += "L";
-            OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType.Light);
+            OnAttack(OnAttackPressedAnimationEventArgs.AttackType.Light);
         }
     }
 
@@ -184,7 +188,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         if (GetCurrentAttackSO(_input + "H") != null)
         {
             _input += "H";
-            OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType.Heavy);
+            OnAttack(OnAttackPressedAnimationEventArgs.AttackType.Heavy);
 
         }
     }
@@ -229,7 +233,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         _canAttack = true;
     }
 
-    private void OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType attack)
+    private void OnAttack(OnAttackPressedAnimationEventArgs.AttackType attack)
     {
         if (!_playerDash.IsDashing)
         {
