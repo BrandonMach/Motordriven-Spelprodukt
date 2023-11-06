@@ -7,7 +7,8 @@ using FMODUnity;
 
 public class EntertainmentManager : MonoBehaviour
 {
-    public static EntertainmentManager Instance;
+    private static EntertainmentManager _instance;
+    public static EntertainmentManager Instance { get => _instance; set => _instance = value; }
 
     //For Testing
     public TextMeshProUGUI EntertainmentText;
@@ -63,6 +64,8 @@ public class EntertainmentManager : MonoBehaviour
 
     [SerializeField] private bool _isOutOfCombat; //OOC
     public bool PlayerNearEnemies;
+
+    
 
     public event System.EventHandler OutOfCombat;
     public event System.EventHandler InCombat;

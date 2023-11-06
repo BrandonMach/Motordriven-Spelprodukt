@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class FMODController : MonoBehaviour
 {
-    [SerializeField] Slider healthSlider; // For testing
+    [SerializeField] Slider healthSlider;
 
     GameManager _gameManager;
     HealthManager _healthManager;
+    EntertainmentManager _entertainmentManager;
 
-    public FMOD.Studio.EventInstance _fmodEventInstance;
+    public EventInstance _fmodEventInstance;
 
 
     float _intensity;
@@ -22,32 +23,38 @@ public class FMODController : MonoBehaviour
     void Start()
     {
         _gameManager = GameManager.Instance;
+        _entertainmentManager = EntertainmentManager.Instance;
 
         _fmodEventInstance = GetComponent<FMODUnity.StudioEventEmitter>().EventInstance;
-
-        
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        _health = healthSlider.value;
-        //Debug.Log(healthSlider.value);
+        UpdateIntensityParameter();
+        UpdateHealthParameter();
+    }
 
+    
+    private void UpdateIntensityParameter()
+    {
+        _intensity = _entertainmentManager.GetETP();
+        _fmodEventInstance.setParameterByName("Intensity", _intensity);
+
+        _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
+
+        Debug.Log($"ChangedParamValue: {changedParamValue}");
+    }
+
+    
+    private void UpdateHealthParameter()
+    {
+        _health = healthSlider.value;
         _fmodEventInstance.setParameterByName("Health", _health);
 
+        _fmodEventInstance.getParameterByName("Health", out float changedParamValue);
 
-        // Debug print to check current paramValue for Health
-        if (Input.GetKey(KeyCode.Space))
-        {
-            _fmodEventInstance.getParameterByName("Health", out float changedParamValue);
-
-            Debug.Log($"ChangedParamValue: {changedParamValue}");
-
-            Debug.Log(_fmodEventInstance);
-            //Debug.Log(result);
-        }
+        Debug.Log($"ChangedParamValue: {changedParamValue}");
     }
 
 
