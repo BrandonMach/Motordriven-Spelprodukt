@@ -18,11 +18,11 @@ public class MMStatusEffect : ActionNode
     protected override State OnUpdate()
     {
 
-        if (_meleeMinionScript.CurrentImpairement != EnemyScript.Impairement.none)
+        if (_meleeMinionScript.CurrentImpairement == EnemyScript.Impairement.none)
         {
-            return State.Success;
+            return State.Failure;
         }
-        return State.Failure;
+        return State.Success;
 
     }
 }

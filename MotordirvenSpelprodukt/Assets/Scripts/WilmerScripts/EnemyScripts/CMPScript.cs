@@ -45,7 +45,7 @@ public class CMPScript : EnemyScript
 
         _movementSpeed = 2;
         _attackRange = 6;
-        _attackCooldown = 2;
+        _timeBetweenAttacks = 2;
         ChaseDistance = 4;
         CanAttack = true;
 

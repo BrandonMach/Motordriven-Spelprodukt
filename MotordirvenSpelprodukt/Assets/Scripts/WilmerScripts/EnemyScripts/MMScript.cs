@@ -10,7 +10,7 @@ public class MMScript : EnemyScript
     public float ChaseDistance;
     
 
-    public Animator Anim;
+   
 
     [Header("Attacks")]
     [SerializeField] private Transform _weaponHolderTransform;
@@ -26,7 +26,7 @@ public class MMScript : EnemyScript
         base.Start();
 
         _attackRange = 4f;
-        _attackCooldown = 2;
+        _timeBetweenAttacks = 2;
         ChaseDistance = 4f;
 
         

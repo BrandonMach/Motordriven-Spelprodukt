@@ -8,7 +8,7 @@ using UnityEngine;
 public class Attack
 {
     public CurrentAttackSO AttackSO;
-    public Vector3 Position;
+    public Vector3 AttackerPosition;
     public float Damage;
 }
 
