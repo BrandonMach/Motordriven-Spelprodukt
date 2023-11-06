@@ -24,26 +24,5 @@ public class MMStatusEffect : ActionNode
         }
         return State.Failure;
 
-        if (_playerScript != null && _meleeMinionScript != null)
-        {
-            if(_meleeMinionScript.CurrentImpairement != EnemyScript.Impairement.none)
-            {
-                return State.Success;
-            }
-            //if (!_meleeMinionScript.CanChase || _meleeMinionScript.Impaired || !_meleeMinionScript.OnGround)
-            //{
-            //    return State.Success;
-            //}
-            else
-            {
-
-                return State.Failure;
-            }
-        }
-        else
-        {
-
-            return State.Failure;
-        }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class MMChaseNode : ActionNode
 {
-    
+    public float lerpSpeed = 200.0f;
 
     protected override void OnStart()
     {
@@ -28,14 +28,15 @@ public class MMChaseNode : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector3 direction = _playerScript.transform.position - _meleeMinionScript.transform.position;
+        //Vector3 direction = _playerScript.transform.position - _meleeMinionScript.transform.position;
 
-        // Normalize the direction to get a unit vector
-        direction.Normalize();
+        //// Normalize the direction to get a unit vector
+        //direction.Normalize();
 
-        //Rotate the Champion towards the players position
+        ////Rotate the Champion towards the players position
 
-        _meleeMinionScript.transform.LookAt(_playerScript.transform);
+        //_meleeMinionScript.transform.LookAt(_playerScript.transform);
+
 
 
         // Move the AI forward, since the AI is facing towards the player
@@ -45,8 +46,8 @@ public class MMChaseNode : ActionNode
         //_meleeMinionScript.Rigidbody.velocity = new Vector3(_meleeMinionScript.transform.forward.x * _meleeMinionScript.MovementSpeed, _meleeMinionScript.Rigidbody.velocity.y, _meleeMinionScript.transform.forward.z * _meleeMinionScript.MovementSpeed);
         //_meleeMinionScript.Rigidbody.Move =  _meleeMinionScript.Rigidbody.velocity + _meleeMinionScript.transform.forward * _meleeMinionScript.MovementSpeed * Time.deltaTime;
 
-    
-       
+
+
         return State.Success;
     }
 

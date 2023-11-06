@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -36,7 +37,8 @@ public class ChallengeManager : MonoBehaviour
 
     public event Action<Challenge> OnChallengeCompleted;
 
-    [SerializeField] TextMeshProUGUI _activeChallengesText;
+    [SerializeField] TextMeshProUGUI _firstActiveChallengeText;
+    [SerializeField] TextMeshProUGUI _secondActiveChallengeText;
 
     private int _activeChallengesCounter;
     private const int _maxActiveChallenges = 2;
@@ -48,14 +50,20 @@ public class ChallengeManager : MonoBehaviour
 
     public void UpdateActivesChallengesTMP()
     {
-        if (_activeChallengesCounter <= _maxActiveChallenges)
+        for (int i = 0; i < _maxActiveChallenges; i++)
         {
-            foreach (Challenge challenge in ActiveChallenges)
+            TextMeshProUGUI textLabel = (i == 0) ? _firstActiveChallengeText : _secondActiveChallengeText;
+
+            if (i < ActiveChallenges.Count)
             {
-                _activeChallengesText.text += challenge.ChallengeName + ", ";
+                textLabel.text = ActiveChallenges[i].ChallengeName.ToString();
             }
-        }  
-       
+            else
+            {
+                textLabel.text = "";
+            }
+        }
+
     }
 
     private void RemoveText()
@@ -86,17 +94,22 @@ public class ChallengeManager : MonoBehaviour
         if (ActiveChallenges.Contains(challenge))
         {
             DeActivateChallenge(challenge);
+            UpdateActivesChallengesTMP();
         }
         else
         {
             if (_activeChallengesCounter < _maxActiveChallenges)
             {
                 ActivateChallenge(challenge);
-                //UpdateActivesChallengesTMP();
+                UpdateActivesChallengesTMP();
             }
             else
             {
                 Debug.Log("Active challenges limit reached");
+                Challenge challengeToDeActivate = ActiveChallenges.FirstOrDefault();
+                DeActivateChallenge(challengeToDeActivate);
+                ActivateChallenge(challenge);
+                UpdateActivesChallengesTMP();
             }
         }
     }

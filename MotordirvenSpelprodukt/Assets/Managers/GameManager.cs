@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Coins" + PlayerCoins);
 
         //Not used
-        _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+        //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
 
         AmountOfChampionsToKill = 2;
        
