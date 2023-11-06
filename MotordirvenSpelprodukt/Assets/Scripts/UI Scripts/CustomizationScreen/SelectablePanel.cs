@@ -11,6 +11,7 @@ public class SelectablePanel : MonoBehaviour
     [SerializeField] private GameObject _challengesPanel;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _panelInfo;
+    [SerializeField] private GameObject _shopPanelInfo;
     [SerializeField] private TextMeshProUGUI _panelInfoText;
 
     private GameObject[] _panels;
@@ -55,6 +56,7 @@ public class SelectablePanel : MonoBehaviour
     {
 
     }
+
     public void InventoryPanelClicked() 
     {
         SetCurrentPanel(0);
@@ -79,7 +81,7 @@ public class SelectablePanel : MonoBehaviour
     {
         SetCurrentPanel(0);
         ActivateShop();
-        SetPanelInfoText("Shop");
+        SetPanelInfoText("Inventory");
         
     }
 
@@ -88,12 +90,14 @@ public class SelectablePanel : MonoBehaviour
         if (!_shopPanel.activeSelf)
         {
             _shopPanel.SetActive(true);
+            _shopPanelInfo.SetActive(true);
         }
     }
 
     private void DeactivateShop()
     {
         _shopPanel.SetActive(false);
+        _shopPanelInfo.SetActive(false);
     }
 
     private void SetPanelInfoText(string text)

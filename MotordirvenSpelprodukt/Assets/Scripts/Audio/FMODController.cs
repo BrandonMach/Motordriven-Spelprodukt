@@ -35,6 +35,7 @@ public class FMODController : MonoBehaviour
         UpdateHealthParameter();
     }
 
+    
     private void UpdateIntensityParameter()
     {
         _intensity = _entertainmentManager.GetETP();
@@ -45,6 +46,7 @@ public class FMODController : MonoBehaviour
         Debug.Log($"ChangedParamValue: {changedParamValue}");
     }
 
+    
     private void UpdateHealthParameter()
     {
         _health = healthSlider.value;
