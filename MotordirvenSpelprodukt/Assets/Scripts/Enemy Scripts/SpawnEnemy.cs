@@ -12,7 +12,7 @@ public class SpawnEnemy : MonoBehaviour
     public static SpawnEnemy Instance { get => _instance; set => _instance = value; }
 
 
-    public Transform[] SpawnPoint;
+    public Transform[] SpawnPoints;
 
     public EnemyScript[] MinionTypes;
 
@@ -21,6 +21,8 @@ public class SpawnEnemy : MonoBehaviour
 
     GameManager _gameManager;
     [SerializeField] int MinimumMinionCount;
+
+
     private void Awake()
     {
         if (_instance != null)
@@ -36,10 +38,10 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         _target = GameObject.FindWithTag("Player").transform;
-       
+
         for (int i = 0; i < 5; i++)
         {
-            SpawNewEnemy();
+            SpawNewEnemy(i);
         }
     }
 
@@ -50,7 +52,7 @@ public class SpawnEnemy : MonoBehaviour
         if(GameManager.EnemyGameObjects.Length < (2+MinimumMinionCount))
         {
 
-            SpawNewEnemy();
+            SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         }
 
 
@@ -58,16 +60,21 @@ public class SpawnEnemy : MonoBehaviour
         {
 
 
-            SpawNewEnemy();
+            SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
             
         }
     }
 
 
-    public void SpawNewEnemy()
+    public void SpawNewEnemy(int spawnPointIndex)
     {
-        Instantiate(MinionTypes[0], SpawnPoint[Random.Range(0, SpawnPoint.Length)].position, Quaternion.LookRotation(_target.position));
+       
+        
+        Instantiate(MinionTypes[0], SpawnPoints[spawnPointIndex].position, Quaternion.LookRotation(_target.position));
         GameManager.Instance.UpdateEnemyList();
+        
+
+       
 
     }
 }
