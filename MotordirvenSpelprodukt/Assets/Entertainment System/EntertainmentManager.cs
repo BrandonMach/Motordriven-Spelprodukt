@@ -92,7 +92,6 @@ public class EntertainmentManager : MonoBehaviour
         _startETP = _maxETP / 2;
         _ETPThreshold = _maxETP / 2;
         _entertainmentPoints = _startETP;
-        //_indicatorArrowrRotateAngle = 90;
     }
 
     // Update is called once per frame

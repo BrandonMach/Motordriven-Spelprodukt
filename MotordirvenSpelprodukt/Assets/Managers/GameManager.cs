@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
+    public int AmountOfChampionsToKill;
+    public static int KilledChampions;
+
     //public int KillCount { get => _killCount; set => _killCount = value; }
     public int KillCount
     {
@@ -97,6 +100,8 @@ public class GameManager : MonoBehaviour
 
         //Not used
         _challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
+
+        AmountOfChampionsToKill = 2;
         
     }
 
@@ -105,6 +110,16 @@ public class GameManager : MonoBehaviour
     {
         if(_champion == null && !_kingCam)
         {
+            if(_etp.GetETP() > _etp.GetExcitedThreshold())
+            {
+                KilledChampions++;
+                Debug.LogError("Champions Killed" + KilledChampions);
+                if(KilledChampions == AmountOfChampionsToKill)
+                {
+                    Debug.Log("You killed all champions");
+                }
+            }
+
             _etp.MatchFinished = true;
             _kingCam = true;
             CamManager.GoToKingCam();

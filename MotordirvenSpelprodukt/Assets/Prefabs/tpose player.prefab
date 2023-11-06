@@ -1193,7 +1193,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8388184567406195021}
-  - component: {fileID: 3674238120144798329}
   m_Layer: 0
   m_Name: Characters_BR(Clone)
   m_TagString: Untagged
@@ -1218,27 +1217,6 @@ Transform:
   - {fileID: 7333616289222833626}
   m_Father: {fileID: 5575574744827445178}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3674238120144798329
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5648320868103823982}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a50cd06a0668d1a418d586a2944e3ed5, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5789317474223923654
 GameObject:
   m_ObjectHideFlags: 0
@@ -4142,9 +4120,15 @@ MonoBehaviour:
   _limbs:
   - {fileID: 2577747419469332913}
   _mainCollider: {fileID: 4128252714503457407}
+  _rb: {fileID: 8199499030154146345}
 --- !u!4 &5575574744827445178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+  m_PrefabInstance: {fileID: 257508685006906267}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &8199499030154146345 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8239513794650657202, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
   m_PrefabInstance: {fileID: 257508685006906267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &557767199060622152

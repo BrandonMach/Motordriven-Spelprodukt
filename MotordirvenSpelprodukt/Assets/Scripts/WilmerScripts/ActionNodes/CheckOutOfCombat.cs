@@ -17,15 +17,16 @@ public class CheckOutOfCombat : ActionNode
 
     protected override State OnUpdate()
     {
-        //if (_playerScript.playerIsOutOfCombat)
-        //{
-        //    return State.Failure;
-        //}
-        //else
-        //{
-        //    return State.Success;
-        //}
-        //return State.Success;
+        if (_meleeMinionScript.OutOfCombat)
+        {
+
+            return State.Success;
+        }
+        else
+        {
+            return State.Failure;
+        }
+        return State.Success;
         return State.Failure;
     }
 }

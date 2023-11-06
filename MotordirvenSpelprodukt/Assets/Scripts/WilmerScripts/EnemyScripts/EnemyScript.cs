@@ -18,9 +18,11 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected float _attackCooldown;
     protected float _lastAttackTime;
     protected float _stunDuration;
+    protected float _attackCooldownTimer;
     //protected bool _canChase;
     protected bool _onGround = true;
     protected bool _impaired;
+    //[SerializeField]
     protected bool _outOfCombat;
 
     public Rigidbody Rigidbody { get; protected set; }
@@ -39,10 +41,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     public float AttackRange { get { return _attackRange; } }
     public float StunDuration { get { return _stunDuration; } set { _stunDuration = value; } }
     public float AttackCooldown { get { return _attackCooldown; } }
+    public float AttackCooldownTimer { get { return _attackCooldownTimer; } set { _attackCooldownTimer = value; } }
     public float LastAttackTime { get { return _lastAttackTime; } set { _lastAttackTime = value; } }
     //public bool CanChase { get { return _canChase; } set { _canChase = value; } }
     public bool Impaired { get { return _impaired; } set { _impaired = value; } }
     public bool OnGround { get { return _onGround; } set { _onGround = value; } }
+    public bool OutOfCombat { get { return _outOfCombat; } set { _outOfCombat = value; } }
 
     private void Awake()
     {
@@ -71,18 +75,40 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected virtual void Update()
     {
 
-        if (CurrentImpairement == Impairement.airborne)
+        AttackCooldownTimer += Time.deltaTime;
+
+        if (CurrentImpairement == EnemyScript.Impairement.none && AttackCooldown < AttackCooldownTimer)
         {
+            Vector3 direction = transform.position - transform.position;
+
+            // Normalize the direction to get a unit vector
+            direction.Normalize();
+
+            //Rotate the Champion towards the players position
+
+            transform.LookAt(Player.Instance.transform);
+
+            this.Rigidbody.velocity = new Vector3(transform.forward.x * MovementSpeed, this.Rigidbody.velocity.y, transform.forward.z * MovementSpeed);
+
+            
+
+        }
+        else if (CurrentImpairement == Impairement.airborne)
+        {
+            
             groundCheckTimer += Time.deltaTime;
             if (groundCheckTimer > 1f)
             {
+                
                 _onGround = Physics.Raycast(transform.position, Vector3.down, 0.1f);
                 if(_onGround)
                 {
                     CurrentImpairement = Impairement.none;
+                    groundCheckTimer = 0;
                 }
             }
         }
+        
 
     }
 
@@ -104,8 +130,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                 break;
 
             case CurrentAttackSO.AttackEffect.Knockup:
-                float knockUpForce = 15;
-                GetKnockedUp(knockUpForce/*, attack.AttackSO.Force*/);
+                GetKnockedUp(attack.AttackSO.Force);
                 break;
 
             case CurrentAttackSO.AttackEffect.Bleed:
