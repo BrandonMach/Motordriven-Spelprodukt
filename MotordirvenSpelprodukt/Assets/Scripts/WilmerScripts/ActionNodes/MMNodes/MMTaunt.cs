@@ -20,7 +20,7 @@ public class MMTaunt : ActionNode
     {
         // Taunt 
         _meleeMinionScript.AIMovementScript.GoTowardsPlayer = false;
-        _meleeMinionScript.Anim.SetTrigger("Idle");
+        //_meleeMinionScript.Anim.SetTrigger("Idle");
         return State.Success;
     }
 

@@ -42,6 +42,7 @@ public class MMWaitNode : ActionNode
                 _meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
             case EnemyScript.Impairement.inAttack:
+                _meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
         }
 

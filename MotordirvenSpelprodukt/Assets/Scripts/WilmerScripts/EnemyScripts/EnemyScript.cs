@@ -91,10 +91,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
             transform.LookAt(Player.Instance.transform);
 
-            this.Rigidbody.velocity = new Vector3(transform.forward.x * MovementSpeed, this.Rigidbody.velocity.y, transform.forward.z * MovementSpeed);
-
-            
-
+            this.Rigidbody.velocity = new Vector3(transform.forward.x * MovementSpeed, this.Rigidbody.velocity.y, transform.forward.z * MovementSpeed);           
         }
         else if (CurrentImpairement == Impairement.airborne)
         {

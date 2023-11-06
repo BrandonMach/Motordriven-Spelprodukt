@@ -33,8 +33,9 @@ public class MMAttackNode : ActionNode
         {
 
             _meleeMinionScript.Anim.SetTrigger("Idle");
-            _meleeMinionScript.CurrentImpairement = Impairement.none;
-            return State.Running;
+            //_meleeMinionScript.CurrentImpairement = Impairement.none;
+            Debug.Log("In none");
+            return State.Failure;
 
         }
         else
@@ -44,10 +45,9 @@ public class MMAttackNode : ActionNode
             _meleeMinionScript.AttackCooldownTimer = 0;
             if(randomValue == 1) _meleeMinionScript.Anim.SetTrigger("LightAttack");
             else if(randomValue == 2) _meleeMinionScript.Anim.SetTrigger("HeavyAttack");
-
+            Debug.LogWarning("IN Attack");
             return State.Success;
         }
-
     }
 }
 
