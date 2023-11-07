@@ -21,7 +21,7 @@ public class KMScript : EnemyScript
         expolisionHitbox.enabled = false;
         _movementSpeed = 5; //Ramp up speed kan testas
         _attackRange = 0.2f; //?? kanske inte  behövs
-        _timeBetweenAttacks = 2; //Kanske inte behövs
+        //_timeBetweenAttacks = 2; //Kanske inte behövs
         ChaseDistance = 2;
         
     }

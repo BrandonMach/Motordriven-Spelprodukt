@@ -24,37 +24,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1475117630241535359, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
-      propertyPath: tree
-      value: 
-      objectReference: {fileID: 11400000, guid: 0eb6cd18091fd0a40a5f2a71402fffb6, type: 2}
     - target: {fileID: 1958713740649098323, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d0038f8ffae689c47bdb6bbc7eeffe53, type: 2}
-    - target: {fileID: 2409767690607814960, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 2638773746553092781, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_Drag
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -62,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -70,15 +50,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -96,17 +76,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeMinion
       objectReference: {fileID: 0}
-    - target: {fileID: 5810775691011438492, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7783520723240619086, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: _maxHealthPoints
-      value: 10
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4747666722037663986, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
     - {fileID: 7212960983435902348, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+    - {fileID: 4747666722037663986, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -136,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 5
+  _movementSpeed: 11
   _healthManager: {fileID: 7888060685761042847}
   anim: {fileID: 1896618498393913730}
   _attackSOArray:
@@ -144,7 +120,7 @@ MonoBehaviour:
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
   distanceToPlayer: 0
   CurrentImpairement: 0
-  ChaseDistance: 2
+  ChaseDistance: 0
   _weaponHolderTransform: {fileID: 0}
   Damage: 10
   ETPDecreaseValue: 0
