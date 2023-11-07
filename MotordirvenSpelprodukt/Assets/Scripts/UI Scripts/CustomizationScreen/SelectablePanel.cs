@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectablePanel : MonoBehaviour
 {
@@ -15,7 +16,14 @@ public class SelectablePanel : MonoBehaviour
     [SerializeField] private GameObject _shopPanelInfo;
     [SerializeField] private TextMeshProUGUI _panelInfoText;
 
+    [SerializeField] private Button _inventoryButton;
+    [SerializeField] private Button _abilitiesButton;
+    [SerializeField] private Button _challengesButton;
+    [SerializeField] private Button _shopButton;
+
     private GameObject[] _panels;
+    private Button[] _buttons;
+    private int _currentButtonIndex = 0;
     private int _currentPanelIndex = 0;
 
     // Start is called before the first frame update
@@ -28,7 +36,27 @@ public class SelectablePanel : MonoBehaviour
             _challengesPanel
         };
 
+        _buttons = new Button[]
+        {
+            _inventoryButton,
+            _abilitiesButton,
+            _challengesButton,
+            _shopButton
+        };
+
         InventoryPanelClicked();
+    }
+
+    private void ToggleInteractable(Button aButton)
+    {
+        foreach (Button button in _buttons)
+        {
+            if (aButton == button)
+            {
+                aButton.interactable = false;
+                button.interactable = true;
+            }
+        }
     }
 
     private void TogglePanel(int panelIndex)
@@ -63,12 +91,22 @@ public class SelectablePanel : MonoBehaviour
         SetCurrentPanel(0);
         DeactivateShop();
         SetPanelInfoText("Inventory");
+
+        _inventoryButton.interactable = false;
+        _abilitiesButton.interactable = true;
+        _challengesButton.interactable = true;
+        _shopButton.interactable = true;
     }
     public void AbilitiesPanelClicked()
     {
         SetCurrentPanel(1);
         DeactivateShop();
         SetPanelInfoText("Abilities");
+
+        _abilitiesButton.interactable = false;
+        _inventoryButton.interactable = true;
+        _challengesButton.interactable = true;
+        _shopButton.interactable = true;
     }
 
     public void ChallengesPanelClicked()
@@ -76,6 +114,11 @@ public class SelectablePanel : MonoBehaviour
         SetCurrentPanel(2);
         DeactivateShop();
         SetPanelInfoText("Challenges");
+
+        _challengesButton.interactable = false;
+        _abilitiesButton.interactable = true;
+        _inventoryButton.interactable = true;
+        _shopButton.interactable = true;
     }
 
     public void ShopPanelClicked()
@@ -83,7 +126,11 @@ public class SelectablePanel : MonoBehaviour
         SetCurrentPanel(0);
         ActivateShop();
         SetPanelInfoText("Inventory");
-        
+
+        _shopButton.interactable = false;
+        _challengesButton.interactable = true;
+        _abilitiesButton.interactable = true;
+        _inventoryButton.interactable = true;
     }
 
     private void ActivateShop()
@@ -92,7 +139,7 @@ public class SelectablePanel : MonoBehaviour
         {
             _shopPanel.SetActive(true);
             _shopPanelInfo.SetActive(true);
-            _inventoryVariantPanel.SetActive(true);
+            //_inventoryVariantPanel.SetActive(true);
         }
         else if (!_inventoryVariantPanel.activeSelf)
         {
