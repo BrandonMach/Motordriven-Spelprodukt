@@ -75,6 +75,11 @@ public class PlayerDash : MonoBehaviour
                 {
                     _rigidBody.velocity = transform.forward * _dashSpeed;
                 }
+
+                if (_currentDashTime <= _dashTime / 2)
+                {
+                    _player.SetPlayerInvulnarableState(false);
+                }
             }
         }
     }
@@ -102,10 +107,9 @@ public class PlayerDash : MonoBehaviour
         if (_currentCooldownTime <= 0)
         {
             IsDashing = true;
+            _player.SetPlayerInvulnarableState(true);
             _currentCooldownTime = _cooldownTime;
         }
-  
-
     }
 
     public bool IsDashAvailable()

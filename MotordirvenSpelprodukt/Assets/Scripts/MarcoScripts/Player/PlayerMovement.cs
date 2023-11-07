@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputMode _currentInputMode;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _attackDashForce = 1.5f;
     [SerializeField] private Camera _mainCamera;
 
     private Player _playerScript;
@@ -56,11 +57,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        
         _playerScript.ChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
         _playerScript.DisableMovement += PlayerScript_OnDisableMovement;
         _playerScript.EnableMovement += PlayerScript_OnEnableMovement;
+    }
 
+    public void AttackDash()
+    {
+        _rigidbody.AddForce(transform.forward * _attackDashForce, ForceMode.Impulse);
     }
 
     private void PlayerScript_OnEnableMovement(object sender, System.EventArgs e)
