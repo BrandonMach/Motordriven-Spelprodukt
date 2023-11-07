@@ -19,10 +19,14 @@ public class PlayerMovement : MonoBehaviour
         MnK
     }
 
+    public Vector3 _moveDirection {  get; private set; }
+
+
     [SerializeField] private RotateMode _currentRotateMode;
     [SerializeField] private InputMode _currentInputMode;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _attackDashForce = 1.5f;
     [SerializeField] private Camera _mainCamera;
 
     private Player _playerScript;
@@ -31,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController _characterController;
 
-    public Vector3 _moveDirection;
 
     private Vector3 _camForward;
     private Vector3 _camRight;
@@ -54,11 +57,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        
         _playerScript.ChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
         _playerScript.DisableMovement += PlayerScript_OnDisableMovement;
         _playerScript.EnableMovement += PlayerScript_OnEnableMovement;
+    }
 
+    public void AttackDash()
+    {
+        _rigidbody.AddForce(transform.forward * _attackDashForce, ForceMode.Impulse);
     }
 
     private void PlayerScript_OnEnableMovement(object sender, System.EventArgs e)
@@ -68,7 +74,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerScript_OnDisableMovement(object sender, System.EventArgs e)
     {
+        if (!_playerScript.IsDashing)
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
         _canMove = false;
+
     }
 
     private void PlayerScript_OnChangeControllerTypeButtonPressed(object sender, System.EventArgs e)
@@ -93,9 +104,6 @@ public class PlayerMovement : MonoBehaviour
         GetMoveDir();
         
         _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
-
-
-
     }
 
     private void FixedUpdate()

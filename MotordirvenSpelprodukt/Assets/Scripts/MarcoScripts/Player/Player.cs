@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour, ICanAttack, IDamagable
+public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 {
 
     public static Player Instance;
@@ -31,18 +32,23 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         public AttackType attackType;
     }
 
+    public bool IsDashing { get; private set; }
 
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
 
+    [SerializeField] private List<GameObject> _damageEffects = new List<GameObject>();
+
+
     [Header("Health settings")]
-    [SerializeField] float _maxHealth;
 
     private HealthManager _healthManager;
     private PlayerDash _playerDash;
     private PlayerMovement _playerMovement;
     private EntertainmentManager _entertainmentManager;
+
+    private BoxCollider _collider;
 
 
     private string _input;
@@ -53,6 +59,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     /// </summary>
     public bool HasTakenDamage { get; set; }
 
+    private bool _invulnerable = false;
 
     private void Awake()
     {
@@ -61,9 +68,12 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
             Instance = this;
         }
 
+
         _healthManager = GetComponent<HealthManager>();
         _playerMovement = GetComponent<PlayerMovement>();
         _playerDash = GetComponent<PlayerDash>();
+
+        _collider = GetComponent<BoxCollider>();
     }
     void Start()
     {
@@ -81,8 +91,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
 
-        if (_playerMovement.IsMoving() && _playerDash.IsDashAvailable())
+        if (_playerDash.IsDashAvailable())
         {
+            IsDashing = true;
+            _input += "E";
             OnDisableMovement();
             OnStartEvade();
         }      
@@ -100,6 +112,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
     {
+        IsDashing = false;
         OnEnableMovement();
         OnComboBroken();
     }
@@ -141,8 +154,12 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     public void TakeDamage(Attack attack)
     {
-        _healthManager.ReduceHealth(attack.Damage);
-        HasTakenDamage = true;
+        if (!_invulnerable)
+        {
+            PlayDamageVFX(attack.AttackerPosition);
+            _healthManager.ReduceHealth(attack.Damage);
+            HasTakenDamage = true;
+        }
     }
 
 
@@ -168,7 +185,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         if (GetCurrentAttackSO(_input + "L") != null)
         {
             _input += "L";
-            OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType.Light);
+            OnAttack(OnAttackPressedAnimationEventArgs.AttackType.Light);
         }
     }
 
@@ -184,7 +201,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         if (GetCurrentAttackSO(_input + "H") != null)
         {
             _input += "H";
-            OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType.Heavy);
+            OnAttack(OnAttackPressedAnimationEventArgs.AttackType.Heavy);
 
         }
     }
@@ -203,7 +220,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
     {
-        ChangeControllerTypeButtonPressed?.Invoke(this, e);
+        //ChangeControllerTypeButtonPressed?.Invoke(this, e);
+        TakeDamage(new Attack { });
 
     }
     private void OnDisableMovement()
@@ -229,14 +247,27 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable
         _canAttack = true;
     }
 
-    private void OnAttackButtonPressed(OnAttackPressedAnimationEventArgs.AttackType attack)
+    private void OnAttack(OnAttackPressedAnimationEventArgs.AttackType attack)
     {
         if (!_playerDash.IsDashing)
         {
             OnDisableMovement();
+            _playerMovement.AttackDash();
             ChangeAttackAnimation?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = attack });
             _canAttack = false;
         }
-        
+    }
+
+    public void SetPlayerInvulnarableState(bool invulnerable)
+    {
+        _invulnerable = invulnerable;
+    }
+
+    public void PlayDamageVFX(Vector3 attackerPosition)
+    {
+        if (_damageEffects.Count != 0)
+        {
+            Instantiate(_damageEffects[0], _collider.ClosestPoint(attackerPosition), transform.rotation);
+        }
     }
 }
