@@ -11,6 +11,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public float CurrentHealthPoints { get; private set; }
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler OnPlayerTakeDamage;
 
     [Header("Dismembrent")]
     private DismemberentEnemyScript _dismembrentScript;
@@ -18,7 +19,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public bool Dead;
     public float _destroydelay = 2.5f;
-    
+
+    public bool IsPlayer;
     public bool GodMode;
     public bool Explode;
 
@@ -84,9 +86,14 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void ReduceHealth(float damage)
     {
+        if (IsPlayer)
+        {
+            OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+        }
+
         CurrentHealthPoints -= damage;
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints / _maxHealthPoints });
-
+        
 
         if (CurrentHealthPoints <= 0)
         {
