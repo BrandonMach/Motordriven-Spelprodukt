@@ -91,6 +91,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
         if (IsPlayer)
         {
             OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+            
         }
 
         CurrentHealthPoints -= damage;

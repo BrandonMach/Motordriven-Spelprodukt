@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     
-
     private static SpawnEnemy _instance;
     public static SpawnEnemy Instance { get => _instance; set => _instance = value; }
 
@@ -49,7 +46,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         
 
-        if(!GameManager.MatchIsFinished && GameManager.EnemyGameObjects.Length < (2+MinimumMinionCount))
+        if(!GameManager.Instance.MatchIsFinished && GameManager.Instance.EnemyGameObjects.Length < (2+MinimumMinionCount))
         {
             SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         }

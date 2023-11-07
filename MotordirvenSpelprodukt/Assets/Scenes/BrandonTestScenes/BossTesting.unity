@@ -663,16 +663,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921c79b0ece1e034886d2b9f155d2dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _champion: {fileID: 0}
-  CamManager: {fileID: 0}
   _etp: {fileID: 0}
   _playerGO: {fileID: 0}
   _player: {fileID: 0}
+  MatchIsFinished: 0
+  _champion: {fileID: 0}
   AmountOfChampionsToKill: 0
   _championList:
   - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
   - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
   _championStartPos: {fileID: 1881333467}
+  CamManager: {fileID: 0}
+  EnemyGameObjects: []
 --- !u!4 &97768752
 Transform:
   m_ObjectHideFlags: 0
@@ -2085,15 +2087,13 @@ MonoBehaviour:
   EntertainmentText: {fileID: 948227089}
   CrowdText: {fileID: 987005959}
   OOCPopUp: {fileID: 1185079241}
-  _entertainmentPoints: 0
   _indicatorArrow: {fileID: 1670958105}
+  _entertainmentPoints: 0
   _maxETP: 100
-  EnemyGameObjects: []
   PlayerCharacter: {fileID: 718974609}
   _scanEnemyArea: 7.19
   _timeOutOfCombatCounter: 0
   _timeOutOfCombatThreshold: 7
-  MatchFinished: 0
   _isOutOfCombat: 0
   PlayerNearEnemies: 0
 --- !u!224 &424025424

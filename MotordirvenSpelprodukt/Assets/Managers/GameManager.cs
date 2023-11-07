@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
-    public static bool MatchIsFinished;
+    public bool MatchIsFinished;
     public System.EventHandler OnMatchFinished;
 
     #region Champions
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     #region Minions
 
     //Enemy List
-    public static GameObject[] EnemyGameObjects;
+    public  GameObject[] EnemyGameObjects;
     private SpawnEnemy _spawnEnemy;
 
     #endregion
@@ -149,7 +149,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
 
         if (_champion == null && !_kingCam)
         {
@@ -162,7 +161,6 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
-
 
         // Testing challenges
         CheckChallengesCompletion();

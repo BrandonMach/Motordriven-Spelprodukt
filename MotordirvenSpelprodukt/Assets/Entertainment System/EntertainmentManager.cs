@@ -60,7 +60,7 @@ public class EntertainmentManager : MonoBehaviour
 
     [Header("OOC- Out Of Combat")]
 
-    public GameObject[] EnemyGameObjects;
+    //public GameObject[] EnemyGameObjects;
     public GameObject PlayerCharacter;
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
     [SerializeField] float _timeOutOfCombatCounter = 0;
@@ -80,17 +80,18 @@ public class EntertainmentManager : MonoBehaviour
 
     private void Awake()
     {
-        //DontDestroyOnLoad(this);
-        if (Instance == null)
+        if (_instance != null)
         {
-            Instance = this;
-        }   
+            Debug.LogWarning("More than one instance of ChallengeManager found");
+            return;
+        }
+        _instance = this;
+
+        DontDestroyOnLoad(gameObject);     
     }
 
     void Start()
     {    
-        
-       
         //ETP
         _startETP = _maxETP / 2;
         _ETPThreshold = _maxETP / 2;
@@ -99,30 +100,31 @@ public class EntertainmentManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {   
         _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
 
         CheckETPChanges();
 
         UpdateETPArrow();
 
-        if (!GameManager.MatchIsFinished)
+        //For testing
+        EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
+        //OTC pop up
+        OOCPopUp.SetActive(_isOutOfCombat);
+
+        if (!GameManager.Instance.MatchIsFinished)
         {
+            Debug.Log("sdkasd");
             CheckIfOutOfCombat();
             if (_isOutOfCombat)
             {
                 OutOfCombatDecreaseOverTime();
             }
-        }
-
-        //For testing
-        EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
-        //OTC pop up
-        OOCPopUp.SetActive(_isOutOfCombat);
+        } 
     }
 
 
+    #region ETP Change Events
     void CheckETPChanges()
     {
         if(GetETP() > GetExcitedThreshold())
@@ -138,16 +140,17 @@ public class EntertainmentManager : MonoBehaviour
             OnETPNormal?.Invoke(this, EventArgs.Empty);
         }
     }
-
+    #endregion
     void UpdateETPArrow()
     {
         _indicatorArrow.localPosition = new Vector3(-360 +(720/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, 0);
     }
 
+    #region OOC
     void CheckIfOutOfCombat()
     {
         //Scan for enemies
-        foreach (GameObject enemies in  GameManager.EnemyGameObjects)
+        foreach (GameObject enemies in  GameManager.Instance.EnemyGameObjects)
         {
             float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
             if (dist > _scanEnemyArea && !_isOutOfCombat)
@@ -174,34 +177,14 @@ public class EntertainmentManager : MonoBehaviour
         }
     }
 
-    public void PlayerInCombat()
-    {
-        if (PlayerNearEnemies)
-        {
-            _isOutOfCombat = false;
-            OnInCombat();
-        }       
-    }
-
     void OutOfCombatDecreaseOverTime()
     {
         _entertainmentPoints -= (Time.deltaTime); //Every second ETP -1
     }
-
-    public void DecreseETP(float amoutToDecrese)
-    {
-        _entertainmentPoints -= amoutToDecrese;
-    }
-    public void increaseETP(int amoutToIncrease)
-    {
-        _entertainmentPoints += amoutToIncrease;
-        
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);      
+        Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);
     }
 
     private void OnOutOfCombat()
@@ -213,9 +196,28 @@ public class EntertainmentManager : MonoBehaviour
     {
         InCombat.Invoke(this, EventArgs.Empty);
     }
+ 
+    public void PlayerInCombat()
+    {
+        if (PlayerNearEnemies)
+        {
+            _isOutOfCombat = false;
+            OnInCombat();
+        }       
+    }
+
+    #endregion
+    public void DecreseETP(float amoutToDecrese)
+    {
+        _entertainmentPoints -= amoutToDecrese;
+    }
+    public void increaseETP(int amoutToIncrease)
+    {
+        _entertainmentPoints += amoutToIncrease;     
+    }
 
     private void OnDestroy()
     {
-        Debug.Log("s");
+        Debug.Log("sdad");
     }
 }
