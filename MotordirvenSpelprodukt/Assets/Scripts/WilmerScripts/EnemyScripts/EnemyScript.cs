@@ -113,10 +113,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
             groundCheckTimer += Time.deltaTime;
             if (groundCheckTimer > 1f)
             {
-                _onGround = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+                _onGround = Physics.Raycast(transform.position, Vector3.down, 1f);
                 if (_onGround)
                 {
-                    CurrentImpairement = Impairement.none;
+                    ResetTriggers();
+                    anim.SetTrigger("Land");
+                    //CurrentImpairement = Impairement.none;
                     groundCheckTimer = 0;
                 }
             }
@@ -138,16 +140,16 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
             case CurrentAttackSO.AttackEffect.Pushback:
                 //TODO: Calculate direction
-                GetPushedback(attack.AttackerPosition, attack.AttackSO.Force);
+                GetPushedback(Player.Instance.transform.position, attack.AttackSO.Force);
                 break;
 
             case CurrentAttackSO.AttackEffect.StunAndPushback:
                 //GetStunned(StunDuration, attack.AttackerPosition);
-                GetPushedback(attack.AttackerPosition, attack.AttackSO.Force);
+                GetPushedback(Player.Instance.transform.position, attack.AttackSO.Force);
                 break;
 
             case CurrentAttackSO.AttackEffect.Knockup:
-                GetKnockedUp(attack.AttackSO.Force);
+                GetKnockedUp(Player.Instance.transform.position, attack.AttackSO.Force);
                 break;
 
             case CurrentAttackSO.AttackEffect.Bleed:
@@ -155,7 +157,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                 break;
 
             case CurrentAttackSO.AttackEffect.Stun:
-                GetStunned(attack.AttackSO.StunDuration, attack.AttackerPosition);
+                GetStunned(attack.AttackSO.StunDuration, Player.Instance.transform.position);
                 break;
             default:
                 break;
@@ -189,23 +191,31 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     }
 
 
-    protected void GetKnockedUp(float force)
+    protected void GetKnockedUp(Vector3 attackerPos, float force)
     {
         Rigidbody.AddForce(Vector3.up * force, ForceMode.Impulse);
+        PushBack(attackerPos, force/4);
         CurrentImpairement = Impairement.airborne;
+        ResetTriggers();
+        anim.SetTrigger("KnockUp");
     }
 
 
     protected void GetPushedback(Vector3 attackerPos, float knockBackForce)
     {
-        Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
-        Rigidbody.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
+        PushBack(attackerPos, knockBackForce);
         CurrentImpairement = Impairement.pushed;
-        _isImpaired = true;
+        //_isImpaired = true;
         Debug.Log(this.GetType().ToString() + "Enemy knocked back with force: " + knockBackForce);
         ResetTriggers();
-        Anim.SetTrigger("PushedBack");
-        
+        Anim.SetTrigger("PushedBack");      
+    }
+
+
+    protected void PushBack(Vector3 attackerPos, float knockBackForce)
+    {
+        Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
+        Rigidbody.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
     }
 
 
@@ -223,6 +233,9 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         Anim.ResetTrigger("HeavyAttack");
         Anim.ResetTrigger("Stunned");
         Anim.ResetTrigger("PushedBack");
+        Anim.ResetTrigger("KnockUp");
+        Anim.ResetTrigger("Land");
+        Anim.ResetTrigger("Taunt");
     }
 
 

@@ -640,40 +640,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -273226506981287983, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 1895271437}
-    - target: {fileID: -273226506981287983, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: CanAttack
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -273226506981287983, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: ChaseDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -273226506981287983, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: _movementSpeed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d0038f8ffae689c47bdb6bbc7eeffe53, type: 2}
-    - target: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3802642374300306398, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
@@ -719,10 +691,6 @@ PrefabInstance:
     - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Name
       value: MeleeMinion
-      objectReference: {fileID: 0}
-    - target: {fileID: 7888060685761042847, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-      propertyPath: _maxHealthPoints
-      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -938,11 +906,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Enabled
@@ -999,6 +967,10 @@ PrefabInstance:
     - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Name
       value: MeleeMinion (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888060685761042847, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: _maxHealthPoints
@@ -3999,6 +3971,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3653336143154241592, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.099
+      objectReference: {fileID: 0}
     - target: {fileID: 3889045252942193201, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: _moveSpeed
       value: 7
@@ -5137,11 +5113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Enabled
@@ -5198,6 +5174,10 @@ PrefabInstance:
     - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Name
       value: MeleeMinion (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888060685761042847, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: _maxHealthPoints
@@ -6036,11 +6016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Enabled
@@ -6097,6 +6077,10 @@ PrefabInstance:
     - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Name
       value: MeleeMinion (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888060685761042847, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: _maxHealthPoints
@@ -6550,11 +6534,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1361071575564859507, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Enabled
@@ -6611,6 +6595,10 @@ PrefabInstance:
     - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: m_Name
       value: MeleeMinion (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701518054205330820, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888060685761042847, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
       propertyPath: _maxHealthPoints
@@ -6908,11 +6896,6 @@ PrefabInstance:
 Animator:
   m_CorrespondingSourceObject: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
   m_PrefabInstance: {fileID: 393889973}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1895271437 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1896618498393913730, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
-  m_PrefabInstance: {fileID: 198773336}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1905774253
 GameObject:
