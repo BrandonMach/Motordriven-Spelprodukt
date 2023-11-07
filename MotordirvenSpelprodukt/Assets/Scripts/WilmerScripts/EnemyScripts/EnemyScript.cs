@@ -142,7 +142,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                 break;
 
             case CurrentAttackSO.AttackEffect.StunAndPushback:
-                GetStunned(StunDuration, attack.AttackerPosition);
+                //GetStunned(StunDuration, attack.AttackerPosition);
                 GetPushedback(attack.AttackerPosition, attack.AttackSO.Force);
                 break;
 
