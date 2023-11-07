@@ -16,7 +16,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     //public bool CanChase { get { return _canChase; } set { _canChase = value; } }
 
 
-    [SerializeField] protected float _movementSpeed = 5;
+    [SerializeField] protected float _movementSpeed = 20;
     [SerializeField] protected HealthManager _healthManager;
     [SerializeField] protected Animator anim;
     [SerializeField] private CurrentAttackSO[] _attackSOArray;
@@ -105,7 +105,10 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
             if (_shouldMove)
             {
-                this.Rigidbody.velocity = new Vector3(transform.forward.x * MovementSpeed, this.Rigidbody.velocity.y, transform.forward.z * MovementSpeed);
+                //this.Rigidbody.velocity = new Vector3(transform.forward.x * MovementSpeed, this.Rigidbody.velocity.y, transform.forward.z * MovementSpeed);
+                //Rigidbody.Move(transform.forward * MovementSpeed, Quaternion.identity);
+                //Rigidbody.AddForce(transform.forward * MovementSpeed);
+                Rigidbody.velocity = transform.forward * MovementSpeed;
             }
         }
         else if (CurrentImpairement == Impairement.airborne)
