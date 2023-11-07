@@ -1,26 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7970731131141326827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
-  m_Name: Selector
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: a17ee513ffe53494b82ac7c13a41694d
-  position: {x: 75.00001, y: 750.99976}
-  agent: {fileID: 0}
-  description: 
-  children:
-  - {fileID: 4172812024098134425}
-  - {fileID: 4169267733548967318}
 --- !u!114 &-7330486071501415011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5c4684ea20d9a764fba63b29e3047ff3
-  position: {x: -150, y: 1149.9998}
+  position: {x: 377.4906, y: 929.3742}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-6444477804286531239
@@ -54,7 +33,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f8bf7e9588ae99c44b76e7bf691cffc4
-  position: {x: -508, y: 684.9998}
+  position: {x: -489.74945, y: 686.5209}
   agent: {fileID: 0}
   description: 
 --- !u!114 &-5305602486680045790
@@ -111,12 +90,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a51a9360070af7943968a14bf6a74f02
-  position: {x: 839.6412, y: 751.0001}
+  position: {x: 655.42596, y: 910}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: 1010289715573792877}
-  - {fileID: 5041473962970106865}
+  - {fileID: -2248064317346673015}
 --- !u!114 &-2248064317346673015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +111,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7b0d8b112555cb44fb625b148e00fd40
-  position: {x: 430, y: 1149.9998}
+  position: {x: 758.5784, y: 1090.6044}
   agent: {fileID: 0}
   description: 
   lerpSpeed: 2
@@ -176,7 +155,6 @@ MonoBehaviour:
   - {fileID: 8971222423332077680}
   - {fileID: -5305602486680045790}
   - {fileID: -750562561723321262}
-  - {fileID: -7970731131141326827}
   - {fileID: 4172812024098134425}
   - {fileID: 4169267733548967318}
   - {fileID: 411775821950429018}
@@ -189,6 +167,7 @@ MonoBehaviour:
   - {fileID: -4819753597248553202}
   - {fileID: -6444477804286531239}
   - {fileID: 8735630225427087329}
+  - {fileID: 1702061553933927725}
 --- !u!114 &411775821950429018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +183,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 9c747327283910147b353c556be06384
-  position: {x: -468.99997, y: 1149.9998}
+  position: {x: 60.490616, y: 929.3742}
   agent: {fileID: 0}
   description: 
 --- !u!114 &1010289715573792877
@@ -222,9 +201,30 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2196e8b13ca18d34aaab2a3f0c97e78f
-  position: {x: 731, y: 928.0001}
+  position: {x: 547.5496, y: 1083.9999}
   agent: {fileID: 0}
   description: 
+--- !u!114 &1702061553933927725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: f8a31ff0139502548abf2288fe43b40e
+  position: {x: 759.6172, y: 763.73303}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: -4347686367045645252}
+  - {fileID: 5041473962970106865}
 --- !u!114 &3686161655450971546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6de2db7be744f7849b407c3f8293dd40
-  position: {x: 0, y: 0}
+  position: {x: 1.5208826, y: -3.893449}
   agent: {fileID: 0}
   description: 
   child: {fileID: 8971222423332077680}
@@ -259,12 +259,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f65be16c323b651438aaa5499fad80cd
-  position: {x: 315.99997, y: 997.9998}
+  position: {x: 489.52917, y: 137.24304}
   agent: {fileID: 0}
   description: 
   children:
   - {fileID: 8450948151615458429}
-  - {fileID: -2248064317346673015}
 --- !u!114 &4172812024098134425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +279,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7c899124332c8ee4f8d19ce0a1c91376
-  position: {x: -299.99994, y: 997.9998}
+  position: {x: 229.49068, y: 777.3741}
   agent: {fileID: 0}
   description: 
   children:
@@ -301,7 +300,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 031942d90f7ffef4281fe80af5b3cdb1
-  position: {x: 966.8595, y: 928.0001}
+  position: {x: 886.0179, y: 919.06165}
   agent: {fileID: 0}
   description: 
 --- !u!114 &8450948151615458429
@@ -319,7 +318,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e4edd98b6f1d8a74ea85039acc04868a
-  position: {x: 165.99997, y: 1149.9998}
+  position: {x: 339.52927, y: 289.24304}
   agent: {fileID: 0}
   description: 
 --- !u!114 &8735630225427087329
@@ -341,8 +340,8 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   children:
-  - {fileID: -7970731131141326827}
-  - {fileID: -4347686367045645252}
+  - {fileID: 4172812024098134425}
+  - {fileID: 1702061553933927725}
 --- !u!114 &8971222423332077680
 MonoBehaviour:
   m_ObjectHideFlags: 0

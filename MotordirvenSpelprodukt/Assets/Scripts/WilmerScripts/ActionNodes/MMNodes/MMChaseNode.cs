@@ -12,7 +12,7 @@ public class MMChaseNode : ActionNode
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         _playerScript = Player.Instance;
-        _meleeMinionScript.Anim.SetTrigger("Walking");
+        
 
         if (_meleeMinionScript.AIMovementScript.GoTowardsPlayer == false)
         {
@@ -29,7 +29,7 @@ public class MMChaseNode : ActionNode
     protected override State OnUpdate()
     {
         //Vector3 direction = _playerScript.transform.position - _meleeMinionScript.transform.position;
-
+        _meleeMinionScript.Anim.SetTrigger("Walking");
         //// Normalize the direction to get a unit vector
         //direction.Normalize();
 
