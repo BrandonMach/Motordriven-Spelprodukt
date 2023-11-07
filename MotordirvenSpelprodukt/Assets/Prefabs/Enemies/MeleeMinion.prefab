@@ -24,9 +24,33 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1475117630241535359, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: tree
+      value: 
+      objectReference: {fileID: 11400000, guid: 0eb6cd18091fd0a40a5f2a71402fffb6, type: 2}
+    - target: {fileID: 1958713740649098323, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d0038f8ffae689c47bdb6bbc7eeffe53, type: 2}
+    - target: {fileID: 2409767690607814960, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2638773746553092781, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_Drag
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,16 +96,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeMinion
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5810775691011438492, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783520723240619086, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: _maxHealthPoints
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4747666722037663986, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+    - {fileID: 7212960983435902348, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4630754298611515477, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       insertIndex: -1
       addedObject: {fileID: -273226506981287983}
-    - targetCorrespondingSourceObject: {fileID: 4630754298611515477, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6656947784540198598}
   m_SourcePrefab: {fileID: 100100000, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
 --- !u!95 &1896618498393913730 stripped
 Animator:
@@ -105,32 +136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementSpeed: 5
   _healthManager: {fileID: 7888060685761042847}
+  anim: {fileID: 1896618498393913730}
   _attackSOArray:
   - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
-  stunEffect: {fileID: 0}
-  sphereCheck: {fileID: 0}
-  _movementSpeed: 5
+  distanceToPlayer: 0
   CurrentImpairement: 0
   ChaseDistance: 2
-  Anim: {fileID: 1896618498393913730}
   _weaponHolderTransform: {fileID: 0}
   Damage: 10
   ETPDecreaseValue: 0
---- !u!114 &6656947784540198598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701518054205330820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d386258d11a825040b3717f30076cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GoTowardsPlayer: 1
 --- !u!114 &7888060685761042847 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7783520723240619086, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}

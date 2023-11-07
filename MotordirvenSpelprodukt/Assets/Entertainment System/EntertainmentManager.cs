@@ -53,6 +53,7 @@ public class EntertainmentManager : MonoBehaviour
 
 
     [Header("OOC- Out Of Combat")]
+
     public GameObject[] EnemyGameObjects;
     public GameObject PlayerCharacter;
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
@@ -88,8 +89,8 @@ public class EntertainmentManager : MonoBehaviour
 
     void Start()
     {
-
-        EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
+        
+        EnemyGameObjects = GameManager.EnemyGameObjects;
        
         //ETP
         _startETP = _maxETP / 2;
@@ -100,7 +101,7 @@ public class EntertainmentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting"); //Inte den finaste lösningen
+        EnemyGameObjects = GameManager.EnemyGameObjects; //Inte den finaste lösningen
         _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
 
         CheckETPChanges();
