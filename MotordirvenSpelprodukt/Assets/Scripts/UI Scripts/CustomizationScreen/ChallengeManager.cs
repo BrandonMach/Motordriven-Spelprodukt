@@ -42,28 +42,25 @@ public class ChallengeManager : MonoBehaviour
 
     private int _activeChallengesCounter;
     private const int _maxActiveChallenges = 2;
+    private int _toggleActiveText = 0;
 
     private void Update()
     {
         
     }
 
-    public void UpdateActivesChallengesTMP()
+    public void UpdateActivesChallengesTMP(Challenge challenge)
     {
-        for (int i = 0; i < _maxActiveChallenges; i++)
+        if (_toggleActiveText == 0)
         {
-            TextMeshProUGUI textLabel = (i == 0) ? _firstActiveChallengeText : _secondActiveChallengeText;
-
-            if (i < ActiveChallenges.Count)
-            {
-                textLabel.text = ActiveChallenges[i].ChallengeName.ToString();
-            }
-            else
-            {
-                textLabel.text = "";
-            }
+            _firstActiveChallengeText.text = challenge.ChallengeName.ToString();
+            _toggleActiveText++;
         }
-
+        else if (_toggleActiveText == 1)
+        {
+            _secondActiveChallengeText.text = challenge.ChallengeName.ToString();
+            _toggleActiveText--;
+        }
     }
 
     private void RemoveText()
@@ -94,14 +91,14 @@ public class ChallengeManager : MonoBehaviour
         if (ActiveChallenges.Contains(challenge))
         {
             DeActivateChallenge(challenge);
-            UpdateActivesChallengesTMP();
+            UpdateActivesChallengesTMP(challenge);
         }
         else
         {
             if (_activeChallengesCounter < _maxActiveChallenges)
             {
                 ActivateChallenge(challenge);
-                UpdateActivesChallengesTMP();
+                UpdateActivesChallengesTMP(challenge);
             }
             else
             {
@@ -109,7 +106,7 @@ public class ChallengeManager : MonoBehaviour
                 Challenge challengeToDeActivate = ActiveChallenges.FirstOrDefault();
                 DeActivateChallenge(challengeToDeActivate);
                 ActivateChallenge(challenge);
-                UpdateActivesChallengesTMP();
+                UpdateActivesChallengesTMP(challenge);
             }
         }
     }
