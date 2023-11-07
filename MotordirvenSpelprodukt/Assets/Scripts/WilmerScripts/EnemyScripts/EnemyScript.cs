@@ -21,12 +21,13 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] protected Animator anim;
     [SerializeField] private CurrentAttackSO[] _attackSOArray;
     [SerializeField] private Weapon _weapon;
-
+    [SerializeField] private float groundCheck;
 
     protected float _attackRange;
     //protected float _timeBetweenAttacks;
     protected float _stunDuration;
     //protected float _timeSinceLastAttack;
+    protected Rigidbody _rigidBody;
     protected bool _onGround = true;
     protected bool _isImpaired;
     protected bool _outOfCombat;
@@ -39,7 +40,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
 
     #region Properties
-    public Rigidbody Rigidbody { get; protected set; }
+    public Rigidbody Rigidbody { get { return _rigidBody; } set { _rigidBody = value; } }
     public AIMovement AIMovementScript { get; protected set; }
     public float MovementSpeed { get { return _movementSpeed; } }
     public float AttackRange { get { return _attackRange; } }
@@ -105,18 +106,17 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
             if (_shouldMove)
             {
-                //this.Rigidbody.velocity = new Vector3(transform.forward.x * MovementSpeed, this.Rigidbody.velocity.y, transform.forward.z * MovementSpeed);
-                //Rigidbody.Move(transform.forward * MovementSpeed, Quaternion.identity);
-                //Rigidbody.AddForce(transform.forward * MovementSpeed);
                 Rigidbody.velocity = transform.forward * MovementSpeed;
             }
         }
         else if (CurrentImpairement == Impairement.airborne)
         {
+            _rigidBody.AddForce(Vector3.down * _rigidBody.mass * 9.81f, ForceMode.Force);
+
             groundCheckTimer += Time.deltaTime;
-            if (groundCheckTimer > 1f)
+            if (groundCheckTimer > 1.5f)
             {
-                _onGround = Physics.Raycast(transform.position, Vector3.down, 1f);
+                _onGround = Physics.Raycast(transform.position, Vector3.down, groundCheck) ;
                 if (_onGround)
                 {
                     ResetTriggers();
@@ -251,6 +251,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected virtual void ExitAttackAnimEvent()
     {
         // Check if stunned?
+        ResetTriggers();
         CurrentImpairement = Impairement.none;
     }
 
