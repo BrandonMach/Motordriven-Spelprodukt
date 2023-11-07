@@ -60,8 +60,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChampionBase
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4747666722037663986, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4630754298611515477, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -394643520276189015}
   m_SourcePrefab: {fileID: 100100000, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+--- !u!1 &8752778463809555289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4630754298611515477, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+  m_PrefabInstance: {fileID: 4124070051489024780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-394643520276189015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752778463809555289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc06db1f1a9dacf458f0a95e26301a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSpeed: 5
+  _healthManager: {fileID: 0}
+  anim: {fileID: 0}
+  _attackSOArray: []
+  _weapon: {fileID: 0}
+  distanceToPlayer: 0
+  CurrentImpairement: 0
+  DamageBuff: 0
+  ChaseDistance: 0
+  Anim: {fileID: 0}
+  AttackIndex: 0
+  CanAttack: 0
+  StopChase: 0
+  AnimationPlaying: 0
+  _weaponHolderTransform: {fileID: 0}
+  _mainColider: {fileID: 0}
+  _slamHitbox: {fileID: 0}
+  Damage: 0
+  ETPDecreaseValue: 0
+  NTime: 0
+  CanChase: 0

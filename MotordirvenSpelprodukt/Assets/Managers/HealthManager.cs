@@ -9,6 +9,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     [SerializeField] float _maxHealthPoints;
     [SerializeField] private float _bleedDuration = 6.0f;
     public float CurrentHealthPoints { get; private set; }
+    [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnPlayerTakeDamage;
@@ -37,6 +38,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     // Update is called once per frame
     void Update()
     {
+        _currentHealth = CurrentHealthPoints;
         if (!GodMode && Dead)
         {
             if (Explode)

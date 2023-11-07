@@ -16,6 +16,7 @@ public class PlayerDamageHUD : MonoBehaviour
     Color resetBloodColor;
     Color resetHurtColor;
 
+    [SerializeField] List<Sprite> _splattersImages;
 
     //[Header("Audio")]
     //[SerializeField] private AudioClip _hurtAudio = null;
@@ -47,6 +48,27 @@ public class PlayerDamageHUD : MonoBehaviour
 
     private void Update()
     {
+
+        switch (_playerHP.CurrentHealthPoints)  
+        {
+            case > 80:
+                _bloodSplatterImage.sprite = _splattersImages[0];
+                break;
+            case > 60:
+                _bloodSplatterImage.sprite = _splattersImages[1];
+                break;
+            case > 40:
+                _bloodSplatterImage.sprite = _splattersImages[2];
+                break;
+            case > 20:
+                _bloodSplatterImage.sprite = _splattersImages[3];
+                break;
+            default:
+                _bloodSplatterImage.sprite = _splattersImages[4];
+                break;
+        }
+
+
         _bloodSplatterImage.color = _splatterAlpha;
         _hurtImage.color = _hurtAlpha;
 

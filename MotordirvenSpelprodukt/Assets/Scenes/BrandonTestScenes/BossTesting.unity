@@ -670,8 +670,8 @@ MonoBehaviour:
   _player: {fileID: 0}
   AmountOfChampionsToKill: 0
   _championList:
-  - {fileID: 3621817252812816374, guid: e56980056fa031243a3441f1ebf65236, type: 3}
-  - {fileID: 1860711972948534787, guid: 6690c378618e0f946a450f4cc5996fa0, type: 3}
+  - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
+  - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
   _championStartPos: {fileID: 1881333467}
 --- !u!4 &97768752
 Transform:
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f4315965310e64d418df97357f31348e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 47e1bfbac1f87ad4d912036fd6b66096, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1628,14 +1628,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.46226418, g: 0.06759523, b: 0.06759523, a: 0.7372549}
+  m_Color: {r: 0.6, g: 0.102394104, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cef41c01a9aa63e45b3a83c750c8ac6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96f4148a40426d74dbe0e4571d12fbfa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2688,6 +2688,12 @@ MonoBehaviour:
   _bloodSplatterImage: {fileID: 186212360}
   _hurtImage: {fileID: 273122121}
   _hurtTimer: 0.1
+  _splattersImages:
+  - {fileID: 21300000, guid: fa4c713ba94c88d489fca1d004c69fd9, type: 3}
+  - {fileID: 21300000, guid: ef49f724d890d8a4287dd3d42ad1d275, type: 3}
+  - {fileID: 21300000, guid: 355b71ff8c86f904db65b3678d566f25, type: 3}
+  - {fileID: 21300000, guid: 47e1bfbac1f87ad4d912036fd6b66096, type: 3}
+  - {fileID: 21300000, guid: 34ec70447b20f3e409dc1d2543cdec6d, type: 3}
   _playerHP: {fileID: 5461979197022512398}
 --- !u!114 &639572724
 MonoBehaviour:
@@ -6460,6 +6466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealthPoints: 0
   _bleedDuration: 6
+  _currentHealth: 0
   HasDismembrent: 0
   Dead: 0
   _destroydelay: 2.5
@@ -6493,15 +6500,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementSpeed: 5
   _healthManager: {fileID: 0}
+  anim: {fileID: 0}
   _attackSOArray: []
   _weapon: {fileID: 0}
-  stunEffect: {fileID: 0}
-  sphereCheck: {fileID: 0}
-  _movementSpeed: 5
+  distanceToPlayer: 0
   CurrentImpairement: 0
   ChaseDistance: 2
-  Anim: {fileID: 0}
   _weaponHolderTransform: {fileID: 0}
   Damage: 0
   ETPDecreaseValue: 0
@@ -8398,7 +8404,7 @@ MonoBehaviour:
   - {fileID: 1439958437}
   - {fileID: 616669568}
   MinionTypes:
-  - {fileID: 5897637473585128013, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
+  - {fileID: -273226506981287983, guid: b029eaf7d0726394bad06fb31c937a4b, type: 3}
   - {fileID: 772040312726353770, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
   - {fileID: 4783427920402105706, guid: fa083190fcb00394084017e8103b709c, type: 3}
   _target: {fileID: 1971354997}
