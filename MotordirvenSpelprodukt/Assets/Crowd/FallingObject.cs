@@ -100,12 +100,14 @@ public class FallingObjectType : MonoBehaviour
                 Destroy(gameObject);
                 Debug.Log("Tomato");
                 Debug.LogError("Player take damage");
+                other.gameObject.GetComponent<HealthManager>().ReduceHealth(5);
                 Destroy(_indicator);
 
             }
             else if (Type == ObjectType.HealthPotion)
             {
                 Debug.Log("Heal Player");
+                other.gameObject.GetComponent<HealthManager>().HealDamage(20);
                 Destroy(this.gameObject);
             }
             else if (Type == ObjectType.CannonBall)
@@ -129,6 +131,7 @@ public class FallingObjectType : MonoBehaviour
                 Destroy(_indicator);
 
             }
+            
         }
     }
 

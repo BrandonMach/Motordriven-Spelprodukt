@@ -10,13 +10,9 @@ public class CrowdBehaviour : MonoBehaviour
     [SerializeField] private AudioSource _cheering;
     [SerializeField] private AudioSource _booing;
 
-    public Rect fallingArea;
-    public GameObject fallingObject;
+    [SerializeField] private GameObject[] _fallingObjects;
     bool _throwObject = true;
 
-
-    bool _playCheering;
-    bool _playBooing;
 
     public AudioSource[] Themes;
     public AudioSource NormalTheme, ExcitedTheme, AngryTheme; 
@@ -39,10 +35,7 @@ public class CrowdBehaviour : MonoBehaviour
         _etManager.OnETPNormal += NormalCrowd;
         _etManager.OnETPAngry += AngryCrowd;
         _etManager.OnETPExited += ExcitedCrowd;
-       
-        //NormalTheme = Themes[0];
-        //ExcitedTheme = Themes[1];
-        //AngryTheme = Themes[2];
+        
 
         NormalTheme.volume = 0.2f;
         ExcitedTheme.volume = 0;
@@ -53,83 +46,62 @@ public class CrowdBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fallingArea = new Rect(0, 3, 10, 2);
+
         this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
 
 
+        //Inte klar än med potions, health potion
         if (Input.GetKeyDown(KeyCode.F))
         {
-            ThrowTomato();
+            StartCoroutine(ThrowObject(_fallingObjects[1]));     
         }
         
-
+            
     }
 
+    #region Exited Crowd
     private void ExcitedCrowd(object sender, System.EventArgs e)
     {
-        _playCheering = true;
         _emotion = CrowdEmotion.Excited;
 
-        //Swicth music track, before latest motion
-
-        //StopAllCoroutines();
         StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
+    #endregion
+
+    #region Angry Crowd
     private void AngryCrowd(object sender, System.EventArgs e)
     {
         if (_throwObject)
         {
-            StartCoroutine(ThrowTomato());
-            //_throwObject = true;
+            StartCoroutine(ThrowObject(_fallingObjects[0]));
         }
 
-        //Swicth music track
-        _playBooing = true;
         _emotion = CrowdEmotion.Angry;
 
-
-        //Swicth music track, before latest motion
-        //StopAllCoroutines();
         StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
+    #endregion
 
+    #region Normal Crowd
     private void NormalCrowd(object sender, System.EventArgs e)
     {
-        //Swicth music track
-        _playCheering = false;
-        _playBooing = false;
         _emotion = CrowdEmotion.Normal;
-
-
-        //Swicth music track, before latest motion
-        //StopAllCoroutines();
         StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
+    #endregion
 
 
-
-    private IEnumerator ThrowTomato()
+    private IEnumerator ThrowObject(GameObject fallingObject)
     {
         _throwObject = false;
         float randonThrowPosX = Random.Range(-10, 10);
         float randonThrowPosY = Random.Range(-10, 10);
         Instantiate(fallingObject, _playerPos.position + new Vector3(randonThrowPosX, 20, randonThrowPosY), transform.rotation);
         yield return new WaitForSeconds(2);
-        _throwObject = true;
-        
-    }
-
-    void PlayCheer()
-    {
-        _cheering.Play();
-    }
-
-    void PlayBooo()
-    {
-        _booing.Play();
+        _throwObject = true;      
     }
 
     private IEnumerator FadeTheme (AudioSource newTheme, CrowdEmotion LatestEmotion)

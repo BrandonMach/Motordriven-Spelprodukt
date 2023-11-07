@@ -10,7 +10,8 @@ public class PresentationTransition : MonoBehaviour
     void Start()
     {
         Orc.SetActive(false);
-        //canvas = GetComponent<Canvas>();
+        //
+        //= GetComponent<Canvas>();
        
     }
 

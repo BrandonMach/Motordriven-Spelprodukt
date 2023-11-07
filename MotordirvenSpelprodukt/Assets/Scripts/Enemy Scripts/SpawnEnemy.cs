@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     
-
     private static SpawnEnemy _instance;
     public static SpawnEnemy Instance { get => _instance; set => _instance = value; }
 
 
     public Transform[] SpawnPoints;
-
+    private List<int> pointUsed;
     public EnemyScript[] MinionTypes;
 
     public Transform _target;
 
 
-    GameManager _gameManager;
     [SerializeField] int MinimumMinionCount;
 
 
@@ -49,32 +45,24 @@ public class SpawnEnemy : MonoBehaviour
     void Update()
     {
         
-        if(GameManager.EnemyGameObjects.Length < (2+MinimumMinionCount))
-        {
 
+        if(!GameManager.Instance.MatchIsFinished && GameManager.Instance.EnemyGameObjects.Length < (2+MinimumMinionCount))
+        {
             SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.Y)) // För testing
         {
-
-
-            SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
-            
+            SpawNewEnemy(Random.Range(0, SpawnPoints.Length));           
         }
     }
 
 
     public void SpawNewEnemy(int spawnPointIndex)
     {
-       
-        
         Instantiate(MinionTypes[0], SpawnPoints[spawnPointIndex].position, Quaternion.LookRotation(_target.position));
         GameManager.Instance.UpdateEnemyList();
-        
-
-       
-
+        //pointUsed.Add(spawnPointIndex);
     }
 }

@@ -91,6 +91,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
         if (IsPlayer)
         {
             OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+            
         }
 
         CurrentHealthPoints -= damage;
@@ -122,7 +123,10 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void Die()
     {
-        
+        if (IsPlayer)
+        {
+            gameObject.GetComponent<Rigidbody>().useGravity = false;
+        }
         if (hasSlowMo)
         {
             _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion

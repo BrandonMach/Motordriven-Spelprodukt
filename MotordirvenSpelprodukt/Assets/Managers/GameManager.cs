@@ -53,13 +53,13 @@ public class GameManager : MonoBehaviour
 
     int _killstreakKillCount;
 
-    
+
 
     #endregion
 
-    [SerializeField] UnityEngine.Object _champion;
-    [SerializeField] SwitchCamera CamManager;
-    private bool _kingCam;
+
+    #region GameLoop
+
 
     [SerializeField] EntertainmentManager _etp;
     [SerializeField] GameObject _playerGO;
@@ -67,18 +67,37 @@ public class GameManager : MonoBehaviour
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
 
-    //Enemy List
-    public static GameObject[] EnemyGameObjects;
-    private SpawnEnemy _spawnEnemy;
+    public bool MatchIsFinished;
+    public System.EventHandler OnMatchFinished;
+
+    #region Champions
 
     //Champion Path 
     [Header("Champion Path")]
+    [SerializeField] UnityEngine.Object _champion;
     public int AmountOfChampionsToKill; //CHampion road-map
     public static int KilledChampions;
     [SerializeField] private List<GameObject> _championList;
     [SerializeField] private Transform _championStartPos;
+    #endregion
 
 
+    #region Camera
+
+    [SerializeField] SwitchCamera CamManager;
+    private bool _kingCam;
+    #endregion
+
+
+    #region Minions
+
+    //Enemy List
+    public  GameObject[] EnemyGameObjects;
+    private SpawnEnemy _spawnEnemy;
+
+    #endregion
+
+    #endregion
 
     //public int KillCount { get => _killCount; set => _killCount = value; }
     public int KillCount
@@ -99,9 +118,6 @@ public class GameManager : MonoBehaviour
 
     public void UpdateEnemyList()
     {
-        //Subscribe to spawn enemy event
-        
-
         EnemyGameObjects =   GameObject.FindGameObjectsWithTag("EnemyTesting");
     }
 
@@ -114,7 +130,7 @@ public class GameManager : MonoBehaviour
         _playerGO = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _etp = EntertainmentManager.Instance;
-        Debug.Log(_champion.name);
+
 
         //För testing
         PlayerCoins = 50;
@@ -124,45 +140,19 @@ public class GameManager : MonoBehaviour
         //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         _spawnEnemy = SpawnEnemy.Instance;
 
-
-        //_spawnEnemy.OnSpawnNewEnemy += UpdateEnemyList;
-     
-
         AmountOfChampionsToKill = 2;
-       
+
+        OnMatchFinished += MatchFinished;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-       // EnemyGameObjects = GameObject.FindGameObjectsWithTag("EnemyTesting");
 
         if (_champion == null && !_kingCam)
         {
-            if(_etp.GetETP() > (_etp.GetMaxETP()/2))
-            {
-                
-                KilledChampions++;
-                Debug.LogError("Champions Killed" + KilledChampions);
-                if(KilledChampions == AmountOfChampionsToKill)
-                {
-                    Debug.Log("You killed all champions");
-                }
-            }
-            else
-            {
-                _playerGO.gameObject.GetComponent<Rigidbody>().useGravity = false;
-            }
-
-            _etp.MatchFinished = true;
-            _kingCam = true;
-            CamManager.GoToKingCam();
-            OnChampionKilled?.Invoke(this, EventArgs.Empty);
-
-            _championIsDead = true;
-            Debug.Log("Champion Is dead");
-
+            OnMatchFinished?.Invoke(this, EventArgs.Empty);
         }
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
@@ -172,11 +162,44 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
 
-
         // Testing challenges
         CheckChallengesCompletion();
         ChallengeTimersUpdate();
     }
+
+
+    #region MatchFinished
+
+    private void MatchFinished(object sender, EventArgs e)
+    {
+        MatchIsFinished = true; //Stop the match
+
+        foreach (var enemies in EnemyGameObjects)
+        {
+            Destroy(enemies);
+        }
+
+        if (_etp.GetETP() > (_etp.GetMaxETP() / 2))
+        {
+            KilledChampions++;
+            Debug.LogError("Champions Killed" + KilledChampions);
+            if (KilledChampions == AmountOfChampionsToKill)
+            {
+                Debug.Log("You killed all champions");
+            }
+        }
+        else
+        {
+            _playerGO.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        }
+
+        _kingCam = true;
+        CamManager.GoToKingCam();
+        OnChampionKilled?.Invoke(this, EventArgs.Empty);
+
+        _championIsDead = true;
+    }
+    #endregion
 
 
 
