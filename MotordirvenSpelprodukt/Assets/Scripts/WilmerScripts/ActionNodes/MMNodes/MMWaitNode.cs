@@ -23,7 +23,6 @@ public class MMWaitNode : ActionNode
 
     protected override State OnUpdate()
     {
-
         startTime += Time.fixedDeltaTime;
 
         switch (_meleeMinionScript.CurrentImpairement)
@@ -36,7 +35,7 @@ public class MMWaitNode : ActionNode
 
             case EnemyScript.Impairement.pushed:
                 //_meleeMinionScript.Anim.SetTrigger("Idle");
-                
+                //_meleeMinionScript.Anim.SetTrigger("PushedBack");
                 return State.Success;
 
             case EnemyScript.Impairement.airborne:
@@ -48,7 +47,5 @@ public class MMWaitNode : ActionNode
         }
 
         return State.Failure;
-
-
     }
 }

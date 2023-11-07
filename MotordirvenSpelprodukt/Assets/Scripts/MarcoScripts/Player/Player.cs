@@ -252,8 +252,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         if (!_playerDash.IsDashing)
         {
             OnDisableMovement();
-            _playerMovement.AttackDash();
             ChangeAttackAnimation?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = attack });
+            _playerMovement.AttackDash();           
             _canAttack = false;
         }
     }

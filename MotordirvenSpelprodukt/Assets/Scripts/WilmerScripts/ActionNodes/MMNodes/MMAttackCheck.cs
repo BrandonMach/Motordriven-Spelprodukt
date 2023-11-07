@@ -27,6 +27,7 @@ public class MMAttackCheck : ActionNode
             // Check if the player is within attack range
             if (_meleeMinionScript.distanceToPlayer <= _meleeMinionScript.AttackRange)
             {
+                _meleeMinionScript.ShouldMove = false;
                 return State.Failure;
             }
             else

@@ -23,6 +23,5 @@ public class MMStatusEffect : ActionNode
             return State.Failure;
         }
         return State.Success;
-
     }
 }

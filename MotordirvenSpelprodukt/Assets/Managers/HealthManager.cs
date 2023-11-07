@@ -9,8 +9,10 @@ public class HealthManager : MonoBehaviour,IHasProgress
     [SerializeField] float _maxHealthPoints;
     [SerializeField] private float _bleedDuration = 6.0f;
     public float CurrentHealthPoints { get; private set; }
+    [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler OnPlayerTakeDamage;
 
     [Header("Dismembrent")]
     private DismemberentEnemyScript _dismembrentScript;
@@ -18,13 +20,15 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public bool Dead;
     public float _destroydelay = 2.5f;
-    
+
+    public bool IsPlayer;
     public bool GodMode;
     public bool Explode;
 
     public bool hasSlowMo;
     public SlowMo _slowMo;
-    
+
+
     void Start()
     {
 
@@ -34,6 +38,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     // Update is called once per frame
     void Update()
     {
+        _currentHealth = CurrentHealthPoints;
         if (!GodMode && Dead)
         {
             if (Explode)
@@ -46,10 +51,16 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 if (_destroydelay <= 0)
                 {
                     Destroy(gameObject);
+                    
                 }
             }
             
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.UpdateEnemyList();
     }
 
 
@@ -77,9 +88,14 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void ReduceHealth(float damage)
     {
+        if (IsPlayer)
+        {
+            OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+        }
+
         CurrentHealthPoints -= damage;
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints / _maxHealthPoints });
-
+        
 
         if (CurrentHealthPoints <= 0)
         {
@@ -106,6 +122,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void Die()
     {
+        
         if (hasSlowMo)
         {
             _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
@@ -115,6 +132,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
         GameManager.Instance.KillCount++;
         Debug.Log("Killcount: " + GameManager.Instance.KillCount);
+
+
 
     }
 
