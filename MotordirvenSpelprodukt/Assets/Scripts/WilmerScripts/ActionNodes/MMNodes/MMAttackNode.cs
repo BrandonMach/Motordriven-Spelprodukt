@@ -54,10 +54,7 @@ public class MMAttackNode : ActionNode
                 _meleeMinionScript.Anim.SetTrigger("HeavyAttack");
             }
         }
-        else if (_meleeMinionScript.CurrentImpairement == Impairement.inAttack) _meleeMinionScript.CurrentImpairement = Impairement.none;
-
-
-
+        //else if (_meleeMinionScript.CurrentImpairement == Impairement.inAttack) _meleeMinionScript.CurrentImpairement = Impairement.none;
 
         return State.Success;
     }

@@ -33,6 +33,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected bool _outOfCombat;
     protected bool _shouldMove;
     private float startBleedTime;
+    private bool _shouldCheckOnGround;
     private float groundCheckTimer;
     public float distanceToPlayer;
     public enum Impairement { none, stunned, airborne, inAttack, pushed }
@@ -90,6 +91,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected virtual void Update()
     {
         distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        _rigidBody.AddForce(Vector3.down * _rigidBody.mass * 9.81f, ForceMode.Force);
 
         //TimeSinceLastAttack += Time.deltaTime;
 
@@ -111,10 +113,10 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         }
         else if (CurrentImpairement == Impairement.airborne)
         {
-            _rigidBody.AddForce(Vector3.down * _rigidBody.mass * 9.81f, ForceMode.Force);
+           
 
             groundCheckTimer += Time.deltaTime;
-            if (groundCheckTimer > 1.5f)
+            if (_shouldCheckOnGround)
             {
                 _onGround = Physics.Raycast(transform.position, Vector3.down, groundCheck) ;
                 if (_onGround)
@@ -123,11 +125,17 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                     anim.SetTrigger("Land");
                     //CurrentImpairement = Impairement.none;
                     groundCheckTimer = 0;
+                    _shouldCheckOnGround = false;
                 }
             }
         }
     }
 
+
+    public void ShouldCheckForGround()
+    {
+        _shouldCheckOnGround = true;
+    }
 
     //protected virtual void Update()
     //{
