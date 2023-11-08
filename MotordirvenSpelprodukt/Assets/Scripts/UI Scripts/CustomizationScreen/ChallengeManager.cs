@@ -51,15 +51,32 @@ public class ChallengeManager : MonoBehaviour
 
     public void UpdateActivesChallengesTMP(Challenge challenge)
     {
-        if (_toggleActiveText == 0)
+
+        if (challenge.IsActivated)
         {
-            _firstActiveChallengeText.text = challenge.ChallengeName.ToString();
-            _toggleActiveText++;
+            if (_toggleActiveText == 0)
+            {
+                _firstActiveChallengeText.text = challenge.ChallengeName.ToString();
+                _toggleActiveText++;
+            }
+            else if (_toggleActiveText == 1)
+            {
+                _secondActiveChallengeText.text = challenge.ChallengeName.ToString();
+                _toggleActiveText--;
+            }
         }
-        else if (_toggleActiveText == 1)
+        else
         {
-            _secondActiveChallengeText.text = challenge.ChallengeName.ToString();
-            _toggleActiveText--;
+            if (_firstActiveChallengeText.text == challenge.ChallengeName.ToString())
+            {
+                _firstActiveChallengeText.text = "";
+                _toggleActiveText = 0;
+            }
+            else if(_secondActiveChallengeText.text == challenge.ChallengeName.ToString())
+            {
+                _secondActiveChallengeText.text = "";
+                _toggleActiveText = 1;
+            }
         }
     }
 
@@ -115,6 +132,7 @@ public class ChallengeManager : MonoBehaviour
     {
         ActiveChallenges.Add(challenge);
         _activeChallengesCounter++;
+        challenge.IsActivated = true;
 
         Debug.Log(_activeChallengesCounter);
         Debug.Log("Challenge added to ActiveChallenges (List)" + challenge.ChallengeName);
@@ -124,6 +142,7 @@ public class ChallengeManager : MonoBehaviour
     {
         ActiveChallenges.Remove(challenge);
         _activeChallengesCounter--;
+        challenge.IsActivated = false;
 
         Debug.Log("Challenge Removed from ActiveChallenges (List)" + challenge.ChallengeName);
     }

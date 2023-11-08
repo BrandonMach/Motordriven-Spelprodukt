@@ -11,6 +11,10 @@ public class KingDecision : MonoBehaviour
     private EntertainmentManager _etp;
     [SerializeField] SwitchCamera CamManager;
     Animator _anim;
+
+    public GameObject EmotePosition;
+    public GameObject[] Emotes;
+
     void Start()
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -20,14 +24,38 @@ public class KingDecision : MonoBehaviour
 
         _anim = GetComponent<Animator>();
         gameManager.OnChampionKilled += PlayDecisionAnimation;
-        //_anim.SetBool("Approved", false);
+
+
+        //King Emotes
+
+        Emotes[1].SetActive(false);
+
+        Emotes[0].SetActive(false);
+        _etp.OnETPAngry += AngryEmote;
+        _etp.OnETPExited += ExcitedEmote;
+
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
+
+        
     }
+
+    private void AngryEmote(object sender, System.EventArgs e)
+    {
+        Emotes[1].SetActive(false);
+
+        Emotes[0].SetActive(true);
+    }
+    private void ExcitedEmote(object sender, System.EventArgs e)
+    {
+        Emotes[0].SetActive(false);
+        Emotes[1].SetActive(true);
+    }
+
 
     private void PlayDecisionAnimation(object sender, EventArgs e)
     {

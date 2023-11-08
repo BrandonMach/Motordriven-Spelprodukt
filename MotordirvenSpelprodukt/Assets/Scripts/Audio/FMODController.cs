@@ -41,9 +41,9 @@ public class FMODController : MonoBehaviour
         _intensity = _entertainmentManager.GetETP();
         _fmodEventInstance.setParameterByName("Intensity", _intensity);
 
-        _fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
 
-        Debug.Log($"ChangedParamValue: {changedParamValue}");
+        //_fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
+        //Debug.Log($"ChangedParamValue: {changedParamValue}");
     }
 
     
@@ -52,9 +52,9 @@ public class FMODController : MonoBehaviour
         _health = healthSlider.value;
         _fmodEventInstance.setParameterByName("Health", _health);
 
-        _fmodEventInstance.getParameterByName("Health", out float changedParamValue);
 
-        Debug.Log($"ChangedParamValue: {changedParamValue}");
+        //_fmodEventInstance.getParameterByName("Health", out float changedParamValue);
+        //Debug.Log($"ChangedParamValue: {changedParamValue}");
     }
 
 
