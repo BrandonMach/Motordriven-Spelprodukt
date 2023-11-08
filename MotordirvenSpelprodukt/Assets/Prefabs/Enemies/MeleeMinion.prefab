@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7783520723240619086, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: _maxHealthPoints
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4747666722037663986, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
@@ -116,12 +116,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 3.5
+  _movementSpeed: 3
   _healthManager: {fileID: 7888060685761042847}
   anim: {fileID: 1896618498393913730}
   _attackSOArray:
   - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
+  groundCheck: 5
   distanceToPlayer: 0
   CurrentImpairement: 0
   ChaseDistance: 0
