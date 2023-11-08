@@ -114,7 +114,7 @@ public class EntertainmentManager : MonoBehaviour
 
         if (!GameManager.Instance.MatchIsFinished)
         {
-            Debug.Log("sdkasd");
+            //Debug.Log("sdkasd");
             CheckIfOutOfCombat();
             if (_isOutOfCombat)
             {
