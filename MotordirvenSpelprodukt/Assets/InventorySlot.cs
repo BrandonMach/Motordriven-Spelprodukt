@@ -44,9 +44,7 @@ public class InventorySlot : MonoBehaviour
         if (_item as Weapon && _item != null && Player.Instance!=null)
         {
             Weapon weapon = (Weapon)_item;
-            Debug.Log(weapon.GetName());
             Player.Instance.SetWeapon(weapon);
-        }
-            
+        }            
     }
 }

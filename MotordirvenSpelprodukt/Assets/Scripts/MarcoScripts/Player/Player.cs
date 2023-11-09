@@ -273,9 +273,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     }
     public void SetWeapon(Weapon _weapon)
     {
-        //if (_currentWeapon != null) { oldWeapon = _currentWeapon; }
         _currentWeapon = _weapon;
-        ReplaceWeapon();      
+        ReplaceWeapon();
+
     }
     public void ReplaceWeapon()
     {
