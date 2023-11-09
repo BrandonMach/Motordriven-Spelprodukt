@@ -2558,7 +2558,7 @@ MonoBehaviour:
   PlayerCharacter: {fileID: 718974609}
   _scanEnemyArea: 7.19
   _timeOutOfCombatCounter: 0
-  _timeOutOfCombatThreshold: 7
+  _timeOutOfCombatThreshold: 3
   _isOutOfCombat: 0
   PlayerNearEnemies: 0
 --- !u!224 &424025424
@@ -5932,7 +5932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4945240268366888671, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4945240268366888671, guid: 692a5daf59240cb42adad9363b9f471a, type: 3}
       propertyPath: m_ImpulseDefinition.m_ImpulseType
@@ -11524,7 +11524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1971354996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13136,6 +13136,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1388447883039732614, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: isPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388447883039732614, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: stunEffect
       value: 
       objectReference: {fileID: 1473618284}
@@ -13248,7 +13252,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718974609}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
   m_Name: 
@@ -13325,8 +13329,6 @@ SceneRoots:
   - {fileID: 2128326376}
   - {fileID: 1971354997}
   - {fileID: 263178236}
-  - {fileID: 885737929}
-  - {fileID: 1066364002}
   - {fileID: 856709053}
   - {fileID: 1674989156}
   - {fileID: 1567983888}
@@ -13344,3 +13346,5 @@ SceneRoots:
   - {fileID: 209471585}
   - {fileID: 1302655339}
   - {fileID: 1329108147}
+  - {fileID: 885737929}
+  - {fileID: 1066364002}

@@ -43,6 +43,11 @@ public class MMScript : EnemyScript
 
     }
 
+    //protected override void OnAttack()
+    //{
+    //    base.OnAttack();
+    //}
+
     protected override void OnDestroy()
     {
         base.OnDestroy();

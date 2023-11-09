@@ -29,6 +29,8 @@ public class CurrentAttackSO : ScriptableObject
     public float StunDuration;
     public bool Last;
     public string Name;
-    // ETP Decrease
+    public int ETPChange;
+    // ETP Decrease for Enemies
+    // ETP Increase for Player
 }
 
