@@ -143,7 +143,7 @@ public class EntertainmentManager : MonoBehaviour
     #endregion
     void UpdateETPArrow()
     {
-        _indicatorArrow.localPosition = new Vector3(-360 +(720/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, 0);
+        _indicatorArrow.localPosition = new Vector3(-160 +(320/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, _indicatorArrow.localPosition.z);
     }
 
     #region OOC

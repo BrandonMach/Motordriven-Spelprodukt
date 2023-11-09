@@ -26,6 +26,8 @@ public class SwitchCamera : MonoBehaviour
        
     }
 
+ 
+
     public void GoToKingCam()
     {      
         StartCoroutine(ChangeCameraAndDoSomething());

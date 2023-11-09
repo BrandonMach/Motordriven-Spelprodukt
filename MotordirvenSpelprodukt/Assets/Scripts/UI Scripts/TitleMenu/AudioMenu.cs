@@ -34,6 +34,8 @@ public class AudioMenu : MenuAbstract, IMenu
     {
         _prevMenu.SetActive(true);
         gameObject.SetActive(false);
+
+        Debug.Log(_prevMenu.name + _prevMenu.activeSelf);
     }
 
     // Start is called before the first frame update

@@ -252,7 +252,8 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void OnAttack()
     {
-        RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });                       
+        RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });
+        
     }
 
 
