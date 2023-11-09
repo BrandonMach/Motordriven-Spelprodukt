@@ -40,10 +40,11 @@ public class MMAttackNode : ActionNode
         //{
         //if (_meleeMinionScript.CurrentImpairement == Impairement.none)
         //{
-            _meleeMinionScript.CurrentImpairement = Impairement.inAttack;
+            _meleeMinionScript.CurrentState = EnemyState.inAttack;
             int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
             //_meleeMinionScript.TimeSinceLastAttack = 0;
             _meleeMinionScript.ResetTriggers();
+
 
             if (randomValue == 1)
             {

@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 7817217740943220301}
   - component: {fileID: 4869250152128649706}
   - component: {fileID: 461463204145818593}
+  - component: {fileID: 875374881878796921}
   m_Layer: 7
   m_Name: MeleeMinionNew
   m_TagString: EnemyTesting
@@ -188,6 +189,7 @@ Transform:
   m_Children:
   - {fileID: 2208363939506914843}
   - {fileID: 7895414410543837676}
+  - {fileID: 6975977496842331216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3972442149091381565
@@ -283,8 +285,9 @@ MonoBehaviour:
   _attackSOArray:
   - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
-  groundCheck: 5
-  distanceToPlayer: 0
+  _groundCheck: {fileID: 6975977496842331216}
+  _landOffsetCheck: 5
+  _onGround: 1
   CurrentImpairement: 0
   ChaseDistance: 0
   _weaponHolderTransform: {fileID: 0}
@@ -338,6 +341,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!143 &875374881878796921
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642609581006262702}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Height: 3.19
+  m_Radius: 0.4
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.57, z: 0}
 --- !u!1 &4033620055580171857
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +583,37 @@ RectTransform:
   m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6245668570272846146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6975977496842331216}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6975977496842331216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6245668570272846146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7026386133347330612}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7786145411499618966
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnemyScript;
 
-public class MMAttackCheck : ActionNode
+public class MMAttackCheck2 : ActionNode
 {
 
     
