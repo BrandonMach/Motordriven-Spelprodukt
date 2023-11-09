@@ -94,6 +94,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
             
         }
+        
 
         CurrentHealthPoints -= damage;
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints / _maxHealthPoints });

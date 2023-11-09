@@ -56,7 +56,7 @@ public class EntertainmentManager : MonoBehaviour
 
     #endregion
 
-    #region OUT OF COMBAT
+    #region OUT OF COMBAT Variables
 
     [Header("OOC- Out Of Combat")]
 
@@ -74,6 +74,7 @@ public class EntertainmentManager : MonoBehaviour
 
     public event System.EventHandler OutOfCombat;
     public event System.EventHandler InCombat;
+
     #endregion
 
     // [SerializeField] private bool _startComboWindowTimer;
@@ -87,7 +88,7 @@ public class EntertainmentManager : MonoBehaviour
         }
         _instance = this;
 
-        DontDestroyOnLoad(gameObject);     
+        //DontDestroyOnLoad(gameObject);     
     }
 
     void Start()
@@ -96,6 +97,8 @@ public class EntertainmentManager : MonoBehaviour
         _startETP = _maxETP / 2;
         _ETPThreshold = _maxETP / 2;
         _entertainmentPoints = _startETP;
+
+        Player.Instance.GetComponent<AttackManager>().EnemyHit += EnemyHitPlayerInCombat;
     }
 
     // Update is called once per frame
@@ -170,11 +173,18 @@ public class EntertainmentManager : MonoBehaviour
                 _timeOutOfCombatCounter = 0;
             }
 
-            if (dist < _scanEnemyArea  /* attack hits enemy*/)
-            {
-                PlayerNearEnemies = true;
-            }
+            //if (dist < _scanEnemyArea  /* attack hits enemy*/)
+            //{
+            //    PlayerNearEnemies = true;
+            //}
         }
+    }
+
+    private void EnemyHitPlayerInCombat(object sender, System.EventArgs e) // Player hit Enemy => Player in combat
+    {  
+        _isOutOfCombat = false;
+        OnInCombat();
+        Debug.Log("Hit Enemy & out of combat");
     }
 
     void OutOfCombatDecreaseOverTime()
@@ -197,14 +207,6 @@ public class EntertainmentManager : MonoBehaviour
         InCombat.Invoke(this, EventArgs.Empty);
     }
  
-    public void PlayerInCombat()
-    {
-        if (PlayerNearEnemies)
-        {
-            _isOutOfCombat = false;
-            OnInCombat();
-        }       
-    }
 
     #endregion
     public void DecreseETP(float amoutToDecrese)
@@ -216,8 +218,8 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints += amoutToIncrease;     
     }
 
-    private void OnDestroy()
-    {
-        Debug.Log("sdad");
-    }
+    //private void OnDestroy()
+    //{
+    //    Debug.Log("sdad");
+    //}
 }

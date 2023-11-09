@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CMPScript : EnemyScript
 {
@@ -37,6 +38,8 @@ public class CMPScript : EnemyScript
 
     public float NTime;
     public bool CanChase;
+
+    [SerializeField] private CinemachineCollisionImpulseSource _impulseSource;
 
 
     protected override void Start()
@@ -95,6 +98,7 @@ public class CMPScript : EnemyScript
 
     protected override void OnAttack()
     {
+       
         base.OnAttack();
     }
 
