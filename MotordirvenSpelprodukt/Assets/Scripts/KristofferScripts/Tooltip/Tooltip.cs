@@ -28,6 +28,9 @@ public class Tooltip : MonoBehaviour
         int headerLength = headerField.text.Length;
         int contentLength = headerField.text.Length;
         layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
+        Image image = gameObject.GetComponent<Image>();
+        image.SetNativeSize();
+        
     }
     private void Update()
     {
@@ -36,6 +39,7 @@ public class Tooltip : MonoBehaviour
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;
         rectTransform.pivot = new Vector2(pivotX, pivotY);
+        
         
         transform.position = position;
     }
