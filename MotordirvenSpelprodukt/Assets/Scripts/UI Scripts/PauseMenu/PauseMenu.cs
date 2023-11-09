@@ -69,6 +69,6 @@ public class PauseMenu : MenuAbstract, IMenu
 
     public override void ClickMenuOption3()
     {
-        // TODO : Load TitleScreenScene
+        base.ClickMenuOption3();
     }
 }
