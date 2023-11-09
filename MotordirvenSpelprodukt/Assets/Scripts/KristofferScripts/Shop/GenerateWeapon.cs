@@ -88,7 +88,6 @@ public class GenerateWeapon : MonoBehaviour
         _weaponRangeText.text = "";
         _buttonText.text = "Sold";
         _purshased = true;
-        Debug.Log(_weapon.GetName());
         return _weapon;
     }
     public bool Bought() { return _purshased; }

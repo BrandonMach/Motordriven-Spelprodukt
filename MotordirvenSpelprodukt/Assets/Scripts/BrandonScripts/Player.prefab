@@ -59,8 +59,8 @@ MonoBehaviour:
   _currentInputMode: 1
   _moveSpeed: 5
   _rotationSpeed: 5
+  _attackDashForce: 1.5
   _mainCamera: {fileID: 0}
-  _moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &6983715570975962233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +82,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43e969ffebb1ff149a7be37c3c809337, type: 2}
   - {fileID: 11400000, guid: 233b0df4a8412894993379db940e4fbc, type: 2}
   _currentWeapon: {fileID: 11400000, guid: 290c659d44476e54f8b22b29660ccb95, type: 2}
-  _maxHealth: 0
+  weaponHand: {fileID: 0}
+  weaponObject: {fileID: 0}
+  _damageEffects: []
 --- !u!65 &4240320676079036900
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -196,10 +198,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealthPoints: 0
   _bleedDuration: 6
+  _currentHealth: 0
   HasDismembrent: 0
   Dead: 0
   _destroydelay: 2.5
+  IsPlayer: 0
   GodMode: 0
+  Explode: 0
   hasSlowMo: 0
   _slowMo: {fileID: 0}
 --- !u!114 &6427510033528720318
@@ -389,10 +394,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4470466264897572, guid: 404a923dea987c14498264bf7d13d458, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4370407923763819647}
+      addedObject: {fileID: 7539353631673202526}
     - targetCorrespondingSourceObject: {fileID: 4470466264897572, guid: 404a923dea987c14498264bf7d13d458, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7539353631673202526}
+      addedObject: {fileID: 4370407923763819647}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404a923dea987c14498264bf7d13d458, type: 3}
 --- !u!4 &627177901422251158 stripped

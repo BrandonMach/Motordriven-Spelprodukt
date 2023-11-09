@@ -41,7 +41,12 @@ public class InventorySlot : MonoBehaviour
     }
     public void OnPress()
     {
-        if (_item as Weapon && _item != null && Player.Instance!=null) 
-            _item = Player.Instance.SetWeapon((Weapon)_item);
+        if (_item as Weapon && _item != null && Player.Instance!=null)
+        {
+            Weapon weapon = (Weapon)_item;
+            Debug.Log(weapon.GetName());
+            Player.Instance.SetWeapon(weapon);
+        }
+            
     }
 }
