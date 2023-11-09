@@ -87,7 +87,7 @@ public class EntertainmentManager : MonoBehaviour
         }
         _instance = this;
 
-        DontDestroyOnLoad(gameObject);     
+        //DontDestroyOnLoad(gameObject);     
     }
 
     void Start()
