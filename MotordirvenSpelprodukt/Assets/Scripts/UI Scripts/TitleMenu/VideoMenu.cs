@@ -82,5 +82,7 @@ public class VideoMenu : MenuAbstract, IMenu
     {
         _prevMenu.SetActive(true);
         gameObject.SetActive(false);
+
+        Debug.Log(_prevMenu.name + _prevMenu.activeSelf);
     }
 }
