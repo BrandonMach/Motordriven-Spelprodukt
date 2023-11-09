@@ -21,27 +21,30 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] protected Animator anim;
     [SerializeField] private CurrentAttackSO[] _attackSOArray;
     [SerializeField] private Weapon _weapon;
-    [SerializeField] private float groundCheck;
-
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private float _landOffsetCheck;
+    [SerializeField] protected bool _onGround = true;
     protected float _attackRange;
     //protected float _timeBetweenAttacks;
     protected float _stunDuration;
     //protected float _timeSinceLastAttack;
-    protected Rigidbody _rigidBody;
-    protected bool _onGround = true;
+    protected Rigidbody _rb;
+    
     protected bool _isImpaired;
     protected bool _outOfCombat;
     protected bool _shouldMove;
+    protected CharacterController _characterController;
     private float startBleedTime;
     private bool _shouldCheckOnGround;
     private float groundCheckTimer;
-    public float distanceToPlayer;
+    protected float _distanceToPlayer;
     public enum Impairement { none, stunned, airborne, inAttack, pushed }
     public Impairement CurrentImpairement = Impairement.none;
 
 
     #region Properties
-    public Rigidbody Rigidbody { get { return _rigidBody; } set { _rigidBody = value; } }
+    public Rigidbody RB { get { return _rb; } set { _rb = value; } }
+    public CharacterController CharacterController { get { return _characterController; } set { _characterController = value; } }
     public AIMovement AIMovementScript { get; protected set; }
     public float MovementSpeed { get { return _movementSpeed; } }
     public float AttackRange { get { return _attackRange; } }
@@ -53,6 +56,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     public bool OutOfCombat { get { return _outOfCombat; } set { _outOfCombat = value; } }
     public bool ShouldMove { get { return _shouldMove; } set { _shouldMove = value; } }
     public Animator Anim { get { return anim; } set { anim = value; } }
+    public float DistanceToPlayer { get { return _distanceToPlayer; } set { _distanceToPlayer = value; } }
     #endregion
 
 
@@ -68,7 +72,9 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void Start()
     {
-        Rigidbody = GetComponent<Rigidbody>();
+        RB = GetComponent<Rigidbody>();
+        RB.useGravity = true;
+        CharacterController = GetComponent<CharacterController>();
         EntertainmentManager.Instance.OutOfCombat += Instance_OnOutOfCombat;
         EntertainmentManager.Instance.InCombat += Instance_OnInCombat;
     }
@@ -90,8 +96,10 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void Update()
     {
-        distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        _rigidBody.AddForce(Vector3.down * _rigidBody.mass * 9.81f, ForceMode.Force);
+        RB.useGravity = true;
+        OnGround = Physics.Raycast(_groundCheck.position, Vector3.down, 0.2f);
+        _distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
 
         //TimeSinceLastAttack += Time.deltaTime;
 
@@ -106,20 +114,27 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
             transform.LookAt(Player.Instance.transform);
 
-            if (_shouldMove)
-            {
-                Rigidbody.velocity = transform.forward * MovementSpeed;
-            }
+            //if (_shouldMove)
+            //{
+            //    Rigidbody.velocity = transform.forward * MovementSpeed;
+            //}
         }
         else if (CurrentImpairement == Impairement.airborne)
-        {
-           
-
+        {       
             groundCheckTimer += Time.deltaTime;
             if (_shouldCheckOnGround)
             {
-                _onGround = Physics.Raycast(transform.position, Vector3.down, groundCheck) ;
-                if (_onGround)
+                //_onGround = Physics.Raycast(transform.position, Vector3.down, groundCheck) ;
+                //if (_onGround)
+                //{
+                //    ResetTriggers();
+                //    anim.SetTrigger("Land");
+                //    //CurrentImpairement = Impairement.none;
+                //    groundCheckTimer = 0;
+                //    _shouldCheckOnGround = false;
+                //}
+
+                if (Physics.Raycast(transform.position, Vector3.down, _landOffsetCheck))
                 {
                     ResetTriggers();
                     anim.SetTrigger("Land");
@@ -129,6 +144,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                 }
             }
         }
+    }
+
+
+    public void SetAirBorn()
+    {
+        CurrentImpairement = Impairement.airborne;
     }
 
 
@@ -164,7 +185,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
                 break;
 
             case CurrentAttackSO.AttackEffect.Bleed:
-                StartBleedCoroutine(attack);
+                //StartBleedCoroutine(attack);
                 break;
 
             case CurrentAttackSO.AttackEffect.Stun:
@@ -204,9 +225,9 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected void GetKnockedUp(Vector3 attackerPos, float force)
     {
-        Rigidbody.AddForce(Vector3.up * force, ForceMode.Impulse);
+        RB.AddForce(Vector3.up * force, ForceMode.Impulse);
         PushBack(attackerPos, force/4);
-        CurrentImpairement = Impairement.airborne;
+        //CurrentImpairement = Impairement.airborne;
         ResetTriggers();
         anim.SetTrigger("KnockUp");
     }
@@ -226,7 +247,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected void PushBack(Vector3 attackerPos, float knockBackForce)
     {
         Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
-        Rigidbody.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
+        RB.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
     }
 
 

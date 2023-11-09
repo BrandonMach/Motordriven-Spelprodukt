@@ -38,8 +38,8 @@ public class MMAttackNode : ActionNode
         //}
         //else
         //{
-        if (_meleeMinionScript.CurrentImpairement == Impairement.none)
-        {
+        //if (_meleeMinionScript.CurrentImpairement == Impairement.none)
+        //{
             _meleeMinionScript.CurrentImpairement = Impairement.inAttack;
             int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
             //_meleeMinionScript.TimeSinceLastAttack = 0;
@@ -53,7 +53,7 @@ public class MMAttackNode : ActionNode
             {
                 _meleeMinionScript.Anim.SetTrigger("HeavyAttack");
             }
-        }
+        //}
         //else if (_meleeMinionScript.CurrentImpairement == Impairement.inAttack) _meleeMinionScript.CurrentImpairement = Impairement.none;
 
         return State.Success;

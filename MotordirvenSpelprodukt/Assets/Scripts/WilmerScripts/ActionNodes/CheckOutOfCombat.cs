@@ -17,6 +17,7 @@ public class CheckOutOfCombat : ActionNode
 
     protected override State OnUpdate()
     {
+        return State.Failure;
         if (_meleeMinionScript.OutOfCombat)
         {
 

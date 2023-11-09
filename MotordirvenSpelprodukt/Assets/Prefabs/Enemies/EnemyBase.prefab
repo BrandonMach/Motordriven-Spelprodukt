@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealthPoints: 10
   _bleedDuration: 6
+  _currentHealth: 0
   HasDismembrent: 0
   Dead: 0
   _destroydelay: 2.5
@@ -363,6 +364,7 @@ MonoBehaviour:
   _attackSOArray:
   - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
+  groundCheck: 0
   distanceToPlayer: 0
   CurrentImpairement: 0
   ChaseDistance: 2
@@ -376,7 +378,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4630754298611515477}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d386258d11a825040b3717f30076cb0c, type: 3}
   m_Name: 

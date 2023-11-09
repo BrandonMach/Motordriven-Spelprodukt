@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyScript;
 
 public class MMAttackCheck : ActionNode
 {
@@ -19,26 +20,31 @@ public class MMAttackCheck : ActionNode
 
     protected override State OnUpdate()
     {
-        if (_playerScript != null)
+        //if (_playerScript != null)
+        //{
+        // Calculate the distance between the enemy and the player
+        //float distanceToPlayer = Vector3.Distance(_meleeMinionScript.transform.position, _playerScript.transform.position);
+        
+        //_meleeMinionScript.distanceToPlayer = distanceToPlayer;
+        // Check if the player is within attack range
+        if (_meleeMinionScript.DistanceToPlayer <= _meleeMinionScript.AttackRange
+            && _meleeMinionScript.CurrentImpairement == Impairement.none
+            && _meleeMinionScript.CurrentImpairement != Impairement.airborne
+            && _meleeMinionScript.OnGround)
         {
-            // Calculate the distance between the enemy and the player
-            //float distanceToPlayer = Vector3.Distance(_meleeMinionScript.transform.position, _playerScript.transform.position);
-
-            // Check if the player is within attack range
-            if (_meleeMinionScript.distanceToPlayer <= _meleeMinionScript.AttackRange)
-            {
-                _meleeMinionScript.ShouldMove = false;
-                return State.Failure;
-            }
-            else
-            {
-                return State.Success; // Player is out of attack range
-            }
+            _meleeMinionScript.ShouldMove = false;
+            return State.Failure;
         }
         else
         {
-            return State.Success; // Player not found
+            _meleeMinionScript.ShouldMove = true;
+            return State.Success; // Player is out of attack range
         }
+        //}
+        //else
+        //{
+        //    return State.Success; // Player not found
+        //}
     }
 
 }

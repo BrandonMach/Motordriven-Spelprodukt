@@ -31,6 +31,14 @@ public class MMChaseNode : ActionNode
         {
             _meleeMinionScript.ResetTriggers();
             _meleeMinionScript.Anim.SetTrigger("Walking");
+
+            if (_meleeMinionScript.ShouldMove)
+            {
+                _meleeMinionScript.RB.velocity = _meleeMinionScript.transform.forward * _meleeMinionScript.MovementSpeed;
+                //_meleeMinionScript.RB.Move(_meleeMinionScript.MovementSpeed * Time.deltaTime * _meleeMinionScript.transform.forward, Quaternion.identity);
+                //Vector3 direction = _meleeMinionScript.transform.forward * 1f;//_meleeMinionScript.MovementSpeed;
+                //_meleeMinionScript.CharacterController.Move(direction * Time.deltaTime);
+            }
         }
 
         

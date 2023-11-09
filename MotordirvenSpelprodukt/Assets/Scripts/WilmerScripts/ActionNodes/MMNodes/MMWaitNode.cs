@@ -46,6 +46,10 @@ public class MMWaitNode : ActionNode
                 return State.Success;
         }
 
+        if (_meleeMinionScript.OnGround)
+        {
+            return State.Success;
+        }
         return State.Failure;
     }
 }

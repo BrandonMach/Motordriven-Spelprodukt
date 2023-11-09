@@ -61,7 +61,7 @@ public class SpawnEnemy : MonoBehaviour
 
     public void SpawNewEnemy(int spawnPointIndex)
     {
-        Instantiate(MinionTypes[0], SpawnPoints[spawnPointIndex].position, Quaternion.LookRotation(_target.position));
+        Instantiate(MinionTypes[0], SpawnPoints[spawnPointIndex].position,Quaternion.identity /* Quaternion.LookRotation(_target.position)*/);
         GameManager.Instance.UpdateEnemyList();
         //pointUsed.Add(spawnPointIndex);
     }
