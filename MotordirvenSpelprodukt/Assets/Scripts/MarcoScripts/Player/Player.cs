@@ -190,7 +190,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         if (_input == combo)
         {
 
-            if(_input.Length == _tempComboChecker && _tempComboChecker == 3) //Only give ETP if 3 hit-combo is executed
+            if(_input.Length <= _tempComboChecker && _input.Length == 3) //Only give ETP if 3 hit-combo is executed
             {
                 _entertainmentManager.increaseETP(GetCurrentAttackSO(_input).ETPChange);
             }
@@ -204,6 +204,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         if (!_canAttack)
         {
+            //Kolla om man spammar knappar under attack animation
             return;
         }
        
