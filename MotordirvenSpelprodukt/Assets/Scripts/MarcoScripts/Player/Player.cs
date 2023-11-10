@@ -42,6 +42,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     [SerializeField] private List<GameObject> _damageEffects = new List<GameObject>();
 
 
+    //Combo
+    float _tempComboChecker;
+
     [Header("Health settings")]
 
     private HealthManager _healthManager;
@@ -87,6 +90,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         _input = "";
         _entertainmentManager = EntertainmentManager.Instance;
+
+        Player.Instance.GetComponent<AttackManager>().EnemyHit += AttackLanded;
+        Player.Instance.GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
     }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
@@ -134,7 +140,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             {
                 if (currentAttackSO.Last && _entertainmentManager != null)
                 {
-                    _entertainmentManager.increaseETP(20);
+                    //Görs två gånger
+                    //_entertainmentManager.increaseETP(20);
+                    //break;
                 }
                 return currentAttackSO;
             }
@@ -163,12 +171,30 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         }
     }
 
+    private void AttackLanded(object sender, EventArgs e)
+    {
+        _tempComboChecker++;
+        Debug.LogWarning("Temp Combo Checker: " + _tempComboChecker);
+
+    }
+    private void ResetComboChecker(object sender, EventArgs e)
+    {
+        _tempComboChecker = 0;
+        Debug.LogWarning("Temp Combo Checker has been Reseted: " + _tempComboChecker);
+
+    }
 
     private void AnimationEvent_ComboBroken(string combo)
     {
 
         if (_input == combo)
         {
+
+            if(_input.Length == _tempComboChecker && _tempComboChecker == 3) //Only give ETP if 3 hit-combo is executed
+            {
+                _entertainmentManager.increaseETP(GetCurrentAttackSO(_input).ETPChange);
+            }
+            
             OnComboBroken();
         }
     }
@@ -176,7 +202,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
 
-        _entertainmentManager?.PlayerInCombat();
         if (!_canAttack)
         {
             return;
@@ -193,7 +218,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
     {
         
-        _entertainmentManager?.PlayerInCombat();
         if (!_canAttack)
         {
             return;
@@ -243,6 +267,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void OnComboBroken()
     {
+        ResetComboChecker(this, EventArgs.Empty);
         _input = "";
         ComboBroken?.Invoke(this, EventArgs.Empty);
         _canAttack = true;
