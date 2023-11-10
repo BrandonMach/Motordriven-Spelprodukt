@@ -13,7 +13,6 @@ public class KMScript : EnemyScript
     [SerializeField] private Collider expolisionHitbox;
     [SerializeField] public float _diveRange;
     public ParticleSystem _explosion;
-    [SerializeField] public bool PlayerInpact;
 
     protected override void Start()
     {
