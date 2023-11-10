@@ -14,8 +14,8 @@ public class CrowdBehaviour : MonoBehaviour
     bool _throwObject = true;
 
 
-    public AudioSource[] Themes;
-    public AudioSource NormalTheme, ExcitedTheme, AngryTheme; 
+    //public AudioSource[] Themes;
+    //public AudioSource NormalTheme, ExcitedTheme, AngryTheme; 
     public enum CrowdEmotion
     {
         Normal,
@@ -37,9 +37,9 @@ public class CrowdBehaviour : MonoBehaviour
         _etManager.OnETPExited += ExcitedCrowd;
         
 
-        NormalTheme.volume = 0.2f;
-        ExcitedTheme.volume = 0;
-        AngryTheme.volume = 0;
+        //NormalTheme.volume = 0.2f;
+        //ExcitedTheme.volume = 0;
+        //AngryTheme.volume = 0;
     }
 
 
@@ -47,7 +47,7 @@ public class CrowdBehaviour : MonoBehaviour
     void Update()
     {
 
-        this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
+       // this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
 
 
         //Inte klar än med potions, health potion
@@ -64,7 +64,7 @@ public class CrowdBehaviour : MonoBehaviour
     {
         _emotion = CrowdEmotion.Excited;
 
-        StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
+        //StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
     #endregion
@@ -79,7 +79,7 @@ public class CrowdBehaviour : MonoBehaviour
 
         _emotion = CrowdEmotion.Angry;
 
-        StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
+        //StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
     #endregion
@@ -88,7 +88,7 @@ public class CrowdBehaviour : MonoBehaviour
     private void NormalCrowd(object sender, System.EventArgs e)
     {
         _emotion = CrowdEmotion.Normal;
-        StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
+        //StartCoroutine(FadeTheme(NormalTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
     #endregion
@@ -104,46 +104,46 @@ public class CrowdBehaviour : MonoBehaviour
         _throwObject = true;      
     }
 
-    private IEnumerator FadeTheme (AudioSource newTheme, CrowdEmotion LatestEmotion)
-    {
+    //private IEnumerator FadeTheme (AudioSource newTheme, CrowdEmotion LatestEmotion)
+    //{
 
-        float timeToFade = 1.25f;
-        float timeElapsed = 0;
+    //    float timeToFade = 1.25f;
+    //    float timeElapsed = 0;
 
-        if(LatestEmotion != _emotion)
-        {
-            if (LatestEmotion == CrowdEmotion.Excited)
-            {
-                while (timeElapsed < timeToFade)
-                {
-                    newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
-                    ExcitedTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
-                    timeElapsed += Time.deltaTime;
-                    yield return null;
-                }
-            }
-            if (LatestEmotion == CrowdEmotion.Angry)
-            {
-                while (timeElapsed < timeToFade)
-                {
-                    newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
-                    AngryTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
-                    timeElapsed += Time.deltaTime;
-                    yield return null;
-                }
-            }
+    //    if(LatestEmotion != _emotion)
+    //    {
+    //        if (LatestEmotion == CrowdEmotion.Excited)
+    //        {
+    //            while (timeElapsed < timeToFade)
+    //            {
+    //                newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
+    //                ExcitedTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
+    //                timeElapsed += Time.deltaTime;
+    //                yield return null;
+    //            }
+    //        }
+    //        if (LatestEmotion == CrowdEmotion.Angry)
+    //        {
+    //            while (timeElapsed < timeToFade)
+    //            {
+    //                newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
+    //                AngryTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
+    //                timeElapsed += Time.deltaTime;
+    //                yield return null;
+    //            }
+    //        }
 
-            if (LatestEmotion == CrowdEmotion.Normal)
-            {
-                while (timeElapsed < timeToFade)
-                {
-                    newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
-                    NormalTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
-                    timeElapsed += Time.deltaTime;
-                    yield return null;
-                }
-            }
-        }
-    }
+    //        if (LatestEmotion == CrowdEmotion.Normal)
+    //        {
+    //            while (timeElapsed < timeToFade)
+    //            {
+    //                newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
+    //                NormalTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
+    //                timeElapsed += Time.deltaTime;
+    //                yield return null;
+    //            }
+    //        }
+    //    }
+    //}
 
 }

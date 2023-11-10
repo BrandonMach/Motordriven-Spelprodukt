@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoints: 500
+  _maxHealthPoints: 250
   _bleedDuration: 6
   _currentHealth: 0
   HasDismembrent: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7189006194749984216}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c781b6e9c0ac562459670ad76b1711ba, type: 3}
   m_Name: 
@@ -376,6 +376,7 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  isPlayer: 0
   stunEffect: {fileID: 0}
 --- !u!95 &1893978260557283440
 Animator:
@@ -467,12 +468,13 @@ MonoBehaviour:
   StopChase: 0
   AnimationPlaying: 0
   _weaponHolderTransform: {fileID: 951730097183689126}
-  _mainColider: {fileID: 0}
+  _mainColider: {fileID: 3292747602063517994}
   _slamHitbox: {fileID: 0}
   Damage: 10
   ETPDecreaseValue: 0
   NTime: 0
   CanChase: 0
+  _impulseSource: {fileID: 0}
 --- !u!1 &7580865999862367671
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +754,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4000155004322133092, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7284907128656886222}
+    - targetCorrespondingSourceObject: {fileID: 4000155004322133092, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3292747602063517994}
+    - targetCorrespondingSourceObject: {fileID: 4000155004322133092, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2861339575662719221}
   m_SourcePrefab: {fileID: 100100000, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
 --- !u!4 &951730097183689126 stripped
 Transform:
@@ -764,3 +775,118 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4155741821396558, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
   m_PrefabInstance: {fileID: 1048636834696273325}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4111476867564382665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4000155004322133092, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
+  m_PrefabInstance: {fileID: 1048636834696273325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7284907128656886222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111476867564382665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.3
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_IgnoreTag: EnemyTesting
+  m_UseImpactDirection: 0
+  m_ScaleImpactWithMass: 0
+  m_ScaleImpactWithSpeed: 0
+--- !u!136 &3292747602063517994
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111476867564382665}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.31450567
+  m_Height: 1.5028926
+  m_Direction: 1
+  m_Center: {x: -0.000000027000448, y: 0.513249, z: 0.14996116}
+--- !u!54 &2861339575662719221
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111476867564382665}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

@@ -37,9 +37,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
-
+    [SerializeField] private GameObject weaponHand;
+    [SerializeField] private GameObject weaponObject;
     [SerializeField] private List<GameObject> _damageEffects = new List<GameObject>();
 
+
+    //Combo
+    float _tempComboChecker;
 
     [Header("Health settings")]
 
@@ -86,6 +90,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         _input = "";
         _entertainmentManager = EntertainmentManager.Instance;
+
+        Player.Instance.GetComponent<AttackManager>().EnemyHit += AttackLanded;
+        Player.Instance.GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
     }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
@@ -133,7 +140,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             {
                 if (currentAttackSO.Last && _entertainmentManager != null)
                 {
-                    _entertainmentManager.increaseETP(20);
+                    //Görs två gånger
+                    //_entertainmentManager.increaseETP(20);
+                    //break;
                 }
                 return currentAttackSO;
             }
@@ -160,14 +169,36 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             _healthManager.ReduceHealth(attack.Damage);
             HasTakenDamage = true;
         }
+        else
+        {
+            Debug.Log("invulnerable");
+        }
     }
 
+    private void AttackLanded(object sender, EventArgs e)
+    {
+        _tempComboChecker++;
+        Debug.LogWarning("Temp Combo Checker: " + _tempComboChecker);
+
+    }
+    private void ResetComboChecker(object sender, EventArgs e)
+    {
+        _tempComboChecker = 0;
+        Debug.LogWarning("Temp Combo Checker has been Reseted: " + _tempComboChecker);
+
+    }
 
     private void AnimationEvent_ComboBroken(string combo)
     {
 
         if (_input == combo)
         {
+
+            if(_input.Length <= _tempComboChecker && _input.Length == 3) //Only give ETP if 3 hit-combo is executed
+            {
+                _entertainmentManager.increaseETP(GetCurrentAttackSO(_input).ETPChange);
+            }
+            
             OnComboBroken();
         }
     }
@@ -175,9 +206,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void GameInput_OnLightAttackButtonPressed(object sender, EventArgs e)
     {
 
-        _entertainmentManager?.PlayerInCombat();
         if (!_canAttack)
         {
+            //Kolla om man spammar knappar under attack animation
             return;
         }
        
@@ -192,7 +223,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void GameInput_OnHeavyAttackButtonPressed(object sender, EventArgs e)
     {
         
-        _entertainmentManager?.PlayerInCombat();
         if (!_canAttack)
         {
             return;
@@ -242,6 +272,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void OnComboBroken()
     {
+        ResetComboChecker(this, EventArgs.Empty);
         _input = "";
         ComboBroken?.Invoke(this, EventArgs.Empty);
         _canAttack = true;
@@ -270,4 +301,31 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             Instantiate(_damageEffects[0], _collider.ClosestPoint(attackerPosition), transform.rotation);
         }
     }
+    public void SetWeapon(Weapon _weapon)
+    {
+        _currentWeapon = _weapon;
+        ReplaceWeapon();
+
+    }
+    public void ReplaceWeapon()
+    {
+        if(_currentWeapon != null)
+        {
+            Debug.Log(_currentWeapon.GetPath());
+            
+            GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+_currentWeapon.GetPath()));
+            weaponnew.transform.parent = weaponHand.transform;
+            weaponnew.transform.position = weaponObject.transform.position;
+            weaponnew.transform.rotation = weaponObject.transform.rotation;
+            weaponnew.transform.localScale = weaponObject.transform.localScale;
+            weaponObject.transform.GetChild(0).parent = weaponnew.transform;
+            WeaponVisualEffects wve = gameObject.GetComponent<WeaponVisualEffects>();
+            wve.SetNewTrail(weaponnew.transform.GetChild(0));
+            Destroy(weaponObject);
+            weaponObject = weaponnew;
+
+        }
+        
+    }
+    
 }

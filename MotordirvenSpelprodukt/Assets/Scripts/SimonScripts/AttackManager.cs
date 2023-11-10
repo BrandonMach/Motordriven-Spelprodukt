@@ -17,6 +17,12 @@ public class AttackManager : MonoBehaviour
     private Vector3 _checkPos;
     private string debugCurrentAttackMessage;
     private ICanAttack attacker;
+    private float _etpDecrease;
+
+    public System.EventHandler EnemyHit;
+    public System.EventHandler AttackMissed;
+
+    public bool isPlayer;
 
     [SerializeField] private ParticleSystem stunEffect;
 
@@ -60,13 +66,32 @@ public class AttackManager : MonoBehaviour
 
         Collider[] enemyHits = Physics.OverlapSphere(_checkPos, _range, _enemyLayerMask);
 
+        if(enemyHits.Length==0 && isPlayer) //if attack misses enemy as player dont get ETP fo completed combo
+        {
+            AttackMissed?.Invoke(this, System.EventArgs.Empty);
+        }
+
         for (int i = 0; i < enemyHits.Length; i++)
         {
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
                 enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, AttackerPosition = _checkPos, Damage = _damage });
+
+                
+
+                if (enemyHits[i].CompareTag("Player"))
+                {
+                    Debug.Log("Player has been hit");
+                    EntertainmentManager.Instance.DecreseETP(_etpDecrease);
+                }
+                else if (enemyHits[i].CompareTag("EnemyTesting"))
+                {
+                    EnemyHit?.Invoke(this, System.EventArgs.Empty);
+                }
+                
             }
+           
         }
     }
 
@@ -78,9 +103,13 @@ public class AttackManager : MonoBehaviour
         _effect = e.CurrentAttackSO.CurrentAttackEffect;
         _attackType = e.CurrentAttackSO.currentAttackType;
         debugCurrentAttackMessage = e.CurrentAttackSO.name;
+        _etpDecrease = e.CurrentAttackSO.ETPChange;
     }
 
-
+    //public void OnEnemyGotHit()
+    //{
+    //    Debug.Log("Enemy has been hit");
+    //}
 
     private void OnDrawGizmos()
     {

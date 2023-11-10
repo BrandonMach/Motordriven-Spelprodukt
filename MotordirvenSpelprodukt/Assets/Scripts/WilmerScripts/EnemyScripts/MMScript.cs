@@ -39,6 +39,11 @@ public class MMScript : EnemyScript
         //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
     }
 
+    //protected override void OnAttack()
+    //{
+    //    base.OnAttack();
+    //}
+
     protected override void OnDestroy()
     {
         base.OnDestroy();
