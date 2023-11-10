@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 {
-    //[SerializeField] private ParticleSystem stunEffect;
+    [SerializeField] private ParticleSystem stunEffect;
     //[SerializeField] private Transform sphereCheck;
     //protected bool _canChase;
     //protected float _lastAttackTime;
@@ -196,12 +196,11 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     }
 
 
-
-
     //protected virtual void Update()
     //{
 
     //}
+
 
     public void TakeDamage(Attack attack)
     {
@@ -258,11 +257,14 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
-        //Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
+        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
 
 
         //ParticleSystemManager.Instance.PlayStunEffect(pos, Quaternion.Euler(-90, 0, 0), transform);
         //ParticleSystemManager.Instance.PlayShockWaveEffect(attackerPos);
+
+        ResetTriggers();
+        anim.SetTrigger("Stunned");
     }
 
 
@@ -325,7 +327,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     }
 
 
-    private void CheckCanMove()
+    protected virtual void CheckCanMove()
     {
         AnimatorStateInfo anim = Anim.GetCurrentAnimatorStateInfo(0);
         //currentAnim = anim.IsName()

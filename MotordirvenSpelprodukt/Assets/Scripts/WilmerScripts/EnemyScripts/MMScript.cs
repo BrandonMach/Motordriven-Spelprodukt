@@ -33,7 +33,7 @@ public class MMScript : EnemyScript
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
         //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
