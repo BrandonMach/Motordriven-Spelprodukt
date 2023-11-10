@@ -37,7 +37,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
-
+    [SerializeField] private GameObject weaponHand;
+    [SerializeField] private GameObject weaponObject;
     [SerializeField] private List<GameObject> _damageEffects = new List<GameObject>();
 
 
@@ -295,4 +296,31 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             Instantiate(_damageEffects[0], _collider.ClosestPoint(attackerPosition), transform.rotation);
         }
     }
+    public void SetWeapon(Weapon _weapon)
+    {
+        _currentWeapon = _weapon;
+        ReplaceWeapon();
+
+    }
+    public void ReplaceWeapon()
+    {
+        if(_currentWeapon != null)
+        {
+            Debug.Log(_currentWeapon.GetPath());
+            
+            GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+_currentWeapon.GetPath()));
+            weaponnew.transform.parent = weaponHand.transform;
+            weaponnew.transform.position = weaponObject.transform.position;
+            weaponnew.transform.rotation = weaponObject.transform.rotation;
+            weaponnew.transform.localScale = weaponObject.transform.localScale;
+            weaponObject.transform.GetChild(0).parent = weaponnew.transform;
+            WeaponVisualEffects wve = gameObject.GetComponent<WeaponVisualEffects>();
+            wve.SetNewTrail(weaponnew.transform.GetChild(0));
+            Destroy(weaponObject);
+            weaponObject = weaponnew;
+
+        }
+        
+    }
+    
 }

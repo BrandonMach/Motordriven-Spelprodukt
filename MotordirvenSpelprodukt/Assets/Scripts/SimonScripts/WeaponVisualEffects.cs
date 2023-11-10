@@ -68,4 +68,8 @@ public class WeaponVisualEffects : MonoBehaviour
             _debreeParticleMainModule.startColor = _debreeParticleStartColor;
         }
     }
+    public void SetNewTrail(Transform trail)
+    {
+        _weaponTrail = trail.GetComponent<ParticleSystem>();
+    }
 }

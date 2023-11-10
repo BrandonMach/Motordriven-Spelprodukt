@@ -39,4 +39,12 @@ public class InventorySlot : MonoBehaviour
         trigger.header = weapon.GetName();       
         trigger.content = "Level: " + weapon.GetLevel() + "\n" + "Damage:" + weapon.GetDamage();
     }
+    public void OnPress()
+    {
+        if (_item as Weapon && _item != null && Player.Instance!=null)
+        {
+            Weapon weapon = (Weapon)_item;
+            Player.Instance.SetWeapon(weapon);
+        }            
+    }
 }
