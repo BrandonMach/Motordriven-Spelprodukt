@@ -32,22 +32,14 @@ public class KMScript : EnemyScript
         
     }
 
-    public void ActivateExpolsion()
-    {
-        
-        expolisionHitbox.enabled = true;
-        
-    }
-    public void ExplodeDie()
+
+    protected override void OnAttack()
     {
 
-        if (!PlayerInpact)
-        {
-            expolisionHitbox.enabled = true;
-            Instantiate(_explosion, transform);
-            //hpmanger.TakeDamage(100);
-        }
         
-        
+
+        base.OnAttack();
+        //Instantiate(_explosion, this.transform);
+        this.GetComponent<HealthManager>().ReduceHealth(100);
     }
 }
