@@ -204,6 +204,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         if (!_canAttack)
         {
+            //Kolla om man spammar knappar under attack animation
             return;
         }
        
