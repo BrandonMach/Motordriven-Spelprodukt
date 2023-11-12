@@ -28,19 +28,15 @@ public class MMScript : EnemyScript
         _attackRange = 4f;
         //_timeBetweenAttacks = 2;
         ChaseDistance = 4f;
-
-        
+     
         Anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
-        
-        
-
-
+        //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
     }
 
     //protected override void OnAttack()

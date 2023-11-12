@@ -13,7 +13,7 @@ public class MMChaseNode : ActionNode
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
         _playerScript = Player.Instance;
 
-        _meleeMinionScript.ShouldMove = true;
+        _meleeMinionScript.CanMove = true;
 
     }
 
@@ -27,10 +27,35 @@ public class MMChaseNode : ActionNode
         //Vector3 direction = _playerScript.transform.position - _meleeMinionScript.transform.position;
        
 
-        if (_meleeMinionScript.CurrentImpairement == EnemyScript.Impairement.none)
+        if (_meleeMinionScript.CurrentState == EnemyScript.EnemyState.none)
         {
             _meleeMinionScript.ResetTriggers();
             _meleeMinionScript.Anim.SetTrigger("Walking");
+
+            if (_meleeMinionScript.CanMove)
+            {
+                _meleeMinionScript.RB.velocity = _meleeMinionScript.transform.forward * _meleeMinionScript.MovementSpeed;
+                _meleeMinionScript.RB.AddForce(Vector3.down * _meleeMinionScript.RB.mass * 9.81f, ForceMode.Force);
+
+
+                //Vector3 direction = transform.position - transform.position;
+                Vector3 direction = _playerScript.transform.position - _meleeMinionScript.transform.position;
+                direction.y = 0;
+                // Normalize the direction to get a unit vector
+                direction.Normalize();
+                //Rotate the Champion towards the players position
+                //_meleeMinionScript.transform.LookAt(Player.Instance.transform);
+
+
+                Quaternion targetRot = Quaternion.LookRotation(direction);
+                _meleeMinionScript.transform.rotation = Quaternion.Slerp(_meleeMinionScript.transform.rotation, targetRot, Time.deltaTime * 1);
+
+
+
+                //_meleeMinionScript.RB.Move(_meleeMinionScript.MovementSpeed * Time.deltaTime * _meleeMinionScript.transform.forward, Quaternion.identity);
+                //Vector3 direction = _meleeMinionScript.transform.forward * 1f;//_meleeMinionScript.MovementSpeed;
+                //_meleeMinionScript.CharacterController.Move(direction * Time.deltaTime);
+            }
         }
 
         

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MMWaitNode : ActionNode
+public class MMWaitNode2 : ActionNode
 {
     private float _duration;
     float startTime = 0;
