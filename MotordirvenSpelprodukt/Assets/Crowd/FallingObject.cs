@@ -137,7 +137,7 @@ public class FallingObjectType : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        //Kanske ta bort target
         if (other.gameObject.tag == ("Target"))
         {
             if (Type == ObjectType.Tomato)

@@ -9,7 +9,7 @@ public class KMChaseNode : ActionNode
     protected override void OnStart()
     {
         _kamikazeScript = _enemyObject.GetComponent<KMScript>();
-        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _playerScript = Player.Instance;
     }
 
     protected override void OnStop()
@@ -25,9 +25,12 @@ public class KMChaseNode : ActionNode
         direction.Normalize();
 
         //Rotate the Kamikaze unit towards the players position
-        _kamikazeScript.transform.rotation = Quaternion.Slerp(_kamikazeScript.transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
+        _kamikazeScript.transform.rotation = Quaternion.Lerp(_kamikazeScript.transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
 
         _kamikazeScript.transform.position += _kamikazeScript.transform.forward * _kamikazeScript.MovementSpeed * Time.deltaTime;
+
+        //_kamikazeScript.transform.position = Vector3.Lerp(_kamikazeScript.transform.position, _playerScript.transform.position, Time.deltaTime);
+            //_kamikazeScript.transform.forward * _kamikazeScript.MovementSpeed * Time.deltaTime;
 
        
         return State.Success;

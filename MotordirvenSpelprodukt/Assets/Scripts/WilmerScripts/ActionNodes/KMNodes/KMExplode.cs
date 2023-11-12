@@ -7,9 +7,9 @@ public class KMExplode : ActionNode
     protected override void OnStart()
     {
         _kamikazeScript = _enemyObject.GetComponent<KMScript>();
-        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _playerScript = Player.Instance;
 
-        
+
     }
 
     protected override void OnStop()

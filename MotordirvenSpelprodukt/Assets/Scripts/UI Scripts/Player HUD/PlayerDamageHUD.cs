@@ -28,7 +28,7 @@ public class PlayerDamageHUD : MonoBehaviour
         _hurtImage.enabled = false;
         _bloodSplatterImage.enabled = false;
 
-        _playerHP = GameObject.FindWithTag("Player").GetComponent<HealthManager>();
+        //_playerHP = GameObject.FindWithTag("Player").GetComponent<HealthManager>();
         _playerHP.OnPlayerTakeDamage += UpdateAlphColor;
 
        
