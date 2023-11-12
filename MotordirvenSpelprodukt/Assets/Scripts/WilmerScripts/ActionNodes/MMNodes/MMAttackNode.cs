@@ -40,20 +40,20 @@ public class MMAttackNode : ActionNode
         //{
         //if (_meleeMinionScript.CurrentImpairement == Impairement.none)
         //{
-            _meleeMinionScript.CurrentState = EnemyState.inAttack;
-            int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
-            //_meleeMinionScript.TimeSinceLastAttack = 0;
-            _meleeMinionScript.ResetTriggers();
+            //_meleeMinionScript.CurrentState = MinionScript.EnemyState.inAttack;
+            //int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
+            ////_meleeMinionScript.TimeSinceLastAttack = 0;
+            //_meleeMinionScript.ResetTriggers();
 
 
-            if (randomValue == 1)
-            {
-                _meleeMinionScript.Anim.SetTrigger("LightAttack");
-            }
-            else
-            {
-                _meleeMinionScript.Anim.SetTrigger("HeavyAttack");
-            }
+            //if (randomValue == 1)
+            //{
+            //    _meleeMinionScript.Anim.SetTrigger("LightAttack");
+            //}
+            //else
+            //{
+            //    _meleeMinionScript.Anim.SetTrigger("HeavyAttack");
+            //}
         //}
         //else if (_meleeMinionScript.CurrentImpairement == Impairement.inAttack) _meleeMinionScript.CurrentImpairement = Impairement.none;
 

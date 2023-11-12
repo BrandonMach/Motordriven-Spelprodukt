@@ -26,11 +26,11 @@ public class MMChaseNode2 : ActionNode
     {
         // Should always chase if attack or taunt fails.
 
-            if (_meleeMinionScript.CurrentState != EnemyScript.EnemyState.chasing)
+            if (_meleeMinionScript.CurrentState != MinionScript.EnemyState.chasing)
             {
                 _meleeMinionScript.PreviousState = _meleeMinionScript.CurrentState;
             }
-            _meleeMinionScript.CurrentState = EnemyScript.EnemyState.chasing;
+            _meleeMinionScript.CurrentState = MinionScript.EnemyState.chasing;
             //Debug.Log("Enemy is Chasing");
             return State.Success; 
 

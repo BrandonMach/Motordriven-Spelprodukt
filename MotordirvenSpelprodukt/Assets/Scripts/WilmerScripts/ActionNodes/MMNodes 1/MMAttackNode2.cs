@@ -31,11 +31,11 @@ public class MMAttackNode2 : ActionNode
         // If withing range to attack
         if (_meleeMinionScript.DistanceToPlayer <= _meleeMinionScript.AttackRange)
         {
-            if (_meleeMinionScript.CurrentState != EnemyState.inAttack)
+            if (_meleeMinionScript.CurrentState != MinionScript.EnemyState.inAttack)
             {
                 _meleeMinionScript.PreviousState = _meleeMinionScript.CurrentState;
             }       
-            _meleeMinionScript.CurrentState = EnemyState.inAttack;
+            _meleeMinionScript.CurrentState = MinionScript.EnemyState.inAttack;
             //Debug.Log("Enemy is in attack");
             return State.Success;
         }

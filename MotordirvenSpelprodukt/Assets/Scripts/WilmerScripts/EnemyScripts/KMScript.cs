@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KMScript : EnemyScript
+public class KMScript : MinionScript
 {
 
     public Animator Anim;
@@ -18,8 +18,8 @@ public class KMScript : EnemyScript
     {
         base.Start();
         expolisionHitbox.enabled = false;
-        _movementSpeed = 5; //Ramp up speed kan testas
-        _attackRange = 0.2f; //?? kanske inte  behövs
+        MovementSpeed = 5; //Ramp up speed kan testas
+        AttackRange = 0.2f; //?? kanske inte  behövs
         //_timeBetweenAttacks = 2; //Kanske inte behövs
         ChaseDistance = 2;
         
