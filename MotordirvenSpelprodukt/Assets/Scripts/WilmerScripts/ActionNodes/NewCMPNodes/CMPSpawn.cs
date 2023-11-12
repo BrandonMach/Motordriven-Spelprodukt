@@ -20,8 +20,8 @@ public class CMPSpawn : ActionNode
         if (_champion1Script.CurrentState == CMP1Script.ChampionState.Enter )
         {
 
-            return State.Success;
+            return State.Failure;
         }
-        return State.Failure;
+        return State.Success;
     }
 }
