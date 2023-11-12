@@ -19,6 +19,7 @@ public abstract class Node : ScriptableObject
     //protected RangedMinionScript rangedMinionScript;
     protected GameObject _enemyObject;
     protected CMPScript _championScript;
+    protected CMP1Script _champion1Script;
     protected KMScript _kamikazeScript;
 
 

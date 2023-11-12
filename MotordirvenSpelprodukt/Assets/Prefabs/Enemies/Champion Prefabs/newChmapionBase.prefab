@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c781b6e9c0ac562459670ad76b1711ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: 10715cab7b9197143a854cf81910001c, type: 2}
+  tree: {fileID: 11400000, guid: c3072cc902362dc4dabbd495d9e50229, type: 2}
 --- !u!114 &5692531403393388579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,15 +451,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc06db1f1a9dacf458f0a95e26301a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunEffect: {fileID: 0}
   _movementSpeed: 5
   _healthManager: {fileID: 9174880145983834101}
   anim: {fileID: 1893978260557283440}
   _attackSOArray:
   - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
-  groundCheck: 0
-  distanceToPlayer: 0
-  CurrentImpairement: 0
+  _groundCheck: {fileID: 0}
+  _landOffsetCheck: 0
+  _onGround: 1
+  currentAnim: 
+  CurrentState: 5
+  PreviousState: 0
   DamageBuff: 4
   ChaseDistance: 0
   Anim: {fileID: 1893978260557283440}

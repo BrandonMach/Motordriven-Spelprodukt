@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8414888895858257922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1441fb39745c76f43a258b25eaeeb763
+  position: {x: 0.00001001358, y: 251.85002}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: -3195362024917319277}
+  - {fileID: -1565867474083346710}
+  - {fileID: 254152225887511253}
+  - {fileID: -4460914457241963869}
+--- !u!114 &-4460914457241963869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71abd0d03072359448364a52d5bd63fd, type: 3}
+  m_Name: CMPBasicCombo
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: e817242886ee2a546969633d54e1bfc7
+  position: {x: 452, y: 556.7734}
+  agent: {fileID: 0}
+  description: Performs a combo of 3 attacks if the player is in range
+--- !u!114 &-3195362024917319277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5f3f4e858d32a499b7804e979cc581, type: 3}
+  m_Name: CMPSpawn
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c54926e3035f3224a9222120ccddeb30
+  position: {x: -449.99997, y: 556.7734}
+  agent: {fileID: 0}
+  description: Plays the spawn animation
+--- !u!114 &-1565867474083346710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551b51665ad80c54ea0252b9c7497a9d, type: 3}
+  m_Name: CMPTaunt
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: bd402ce6e040b8747a4faba75b433443
+  position: {x: -150, y: 556.7734}
+  agent: {fileID: 0}
+  description: 
+--- !u!114 &-1565571000708426868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c82cb4e54eff04b9ebe5d7ec0bb257, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 4e7b2a920c894c24baf88112f421c03b
+  position: {x: 0.00001001358, y: 119.95001}
+  agent: {fileID: 0}
+  description: 
+  child: {fileID: -8414888895858257922}
+  RestartOnFailure: 1
+  RestartOnSuccess: 1
+  maxRepeats: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2184fb2ea52a3445aa463532529ed74, type: 3}
+  m_Name: CMPBehaviorTree2
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 6714923190833295656}
+  treeState: 0
+  nodes:
+  - {fileID: 6714923190833295656}
+  - {fileID: -1565571000708426868}
+  - {fileID: -8414888895858257922}
+  - {fileID: 254152225887511253}
+  - {fileID: -4460914457241963869}
+  - {fileID: -1565867474083346710}
+  - {fileID: -3195362024917319277}
+--- !u!114 &254152225887511253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2132c64f01065ee4a90460fdfe1c1f39, type: 3}
+  m_Name: CMPSpecialAttack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d4dc1c773d589b94b8a95c4671dda208
+  position: {x: 150.00002, y: 556.7734}
+  agent: {fileID: 0}
+  description: Performs one of two special attacks if the player is out of range
+--- !u!114 &6714923190833295656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5caebc3de64edf64a8154a7d11c43dbe, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 2bfbf9daa0689e444b0a427a93558b61
+  position: {x: 0, y: 0}
+  agent: {fileID: 0}
+  description: 
+  child: {fileID: -1565571000708426868}
