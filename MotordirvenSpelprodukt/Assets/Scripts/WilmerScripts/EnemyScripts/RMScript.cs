@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RMScript : EnemyScript
+public class RMScript : MinionScript
 {
     // Start is called before the first frame update
     public float FleeDistance;

@@ -276,8 +276,8 @@ GameObject:
   - component: {fileID: 5692531403393388579}
   - component: {fileID: 1893978260557283440}
   - component: {fileID: 5324124006237618756}
-  - component: {fileID: 1507164015014775572}
   - component: {fileID: 2543974528921257583}
+  - component: {fileID: -1317548975645876355}
   m_Layer: 7
   m_Name: newChmapionBase
   m_TagString: EnemyTesting
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c781b6e9c0ac562459670ad76b1711ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: 10715cab7b9197143a854cf81910001c, type: 2}
+  tree: {fileID: 11400000, guid: c3072cc902362dc4dabbd495d9e50229, type: 2}
 --- !u!114 &5692531403393388579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +388,7 @@ Animator:
   m_GameObject: {fileID: 7189006194749984216}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a50cd06a0668d1a418d586a2944e3ed5, type: 3}
-  m_Controller: {fileID: 9100000, guid: faafd5271688e4549b7561672872cd2a, type: 2}
+  m_Controller: {fileID: 9100000, guid: debe3b2a09503864baabece87c9b9758, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -426,7 +426,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1507164015014775572
+--- !u!114 &2543974528921257583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,31 +435,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7189006194749984216}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d386258d11a825040b3717f30076cb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GoTowardsPlayer: 1
---- !u!114 &2543974528921257583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7189006194749984216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc06db1f1a9dacf458f0a95e26301a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 5
   _healthManager: {fileID: 9174880145983834101}
   anim: {fileID: 1893978260557283440}
+  _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
   _attackSOArray:
   - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
-  _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
-  groundCheck: 0
-  distanceToPlayer: 0
-  CurrentImpairement: 0
   DamageBuff: 4
   ChaseDistance: 0
   Anim: {fileID: 1893978260557283440}
@@ -475,6 +459,26 @@ MonoBehaviour:
   NTime: 0
   CanChase: 0
   _impulseSource: {fileID: 0}
+--- !u!114 &-1317548975645876355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7189006194749984216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3c3e950bb08345baa044dae97c4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSpeed: 20
+  _healthManager: {fileID: 9174880145983834101}
+  anim: {fileID: 1893978260557283440}
+  _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
+  _attackSOArray:
+  - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
+  CurrentState: 0
+  PreviousState: 0
 --- !u!1 &7580865999862367671
 GameObject:
   m_ObjectHideFlags: 0
