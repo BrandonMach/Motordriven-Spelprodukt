@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
+
 public class HealthManager : MonoBehaviour,IHasProgress
 {
     [SerializeField] float _maxHealthPoints;
@@ -29,9 +30,10 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public SlowMo _slowMo;
 
 
+    
     void Start()
     {
-
+        
         CurrentHealthPoints = _maxHealthPoints;
     }
 
@@ -89,7 +91,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public void ReduceHealth(float damage)
     {
         if (IsPlayer)
-        {           
+        {
+            
             OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
             
         }

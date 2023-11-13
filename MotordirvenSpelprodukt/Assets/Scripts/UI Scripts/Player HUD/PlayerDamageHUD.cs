@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayerDamageHUD : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class PlayerDamageHUD : MonoBehaviour
     //[Header("Audio")]
     //[SerializeField] private AudioClip _hurtAudio = null;
     public HealthManager _playerHP;
-    
 
+    public CinemachineImpulseSource ImpulseSource;
     private void Start()
     {
         _hurtImage.enabled = false;
@@ -42,6 +43,7 @@ public class PlayerDamageHUD : MonoBehaviour
 
     void UpdateAlphColor(object sender, System.EventArgs e)
     {
+        ImpulseSource.GenerateImpulse();
         Reset();
     }
 
