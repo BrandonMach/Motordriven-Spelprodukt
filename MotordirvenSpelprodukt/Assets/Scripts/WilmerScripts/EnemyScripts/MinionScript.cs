@@ -12,7 +12,7 @@ public class MinionScript : EnemyScript
     [SerializeField] private bool _onGround = true;
     private bool _shouldCheckOnGround;
 
-    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing }
+    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing }
     public EnemyState CurrentState = EnemyState.chasing;
     public EnemyState PreviousState = EnemyState.none;
 
@@ -102,6 +102,9 @@ public class MinionScript : EnemyScript
                 }
                 break;
 
+            case EnemyState.fleeing:
+
+                break;
             default:
                 break;
         }

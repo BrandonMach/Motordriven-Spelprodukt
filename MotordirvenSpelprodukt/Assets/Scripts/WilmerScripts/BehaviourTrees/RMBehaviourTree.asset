@@ -1,44 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3930202147736789727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af9b67483b480241995ca095d99fa20, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 76942d3e50785db468b6b2e5d8f76712
-  position: {x: 284.33752, y: 657}
-  agent: {fileID: 0}
-  description: 
-  children:
-  - {fileID: 2349706414927055781}
-  - {fileID: 8184506838124303662}
---- !u!114 &-3829865870370467058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecb5630f0eb0154479509f2f1f062658, type: 3}
-  m_Name: RMFleeRange
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 18a33b593f8636e44907cb71ae788766
-  position: {x: -742.8933, y: 947.99994}
-  agent: {fileID: 0}
-  description: 
 --- !u!114 &-1940845713076873809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,31 +18,7 @@ MonoBehaviour:
   position: {x: 0.000015258789, y: 398.0725}
   agent: {fileID: 0}
   description: 
-  children:
-  - {fileID: -1428147931264247917}
-  - {fileID: -3930202147736789727}
-  - {fileID: 437311418243567960}
---- !u!114 &-1428147931264247917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af9b67483b480241995ca095d99fa20, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 767d8f03c24fcce4e97ba89ce6a524c3
-  position: {x: -642.4583, y: 657}
-  agent: {fileID: 0}
-  description: 
-  children:
-  - {fileID: -3829865870370467058}
-  - {fileID: 751231693796251821}
+  children: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,50 +37,6 @@ MonoBehaviour:
   - {fileID: 5817194553497520155}
   - {fileID: 1499319278424375923}
   - {fileID: -1940845713076873809}
-  - {fileID: -3930202147736789727}
-  - {fileID: -1428147931264247917}
-  - {fileID: 8184506838124303662}
-  - {fileID: 751231693796251821}
-  - {fileID: -3829865870370467058}
-  - {fileID: 2349706414927055781}
-  - {fileID: 437311418243567960}
---- !u!114 &437311418243567960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af9b67483b480241995ca095d99fa20, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: e76a8eb8fab225943a5f029b1d861a6b
-  position: {x: -265.8491, y: 657}
-  agent: {fileID: 0}
-  description: 
-  children: []
---- !u!114 &751231693796251821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8d343182bd325459ae29bbc328a7ff, type: 3}
-  m_Name: RMFleeNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: f979e1b92e41a754696d831b712255f7
-  position: {x: -549.8529, y: 947.9999}
-  agent: {fileID: 0}
-  description: 
 --- !u!114 &1499319278424375923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,24 +56,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   child: {fileID: -1940845713076873809}
---- !u!114 &2349706414927055781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46bd7f10113fac0499c12397d768a710, type: 3}
-  m_Name: RMAttackCheck
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: b9daff2f026a2464b9de0d7b11cdeab4
-  position: {x: 153.00006, y: 891.0001}
-  agent: {fileID: 0}
-  description: 
+  RestartOnFailure: 0
+  RestartOnSuccess: 0
+  maxRepeats: 0
 --- !u!114 &5817194553497520155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,21 +78,3 @@ MonoBehaviour:
   agent: {fileID: 0}
   description: 
   child: {fileID: 1499319278424375923}
---- !u!114 &8184506838124303662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beec1b54d0ad39647bc703fc575b638b, type: 3}
-  m_Name: RMAttackNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 0a48800e23daaf342916401b415ccb7c
-  position: {x: 434.00003, y: 891.0001}
-  agent: {fileID: 0}
-  description: 
