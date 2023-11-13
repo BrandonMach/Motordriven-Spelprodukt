@@ -17,12 +17,13 @@ public class CMPSpecialAttack : ActionNode
 
     protected override State OnUpdate()
     {
-        if (_champion1Script.CurrentState == CMP1Script.ChampionState.Taunt)
+        if (_champion1Script.CurrentState == CMP1Script.ChampionState.None && _champion1Script.PreviousState == CMP1Script.ChampionState.Taunt)
         {
             if(_champion1Script.AttackRange <= _champion1Script.DistanceToPlayer)
             {
-                _champion1Script.PreviousState = _champion1Script.CurrentState;
-                _champion1Script.CurrentState = CMP1Script.ChampionState.SpecialAttack;
+                _champion1Script.Anim.SetTrigger("JumpAttack");
+                //_champion1Script.PreviousState = _champion1Script.CurrentState;
+                //_champion1Script.CurrentState = CMP1Script.ChampionState.SpecialAttack;
                 return State.Success;
             }
             return State.Failure;
