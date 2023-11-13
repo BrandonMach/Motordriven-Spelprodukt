@@ -57,54 +57,27 @@ public class MinionScript : EnemyScript
                 break;
 
             case EnemyState.stunned:
-                // Add timer for stun
+                HandleStun();
                 break;
 
             case EnemyState.airborne:
-                if (_shouldCheckOnGround)
-                {
-                    if (Physics.Raycast(transform.position, Vector3.down, _landOffsetCheck))
-                    {
-                        ResetTriggers();
-                        Anim.SetTrigger("Land");
-                        _shouldCheckOnGround = false;
-                    }
-                }
+                HandleAirborne();
                 break;
 
             case EnemyState.inAttack:
-                FacePlayer();
-                int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
-                ResetTriggers();
-                if (randomValue == 1)
-                {
-                    Anim.SetTrigger("LightAttack");
-                }
-                else
-                {
-                    Anim.SetTrigger("HeavyAttack");
-                }
-
+                HandleAttack();
                 break;
 
-            case EnemyState.pushed:
+            case EnemyState.pushed:            
                 break;
 
             case EnemyState.chasing:
-                ResetTriggers();
-                Anim.SetTrigger("Walking");
-
-                if (CanMove)
-                {
-                    RB.velocity = transform.forward * MovementSpeed;
-                    RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);
-                    FacePlayer();
-                }
+                HandleChase();
                 break;
 
             case EnemyState.fleeing:
-
                 break;
+
             default:
                 break;
         }
@@ -172,8 +145,51 @@ public class MinionScript : EnemyScript
     }
     #endregion
 
+    #region EnemyState Virtual Methods
+    protected virtual void HandleChase()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Walking");
+
+        if (CanMove)
+        {
+            RB.velocity = transform.forward * MovementSpeed;
+            RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);
+            FacePlayer();
+        }
+    }
+
+    protected virtual void HandleStun()
+    {
+
+    }
+    protected virtual void HandleAirborne()
+    {
+        if (_shouldCheckOnGround)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, _landOffsetCheck))
+            {
+                ResetTriggers();
+                Anim.SetTrigger("Land");
+                _shouldCheckOnGround = false;
+            }
+        }
+    }
 
 
+    /// <summary>
+    /// Should be overrided by each minion type.
+    /// Attack logic is to be added in each class.
+    /// </summary>
+    protected virtual void HandleAttack()
+    {
+        FacePlayer();
+        ResetTriggers();
+        // Call base and add apply attack logic.
+    }
+    #endregion
+
+    #region Receive Attack Methods
     public override void TakeDamage(Attack attack)
     {
         base.TakeDamage(attack);
@@ -271,6 +287,7 @@ public class MinionScript : EnemyScript
         Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
         RB.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
     }
+    #endregion
 
 
     protected virtual void ResetTriggers()

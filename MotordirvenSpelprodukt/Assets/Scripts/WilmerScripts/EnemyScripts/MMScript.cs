@@ -60,4 +60,20 @@ public class MMScript : MinionScript
         Anim.ResetTrigger("LightAttack");
         Anim.ResetTrigger("HeavyAttack");
     }
+
+    protected override void HandleAttack()
+    {
+        // Call base and apply local attack logic.
+        base.HandleAttack();
+
+        int randomValue = Mathf.FloorToInt(Random.Range(1.0f, 3.0f));
+        if (randomValue == 1)
+        {
+            Anim.SetTrigger("LightAttack");
+        }
+        else
+        {
+            Anim.SetTrigger("HeavyAttack");
+        }
+    }
 }

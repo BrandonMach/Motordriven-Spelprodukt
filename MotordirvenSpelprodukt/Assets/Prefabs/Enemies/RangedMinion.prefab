@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153512001361294276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0033660382, y: 0.5912803, z: -0.08881907, w: 0.8015532}
+  m_LocalRotation: {x: 0.0033660228, y: 0.5912802, z: -0.0888191, w: 0.8015532}
   m_LocalPosition: {x: -0.32868168, y: 0.000000007372685, z: 0.0000000010986696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -230,8 +230,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153513271767363198}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03981399, y: 0.055766385, z: 0.14292458, w: 0.98735887}
-  m_LocalPosition: {x: -0.0026534852, y: 0.7938977, z: -0.010198866}
+  m_LocalRotation: {x: 0.090468675, y: 0.72512394, z: 0.12223663, w: 0.67161655}
+  m_LocalPosition: {x: -0.015116646, y: 0.84073293, z: 0.00056130544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1773,7 +1773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154508031300559166}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01528802, y: -0.08535796, z: 0.098370865, w: 0.99136454}
+  m_LocalRotation: {x: 0.3031384, y: -0.54538095, z: 0.09466093, w: 0.7756971}
   m_LocalPosition: {x: -0.08285275, y: 0.036295455, z: 0.0000000037252903}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2535,7 +2535,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155022362822772322}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.36586738, y: 0.14257066, z: -0.009628262, w: 0.9196315}
+  m_LocalRotation: {x: -0.365843, y: 0.14302568, z: -0.009658982, w: 0.9195702}
   m_LocalPosition: {x: -0.45683354, y: 0.000000006091194, z: -2.937668e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3270,7 +3270,6 @@ GameObject:
   - component: {fileID: 6168017317088594675}
   - component: {fileID: 3003743497886142356}
   - component: {fileID: 7492074816532999623}
-  - component: {fileID: 315945659908084176}
   - component: {fileID: 8457842664103634729}
   - component: {fileID: 9171846179818181865}
   - component: {fileID: 4063314324975484624}
@@ -3375,34 +3374,6 @@ MonoBehaviour:
   Explode: 0
   hasSlowMo: 0
   _slowMo: {fileID: 0}
---- !u!114 &315945659908084176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6053341380786954417}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b9ef3dde6d5fe84f944c721c78fcd91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementSpeed: 3
-  _healthManager: {fileID: 7492074816532999623}
-  anim: {fileID: 8457842664103634729}
-  _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
-  _attackSOArray:
-  - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
-  stunEffect: {fileID: 0}
-  _groundCheck: {fileID: 7507306499837994651}
-  _landOffsetCheck: 5
-  _onGround: 1
-  CurrentState: 5
-  PreviousState: 0
-  ChaseDistance: 0
-  _weaponHolderTransform: {fileID: 0}
-  Damage: 10
-  ETPDecreaseValue: 0
 --- !u!95 &8457842664103634729
 Animator:
   serializedVersion: 5
