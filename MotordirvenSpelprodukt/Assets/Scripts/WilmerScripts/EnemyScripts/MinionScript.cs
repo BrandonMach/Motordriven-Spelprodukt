@@ -103,6 +103,7 @@ public class MinionScript : EnemyScript
                 break;
 
             case EnemyState.fleeing:
+
                 break;
             default:
                 break;
