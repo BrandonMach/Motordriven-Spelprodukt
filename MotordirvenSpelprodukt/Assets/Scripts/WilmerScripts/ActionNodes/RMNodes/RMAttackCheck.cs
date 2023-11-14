@@ -24,7 +24,8 @@ public class RMAttackCheck : ActionNode
     protected override State OnUpdate()
     {
         // If withing range to attack
-        Debug.Log(_rangedMinionScript.DistanceToPlayer);
+        //Debug.Log(_rangedMinionScript.DistanceToPlayer);
+
         if (_rangedMinionScript.DistanceToPlayer <= _rangedMinionScript.AttackRange
             && _rangedMinionScript.DistanceToPlayer > _rangedMinionScript.StartFleeRange)
         {

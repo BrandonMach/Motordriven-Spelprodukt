@@ -30,16 +30,17 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         if (_fired)
-        {
-            
+        {          
             MoveArrow();
             _timeSinceFire += Time.deltaTime;
 
             if (_timeSinceFire >= _maxLifeTime)
             {
-                //transform.SetPositionAndRotation(_startPos.position, _startPos.rotation);
+                transform.SetPositionAndRotation(_startPos.position, _startPos.rotation);
                 _fired = false;
-                //transform.parent = defaultParent;
+                transform.parent = defaultParent;
+                //transform.position = defaultParent.position;
+                _timeSinceFire = 0;
             }
         }
     }
@@ -50,6 +51,7 @@ public class Arrow : MonoBehaviour
         //transform.Translate(Vector3.forward * _arrowSpeed * Time.deltaTime);
         //_rb.AddForce(transform.forward *  _arrowSpeed, ForceMode.Impulse);
         _rb.velocity = transform.up * _arrowSpeed;
+        //_rb.AddTorque(transform.up * _arrowSpeed*5);
     }
 
 
