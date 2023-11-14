@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         _challengeManager = ChallengeManager.Instance;
         _gameStartTimer = 0;
 
-        _champion = GameObject.FindObjectOfType<CMPScript>();
+        _champion = GameObject.FindObjectOfType<CMP1Script>();
         _playerGO = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _etp = EntertainmentManager.Instance;

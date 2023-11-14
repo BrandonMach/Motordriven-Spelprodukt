@@ -43,7 +43,7 @@ public class PlayerDamageHUD : MonoBehaviour
 
     void UpdateAlphColor(object sender, System.EventArgs e)
     {
-        ImpulseSource.GenerateImpulse();
+        ImpulseSource.GenerateImpulse(); //Only if the attackSO has bool screen shake checked
         Reset();
     }
 
