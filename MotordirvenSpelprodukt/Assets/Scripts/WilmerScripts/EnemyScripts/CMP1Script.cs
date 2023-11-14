@@ -93,8 +93,8 @@ public class CMP1Script : ChampionScript
 
     public void StartArcMotion()
     {
-        arcMotion.endPoint = Player.Instance.transform;
-        arcMotion.journeyLength = Vector3.Distance(arcMotion.startPoint.position, arcMotion.endPoint.position);
+        arcMotion.EndPoint = Player.Instance.transform;
+        arcMotion.journeyLength = Vector3.Distance(arcMotion.startPoint.position, arcMotion.EndPoint.position);
         arcMotion.startTime = Time.time;
 
         // Enable a flag to start the arc motion

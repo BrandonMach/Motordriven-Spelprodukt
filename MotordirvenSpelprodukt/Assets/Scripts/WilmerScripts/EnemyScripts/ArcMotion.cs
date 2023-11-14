@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArcMotion : MonoBehaviour
 {
-    public Transform endPoint;
+    private Transform endPoint;
     public Transform startPoint;
     public float arcHeight = 2.0f;
     public float speed = 2.0f;
@@ -13,6 +13,7 @@ public class ArcMotion : MonoBehaviour
     public float startTime;
     public bool isRunning = false;
 
+    public Transform EndPoint { get => endPoint; set => endPoint = value; }
 
     void Start()
     {
@@ -28,11 +29,11 @@ public class ArcMotion : MonoBehaviour
             float distanceCovered = (Time.time - startTime) * speed;
             float journeyFraction = distanceCovered / journeyLength;
 
-            Vector3 arcMidPoint = startPoint.position + (endPoint.position - startPoint.position) * 0.5f;
+            Vector3 arcMidPoint = startPoint.position + (EndPoint.position - startPoint.position) * 0.5f;
             arcMidPoint += Vector3.up * arcHeight;
 
-            Vector3 currentPos = Vector3.Lerp(startPoint.position, endPoint.position, journeyFraction);
-            currentPos.y = Mathf.Lerp(startPoint.position.y, endPoint.position.y, journeyFraction) + Mathf.Sin(journeyFraction * Mathf.PI) * arcHeight;
+            Vector3 currentPos = Vector3.Lerp(startPoint.position, EndPoint.position, journeyFraction);
+            currentPos.y = Mathf.Lerp(startPoint.position.y, EndPoint.position.y, journeyFraction) + Mathf.Sin(journeyFraction * Mathf.PI) * arcHeight;
 
             transform.position = currentPos;
 
