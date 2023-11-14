@@ -103,6 +103,7 @@ public class CMP1Script : ChampionScript
 
         // Enable a flag to start the arc motion
         arcMotion.isRunning = true;
+        Debug.Log("Hej");
     }
     public void StopArcMotion()
     {
