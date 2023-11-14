@@ -16,15 +16,17 @@ public class TestHUDPlacment : MonoBehaviour
     bool AttackTreeIsActive;
 
     public GameObject[] Areans;
-    bool SmallArena;
+    bool BigArena;
 
     public HealthManager ActivateGodMode;
+    public GameObject light;
     // Update is called once per frame
 
     private void Start()
     {
         ETPbar.anchoredPosition = ETPbarPositions[0];
         HealthOrb.anchoredPosition = HealthOrbPositions[0];
+        BigArena = false;
     }
     void Update()
     {
@@ -79,16 +81,26 @@ public class TestHUDPlacment : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SmallArena = !SmallArena;
+            BigArena = !BigArena;
 
             foreach (var item in Areans)
             {
                 item.SetActive(false);
             }
 
-            Areans[SmallArena ? 0 : 1].SetActive(true); //Bool true =0, false = 1
+            
+
+            Areans[BigArena ? 1 : 0].SetActive(true); //Bool true =0, false = 1
         }
 
-
+        if (BigArena)
+        {
+            light.SetActive(true);
+        }
+        else
+        {
+            light.SetActive(false);
+        }
+      
     }
 }
