@@ -30,6 +30,7 @@ public class CurrentAttackSO : ScriptableObject
     public bool Last;
     public string Name;
     public int ETPChange;
+    public bool ScreenShake;
     // ETP Decrease for Enemies
     // ETP Increase for Player
 }
