@@ -9,17 +9,14 @@ public class CMP1Script : ChampionScript
     public enum ChampionState { Enter, Taunt, SpecialAttack, BasicAttack, None }
     public ChampionState CurrentState = ChampionState.Enter;
     public ChampionState PreviousState = ChampionState.Enter;
-    private ArcMotion arcMotion;
 
-    
-
+ 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         AttackRange = 5;
         Anim = GetComponent<Animator>();
-        arcMotion = GetComponent<ArcMotion>();
 
     }
 
@@ -27,8 +24,12 @@ public class CMP1Script : ChampionScript
     protected override void Update()
     {
         base.Update();
-        
-        FacePlayer();
+
+        if (CurrentState != ChampionState.SpecialAttack)
+        {
+
+            FacePlayer();
+        }
 
         switch (CurrentState)
         {
@@ -47,7 +48,6 @@ public class CMP1Script : ChampionScript
                 break;
             case ChampionState.BasicAttack:
                 //Perform basic attack combo
-                // (animation not in place)
                 Anim.SetTrigger("BasicCombo1");
                 break;
             default:
@@ -93,21 +93,5 @@ public class CMP1Script : ChampionScript
     protected override void OnAttack()
     {
         base.OnAttack();
-    }
-
-    public void StartArcMotion()
-    {
-        arcMotion.EndPoint = Player.Instance.transform;
-        arcMotion.journeyLength = Vector3.Distance(arcMotion.startPoint.position, arcMotion.EndPoint.position);
-        arcMotion.startTime = Time.time;
-
-        // Enable a flag to start the arc motion
-        arcMotion.isRunning = true;
-        Debug.Log("Hej");
-    }
-    public void StopArcMotion()
-    {
-
-        arcMotion.isRunning = false;
     }
 }
