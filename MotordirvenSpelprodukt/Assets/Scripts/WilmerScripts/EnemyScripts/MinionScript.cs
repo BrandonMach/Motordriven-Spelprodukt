@@ -47,7 +47,7 @@ public class MinionScript : EnemyScript
     {
         // Call Update() on EnemyScript
         base.Update();
-
+       
         CheckCanMove("Walking");
         OnGround = Physics.Raycast(_groundCheck.position, Vector3.down, 0.2f);
 
@@ -76,6 +76,7 @@ public class MinionScript : EnemyScript
                 break;
 
             case EnemyState.fleeing:
+                HandleFleeing();
                 break;
 
             default:
@@ -159,12 +160,15 @@ public class MinionScript : EnemyScript
         }
     }
 
+
     protected virtual void HandleStun()
     {
-
     }
+
+
     protected virtual void HandleAirborne()
     {
+        RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);
         if (_shouldCheckOnGround)
         {
             if (Physics.Raycast(transform.position, Vector3.down, _landOffsetCheck))
@@ -174,6 +178,11 @@ public class MinionScript : EnemyScript
                 _shouldCheckOnGround = false;
             }
         }
+    }
+
+
+    protected virtual void HandleFleeing()
+    {
     }
 
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1940845713076873809
+--- !u!114 &-8446824040369586950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,16 +9,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af9b67483b480241995ca095d99fa20, type: 3}
-  m_Name: SequencerNode
+  m_Script: {fileID: 11500000, guid: f296a16e8dd8a7d4490c33b047afc957, type: 3}
+  m_Name: RMChaseNode
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: a0e097f4120f7bb499156b452416f494
-  position: {x: 0.000015258789, y: 398.0725}
+  guid: d76f76c3c04deb34aabeedc84af8f477
+  position: {x: 274.26688, y: 639.99994}
   agent: {fileID: 0}
   description: 
-  children: []
+  lerpSpeed: 200
+--- !u!114 &-989744272149470765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 367b3e52328f7294291c759bdf45a0bd
+  position: {x: 101.74105, y: 473.98804}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 7276741058982360605}
+  - {fileID: 2652324113818288857}
+  - {fileID: -8446824040369586950}
+--- !u!114 &-72775052448781785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba443dd6aba49346a5a52f5ed8202f2, type: 3}
+  m_Name: RMImpairedCheck
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: a04f51bf8ae831f47bcb9069d223fb70
+  position: {x: -87.7649, y: 475.74896}
+  agent: {fileID: 0}
+  description: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,7 +76,12 @@ MonoBehaviour:
   nodes:
   - {fileID: 5817194553497520155}
   - {fileID: 1499319278424375923}
-  - {fileID: -1940845713076873809}
+  - {fileID: -72775052448781785}
+  - {fileID: 3006361640367102350}
+  - {fileID: -989744272149470765}
+  - {fileID: 7276741058982360605}
+  - {fileID: -8446824040369586950}
+  - {fileID: 2652324113818288857}
 --- !u!114 &1499319278424375923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,13 +97,52 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8aad3cd706d55054c9a1777d271ac14a
-  position: {x: -0.000006914139, y: 201.35252}
+  position: {x: 15.56899, y: 216.1643}
   agent: {fileID: 0}
   description: 
-  child: {fileID: -1940845713076873809}
-  RestartOnFailure: 0
-  RestartOnSuccess: 0
+  child: {fileID: 3006361640367102350}
+  RestartOnFailure: 1
+  RestartOnSuccess: 1
   maxRepeats: 0
+--- !u!114 &2652324113818288857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8d343182bd325459ae29bbc328a7ff, type: 3}
+  m_Name: RMFleeNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 802a6a5bda9599540ba1c71df873c407
+  position: {x: 103.00796, y: 640.41583}
+  agent: {fileID: 0}
+  description: 
+--- !u!114 &3006361640367102350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98349b2a89246be468ea74818244f0c8, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d88bf121249807a4d9c6ea2f5357c2c0
+  position: {x: 15.243051, y: 323.04208}
+  agent: {fileID: 0}
+  description: 
+  children:
+  - {fileID: -72775052448781785}
+  - {fileID: -989744272149470765}
 --- !u!114 &5817194553497520155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,7 +158,25 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 36e553dab97d7f048adbf34b45b21931
-  position: {x: 0, y: 0}
+  position: {x: 14.569019, y: 106.16431}
   agent: {fileID: 0}
   description: 
   child: {fileID: 1499319278424375923}
+--- !u!114 &7276741058982360605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46bd7f10113fac0499c12397d768a710, type: 3}
+  m_Name: RMAttackCheck
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c39b182fcee991e42a2bb743e3a9cc4b
+  position: {x: -66.24703, y: 641.996}
+  agent: {fileID: 0}
+  description: 
