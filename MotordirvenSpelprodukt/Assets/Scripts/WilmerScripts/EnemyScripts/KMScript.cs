@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KMScript : EnemyScript
+public class KMScript : MinionScript
 {
 
     public Animator Anim;
@@ -10,44 +10,65 @@ public class KMScript : EnemyScript
 
 
     [Header("Attack")]
-    [SerializeField] private Collider expolisionHitbox;
-    [SerializeField] public float _diveRange;
+    //[SerializeField] private Collider expolisionHitbox;
+    [SerializeField] public float _automaticExplodeRange;
+    [SerializeField] public float _activateManualExplodeRange;
+
+    public bool _maunalExplodeActive;
+    
+    float _explodeTimer;
+    int intTimer;
+
     public ParticleSystem _explosion;
-    [SerializeField] public bool PlayerInpact;
+    public TMPro.TextMeshProUGUI _countdownNumber;
 
     protected override void Start()
     {
-        base.Start();
-        expolisionHitbox.enabled = false;
-        _movementSpeed = 5; //Ramp up speed kan testas
-        _attackRange = 0.2f; //?? kanske inte  behövs
-        //_timeBetweenAttacks = 2; //Kanske inte behövs
+       
+        
         ChaseDistance = 2;
-        
+
+        _explodeTimer = 3;
+       
+        base.Start();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void ActivateExpolsion()
-    {
-        
-        expolisionHitbox.enabled = true;
-        
-    }
-    public void ExplodeDie()
+    protected override void Update()
     {
 
-        if (!PlayerInpact)
+
+        intTimer = (int)_explodeTimer;
+
+
+        if (_maunalExplodeActive)
         {
-            expolisionHitbox.enabled = true;
-            Instantiate(_explosion, transform);
-            //hpmanger.TakeDamage(100);
+            
+            _countdownNumber.text = (1+intTimer).ToString();
+            
+            _explodeTimer -= Time.deltaTime;
+            Debug.Log("Active bomb timer: " + _explodeTimer);
+            if (_explodeTimer <= 0)
+            {
+                Debug.Log("Active bomba");
+                OnAttack();
+            }
         }
+
+
+        base.Update();
+    }
+  
+
+
+    protected override void OnAttack()
+    {
+
         
-        
+
+        base.OnAttack();
+        //Instantiate(_explosion, this.transform);
+        this.GetComponent<HealthManager>().ReduceHealth(100);
     }
 }

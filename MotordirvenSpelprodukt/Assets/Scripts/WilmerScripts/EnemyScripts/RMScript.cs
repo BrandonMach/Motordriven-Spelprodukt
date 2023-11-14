@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RMScript : EnemyScript
+public class RMScript : MinionScript
 {
-    // Start is called before the first frame update
+    [SerializeField] private Transform _fireArrowPos;
+
+
     public float FleeDistance;
 
     protected override void Start()
@@ -12,8 +14,8 @@ public class RMScript : EnemyScript
         base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    protected override void Update()
     {
 
     }

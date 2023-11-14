@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CMPScript : EnemyScript
+public class CMPScript : ChampionScript
 {
     
 
@@ -46,8 +46,8 @@ public class CMPScript : EnemyScript
     {
         base.Start();
 
-        _movementSpeed = 2;
-        _attackRange = 6;
+        MovementSpeed = 2;
+        AttackRange = 6;
         //_timeBetweenAttacks = 2;
         ChaseDistance = 4;
         CanAttack = true;
@@ -65,7 +65,7 @@ public class CMPScript : EnemyScript
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
        NTime = Anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }

@@ -169,6 +169,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             _healthManager.ReduceHealth(attack.Damage);
             HasTakenDamage = true;
         }
+        else
+        {
+            Debug.Log("invulnerable");
+        }
     }
 
     private void AttackLanded(object sender, EventArgs e)

@@ -18,11 +18,10 @@ public class MMTaunt : ActionNode
 
     protected override State OnUpdate()
     {
+
         // Taunt 
-        _meleeMinionScript.AIMovementScript.GoTowardsPlayer = false;
+        //_meleeMinionScript.AIMovementScript.GoTowardsPlayer = false;
         //_meleeMinionScript.Anim.SetTrigger("Idle");
         return State.Success;
     }
-
-
 }

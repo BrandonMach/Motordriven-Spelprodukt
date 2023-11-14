@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
+
 public class HealthManager : MonoBehaviour,IHasProgress
 {
     [SerializeField] float _maxHealthPoints;
@@ -12,7 +13,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public event EventHandler OnPlayerTakeDamage;
+    public System.EventHandler OnPlayerTakeDamage;
 
     [Header("Dismembrent")]
     private DismemberentEnemyScript _dismembrentScript;
@@ -29,9 +30,10 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public SlowMo _slowMo;
 
 
+    
     void Start()
     {
-
+        
         CurrentHealthPoints = _maxHealthPoints;
     }
 
