@@ -8,7 +8,7 @@ public class RMScript : MinionScript
     [SerializeField] private Transform _fireArrowPos;
     [SerializeField] private float _startFleeRange;
     [SerializeField] private ArrowManager _arrowManager;
-    private NavMeshAgent _agent;
+    private NavMeshAgent _navMesh;
     public float rang;
     public float StartFleeRange 
     { 
@@ -21,8 +21,8 @@ public class RMScript : MinionScript
     {
         base.Start();
         AttackRange = 20;
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = MovementSpeed;
+        _navMesh = GetComponent<NavMeshAgent>();
+        _navMesh.speed = MovementSpeed;
         rang = AttackRange;
     }
 
@@ -30,21 +30,36 @@ public class RMScript : MinionScript
     protected override void Update()
     {
         base.Update();
+        if (CurrentState == EnemyState.fleeing)
+        {
+            _navMesh.enabled = true;
+        }
+        else _navMesh.enabled = false;
     }
 
 
     protected override void HandleFleeing()
     {
         base.HandleFleeing();
+        
         ResetTriggers();
         Anim.SetTrigger("Walking");
         if (CurrentState == EnemyState.fleeing)
         {
             Vector3 dir = transform.position - Player.Instance.transform.position;
             Vector3 goTo = transform.position + dir.normalized * 10;
-            _agent.SetDestination(goTo);
+            _navMesh.SetDestination(goTo);
+            FacePlayer();
         }
     }
+
+
+    //protected override void HandleChase()
+    //{
+    //    ResetTriggers();
+    //    Anim.SetTrigger("Walking");
+    //    _agent.SetDestination(Player.Instance.transform.position);
+    //}
 
 
     public void FireArrowAnimEvent()
