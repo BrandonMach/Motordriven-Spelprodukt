@@ -7,15 +7,13 @@ public class CrowdBehaviour : MonoBehaviour
     [SerializeField] private EntertainmentManager _etManager;
 
     [SerializeField] private Transform _playerPos;
-    [SerializeField] private AudioSource _cheering;
-    [SerializeField] private AudioSource _booing;
+
 
     [SerializeField] private GameObject[] _fallingObjects;
     bool _throwObject = true;
 
-
-    //public AudioSource[] Themes;
-    //public AudioSource NormalTheme, ExcitedTheme, AngryTheme; 
+    [SerializeField] AudienceAnimationScipt[] _crowdSections;
+    public List<GameObject> _championFans;
     public enum CrowdEmotion
     {
         Normal,
@@ -29,26 +27,43 @@ public class CrowdBehaviour : MonoBehaviour
     {
         return _emotion;
     }
+
+    private void Awake()
+    {
+        _crowdSections = GameObject.FindObjectsOfType<AudienceAnimationScipt>();
+
+    }
+
     void Start()
     {
         //Subscribes to events
         _etManager.OnETPNormal += NormalCrowd;
         _etManager.OnETPAngry += AngryCrowd;
         _etManager.OnETPExited += ExcitedCrowd;
-        
 
-        //NormalTheme.volume = 0.2f;
-        //ExcitedTheme.volume = 0;
-        //AngryTheme.volume = 0;
+
+        foreach (var audience in _crowdSections)
+        {
+            int setRandomChampionFans = Random.Range(0, 10);
+            
+            if(setRandomChampionFans > 5) //Make a audience memeber a Challenger fan randomly
+            {
+                audience.ChallengerFans = true;
+                _championFans.Add(audience.gameObject);
+            }
+            
+            
+        }
+
+
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
-       // this.transform.position = _playerPos.position /*+ new Vector3(0, 10, 0)*/;
-
+        
 
         //Inte klar än med potions, health potion
         if (Input.GetKeyDown(KeyCode.F))
@@ -97,53 +112,14 @@ public class CrowdBehaviour : MonoBehaviour
     private IEnumerator ThrowObject(GameObject fallingObject)
     {
         _throwObject = false;
-        float randonThrowPosX = Random.Range(-10, 10);
-        float randonThrowPosY = Random.Range(-10, 10);
-        Instantiate(fallingObject, _playerPos.position + new Vector3(randonThrowPosX, 20, randonThrowPosY), transform.rotation);
+
+        int randomChampionFan = Random.Range(0, _championFans.Count);
+
+        Instantiate(fallingObject, _championFans[randomChampionFan].transform.position, transform.rotation);
         yield return new WaitForSeconds(2);
         _throwObject = true;      
     }
 
-    //private IEnumerator FadeTheme (AudioSource newTheme, CrowdEmotion LatestEmotion)
-    //{
 
-    //    float timeToFade = 1.25f;
-    //    float timeElapsed = 0;
-
-    //    if(LatestEmotion != _emotion)
-    //    {
-    //        if (LatestEmotion == CrowdEmotion.Excited)
-    //        {
-    //            while (timeElapsed < timeToFade)
-    //            {
-    //                newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
-    //                ExcitedTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
-    //                timeElapsed += Time.deltaTime;
-    //                yield return null;
-    //            }
-    //        }
-    //        if (LatestEmotion == CrowdEmotion.Angry)
-    //        {
-    //            while (timeElapsed < timeToFade)
-    //            {
-    //                newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
-    //                AngryTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
-    //                timeElapsed += Time.deltaTime;
-    //                yield return null;
-    //            }
-    //        }
-
-    //        if (LatestEmotion == CrowdEmotion.Normal)
-    //        {
-    //            while (timeElapsed < timeToFade)
-    //            {
-    //                newTheme.volume = Mathf.Lerp(0, 0.2f, timeElapsed / timeToFade);
-    //                NormalTheme.volume = Mathf.Lerp(0.2f, 0, timeElapsed / timeToFade);
-    //                timeElapsed += Time.deltaTime;
-    //                yield return null;
-    //            }
-    //        }
-    //    }
-    //}
 
 }

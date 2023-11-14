@@ -10,26 +10,56 @@ public class KMScript : MinionScript
 
 
     [Header("Attack")]
-    [SerializeField] private Collider expolisionHitbox;
-    [SerializeField] public float _diveRange;
+    //[SerializeField] private Collider expolisionHitbox;
+    [SerializeField] public float _automaticExplodeRange;
+    [SerializeField] public float _activateManualExplodeRange;
+
+    public bool _maunalExplodeActive;
+    
+    float _explodeTimer;
+    int intTimer;
+
     public ParticleSystem _explosion;
+    public TMPro.TextMeshProUGUI _countdownNumber;
 
     protected override void Start()
     {
-        base.Start();
-        expolisionHitbox.enabled = false;
-        MovementSpeed = 5; //Ramp up speed kan testas
-        AttackRange = 0.2f; //?? kanske inte  behövs
-        //_timeBetweenAttacks = 2; //Kanske inte behövs
-        ChaseDistance = 2;
+       
         
+        ChaseDistance = 2;
+
+        _explodeTimer = 3;
+       
+        base.Start();
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    protected override void Update()
     {
-        
+
+
+        intTimer = (int)_explodeTimer;
+
+
+        if (_maunalExplodeActive)
+        {
+            
+            _countdownNumber.text = (1+intTimer).ToString();
+            
+            _explodeTimer -= Time.deltaTime;
+            Debug.Log("Active bomb timer: " + _explodeTimer);
+            if (_explodeTimer <= 0)
+            {
+                Debug.Log("Active bomba");
+                OnAttack();
+            }
+        }
+
+
+        base.Update();
     }
+  
 
 
     protected override void OnAttack()

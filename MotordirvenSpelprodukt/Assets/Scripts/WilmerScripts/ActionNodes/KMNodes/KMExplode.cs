@@ -7,9 +7,9 @@ public class KMExplode : ActionNode
     protected override void OnStart()
     {
         _kamikazeScript = _enemyObject.GetComponent<KMScript>();
-        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _playerScript = Player.Instance;
 
-        
+
     }
 
     protected override void OnStop()
@@ -19,7 +19,7 @@ public class KMExplode : ActionNode
 
     protected override State OnUpdate()
     {
-        if(Vector3.Distance(_kamikazeScript.transform.position, _playerScript.transform.position) <= _kamikazeScript._diveRange)
+        if(Vector3.Distance(_kamikazeScript.transform.position, _playerScript.transform.position) <= _kamikazeScript._automaticExplodeRange)
         {
             _kamikazeScript.Anim.Play("Dive");
             //Debug.Log("Kamikaze");
