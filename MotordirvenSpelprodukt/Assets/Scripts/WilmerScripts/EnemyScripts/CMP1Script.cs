@@ -90,6 +90,10 @@ public class CMP1Script : ChampionScript
 
     //Reset triggers method
 
+    protected override void OnAttack()
+    {
+        base.OnAttack();
+    }
 
     public void StartArcMotion()
     {
