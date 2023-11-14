@@ -49,7 +49,7 @@ public class Arrow : MonoBehaviour
     {
         //transform.Translate(Vector3.forward * _arrowSpeed * Time.deltaTime);
         //_rb.AddForce(transform.forward *  _arrowSpeed, ForceMode.Impulse);
-        _rb.velocity = fireDirection * _arrowSpeed;
+        _rb.velocity = transform.up * _arrowSpeed;
     }
 
 
@@ -57,7 +57,8 @@ public class Arrow : MonoBehaviour
     {
         this._attack = attack;
         transform.position = firePos.position;
-        transform.rotation = firePos.rotation;
+        Quaternion desiredRot = Quaternion.Euler(90, 0, 0);
+        transform.rotation = firePos.rotation * desiredRot;
         fireDirection = direction;
         _rb.isKinematic = false;
         //_rb.useGravity = true;
@@ -78,6 +79,4 @@ public class Arrow : MonoBehaviour
             transform.SetParent(other.transform);
         }
     }
-
-
 }

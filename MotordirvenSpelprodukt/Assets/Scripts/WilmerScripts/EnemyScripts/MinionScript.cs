@@ -76,6 +76,7 @@ public class MinionScript : EnemyScript
                 break;
 
             case EnemyState.fleeing:
+                HandleFleeing();
                 break;
 
             default:
@@ -159,10 +160,12 @@ public class MinionScript : EnemyScript
         }
     }
 
+
     protected virtual void HandleStun()
     {
-
     }
+
+
     protected virtual void HandleAirborne()
     {
         if (_shouldCheckOnGround)
@@ -174,6 +177,11 @@ public class MinionScript : EnemyScript
                 _shouldCheckOnGround = false;
             }
         }
+    }
+
+
+    protected virtual void HandleFleeing()
+    {
     }
 
 
