@@ -9,6 +9,7 @@ public class CMP1Script : ChampionScript
     public enum ChampionState { Enter, Taunt, SpecialAttack, BasicAttack, None }
     public ChampionState CurrentState = ChampionState.Enter;
     public ChampionState PreviousState = ChampionState.Enter;
+    private ArcMotion arcMotion;
 
     
 
@@ -18,7 +19,7 @@ public class CMP1Script : ChampionScript
         base.Start();
         AttackRange = 5;
         Anim = GetComponent<Animator>();
-
+        arcMotion = GetComponent<ArcMotion>();
 
     }
 
@@ -88,4 +89,20 @@ public class CMP1Script : ChampionScript
     }
 
     //Reset triggers method
+
+
+    public void StartArcMotion()
+    {
+        arcMotion.endPoint = Player.Instance.transform;
+        arcMotion.journeyLength = Vector3.Distance(arcMotion.startPoint.position, arcMotion.endPoint.position);
+        arcMotion.startTime = Time.time;
+
+        // Enable a flag to start the arc motion
+        arcMotion.isRunning = true;
+    }
+    public void StopArcMotion()
+    {
+
+        arcMotion.isRunning = false;
+    }
 }

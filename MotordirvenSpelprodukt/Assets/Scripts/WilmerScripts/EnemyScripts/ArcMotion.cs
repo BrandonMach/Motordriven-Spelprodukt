@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ArcMotion : MonoBehaviour
 {
-    private Transform endPoint;
+    public Transform endPoint;
     public Transform startPoint;
     public float arcHeight = 2.0f;
     public float speed = 2.0f;
 
-    private float journeyLength;
-    private float startTime;
+    public float journeyLength;
+    public float startTime;
     public bool isRunning = false;
 
 
@@ -43,18 +43,18 @@ public class ArcMotion : MonoBehaviour
             } 
         }
     }
-    public void StartArcMotion(Transform player)
-    {
-        endPoint = player;
-        journeyLength = Vector3.Distance(startPoint.position, endPoint.position);
-        startTime = Time.time;
+    //public void StartArcMotion(Transform player)
+    //{
+    //    endPoint = player;
+    //    journeyLength = Vector3.Distance(startPoint.position, endPoint.position);
+    //    startTime = Time.time;
 
-        // Enable a flag to start the arc motion
-        isRunning = true;
-    }
-    public void StopArcMotion()
-    {
+    //    // Enable a flag to start the arc motion
+    //    isRunning = true;
+    //}
+    //public void StopArcMotion()
+    //{
 
-        isRunning = false;
-    }
+    //    isRunning = false;
+    //}
 }
