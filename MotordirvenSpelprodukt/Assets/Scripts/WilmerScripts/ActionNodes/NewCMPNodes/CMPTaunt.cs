@@ -17,11 +17,15 @@ public class CMPTaunt : ActionNode
 
     protected override State OnUpdate()
     {
-        if(_champion1Script.CurrentState == CMP1Script.ChampionState.Enter || _champion1Script.CurrentState == CMP1Script.ChampionState.BasicAttack)
+        if (_champion1Script.CurrentState == CMP1Script.ChampionState.None)
         {
-            _champion1Script.PreviousState = _champion1Script.CurrentState;
-            _champion1Script.CurrentState = CMP1Script.ChampionState.Taunt;
-            return State.Success;
+            if (_champion1Script.PreviousState == CMP1Script.ChampionState.Enter || _champion1Script.PreviousState == CMP1Script.ChampionState.BasicAttack)
+            {
+                _champion1Script.Anim.SetTrigger("Taunt");
+                //_champion1Script.PreviousState = _champion1Script.CurrentState;
+                //_champion1Script.CurrentState = CMP1Script.ChampionState.Taunt;
+                return State.Success;
+            } 
         }
         return State.Failure;
     }
