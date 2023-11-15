@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayerDamageHUD : MonoBehaviour
 {
@@ -21,14 +22,14 @@ public class PlayerDamageHUD : MonoBehaviour
     //[Header("Audio")]
     //[SerializeField] private AudioClip _hurtAudio = null;
     public HealthManager _playerHP;
-    
 
+    public CinemachineImpulseSource ImpulseSource;
     private void Start()
     {
         _hurtImage.enabled = false;
         _bloodSplatterImage.enabled = false;
 
-        _playerHP = GameObject.FindWithTag("Player").GetComponent<HealthManager>();
+        //_playerHP = GameObject.FindWithTag("Player").GetComponent<HealthManager>();
         _playerHP.OnPlayerTakeDamage += UpdateAlphColor;
 
        
@@ -42,6 +43,7 @@ public class PlayerDamageHUD : MonoBehaviour
 
     void UpdateAlphColor(object sender, System.EventArgs e)
     {
+        ImpulseSource.GenerateImpulse(); //Only if the attackSO has bool screen shake checked
         Reset();
     }
 

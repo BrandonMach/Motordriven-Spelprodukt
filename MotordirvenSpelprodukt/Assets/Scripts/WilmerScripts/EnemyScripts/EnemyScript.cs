@@ -10,8 +10,8 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] private float _movementSpeed = 20;
     [SerializeField] private HealthManager _healthManager;
     [SerializeField] private Animator anim;
-    [SerializeField] private Weapon _weapon;
-    [SerializeField] private CurrentAttackSO[] _attackSOArray;
+    [SerializeField] protected Weapon _weapon;
+    [SerializeField] protected CurrentAttackSO[] _attackSOArray;
     private float startBleedTime;
 
 

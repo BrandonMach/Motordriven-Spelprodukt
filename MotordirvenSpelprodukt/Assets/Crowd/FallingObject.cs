@@ -28,23 +28,23 @@ public class FallingObjectType : MonoBehaviour
     public float MaxDistance = 0.4f;
     public float MaxForce = 0.1f;
 
-    Rigidbody rb;
+    
 
     Vector3 _targetIndicatorPosition;
     Vector3 _playerPosition;
 
-    public float _speed = 1.0f;
+    public float _speed = 0.1f;
 
     // Time when the movement started.
     private float _startTime;
-    private Vector3 _startPos;
+   // private Vector3 _startPos;
     public  float _journeyLength;
     public float _distCovered;
 
     void Start()
     {
         _playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        rb = GetComponent<Rigidbody>();
+ 
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {
             //Arena area
@@ -52,7 +52,7 @@ public class FallingObjectType : MonoBehaviour
             float posZ = Random.Range(-2, 2);
 
 
-            _targetIndicatorPosition = new Vector3(posX + _playerPosition.x, 0.001f, posZ + _playerPosition.z);
+            _targetIndicatorPosition = new Vector3(/*posX +*/ _playerPosition.x, 0.001f, /*posZ +*/ _playerPosition.z);
             _indicator = Instantiate(IndicatorPrefab, _targetIndicatorPosition, IndicatorPrefab.transform.rotation);
             //_indicator.transform.SetParent(this.transform);
         }
@@ -61,10 +61,10 @@ public class FallingObjectType : MonoBehaviour
 
         float throwPosX = Random.Range(-10, 10);
         float throwPosZ = Random.Range(-10, 10);
-        _startPos = new Vector3(throwPosX, 10, throwPosZ);
+        //_startPos = new Vector3(throwPosX, 10, throwPosZ);
 
-        transform.position= _startPos; 
-        _journeyLength = Vector3.Distance(_startPos, _targetIndicatorPosition);
+        //transform.position= _startPos; 
+        _journeyLength = Vector3.Distance(transform.position, _targetIndicatorPosition);
     }
 
     // Update is called once per frame
@@ -75,7 +75,7 @@ public class FallingObjectType : MonoBehaviour
         // Fraction of journey completed equals current distance divided by total distance.
         float fractionOfJourney = _distCovered / _journeyLength;
 
-        transform.position = Vector3.Lerp(_startPos, _targetIndicatorPosition, fractionOfJourney);
+        transform.position = Vector3.Slerp(transform.position, _targetIndicatorPosition, fractionOfJourney);
         
 
 
@@ -125,7 +125,7 @@ public class FallingObjectType : MonoBehaviour
                 
                 Debug.Log("Tomato Splash");
 
-                Instantiate(_splashEffects, _targetIndicatorPosition, _splashEffects.transform.rotation);
+                Instantiate(_splashEffects, transform.position, _splashEffects.transform.rotation);
 
                 Destroy(gameObject);
                 Destroy(_indicator);
@@ -137,6 +137,21 @@ public class FallingObjectType : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Kanske ta bort target
+        if (other.gameObject.tag == ("Target"))
+        {
+            if (Type == ObjectType.Tomato)
+            {
+
+                Debug.Log("Tomato Splash");
+
+                Instantiate(_splashEffects, transform.position, _splashEffects.transform.rotation);
+
+                Destroy(gameObject);
+                Destroy(_indicator);
+
+            }
+        }
     }
 
 

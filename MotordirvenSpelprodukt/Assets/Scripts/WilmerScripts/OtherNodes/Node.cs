@@ -16,6 +16,7 @@ public abstract class Node : ScriptableObject
     [HideInInspector] public NavMeshAgent agent;
     [TextArea] public string description;
     protected MMScript _meleeMinionScript;
+    protected RMScript _rangedMinionScript;
     //protected RangedMinionScript rangedMinionScript;
     protected GameObject _enemyObject;
     protected CMPScript _championScript;
