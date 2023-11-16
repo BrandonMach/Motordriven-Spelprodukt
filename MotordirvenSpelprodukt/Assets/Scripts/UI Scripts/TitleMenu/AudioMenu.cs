@@ -7,10 +7,13 @@ public class AudioMenu : MenuAbstract, IMenu
 {
 
     public AudioMixer audioMixer;
+    public FMODController FMODController;
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        //audioMixer.SetFloat("volume", volume);
+        FMODController.SetVolume(volume);
+        Debug.Log("float volume:" + volume);
     }
 
     

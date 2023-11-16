@@ -14,7 +14,7 @@ public class FMODController : MonoBehaviour
     EntertainmentManager _entertainmentManager;
 
     public EventInstance _fmodEventInstance;
-
+    
 
     float _intensity;
     float _health;
@@ -33,6 +33,14 @@ public class FMODController : MonoBehaviour
     {
         UpdateIntensityParameter();
         UpdateHealthParameter();
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (_fmodEventInstance.isValid())
+        {
+            _fmodEventInstance.setVolume(volume);
+        }
     }
 
     
