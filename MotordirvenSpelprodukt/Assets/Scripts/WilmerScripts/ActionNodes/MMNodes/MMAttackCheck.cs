@@ -10,7 +10,8 @@ public class MMAttackCheck : ActionNode
     protected override void OnStart()
     {
         _meleeMinionScript = _enemyObject.GetComponent<MMScript>();
-        _playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+        //_playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _playerScript = Player.Instance;
     }
 
     protected override void OnStop()
@@ -28,8 +29,8 @@ public class MMAttackCheck : ActionNode
         //_meleeMinionScript.distanceToPlayer = distanceToPlayer;
         // Check if the player is within attack range
         if (_meleeMinionScript.DistanceToPlayer <= _meleeMinionScript.AttackRange
-            && _meleeMinionScript.CurrentState == EnemyState.none
-            && _meleeMinionScript.CurrentState != EnemyState.airborne
+            && _meleeMinionScript.CurrentState == MinionScript.EnemyState.none
+            && _meleeMinionScript.CurrentState !=   MinionScript.EnemyState.airborne
             && _meleeMinionScript.OnGround)
         {
             _meleeMinionScript.CanMove = false;

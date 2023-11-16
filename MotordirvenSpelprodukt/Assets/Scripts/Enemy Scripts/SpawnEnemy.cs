@@ -33,7 +33,7 @@ public class SpawnEnemy : MonoBehaviour
 
     void Start()
     {
-        _target = GameObject.FindWithTag("Player").transform;
+        _target = Player.Instance.transform;
 
         for (int i = 0; i < 5; i++)
         {
@@ -44,9 +44,9 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-        if(!GameManager.Instance.MatchIsFinished && GameManager.Instance.EnemyGameObjects.Length < (2+MinimumMinionCount))
+
+        if (!GameManager.Instance.MatchIsFinished && GameManager.Instance.EnemyGameObjects.Length < (2 + MinimumMinionCount))
         {
             SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         }
@@ -54,7 +54,7 @@ public class SpawnEnemy : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Y)) // För testing
         {
-            SpawNewEnemy(Random.Range(0, SpawnPoints.Length));           
+            SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         }
     }
 

@@ -23,35 +23,35 @@ public class MMWaitNode : ActionNode
 
     protected override State OnUpdate()
     {
-        startTime += Time.fixedDeltaTime;
+        //startTime += Time.fixedDeltaTime;
 
 
 
-        switch (_meleeMinionScript.CurrentState)
-        {
+        //switch (_meleeMinionScript.CurrentState)
+        //{
 
-            case EnemyScript.EnemyState.stunned:
-                _duration = _meleeMinionScript.StunDuration;
-                //_meleeMinionScript.Anim.SetTrigger("Idle");
-                return State.Success;
+        //    case EnemyScript.EnemyState.stunned:
+        //        _duration = _meleeMinionScript.StunDuration;
+        //        //_meleeMinionScript.Anim.SetTrigger("Idle");
+        //        return State.Success;
 
-            case EnemyScript.EnemyState.pushed:
-                //_meleeMinionScript.Anim.SetTrigger("Idle");
-                //_meleeMinionScript.Anim.SetTrigger("PushedBack");
-                return State.Success;
+        //    case EnemyScript.EnemyState.pushed:
+        //        //_meleeMinionScript.Anim.SetTrigger("Idle");
+        //        //_meleeMinionScript.Anim.SetTrigger("PushedBack");
+        //        return State.Success;
 
-            case EnemyScript.EnemyState.airborne:
-                //_meleeMinionScript.Anim.SetTrigger("Idle");
-                return State.Success;
-            case EnemyScript.EnemyState.inAttack:
-                //_meleeMinionScript.Anim.SetTrigger("Idle");
-                return State.Success;
-        }
+        //    case EnemyScript.EnemyState.airborne:
+        //        //_meleeMinionScript.Anim.SetTrigger("Idle");
+        //        return State.Success;
+        //    case EnemyScript.EnemyState.inAttack:
+        //        //_meleeMinionScript.Anim.SetTrigger("Idle");
+        //        return State.Success;
+        //}
 
-        if (_meleeMinionScript.OnGround)
-        {
-            return State.Success;
-        }
+        //if (_meleeMinionScript.OnGround)
+        //{
+        //    return State.Success;
+        //}
         return State.Failure;
     }
 }

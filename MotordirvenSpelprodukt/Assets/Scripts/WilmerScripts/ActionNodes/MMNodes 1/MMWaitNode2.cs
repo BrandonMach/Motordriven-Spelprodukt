@@ -30,20 +30,20 @@ public class MMWaitNode2 : ActionNode
         switch (_meleeMinionScript.CurrentState)
         {
 
-            case EnemyScript.EnemyState.stunned:
+            case MinionScript.EnemyState.stunned:
                 _duration = _meleeMinionScript.StunDuration;
                 //_meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
 
-            case EnemyScript.EnemyState.pushed:
+            case MinionScript.EnemyState.pushed:
                 //_meleeMinionScript.Anim.SetTrigger("Idle");
                 //_meleeMinionScript.Anim.SetTrigger("PushedBack");
                 return State.Success;
 
-            case EnemyScript.EnemyState.airborne:
+            case MinionScript.EnemyState.airborne:
                 //_meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
-            case EnemyScript.EnemyState.inAttack:
+            case MinionScript.EnemyState.inAttack:
                 //_meleeMinionScript.Anim.SetTrigger("Idle");
                 return State.Success;
         }

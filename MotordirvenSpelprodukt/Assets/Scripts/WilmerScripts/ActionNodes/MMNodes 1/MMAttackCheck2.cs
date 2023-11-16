@@ -28,8 +28,8 @@ public class MMAttackCheck2 : ActionNode
         //_meleeMinionScript.distanceToPlayer = distanceToPlayer;
         // Check if the player is within attack range
         if (_meleeMinionScript.DistanceToPlayer <= _meleeMinionScript.AttackRange
-            && _meleeMinionScript.CurrentState == EnemyState.none
-            && _meleeMinionScript.CurrentState != EnemyState.airborne
+            && _meleeMinionScript.CurrentState == MinionScript.EnemyState.none
+            && _meleeMinionScript.CurrentState != MinionScript.EnemyState.airborne
             && _meleeMinionScript.OnGround)
         {
             _meleeMinionScript.CanMove = false;

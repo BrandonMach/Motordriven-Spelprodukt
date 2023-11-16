@@ -19,7 +19,7 @@ public class MMStatusEffect : ActionNode
     {
 
 
-        if (_meleeMinionScript.CurrentState == EnemyScript.EnemyState.none
+        if (_meleeMinionScript.CurrentState == MinionScript.EnemyState.none
             && _meleeMinionScript.OnGround)
         {
             
