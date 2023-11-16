@@ -8,13 +8,14 @@ using UnityEngine.UI;
 public class FMODController : MonoBehaviour
 {
     [SerializeField] Slider healthSlider;
+    [SerializeField] Slider volumeSlider;
 
     GameManager _gameManager;
     HealthManager _healthManager;
     EntertainmentManager _entertainmentManager;
 
     public EventInstance _fmodEventInstance;
-
+    
 
     float _intensity;
     float _health;
@@ -26,6 +27,7 @@ public class FMODController : MonoBehaviour
         _entertainmentManager = EntertainmentManager.Instance;
 
         _fmodEventInstance = GetComponent<FMODUnity.StudioEventEmitter>().EventInstance;
+        volumeSlider.value = 0.3f;
     }
 
     // Update is called once per frame
@@ -33,6 +35,14 @@ public class FMODController : MonoBehaviour
     {
         UpdateIntensityParameter();
         UpdateHealthParameter();
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (_fmodEventInstance.isValid())
+        {
+            _fmodEventInstance.setVolume(volume);
+        }
     }
 
     
