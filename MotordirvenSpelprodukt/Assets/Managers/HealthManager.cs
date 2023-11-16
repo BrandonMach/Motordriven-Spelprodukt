@@ -90,30 +90,35 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void ReduceHealth(float damage)
     {
-        if (IsPlayer)
+        if (!GodMode)
         {
-            
-            OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
-            
-        }
-        
-
-        CurrentHealthPoints -= damage;
-        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints / _maxHealthPoints });
-        
-
-        if (CurrentHealthPoints <= 0)
-        {
-            if (HasDismembrent)
+            if (IsPlayer)
             {
-                _dismembrentScript = GetComponent<DismemberentEnemyScript>();
-                _dismembrentScript.GetKilled();
+
+                OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+
             }
 
 
-            //if the killing blow remove healthbar
-            Die();
+            CurrentHealthPoints -= damage;
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints / _maxHealthPoints });
+
+
+            if (CurrentHealthPoints <= 0)
+            {
+                if (HasDismembrent)
+                {
+                    _dismembrentScript = GetComponent<DismemberentEnemyScript>();
+                    _dismembrentScript.GetKilled();
+                }
+
+
+                Die();
+
+            }
         }
+
+      
     }
 
     //public void GetStunned(float stunDuration)

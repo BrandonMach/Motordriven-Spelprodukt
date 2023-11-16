@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -7,13 +8,15 @@ public class AudioMenu : MenuAbstract, IMenu
 {
 
     public AudioMixer audioMixer;
+    public FMODController FMODController;
+
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        //audioMixer.SetFloat("volume", volume);
+        FMODController.SetVolume(volume);
+        Debug.Log("float volume:" + volume);
     }
-
-    
 
     public void ClickESC()
     {
@@ -41,7 +44,7 @@ public class AudioMenu : MenuAbstract, IMenu
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

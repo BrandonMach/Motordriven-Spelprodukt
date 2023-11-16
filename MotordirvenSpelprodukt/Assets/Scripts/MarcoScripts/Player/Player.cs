@@ -250,7 +250,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
     {
-        //ChangeControllerTypeButtonPressed?.Invoke(this, e);
+        ChangeControllerTypeButtonPressed?.Invoke(this, e);
         TakeDamage(new Attack { });
 
     }
