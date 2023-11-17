@@ -136,17 +136,19 @@ public class HealthManager : MonoBehaviour,IHasProgress
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
+        else 
+        {
+            //Only increase killcount on npc
+            GameManager.Instance.KillCount++;
+            Debug.Log("Killcount: " + GameManager.Instance.KillCount);
+        }
+
         if (hasSlowMo)
         {
             _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
         }
         
         Dead = true;
-
-        GameManager.Instance.KillCount++;
-        Debug.Log("Killcount: " + GameManager.Instance.KillCount);
-
-
 
     }
 
