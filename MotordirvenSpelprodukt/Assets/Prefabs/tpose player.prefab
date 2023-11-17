@@ -1981,6 +1981,38 @@ Transform:
   - {fileID: 1677585133993775360}
   m_Father: {fileID: 6677559238132659455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7477020843236807854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6539079186082959061}
+  m_Layer: 8
+  m_Name: VFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6539079186082959061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7477020843236807854}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6196182299904484600}
+  m_Father: {fileID: 5575574744827445178}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7576190200583803341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,7 +2434,7 @@ Transform:
   - {fileID: 1163918383458517726}
   - {fileID: 1220670067850125844}
   - {fileID: 9137468351958520702}
-  m_Father: {fileID: 5575574744827445178}
+  m_Father: {fileID: 6539079186082959061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8739709545328882806
 GameObject:
@@ -4072,7 +4104,7 @@ PrefabInstance:
       addedObject: {fileID: 8388184567406195021}
     - targetCorrespondingSourceObject: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6196182299904484600}
+      addedObject: {fileID: 6539079186082959061}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       insertIndex: -1
@@ -4149,7 +4181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c550a3195edf4c4a86bdbd688cd6719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxZize: 10
+  _maxSize: 0
   _inputSpamAmount: 3
   _amountToCheckForSpam: 5
   _enertainmentDecrease: 10
