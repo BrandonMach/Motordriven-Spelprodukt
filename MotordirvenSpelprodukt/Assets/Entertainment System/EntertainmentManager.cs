@@ -54,6 +54,12 @@ public class EntertainmentManager : MonoBehaviour
     public event System.EventHandler OnETPAngry;
     public event System.EventHandler OnETPNormal;
 
+
+
+    [Header("ETP Audio")]
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip[] _etpSoundEffects;
+
     #endregion
 
     #region OUT OF COMBAT Variables
@@ -99,6 +105,7 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints = _startETP;
 
         Player.Instance.GetComponent<AttackManager>().EnemyHit += EnemyHitPlayerInCombat;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -133,10 +140,14 @@ public class EntertainmentManager : MonoBehaviour
         if(GetETP() > GetExcitedThreshold())
         {
             OnETPExited?.Invoke(this, EventArgs.Empty);
+            _audioSource.clip = _etpSoundEffects[0];
+            _audioSource.Play();
         }
         else if (GetETP() < GetAngryThreshold())
         {
             OnETPAngry?.Invoke(this, EventArgs.Empty);
+            _audioSource.clip = _etpSoundEffects[1];
+            _audioSource.Play();
         }
         else
         {
