@@ -22,10 +22,15 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+       
+
         Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 1.5f, _championStartPos.position.z);
         Quaternion championRotation = Quaternion.Euler(_championList[KilledChampions].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
 
-        Instantiate(_championList[KilledChampions], championSpawnPos, championRotation);
+        _championNy = Instantiate(_championList[KilledChampions], championSpawnPos, championRotation);
+
+        //_champion = GameObject.FindObjectOfType<CMP1Script>();
+
 
     }
 
@@ -75,7 +80,8 @@ public class GameManager : MonoBehaviour
 
     //Champion Path 
     [Header("Champion Path")]
-    [SerializeField] UnityEngine.Object _champion;
+    [SerializeField] public UnityEngine.Object _champion;
+    [SerializeField] public GameObject _championNy;
     public int AmountOfChampionsToKill; //CHampion road-map
     public static int KilledChampions;
     [SerializeField] private List<GameObject> _championList;
@@ -128,7 +134,7 @@ public class GameManager : MonoBehaviour
         _gameStartTimer = 0;
         _berserkerTimer = 0;
 
-        _champion = GameObject.FindObjectOfType<CMP1Script>();
+      
         _player = Player.Instance;
         _playerGO = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
@@ -153,7 +159,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (_champion == null && !_kingCam)
+        if (_championNy == null && !_kingCam)
         {
             OnMatchFinished?.Invoke(this, EventArgs.Empty);
         }

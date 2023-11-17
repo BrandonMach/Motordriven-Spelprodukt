@@ -29,12 +29,13 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public bool hasSlowMo;
     public SlowMo _slowMo;
 
-
+    
     
     void Start()
     {
         
         CurrentHealthPoints = _maxHealthPoints;
+       
     }
 
     // Update is called once per frame

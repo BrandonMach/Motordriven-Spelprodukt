@@ -1780,6 +1780,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 191538270}
     - target: {fileID: 5891716620810562668, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891716620810562668, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+      propertyPath: _refillSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891716620810562668, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
       propertyPath: _hasProgressGameObject
       value: 
       objectReference: {fileID: 1537310729}
@@ -1801,9 +1809,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5265066023250140052, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+    - {fileID: 5891716620810562668, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3025353642337224793, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 398284022}
   m_SourcePrefab: {fileID: 100100000, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
 --- !u!114 &191538270 stripped
 MonoBehaviour:
@@ -2759,6 +2771,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397703878}
   m_CullTransparentMesh: 1
+--- !u!1 &398284021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3025353642337224793, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+  m_PrefabInstance: {fileID: 191538269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &398284022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398284021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613c5e5490525444eb84225928d471d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasProgressGameObject: {fileID: 1537310729}
+  _slider: {fileID: 191538270}
+  _refillSpeed: 0.5
+  IsChampionHPbar: 0
 --- !u!1001 &398635446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4744,6 +4777,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   MatchIsFinished: 0
   _champion: {fileID: 0}
+  _championNy: {fileID: 0}
   AmountOfChampionsToKill: 0
   _championList:
   - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
@@ -8685,7 +8719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3280085971499641167, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4986899907661843118, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
       propertyPath: _movementSpeed
