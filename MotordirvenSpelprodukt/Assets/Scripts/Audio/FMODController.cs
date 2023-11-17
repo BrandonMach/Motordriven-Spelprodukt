@@ -49,7 +49,7 @@ public class FMODController : MonoBehaviour
     private void UpdateIntensityParameter()
     {
         _intensity = _entertainmentManager.GetETP();
-        _fmodEventInstance.setParameterByName("Intensity", _intensity);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Entertainment", _intensity);
 
 
         //_fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
@@ -60,7 +60,8 @@ public class FMODController : MonoBehaviour
     private void UpdateHealthParameter()
     {
         _health = healthSlider.value;
-        _fmodEventInstance.setParameterByName("Health", _health);
+        Debug.Log("health: " + _health);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Health", _health);
 
 
         //_fmodEventInstance.getParameterByName("Health", out float changedParamValue);

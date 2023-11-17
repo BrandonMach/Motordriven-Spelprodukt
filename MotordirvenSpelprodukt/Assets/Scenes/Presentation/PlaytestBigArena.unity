@@ -260,11 +260,11 @@ GameObject:
   m_Component:
   - component: {fileID: 27000599}
   - component: {fileID: 27000593}
-  - component: {fileID: 27000598}
   - component: {fileID: 27000597}
   - component: {fileID: 27000596}
   - component: {fileID: 27000595}
   - component: {fileID: 27000594}
+  - component: {fileID: 27000600}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -430,14 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4847d8c72ee4ec84a96efe73e3248360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &27000598
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27000592}
-  m_Enabled: 1
 --- !u!4 &27000599
 Transform:
   m_ObjectHideFlags: 0
@@ -453,6 +445,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &27000600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27000592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &31149022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1034,6 +1039,34 @@ PrefabInstance:
       propertyPath: volumeSlider
       value: 
       objectReference: {fileID: 849772053}
+    - target: {fileID: 3775717367182788008, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+      propertyPath: Banks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775717367182788008, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+      propertyPath: Banks.Array.data[0]
+      value: Master
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187881903499027142, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187881903499027142, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 148056549
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187881903499027142, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1156491615
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187881903499027142, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: 217249950
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187881903499027142, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 689223721
+      objectReference: {fileID: 0}
     - target: {fileID: 7294633899754028096, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 711.39655
@@ -1645,6 +1678,14 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1800511540857894261, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800511540857894261, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2308684024280983863, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1757,7 +1798,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5265066023250140052, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6488,8 +6530,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1119929734}
   - component: {fileID: 1119929733}
-  - component: {fileID: 1119929732}
   - component: {fileID: 1119929731}
+  - component: {fileID: 1119929735}
   m_Layer: 0
   m_Name: Canvas Camera
   m_TagString: Untagged
@@ -6541,14 +6583,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &1119929732
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119929730}
-  m_Enabled: 1
 --- !u!20 &1119929733
 Camera:
   m_ObjectHideFlags: 0
@@ -6615,6 +6649,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1119929735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119929730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &1122628415
 PrefabInstance:
   m_ObjectHideFlags: 0
