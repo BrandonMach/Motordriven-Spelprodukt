@@ -18,6 +18,7 @@ public class AttackManager : MonoBehaviour
     private string debugCurrentAttackMessage;
     private ICanAttack attacker;
     private float _etpDecrease;
+    private bool _screenShake;
 
     public System.EventHandler EnemyHit;
     public System.EventHandler AttackMissed;
@@ -84,6 +85,11 @@ public class AttackManager : MonoBehaviour
                 {
                     Debug.Log("Player has been hit");
                     EntertainmentManager.Instance.DecreseETP(_etpDecrease);
+
+                    if(_screenShake == true)
+                    {
+                        PlayerDamageHUD.Instance.ShakeScreen();
+                    }
                 }
                 else if (enemyHits[i].CompareTag("EnemyTesting"))
                 {
@@ -104,6 +110,7 @@ public class AttackManager : MonoBehaviour
         _attackType = e.CurrentAttackSO.currentAttackType;
         debugCurrentAttackMessage = e.CurrentAttackSO.name;
         _etpDecrease = e.CurrentAttackSO.ETPChange;
+        _screenShake= e.CurrentAttackSO.ScreenShake;
     }
 
     //public void OnEnemyGotHit()
