@@ -4080,6 +4080,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8064398764332070987}
+    - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3757048863897118904}
   m_SourcePrefab: {fileID: 100100000, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
 --- !u!65 &4128252714503457407 stripped
 BoxCollider:
@@ -4106,6 +4109,7 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  isPlayer: 0
   stunEffect: {fileID: 0}
 --- !u!114 &8064398764332070987
 MonoBehaviour:
@@ -4133,6 +4137,22 @@ MonoBehaviour:
   - {fileID: 2577747419469332913}
   _mainCollider: {fileID: 4128252714503457407}
   _rb: {fileID: 8199499030154146345}
+--- !u!114 &3757048863897118904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837593979468772016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c550a3195edf4c4a86bdbd688cd6719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxZize: 10
+  _inputSpamAmount: 3
+  _amountToCheckForSpam: 5
+  _enertainmentDecrease: 10
 --- !u!4 &5575574744827445178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
