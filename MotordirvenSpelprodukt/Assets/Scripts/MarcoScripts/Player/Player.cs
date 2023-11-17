@@ -57,6 +57,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private string _input;
     private bool _canAttack = true;
+    private PlayerInputSpamChecker _playerInputSpamChecker;
 
     /// <summary>
     /// Used for testing challenge "KillStreak"
@@ -78,6 +79,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _playerDash = GetComponent<PlayerDash>();
 
         _collider = GetComponent<BoxCollider>();
+        _playerInputSpamChecker = GetComponent<PlayerInputSpamChecker>();
     }
     void Start()
     {
@@ -91,8 +93,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _input = "";
         _entertainmentManager = EntertainmentManager.Instance;
 
-        Player.Instance.GetComponent<AttackManager>().EnemyHit += AttackLanded;
-        Player.Instance.GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
+        GetComponent<AttackManager>().EnemyHit += AttackLanded;
+        GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
     }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
@@ -191,7 +193,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void AnimationEvent_ComboBroken(string combo)
     {
 
-        if (_input == combo)
+        if (_input == combo) // Makes sure that it isn't the previous animation that is calling the event
         {
 
             if(_input.Length <= _tempComboChecker && _input.Length == 3) //Only give ETP if 3 hit-combo is executed
@@ -273,6 +275,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void OnComboBroken()
     {
         ResetComboChecker(this, EventArgs.Empty);
+
+        _playerInputSpamChecker?.AddInputSequence(_input);
         _input = "";
         ComboBroken?.Invoke(this, EventArgs.Empty);
         _canAttack = true;
@@ -282,9 +286,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     {
         if (!_playerDash.IsDashing)
         {
+            _playerMovement.AttackDash();
             OnDisableMovement();
             ChangeAttackAnimation?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = attack });
-            _playerMovement.AttackDash();           
+                       
             _canAttack = false;
         }
     }

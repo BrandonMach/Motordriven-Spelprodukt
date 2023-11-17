@@ -62,7 +62,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     private void OnDestroy()
     {
-        GameManager.Instance.UpdateEnemyList();
+        GameManager.Instance?.UpdateEnemyList();
     }
 
 
