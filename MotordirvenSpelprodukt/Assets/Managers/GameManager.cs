@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
 
-        if(_playerGO == null)
+        if(_player == null)
         {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
