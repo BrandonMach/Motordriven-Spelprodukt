@@ -19,7 +19,7 @@ MonoBehaviour:
     Data3: 217249950
     Data4: 689223721
   Banks:
-  - {fileID: -3922193566347515105}
+  - {fileID: 5022200313784203570}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   Path: Assets/Music/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638347857641076340
+  lastModified: 638345252993877514
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -64,30 +64,10 @@ MonoBehaviour:
   Path: Assets/Music/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638347857641086568
+  lastModified: 638345252993992292
   FileSizes:
   - Name: Desktop
     Value: 912
-  Exists: 1
---- !u!114 &-3922193566347515105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: "bank:/F\xC4ME_Music.bank"
-  m_EditorClassIdentifier: 
-  Path: "Assets/Music/Build/Desktop/F\xC4ME_Music.bank"
-  Name: "F\xC4ME_Music"
-  StudioPath: "bank:/F\xC4ME_Music"
-  lastModified: 638347857641061312
-  FileSizes:
-  - Name: Desktop
-    Value: 7783584
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -104,7 +84,7 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -5261443151645862283}
   - {fileID: -6337005443576701300}
-  - {fileID: -3922193566347515105}
+  - {fileID: 5022200313784203570}
   EditorEvents:
   - {fileID: -7448298583173178588}
   EditorParameters: []
@@ -112,8 +92,28 @@ MonoBehaviour:
   - {fileID: -6337005443576701300}
   StringsBanks:
   - {fileID: -5261443151645862283}
-  cacheTime: 638347857641086568
+  cacheTime: 638348691415429139
   cacheVersion: 131608
+--- !u!114 &5022200313784203570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: "bank:/F\xC4ME_Music.bank"
+  m_EditorClassIdentifier: 
+  Path: "Assets/Music/Build/Desktop/F\xC4ME_Music.bank"
+  Name: "F\xC4ME_Music"
+  StudioPath: "bank:/F\xC4ME_Music"
+  lastModified: 638348691415429139
+  FileSizes:
+  - Name: Desktop
+    Value: 7783584
+  Exists: 1
 --- !u!114 &5474725632239618929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   Name: Intensity
   StudioPath: 
   Min: 0
-  Max: 1
+  Max: 100
   Default: 0
   ID:
     data1: 2502622332
@@ -153,7 +153,7 @@ MonoBehaviour:
   Name: Health
   StudioPath: 
   Min: 0
-  Max: 1
+  Max: 100
   Default: 0
   ID:
     data1: 1197805461

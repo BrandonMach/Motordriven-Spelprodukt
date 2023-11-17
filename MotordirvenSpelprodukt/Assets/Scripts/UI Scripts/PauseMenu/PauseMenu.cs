@@ -18,8 +18,9 @@ public class PauseMenu : MenuAbstract, IMenu
     // Update is called once per frame
     void Update()
     {
-        ClickESC(); 
+        ClickESC();
 
+        Debug.Log("Timescale: " + Time.timeScale);
 
     }
 
