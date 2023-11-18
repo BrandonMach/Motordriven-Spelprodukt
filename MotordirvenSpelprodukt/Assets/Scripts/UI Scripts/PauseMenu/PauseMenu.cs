@@ -20,8 +20,6 @@ public class PauseMenu : MenuAbstract, IMenu
     {
         ClickESC();
 
-        Debug.Log("Timescale: " + Time.timeScale);
-
     }
 
 

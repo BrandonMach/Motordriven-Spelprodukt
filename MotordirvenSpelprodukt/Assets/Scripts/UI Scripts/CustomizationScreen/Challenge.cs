@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Challenge : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class Challenge : MonoBehaviour
     [SerializeField] private string _description;
     [SerializeField] private int _requirement;
     [SerializeField] private int _reward;
-    [SerializeField] private TextMeshProUGUI _text; 
+    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private GameObject _challengeButton;
 
     private bool _isCompleted;
     private bool _isActivated;
@@ -23,11 +25,13 @@ public class Challenge : MonoBehaviour
     public TextMeshProUGUI Text { get => _text; set => _text = value; }
     public bool IsCompleted { get => _isCompleted; set => _isCompleted = value; }
     public bool IsActivated { get => _isActivated; set => _isActivated = value; }
+    public GameObject ChallengeButton { get => _challengeButton; set => _challengeButton = value; }
 
     private void Start()
     {
         trigger = GetComponent<TooltipTrigger>();
         trigger.content = _description;
+        DontDestroyOnLoad(ChallengeButton);
     }
 
     public Challenge(string name, string description, int requirement)
