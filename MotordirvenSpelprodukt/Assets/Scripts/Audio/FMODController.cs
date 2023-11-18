@@ -60,7 +60,6 @@ public class FMODController : MonoBehaviour
     private void UpdateHealthParameter()
     {
         _health = healthSlider.value;
-        Debug.Log("health: " + _health);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Health", _health);
 
 
