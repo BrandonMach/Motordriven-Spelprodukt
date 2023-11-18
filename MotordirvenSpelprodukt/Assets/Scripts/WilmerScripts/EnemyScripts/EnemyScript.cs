@@ -112,19 +112,19 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     {
         AnimatorStateInfo anim = Anim.GetCurrentAnimatorStateInfo(0);
 
-        //if (anim.IsName("Heavy Attack") || anim.IsName("Light Attack"))
-        //{
-        //    CanMove = false;
-        //}
-        //else CanMove = true;
-        
-
         if (anim.IsName(animToCheck))
         {
-            CanMove = true;
-            return;
+            CanMove = false;
         }
-        CanMove = false;
+        else CanMove = true;
+
+
+        //if (anim.IsName(animToCheck))
+        //{
+        //    CanMove = true;
+        //    return;
+        //}
+        //CanMove = false;
     }
 
 

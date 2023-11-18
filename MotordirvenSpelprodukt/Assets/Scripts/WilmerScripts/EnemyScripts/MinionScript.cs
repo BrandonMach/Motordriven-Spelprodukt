@@ -48,7 +48,7 @@ public class MinionScript : EnemyScript
         // Call Update() on EnemyScript
         base.Update();
        
-        CheckCanMove("Walking");
+        
         OnGround = Physics.Raycast(_groundCheck.position, Vector3.down, 0.2f);
 
         switch (CurrentState)

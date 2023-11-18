@@ -36,6 +36,8 @@ public class MMScript : MinionScript
     protected override void Update()
     {
         base.Update();
+        CheckCanMove("Heavy Attack");
+        CheckCanMove("Light Attack");
         //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
     }
 

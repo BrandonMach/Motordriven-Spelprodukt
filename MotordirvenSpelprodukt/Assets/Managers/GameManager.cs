@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
-
+    // Kommer föras över till ChallengeManager ifall det finns tid
     #region ChallengeMethods
 
     private void HandleChallengeCompleted(Challenge completedChallenge)
@@ -222,6 +222,7 @@ public class GameManager : MonoBehaviour
         _challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
         Debug.Log("PlayerCoins = " + PlayerCoins);
+        completedChallenge.ChallengeButton.SetActive(false);
     }
 
     /// <summary>
@@ -287,6 +288,7 @@ public class GameManager : MonoBehaviour
         if (_player.HasTakenDamage)
         {
             _berserkerTimer = 0f;
+            _player.HasTakenDamage = false;
             Debug.Log("_berserkerTimer has been reset");
         }
 
