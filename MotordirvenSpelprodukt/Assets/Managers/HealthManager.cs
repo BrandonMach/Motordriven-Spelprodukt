@@ -13,7 +13,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public System.EventHandler OnPlayerTakeDamage;
+    public System.EventHandler OnShakeScreen;
 
     [Header("Dismembrent")]
     private DismemberentEnemyScript _dismembrentScript;
@@ -62,7 +62,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     private void OnDestroy()
     {
-        GameManager.Instance.UpdateEnemyList();
+        GameManager.Instance?.UpdateEnemyList();
     }
 
 
@@ -95,7 +95,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             if (IsPlayer)
             {
 
-                OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+                OnShakeScreen?.Invoke(this, EventArgs.Empty);
 
             }
 
@@ -136,17 +136,19 @@ public class HealthManager : MonoBehaviour,IHasProgress
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
+        else 
+        {
+            //Only increase killcount on npc
+            GameManager.Instance.KillCount++;
+            Debug.Log("Killcount: " + GameManager.Instance.KillCount);
+        }
+
         if (hasSlowMo)
         {
             _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
         }
         
         Dead = true;
-
-        GameManager.Instance.KillCount++;
-        Debug.Log("Killcount: " + GameManager.Instance.KillCount);
-
-
 
     }
 

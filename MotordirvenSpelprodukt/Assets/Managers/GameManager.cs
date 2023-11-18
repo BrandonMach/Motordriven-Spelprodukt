@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
 
     float _gameStartTimer;
+    float _berserkerTimer;
     float _challengeTimer;
     bool _isTimerActive;
 
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour
             _killstreakKillCount++;
             _killCount = value;
 
-            Debug.Log($"KillstreakCount: {_killstreakKillCount}");
+            //Debug.Log($"KillstreakCount: {_killstreakKillCount}");
         }
     }
 
@@ -125,8 +126,10 @@ public class GameManager : MonoBehaviour
     {
         _challengeManager = ChallengeManager.Instance;
         _gameStartTimer = 0;
+        _berserkerTimer = 0;
 
         _champion = GameObject.FindObjectOfType<CMP1Script>();
+        _player = Player.Instance;
         _playerGO = GameObject.FindGameObjectWithTag("Player");
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _etp = EntertainmentManager.Instance;
@@ -157,7 +160,7 @@ public class GameManager : MonoBehaviour
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
 
-        if(_playerGO == null)
+        if(_player == null)
         {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
@@ -275,7 +278,13 @@ public class GameManager : MonoBehaviour
     private bool BerserkerCheck(TimeChallenge timeChallenge)
     {
 
-        if (timeChallenge.ChallengeName == "Berserker" && timeChallenge.TimeForCompletion >= _gameStartTimer && _killCount >= timeChallenge.Requirement)
+        if (_player.HasTakenDamage)
+        {
+            _berserkerTimer = 0f;
+            Debug.Log("_berserkerTimer has been reset");
+        }
+
+        if (timeChallenge.ChallengeName == "Berserker" && timeChallenge.TimeForCompletion >= _berserkerTimer && _killCount >= timeChallenge.Requirement)
         {
             return true;
         }
@@ -365,6 +374,7 @@ public class GameManager : MonoBehaviour
     public void ChallengeTimersUpdate()
     {
         _gameStartTimer += Time.deltaTime;
+        _berserkerTimer += Time.deltaTime;
     }
 
 

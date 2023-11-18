@@ -6,6 +6,23 @@ using Cinemachine;
 
 public class PlayerDamageHUD : MonoBehaviour
 {
+
+    #region Singleton
+
+    private static PlayerDamageHUD _instance;
+    public static PlayerDamageHUD Instance { get => _instance; set => _instance = value; }
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            return;
+        }
+        Instance = this;
+
+       
+    }
+    #endregion
+
     [SerializeField] private Image _bloodSplatterImage = null;
     [SerializeField] private Image _hurtImage = null;
     [SerializeField] private float _hurtTimer = 1f;
@@ -30,7 +47,9 @@ public class PlayerDamageHUD : MonoBehaviour
         _bloodSplatterImage.enabled = false;
 
         //_playerHP = GameObject.FindWithTag("Player").GetComponent<HealthManager>();
-        _playerHP.OnPlayerTakeDamage += UpdateAlphColor;
+
+
+        _playerHP.OnShakeScreen += UpdateAlphColor;
 
        
         _splatterAlpha = _bloodSplatterImage.color;
@@ -43,10 +62,14 @@ public class PlayerDamageHUD : MonoBehaviour
 
     void UpdateAlphColor(object sender, System.EventArgs e)
     {
-        ImpulseSource.GenerateImpulse(); //Only if the attackSO has bool screen shake checked
+       
         Reset();
     }
 
+    public void ShakeScreen()
+    {
+        ImpulseSource.GenerateImpulse(); //Only if the attackSO has bool screen shake checked
+    }
 
     private void Update()
     {

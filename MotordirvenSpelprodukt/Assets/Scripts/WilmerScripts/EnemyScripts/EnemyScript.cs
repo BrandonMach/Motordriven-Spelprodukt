@@ -46,8 +46,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void Update()
     {
-        RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);        
-        DistanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);    
+        if(Player.Instance != null)
+        {
+            DistanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        }
+        
     }
 
 
@@ -57,15 +61,20 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     protected void FacePlayer()
     {
         //Vector3 direction = transform.position - transform.position;
-        Vector3 direction = Player.Instance.transform.position - transform.position;
-        direction.y = 0;
+        
+        if(Player.Instance != null)
+        {
+            Vector3 direction = Player.Instance.transform.position - transform.position;
+            direction.y = 0;
 
-        // Normalize the direction to get a unit vector
-        direction.Normalize();
+            // Normalize the direction to get a unit vector
+            direction.Normalize();
 
-        //Rotate the Champion towards the players position
-        Quaternion targetRot = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10);
+            //Rotate the Champion towards the players position
+            Quaternion targetRot = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10);
+        }
+       
     }
 
 

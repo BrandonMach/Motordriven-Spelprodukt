@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7448298583173178588
+--- !u!114 &-4761191325889865451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/New Event
+  m_Name: event:/Music
   m_EditorClassIdentifier: 
-  Path: event:/New Event
+  Path: event:/Music
   Guid:
     Data1: 148056549
     Data2: 1156491615
     Data3: 217249950
     Data4: 689223721
   Banks:
-  - {fileID: 5022200313784203570}
+  - {fileID: 5540253985863976750}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8384059605799437386}
-  - {fileID: 5474725632239618929}
+  - {fileID: 4919715699683408713}
+  - {fileID: -3278912505201584881}
   MinDistance: 1
   MaxDistance: 20
-  Length: 158000
---- !u!114 &-6337005443576701300
+  Length: 174000
+--- !u!114 &-4257467875761341707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,15 +41,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: Assets/Music/Build/Desktop/Master.bank
+  Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638348071963417731
-  FileSizes:
-  - Name: Desktop
-    Value: 1036
+  lastModified: 638358431728810074
+  FileSizes: []
   Exists: 1
---- !u!114 &-5261443151645862283
+--- !u!114 &-3278912505201584881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,16 +56,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Entertainment
   m_EditorClassIdentifier: 
-  Path: Assets/Music/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638348071963417731
-  FileSizes:
-  - Name: Desktop
-    Value: 912
+  Name: Entertainment
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 2502622332
+    data2: 1396067453
+  Type: 0
+  IsGlobal: 1
+  Labels: []
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -82,19 +84,21 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -5261443151645862283}
-  - {fileID: -6337005443576701300}
-  - {fileID: 5022200313784203570}
+  - {fileID: 2098138437701751822}
+  - {fileID: 5540253985863976750}
+  - {fileID: -4257467875761341707}
   EditorEvents:
-  - {fileID: -7448298583173178588}
-  EditorParameters: []
+  - {fileID: -4761191325889865451}
+  EditorParameters:
+  - {fileID: 9144251083752334150}
+  - {fileID: 8729387731040408407}
   MasterBanks:
-  - {fileID: -6337005443576701300}
+  - {fileID: -4257467875761341707}
   StringsBanks:
-  - {fileID: -5261443151645862283}
-  cacheTime: 638348071963417731
+  - {fileID: 2098138437701751822}
+  cacheTime: 638358431728830024
   cacheVersion: 131608
---- !u!114 &5022200313784203570
+--- !u!114 &2098138437701751822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,17 +108,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: "bank:/F\xC4ME_Music.bank"
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: "Assets/Music/Build/Desktop/F\xC4ME_Music.bank"
-  Name: "F\xC4ME_Music"
-  StudioPath: "bank:/F\xC4ME_Music"
-  lastModified: 638348071963407728
+  Path: Assets/FMODBanks/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638358431728830024
   FileSizes:
-  - Name: Desktop
-    Value: 7783584
+  - Name: 
+    Value: 912
   Exists: 1
---- !u!114 &5474725632239618929
+--- !u!114 &4919715699683408713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,41 +128,83 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/New Event/Intensity
-  m_EditorClassIdentifier: 
-  Name: Intensity
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2502622332
-    data2: 1396067453
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &8384059605799437386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/New Event/Health
+  m_Name: parameter:/Music/Health
   m_EditorClassIdentifier: 
   Name: Health
   StudioPath: 
   Min: 0
-  Max: 1
+  Max: 100
   Default: 0
   ID:
     data1: 1197805461
     data2: 619291858
   Type: 0
-  IsGlobal: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &5540253985863976750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FAME_Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMODBanks/Desktop/FAME_Music.bank
+  Name: FAME_Music
+  StudioPath: bank:/FAME_Music
+  lastModified: 638358431728790440
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8729387731040408407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Health
+  m_EditorClassIdentifier: 
+  Name: Health
+  StudioPath: parameter:/Health
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 1197805461
+    data2: 619291858
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &9144251083752334150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Entertainment
+  m_EditorClassIdentifier: 
+  Name: Entertainment
+  StudioPath: parameter:/Entertainment
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 2502622332
+    data2: 1396067453
+  Type: 0
+  IsGlobal: 1
   Labels: []
   Exists: 1
