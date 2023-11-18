@@ -13,7 +13,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public System.EventHandler OnPlayerTakeDamage;
+    public System.EventHandler OnShakeScreen;
 
     [Header("Dismembrent")]
     private DismemberentEnemyScript _dismembrentScript;
@@ -95,7 +95,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             if (IsPlayer)
             {
 
-                OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+                OnShakeScreen?.Invoke(this, EventArgs.Empty);
 
             }
 

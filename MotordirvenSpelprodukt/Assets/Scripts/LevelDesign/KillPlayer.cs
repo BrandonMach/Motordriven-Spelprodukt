@@ -6,13 +6,19 @@ public class KillPlayer : MonoBehaviour
 {
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("HUH?");
-            HealthManager manager = other.gameObject.GetComponent<HealthManager>();
+        //if (other.CompareTag("Player"))
+        //{
+        //    Debug.Log("HUH?");
+        //    HealthManager manager = other.gameObject.GetComponent<HealthManager>();
 
-            if (manager != null)
-                manager.Die();
+        //    if (manager != null)
+        //        manager.Die();
+        //}
+
+
+        if(other.gameObject == Player.Instance.gameObject)
+        {
+            other.gameObject.GetComponent<HealthManager>().Die();
         }
     }
 }
