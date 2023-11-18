@@ -16,17 +16,23 @@ public class ProgressBarUI : MonoBehaviour
     private bool increaseHealth;
     public bool IsChampionHPbar;
 
+   
+
     private void Start()
     {
 
         if (IsChampionHPbar)
         {
             _hasProgressGameObject = GameManager.Instance._championNy;
+            
+            //_slider.maxValue = 250;
+            //_slider.value = 230;
         }
 
 
         _hasProgress = _hasProgressGameObject.GetComponent<IHasProgress>(); //Lägger in objectet som ska påverka Ehalthbar UI element
-
+        _slider.maxValue = _hasProgressGameObject.GetComponent<HealthManager>().MaxHP;
+        _slider.value = _hasProgressGameObject.GetComponent<HealthManager>().MaxHP;
 
         if (_hasProgress == null)
         {

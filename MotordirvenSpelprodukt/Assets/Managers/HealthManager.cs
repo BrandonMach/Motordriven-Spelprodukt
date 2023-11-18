@@ -8,6 +8,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class HealthManager : MonoBehaviour,IHasProgress
 {
     [SerializeField] float _maxHealthPoints;
+    public float MaxHP { get => _maxHealthPoints; }
     [SerializeField] private float _bleedDuration = 6.0f;
     public float CurrentHealthPoints { get; private set; }
     [SerializeField] float _currentHealth;
