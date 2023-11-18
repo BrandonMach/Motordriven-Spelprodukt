@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 11530044}
   - component: {fileID: 11530043}
   m_Layer: 5
-  m_Name: HealthCanvas
+  m_Name: Player Damage HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,14 +679,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62696562}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -250.84015}
+  m_LocalRotation: {x: 0.03456237, y: 0.048393603, z: 0.9982288, w: -0.0016755655}
+  m_LocalPosition: {x: 0, y: 0, z: -250.84018}
   m_LocalScale: {x: 200, y: 200.00002, z: 200.00002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1122628416}
   m_Father: {fileID: 997289681}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -5.551, y: 3.966, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 386}
@@ -2790,7 +2790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hasProgressGameObject: {fileID: 1537310729}
   _slider: {fileID: 191538270}
-  _refillSpeed: 0.5
+  _refillSpeed: 30
   IsChampionHPbar: 0
 --- !u!1001 &398635446
 PrefabInstance:
@@ -6848,6 +6848,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Red Diamond
       objectReference: {fileID: 0}
+    - target: {fileID: 480420003540923539, guid: f6b7e26ee589bdf448a60122e78633bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.964
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f6b7e26ee589bdf448a60122e78633bf, type: 3}
       propertyPath: m_Name
       value: etpbar
@@ -6859,6 +6863,18 @@ PrefabInstance:
     - target: {fileID: 3907091372267947420, guid: f6b7e26ee589bdf448a60122e78633bf, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735050061534506967, guid: f6b7e26ee589bdf448a60122e78633bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735050061534506967, guid: f6b7e26ee589bdf448a60122e78633bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735050061534506967, guid: f6b7e26ee589bdf448a60122e78633bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.964
       objectReference: {fileID: 0}
     - target: {fileID: 7842732192952116574, guid: f6b7e26ee589bdf448a60122e78633bf, type: 3}
       propertyPath: m_Layer

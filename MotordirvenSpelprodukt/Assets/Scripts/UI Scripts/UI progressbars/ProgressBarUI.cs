@@ -43,6 +43,7 @@ public class ProgressBarUI : MonoBehaviour
     private void HasProgress_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {
         _targetFillAmount = e.progressNormalized;
+
         if (_targetFillAmount > _slider.value) 
         { 
             increaseHealth = true;
@@ -55,13 +56,14 @@ public class ProgressBarUI : MonoBehaviour
 
     private void Update()
     {
+        
         if (_slider.value != _targetFillAmount)
         {
-            if (increaseHealth && _slider.value < _targetFillAmount)
+            if (increaseHealth && _slider.value <= _targetFillAmount)
             {
                 _slider.value += _refillSpeed * Time.deltaTime;
             }
-            else if (!increaseHealth && _slider.value > _targetFillAmount)
+            else if (!increaseHealth && _slider.value >= _targetFillAmount)
             {
                 _slider.value -= _refillSpeed * Time.deltaTime;
             }
