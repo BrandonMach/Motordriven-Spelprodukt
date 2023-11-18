@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ChallengeManager : MonoBehaviour
@@ -26,6 +27,11 @@ public class ChallengeManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        foreach (GameObject item in AvailableChallengeButtons)
+        {
+            
+        }
+
         ActiveChallenges = new List<Challenge>();
     }
     #endregion
@@ -34,6 +40,8 @@ public class ChallengeManager : MonoBehaviour
 
     public List<Challenge> AvailableChallenges = new List<Challenge>();
     public List<Challenge> ActiveChallenges;
+
+    public List<GameObject> AvailableChallengeButtons = new List<GameObject>();
 
     public event Action<Challenge> OnChallengeCompleted;
 
@@ -46,7 +54,21 @@ public class ChallengeManager : MonoBehaviour
 
     private void Update()
     {
-        
+        foreach (Challenge challenge in AvailableChallenges)
+        {
+            if (challenge.IsCompleted)
+            {
+                challenge.ChallengeButton.SetActive(false);
+            }
+        }
+    }
+
+    public void DeActivateCompletedChallengeButton(Challenge challenge)
+    {
+        if (challenge.IsCompleted)
+        {
+            challenge.ChallengeButton.SetActive(false);
+        }
     }
 
     public void UpdateActivesChallengesTMP(Challenge challenge)
