@@ -8,8 +8,9 @@ public class RMScript : MinionScript
     [SerializeField] private Transform _fireArrowPos;
     [SerializeField] private float _startFleeRange;
     [SerializeField] private ArrowManager _arrowManager;
+    [SerializeField] private float _agentRotationSpeed;
     private NavMeshAgent _navMesh;
-    public float rang;
+
     public float StartFleeRange 
     { 
         get { return _startFleeRange; } 
@@ -23,13 +24,15 @@ public class RMScript : MinionScript
         AttackRange = 20;
         _navMesh = GetComponent<NavMeshAgent>();
         _navMesh.speed = MovementSpeed;
-        rang = AttackRange;
+        _navMesh.angularSpeed = _agentRotationSpeed;
+        //_agentRotationSpeed = _navMesh.angularSpeed;
     }
 
 
     protected override void Update()
     {
         base.Update();
+        CheckCanMove("Shoot");
         if (CurrentState == EnemyState.fleeing)
         {
             _navMesh.enabled = true;
@@ -38,19 +41,42 @@ public class RMScript : MinionScript
     }
 
 
+    public void StandupAnimFinished()
+    {
+        Anim.SetBool("GettingUp", false);
+    }
+
+
+    public void StandUpAnimStarted()
+    {
+        Anim.SetBool("GettingUp", true);
+    }
+
+
     protected override void HandleFleeing()
     {
         base.HandleFleeing();
         
         ResetTriggers();
-        Anim.SetTrigger("Walking");
-        if (CurrentState == EnemyState.fleeing)
+        Anim.SetTrigger("Backpaddle");
+        //Anim.SetTrigger("Walking");
+        if (CurrentState == EnemyState.fleeing && CanMove)
         {
             Vector3 dir = transform.position - Player.Instance.transform.position;
             Vector3 goTo = transform.position + dir.normalized * 10;
             _navMesh.SetDestination(goTo);
             FacePlayer();
         }
+    }
+
+
+    protected override void ResetTriggers()
+    {
+        base.ResetTriggers();
+
+        Anim.ResetTrigger("Shoot");
+        Anim.ResetTrigger("GettingUp");
+        Anim.ResetTrigger("Backpaddle");
     }
 
 

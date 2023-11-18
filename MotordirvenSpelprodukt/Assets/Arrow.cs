@@ -23,9 +23,15 @@ public class Arrow : MonoBehaviour
         _startPos = transform;
         defaultParent = transform.parent;
         _rb = GetComponent<Rigidbody>();
+        _rb.isKinematic = false;
         //_rb.useGravity = false;
+        Player.Instance.StartEvade += Player_OnEvade;
     }
 
+    private void Player_OnEvade(object sender, System.EventArgs e)
+    {
+        
+    }
 
     void Update()
     {
@@ -36,8 +42,10 @@ public class Arrow : MonoBehaviour
 
             if (_timeSinceFire >= _maxLifeTime)
             {
+                _rb.isKinematic = false;
                 transform.SetPositionAndRotation(_startPos.position, _startPos.rotation);
                 _fired = false;
+                
                 transform.parent = defaultParent;
                 //transform.position = defaultParent.position;
                 _timeSinceFire = 0;
@@ -46,11 +54,22 @@ public class Arrow : MonoBehaviour
     }
 
 
+    private void ResetArrow()
+    {
+
+    }
+
+
     private void MoveArrow()
     {
         //transform.Translate(Vector3.forward * _arrowSpeed * Time.deltaTime);
         //_rb.AddForce(transform.forward *  _arrowSpeed, ForceMode.Impulse);
-        _rb.velocity = transform.up * _arrowSpeed;
+        if (_rb.isKinematic == false)
+        {
+            _rb.velocity = transform.up * _arrowSpeed;
+
+        }
+ 
         //_rb.AddTorque(transform.up * _arrowSpeed*5);
     }
 
@@ -73,12 +92,22 @@ public class Arrow : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other)
-    {
+    {    
         if (other.transform.CompareTag("Player"))
         {
-            Player.Instance.TakeDamage(_attack);
             _rb.isKinematic = true;
             transform.SetParent(other.transform);
+            //Player.Instance.TakeDamage(_attack);                  
         }
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.transform.CompareTag("Player"))
+    //    {
+    //        Player.Instance.TakeDamage(_attack);
+    //        _rb.isKinematic = true;
+    //        transform.SetParent(collision.transform);
+    //    }
+    //}
 }

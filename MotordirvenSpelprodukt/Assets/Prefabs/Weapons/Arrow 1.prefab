@@ -224,16 +224,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959729250425484}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5440755, y: 2.8349276, z: 2.544076}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4668755794025904}
   - {fileID: 4115648698905132}
   - {fileID: 4839572531540142}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!136 &5443792957615159391
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -249,14 +249,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.007
-  m_Height: 0.79
+  m_Radius: 0.015
+  m_Height: 0.08
   m_Direction: 1
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: 0.655, z: 0}
 --- !u!114 &-7601555457848662976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,8 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646a3a5fe2feee840a44f9a86bfed04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLifeTime: 5
-  _arrowSpeed: 0
+  _maxLifeTime: 8
+  _arrowSpeed: 35
 --- !u!54 &8730529407226898089
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959729250425484}
   serializedVersion: 4
-  m_Mass: 0.2
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -293,8 +293,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
