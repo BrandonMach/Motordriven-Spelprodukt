@@ -80,12 +80,13 @@ public class GameManager : MonoBehaviour
 
     //Champion Path 
     [Header("Champion Path")]
-    [SerializeField] public UnityEngine.Object _champion;
+    public UnityEngine.Object _champion;
     [SerializeField] public GameObject _championNy;
     public int AmountOfChampionsToKill; //CHampion road-map
     public static int KilledChampions;
     [SerializeField] private List<GameObject> _championList;
     [SerializeField] private Transform _championStartPos;
+    [SerializeField] private  TextMeshProUGUI _championHPText;
     #endregion
 
 
@@ -159,6 +160,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+        if(_championNy != null)
+        {
+            _championHPText.text = (_championNy.GetComponent<HealthManager>().CurrentHealthPoints / _championNy.GetComponent<HealthManager>().MaxHP * 100).ToString() + "%";
+        }
+
+        
         if (_championNy == null && !_kingCam)
         {
             OnMatchFinished?.Invoke(this, EventArgs.Empty);
