@@ -43,7 +43,7 @@ public class FallingObjectType : MonoBehaviour
 
     void Start()
     {
-        _playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        _playerPosition = Player.Instance.transform.position;
  
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,Ground))
         {

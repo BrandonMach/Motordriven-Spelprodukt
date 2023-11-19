@@ -26,11 +26,12 @@ public class DismemberentEnemyScript : MonoBehaviour
     void Update()
     {
         //För testing
-        //if (Input.GetKeyDown(KeyCode.N))
-        //{  
-        //    _limbs[Random.Range(0, _limbs.Count)].Dismember();
-        //    ActivateRagdoll();
-        //}
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            //_limbs[Random.Range(0, _limbs.Count)].Dismember();
+            //ActivateRagdoll();
+            PlayerDismember();
+        }
     }
 
     public void PlayerDismember()
@@ -67,7 +68,9 @@ public class DismemberentEnemyScript : MonoBehaviour
 
     public void GetKilled()
     {
-        _limbs[Random.Range(0, _limbs.Count)].Dismember();
-        ActivateRagdoll();
+        //_limbs[Random.Range(0, _limbs.Count)].Dismember();
+        //ActivateRagdoll();
+        PlayerDismember();
     }
+
 }

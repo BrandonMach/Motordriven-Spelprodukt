@@ -26,7 +26,7 @@ public class DismembermentLimbsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void Dismember() //Dismembrent function i Idamage eller i health sckriptet gör get hoit kalla på detta

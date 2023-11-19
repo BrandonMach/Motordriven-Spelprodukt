@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class CMP1Script : ChampionScript
 {
+    public string ChampionName;
     public enum ChampionState { Enter, Taunt, SpecialAttack, BasicAttack, None }
     public ChampionState CurrentState = ChampionState.Enter;
     public ChampionState PreviousState = ChampionState.Enter;

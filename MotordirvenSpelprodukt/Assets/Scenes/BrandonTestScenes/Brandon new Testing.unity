@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 47e1bfbac1f87ad4d912036fd6b66096, type: 3}
   - {fileID: 21300000, guid: 34ec70447b20f3e409dc1d2543cdec6d, type: 3}
   _playerHP: {fileID: 1537310728}
-  ImpulseSource: {fileID: 1537310730}
+  ImpulseSource: {fileID: 0}
 --- !u!114 &11530044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4962,17 +4962,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _etp: {fileID: 0}
-  _playerGO: {fileID: 0}
   _player: {fileID: 0}
   MatchIsFinished: 0
+  Canvases:
+  - {fileID: 107647397}
+  - {fileID: 976007180}
   _champion: {fileID: 0}
-  _championNy: {fileID: 0}
   AmountOfChampionsToKill: 0
   _championList:
   - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
   - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
   _championStartPos: {fileID: 967999941}
   _championHPText: {fileID: 1497992532}
+  _championNameText: {fileID: 1996674469}
   CamManager: {fileID: 449361483}
   EnemyGameObjects: []
 --- !u!4 &681701748
@@ -5958,6 +5960,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4884869238987008, guid: acce342346444bf499347812a6e325f8, type: 3}
   m_PrefabInstance: {fileID: 967999940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &976007180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6776200444651968710, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
+  m_PrefabInstance: {fileID: 191538269}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &997289680
 GameObject:
@@ -7198,6 +7205,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4596640331168922, guid: 5384b0579aea21545b42e1e5bd2f4cc0, type: 3}
   m_PrefabInstance: {fileID: 1135047799}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1145822273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3343643216543082956, guid: 626a1c2dfac8d2645b795e983383ec31, type: 3}
+  m_PrefabInstance: {fileID: 1774080979}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b966abb1a91d1344ab1661b72de449af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1154533053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8726,7 +8744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
   slowDownDuration: 2
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 1145822273}
 --- !u!4 &1386944804
 Transform:
   m_ObjectHideFlags: 0
@@ -9887,6 +9905,10 @@ PrefabInstance:
       propertyPath: _maxSize
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3757048863897118904, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3889045252942193201, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: _moveSpeed
       value: 9
@@ -9899,13 +9921,17 @@ PrefabInstance:
       propertyPath: _rotationSpeed
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 4128252714503457407, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4445148973989027988, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: GodMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4445148973989027988, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: IsPlayer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4837593979468772016, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: m_Name
@@ -9957,15 +9983,12 @@ PrefabInstance:
       objectReference: {fileID: 113899808}
     - target: {fileID: 8199499030154146345, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: m_UseGravity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4837593979468772016, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1537310730}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
 --- !u!4 &1537310726 stripped
 Transform:
@@ -9999,66 +10022,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4837593979468772016, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
   m_PrefabInstance: {fileID: 1537310725}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1537310730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537310729}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_ImpulseShape: 4
-    m_CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ImpulseDuration: 0.4
-    m_ImpulseType: 1
-    m_DissipationRate: 0.25
-    m_RawSignal: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 100
-    m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -1, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  m_IgnoreTag: Player
-  m_UseImpactDirection: 0
-  m_ScaleImpactWithMass: 0
-  m_ScaleImpactWithSpeed: 0
 --- !u!1 &1542138413
 GameObject:
   m_ObjectHideFlags: 0
