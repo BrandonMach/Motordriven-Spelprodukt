@@ -21,7 +21,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public bool HasDismembrent;
 
     public bool Dead;
-    public float _destroydelay = 2.5f;
+    public float _destroydelay = 1.5f;
 
     public bool IsPlayer;
     public bool GodMode;

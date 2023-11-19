@@ -9,7 +9,7 @@ public class DismemberentEnemyScript : MonoBehaviour
 
     [SerializeField] List<Rigidbody> _ragdollRigids;
     [SerializeField] List<DismembermentLimbsScript> _limbs;
-    [SerializeField] BoxCollider _mainCollider;
+    [SerializeField] Collider _mainCollider;
     [SerializeField] Rigidbody _rb;
     void Start()
     {

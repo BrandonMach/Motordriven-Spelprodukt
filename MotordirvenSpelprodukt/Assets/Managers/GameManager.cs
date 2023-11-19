@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-           //_playerGO.gameObject.GetComponent<Rigidbody>().useGravity = false;
+     
            _player.gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
