@@ -22,7 +22,10 @@ public class AudioMenu : MenuAbstract, IMenu
     {
         base.ClickESC();
     }
-
+    public override void ClickBack()
+    {
+        base.ClickBack();
+    }
     public void ClickMenuOption1()
     {
         throw new System.NotImplementedException();
