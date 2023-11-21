@@ -169,6 +169,8 @@ public class MinionScript : EnemyScript
 
     protected virtual void HandleStun()
     {
+        //ResetTriggers();
+        //Anim.SetTrigger("Stunned");
     }
 
 
@@ -253,14 +255,15 @@ public class MinionScript : EnemyScript
 
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
-        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
+        ResetTriggers();
+        Anim.SetTrigger("Stunned");
+        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);       //Funkar inte?
 
 
         //ParticleSystemManager.Instance.PlayStunEffect(pos, Quaternion.Euler(-90, 0, 0), transform);
         //ParticleSystemManager.Instance.PlayShockWaveEffect(attackerPos);
 
-        ResetTriggers();
-        Anim.SetTrigger("Stunned");
+        
     }
 
     private void GetHit()
@@ -313,19 +316,6 @@ public class MinionScript : EnemyScript
 
 
     protected virtual void ResetTriggers()
-    {
-        // Call ResetTriggers on EnemyScript
-        //base.ResetTriggers();
-
-        // For all minions
-        Anim.ResetTrigger("Walking");
-        Anim.ResetTrigger("Stunned");
-        Anim.ResetTrigger("PushedBack");
-        Anim.ResetTrigger("KnockUp");
-        Anim.ResetTrigger("Land");
-        Anim.ResetTrigger("Taunt");
-    }
-    protected virtual void ResetTriggersForHit()
     {
         // Call ResetTriggers on EnemyScript
         //base.ResetTriggers();
