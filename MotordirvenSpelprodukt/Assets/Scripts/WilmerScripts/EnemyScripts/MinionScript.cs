@@ -12,7 +12,7 @@ public class MinionScript : EnemyScript
     [SerializeField] private bool _onGround = true;
     private bool _shouldCheckOnGround;
 
-    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing }
+    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing}
     public EnemyState CurrentState = EnemyState.chasing;
     public EnemyState PreviousState = EnemyState.none;
 
@@ -83,6 +83,7 @@ public class MinionScript : EnemyScript
                 break;
         }
     }
+
 
     #region Events
     /// <summary>
@@ -160,6 +161,11 @@ public class MinionScript : EnemyScript
         }
     }
 
+    protected virtual void HandleHit()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Hit");
+    }
 
     protected virtual void HandleStun()
     {
@@ -206,6 +212,7 @@ public class MinionScript : EnemyScript
         switch (attack.AttackSO.CurrentAttackEffect)
         {
             case CurrentAttackSO.AttackEffect.None:
+                GetHit();
                 break;
 
             case CurrentAttackSO.AttackEffect.Pushback:
@@ -233,6 +240,7 @@ public class MinionScript : EnemyScript
         }
     }
 
+    
 
     protected void GetStunned(float stunDuration, Vector3 attackerPos)
     {
@@ -255,6 +263,11 @@ public class MinionScript : EnemyScript
         Anim.SetTrigger("Stunned");
     }
 
+    private void GetHit()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Hit");
+    }
 
     /// <summary>
     /// Adds force to enemy upwards. Only for minions.
@@ -300,6 +313,19 @@ public class MinionScript : EnemyScript
 
 
     protected virtual void ResetTriggers()
+    {
+        // Call ResetTriggers on EnemyScript
+        //base.ResetTriggers();
+
+        // For all minions
+        Anim.ResetTrigger("Walking");
+        Anim.ResetTrigger("Stunned");
+        Anim.ResetTrigger("PushedBack");
+        Anim.ResetTrigger("KnockUp");
+        Anim.ResetTrigger("Land");
+        Anim.ResetTrigger("Taunt");
+    }
+    protected virtual void ResetTriggersForHit()
     {
         // Call ResetTriggers on EnemyScript
         //base.ResetTriggers();

@@ -10,7 +10,7 @@
 [LOG] DownMix::init                            : done.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000002460DC02AC8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000244FBCB4E48 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -22,6 +22,42 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SoundI::release                          :  (00000245EACA0088)
+[LOG] SoundI::release                          :     FAME_Tam tam TR 20231116 (000002461621B168)
+[LOG] SoundI::release                          : FAME_Tenor Drum II 20231116 (0000024615C6A5F8)
+[LOG] SoundI::release                          :     FAME_Tenor Drum II 20231116 (00000245E8E55228)
+[LOG] SoundI::release                          :     FAME_Tenor Drum II 20231116 (00000245E9741F48)
+[LOG] SoundI::release                          : FAME_Male choir 20231116 (0000024615C69F38)
+[LOG] SoundI::release                          :     FAME_Male choir 20231116 (00000246160D5708)
+[LOG] SoundI::release                          :     FAME_Male choir 20231116 (00000245E9742608)
+[LOG] SoundI::release                          : FAME_Trombones short 20231116 (0000024610E77848)
+[LOG] SoundI::release                          :     FAME_Trombones short 20231116 (00000246160D5D88)
+[LOG] SoundI::release                          :     FAME_Trombones short 20231116 (00000245E9742458)
+[LOG] SoundI::release                          : FAME_Horns 20231116 (0000024610E77698)
+[LOG] SoundI::release                          :     FAME_Horns 20231116 (00000246160D5A48)
+[LOG] SoundI::release                          :     FAME_Horns 20231116 (00000245E9742B18)
+[LOG] SoundI::release                          : FAME_Tenor Drum I 20231116 (0000024610E77188)
+[LOG] SoundI::release                          :     FAME_Tenor Drum I 20231116 (00000246160D5228)
+[LOG] SoundI::release                          :     FAME_Tenor Drum I 20231116 (00000244E47096D8)
+[LOG] SoundI::release                          : FAME_strings short 20231116 (0000024610E774E8)
+[LOG] SoundI::release                          :     FAME_strings short 20231116 (00000244E3B1DA78)
+[LOG] SoundI::release                          :     FAME_strings short 20231116 (00000244E4709888)
+[LOG] SoundI::release                          :  (00000245EACA0D78)
+[LOG] SoundI::release                          :     FAME_strings long TR 20231116 (000002461621AAE8)
+[LOG] SoundI::release                          :  (00000245EAC9FC38)
+[LOG] SoundI::release                          :     FAME_Pad 1 TR 20231116 (000002461621B308)
+[LOG] SoundI::release                          :  (00000245EACA0A98)
+[LOG] SoundI::release                          :     FAME_Suspended Cymbals TR 20231116 (000002461621AE28)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -29,3 +65,5 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
