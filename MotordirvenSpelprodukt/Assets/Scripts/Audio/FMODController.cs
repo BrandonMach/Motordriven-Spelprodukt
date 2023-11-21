@@ -35,6 +35,8 @@ public class FMODController : MonoBehaviour
     {
         UpdateIntensityParameter();
         UpdateHealthParameter();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetVolume(float volume)
@@ -42,6 +44,10 @@ public class FMODController : MonoBehaviour
         if (_fmodEventInstance.isValid())
         {
             _fmodEventInstance.setVolume(volume);
+        }
+        else
+        {
+            Debug.Log("fmodEventInstance is not valid");
         }
     }
 

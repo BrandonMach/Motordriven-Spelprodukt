@@ -80,6 +80,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         _collider = GetComponent<BoxCollider>();
         _playerInputSpamChecker = GetComponent<PlayerInputSpamChecker>();
+        
+        
     }
     void Start()
     {
@@ -95,6 +97,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         GetComponent<AttackManager>().EnemyHit += AttackLanded;
         GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
+        if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon() != null)
+            SetWeapon(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon());
     }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
