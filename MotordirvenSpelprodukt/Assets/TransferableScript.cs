@@ -5,7 +5,7 @@ using UnityEngine;
 public class TransferableScript : MonoBehaviour
 {
     [SerializeField] private Weapon _weapon;
-    [SerializeField] private GameObject _FMODAudioManager;
+    //[SerializeField] private FMODController _FMODcontroller;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -18,4 +18,12 @@ public class TransferableScript : MonoBehaviour
     {
         _weapon = weapon;
     }
+    //public FMODController GetFMODAM()
+    //{
+    //    return _FMODcontroller;
+    //}
+    //public void SetFMODAM(FMODController FMODAM)
+    //{
+    //    _FMODcontroller = FMODAM;
+    //}
 }

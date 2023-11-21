@@ -1,8 +1,10 @@
 using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class FMODController : MonoBehaviour
@@ -15,16 +17,39 @@ public class FMODController : MonoBehaviour
     EntertainmentManager _entertainmentManager;
 
     public EventInstance _fmodEventInstance;
-    
+
+    private StudioEventEmitter eventEmitter;
+    private static FMODController _instance;
+
 
     float _intensity;
     float _health;
+
+    public static FMODController Instance { get => _instance; set => _instance = value; }
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            // If no instance exists, make this the instance and mark as persistent
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // If an instance already exists, destroy this GameObject
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         _gameManager = GameManager.Instance;
         _entertainmentManager = EntertainmentManager.Instance;
+
+        //if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM() != null)
+        //    SetFMOD(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM());
 
         _fmodEventInstance = GetComponent<FMODUnity.StudioEventEmitter>().EventInstance;
         volumeSlider.value = 0.3f;
@@ -37,6 +62,43 @@ public class FMODController : MonoBehaviour
         UpdateHealthParameter();
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void SetFMOD(FMODController fmod)
+    {
+        Instance = fmod;
+    }
+
+    public void ChangeEvent(string newEventPath)
+    {
+        // Stop and release the current instance
+        _fmodEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        _fmodEventInstance.release();
+
+        // Create a new instance with the updated event path
+        _fmodEventInstance = FMODUnity.RuntimeManager.CreateInstance(newEventPath);
+        _fmodEventInstance.start();
+
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
+
+    public float GetVolume()
+    {
+        if (_fmodEventInstance.isValid())
+        {
+            float volume;
+            _fmodEventInstance.getVolume(out volume);
+            return volume;
+        }
+        else
+        {
+            Debug.LogWarning("FMOD event instance is not valid.");
+            return 0f;
+        }
     }
 
     public void SetVolume(float volume)
