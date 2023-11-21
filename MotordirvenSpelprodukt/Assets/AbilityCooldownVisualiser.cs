@@ -7,13 +7,14 @@ using TMPro;
 public class AbilityCooldownVisualiser : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    static int AbilitiesActive = 0;
 
     [Header("Rolling ability Cooldown")]
     public Image AbilityImage;
     public TextMeshProUGUI AbilityCooldownText;
     bool _isAbilityCooldown;
     float _currrentAbilityCooldown;
+
 
     float _cooldownDuration;
     public enum AbilityType
@@ -70,7 +71,7 @@ public class AbilityCooldownVisualiser : MonoBehaviour
                 break;
         }
 
-
+        //När en isAbility sätts igång +1 i active abilities. Lägg ability icon på x position
         if (_isAbilityCooldown)
         {
             if (_currrentAbilityCooldown <= 0f)
