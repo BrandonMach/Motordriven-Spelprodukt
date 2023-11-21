@@ -15,7 +15,10 @@ public class ControlsMenu : MenuAbstract, IMenu
     {
         base.Update();
     }
-
+    public override void ClickBack()
+    {
+        base.ClickBack();
+    }
     public void ClickESC()
     {
         base.ClickESC();

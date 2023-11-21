@@ -152,8 +152,6 @@ public class GameManager : MonoBehaviour
         PlayerCoins = 50;
         Debug.Log("Coins" + PlayerCoins);
 
-        //Not used
-        //_challengeManager.OnChallengeCompleted += HandleChallengeCompleted;
         _spawnEnemy = SpawnEnemy.Instance;
 
         AmountOfChampionsToKill = 2;
@@ -246,7 +244,7 @@ public class GameManager : MonoBehaviour
         _challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
         Debug.Log("PlayerCoins = " + PlayerCoins);
-        completedChallenge.ChallengeButton.SetActive(false);
+        //completedChallenge.ChallengeButton.SetActive(false);
     }
 
     /// <summary>

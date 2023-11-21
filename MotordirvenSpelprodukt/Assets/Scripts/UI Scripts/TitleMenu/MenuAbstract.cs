@@ -19,6 +19,12 @@ public abstract class MenuAbstract : MonoBehaviour, IMenu
         }
     }
 
+    public virtual void ClickBack()
+    {
+        gameObject.SetActive(false);
+        _prevMenu.SetActive(true);
+    }
+
     public virtual void ClickMenuOption1()
     {
         _menuOption1.SetActive(true);
