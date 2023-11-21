@@ -5,6 +5,7 @@ using UnityEngine;
 public class TransferableScript : MonoBehaviour
 {
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private GameObject _FMODAudioManager;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);

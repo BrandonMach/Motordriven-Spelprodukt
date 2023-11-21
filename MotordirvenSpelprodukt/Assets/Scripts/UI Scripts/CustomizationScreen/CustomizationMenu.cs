@@ -27,6 +27,6 @@ public class CustomizationMenu : MonoBehaviour
     public void ClickEnterArena()
     {
 
-        SceneManager.LoadScene(1,LoadSceneMode.Single);
+        SceneManager.LoadScene(2,LoadSceneMode.Single);
     }
 }
