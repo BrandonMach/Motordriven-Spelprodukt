@@ -38,9 +38,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 735bb91e9d5bdc54380b8c6b867a42bb
-  position: {x: 128.56955, y: 634.502}
+  position: {x: 132.00002, y: 628.42004}
   agent: {fileID: 0}
-  description: 
+  description: 'Continues on failure
+
+    Returns Success'
   children:
   - {fileID: 4217411513025424744}
   - {fileID: 7008783784521495812}
@@ -62,7 +64,7 @@ MonoBehaviour:
   guid: d403c83c63fb9ce45b67ff98915fb2cc
   position: {x: 318.5377, y: 817.506}
   agent: {fileID: 0}
-  description: 
+  description: Chase player
   lerpSpeed: 200
 --- !u!114 &2547314859709489155
 MonoBehaviour:
@@ -81,7 +83,7 @@ MonoBehaviour:
   guid: f817906ccec45bc45bc884342c39bc5a
   position: {x: -278, y: 642.05963}
   agent: {fileID: 0}
-  description: 
+  description: Checks impairment and act accordingly
 --- !u!114 &3686161655450971546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +99,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6de2db7be744f7849b407c3f8293dd40
-  position: {x: -50.56264, y: 253.33398}
+  position: {x: -50.00003, y: 250.355}
   agent: {fileID: 0}
   description: 
   child: {fileID: 8971222423332077680}
@@ -118,7 +120,7 @@ MonoBehaviour:
   guid: 81f9ae9ec7ef4bd458abfb060f374eb0
   position: {x: -59.709263, y: 819.251}
   agent: {fileID: 0}
-  description: 
+  description: If in range, attack
 --- !u!114 &7008783784521495812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +138,7 @@ MonoBehaviour:
   guid: d42d3a13f2b19554fa9732c60b729289
   position: {x: 131.53777, y: 819.31696}
   agent: {fileID: 0}
-  description: 
+  description: If player out of combat, taunt
 --- !u!114 &7850995116442485607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +156,9 @@ MonoBehaviour:
   guid: b61ffffbd8cfe6b4c9dc166408c8980e
   position: {x: -50.99999, y: 463.05963}
   agent: {fileID: 0}
-  description: 
+  description: 'Continues on failure
+
+    Returns Success'
   children:
   - {fileID: 2547314859709489155}
   - {fileID: 68370558617441177}
