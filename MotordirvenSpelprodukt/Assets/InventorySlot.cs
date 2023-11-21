@@ -45,6 +45,11 @@ public class InventorySlot : MonoBehaviour
         {
             Weapon weapon = (Weapon)_item;
             Player.Instance.SetWeapon(weapon);
+            SetTransferWeapon();
         }            
+    }
+    private void SetTransferWeapon()
+    {
+        GameObject.Find("Transferables").GetComponent<TransferableScript>().SetWeapon((Weapon)_item);
     }
 }
