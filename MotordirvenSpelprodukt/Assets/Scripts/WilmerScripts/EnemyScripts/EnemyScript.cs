@@ -62,7 +62,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     {
         //Vector3 direction = transform.position - transform.position;
         
-        if(Player.Instance != null)
+        if(Player.Instance != null && !_healthManager.Dead)
         {
             Vector3 direction = Player.Instance.transform.position - transform.position;
             direction.y = 0;
