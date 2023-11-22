@@ -21,9 +21,10 @@ public class FMODController : MonoBehaviour
     private StudioEventEmitter eventEmitter;
     private static FMODController _instance;
 
+    bool firstTime;
 
-    float _intensity;
-    float _health;
+    public float _intensity;
+    public float _health;
 
     public static FMODController Instance { get => _instance; set => _instance = value; }
 
@@ -45,19 +46,34 @@ public class FMODController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        firstTime = true;
+        _intensity = 50;
         _gameManager = GameManager.Instance;
-        _entertainmentManager = EntertainmentManager.Instance;
+        //_entertainmentManager = EntertainmentManager.Instance;
 
         //if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM() != null)
         //    SetFMOD(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM());
 
         _fmodEventInstance = GetComponent<FMODUnity.StudioEventEmitter>().EventInstance;
         volumeSlider.value = 0.3f;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance != null && firstTime)
+        {
+            firstTime = false;
+            ChangeEvent("event:/Music");
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            gameObject.GetComponent<StudioEventEmitter>().EventInstance.start();
+        }
+
         UpdateIntensityParameter();
         UpdateHealthParameter();
 
@@ -72,13 +88,12 @@ public class FMODController : MonoBehaviour
     public void ChangeEvent(string newEventPath)
     {
         // Stop and release the current instance
-        _fmodEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        _fmodEventInstance.release();
+        _fmodEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //_fmodEventInstance.release();
 
         // Create a new instance with the updated event path
         _fmodEventInstance = FMODUnity.RuntimeManager.CreateInstance(newEventPath);
         _fmodEventInstance.start();
-
     }
 
     public void Destroy()
@@ -116,8 +131,18 @@ public class FMODController : MonoBehaviour
     
     private void UpdateIntensityParameter()
     {
-        _intensity = _entertainmentManager.GetETP();
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Entertainment", _intensity);
+        Debug.Log("ETP: " + _intensity);
+
+    
+
+        if (EntertainmentManager.Instance != null)
+        {
+            //_entertainmentManager = EntertainmentManager.Instance;
+            _intensity = EntertainmentManager.Instance.GetETP();
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Entertainment", _intensity);
+        }
+        
+       
 
 
         //_fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
@@ -127,9 +152,14 @@ public class FMODController : MonoBehaviour
     
     private void UpdateHealthParameter()
     {
-        _health = healthSlider.value;
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Health", _health);
+        //_health = healthSlider.value;
 
+        if (Player.Instance != null)
+        {
+            _health = Player.Instance.GetComponent<HealthManager>().CurrentHealthPoints;
+
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Health", _health);
+        }
 
         //_fmodEventInstance.getParameterByName("Health", out float changedParamValue);
         //Debug.Log($"ChangedParamValue: {changedParamValue}");
