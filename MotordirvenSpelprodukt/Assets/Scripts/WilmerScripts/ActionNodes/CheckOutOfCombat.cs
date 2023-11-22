@@ -19,16 +19,6 @@ public class CheckOutOfCombat : ActionNode
     {
 
         return State.Failure;
-        if (_meleeMinionScript.OutOfCombat)
-        {
-
-            return State.Success;
-        }
-        else
-        {
-            return State.Failure;
-        }
-        return State.Success;
-        return State.Failure;
+        
     }
 }
