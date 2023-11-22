@@ -8,6 +8,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class HealthManager : MonoBehaviour,IHasProgress
 {
     [SerializeField] float _maxHealthPoints;
+    public float MaxHP { get => _maxHealthPoints; }
     [SerializeField] private float _bleedDuration = 6.0f;
     public float CurrentHealthPoints { get; private set; }
     [SerializeField] float _currentHealth;
@@ -20,7 +21,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public bool HasDismembrent;
 
     public bool Dead;
-    public float _destroydelay = 2.5f;
+    public float _destroydelay = 1.5f;
 
     public bool IsPlayer;
     public bool GodMode;
@@ -29,12 +30,13 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public bool hasSlowMo;
     public SlowMo _slowMo;
 
-
+    
     
     void Start()
     {
         
         CurrentHealthPoints = _maxHealthPoints;
+       
     }
 
     // Update is called once per frame
@@ -101,7 +103,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
 
             CurrentHealthPoints -= damage;
-            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints / _maxHealthPoints });
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints /*/ _maxHealthPoints*/ });
 
 
             if (CurrentHealthPoints <= 0)

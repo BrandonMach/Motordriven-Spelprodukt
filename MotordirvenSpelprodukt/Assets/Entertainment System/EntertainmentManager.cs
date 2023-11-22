@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using FMODUnity;
+using UnityEngine.UI;
 
 public class EntertainmentManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class EntertainmentManager : MonoBehaviour
     //For Testing
     public TextMeshProUGUI EntertainmentText;
     public TextMeshProUGUI CrowdText;
-    public GameObject OOCPopUp;
+    
 
 
     [Header("UI Arrow")]
@@ -62,6 +63,7 @@ public class EntertainmentManager : MonoBehaviour
 
     [Header("OOC- Out Of Combat")]
 
+    public Image OOCPopUp;
     //public GameObject[] EnemyGameObjects;
     public GameObject PlayerCharacter;
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
@@ -117,8 +119,7 @@ public class EntertainmentManager : MonoBehaviour
 
         //For testing
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
-        //OTC pop up
-        OOCPopUp.SetActive(_isOutOfCombat);
+       
 
         if (!GameManager.Instance.MatchIsFinished)
         {
@@ -126,7 +127,14 @@ public class EntertainmentManager : MonoBehaviour
             CheckIfOutOfCombat();
             if (_isOutOfCombat)
             {
+                //OTC pop up
+                OOCPopUp.color = new Color(OOCPopUp.color.r, OOCPopUp.color.g, OOCPopUp.color.b, 252);
                 OutOfCombatDecreaseOverTime();
+            }
+            else
+            {
+                //OTC pop up
+                OOCPopUp.color = new Color(OOCPopUp.color.r, OOCPopUp.color.g, OOCPopUp.color.b, 0);
             }
         } 
     }

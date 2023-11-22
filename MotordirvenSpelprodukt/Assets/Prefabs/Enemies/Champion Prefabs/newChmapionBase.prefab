@@ -55,7 +55,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6880972791787181750
 RectTransform:
   m_ObjectHideFlags: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   _hasProgressGameObject: {fileID: 7189006194749984216}
   _slider: {fileID: 1771751523862762451}
   _refillSpeed: 0.5
+  IsChampionHPbar: 0
 --- !u!1 &2324902738467017218
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +356,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7189006194749984216}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c781b6e9c0ac562459670ad76b1711ba, type: 3}
   m_Name: 
@@ -441,9 +442,11 @@ MonoBehaviour:
   _movementSpeed: 20
   _healthManager: {fileID: 9174880145983834101}
   anim: {fileID: 1893978260557283440}
-  _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
+  _weapon: {fileID: 11400000, guid: 08da9303af86cef4e909e5362b0b9389, type: 2}
   _attackSOArray:
   - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
+  - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
+  ChampionName: 'Ozgath: King of Chaos'
   CurrentState: 0
   PreviousState: 0
 --- !u!114 &2587968681938888123
@@ -497,7 +500,7 @@ RectTransform:
   m_Father: {fileID: 6905102123976401117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4.650013, y: 0}
   m_SizeDelta: {x: 19.31, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

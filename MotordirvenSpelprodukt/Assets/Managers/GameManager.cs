@@ -22,10 +22,15 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+       
+
         Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 1.5f, _championStartPos.position.z);
         Quaternion championRotation = Quaternion.Euler(_championList[KilledChampions].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
 
-        Instantiate(_championList[KilledChampions], championSpawnPos, championRotation);
+        _champion = Instantiate(_championList[KilledChampions], championSpawnPos, championRotation);
+
+        //_champion = GameObject.FindObjectOfType<CMP1Script>();
+
 
     }
 
@@ -63,7 +68,7 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] EntertainmentManager _etp;
-    [SerializeField] GameObject _playerGO;
+
     [SerializeField] Player _player;
 
     public static int PlayerCoins; //Static så att anadra scener kan få access
@@ -71,15 +76,23 @@ public class GameManager : MonoBehaviour
     public bool MatchIsFinished;
     public System.EventHandler OnMatchFinished;
 
+    public GameObject[] Canvases;
+
     #region Champions
 
     //Champion Path 
     [Header("Champion Path")]
-    [SerializeField] UnityEngine.Object _champion;
+
+    [SerializeField] public GameObject _champion;
     public int AmountOfChampionsToKill; //CHampion road-map
     public static int KilledChampions;
     [SerializeField] private List<GameObject> _championList;
     [SerializeField] private Transform _championStartPos;
+    
+    //HP bar
+
+    [SerializeField] private  TextMeshProUGUI _championHPText;
+    [SerializeField] private TextMeshProUGUI _championNameText;
     #endregion
 
 
@@ -128,9 +141,9 @@ public class GameManager : MonoBehaviour
         _gameStartTimer = 0;
         _berserkerTimer = 0;
 
-        _champion = GameObject.FindObjectOfType<CMP1Script>();
+      
         _player = Player.Instance;
-        _playerGO = GameObject.FindGameObjectWithTag("Player");
+       
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _etp = EntertainmentManager.Instance;
 
@@ -144,6 +157,7 @@ public class GameManager : MonoBehaviour
         AmountOfChampionsToKill = 2;
 
         OnMatchFinished += MatchFinished;
+        UpdateEnemyList();
         
     }
 
@@ -151,6 +165,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+        if(_champion != null)
+        {
+
+            _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
+            var championHealthManager = _champion.GetComponent<HealthManager>();
+            _championHPText.text = (championHealthManager.CurrentHealthPoints / championHealthManager.MaxHP * 100).ToString() + "%";
+        }
+
+        
         if (_champion == null && !_kingCam)
         {
             OnMatchFinished?.Invoke(this, EventArgs.Empty);
@@ -175,6 +198,12 @@ public class GameManager : MonoBehaviour
     {
         MatchIsFinished = true; //Stop the match
 
+        foreach (var canvas in Canvases)
+        {
+            canvas.SetActive(false);
+        }
+
+
         foreach (var enemies in EnemyGameObjects)
         {
             Destroy(enemies);
@@ -191,7 +220,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _playerGO.gameObject.GetComponent<Rigidbody>().useGravity = false;
+     
+           _player.gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
         _kingCam = true;
