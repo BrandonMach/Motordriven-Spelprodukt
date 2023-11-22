@@ -16,6 +16,7 @@ public class Weapon : Item
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _range;
     private float _damageOffset=1, _rangeOffset=1, _speedOffset=1;   
+    [SerializeField] private string _attackTreeDescriptionTextfile;
     // Lägg till en bleed damage property på vapnet?
     public void UpgradeWeapon()
     {
@@ -50,5 +51,6 @@ public class Weapon : Item
     public int GetLevel() { return _weaponLevel; }
     public Sprite GetImage() { return _image; }
     public string GetPath() { return _prefabPath; }
+    public string GetAttackTreeDescriptionPath() { return _attackTreeDescriptionTextfile; }
     public Weapontype GetWeaponType() { return _weaponType; }   
 }
