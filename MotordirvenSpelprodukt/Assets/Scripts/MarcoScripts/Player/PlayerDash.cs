@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class PlayerDash : MonoBehaviour
 {
@@ -20,8 +23,14 @@ public class PlayerDash : MonoBehaviour
     private Vector3 _rollDirection;
 
 
-    private float _currentDashTime;
+    [SerializeField] private float _currentDashTime;
     private float _currentCooldownTime;
+
+    [Header("For ability HUD cooldown")]
+    bool _isOnCooldown;
+    public float CooldownDuration { get => _cooldownTime; }
+    public float DashCooldown { get => _currentCooldownTime; } 
+    public bool IsOnCooldown { get => _isOnCooldown; }
 
 
     private void Awake()
@@ -90,14 +99,24 @@ public class PlayerDash : MonoBehaviour
         {
             if (_currentDashTime > 0)
             {
+                _isOnCooldown = true;
                 _currentDashTime -= Time.deltaTime;
+            }
+            else
+            {
+                _isOnCooldown = false;
             }
         }
         else
         {
             if (_currentCooldownTime > 0)
             {
+                _isOnCooldown = true;
                 _currentCooldownTime -= Time.deltaTime;
+            }
+            else
+            {
+                _isOnCooldown = false;
             }
         }
     }

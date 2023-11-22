@@ -2844,7 +2844,7 @@ PrefabInstance:
       objectReference: {fileID: 6196182299904484600}
     - target: {fileID: 3921070419429540266, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: _moveSpeed
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3921070419429540266, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: KnockbackTime
@@ -2883,6 +2883,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4477296801512473359, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      propertyPath: IsPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477296801512473359, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: HasDismembrent
       value: 1
       objectReference: {fileID: 0}
@@ -2904,7 +2908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.27
+      value: -8.68
       objectReference: {fileID: 0}
     - target: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2912,7 +2916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.32
+      value: -0.98
       objectReference: {fileID: 0}
     - target: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2950,6 +2954,14 @@ PrefabInstance:
       propertyPath: _enemyLayerMask.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 6983715570975962233, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      propertyPath: weaponHand
+      value: 
+      objectReference: {fileID: 6359385520941622301}
+    - target: {fileID: 6983715570975962233, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      propertyPath: weaponObject
+      value: 
+      objectReference: {fileID: 6505460586214927619}
     - target: {fileID: 6983715570975962233, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: _timeBetweenInputs
       value: 0.4
@@ -4133,7 +4145,7 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  isPlayer: 0
+  isPlayer: 1
   stunEffect: {fileID: 0}
 --- !u!114 &8064398764332070987
 MonoBehaviour:
@@ -4168,12 +4180,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4837593979468772016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c550a3195edf4c4a86bdbd688cd6719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxZize: 10
+  _maxSize: 10
   _inputSpamAmount: 3
   _amountToCheckForSpam: 5
   _enertainmentDecrease: 10
@@ -4603,5 +4615,10 @@ PrefabInstance:
 --- !u!4 &6504247607925137059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4470466264897572, guid: 404a923dea987c14498264bf7d13d458, type: 3}
+  m_PrefabInstance: {fileID: 6506676031669978759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6505460586214927619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1216674268834692, guid: 404a923dea987c14498264bf7d13d458, type: 3}
   m_PrefabInstance: {fileID: 6506676031669978759}
   m_PrefabAsset: {fileID: 0}

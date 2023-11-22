@@ -38,6 +38,7 @@ public class MMScript : MinionScript
         base.Update();
         CheckCanMove("Heavy Attack");
         CheckCanMove("Light Attack");
+        CheckCanMove("MMHit");
         //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
     }
 
@@ -78,4 +79,9 @@ public class MMScript : MinionScript
             Anim.SetTrigger("HeavyAttack");
         }
     }
+    //public override void TakeDamage(Attack attack)
+    //{
+    //    base.TakeDamage(attack);
+    //    CurrentState = EnemyState.Hit;
+    //}
 }

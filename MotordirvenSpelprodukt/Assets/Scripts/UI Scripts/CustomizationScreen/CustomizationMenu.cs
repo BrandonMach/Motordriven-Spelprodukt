@@ -5,10 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class CustomizationMenu : MonoBehaviour
 {
+    [SerializeField] ChallengeManager challengeManager;
+
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    private void Awake()
+    {
+        challengeManager = ChallengeManager.Instance;
     }
 
     // Update is called once per frame
@@ -20,6 +27,6 @@ public class CustomizationMenu : MonoBehaviour
     public void ClickEnterArena()
     {
 
-        SceneManager.LoadScene(1,LoadSceneMode.Single);
+        SceneManager.LoadScene(2,LoadSceneMode.Single);
     }
 }

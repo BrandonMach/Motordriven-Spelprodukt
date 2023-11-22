@@ -12,7 +12,7 @@ public class MinionScript : EnemyScript
     [SerializeField] private bool _onGround = true;
     private bool _shouldCheckOnGround;
 
-    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing }
+    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing}
     public EnemyState CurrentState = EnemyState.chasing;
     public EnemyState PreviousState = EnemyState.none;
 
@@ -83,6 +83,7 @@ public class MinionScript : EnemyScript
                 break;
         }
     }
+
 
     #region Events
     /// <summary>
@@ -160,9 +161,16 @@ public class MinionScript : EnemyScript
         }
     }
 
+    protected virtual void HandleHit()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Hit");
+    }
 
     protected virtual void HandleStun()
     {
+        //ResetTriggers();
+        //Anim.SetTrigger("Stunned");
     }
 
 
@@ -206,6 +214,7 @@ public class MinionScript : EnemyScript
         switch (attack.AttackSO.CurrentAttackEffect)
         {
             case CurrentAttackSO.AttackEffect.None:
+                GetHit();
                 break;
 
             case CurrentAttackSO.AttackEffect.Pushback:
@@ -233,6 +242,7 @@ public class MinionScript : EnemyScript
         }
     }
 
+    
 
     protected void GetStunned(float stunDuration, Vector3 attackerPos)
     {
@@ -245,16 +255,22 @@ public class MinionScript : EnemyScript
 
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
-        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
+        ResetTriggers();
+        Anim.SetTrigger("Stunned");
+        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);       //Funkar inte?
 
 
         //ParticleSystemManager.Instance.PlayStunEffect(pos, Quaternion.Euler(-90, 0, 0), transform);
         //ParticleSystemManager.Instance.PlayShockWaveEffect(attackerPos);
 
-        ResetTriggers();
-        Anim.SetTrigger("Stunned");
+        
     }
 
+    private void GetHit()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Hit");
+    }
 
     /// <summary>
     /// Adds force to enemy upwards. Only for minions.

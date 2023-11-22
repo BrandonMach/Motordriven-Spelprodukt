@@ -23,6 +23,11 @@ public class OptionsMenu : MenuAbstract, IMenu
         base.ClickESC();
     }
 
+    public override void ClickBack()
+    {
+        base.ClickBack();
+    }
+
     public override void ClickMenuOption1()
     {
         base.ClickMenuOption1();

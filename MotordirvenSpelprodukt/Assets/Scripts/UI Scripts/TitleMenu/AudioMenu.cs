@@ -10,6 +10,19 @@ public class AudioMenu : MenuAbstract, IMenu
     public AudioMixer audioMixer;
     public FMODController FMODController;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        //FMODController.SetFMOD(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM());
+
+        FMODController = FMODController.Instance;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        base.Update();
+    }
 
     public void SetVolume(float volume)
     {
@@ -22,7 +35,10 @@ public class AudioMenu : MenuAbstract, IMenu
     {
         base.ClickESC();
     }
-
+    public override void ClickBack()
+    {
+        base.ClickBack();
+    }
     public void ClickMenuOption1()
     {
         throw new System.NotImplementedException();
@@ -41,15 +57,5 @@ public class AudioMenu : MenuAbstract, IMenu
         Debug.Log(_prevMenu.name + _prevMenu.activeSelf);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        base.Update();
-    }
 }
