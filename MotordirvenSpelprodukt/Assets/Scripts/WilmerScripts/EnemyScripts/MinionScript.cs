@@ -12,14 +12,14 @@ public class MinionScript : EnemyScript
     [SerializeField] private bool _onGround = true;
     private bool _shouldCheckOnGround;
 
-    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing}
+    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing, taunt}
     public EnemyState CurrentState = EnemyState.chasing;
     public EnemyState PreviousState = EnemyState.none;
 
 
     #region Properties
     public float StunDuration { get; set; }
-    public bool OutOfCombat { get; set; }
+    //public bool OutOfCombat { get; set; }
     public bool OnGround 
     { 
         get { return _onGround; } 
@@ -78,7 +78,9 @@ public class MinionScript : EnemyScript
             case EnemyState.fleeing:
                 HandleFleeing();
                 break;
-
+            case EnemyState.taunt:
+                HandleTaunt();
+                break;
             default:
                 break;
         }
@@ -91,7 +93,7 @@ public class MinionScript : EnemyScript
     /// </summary>
     private void Instance_OnInCombat(object sender, EventArgs e)
     {
-        OutOfCombat = true;
+        CurrentState = EnemyState.none;
         Debug.Log("OutOfCombat");
     }
 
@@ -102,7 +104,7 @@ public class MinionScript : EnemyScript
     private void Instance_OnOutOfCombat(object sender, EventArgs e)
     {
         Debug.Log("InCombat");
-        OutOfCombat = false;
+        CurrentState = EnemyState.taunt;
     }
 
 
@@ -167,11 +169,18 @@ public class MinionScript : EnemyScript
         Anim.SetTrigger("Hit");
     }
 
+    protected virtual void HandleTaunt()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Taunt");
+    }
+
     protected virtual void HandleStun()
     {
         //ResetTriggers();
         //Anim.SetTrigger("Stunned");
     }
+
 
 
     protected virtual void HandleAirborne()
