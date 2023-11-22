@@ -40,6 +40,9 @@ public class MMScript : MinionScript
         CheckCanMove("Light Attack");
         CheckCanMove("MMHit");
         CheckCanMove("Pushed Back");
+        CheckCanMove("Stand Up");
+        CheckCanMove("Knock Up");
+        CheckCanMove("Stunned");
         //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
     }
 
