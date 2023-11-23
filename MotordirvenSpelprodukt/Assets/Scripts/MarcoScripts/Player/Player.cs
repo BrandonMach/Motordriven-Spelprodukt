@@ -63,6 +63,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     /// Used for testing challenge "KillStreak"
     /// </summary>
     public bool HasTakenDamage { get; set; }
+    public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
 
     private bool _invulnerable = false;
 
@@ -248,7 +249,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         if (!_playerDash.IsDashing)
         {
             OnEnableMovement();
-            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = _currentWeapon });
+            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = CurrentWeapon });
             _canAttack = true;
         }
 
@@ -312,17 +313,17 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     }
     public void SetWeapon(Weapon _weapon)
     {
-        _currentWeapon = _weapon;
+        CurrentWeapon = _weapon;
         ReplaceWeapon();
 
     }
     public void ReplaceWeapon()
     {
-        if(_currentWeapon != null)
+        if(CurrentWeapon != null)
         {
-            Debug.Log(_currentWeapon.GetPath());
+            Debug.Log(CurrentWeapon.GetPath());
             
-            GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+_currentWeapon.GetPath()));
+            GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+CurrentWeapon.GetPath()));
             weaponnew.transform.parent = weaponHand.transform;
             weaponnew.transform.position = weaponObject.transform.position;
             weaponnew.transform.rotation = weaponObject.transform.rotation;
