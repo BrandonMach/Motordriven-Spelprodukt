@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     public event EventHandler ComboBroken;
     public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
     public event EventHandler<OnAttackPressedAnimationEventArgs> ChangeAttackAnimation;
+    public event EventHandler PlayerInterrupted;
 
     public class OnAttackPressedAnimationEventArgs : EventArgs
     {
@@ -172,7 +173,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     {
         if (!_invulnerable)
         {
-            OnComboBroken();
+            if (!IsDashing && _input != "")
+            {
+                //If we get here the player got damaged while attacking, we reset the player combo with OnComboBroken()
+                OnComboBroken();
+                PlayerInterrupted?.Invoke(this, EventArgs.Empty);
+            }
+
             PlayDamageVFX(attack.AttackerPosition);
             _healthManager.ReduceHealth(attack.Damage);
             HasTakenDamage = true;

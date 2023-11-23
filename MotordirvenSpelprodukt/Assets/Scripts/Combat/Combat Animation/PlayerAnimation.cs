@@ -34,7 +34,12 @@ public class PlayerAnimation : MonoBehaviour
         _player.ChangeAttackAnimation += Player_ChangeAttackAnimation;
         _player.StartEvade += Player_StartEvade;
         _player.ComboBroken += Player_OnComboBroken;
+        _player.PlayerInterrupted += Player_OnPlayerInterrupted;
+    }
 
+    private void Player_OnPlayerInterrupted(object sender, EventArgs e)
+    {
+        _animator.SetTrigger("InterruptedHit");
     }
 
     private void Player_OnComboBroken(object sender, EventArgs e)
