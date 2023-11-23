@@ -74,7 +74,6 @@ public class GameLoopManager : MonoBehaviour
 
     [SerializeField] Player _player;
 
-    public static int PlayerCoins; //Static så att anadra scener kan få access
 
     public bool MatchIsFinished;
     public System.EventHandler OnMatchFinished;
@@ -133,6 +132,7 @@ public class GameLoopManager : MonoBehaviour
 
     public int KnockedUpCount { get => _knockedUpCount; set => _knockedUpCount = value; }
     public int KnockedOutOfArena { get => _knockedOutOfArena; set => _knockedOutOfArena = value; }
+    public int PlayerCoins { get; private set; }
 
     public event EventHandler OnChampionKilled;
 
@@ -154,9 +154,7 @@ public class GameLoopManager : MonoBehaviour
         _etp = EntertainmentManager.Instance;
 
 
-        //För testing
-        PlayerCoins = 50;
-        Debug.Log("Coins" + PlayerCoins);
+        
 
         _spawnEnemy = SpawnEnemy.Instance;
 
@@ -189,7 +187,7 @@ public class GameLoopManager : MonoBehaviour
 
         if(_player == null)
         {
-            SceneManager.LoadScene(2, LoadSceneMode.Single);
+            SceneManager.LoadScene(3, LoadSceneMode.Single);
         }
 
         // Testing challenges

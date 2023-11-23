@@ -338,10 +338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoints: 250
+  _maxHealthPoints: 100
   _bleedDuration: 6
   _currentHealth: 0
   HasDismembrent: 0
+  IsDeadOnce: 0
   Dead: 0
   _destroydelay: 2.5
   IsPlayer: 1
@@ -447,7 +448,7 @@ MonoBehaviour:
   ChampionName: 'Ozgath: King of Chaos'
   CurrentState: 0
   PreviousState: 0
-  _slamAttackSO: {fileID: 11400000, guid: af6b6f4b1983ad146bf8cdd60bd5e5e4, type: 2}
+  _jumpAttack: {fileID: 0}
 --- !u!114 &2587968681938888123
 MonoBehaviour:
   m_ObjectHideFlags: 0

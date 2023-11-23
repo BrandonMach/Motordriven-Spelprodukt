@@ -65,10 +65,10 @@ public class KMScript : MinionScript
     protected override void OnAttack()
     {
 
-        
 
+        gameObject.GetComponent<HealthManager>().ReduceHealth(100);
         base.OnAttack();
         //Instantiate(_explosion, this.transform);
-        this.GetComponent<HealthManager>().ReduceHealth(100);
+       
     }
 }
