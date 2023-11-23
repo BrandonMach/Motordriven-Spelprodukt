@@ -14,10 +14,25 @@ public class ProgressBarUI : MonoBehaviour
     private IHasProgress _hasProgress;
 
     private bool increaseHealth;
+    public bool IsChampionHPbar;
+
+   
 
     private void Start()
     {
+
+        if (IsChampionHPbar)
+        {
+            _hasProgressGameObject = GameManager.Instance._champion;
+            
+            //_slider.maxValue = 250;
+            //_slider.value = 230;
+        }
+
+
         _hasProgress = _hasProgressGameObject.GetComponent<IHasProgress>(); //Lägger in objectet som ska påverka Ehalthbar UI element
+        _slider.maxValue = _hasProgressGameObject.GetComponent<HealthManager>().MaxHP;
+        _slider.value = _hasProgressGameObject.GetComponent<HealthManager>().MaxHP;
 
         if (_hasProgress == null)
         {
@@ -34,6 +49,7 @@ public class ProgressBarUI : MonoBehaviour
     private void HasProgress_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {
         _targetFillAmount = e.progressNormalized;
+
         if (_targetFillAmount > _slider.value) 
         { 
             increaseHealth = true;
@@ -46,13 +62,14 @@ public class ProgressBarUI : MonoBehaviour
 
     private void Update()
     {
+        
         if (_slider.value != _targetFillAmount)
         {
-            if (increaseHealth && _slider.value < _targetFillAmount)
+            if (increaseHealth && _slider.value <= _targetFillAmount)
             {
                 _slider.value += _refillSpeed * Time.deltaTime;
             }
-            else if (!increaseHealth && _slider.value > _targetFillAmount)
+            else if (!increaseHealth && _slider.value >= _targetFillAmount)
             {
                 _slider.value -= _refillSpeed * Time.deltaTime;
             }

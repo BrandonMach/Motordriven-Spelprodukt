@@ -12,7 +12,7 @@ public class TestHUDPlacment : MonoBehaviour
 
 
 
-    public GameObject AttackTreeImage;
+   // public GameObject AttackTreeImage;
     bool AttackTreeIsActive;
 
     public GameObject[] Areans;
@@ -40,7 +40,7 @@ public class TestHUDPlacment : MonoBehaviour
             AttackTreeIsActive = !AttackTreeIsActive;
         }
 
-        AttackTreeImage.SetActive(AttackTreeIsActive);
+      //  AttackTreeImage.SetActive(AttackTreeIsActive);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

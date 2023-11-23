@@ -12,14 +12,14 @@ public class MinionScript : EnemyScript
     [SerializeField] private bool _onGround = true;
     private bool _shouldCheckOnGround;
 
-    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing }
+    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing, taunt}
     public EnemyState CurrentState = EnemyState.chasing;
     public EnemyState PreviousState = EnemyState.none;
 
 
     #region Properties
     public float StunDuration { get; set; }
-    public bool OutOfCombat { get; set; }
+    //public bool OutOfCombat { get; set; }
     public bool OnGround 
     { 
         get { return _onGround; } 
@@ -48,7 +48,7 @@ public class MinionScript : EnemyScript
         // Call Update() on EnemyScript
         base.Update();
        
-        CheckCanMove("Walking");
+        
         OnGround = Physics.Raycast(_groundCheck.position, Vector3.down, 0.2f);
 
         switch (CurrentState)
@@ -78,11 +78,14 @@ public class MinionScript : EnemyScript
             case EnemyState.fleeing:
                 HandleFleeing();
                 break;
-
+            case EnemyState.taunt:
+                HandleTaunt();
+                break;
             default:
                 break;
         }
     }
+
 
     #region Events
     /// <summary>
@@ -90,7 +93,7 @@ public class MinionScript : EnemyScript
     /// </summary>
     private void Instance_OnInCombat(object sender, EventArgs e)
     {
-        OutOfCombat = true;
+        CurrentState = EnemyState.none;
         Debug.Log("OutOfCombat");
     }
 
@@ -101,7 +104,7 @@ public class MinionScript : EnemyScript
     private void Instance_OnOutOfCombat(object sender, EventArgs e)
     {
         Debug.Log("InCombat");
-        OutOfCombat = false;
+        CurrentState = EnemyState.taunt;
     }
 
 
@@ -160,10 +163,24 @@ public class MinionScript : EnemyScript
         }
     }
 
+    protected virtual void HandleHit()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Hit");
+    }
+
+    protected virtual void HandleTaunt()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Taunt");
+    }
 
     protected virtual void HandleStun()
     {
+        //ResetTriggers();
+        //Anim.SetTrigger("Stunned");
     }
+
 
 
     protected virtual void HandleAirborne()
@@ -206,6 +223,7 @@ public class MinionScript : EnemyScript
         switch (attack.AttackSO.CurrentAttackEffect)
         {
             case CurrentAttackSO.AttackEffect.None:
+                GetHit();
                 break;
 
             case CurrentAttackSO.AttackEffect.Pushback:
@@ -233,6 +251,7 @@ public class MinionScript : EnemyScript
         }
     }
 
+    
 
     protected void GetStunned(float stunDuration, Vector3 attackerPos)
     {
@@ -245,16 +264,22 @@ public class MinionScript : EnemyScript
 
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
-        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);
+        ResetTriggers();
+        Anim.SetTrigger("Stunned");
+        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);       //Funkar inte?
 
 
         //ParticleSystemManager.Instance.PlayStunEffect(pos, Quaternion.Euler(-90, 0, 0), transform);
         //ParticleSystemManager.Instance.PlayShockWaveEffect(attackerPos);
 
-        ResetTriggers();
-        Anim.SetTrigger("Stunned");
+        
     }
 
+    private void GetHit()
+    {
+        ResetTriggers();
+        Anim.SetTrigger("Hit");
+    }
 
     /// <summary>
     /// Adds force to enemy upwards. Only for minions.

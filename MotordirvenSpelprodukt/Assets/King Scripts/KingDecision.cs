@@ -19,7 +19,7 @@ public class KingDecision : MonoBehaviour
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
-        _playerDismemberent = GameObject.FindWithTag("Player").GetComponent<DismemberentEnemyScript>();
+        _playerDismemberent = Player.Instance.GetComponent<DismemberentEnemyScript>();
         _etp = EntertainmentManager.Instance;
 
         _anim = GetComponent<Animator>();
@@ -68,10 +68,11 @@ public class KingDecision : MonoBehaviour
     //King playes lose animation
     public void ExectutePlayer()
     {
+        StartCoroutine(LoseScreen());
         CamManager.GoToExecute();
         LoseScreenScript.KingExecution = true;
         _playerDismemberent.PlayerDismember();
-        StartCoroutine(LoseScreen());        
+            
     }
 
     private IEnumerator LoseScreen()

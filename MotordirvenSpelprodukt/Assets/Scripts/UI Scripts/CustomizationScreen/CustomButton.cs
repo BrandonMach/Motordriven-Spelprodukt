@@ -13,7 +13,10 @@ public class CustomButton : Button
     // Start is called before the first frame update 
     void Start()
     {
-        TMP.text = ($"{Challenge.ChallengeName}  |  {Challenge.Description}");
+        // Used for auto writing button text
+        TMP.text = ($"{Challenge.ChallengeName}");
+
+        //TMP.text = ($"{Challenge.ChallengeName} |  {Challenge.Description}");
     }
 
     // Update is called once per frame

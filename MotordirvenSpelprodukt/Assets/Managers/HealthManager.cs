@@ -8,19 +8,20 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class HealthManager : MonoBehaviour,IHasProgress
 {
     [SerializeField] float _maxHealthPoints;
+    public float MaxHP { get => _maxHealthPoints; }
     [SerializeField] private float _bleedDuration = 6.0f;
     public float CurrentHealthPoints { get; private set; }
     [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public System.EventHandler OnPlayerTakeDamage;
+    public System.EventHandler OnShakeScreen;
 
     [Header("Dismembrent")]
     private DismemberentEnemyScript _dismembrentScript;
     public bool HasDismembrent;
 
     public bool Dead;
-    public float _destroydelay = 2.5f;
+    public float _destroydelay = 1.5f;
 
     public bool IsPlayer;
     public bool GodMode;
@@ -29,12 +30,13 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public bool hasSlowMo;
     public SlowMo _slowMo;
 
-
+    
     
     void Start()
     {
         
         CurrentHealthPoints = _maxHealthPoints;
+       
     }
 
     // Update is called once per frame
@@ -95,13 +97,13 @@ public class HealthManager : MonoBehaviour,IHasProgress
             if (IsPlayer)
             {
 
-                OnPlayerTakeDamage?.Invoke(this, EventArgs.Empty);
+                OnShakeScreen?.Invoke(this, EventArgs.Empty);
 
             }
 
 
             CurrentHealthPoints -= damage;
-            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints / _maxHealthPoints });
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints /*/ _maxHealthPoints*/ });
 
 
             if (CurrentHealthPoints <= 0)
@@ -136,17 +138,19 @@ public class HealthManager : MonoBehaviour,IHasProgress
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
+        else 
+        {
+            //Only increase killcount on npc
+            GameManager.Instance.KillCount++;
+            Debug.Log("Killcount: " + GameManager.Instance.KillCount);
+        }
+
         if (hasSlowMo)
         {
             _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
         }
         
         Dead = true;
-
-        GameManager.Instance.KillCount++;
-        Debug.Log("Killcount: " + GameManager.Instance.KillCount);
-
-
 
     }
 

@@ -63,6 +63,11 @@ public class VideoMenu : MenuAbstract, IMenu
         Screen.fullScreen = isFullScreen;
     }
 
+    public override void ClickBack()
+    {
+        base.ClickBack();
+    }
+
     public void ClickESC()
     {
         base.ClickESC();

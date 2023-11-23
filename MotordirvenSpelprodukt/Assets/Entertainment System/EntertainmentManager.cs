@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using FMODUnity;
+using UnityEngine.UI;
 
 public class EntertainmentManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class EntertainmentManager : MonoBehaviour
     //For Testing
     public TextMeshProUGUI EntertainmentText;
     public TextMeshProUGUI CrowdText;
-    public GameObject OOCPopUp;
+    
 
 
     [Header("UI Arrow")]
@@ -42,11 +43,11 @@ public class EntertainmentManager : MonoBehaviour
 
     public float GetAngryThreshold()
     {
-        return (_maxETP * 0.33f);
+        return (_maxETP * 0.25f);
     }
     public float GetExcitedThreshold()
     {
-        return (_maxETP * 0.66f);
+        return (_maxETP * 0.75f);
     }
 
     //ETP events
@@ -54,12 +55,15 @@ public class EntertainmentManager : MonoBehaviour
     public event System.EventHandler OnETPAngry;
     public event System.EventHandler OnETPNormal;
 
+  
+
     #endregion
 
     #region OUT OF COMBAT Variables
 
     [Header("OOC- Out Of Combat")]
 
+    public Image OOCPopUp;
     //public GameObject[] EnemyGameObjects;
     public GameObject PlayerCharacter;
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
@@ -99,6 +103,9 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints = _startETP;
 
         Player.Instance.GetComponent<AttackManager>().EnemyHit += EnemyHitPlayerInCombat;
+      
+
+
     }
 
     // Update is called once per frame
@@ -112,8 +119,7 @@ public class EntertainmentManager : MonoBehaviour
 
         //For testing
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
-        //OTC pop up
-        OOCPopUp.SetActive(_isOutOfCombat);
+       
 
         if (!GameManager.Instance.MatchIsFinished)
         {
@@ -121,7 +127,14 @@ public class EntertainmentManager : MonoBehaviour
             CheckIfOutOfCombat();
             if (_isOutOfCombat)
             {
+                //OTC pop up
+                OOCPopUp.color = new Color(OOCPopUp.color.r, OOCPopUp.color.g, OOCPopUp.color.b, 252);
                 OutOfCombatDecreaseOverTime();
+            }
+            else
+            {
+                //OTC pop up
+                OOCPopUp.color = new Color(OOCPopUp.color.r, OOCPopUp.color.g, OOCPopUp.color.b, 0);
             }
         } 
     }
@@ -133,10 +146,13 @@ public class EntertainmentManager : MonoBehaviour
         if(GetETP() > GetExcitedThreshold())
         {
             OnETPExited?.Invoke(this, EventArgs.Empty);
+
+
         }
         else if (GetETP() < GetAngryThreshold())
         {
             OnETPAngry?.Invoke(this, EventArgs.Empty);
+
         }
         else
         {
@@ -144,6 +160,9 @@ public class EntertainmentManager : MonoBehaviour
         }
     }
     #endregion
+
+
+
     void UpdateETPArrow()
     {
         _indicatorArrow.localPosition = new Vector3(-160 +(320/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, _indicatorArrow.localPosition.z);
