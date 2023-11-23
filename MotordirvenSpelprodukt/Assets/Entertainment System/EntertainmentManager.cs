@@ -79,6 +79,8 @@ public class EntertainmentManager : MonoBehaviour
     public event System.EventHandler OutOfCombat;
     public event System.EventHandler InCombat;
 
+    public bool firstTimeInCombat;
+
     #endregion
 
     // [SerializeField] private bool _startComboWindowTimer;
@@ -92,7 +94,7 @@ public class EntertainmentManager : MonoBehaviour
         }
         _instance = this;
 
-        //DontDestroyOnLoad(gameObject);     
+        DontDestroyOnLoad(gameObject);     
     }
 
     void Start()
@@ -121,7 +123,7 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
        
 
-        if (!GameLoopManager.Instance.MatchIsFinished)
+        if (!GameLoopManager.Instance.MatchIsFinished && firstTimeInCombat)
         {
             //Debug.Log("sdkasd");
             CheckIfOutOfCombat();
