@@ -12,7 +12,7 @@ public class FMODController : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] Slider volumeSlider;
 
-    GameManager _gameManager;
+    GameLoopManager _gameManager;
     HealthManager _healthManager;
     EntertainmentManager _entertainmentManager;
 
@@ -48,7 +48,7 @@ public class FMODController : MonoBehaviour
     {
         firstTime = true;
         _intensity = 50;
-        _gameManager = GameManager.Instance;
+        _gameManager = GameLoopManager.Instance;
         //_entertainmentManager = EntertainmentManager.Instance;
 
         //if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM() != null)
@@ -63,7 +63,7 @@ public class FMODController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance != null && firstTime)
+        if (GameLoopManager.Instance != null && firstTime)
         {
             firstTime = false;
             ChangeEvent("event:/Music");
