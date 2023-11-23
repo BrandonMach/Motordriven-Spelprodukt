@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     int _killCount;
     int _knockedUpCount;
+    int _knockedOutOfArena;
 
     float _challengeTimerMinion;
     float _challengeTimerChampion;
@@ -131,6 +132,7 @@ public class GameManager : MonoBehaviour
     }
 
     public int KnockedUpCount { get => _knockedUpCount; set => _knockedUpCount = value; }
+    public int KnockedOutOfArena { get => _knockedOutOfArena; set => _knockedOutOfArena = value; }
 
     public event EventHandler OnChampionKilled;
 
