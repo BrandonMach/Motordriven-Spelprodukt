@@ -65,7 +65,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     private void OnDestroy()
     {
-        GameManager.Instance?.UpdateEnemyList();
+        GameLoopManager.Instance?.UpdateEnemyList();
     }
 
 
@@ -142,8 +142,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
         else if (!IsDeadOnce)
         {
             //Only increase killcount on npc
-            GameManager.Instance.KillCount++;
-            Debug.Log("Killcount: " + GameManager.Instance.KillCount);
+            GameLoopManager.Instance.KillCount++;
+            Debug.Log("Killcount: " + GameLoopManager.Instance.KillCount);
             IsDeadOnce = true;
         }
 

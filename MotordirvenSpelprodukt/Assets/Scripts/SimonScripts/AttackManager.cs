@@ -53,13 +53,11 @@ public class AttackManager : MonoBehaviour
         switch (_attackType)
         {
             case CurrentAttackSO.AttackType.AOE:
-                //_range = 5;
-                _range *= 3;
                 _checkPos = (transform.position + (transform.forward * _impactPosOffset) + (transform.up * transform.localScale.y));
                 break;
             case CurrentAttackSO.AttackType.Directional:
                 //_range = 1.5f;
-                _checkPos = (transform.position + (transform.forward * _range) + (transform.up * transform.localScale.y));
+                _checkPos = (transform.position + (transform.forward * 2) + (transform.up * transform.localScale.y));
                 break;
             default:
                 break;
@@ -103,7 +101,7 @@ public class AttackManager : MonoBehaviour
 
     private void RecieveAttackEvent(OnAttackPressedEventArgs e)
     {
-        _range = e.weaponSO.GetRange();
+        _range = e.weaponSO.GetRange() * e.CurrentAttackSO.rangeMultiplier;
         _damage = e.weaponSO.GetDamage();
         _multiplier = e.CurrentAttackSO.DamageMultiplier;
         _effect = e.CurrentAttackSO.CurrentAttackEffect;
