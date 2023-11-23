@@ -92,7 +92,7 @@ public class RMScript : MinionScript
     {
         Attack attack = new Attack
         {
-            AttackSO = _attackSOArray[0],
+            AttackSO = _attackSODictionary[_normalAttackString],
             Damage = _weapon.GetDamage()
         };
 

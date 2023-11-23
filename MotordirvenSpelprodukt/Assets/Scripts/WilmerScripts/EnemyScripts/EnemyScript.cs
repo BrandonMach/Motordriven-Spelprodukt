@@ -11,7 +11,14 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] private HealthManager _healthManager;
     [SerializeField] private Animator anim;
     [SerializeField] protected Weapon _weapon;
-    [SerializeField] protected CurrentAttackSO[] _attackSOArray;
+    [SerializeField] protected CurrentAttackSO _normalAttackSO;
+
+    protected static string _normalAttackString = "normalAttack";
+
+    protected CurrentAttackSO _currentAttackSO;
+
+    protected Dictionary<string, CurrentAttackSO> _attackSODictionary;
+
     private float startBleedTime;
 
 
@@ -38,6 +45,12 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void Start()
     {
+        _attackSODictionary = new Dictionary<string, CurrentAttackSO>();
+
+        _attackSODictionary.Add(_normalAttackString, _normalAttackSO);
+
+        _currentAttackSO = _attackSODictionary[_normalAttackString];
+
         RB = GetComponent<Rigidbody>();
         RB.useGravity = true;
         AttackRange = _weapon.GetRange();
@@ -103,7 +116,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     /// </summary>
     protected virtual void OnAttack()
     {
-        RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _attackSOArray[0], weaponSO = _weapon });
+        RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = _currentAttackSO, weaponSO = _weapon });
     }
 
 
