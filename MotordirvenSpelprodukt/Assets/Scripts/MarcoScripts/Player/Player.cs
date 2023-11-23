@@ -171,6 +171,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     {
         if (!_invulnerable)
         {
+            OnComboBroken();
             PlayDamageVFX(attack.AttackerPosition);
             _healthManager.ReduceHealth(attack.Damage);
             HasTakenDamage = true;
@@ -278,6 +279,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void OnComboBroken()
     {
+        OnEnableMovement();
+
         ResetComboChecker(this, EventArgs.Empty);
 
         _playerInputSpamChecker?.AddInputSequence(_input);
