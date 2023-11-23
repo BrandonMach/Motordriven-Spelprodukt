@@ -39,6 +39,7 @@ public class MMScript : MinionScript
         CheckCanMove("Heavy Attack");
         CheckCanMove("Light Attack");
         CheckCanMove("MMHit");
+        CheckCanMove("Pushed Back");
         //_rb.AddForce(Vector3.down * _rb.mass * 9.81f, ForceMode.Force);
     }
 
