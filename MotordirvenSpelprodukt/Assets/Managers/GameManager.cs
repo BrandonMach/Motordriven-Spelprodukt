@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     bool _isTimerActive;
 
     int _killCount;
+    int _knockedUpCount;
+
     float _challengeTimerMinion;
     float _challengeTimerChampion;
     bool _championIsDead;
@@ -127,6 +129,8 @@ public class GameManager : MonoBehaviour
             //Debug.Log($"KillstreakCount: {_killstreakKillCount}");
         }
     }
+
+    public int KnockedUpCount { get => _knockedUpCount; set => _knockedUpCount = value; }
 
     public event EventHandler OnChampionKilled;
 
@@ -234,6 +238,7 @@ public class GameManager : MonoBehaviour
 
 
     // Kommer föras över till ChallengeManager ifall det finns tid
+    // Problem: CheckChallengesCompletion() kollas först efter en fight är avgjord
     #region ChallengeMethods
 
     private void HandleChallengeCompleted(Challenge completedChallenge)
@@ -365,9 +370,10 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    //Tested, works
     private bool KnockEmUpCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "Knock 'em Up" /* && int knockUps >= challenge.Requirement */)
+        if (challenge.ChallengeName == "Knock 'em Up" && _knockedUpCount >= challenge.Requirement )
         {
             return true;
         }

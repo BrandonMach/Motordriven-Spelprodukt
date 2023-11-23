@@ -20,6 +20,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     private DismemberentEnemyScript _dismembrentScript;
     public bool HasDismembrent;
 
+    public bool IsDeadOnce;
     public bool Dead;
     public float _destroydelay = 1.5f;
 
@@ -138,11 +139,12 @@ public class HealthManager : MonoBehaviour,IHasProgress
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
-        else 
+        else if (!IsDeadOnce)
         {
             //Only increase killcount on npc
             GameManager.Instance.KillCount++;
             Debug.Log("Killcount: " + GameManager.Instance.KillCount);
+            IsDeadOnce = true;
         }
 
         if (hasSlowMo)

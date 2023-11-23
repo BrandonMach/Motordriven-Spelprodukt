@@ -286,6 +286,9 @@ public class MinionScript : EnemyScript
     /// </summary>
     protected void GetKnockedUp(Vector3 attackerPos, float force)
     {
+        GameManager.Instance.KnockedUpCount++;
+        Debug.Log("KnockUps: " + GameManager.Instance.KnockedUpCount);
+
         RB.AddForce(Vector3.up * force, ForceMode.Impulse);
         PushBack(attackerPos, force / 4);
         if (CurrentState != EnemyState.airborne)
