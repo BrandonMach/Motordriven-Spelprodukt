@@ -88,4 +88,5 @@ public class MMScript : MinionScript
     //    base.TakeDamage(attack);
     //    CurrentState = EnemyState.Hit;
     //}
+
 }

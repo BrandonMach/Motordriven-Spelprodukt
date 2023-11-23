@@ -121,7 +121,7 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
        
 
-        if (!GameManager.Instance.MatchIsFinished)
+        if (!GameLoopManager.Instance.MatchIsFinished)
         {
             //Debug.Log("sdkasd");
             CheckIfOutOfCombat();
@@ -172,7 +172,7 @@ public class EntertainmentManager : MonoBehaviour
     void CheckIfOutOfCombat()
     {
         //Scan for enemies
-        foreach (GameObject enemies in  GameManager.Instance.EnemyGameObjects)
+        foreach (GameObject enemies in  GameLoopManager.Instance.EnemyGameObjects)
         {
             float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
             if (dist > _scanEnemyArea && !_isOutOfCombat)

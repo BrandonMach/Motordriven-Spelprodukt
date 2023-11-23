@@ -6,18 +6,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class GameManager : MonoBehaviour
+public class GameLoopManager : MonoBehaviour
 {
     // Is only to be instantiated once, but can be reachable throughout the project with GameManager.Instance.
     #region Singleton
 
-    private static GameManager _instance;
-    public static GameManager Instance { get => _instance; set => _instance = value; }
+    private static GameLoopManager _instance;
+    public static GameLoopManager Instance { get => _instance; set => _instance = value; }
     private void Awake()
     {
         if (Instance != null)
         {
-            Debug.LogWarning("More than one instance of GameManager found");
+            Debug.LogWarning("More than one instance of GameLoopManager found");
             return;
         }
         Instance = this;

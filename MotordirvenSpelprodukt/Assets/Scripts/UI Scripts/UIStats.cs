@@ -24,9 +24,9 @@ public class UIStats : MonoBehaviour
 
     private void UpdateCoinsText()
     {
-        if (GameManager.Instance != null)
+        if (GameLoopManager.Instance != null)
         {
-            coinsText.text = GameManager.PlayerCoins.ToString();
+            coinsText.text = GameLoopManager.PlayerCoins.ToString();
         }
         else
         {

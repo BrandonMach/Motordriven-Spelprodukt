@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.MatchIsFinished)
+        if (GameLoopManager.Instance.MatchIsFinished)
         {
             _canMove = false;
         }
