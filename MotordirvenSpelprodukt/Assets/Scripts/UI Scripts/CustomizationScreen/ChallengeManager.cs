@@ -36,7 +36,7 @@ public class ChallengeManager : MonoBehaviour
     }
     #endregion
 
-    GameManager _gameManager = GameManager.Instance;
+    GameLoopManager _gameManager = GameLoopManager.Instance;
 
     public List<Challenge> AvailableChallenges = new List<Challenge>();
     public List<Challenge> ActiveChallenges;

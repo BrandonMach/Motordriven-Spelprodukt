@@ -12,18 +12,18 @@ public class MinionScript : EnemyScript
     [SerializeField] private bool _onGround = true;
     private bool _shouldCheckOnGround;
 
-    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing}
+    public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing, taunt }
     public EnemyState CurrentState = EnemyState.chasing;
     public EnemyState PreviousState = EnemyState.none;
 
 
     #region Properties
     public float StunDuration { get; set; }
-    public bool OutOfCombat { get; set; }
-    public bool OnGround 
-    { 
-        get { return _onGround; } 
-        set { _onGround = value; } 
+    //public bool OutOfCombat { get; set; }
+    public bool OnGround
+    {
+        get { return _onGround; }
+        set { _onGround = value; }
     }
     public float LandOffsetCheck
     {
@@ -47,9 +47,9 @@ public class MinionScript : EnemyScript
     {
         // Call Update() on EnemyScript
         base.Update();
-       
-        
-        OnGround = Physics.Raycast(_groundCheck.position, Vector3.down, 0.2f);
+
+
+        OnGround = Physics.Raycast(_groundCheck.position, Vector3.down, 0.3f);
 
         switch (CurrentState)
         {
@@ -68,7 +68,7 @@ public class MinionScript : EnemyScript
                 HandleAttack();
                 break;
 
-            case EnemyState.pushed:            
+            case EnemyState.pushed:
                 break;
 
             case EnemyState.chasing:
@@ -78,7 +78,9 @@ public class MinionScript : EnemyScript
             case EnemyState.fleeing:
                 HandleFleeing();
                 break;
-
+            case EnemyState.taunt:
+                HandleTaunt();
+                break;
             default:
                 break;
         }
@@ -91,7 +93,11 @@ public class MinionScript : EnemyScript
     /// </summary>
     private void Instance_OnInCombat(object sender, EventArgs e)
     {
-        OutOfCombat = true;
+        if(CurrentState == EnemyState.chasing || CurrentState == EnemyState.taunt)
+        {
+            CurrentState = EnemyState.none;
+        }
+        
         Debug.Log("OutOfCombat");
     }
 
@@ -102,7 +108,13 @@ public class MinionScript : EnemyScript
     private void Instance_OnOutOfCombat(object sender, EventArgs e)
     {
         Debug.Log("InCombat");
-        OutOfCombat = false;
+        if (CurrentState == EnemyState.chasing)
+        {
+            CurrentState = EnemyState.taunt;
+            ResetTriggers();
+            Anim.SetTrigger("Taunt");
+        }
+
     }
 
 
@@ -167,11 +179,18 @@ public class MinionScript : EnemyScript
         Anim.SetTrigger("Hit");
     }
 
+    protected virtual void HandleTaunt()
+    {
+        //ResetTriggers();
+        //Anim.SetTrigger("Taunt");
+    }
+
     protected virtual void HandleStun()
     {
         //ResetTriggers();
         //Anim.SetTrigger("Stunned");
     }
+
 
 
     protected virtual void HandleAirborne()
@@ -180,6 +199,12 @@ public class MinionScript : EnemyScript
         if (_shouldCheckOnGround)
         {
             if (Physics.Raycast(transform.position, Vector3.down, _landOffsetCheck))
+            {
+                ResetTriggers();
+                Anim.SetTrigger("Land");
+                _shouldCheckOnGround = false;
+            }
+            else if (OnGround)
             {
                 ResetTriggers();
                 Anim.SetTrigger("Land");
@@ -242,7 +267,7 @@ public class MinionScript : EnemyScript
         }
     }
 
-    
+
 
     protected void GetStunned(float stunDuration, Vector3 attackerPos)
     {
@@ -263,7 +288,7 @@ public class MinionScript : EnemyScript
         //ParticleSystemManager.Instance.PlayStunEffect(pos, Quaternion.Euler(-90, 0, 0), transform);
         //ParticleSystemManager.Instance.PlayShockWaveEffect(attackerPos);
 
-        
+
     }
 
     private void GetHit()
@@ -277,6 +302,9 @@ public class MinionScript : EnemyScript
     /// </summary>
     protected void GetKnockedUp(Vector3 attackerPos, float force)
     {
+        GameLoopManager.Instance.KnockedUpCount++;
+        Debug.Log("KnockUps: " + GameLoopManager.Instance.KnockedUpCount);
+
         RB.AddForce(Vector3.up * force, ForceMode.Impulse);
         PushBack(attackerPos, force / 4);
         if (CurrentState != EnemyState.airborne)
@@ -327,5 +355,8 @@ public class MinionScript : EnemyScript
         Anim.ResetTrigger("KnockUp");
         Anim.ResetTrigger("Land");
         Anim.ResetTrigger("Taunt");
+
+
     }
+
 }

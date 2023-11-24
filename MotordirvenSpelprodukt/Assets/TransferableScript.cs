@@ -8,7 +8,12 @@ public class TransferableScript : MonoBehaviour
     //[SerializeField] private FMODController _FMODcontroller;
     private void Awake()
     {
+        
         DontDestroyOnLoad(gameObject);
+    }
+    private void Update()
+    {
+        _weapon = Player.Instance.GetPlayerCurrentWeapon;
     }
     public Weapon GetWeapon()
     {

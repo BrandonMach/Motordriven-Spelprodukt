@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     public event EventHandler ComboBroken;
     public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
     public event EventHandler<OnAttackPressedAnimationEventArgs> ChangeAttackAnimation;
+    public event EventHandler PlayerInterrupted;
 
     public class OnAttackPressedAnimationEventArgs : EventArgs
     {
@@ -37,8 +38,12 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
+
+    public Weapon GetPlayerCurrentWeapon { get => _currentWeapon; }
+
     [SerializeField] private GameObject weaponHand;
     [SerializeField] private GameObject weaponObject;
+    
     [SerializeField] private List<GameObject> _damageEffects = new List<GameObject>();
 
 
@@ -63,6 +68,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     /// Used for testing challenge "KillStreak"
     /// </summary>
     public bool HasTakenDamage { get; set; }
+    public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
 
     private bool _invulnerable = false;
 
@@ -134,7 +140,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Update()
     {
-        
+        if(GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        {
+            _canAttack = false;
+        }
     }
 
     
@@ -171,6 +180,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     {
         if (!_invulnerable)
         {
+            if (!IsDashing && _input != "")
+            {
+                //If we get here the player got damaged while attacking, we reset the player combo with OnComboBroken()
+                OnComboBroken();
+                PlayerInterrupted?.Invoke(this, EventArgs.Empty);
+            }
+
             PlayDamageVFX(attack.AttackerPosition);
             _healthManager.ReduceHealth(attack.Damage);
             HasTakenDamage = true;
@@ -248,7 +264,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         if (!_playerDash.IsDashing)
         {
             OnEnableMovement();
-            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = _currentWeapon });
+            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = CurrentWeapon });
             _canAttack = true;
         }
 
@@ -278,6 +294,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void OnComboBroken()
     {
+        OnEnableMovement();
+
         ResetComboChecker(this, EventArgs.Empty);
 
         _playerInputSpamChecker?.AddInputSequence(_input);
@@ -312,17 +330,17 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     }
     public void SetWeapon(Weapon _weapon)
     {
-        _currentWeapon = _weapon;
+        CurrentWeapon = _weapon;
         ReplaceWeapon();
 
     }
     public void ReplaceWeapon()
     {
-        if(_currentWeapon != null)
+        if(CurrentWeapon != null)
         {
-            Debug.Log(_currentWeapon.GetPath());
+            Debug.Log(CurrentWeapon.GetPath());
             
-            GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+_currentWeapon.GetPath()));
+            GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+CurrentWeapon.GetPath()));
             weaponnew.transform.parent = weaponHand.transform;
             weaponnew.transform.position = weaponObject.transform.position;
             weaponnew.transform.rotation = weaponObject.transform.rotation;

@@ -46,7 +46,7 @@ public class SpawnEnemy : MonoBehaviour
     {
 
 
-        if (!GameManager.Instance.MatchIsFinished && GameManager.Instance.EnemyGameObjects.Length < (2 + MinimumMinionCount))
+        if (!GameLoopManager.Instance.MatchIsFinished && GameLoopManager.Instance.EnemyGameObjects.Length < (2 + MinimumMinionCount))
         {
             SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         }
@@ -61,8 +61,8 @@ public class SpawnEnemy : MonoBehaviour
 
     public void SpawNewEnemy(int spawnPointIndex)
     {
-        Instantiate(MinionTypes[0], SpawnPoints[spawnPointIndex].position,Quaternion.identity /* Quaternion.LookRotation(_target.position)*/);
-        GameManager.Instance.UpdateEnemyList();
+        Instantiate(MinionTypes[Random.Range(0,MinionTypes.Length)], SpawnPoints[spawnPointIndex].position,Quaternion.identity /* Quaternion.LookRotation(_target.position)*/);
+        GameLoopManager.Instance.UpdateEnemyList();
         //pointUsed.Add(spawnPointIndex);
     }
 }

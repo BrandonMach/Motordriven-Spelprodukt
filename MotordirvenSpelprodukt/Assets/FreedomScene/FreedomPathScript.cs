@@ -40,7 +40,7 @@ public class FreedomPathScript : MonoBehaviour
     {
         _currencyText.text = "Currency: " + _tempPlayerCoins;
        
-        Debug.LogError("Actual gold: " +GameManager.PlayerCoins);
+        Debug.LogError("Actual gold: " + GameManager.PlayerCoins);
 
         if (_showErrorPanel)
         {
@@ -111,6 +111,6 @@ public class FreedomPathScript : MonoBehaviour
 
     public void GoToInventory()
     {
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }
