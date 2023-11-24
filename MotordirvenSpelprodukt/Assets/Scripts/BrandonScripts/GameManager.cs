@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         //För testing
         PlayerCoins = 50;
-        Debug.Log("Coins" +     PlayerCoins);
+        //Debug.Log("Coins" +     PlayerCoins);
         DontDestroyOnLoad(gameObject);
     }
 

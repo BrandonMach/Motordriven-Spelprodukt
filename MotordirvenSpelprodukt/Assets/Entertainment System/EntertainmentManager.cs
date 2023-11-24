@@ -65,7 +65,7 @@ public class EntertainmentManager : MonoBehaviour
 
     public Image OOCPopUp;
     //public GameObject[] EnemyGameObjects;
-    public GameObject PlayerCharacter;
+    
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
     [SerializeField] float _timeOutOfCombatCounter = 0;
     [SerializeField] float _timeOutOfCombatThreshold;
@@ -94,7 +94,7 @@ public class EntertainmentManager : MonoBehaviour
         }
         _instance = this;
 
-        DontDestroyOnLoad(gameObject);     
+        //DontDestroyOnLoad(gameObject);     
     }
 
     void Start()
@@ -176,7 +176,7 @@ public class EntertainmentManager : MonoBehaviour
         //Scan for enemies
         foreach (GameObject enemies in  GameLoopManager.Instance.EnemyGameObjects)
         {
-            float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
+            float dist = Vector3.Distance(enemies.transform.position, Player.Instance.transform.position);
             if (dist > _scanEnemyArea && !_isOutOfCombat)
             {
                 PlayerNearEnemies = false; 
@@ -215,7 +215,7 @@ public class EntertainmentManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);
+        Gizmos.DrawWireSphere(Player.Instance.transform.position, _scanEnemyArea);
     }
 
     private void OnOutOfCombat()

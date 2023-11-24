@@ -29,7 +29,7 @@ public class AttackTreeVideoManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Path = GameObject.FindObjectOfType<TransferableScript>().GetWeapon().GetAttackTreeDescriptionPath();
+        //Path = GameObject.FindObjectOfType<TransferableScript>().GetWeapon().GetAttackTreeDescriptionPath();    
         lines = File.ReadAllLines(Path);
     }
 

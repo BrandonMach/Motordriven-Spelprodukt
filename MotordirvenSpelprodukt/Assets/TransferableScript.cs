@@ -11,6 +11,10 @@ public class TransferableScript : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
     }
+    private void Update()
+    {
+        _weapon = Player.Instance.GetPlayerCurrentWeapon;
+    }
     public Weapon GetWeapon()
     {
         return _weapon;

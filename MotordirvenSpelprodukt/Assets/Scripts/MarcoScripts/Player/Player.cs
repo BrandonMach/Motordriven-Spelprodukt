@@ -37,8 +37,12 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
+
+    public Weapon GetPlayerCurrentWeapon { get => _currentWeapon; }
+
     [SerializeField] private GameObject weaponHand;
     [SerializeField] private GameObject weaponObject;
+    
     [SerializeField] private List<GameObject> _damageEffects = new List<GameObject>();
 
 
