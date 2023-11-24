@@ -6,12 +6,12 @@ public class SlowMo: MonoBehaviour
 {
     public float slowdownFactor = 0.05f;
     public float slowDownDuration = 2;
-    public PauseMenu pauseMenu;
+    //public PauseMenu pauseMenu;
 
     // Update is called once per frame
     void Update()
     {
-        if (!pauseMenu.GameIsPaused)
+        if (!PauseMenu.GameIsPaused)
         {
             Time.timeScale += (1f / slowDownDuration) * Time.unscaledDeltaTime;
             Time.fixedDeltaTime += (0.01f / slowDownDuration) * Time.unscaledDeltaTime;

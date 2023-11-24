@@ -1302,11 +1302,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 4217fbc721db0004aa15e39f828f59fe, type: 2}
   m_BuildHeightMesh: 0
---- !u!4 &275208082 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6376993833523115797, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
-  m_PrefabInstance: {fileID: 1472243560}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &280201497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1120694907131761998, guid: 95c6c1b4071792641aa53cc848421c7b, type: 3}
@@ -2910,17 +2905,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 935143034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1145822273 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3343643216543082956, guid: 626a1c2dfac8d2645b795e983383ec31, type: 3}
-  m_PrefabInstance: {fileID: 1774080979}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500318288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b966abb1a91d1344ab1661b72de449af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1148224506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3880,7 +3864,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
   slowDownDuration: 2
-  pauseMenu: {fileID: 1145822273}
 --- !u!4 &1386944804
 Transform:
   m_ObjectHideFlags: 0
@@ -4000,20 +3983,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3280085971499641167, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4986899907661843118, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
       propertyPath: _explosion
       value: 
       objectReference: {fileID: 2112717376}
-    - target: {fileID: 4986899907661843118, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
-      propertyPath: _groundCheck
-      value: 
-      objectReference: {fileID: 275208082}
-    - target: {fileID: 4986899907661843118, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
-      propertyPath: _maunalExplodeActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6376993833523115797, guid: 7e3bd7cc25eefd543804661b896a424d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.2

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseMenu : MenuAbstract, IMenu
 {
-    public bool GameIsPaused = false;
+    public static bool GameIsPaused = false;
 
     [SerializeField] GameObject _pauseMenuUI;
    

@@ -168,8 +168,15 @@ public class GameLoopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach (var canvas in Canvases)
+        {
+            canvas.SetActive(!PauseMenu.GameIsPaused);
+        }
 
-        if(_champion != null)
+       
+
+
+        if (_champion != null)
         {
 
             _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
@@ -204,7 +211,7 @@ public class GameLoopManager : MonoBehaviour
 
         foreach (var canvas in Canvases)
         {
-            canvas.SetActive(false);
+            canvas.SetActive(MatchIsFinished);
         }
 
 

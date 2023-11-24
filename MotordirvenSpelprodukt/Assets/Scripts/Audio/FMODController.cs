@@ -131,7 +131,7 @@ public class FMODController : MonoBehaviour
     
     private void UpdateIntensityParameter()
     {
-        Debug.Log("ETP: " + _intensity);
+        //Debug.Log("ETP: " + _intensity);
 
     
 
