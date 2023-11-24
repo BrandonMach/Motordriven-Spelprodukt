@@ -48,7 +48,7 @@ public class KMScript : MinionScript
             _countdownNumber.text = (1+intTimer).ToString();
             
             _explodeTimer -= Time.deltaTime;
-            Debug.Log("Active bomb timer: " + _explodeTimer);
+           // Debug.Log("Active bomb timer: " + _explodeTimer);
             if (_explodeTimer <= 0)
             {
                 Debug.Log("Active bomba");
