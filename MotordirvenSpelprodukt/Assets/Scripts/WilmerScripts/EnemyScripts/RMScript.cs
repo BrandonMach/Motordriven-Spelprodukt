@@ -26,7 +26,6 @@ public class RMScript : MinionScript
         _navMesh.speed = MovementSpeed;
         _navMesh.angularSpeed = _agentRotationSpeed;
         //_agentRotationSpeed = _navMesh.angularSpeed;
-        _arrowManager = GameLoopManager.Instance.gameObject.GetComponent<ArrowManager>();
     }
 
 
@@ -93,7 +92,7 @@ public class RMScript : MinionScript
     {
         Attack attack = new Attack
         {
-            AttackSO = _attackSODictionary[_normalAttackString],
+            AttackSO = _attackSOArray[0],
             Damage = _weapon.GetDamage()
         };
 

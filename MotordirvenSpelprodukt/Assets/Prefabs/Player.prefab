@@ -51,10 +51,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentRotateMode: 0
   _currentInputMode: 1
+  _gameInput: {fileID: 0}
   _moveSpeed: 7
   _rotationSpeed: 5
-  _attackDashForce: 1.5
   _mainCamera: {fileID: 0}
+  _playerAnimation: {fileID: 1159861338740827350}
+  _playerScript: {fileID: 5463209600150525975}
 --- !u!143 &4313824081767745495
 CharacterController:
   m_ObjectHideFlags: 0
@@ -134,11 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameInput: {fileID: 0}
-  _AttackSOArray: []
-  _currentWeapon: {fileID: 0}
-  weaponHand: {fileID: 0}
-  weaponObject: {fileID: 0}
-  _damageEffects: []
 --- !u!1001 &2468908573452915862
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,19 +20,19 @@ public class ETPArrow : MonoBehaviour
     {
         if (other.gameObject.CompareTag("White Diamond"))
         {
-            Debug.Log("white diamond");
+            Debug.LogError("white diamond");
         }
         else if (other.gameObject.CompareTag("Red Diamond"))
         {
-            Debug.Log("Red diamond");
+            Debug.LogError("Red diamond");
         }
         else if (other.gameObject.CompareTag("Green Diamond"))
         {
-            Debug.Log("Green diamond");
+            Debug.LogError("Green diamond");
         }
         else if (other.gameObject.CompareTag("Yellow Diamond"))
         {
-            Debug.Log("Yellow diamond");
+            Debug.LogError("Yellow diamond");
         }
     }
 }

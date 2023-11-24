@@ -14,7 +14,6 @@ public class OutOfArenaScript : MonoBehaviour
         if(other.gameObject.GetComponent<HealthManager>() != null)
         {
             other.gameObject.GetComponent<HealthManager>().ReduceHealth(300);
-            GameLoopManager.Instance.KnockedOutOfArena++;
         }
 
 

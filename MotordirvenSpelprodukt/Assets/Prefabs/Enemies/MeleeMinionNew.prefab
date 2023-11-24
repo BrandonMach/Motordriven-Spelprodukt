@@ -150,7 +150,6 @@ MonoBehaviour:
   _hasProgressGameObject: {fileID: 1642609581006262702}
   _slider: {fileID: 134142241623063826}
   _refillSpeed: 0.5
-  IsChampionHPbar: 0
 --- !u!1 &1642609581006262702
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +230,6 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  isPlayer: 0
   stunEffect: {fileID: 0}
 --- !u!114 &7214751171691965488
 MonoBehaviour:
@@ -284,14 +282,13 @@ MonoBehaviour:
   _movementSpeed: 3
   _healthManager: {fileID: 1949360036307767630}
   anim: {fileID: 4869250152128649706}
+  _attackSOArray:
+  - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
-  _normalAttackSO: {fileID: 11400000, guid: 01c5181489553064a873e290cab35820, type: 2}
-  stunEffect: {fileID: 0}
   _groundCheck: {fileID: 6975977496842331216}
   _landOffsetCheck: 5
   _onGround: 1
-  CurrentState: 5
-  PreviousState: 0
+  CurrentImpairement: 0
   ChaseDistance: 0
   _weaponHolderTransform: {fileID: 0}
   Damage: 10

@@ -12,28 +12,17 @@ public class FindAudioManager : MonoBehaviour
 
     void Start()
     {
-        //// Find the GameObject in the current scene
-        //targetObject = GameObject.Find(targetObjectName);
-        //if (targetObject != null)
-        //{
-        //    // Do something with the found object
-        //    Debug.Log("Found the object: " + targetObject.name);
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("Object not found in the current scene.");
-        //}
-
-        button = gameObject.GetComponent<Button>();
-
-        button.onClick.AddListener(delegate () { ChangeEvent(); });
+        // Find the GameObject in the current scene
+        targetObject = GameObject.Find(targetObjectName);
+        if (targetObject != null)
+        {
+            // Do something with the found object
+            Debug.Log("Found the object: " + targetObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("Object not found in the current scene.");
+        }
     }
-
-    public void ChangeEvent()
-    {
-        //FMODController.Instance.ChangeEvent("event:/Music");
-    }
-
-
 
 }

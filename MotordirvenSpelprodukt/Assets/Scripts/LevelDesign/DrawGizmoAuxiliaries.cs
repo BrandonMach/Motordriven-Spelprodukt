@@ -45,9 +45,6 @@ namespace LevelDesign
                 case LayerType.Vegetation:
                     DrawGrass(positions); 
                     break;
-                case LayerType.ArenaProps:
-                    DrawArenaProps(positions);
-                    break;
             }
         }
 
@@ -66,11 +63,6 @@ namespace LevelDesign
             foreach (Vector3 pos in positions) Gizmos.DrawWireCube(pos, GizmoDefaultCube);
         }
 
-        static void DrawArenaProps(Vector3[] positions)
-        {
-            foreach (Vector3 pos in positions) Gizmos.DrawSphere(pos, 0.25f);
-        }
-
         static void SetGizmoColorByLayerType(LayerType type)
         {
             switch (type)
@@ -83,9 +75,6 @@ namespace LevelDesign
                     break;
                 case LayerType.Vegetation:
                     Gizmos.color = Color.yellow;
-                    break;
-                case LayerType.ArenaProps:
-                    Gizmos.color = Color.magenta;
                     break;
             }
         }

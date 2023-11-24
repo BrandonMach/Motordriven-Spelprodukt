@@ -70,9 +70,4 @@ public class PauseMenu : MenuAbstract, IMenu
     {
         base.ClickMenuOption3();
     }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }

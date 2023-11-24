@@ -65,7 +65,7 @@ public class EntertainmentManager : MonoBehaviour
 
     public Image OOCPopUp;
     //public GameObject[] EnemyGameObjects;
-    
+    public GameObject PlayerCharacter;
     [SerializeField] [Range(0, 10)] float _scanEnemyArea;
     [SerializeField] float _timeOutOfCombatCounter = 0;
     [SerializeField] float _timeOutOfCombatThreshold;
@@ -78,8 +78,6 @@ public class EntertainmentManager : MonoBehaviour
 
     public event System.EventHandler OutOfCombat;
     public event System.EventHandler InCombat;
-
-    public bool firstTimeInCombat;
 
     #endregion
 
@@ -123,7 +121,7 @@ public class EntertainmentManager : MonoBehaviour
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
        
 
-        if (!GameLoopManager.Instance.MatchIsFinished && firstTimeInCombat)
+        if (!GameManager.Instance.MatchIsFinished)
         {
             //Debug.Log("sdkasd");
             CheckIfOutOfCombat();
@@ -174,9 +172,9 @@ public class EntertainmentManager : MonoBehaviour
     void CheckIfOutOfCombat()
     {
         //Scan for enemies
-        foreach (GameObject enemies in  GameLoopManager.Instance.EnemyGameObjects)
+        foreach (GameObject enemies in  GameManager.Instance.EnemyGameObjects)
         {
-            float dist = Vector3.Distance(enemies.transform.position, Player.Instance.transform.position);
+            float dist = Vector3.Distance(enemies.transform.position, PlayerCharacter.transform.position);
             if (dist > _scanEnemyArea && !_isOutOfCombat)
             {
                 PlayerNearEnemies = false; 
@@ -215,7 +213,7 @@ public class EntertainmentManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(Player.Instance.transform.position, _scanEnemyArea);
+        Gizmos.DrawWireSphere(PlayerCharacter.transform.position, _scanEnemyArea);
     }
 
     private void OnOutOfCombat()

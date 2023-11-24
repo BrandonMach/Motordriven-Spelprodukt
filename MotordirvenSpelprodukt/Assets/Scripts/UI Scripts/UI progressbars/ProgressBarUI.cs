@@ -23,7 +23,7 @@ public class ProgressBarUI : MonoBehaviour
 
         if (IsChampionHPbar)
         {
-            _hasProgressGameObject = GameLoopManager.Instance._champion;
+            _hasProgressGameObject = GameManager.Instance._champion;
             
             //_slider.maxValue = 250;
             //_slider.value = 230;

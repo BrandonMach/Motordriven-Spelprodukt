@@ -12,7 +12,7 @@ public class PlayerDash : MonoBehaviour
 
     public bool IsDashing { get; private set; }
 
-    [SerializeField] float _speedMultiplier;
+    [SerializeField] float _dashSpeed;
     [SerializeField] float _dashTime;
     [SerializeField] float _rotationSpeed;
     [SerializeField] float _cooldownTime;
@@ -78,11 +78,11 @@ public class PlayerDash : MonoBehaviour
             {
                 if (_rigidBody.velocity != Vector3.zero)
                 {
-                    _rigidBody.velocity = _rigidBody.velocity.normalized * _playerMovement.MoveSpeed * _speedMultiplier;
+                    _rigidBody.velocity = _rigidBody.velocity.normalized * _dashSpeed;
                 }
                 else
                 {
-                    _rigidBody.velocity = transform.forward * _playerMovement.MoveSpeed * _speedMultiplier;
+                    _rigidBody.velocity = transform.forward * _dashSpeed;
                 }
 
                 if (_currentDashTime <= _dashTime / 2)

@@ -769,6 +769,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1157271430531837700}
+  - {fileID: 1421225502567989567}
   m_Father: {fileID: 1157237414588061538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1154164568554773046
@@ -1741,7 +1742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1157566897254559194
 Transform:
   m_ObjectHideFlags: 0
@@ -3004,7 +3005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1157154182538139846
 Transform:
   m_ObjectHideFlags: 0
@@ -3689,7 +3690,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1421225502567989567}
   - {fileID: 1156942439025825574}
   m_Father: {fileID: 1157865714103903804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4210,13 +4210,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2847095229827064144}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19983423, y: -0.2072493, z: 0.8274569, w: -0.48210898}
-  m_LocalPosition: {x: 0.159, y: -0.019, z: 0.1}
+  m_LocalRotation: {x: -0.8274572, y: -0.48210835, z: 0.19983438, w: 0.20724948}
+  m_LocalPosition: {x: -1.408, y: 0.479, z: -1.86}
   m_LocalScale: {x: 0.50898737, y: 0.50898725, z: 0.50898737}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1421225502567989567}
-  m_LocalEulerAnglesHint: {x: 8.644, y: 32.455, z: 242.974}
+  m_LocalEulerAnglesHint: {x: -8.644, y: -147.545, z: 117.026}
 --- !u!33 &2882162821747233094
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4291,13 +4291,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3235735191465449148}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.124514334, y: 0.26508394, z: -0.15864666, w: 0.94289875}
-  m_LocalPosition: {x: -0.16056626, y: 0.053102195, z: 0.071275175}
+  m_LocalRotation: {x: 0.71625906, y: -0.19068743, z: 0.67122555, w: -0.008218949}
+  m_LocalPosition: {x: 1.9037765, y: -0.45722306, z: 1.1568199}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2848987904282708524}
-  m_Father: {fileID: 1157132160396553454}
+  m_Father: {fileID: 1157820480427917376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6053341380786954417
 GameObject:
@@ -4411,7 +4411,6 @@ MonoBehaviour:
   _bleedDuration: 6
   _currentHealth: 0
   HasDismembrent: 1
-  IsDeadOnce: 0
   Dead: 0
   _destroydelay: 2.5
   IsPlayer: 0
@@ -4435,7 +4434,8 @@ MonoBehaviour:
   _healthManager: {fileID: 7492074816532999623}
   anim: {fileID: 8457842664103634729}
   _weapon: {fileID: 11400000, guid: 4865d096b0436034d854dcfea75e1b96, type: 2}
-  _normalAttackSO: {fileID: 11400000, guid: 01c5181489553064a873e290cab35820, type: 2}
+  _attackSOArray:
+  - {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   stunEffect: {fileID: 0}
   _groundCheck: {fileID: 7507306499837994651}
   _landOffsetCheck: 5

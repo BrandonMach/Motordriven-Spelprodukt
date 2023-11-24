@@ -16,7 +16,6 @@ namespace LevelDesign
     {
         Tree, 
         Vegetation,
-        Ground,
-        ArenaProps
+        Ground
     }
 }

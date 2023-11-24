@@ -11,19 +11,13 @@ public class CMP1Script : ChampionScript
     public ChampionState CurrentState = ChampionState.Enter;
     public ChampionState PreviousState = ChampionState.Enter;
 
-    [SerializeField] protected CurrentAttackSO _jumpAttack;
-
-    protected static string _jumpAttackStringKey = "jumpAttack";
-
-
+ 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         AttackRange = 5;
         Anim = GetComponent<Animator>();
-
-        _attackSODictionary.Add(_jumpAttackStringKey, _jumpAttack);
 
     }
 
@@ -73,14 +67,12 @@ public class CMP1Script : ChampionScript
 
     public void EnterBasicAttackState()
     {
-        CurrentState = ChampionState.BasicAttack;
-
-        _currentAttackSO = _attackSODictionary[_normalAttackString];
+        CurrentState = ChampionState.BasicAttack; 
     }
     public void EnterSpecialState()
     {
         CurrentState = ChampionState.SpecialAttack;
-        _currentAttackSO = _attackSODictionary[_jumpAttackStringKey];
+
     }
     public void EnterTauntState()
     {

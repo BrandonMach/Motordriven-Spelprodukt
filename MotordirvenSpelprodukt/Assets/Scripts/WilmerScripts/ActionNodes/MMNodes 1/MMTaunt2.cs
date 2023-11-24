@@ -19,13 +19,14 @@ public class MMTaunt2 : ActionNode
     protected override State OnUpdate()
     {
 
-        // Should always chase if attack or taunt fails.
-        if (_meleeMinionScript.CurrentState == MinionScript.EnemyState.taunt)
-        {
-            return State.Success;
-        }
-        
-        //Debug.Log("Enemy is Chasing");
+        // Taunt 
+        //_meleeMinionScript.AIMovementScript.GoTowardsPlayer = false;
+        //_meleeMinionScript.Anim.SetTrigger("Idle");
+        //return State.Success;
+
+
+        // Return failure since it should not taunt ATM.
+        //Debug.Log("Enemy is NOT in taunt");
         return State.Failure;
     }
 }

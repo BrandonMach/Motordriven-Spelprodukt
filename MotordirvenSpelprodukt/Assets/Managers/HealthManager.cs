@@ -20,7 +20,6 @@ public class HealthManager : MonoBehaviour,IHasProgress
     private DismemberentEnemyScript _dismembrentScript;
     public bool HasDismembrent;
 
-    public bool IsDeadOnce;
     public bool Dead;
     public float _destroydelay = 1.5f;
 
@@ -65,7 +64,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance?.UpdateEnemyList();
+        GameManager.Instance?.UpdateEnemyList();
     }
 
 
@@ -93,14 +92,13 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void ReduceHealth(float damage)
     {
-        EntertainmentManager.Instance.firstTimeInCombat = true;
         if (!GodMode)
         {
             if (IsPlayer)
             {
 
                 OnShakeScreen?.Invoke(this, EventArgs.Empty);
-                
+
             }
 
 
@@ -140,12 +138,11 @@ public class HealthManager : MonoBehaviour,IHasProgress
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
-        else if (!IsDeadOnce)
+        else 
         {
             //Only increase killcount on npc
-            GameLoopManager.Instance.KillCount++;
-            Debug.Log("Killcount: " + GameLoopManager.Instance.KillCount);
-            IsDeadOnce = true;
+            GameManager.Instance.KillCount++;
+            Debug.Log("Killcount: " + GameManager.Instance.KillCount);
         }
 
         if (hasSlowMo)

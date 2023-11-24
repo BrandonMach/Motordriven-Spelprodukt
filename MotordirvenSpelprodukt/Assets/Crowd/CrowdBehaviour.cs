@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrowdBehaviour : MonoBehaviour
 {
-    //[SerializeField] private EntertainmentManager _etManager;
+    [SerializeField] private EntertainmentManager _etManager;
 
     [SerializeField] private Transform _playerPos;
 
@@ -31,16 +31,15 @@ public class CrowdBehaviour : MonoBehaviour
     private void Awake()
     {
         _crowdSections = GameObject.FindObjectsOfType<AudienceAnimationScipt>();
-        
 
     }
 
     void Start()
     {
         //Subscribes to events
-        EntertainmentManager.Instance.OnETPNormal += NormalCrowd;
-        EntertainmentManager.Instance.OnETPAngry += AngryCrowd;
-        EntertainmentManager.Instance.OnETPExited += ExcitedCrowd;
+        _etManager.OnETPNormal += NormalCrowd;
+        _etManager.OnETPAngry += AngryCrowd;
+        _etManager.OnETPExited += ExcitedCrowd;
 
 
         foreach (var audience in _crowdSections)

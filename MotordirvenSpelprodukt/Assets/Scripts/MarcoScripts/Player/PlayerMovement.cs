@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 _moveDirection {  get; private set; }
 
-    public float MoveSpeed { get { return _moveSpeed; } private set { _moveSpeed = value; } }
 
     [SerializeField] private RotateMode _currentRotateMode;
     [SerializeField] private InputMode _currentInputMode;
@@ -101,19 +100,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
-        if(GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        if (GameManager.Instance.MatchIsFinished)
         {
             _canMove = false;
         }
-        else
-        {
-            if (GameLoopManager.Instance.MatchIsFinished)
-            {
-                _canMove = false;
-            }
-        }
-       
         GetMoveDir();
         
         _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);

@@ -23,8 +23,7 @@ public class MMImpairedCheck : ActionNode
         if (_meleeMinionScript.CurrentState != MinionScript.EnemyState.stunned
             && _meleeMinionScript.CurrentState != MinionScript.EnemyState.airborne
             && _meleeMinionScript.CurrentState != MinionScript.EnemyState.pushed
-            && _meleeMinionScript.OnGround
-            && _meleeMinionScript.CurrentState != MinionScript.EnemyState.taunt)
+            && _meleeMinionScript.OnGround)
         {
             //Debug.Log("Enemy is NOT impaired");
             return State.Failure;

@@ -12,7 +12,6 @@ namespace LevelDesign
         [SerializeField] private GameObject[] treePrefabs;
         [SerializeField] private GameObject[] vegetationPrefabs;
         [SerializeField] private GameObject[] groundPrefabs;
-        [SerializeField] private GameObject[] arenaPropPrefabs;
 
         [Header("Debug")]
         [SerializeField] private bool promptPlacement;
@@ -102,9 +101,6 @@ namespace LevelDesign
                 case LayerType.Vegetation:
                     if (vegetationPrefabs.Length < 0) errorMessage = "No vegetation prefabs found";
                     break;
-                case LayerType.ArenaProps:
-                    if (arenaPropPrefabs.Length < 0) errorMessage = "No ArenaProp prefabs found";
-                    break;
             }
 
             return string.IsNullOrEmpty(errorMessage);
@@ -120,8 +116,6 @@ namespace LevelDesign
                     return groundPrefabs[Random.Range(0, groundPrefabs.Length)];
                 case LayerType.Vegetation:
                     return vegetationPrefabs[Random.Range(0, vegetationPrefabs.Length)];
-                case LayerType.ArenaProps:
-                    return arenaPropPrefabs[Random.Range(0, arenaPropPrefabs.Length)];
             }
 
             return null;
