@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 _moveDirection {  get; private set; }
 
+    public float MoveSpeed { get { return _moveSpeed; } private set { _moveSpeed = value; } }
 
     [SerializeField] private RotateMode _currentRotateMode;
     [SerializeField] private InputMode _currentInputMode;
