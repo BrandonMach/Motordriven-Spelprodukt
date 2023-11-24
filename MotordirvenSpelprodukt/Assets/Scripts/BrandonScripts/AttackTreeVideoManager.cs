@@ -36,9 +36,9 @@ public class AttackTreeVideoManager : MonoBehaviour
     public void SwitchVideoClip(int comboIndex)
     {
         ComboIndex = comboIndex;
-
-        _description.text = lines[comboIndex];
         _videoClip.clip = AttackClips[comboIndex];
+        _description.text = lines[comboIndex];
+       
 
 
 
