@@ -17,7 +17,7 @@ public class KingDecision : MonoBehaviour
 
     void Start()
     {
-        GameLoopManager gameManager = GameObject.Find("GameManager").GetComponent<GameLoopManager>();
+        GameLoopManager gameManager = GameLoopManager.Instance;
         CamManager = GameObject.FindWithTag("CamManager").GetComponent<SwitchCamera>();
         _playerDismemberent = Player.Instance.GetComponent<DismemberentEnemyScript>();
         _etp = EntertainmentManager.Instance;
@@ -78,7 +78,7 @@ public class KingDecision : MonoBehaviour
     private IEnumerator LoseScreen()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
+        SceneManager.LoadScene(3, LoadSceneMode.Single);
     }
 
 
@@ -87,6 +87,6 @@ public class KingDecision : MonoBehaviour
     {
         //testar gå till concept save money
 
-        SceneManager.LoadScene(3, LoadSceneMode.Single);
+        SceneManager.LoadScene(4, LoadSceneMode.Single);
     }
 }

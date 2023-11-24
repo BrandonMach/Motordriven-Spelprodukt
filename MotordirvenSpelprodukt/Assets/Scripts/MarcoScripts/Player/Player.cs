@@ -136,7 +136,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Update()
     {
-        
+        if(GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        {
+            _canAttack = false;
+        }
     }
 
     
