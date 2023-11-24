@@ -101,10 +101,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (GameLoopManager.Instance.MatchIsFinished)
-        {
-            _canMove = false;
-        }
+        //if (GameLoopManager.Instance.MatchIsFinished)
+        //{
+        //    _canMove = false;
+        //}
         GetMoveDir();
         
         _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
