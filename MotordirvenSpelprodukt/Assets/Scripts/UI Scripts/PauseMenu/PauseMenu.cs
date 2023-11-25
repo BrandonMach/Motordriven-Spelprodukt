@@ -7,6 +7,7 @@ public class PauseMenu : MenuAbstract, IMenu
     public static bool GameIsPaused = false;
 
     [SerializeField] GameObject _pauseMenuUI;
+    [SerializeField] RectTransform _background;
    
 
     private void Start()
