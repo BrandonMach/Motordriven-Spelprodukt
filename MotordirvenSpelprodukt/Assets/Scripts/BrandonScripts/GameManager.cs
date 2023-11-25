@@ -46,7 +46,8 @@ public class GameManager : MonoBehaviour
 
 
     Scene currentScene;
-    public static int PlayerCoins; //Static så att anadra scener kan få access
+    public static float PlayerCoins; //Static så att anadra scener kan få access
+    public static int ChampionsKilled;
 
 
     void Start()
@@ -54,13 +55,14 @@ public class GameManager : MonoBehaviour
 
         //För testing
         PlayerCoins = 50;
-        Debug.Log("Coins" +     PlayerCoins);
+        //Debug.Log("Coins" +     PlayerCoins);
         DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Coins" + PlayerCoins);
         currentScene = SceneManager.GetActiveScene();
 
         if (currentScene.buildIndex == 1)
@@ -81,5 +83,10 @@ public class GameManager : MonoBehaviour
         //{
             
         //}
+    }
+
+    public void RewardCoins(float amount)
+    {
+        PlayerCoins += amount;
     }
 }

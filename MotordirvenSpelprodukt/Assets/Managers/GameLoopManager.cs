@@ -132,7 +132,7 @@ public class GameLoopManager : MonoBehaviour
 
     public int KnockedUpCount { get => _knockedUpCount; set => _knockedUpCount = value; }
     public int KnockedOutOfArena { get => _knockedOutOfArena; set => _knockedOutOfArena = value; }
-    public int PlayerCoins { get; private set; }
+    
 
     public event EventHandler OnChampionKilled;
 
@@ -208,6 +208,7 @@ public class GameLoopManager : MonoBehaviour
     private void MatchFinished(object sender, EventArgs e)
     {
         MatchIsFinished = true; //Stop the match
+        
 
         foreach (var canvas in Canvases)
         {
@@ -222,9 +223,10 @@ public class GameLoopManager : MonoBehaviour
 
         if (_etp.GetETP() > (_etp.GetMaxETP() / 2))
         {
-            KilledChampions++;
-            Debug.LogError("Champions Killed" + KilledChampions);
-            if (KilledChampions == AmountOfChampionsToKill)
+            GameManager.ChampionsKilled++;
+            Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
+            GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33);
+            if (GameManager.ChampionsKilled == AmountOfChampionsToKill)
             {
                 Debug.Log("You killed all champions");
             }
@@ -240,6 +242,8 @@ public class GameLoopManager : MonoBehaviour
         OnChampionKilled?.Invoke(this, EventArgs.Empty);
 
         _championIsDead = true;
+
+       
     }
     #endregion
 
@@ -250,12 +254,12 @@ public class GameLoopManager : MonoBehaviour
 
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
-        PlayerCoins += completedChallenge.Reward;
+        GameManager.Instance.RewardCoins( completedChallenge.Reward);
         completedChallenge.IsCompleted = true;
         _challengeManager.DeActivateChallenge(completedChallenge);
         _challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
-        Debug.Log("PlayerCoins = " + PlayerCoins);
+        Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
         //completedChallenge.ChallengeButton.SetActive(false);
     }
 

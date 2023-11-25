@@ -19,7 +19,7 @@ public class FreedomPathScript : MonoBehaviour
     bool _paymentConfirmed;
 
     int amountWaged = 0;
-    int _tempPlayerCoins;
+    float _tempPlayerCoins;
     int _tempFreedomPrice;
     public int FreedomPrice; //Öka destå fler du dödar i arenan
     private float _stagePriceMultiplier = 1.3f;
@@ -29,7 +29,7 @@ public class FreedomPathScript : MonoBehaviour
 
 
         _freedomPriceText.text = "Freedom Price Pot:" + FreedomPrice;
-        _tempPlayerCoins = GameManager.PlayerCoins;
+        //_tempPlayerCoins = GameManager.PlayerCoins;
         _tempFreedomPrice = FreedomPrice;
 
         _ogErrorPanelColor = _errorPanel.GetComponent<Image>().color;
@@ -38,6 +38,7 @@ public class FreedomPathScript : MonoBehaviour
 
     void Update()
     {
+        _tempPlayerCoins = GameManager.PlayerCoins;
         _currencyText.text = "Currency: " + _tempPlayerCoins;
        
         Debug.LogError("Actual gold: " + GameManager.PlayerCoins);
