@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public  enum CurrentScen
     {
+        MainMenuScene,
         CustomizationScene,
         AreaScen,
         ShopScen
@@ -65,6 +66,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Coins" + PlayerCoins);
         currentScene = SceneManager.GetActiveScene();
 
+        if (currentScene.buildIndex == 0)
+        {
+            _currentScen = CurrentScen.MainMenuScene;
+            Debug.Log("In MainMenuScene");
+        }
         if (currentScene.buildIndex == 1)
         {
             _currentScen = CurrentScen.CustomizationScene;

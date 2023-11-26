@@ -63,8 +63,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         if(Player.Instance != null)
         {
             DistanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        }
-        
+        }      
     }
 
 
