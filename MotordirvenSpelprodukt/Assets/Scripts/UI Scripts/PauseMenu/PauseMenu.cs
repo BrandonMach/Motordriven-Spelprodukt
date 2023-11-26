@@ -78,11 +78,13 @@ public class PauseMenu : MenuAbstract, IMenu
     {
         if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene)
         {
+            Resume();
             //Loading main menu
             SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
         else if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen)
         {
+            Resume();
             SceneManager.LoadScene(1, LoadSceneMode.Single);
         }
         else if (GameManager.Instance._currentScen == GameManager.CurrentScen.MainMenuScene)
