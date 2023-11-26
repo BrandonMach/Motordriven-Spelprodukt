@@ -95,4 +95,9 @@ public class GameManager : MonoBehaviour
     {
         PlayerCoins += amount;
     }
+
+    public void RemoveCoins(float amount)
+    {
+        PlayerCoins -= amount;
+    }
 }
