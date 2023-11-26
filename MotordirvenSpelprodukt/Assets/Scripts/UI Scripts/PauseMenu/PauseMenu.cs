@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PauseMenu : MenuAbstract, IMenu
 {
-    public bool GameIsPaused = false;
+    public static bool GameIsPaused = false;
 
     [SerializeField] GameObject _pauseMenuUI;
+
    
 
     private void Start()
@@ -69,5 +70,10 @@ public class PauseMenu : MenuAbstract, IMenu
     public override void ClickMenuOption3()
     {
         base.ClickMenuOption3();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

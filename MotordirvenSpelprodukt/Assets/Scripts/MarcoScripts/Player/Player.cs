@@ -59,6 +59,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private string _input;
     private bool _canAttack = true;
     private PlayerInputSpamChecker _playerInputSpamChecker;
+    private Transform _shockwavePosition;
 
     /// <summary>
     /// Used for testing challenge "KillStreak"
@@ -67,6 +68,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
 
     private bool _invulnerable = false;
+
 
     private void Awake()
     {
@@ -85,6 +87,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         
         
     }
+
+
     void Start()
     {
         _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
@@ -101,7 +105,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
         if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon() != null)
             SetWeapon(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon());
+
+        _shockwavePosition = transform.Find("ShockwavePosition");
     }
+
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
@@ -136,7 +143,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Update()
     {
-        
+        if(GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        {
+            _canAttack = false;
+        }
     }
 
     
@@ -260,8 +270,14 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = CurrentWeapon });
             _canAttack = true;
         }
-
     }
+
+
+    public void PlaySlamEffect()
+    {
+        ParticleSystemManager.Instance.PlayParticleFromPool(ParticleSystemManager.ParticleEffects.Slam, _shockwavePosition);
+    }
+
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
     {

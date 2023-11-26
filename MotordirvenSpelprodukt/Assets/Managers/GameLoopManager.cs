@@ -74,7 +74,6 @@ public class GameLoopManager : MonoBehaviour
 
     [SerializeField] Player _player;
 
-    public static int PlayerCoins; //Static så att anadra scener kan få access
 
     public bool MatchIsFinished;
     public System.EventHandler OnMatchFinished;
@@ -133,6 +132,7 @@ public class GameLoopManager : MonoBehaviour
 
     public int KnockedUpCount { get => _knockedUpCount; set => _knockedUpCount = value; }
     public int KnockedOutOfArena { get => _knockedOutOfArena; set => _knockedOutOfArena = value; }
+    
 
     public event EventHandler OnChampionKilled;
 
@@ -154,9 +154,7 @@ public class GameLoopManager : MonoBehaviour
         _etp = EntertainmentManager.Instance;
 
 
-        //För testing
-        PlayerCoins = 50;
-        Debug.Log("Coins" + PlayerCoins);
+        
 
         _spawnEnemy = SpawnEnemy.Instance;
 
@@ -170,8 +168,15 @@ public class GameLoopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach (var canvas in Canvases)
+        {
+            canvas.SetActive(!PauseMenu.GameIsPaused);
+        }
 
-        if(_champion != null)
+       
+
+
+        if (_champion != null)
         {
 
             _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
@@ -189,7 +194,7 @@ public class GameLoopManager : MonoBehaviour
 
         if(_player == null)
         {
-            SceneManager.LoadScene(2, LoadSceneMode.Single);
+            SceneManager.LoadScene(3, LoadSceneMode.Single);
         }
 
         // Testing challenges
@@ -203,10 +208,11 @@ public class GameLoopManager : MonoBehaviour
     private void MatchFinished(object sender, EventArgs e)
     {
         MatchIsFinished = true; //Stop the match
+        
 
         foreach (var canvas in Canvases)
         {
-            canvas.SetActive(false);
+            canvas.SetActive(MatchIsFinished);
         }
 
 
@@ -217,9 +223,10 @@ public class GameLoopManager : MonoBehaviour
 
         if (_etp.GetETP() > (_etp.GetMaxETP() / 2))
         {
-            KilledChampions++;
-            Debug.LogError("Champions Killed" + KilledChampions);
-            if (KilledChampions == AmountOfChampionsToKill)
+            GameManager.ChampionsKilled++;
+            Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
+            GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33);
+            if (GameManager.ChampionsKilled == AmountOfChampionsToKill)
             {
                 Debug.Log("You killed all champions");
             }
@@ -235,6 +242,8 @@ public class GameLoopManager : MonoBehaviour
         OnChampionKilled?.Invoke(this, EventArgs.Empty);
 
         _championIsDead = true;
+
+       
     }
     #endregion
 
@@ -245,12 +254,12 @@ public class GameLoopManager : MonoBehaviour
 
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
-        PlayerCoins += completedChallenge.Reward;
+        GameManager.Instance.RewardCoins( completedChallenge.Reward);
         completedChallenge.IsCompleted = true;
         _challengeManager.DeActivateChallenge(completedChallenge);
         _challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
-        Debug.Log("PlayerCoins = " + PlayerCoins);
+        Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
         //completedChallenge.ChallengeButton.SetActive(false);
     }
 

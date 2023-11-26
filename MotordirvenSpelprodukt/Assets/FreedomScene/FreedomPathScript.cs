@@ -19,7 +19,7 @@ public class FreedomPathScript : MonoBehaviour
     bool _paymentConfirmed;
 
     int amountWaged = 0;
-    int _tempPlayerCoins;
+    float _tempPlayerCoins;
     int _tempFreedomPrice;
     public int FreedomPrice; //Öka destå fler du dödar i arenan
     private float _stagePriceMultiplier = 1.3f;
@@ -29,7 +29,7 @@ public class FreedomPathScript : MonoBehaviour
 
 
         _freedomPriceText.text = "Freedom Price Pot:" + FreedomPrice;
-        _tempPlayerCoins = GameLoopManager.PlayerCoins;
+        //_tempPlayerCoins = GameManager.PlayerCoins;
         _tempFreedomPrice = FreedomPrice;
 
         _ogErrorPanelColor = _errorPanel.GetComponent<Image>().color;
@@ -38,9 +38,10 @@ public class FreedomPathScript : MonoBehaviour
 
     void Update()
     {
+        _tempPlayerCoins = GameManager.PlayerCoins;
         _currencyText.text = "Currency: " + _tempPlayerCoins;
        
-        Debug.LogError("Actual gold: " +GameLoopManager.PlayerCoins);
+        Debug.LogError("Actual gold: " + GameManager.PlayerCoins);
 
         if (_showErrorPanel)
         {
@@ -68,7 +69,7 @@ public class FreedomPathScript : MonoBehaviour
     public void PayforFreedom(int amount)
     {
         
-        if ((_tempPlayerCoins - amount) >= 0 && _tempFreedomPrice >= 0 && (GameLoopManager.PlayerCoins - amount) >= 0)
+        if ((_tempPlayerCoins - amount) >= 0 && _tempFreedomPrice >= 0 && (GameManager.PlayerCoins - amount) >= 0)
         {  
             if ((_tempFreedomPrice - amount) >= 0)
             {
@@ -93,9 +94,9 @@ public class FreedomPathScript : MonoBehaviour
     {
         _freedomPriceText.color = Color.white;
         FreedomPrice -= amountWaged;
-        GameLoopManager.PlayerCoins -= amountWaged;
+        GameManager.PlayerCoins -= amountWaged;
         amountWaged = 0;
-        _tempPlayerCoins = GameLoopManager.PlayerCoins;
+        _tempPlayerCoins = GameManager.PlayerCoins;
         
     }
 
@@ -105,12 +106,12 @@ public class FreedomPathScript : MonoBehaviour
         _freedomPriceText.text = "Freedom Price Pot:" + FreedomPrice;
         
         _tempFreedomPrice = FreedomPrice;
-        _tempPlayerCoins = GameLoopManager.PlayerCoins;
+        _tempPlayerCoins = GameManager.PlayerCoins;
         amountWaged = 0;
     }
 
     public void GoToInventory()
     {
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }

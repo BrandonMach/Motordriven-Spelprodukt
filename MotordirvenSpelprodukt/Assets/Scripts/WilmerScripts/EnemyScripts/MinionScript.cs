@@ -278,17 +278,14 @@ public class MinionScript : EnemyScript
         }
         CurrentState = EnemyState.stunned;
 
-        Vector3 pos = transform.position;
-        pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
+        //Vector3 pos = transform.position;
+        //pos = new Vector3(pos.x, pos.y + transform.localScale.y + 1, pos.z);
         ResetTriggers();
         Anim.SetTrigger("Stunned");
-        Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);       //Funkar inte?
+        //Instantiate(stunEffect, pos, Quaternion.Euler(-90, 0, 0), transform);       //Funkar inte?
 
-
-        //ParticleSystemManager.Instance.PlayStunEffect(pos, Quaternion.Euler(-90, 0, 0), transform);
-        //ParticleSystemManager.Instance.PlayShockWaveEffect(attackerPos);
-
-
+        ParticleSystemManager.Instance
+            .PlayParticleFromPool(ParticleSystemManager.ParticleEffects.Stun, transform);
     }
 
     private void GetHit()

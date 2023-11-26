@@ -22,23 +22,23 @@ public class AttackTreeVideoManager : MonoBehaviour
 
     void Start()
     {
-        
-        
+        lines = File.ReadAllLines(Path);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Path = GameObject.FindObjectOfType<TransferableScript>().GetWeapon().GetAttackTreeDescriptionPath();
-        lines = File.ReadAllLines(Path);
+       // Path = GameObject.FindObjectOfType<TransferableScript>().GetWeapon().GetAttackTreeDescriptionPath();
+        //lines = File.ReadAllLines(Path);
     }
 
     public void SwitchVideoClip(int comboIndex)
     {
         ComboIndex = comboIndex;
-
-        _description.text = lines[comboIndex];
         _videoClip.clip = AttackClips[comboIndex];
+        _description.text = lines[comboIndex];
+       
 
 
 

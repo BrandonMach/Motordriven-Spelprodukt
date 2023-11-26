@@ -48,7 +48,7 @@ public class KMScript : MinionScript
             _countdownNumber.text = (1+intTimer).ToString();
             
             _explodeTimer -= Time.deltaTime;
-            Debug.Log("Active bomb timer: " + _explodeTimer);
+            //Debug.Log("Active bomb timer: " + _explodeTimer);
             if (_explodeTimer <= 0)
             {
                 Debug.Log("Active bomba");
@@ -65,10 +65,10 @@ public class KMScript : MinionScript
     protected override void OnAttack()
     {
 
-        
 
+        gameObject.GetComponent<HealthManager>().ReduceHealth(100);
         base.OnAttack();
         //Instantiate(_explosion, this.transform);
-        this.GetComponent<HealthManager>().ReduceHealth(100);
+       
     }
 }

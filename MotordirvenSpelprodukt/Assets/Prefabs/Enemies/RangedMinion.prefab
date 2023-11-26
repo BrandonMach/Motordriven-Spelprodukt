@@ -3376,10 +3376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoints: 1000
+  _maxHealthPoints: 100
   _bleedDuration: 6
   _currentHealth: 0
   HasDismembrent: 0
+  IsDeadOnce: 0
   Dead: 0
   _destroydelay: 2.5
   IsPlayer: 0
@@ -3452,7 +3453,6 @@ MonoBehaviour:
   anim: {fileID: 8457842664103634729}
   _weapon: {fileID: 11400000, guid: ff20cb8b570afe74687ac32136c44c71, type: 2}
   _normalAttackSO: {fileID: 11400000, guid: 0c81b9dfec25272419b9f01e0dfb5a2f, type: 2}
-  _slamAttackSO: {fileID: 0}
   stunEffect: {fileID: 0}
   _groundCheck: {fileID: 7507306499837994651}
   _landOffsetCheck: 5
@@ -3677,7 +3677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hasProgressGameObject: {fileID: 6053341380786954417}
   _slider: {fileID: 5552871259317986825}
-  _refillSpeed: 0.5
+  _refillSpeed: 30
   IsChampionHPbar: 0
 --- !u!1 &6706769011353083866
 GameObject:

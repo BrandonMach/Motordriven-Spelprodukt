@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,28 +25,68 @@ public class GameManager : MonoBehaviour
 
       
 
-        //_champion = GameObject.FindObjectOfType<CMP1Script>();
+       
 
 
     }
 
-    /// <summary>
-    /// Set your _gameManager variable to this instance in order to achieve the Singleton pattern.
-    /// Example: _gameManager = GameManager.Instance
-    /// </summary>
+
 
     #endregion
 
 
+    public  enum CurrentScen
+    {
+        CustomizationScene,
+        AreaScen,
+        ShopScen
+    }
+
+    public CurrentScen _currentScen;
+
+
+    Scene currentScene;
+    public static float PlayerCoins; //Static så att anadra scener kan få access
+    public static int ChampionsKilled;
+
 
     void Start()
     {
-        
+
+        //För testing
+        PlayerCoins = 50;
+        //Debug.Log("Coins" +     PlayerCoins);
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("Coins" + PlayerCoins);
+        currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.buildIndex == 1)
+        {
+            _currentScen = CurrentScen.CustomizationScene;
+            //Customization Scene
+            Debug.Log("In Customization Scene");
+        }
+        if (currentScene.buildIndex == 2)
+        {
+            //Brandon new testing Scene
+            Debug.Log("In Brandon new testing Scene");
+            _currentScen = CurrentScen.AreaScen;
+        }
+
+
+        //switch (currentScene.buildIndex)
+        //{
+            
+        //}
+    }
+
+    public void RewardCoins(float amount)
+    {
+        PlayerCoins += amount;
     }
 }
