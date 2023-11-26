@@ -10,7 +10,7 @@ public class OptionsMenu : MenuAbstract, IMenu
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void Update()
@@ -41,5 +41,10 @@ public class OptionsMenu : MenuAbstract, IMenu
     public override void ClickMenuOption3()
     {
         base.ClickMenuOption3();
+    }
+
+    public override void ClickMenuOption4()
+    {
+        base.ClickMenuOption4();
     }
 }
