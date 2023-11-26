@@ -26,20 +26,17 @@ public class AttackTreeVideoManager : MonoBehaviour
 
         var textFile = Resources.Load<TextAsset>(Path);
 
-        var yo= textFile.ToString();
-        Debug.LogWarning(yo);
+        var singleString= textFile.ToString();
+        Debug.LogWarning(singleString);
 
 
-        lines = yo.Split(",");
+        lines = singleString.Split(",");
         
-
-        for (int i = 0; i < lines.Length; i++)
+        foreach (var text in lines)
         {
-            Debug.Log( lines[i].Trim('\n') + " " + i);
+            text.Trim('\n');
         }
-
      
-       // lines = File.ReadAllLines(Path);
        
     }
 
