@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MenuAbstract, IMenu
 {
     public static bool GameIsPaused = false;
+    GameManager _gameManager = GameManager.Instance;
 
     [SerializeField] GameObject _pauseMenuUI;
 
@@ -74,6 +76,19 @@ public class PauseMenu : MenuAbstract, IMenu
 
     public void QuitGame()
     {
-        Application.Quit();
+        if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene)
+        {
+            //Loading main menu
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
+        else if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen)
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+        }
+        else if (GameManager.Instance._currentScen == GameManager.CurrentScen.MainMenuScene)
+        {
+            Application.Quit();
+        }
+        
     }
 }
