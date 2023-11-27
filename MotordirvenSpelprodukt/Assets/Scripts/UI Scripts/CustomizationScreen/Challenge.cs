@@ -16,7 +16,7 @@ public class Challenge : MonoBehaviour
 
     private bool _isCompleted;
     private bool _isActivated;
-    private TooltipTrigger trigger;
+    public TooltipTrigger trigger;
 
     public string ChallengeName { get => _challengeName; set => _challengeName = value; }
     public string Description { get => _description; set => _description = value; }
@@ -29,9 +29,18 @@ public class Challenge : MonoBehaviour
 
     private void Start()
     {
-        trigger = GetComponent<TooltipTrigger>();
-        trigger.content = _description;
+        //trigger = GetComponent<TooltipTrigger>();
+        //trigger.content = _description;
         DontDestroyOnLoad(ChallengeButton);
+    }
+
+    private void Update()
+    {
+        if (ChallengeManager.Instance.ChallengesActive)
+        {
+            trigger.content = _description;
+        }
+        
     }
 
     public Challenge(string name, string description, int requirement)

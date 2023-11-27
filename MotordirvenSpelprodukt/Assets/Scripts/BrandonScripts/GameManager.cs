@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
 
     Player _player;
-
+    
 
 
     public static int ChampionsKilled;
@@ -146,7 +146,13 @@ public class GameManager : MonoBehaviour
         }
         if (currentScene.buildIndex == 1)
         {
+            foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
+            {
+                ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
+            }
+            
             _currentScen = CurrentScen.CustomizationScene;
+
             //Customization Scene
            // Debug.Log("In Customization Scene");
         }
