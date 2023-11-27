@@ -22,8 +22,22 @@ public class AttackTreeVideoManager : MonoBehaviour
 
     void Start()
     {
-        lines = File.ReadAllLines(Path);
+        //Resources.Load(Path);
 
+        var textFile = Resources.Load<TextAsset>(Path);
+
+        var singleString= textFile.ToString();
+        Debug.LogWarning(singleString);
+
+
+        lines = singleString.Split(",");
+        
+        foreach (var text in lines)
+        {
+            text.Trim('\n');
+        }
+     
+       
     }
 
     // Update is called once per frame

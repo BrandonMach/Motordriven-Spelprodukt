@@ -9,7 +9,7 @@ public class ShopSystem : MonoBehaviour
     [Header("Player Weapon")]
     [SerializeField] private Weapon _weapon;
     [Header("Shop Menu")]
-    [SerializeField] private int _currency;
+    [SerializeField] private float _currency;
     [SerializeField] private TextMeshProUGUI _currencyText;
     [Header("Upgrade Menu")]
     [SerializeField] private Image _weaponImage;
@@ -33,12 +33,19 @@ public class ShopSystem : MonoBehaviour
         UpdateUpgradeView();
         _rerollButtonText.text = (rerollCounter * rerollBaseline).ToString();
     }
+
+    private void Update()
+    {
+        _currency = GameManager.PlayerCoins;
+    }
     public void MakePurshase(GenerateWeapon g)
     {
+
+
         _weapon = TryPurshase(g);
 
         UpdateUpgradeView();
-
+        GameManager.Instance.RemoveCoins((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()));
         Inventory.Instance.Add(_weapon);
     }
     public Weapon TryPurshase(GenerateWeapon g)

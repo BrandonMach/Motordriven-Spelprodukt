@@ -33,6 +33,7 @@ public class GenerateWeapon : MonoBehaviour
         _weapon.SetName(GenerateName(type));
         GenerateModel();
         UpdatePanel(level);
+       
     }
 
     private string GenerateName(Weapontype type)

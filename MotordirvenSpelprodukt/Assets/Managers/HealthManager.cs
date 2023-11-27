@@ -139,6 +139,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
         if (IsPlayer)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
+            GameLoopManager.Instance.TotalDeaths++;
         }
         else if (!IsDeadOnce)
         {

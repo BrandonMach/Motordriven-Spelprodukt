@@ -52,12 +52,23 @@ public class PlayerDash : MonoBehaviour
 
     void Update()
     {
-        HandleTimers();
+        if((GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen))
+        {
+            HandleTimers();
+        }
+        
     }
 
     private void FixedUpdate()
     {
-        HandleRoll();
+        if ((GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen))
+        {
+            HandleRoll();
+        }
+        else
+        {
+            IsDashing = false;
+        }
     }
 
     private void HandleRoll()

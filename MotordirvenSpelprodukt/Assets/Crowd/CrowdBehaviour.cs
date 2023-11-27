@@ -115,7 +115,7 @@ public class CrowdBehaviour : MonoBehaviour
 
         int randomChampionFan = Random.Range(0, _championFans.Count);
 
-        Instantiate(fallingObject, _championFans[randomChampionFan].transform.position, transform.rotation);
+        Instantiate(fallingObject, _championFans[randomChampionFan].transform.position , transform.rotation);
         yield return new WaitForSeconds(2);
         _throwObject = true;      
     }

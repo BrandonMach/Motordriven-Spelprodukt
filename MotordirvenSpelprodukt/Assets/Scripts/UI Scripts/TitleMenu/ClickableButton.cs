@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
+    [SerializeField] private GameObject _hoverObjectIcon;
     [SerializeField] private Image _img;
     [SerializeField] private Sprite _default, _pressed;
     [SerializeField] private TextMeshProUGUI _textMeshPro;
@@ -34,11 +34,13 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (isMouseOver)
         {
             _textMeshPro.characterSpacing = hoverCharacterSpacing;
+            _hoverObjectIcon.SetActive(true);
             Debug.Log("Spacing!");
         }
         else if (!isMouseOver)
         {
             _textMeshPro.characterSpacing = originalCharacterSpacing;
+            _hoverObjectIcon.SetActive(false);
         }
     }
 

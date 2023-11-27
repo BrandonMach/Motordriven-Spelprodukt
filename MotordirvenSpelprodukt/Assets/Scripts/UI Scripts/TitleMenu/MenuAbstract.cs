@@ -8,6 +8,7 @@ public abstract class MenuAbstract : MonoBehaviour, IMenu
     [SerializeField] protected GameObject _menuOption1;
     [SerializeField] protected GameObject _menuOption2;
     [SerializeField] protected GameObject _menuOption3;
+    [SerializeField] protected GameObject _menuOption4;
 
 
     public void ClickESC()
@@ -40,6 +41,11 @@ public abstract class MenuAbstract : MonoBehaviour, IMenu
     public virtual void ClickMenuOption3()
     {
         _menuOption3.SetActive(true);
+        gameObject.SetActive(false);
+    }
+    public virtual void ClickMenuOption4()
+    {
+        _menuOption4.SetActive(true);
         gameObject.SetActive(false);
     }
 

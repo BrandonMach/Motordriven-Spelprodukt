@@ -54,13 +54,19 @@ public class GameLoopManager : MonoBehaviour
     int _killCount;
     int _knockedUpCount;
     int _knockedOutOfArena;
+    int _killstreakKillCount;
+    int _totalDeaths;
+
+    int _totalKillcount;
+    int _totalKnockUps;
+    int _totalKnockedOutOfArena;
+    int _highestKillStreakKillCount;
 
     float _challengeTimerMinion;
     float _challengeTimerChampion;
     bool _championIsDead;
     bool _challengeRequirementsMet;
 
-    int _killstreakKillCount;
 
 
 
@@ -124,6 +130,13 @@ public class GameLoopManager : MonoBehaviour
         {
             _player.HasTakenDamage = false;
             _killstreakKillCount++;
+
+            // Stores highest killstreak achieved, used for stats
+            if (_killstreakKillCount > HighestKillStreakKillCount)
+            {
+                HighestKillStreakKillCount = _killstreakKillCount;
+            }
+
             _killCount = value;
 
             //Debug.Log($"KillstreakCount: {_killstreakKillCount}");
@@ -132,7 +145,11 @@ public class GameLoopManager : MonoBehaviour
 
     public int KnockedUpCount { get => _knockedUpCount; set => _knockedUpCount = value; }
     public int KnockedOutOfArena { get => _knockedOutOfArena; set => _knockedOutOfArena = value; }
-    
+    public int TotalKillcount { get => _totalKillcount; set => _totalKillcount = value; }
+    public int TotalKnockUps { get => _totalKnockUps; set => _totalKnockUps = value; }
+    public int TotalKnockedOutOfArena { get => _totalKnockedOutOfArena; set => _totalKnockedOutOfArena = value; }
+    public int HighestKillStreakKillCount { get => _highestKillStreakKillCount; set => _highestKillStreakKillCount = value; }
+    public int TotalDeaths { get => _totalDeaths; set => _totalDeaths = value; }
 
     public event EventHandler OnChampionKilled;
 
@@ -207,6 +224,8 @@ public class GameLoopManager : MonoBehaviour
 
     private void MatchFinished(object sender, EventArgs e)
     {
+        SettingStatistics();
+
         MatchIsFinished = true; //Stop the match
         
 
@@ -244,6 +263,20 @@ public class GameLoopManager : MonoBehaviour
         _championIsDead = true;
 
        
+    }
+
+    /// <summary>
+    /// Updates variables for statistics and resets challengecounters (except killstreak)
+    /// </summary>
+    private void SettingStatistics()
+    {
+        TotalKillcount = _killCount;
+        TotalKnockUps = _knockedUpCount;
+        TotalKnockedOutOfArena = _knockedOutOfArena;
+
+        _killCount = 0;
+        _knockedUpCount = 0;
+        _knockedOutOfArena = 0;
     }
     #endregion
 

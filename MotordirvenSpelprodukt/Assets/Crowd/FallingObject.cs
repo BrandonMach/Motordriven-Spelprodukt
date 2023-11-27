@@ -53,7 +53,7 @@ public class FallingObjectType : MonoBehaviour
             float posZ = Random.Range(-2, 2);
 
 
-            _targetIndicatorPosition = new Vector3(/*posX +*/ _playerPosition.x, /*0.001f*/ 0, /*posZ +*/ _playerPosition.z);
+            _targetIndicatorPosition = new Vector3(/*posX +*/ _playerPosition.x, 0.001f, /*posZ +*/ _playerPosition.z);
             _indicator = Instantiate(IndicatorPrefab, _targetIndicatorPosition, IndicatorPrefab.transform.rotation);
             //_indicator.transform.SetParent(this.transform);
         }
@@ -75,44 +75,48 @@ public class FallingObjectType : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //_distCovered = (Time.time - _startTime) * _speed;
+        _distCovered = (Time.time - _startTime) * _speed;
 
-        // Fraction of journey completed equals current distance divided by total distance.
-        //float fractionOfJourney = _distCovered / _journeyLength;
+        //Fraction of journey completed equals current distance divided by total distance.
+        float fractionOfJourney = _distCovered / _journeyLength;
 
-        //transform.position = Vector3.Slerp(transform.position, _targetIndicatorPosition, fractionOfJourney);
-
-        if (isFalling)
-        {
-
-            float distanceCovered = (Time.time - _startTime) * _speed;
-            float journeyFraction = distanceCovered / _journeyLength;
-
-            Vector3 currentPos = Vector3.Lerp(this.transform.position, _targetIndicatorPosition, journeyFraction);
-
-            //currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y, journeyFraction) + Mathf.Sin(journeyFraction * Mathf.PI)  * 2;
-            if (currentPos.x != _targetIndicatorPosition.x && currentPos.z != _targetIndicatorPosition.x)
-            {
-                currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y +0.01f, journeyFraction) /*+ Mathf.Sin(journeyFraction * Mathf.PI) * 2*/;
-            }
-
-            transform.position = currentPos;
-
-            if (journeyFraction >= 1.0f)
-            {
-
-                isFalling = false;
-                // Object has reached its destination
-                // You can add additional logic here if needed
-            }
-            else
-            {
+        
+        transform.position = Vector3.Lerp(transform.position, _targetIndicatorPosition, fractionOfJourney);
 
 
-            }
 
 
-        }
+        //if (isFalling)
+        //{
+
+        //    float distanceCovered = (Time.time - _startTime) * _speed;
+        //    float journeyFraction = distanceCovered / _journeyLength;
+
+        //    Vector3 currentPos = Vector3.Lerp(this.transform.position, _targetIndicatorPosition, journeyFraction);
+
+        //    currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y, journeyFraction) /*+ Mathf.Sin(journeyFraction * Mathf.PI) * 2*/;
+        //    if (currentPos.x != _targetIndicatorPosition.x && currentPos.z != _targetIndicatorPosition.x)
+        //    {
+        //        currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y + 0.01f, journeyFraction) /*+ Mathf.Sin(journeyFraction * Mathf.PI) * 2*/;
+        //    }
+
+        //    transform.position = currentPos;
+
+        //    if (journeyFraction >= 1.0f)
+        //    {
+
+        //        isFalling = false;
+        //        //Object has reached its destination
+        //        //You can add additional logic here if needed
+        //    }
+        //    else
+        //    {
+
+
+        //    }
+
+
+        //}
 
 
 
@@ -127,6 +131,8 @@ public class FallingObjectType : MonoBehaviour
         
     }
 
+
+   
 
     private void OnCollisionEnter(Collision other)
     {
