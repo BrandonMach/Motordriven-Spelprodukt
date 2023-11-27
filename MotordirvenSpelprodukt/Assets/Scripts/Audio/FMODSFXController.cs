@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class FMODSFXController : MonoBehaviour
 {
-    FMODSFXController _instance;
+    private static FMODSFXController _instance;
+
 
     [SerializeField] Slider SFXVolumeSlider;
     List<EventInstance> _sfxEventInstances;
@@ -42,7 +43,7 @@ public class FMODSFXController : MonoBehaviour
     public EventReference tomatoSplash2EventPath;
     public EventReference coinDropEventPath;
 
-    public FMODSFXController Instance { get => _instance; set => _instance = value; }
+    public static FMODSFXController Instance { get => _instance; set => _instance = value; }
 
     private void Awake()
     {
@@ -158,11 +159,29 @@ public class FMODSFXController : MonoBehaviour
     public void PlayCrowdCheer() => crowdCheer.start();
     public void PlayItemEquip() => itemEquip.start();
     public void PlayJailDoorClose() => jailDoorClose.start();
-    public void PlayMinionHit() => minionHit.start();
-    public void PlayMinionHit2() => minionHit2.start();
-    public void PlayMinionHit3() => minionHit3.start();
     public void PlaySwordHit() => swordHit.start();
     public void PlayTomatoSplash() => tomatoSplash.start();
     public void PlayTomatoSplash2() => tomatoSplash2.start();
     public void PlayCoinDrop() => coinDrop.start();
+    public void PlayMinionHit() => minionHit.start();
+    public void PlayMinionHit2() => minionHit2.start();
+    public void PlayMinionHit3() => minionHit3.start();
+
+    public void PlayRandomMinionHit()
+    {
+        int randomNumber = Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlayMinionHit();
+        }
+        else if (randomNumber == 2)
+        {
+            PlayMinionHit2();
+        }
+        else if (randomNumber == 3)
+        {
+            PlayMinionHit3();
+        }
+    }
 }
