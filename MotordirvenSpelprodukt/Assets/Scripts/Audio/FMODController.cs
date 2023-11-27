@@ -69,10 +69,10 @@ public class FMODController : MonoBehaviour
             ChangeEvent("event:/Music");
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            gameObject.GetComponent<StudioEventEmitter>().EventInstance.start();
-        }
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    gameObject.GetComponent<StudioEventEmitter>().EventInstance.start();
+        //}
 
         UpdateIntensityParameter();
         UpdateHealthParameter();
