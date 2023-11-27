@@ -67,7 +67,7 @@ public class GameLoopManager : MonoBehaviour
     bool _championIsDead;
     bool _challengeRequirementsMet;
 
-
+    bool beenOutOfCombat;
 
 
     #endregion
@@ -150,6 +150,7 @@ public class GameLoopManager : MonoBehaviour
     public int TotalKnockedOutOfArena { get => _totalKnockedOutOfArena; set => _totalKnockedOutOfArena = value; }
     public int HighestKillStreakKillCount { get => _highestKillStreakKillCount; set => _highestKillStreakKillCount = value; }
     public int TotalDeaths { get => _totalDeaths; set => _totalDeaths = value; }
+    public bool BeenOutOfCombat { get => beenOutOfCombat; set => beenOutOfCombat = value; }
 
     public event EventHandler OnChampionKilled;
 
@@ -215,8 +216,8 @@ public class GameLoopManager : MonoBehaviour
         }
 
         // Testing challenges
-        CheckChallengesCompletion();
-        ChallengeTimersUpdate();
+        //CheckChallengesCompletion();
+        //ChallengeTimersUpdate();
     }
 
 
@@ -270,13 +271,13 @@ public class GameLoopManager : MonoBehaviour
     /// </summary>
     private void SettingStatistics()
     {
-        TotalKillcount = _killCount;
-        TotalKnockUps = _knockedUpCount;
-        TotalKnockedOutOfArena = _knockedOutOfArena;
+        GameManager.Instance.TotalKillcount = GameManager.Instance.KillCount;
+        GameManager.Instance.TotalKnockUps = GameManager.Instance.KnockedUpCount;
+        GameManager.Instance.TotalKnockedOutOfArena = GameManager.Instance.KnockedOutOfArena;
 
-        _killCount = 0;
-        _knockedUpCount = 0;
-        _knockedOutOfArena = 0;
+        GameManager.Instance.KillCount = 0;
+        GameManager.Instance.KnockedUpCount = 0;
+        GameManager.Instance.KnockedOutOfArena = 0;
     }
     #endregion
 
@@ -444,7 +445,7 @@ public class GameLoopManager : MonoBehaviour
 
     private bool FearlessCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "Fearless" /* && bool outOfCombat */)
+        if (challenge.ChallengeName == "Fearless" && !BeenOutOfCombat)
         {
             return true;
         }
