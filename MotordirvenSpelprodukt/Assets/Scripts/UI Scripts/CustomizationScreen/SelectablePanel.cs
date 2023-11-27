@@ -96,7 +96,7 @@ public class SelectablePanel : MonoBehaviour
         _abilitiesButton.interactable = true;
         _challengesButton.interactable = true;
         _shopButton.interactable = true;
-        ChallengeManager.Instance.ChallengesActive = false;
+       
     }
     public void AbilitiesPanelClicked()
     {
@@ -108,7 +108,7 @@ public class SelectablePanel : MonoBehaviour
         _inventoryButton.interactable = true;
         _challengesButton.interactable = true;
         _shopButton.interactable = true;
-        ChallengeManager.Instance.ChallengesActive = false;
+        
     }
 
     public void ChallengesPanelClicked()
@@ -121,7 +121,7 @@ public class SelectablePanel : MonoBehaviour
         _abilitiesButton.interactable = true;
         _inventoryButton.interactable = true;
         _shopButton.interactable = true;
-        ChallengeManager.Instance.ChallengesActive = true;
+        
         ChallengeManager.Instance.ChallengePanelOpen();
 
         foreach (var challengeButton in ChallengeManager.Instance.ChallengeButtonArray)
@@ -140,7 +140,7 @@ public class SelectablePanel : MonoBehaviour
         _challengesButton.interactable = true;
         _abilitiesButton.interactable = true;
         _inventoryButton.interactable = true;
-        ChallengeManager.Instance.ChallengesActive = false;
+        
        
     }
 

@@ -216,7 +216,7 @@ public class GameLoopManager : MonoBehaviour
         }
 
         // Testing challenges
-        //CheckChallengesCompletion();
+       // CheckChallengesCompletion();
         //ChallengeTimersUpdate();
     }
 
@@ -261,7 +261,9 @@ public class GameLoopManager : MonoBehaviour
         CamManager.GoToKingCam();
         OnChampionKilled?.Invoke(this, EventArgs.Empty);
 
-        _championIsDead = true;
+       // _championIsDead = true;
+        GameManager.Instance._championIsDeadX = true;
+        
 
        
     }

@@ -36,11 +36,12 @@ public class Challenge : MonoBehaviour
 
     private void Update()
     {
-        if (ChallengeManager.Instance.ChallengesActive)
-        {
-            trigger.content = _description;
-        }
-        
+
+    }
+
+    public void UpdateTriggerContent()
+    {
+        trigger.content = _description;
     }
 
     public Challenge(string name, string description, int requirement)

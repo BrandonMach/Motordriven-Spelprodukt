@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     float _challengeTimerMinionX;
     float _challengeTimerChampionX;
-    bool _championIsDeadX;
+    public bool _championIsDeadX;
     bool _challengeRequirementsMetX;
 
     bool beenOutOfCombatX;

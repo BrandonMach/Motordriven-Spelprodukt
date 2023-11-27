@@ -15,7 +15,7 @@ public class ChallengeManager : MonoBehaviour
     //private static ChallengeManager _instance;
     //public static ChallengeManager Instance { get => _instance; set => _instance = value; }
 
-    public bool ChallengesActive;
+    //public bool ChallengesActive;
     //private void Awake()
     //{
     //    if (Instance != null)
@@ -138,13 +138,7 @@ public class ChallengeManager : MonoBehaviour
         AvailableChallengesArray = FindObjectsOfType<Challenge>();
 
 
-        foreach (var item in AvailableChallengesArray)
-        {
-            if (item.IsCompleted)
-            {
-                item.ChallengeButton.SetActive(false);
-            }
-        }
+        
 
         if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene /*&& ChallengesActive*/)
         {
@@ -155,14 +149,28 @@ public class ChallengeManager : MonoBehaviour
             for (int i = 0; i < ChallengeButtonArray.Length; i++)
             {
                 ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
+                
 
             }
 
             for (int i = 0; i < AvailableChallengesArray.Length; i++)
             {
-                AvailableChallengesArray[i].trigger = ChallengeButtonArray[i].gameObject.GetComponent<TooltipTrigger>();
+                AvailableChallengesArray[i].trigger = ChallengeButtonArray[i].gameObject.GetComponent<TooltipTrigger>(); //Assigne tool tip
             }
 
+        }
+
+
+        foreach (var availableChallenges in AvailableChallengesArray)
+        {
+
+            availableChallenges.UpdateTriggerContent(); //Update tooltip
+
+
+            if (availableChallenges.IsCompleted)
+            {
+                availableChallenges.ChallengeButton.SetActive(false);
+            }
         }
     }
 
