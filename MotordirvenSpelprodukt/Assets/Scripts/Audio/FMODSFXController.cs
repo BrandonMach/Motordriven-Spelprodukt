@@ -64,7 +64,7 @@ public class FMODSFXController : MonoBehaviour
     void Start()
     {
         CreateSFXInstances();
-        InitializeEventInstancesList();
+        //InitializeEventInstancesList();
         SFXVolumeSlider.value = 0.3f;
     }
 
@@ -113,22 +113,23 @@ public class FMODSFXController : MonoBehaviour
 
     void InitializeEventInstancesList()
     {
-        _sfxEventInstances = new List<EventInstance>();
-
-        _sfxEventInstances.Add(bowLoad);
-        _sfxEventInstances.Add(bowRelease);
-        _sfxEventInstances.Add(championSlam);
-        _sfxEventInstances.Add(crowdBoo);
-        _sfxEventInstances.Add(crowdCheer);
-        _sfxEventInstances.Add(itemEquip);
-        _sfxEventInstances.Add(jailDoorClose);
-        _sfxEventInstances.Add(minionHit);
-        _sfxEventInstances.Add(minionHit2);
-        _sfxEventInstances.Add(minionHit3);
-        _sfxEventInstances.Add(swordHit);
-        _sfxEventInstances.Add(tomatoSplash);
-        _sfxEventInstances.Add(tomatoSplash2);
-        _sfxEventInstances.Add(coinDrop);
+        _sfxEventInstances = new List<EventInstance>
+        {
+            bowLoad,
+            bowRelease,
+            championSlam,
+            crowdBoo,
+            crowdCheer,
+            itemEquip,
+            jailDoorClose,
+            minionHit,
+            minionHit2,
+            minionHit3,
+            swordHit,
+            tomatoSplash,
+            tomatoSplash2,
+            coinDrop
+        };
     }
 
     /// <summary>
@@ -136,6 +137,24 @@ public class FMODSFXController : MonoBehaviour
     /// </summary>
     void CreateSFXInstances()
     {
+        _sfxEventInstances = new List<EventInstance>
+        {
+            bowLoad,
+            bowRelease,
+            championSlam,
+            crowdBoo,
+            crowdCheer,
+            itemEquip,
+            jailDoorClose,
+            minionHit,
+            minionHit2,
+            minionHit3,
+            swordHit,
+            tomatoSplash,
+            tomatoSplash2,
+            coinDrop
+        };
+
         bowLoad = FMODUnity.RuntimeManager.CreateInstance(bowLoadEventPath);
         bowRelease = FMODUnity.RuntimeManager.CreateInstance(bowReleaseEventPath);
         championSlam = FMODUnity.RuntimeManager.CreateInstance(championSlamEventPath);
