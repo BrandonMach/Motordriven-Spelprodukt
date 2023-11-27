@@ -26,6 +26,7 @@ public class CustomizationMenu : MonoBehaviour
         //Angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, TargetRotation, ref r, 0.1f);
 
         //PlayerObject.transform.rotation = Quaternion.Euler(0, Angle, 0);
+        PlayerObject = Player.Instance.gameObject;
     }
 
     public void ClickEnterArena()

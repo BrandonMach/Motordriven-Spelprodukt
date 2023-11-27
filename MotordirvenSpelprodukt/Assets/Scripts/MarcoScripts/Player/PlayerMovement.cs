@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion _newRotation;
 
     private bool _isMoving = false;
-    private bool _canMove = true;
+    public bool _canMove = true;
 
     private void Awake()
     {
@@ -112,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 _canMove = false;
             }
+
         }
        
         GetMoveDir();
