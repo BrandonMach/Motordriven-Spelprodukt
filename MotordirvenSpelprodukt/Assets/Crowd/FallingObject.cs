@@ -91,7 +91,7 @@ public class FallingObjectType : MonoBehaviour
             Vector3 currentPos = Vector3.Lerp(this.transform.position, _targetIndicatorPosition, journeyFraction);
 
             //currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y, journeyFraction) + Mathf.Sin(journeyFraction * Mathf.PI)  * 2;
-            if (currentPos.x != _targetIndicatorPosition.x && currentPos.z != _targetIndicatorPosition.z)
+            if (currentPos.x != _targetIndicatorPosition.x && currentPos.z != _targetIndicatorPosition.x)
             {
                 currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y +0.01f, journeyFraction) /*+ Mathf.Sin(journeyFraction * Mathf.PI) * 2*/;
             }
