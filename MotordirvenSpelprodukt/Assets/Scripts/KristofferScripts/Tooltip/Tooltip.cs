@@ -12,6 +12,7 @@ public class Tooltip : MonoBehaviour
     public LayoutElement layoutElement;
     public int characterWrapLimit;
     public RectTransform rectTransform;
+    public Vector2 position;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -34,7 +35,7 @@ public class Tooltip : MonoBehaviour
     }
     private void Update()
     {
-        Vector2 position = new Vector2(Input.mousePosition.x, Input.mousePosition.y+40);
+        position = new Vector2(Input.mousePosition.x , Input.mousePosition.y+40);
         
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;

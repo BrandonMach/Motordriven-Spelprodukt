@@ -40,6 +40,7 @@ public class ChallengeManager : MonoBehaviour
 
     public List<Challenge> AvailableChallenges = new List<Challenge>();
     public List<Challenge> ActiveChallenges;
+    public Challenge[] AvailableChallengesArray;
 
     public List<GameObject> AvailableChallengeButtons = new List<GameObject>();
 
@@ -52,15 +53,31 @@ public class ChallengeManager : MonoBehaviour
     private const int _maxActiveChallenges = 2;
     private int _toggleActiveText = 0;
 
+    private void Start()
+    {
+       
+    }
+
     private void Update()
     {
-        foreach (Challenge challenge in AvailableChallenges)
-        {
-            if (challenge.IsCompleted)
-            {
-                challenge.ChallengeButton.SetActive(false);
-            }
-        }
+        //AvailableChallengesArray = FindObjectsOfType<Challenge>();
+
+        //foreach (Challenge challenge in AvailableChallenges)
+        //{
+        //    if (challenge.IsCompleted)
+        //    {
+        //        challenge.ChallengeButton.SetActive(false);
+        //    }
+        //}
+
+
+        ////foreach (var item in AvailableChallengesArray)
+        ////{
+        ////    if (item.IsCompleted)
+        ////    {
+        ////        item.ChallengeButton.SetActive(false);
+        ////    }   
+        ////}
     }
 
     public void DeActivateCompletedChallengeButton(Challenge challenge)

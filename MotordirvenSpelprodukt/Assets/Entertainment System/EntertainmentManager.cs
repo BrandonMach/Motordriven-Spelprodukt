@@ -221,6 +221,7 @@ public class EntertainmentManager : MonoBehaviour
     private void OnOutOfCombat()
     {
         OutOfCombat?.Invoke(this, EventArgs.Empty);
+        GameLoopManager.Instance.BeenOutOfCombat = true;
     }
 
     private void OnInCombat()
