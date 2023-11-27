@@ -1634,7 +1634,7 @@ GameObject:
   - component: {fileID: 1518657506880464990}
   m_Layer: 5
   m_Name: FirstActiveTextTMP
-  m_TagString: Untagged
+  m_TagString: FirstActiveChallenge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3415,7 +3415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0007019043}
+  m_AnchoredPosition: {x: 0, y: -0.0017700195}
   m_SizeDelta: {x: -0.27, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8551803614251850993
@@ -4689,7 +4689,7 @@ GameObject:
   - component: {fileID: 4582543582655905717}
   m_Layer: 5
   m_Name: SecondActiveTextTMP
-  m_TagString: Untagged
+  m_TagString: SecondActiveChallenge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4885,7 +4885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.3615112, y: 0.002105713}
+  m_AnchoredPosition: {x: 1.3615112, y: -0.0014038086}
   m_SizeDelta: {x: -3.2746, y: -857.57}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5977146553200798901
@@ -10911,6 +10911,14 @@ PrefabInstance:
       propertyPath: _challengeButton
       value: 
       objectReference: {fileID: 6050336753677768530}
+    - target: {fileID: 2096455836980965949, guid: 2bbce6b2e4df96e4fbe2c71c31d7dfc0, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2096455836980965949, guid: 2bbce6b2e4df96e4fbe2c71c31d7dfc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2100925750841047008, guid: 2bbce6b2e4df96e4fbe2c71c31d7dfc0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11019,7 +11027,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightEdgeChallengeButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1408212845109790526, guid: 2bbce6b2e4df96e4fbe2c71c31d7dfc0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -12017,11 +12026,20 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
+    - target: {fileID: 7599790814903355717, guid: 8032691d144aa1b4f8a556e21e783d7a, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599790814903355717, guid: 8032691d144aa1b4f8a556e21e783d7a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8172023516031833586, guid: 8032691d144aa1b4f8a556e21e783d7a, type: 3}
       propertyPath: m_Name
       value: ChampionSlayerChallengeButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4964905154369435551, guid: 8032691d144aa1b4f8a556e21e783d7a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -12592,6 +12610,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4159262566907008908, guid: eea06e086b2905847865fecf6f87de24, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159262566907008908, guid: eea06e086b2905847865fecf6f87de24, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340538251971611634, guid: eea06e086b2905847865fecf6f87de24, type: 3}
       propertyPath: m_Name
       value: ThisIsSpartaChallengeButton
@@ -12620,7 +12646,8 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3975071132581651087, guid: eea06e086b2905847865fecf6f87de24, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -12660,6 +12687,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7949249104209337945}
     m_Modifications:
+    - target: {fileID: 2311031376228962522, guid: 36e5f337f59403744b8017c7d94e88fa, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311031376228962522, guid: 36e5f337f59403744b8017c7d94e88fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2318660453946512647, guid: 36e5f337f59403744b8017c7d94e88fa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12754,7 +12789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8220805214879349977, guid: 36e5f337f59403744b8017c7d94e88fa, type: 3}
       propertyPath: m_text
-      value: Killstreak
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8220805214879349977, guid: 36e5f337f59403744b8017c7d94e88fa, type: 3}
       propertyPath: m_fontSize
@@ -12776,7 +12811,8 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3350836092173215193, guid: 36e5f337f59403744b8017c7d94e88fa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -13919,6 +13955,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3945025772533703406, guid: 4ffa7722f6c000a4889efb7bb99c3f0b, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945025772533703406, guid: 4ffa7722f6c000a4889efb7bb99c3f0b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4048011963916343277, guid: 4ffa7722f6c000a4889efb7bb99c3f0b, type: 3}
       propertyPath: _challengeButton
       value: 
@@ -13955,7 +13999,8 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4048011963916343277, guid: 4ffa7722f6c000a4889efb7bb99c3f0b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -15178,6 +15223,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4069374820879935500, guid: 6a62300312d21c840beda7e46e7cc2cb, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069374820879935500, guid: 6a62300312d21c840beda7e46e7cc2cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6214937112130532466, guid: 6a62300312d21c840beda7e46e7cc2cb, type: 3}
       propertyPath: m_Name
       value: KnockEmUpChallengeButton
@@ -15206,7 +15259,8 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3957454266508352783, guid: 6a62300312d21c840beda7e46e7cc2cb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -15253,6 +15307,14 @@ PrefabInstance:
     - target: {fileID: 1666530861670436383, guid: 5ea5a675fcc256341aefb56872b1a96c, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 3.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772535324693717242, guid: 5ea5a675fcc256341aefb56872b1a96c, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772535324693717242, guid: 5ea5a675fcc256341aefb56872b1a96c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776292730203399463, guid: 5ea5a675fcc256341aefb56872b1a96c, type: 3}
       propertyPath: m_Pivot.x
@@ -15362,7 +15424,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FearlessChallengeButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1588554721450350073, guid: 5ea5a675fcc256341aefb56872b1a96c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -17843,6 +17906,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BerserkerChallengeButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6843653885780123675, guid: 20dce886462e64e43bfff13913025aab, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843653885780123675, guid: 20dce886462e64e43bfff13913025aab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8316047787405876929, guid: 20dce886462e64e43bfff13913025aab, type: 3}
       propertyPath: _challengeButton
       value: 
@@ -17871,7 +17942,8 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8316047787405876929, guid: 20dce886462e64e43bfff13913025aab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -20438,6 +20510,14 @@ PrefabInstance:
       propertyPath: _challengeButton
       value: 
       objectReference: {fileID: 737383200104669160}
+    - target: {fileID: 1948751128456556027, guid: 7a8d132d6db3a4642b0170399c01593a, type: 3}
+      propertyPath: Challenge
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948751128456556027, guid: 7a8d132d6db3a4642b0170399c01593a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1960400081099810854, guid: 7a8d132d6db3a4642b0170399c01593a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -20546,7 +20626,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MuggleChallengeButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1556481533457029368, guid: 7a8d132d6db3a4642b0170399c01593a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
