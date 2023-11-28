@@ -57,7 +57,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
 
     private string _input;
-    private bool _canAttack = true;
+    public bool _canAttack = true;
     private PlayerInputSpamChecker _playerInputSpamChecker;
     private Transform _shockwavePosition;
 
@@ -143,7 +143,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Update()
     {
-        if(GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
+        if (GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
         {
             _canAttack = false;
             

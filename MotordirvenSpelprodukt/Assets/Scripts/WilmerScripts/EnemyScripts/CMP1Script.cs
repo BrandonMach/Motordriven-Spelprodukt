@@ -102,5 +102,10 @@ public class CMP1Script : ChampionScript
     protected override void OnAttack()
     {
         base.OnAttack();
+
+        if (CurrentState == ChampionState.SpecialAttack)
+        {
+            FMODSFXController.Instance.PlayChampionSlam();
+        }
     }
 }

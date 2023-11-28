@@ -102,6 +102,11 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 OnShakeScreen?.Invoke(this, EventArgs.Empty);
                 
             }
+            else if (!IsPlayer)
+            {
+                FMODSFXController.Instance.PlaySwordHit();
+                FMODSFXController.Instance.PlayRandomMinionHit();
+            }
 
 
             CurrentHealthPoints -= damage;
