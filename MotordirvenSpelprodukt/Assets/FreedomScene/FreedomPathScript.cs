@@ -112,6 +112,8 @@ public class FreedomPathScript : MonoBehaviour
 
     public void GoToInventory()
     {
+        FMODSFXController.Instance.PlayJailDoorClose();
         SceneManager.LoadScene(1, LoadSceneMode.Single);
+        
     }
 }
