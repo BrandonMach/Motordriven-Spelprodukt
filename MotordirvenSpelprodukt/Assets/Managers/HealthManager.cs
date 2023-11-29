@@ -38,9 +38,9 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public EventReference minionHit2EventPath;
     public EventReference minionHit3EventPath;
 
-    public EventReference bloodSoundEventPath;
-    public EventReference bloodSound2EventPath;
-    public EventReference bloodSound3EventPath;
+    public EventReference hitSoundEventPath;
+    public EventReference hitSound2EventPath;
+    public EventReference hitSound3EventPath;
 
     public EventReference deathSoundEventPath;
     public EventReference deathSound2EventPath;
@@ -126,7 +126,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             else if (!IsPlayer && !isBleeding)
             {
                 PlayRandomMinionHit();
-                PlayRandomBloodSound();
+                PlayRandomHitSound();
             }
 
 
@@ -197,14 +197,14 @@ public class HealthManager : MonoBehaviour,IHasProgress
         deathSound.release();
     }
 
-    public void PlayBloodSound(EventReference bloodSoundRef)
+    public void PlayHitSound(EventReference bloodSoundRef)
     {
-        FMOD.Studio.EventInstance bloodSound = FMODUnity.RuntimeManager.CreateInstance(bloodSoundRef);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(bloodSound, this.transform, this.GetComponent<Rigidbody>());
-        bloodSound.getVolume(out float volume);
-        bloodSound.setVolume(volume / 3);
-        bloodSound.start();
-        bloodSound.release();
+        FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(bloodSoundRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(hitSound, this.transform, this.GetComponent<Rigidbody>());
+        hitSound.getVolume(out float volume);
+        hitSound.setVolume(volume / 3);
+        hitSound.start();
+        hitSound.release();
     }
 
 
@@ -218,7 +218,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void PlayRandomMinionHit()
     {
-        int randomNumber = UnityEngine.Random.Range(1, 4);
+        int randomNumber = UnityEngine.Random.Range(1, 6);
 
         if (randomNumber == 1)
         {
@@ -261,21 +261,21 @@ public class HealthManager : MonoBehaviour,IHasProgress
     }
 
 
-    public void PlayRandomBloodSound()
+    public void PlayRandomHitSound()
     {
         int randomNumber = UnityEngine.Random.Range(1, 4);
 
         if (randomNumber == 1)
         {
-            PlayBloodSound(bloodSoundEventPath);
+            PlayHitSound(hitSoundEventPath);
         }
         else if (randomNumber == 2)
         {
-            PlayBloodSound(bloodSound2EventPath);
+            PlayHitSound(hitSound2EventPath);
         }
         else if (randomNumber == 3)
         {
-            PlayBloodSound(bloodSound3EventPath);
+            PlayHitSound(hitSound3EventPath);
         }
     }
 
