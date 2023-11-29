@@ -21,13 +21,16 @@ public class ETPArrow : MonoBehaviour
         if (other.gameObject.CompareTag("White Diamond"))
         {
             Debug.Log("white diamond");
+            FMODSFXController.Instance.PlayCoinDrop();
         }
         else if (other.gameObject.CompareTag("Red Diamond"))
         {
+            FMODSFXController.Instance.PlayCoinDrop();
             Debug.Log("Red diamond");
         }
         else if (other.gameObject.CompareTag("Green Diamond"))
         {
+            FMODSFXController.Instance.PlayCoinDrop();
             Debug.Log("Green diamond");
         }
         else if (other.gameObject.CompareTag("Yellow Diamond"))

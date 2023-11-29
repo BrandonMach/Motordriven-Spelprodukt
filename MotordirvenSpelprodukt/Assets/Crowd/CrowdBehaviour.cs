@@ -80,6 +80,7 @@ public class CrowdBehaviour : MonoBehaviour
         _emotion = CrowdEmotion.Excited;
 
         //StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
+       // FMODSFXController.Instance.PlayCrowdCheer();
         LatestEmotion = _emotion;
     }
     #endregion
@@ -93,7 +94,7 @@ public class CrowdBehaviour : MonoBehaviour
         }
 
         _emotion = CrowdEmotion.Angry;
-
+       // FMODSFXController.Instance.PlayCrowdBoo();
         //StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
