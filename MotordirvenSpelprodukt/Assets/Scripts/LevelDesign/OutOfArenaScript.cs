@@ -24,9 +24,12 @@ public class OutOfArenaScript : MonoBehaviour
 
     private void PlayWilhelmScream()
     {
-        FMOD.Studio.EventInstance wilhelmScream = FMODUnity.RuntimeManager.CreateInstance(wilhelmScreamEventRef);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(wilhelmScream, this.transform, this.GetComponent<Rigidbody>());
-        wilhelmScream.start();
-        wilhelmScream.release();
+        if (!wilhelmScreamEventRef.IsNull)
+        {
+            FMOD.Studio.EventInstance wilhelmScream = FMODUnity.RuntimeManager.CreateInstance(wilhelmScreamEventRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(wilhelmScream, this.transform, this.GetComponent<Rigidbody>());
+            wilhelmScream.start();
+            wilhelmScream.release();
+        }
     }
 }
