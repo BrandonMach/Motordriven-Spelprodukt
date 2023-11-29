@@ -53,8 +53,8 @@ public class FallingObjectType : MonoBehaviour
             float posZ = Random.Range(-2, 2);
 
 
-            _targetIndicatorPosition = new Vector3(/*posX +*/ _playerPosition.x, 0.001f, /*posZ +*/ _playerPosition.z);
-            _indicator = Instantiate(IndicatorPrefab, _targetIndicatorPosition, IndicatorPrefab.transform.rotation);
+            _targetIndicatorPosition = new Vector3(posX + _playerPosition.x, -1.001f, /*posZ +*/ posZ + _playerPosition.z);
+           // _indicator = Instantiate(IndicatorPrefab, _targetIndicatorPosition, IndicatorPrefab.transform.rotation);
             //_indicator.transform.SetParent(this.transform);
         }
 
