@@ -216,8 +216,8 @@ public class GameLoopManager : MonoBehaviour
         }
 
         // Testing challenges
-       // CheckChallengesCompletion();
-        //ChallengeTimersUpdate();
+        CheckChallengesCompletion();
+        ChallengeTimersUpdate();
     }
 
 
