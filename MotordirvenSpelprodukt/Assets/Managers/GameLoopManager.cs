@@ -54,14 +54,20 @@ public class GameLoopManager : MonoBehaviour
     int _killCount;
     int _knockedUpCount;
     int _knockedOutOfArena;
+    int _killstreakKillCount;
+    int _totalDeaths;
+
+    int _totalKillcount;
+    int _totalKnockUps;
+    int _totalKnockedOutOfArena;
+    int _highestKillStreakKillCount;
 
     float _challengeTimerMinion;
     float _challengeTimerChampion;
     bool _championIsDead;
     bool _challengeRequirementsMet;
 
-    int _killstreakKillCount;
-
+    bool beenOutOfCombat;
 
 
     #endregion
@@ -124,6 +130,13 @@ public class GameLoopManager : MonoBehaviour
         {
             _player.HasTakenDamage = false;
             _killstreakKillCount++;
+
+            // Stores highest killstreak achieved, used for stats
+            if (_killstreakKillCount > HighestKillStreakKillCount)
+            {
+                HighestKillStreakKillCount = _killstreakKillCount;
+            }
+
             _killCount = value;
 
             //Debug.Log($"KillstreakCount: {_killstreakKillCount}");
@@ -132,7 +145,12 @@ public class GameLoopManager : MonoBehaviour
 
     public int KnockedUpCount { get => _knockedUpCount; set => _knockedUpCount = value; }
     public int KnockedOutOfArena { get => _knockedOutOfArena; set => _knockedOutOfArena = value; }
-    public int PlayerCoins { get; private set; }
+    public int TotalKillcount { get => _totalKillcount; set => _totalKillcount = value; }
+    public int TotalKnockUps { get => _totalKnockUps; set => _totalKnockUps = value; }
+    public int TotalKnockedOutOfArena { get => _totalKnockedOutOfArena; set => _totalKnockedOutOfArena = value; }
+    public int HighestKillStreakKillCount { get => _highestKillStreakKillCount; set => _highestKillStreakKillCount = value; }
+    public int TotalDeaths { get => _totalDeaths; set => _totalDeaths = value; }
+    public bool BeenOutOfCombat { get => beenOutOfCombat; set => beenOutOfCombat = value; }
 
     public event EventHandler OnChampionKilled;
 
@@ -168,8 +186,15 @@ public class GameLoopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach (var canvas in Canvases)
+        {
+            canvas.SetActive(!PauseMenu.GameIsPaused);
+        }
 
-        if(_champion != null)
+       
+
+
+        if (_champion != null)
         {
 
             _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
@@ -191,8 +216,8 @@ public class GameLoopManager : MonoBehaviour
         }
 
         // Testing challenges
-        CheckChallengesCompletion();
-        ChallengeTimersUpdate();
+       // CheckChallengesCompletion();
+        //ChallengeTimersUpdate();
     }
 
 
@@ -200,11 +225,14 @@ public class GameLoopManager : MonoBehaviour
 
     private void MatchFinished(object sender, EventArgs e)
     {
+        SettingStatistics();
+
         MatchIsFinished = true; //Stop the match
+        
 
         foreach (var canvas in Canvases)
         {
-            canvas.SetActive(false);
+            canvas.SetActive(MatchIsFinished);
         }
 
 
@@ -215,9 +243,10 @@ public class GameLoopManager : MonoBehaviour
 
         if (_etp.GetETP() > (_etp.GetMaxETP() / 2))
         {
-            KilledChampions++;
-            Debug.LogError("Champions Killed" + KilledChampions);
-            if (KilledChampions == AmountOfChampionsToKill)
+            GameManager.ChampionsKilled++;
+            Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
+            GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33);
+            if (GameManager.ChampionsKilled == AmountOfChampionsToKill)
             {
                 Debug.Log("You killed all champions");
             }
@@ -232,7 +261,25 @@ public class GameLoopManager : MonoBehaviour
         CamManager.GoToKingCam();
         OnChampionKilled?.Invoke(this, EventArgs.Empty);
 
-        _championIsDead = true;
+       // _championIsDead = true;
+        GameManager.Instance._championIsDeadX = true;
+        
+
+       
+    }
+
+    /// <summary>
+    /// Updates variables for statistics and resets challengecounters (except killstreak)
+    /// </summary>
+    private void SettingStatistics()
+    {
+        GameManager.Instance.TotalKillcount = GameManager.Instance.KillCount;
+        GameManager.Instance.TotalKnockUps = GameManager.Instance.KnockedUpCount;
+        GameManager.Instance.TotalKnockedOutOfArena = GameManager.Instance.KnockedOutOfArena;
+
+        GameManager.Instance.KillCount = 0;
+        GameManager.Instance.KnockedUpCount = 0;
+        GameManager.Instance.KnockedOutOfArena = 0;
     }
     #endregion
 
@@ -243,12 +290,12 @@ public class GameLoopManager : MonoBehaviour
 
     private void HandleChallengeCompleted(Challenge completedChallenge)
     {
-        PlayerCoins += completedChallenge.Reward;
+        GameManager.Instance.RewardCoins( completedChallenge.Reward);
         completedChallenge.IsCompleted = true;
         _challengeManager.DeActivateChallenge(completedChallenge);
         _challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
-        Debug.Log("PlayerCoins = " + PlayerCoins);
+        Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
         //completedChallenge.ChallengeButton.SetActive(false);
     }
 
@@ -400,7 +447,7 @@ public class GameLoopManager : MonoBehaviour
 
     private bool FearlessCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "Fearless" /* && bool outOfCombat */)
+        if (challenge.ChallengeName == "Fearless" && !BeenOutOfCombat)
         {
             return true;
         }

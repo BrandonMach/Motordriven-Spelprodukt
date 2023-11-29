@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     private DismemberentEnemyScript _dismembrentScript;
     public bool HasDismembrent;
 
+    private bool isBleeding;
     public bool IsDeadOnce;
     public bool Dead;
     public float _destroydelay = 1.5f;
@@ -31,8 +33,10 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public bool hasSlowMo;
     public SlowMo _slowMo;
 
-    
-    
+    public EventReference minionHitEventPath;
+    public EventReference minionHit2EventPath;
+    public EventReference minionHit3EventPath;
+
     void Start()
     {
         
@@ -73,9 +77,15 @@ public class HealthManager : MonoBehaviour,IHasProgress
     {
         while ((Time.time - startBleedTime) < _bleedDuration)
         {
+            isBleeding = true;
             ReduceHealth(bleedDamage);
             Debug.Log("Health reduced by " + bleedDamage);
             yield return new WaitForSeconds(1.0f);
+        }
+
+        if ((Time.time - startBleedTime) > _bleedDuration)
+        {
+            isBleeding = false;
         }
     }
 
@@ -102,6 +112,10 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 OnShakeScreen?.Invoke(this, EventArgs.Empty);
                 
             }
+            else if (!IsPlayer && !isBleeding)
+            {
+                PlayRandomMinionHit();
+            }
 
 
             CurrentHealthPoints -= damage;
@@ -125,6 +139,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
       
     }
 
+
+
     //public void GetStunned(float stunDuration)
     //{
     //    if (this.gameObject.tag == "EnemyTesting")
@@ -139,6 +155,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
         if (IsPlayer)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
+            GameLoopManager.Instance.TotalDeaths++;
         }
         else if (!IsDeadOnce)
         {
@@ -157,5 +174,51 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     }
 
-  
+    #region FmodSFX
+
+
+    public void PlayMinionHit()
+    {
+        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHitEventPath);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
+        minionHit.start();
+        minionHit.release();
+    }
+
+    public void PlayMinionHit2()
+    {
+        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHit2EventPath);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
+        minionHit.start();
+        minionHit.release();
+    }
+
+    public void PlayMinionHit3()
+    {
+        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHit3EventPath);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
+        minionHit.start();
+        minionHit.release();
+    }
+
+    public void PlayRandomMinionHit()
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlayMinionHit();
+        }
+        else if (randomNumber == 2)
+        {
+            PlayMinionHit2();
+        }
+        else if (randomNumber == 3)
+        {
+            PlayMinionHit3();
+        }
+    }
+    #endregion
+
+
 }

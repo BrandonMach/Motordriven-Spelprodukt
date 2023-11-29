@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrowdBehaviour : MonoBehaviour
 {
-    [SerializeField] private EntertainmentManager _etManager;
+    //[SerializeField] private EntertainmentManager _etManager;
 
     [SerializeField] private Transform _playerPos;
 
@@ -37,9 +37,9 @@ public class CrowdBehaviour : MonoBehaviour
     void Start()
     {
         //Subscribes to events
-        _etManager.OnETPNormal += NormalCrowd;
-        _etManager.OnETPAngry += AngryCrowd;
-        _etManager.OnETPExited += ExcitedCrowd;
+        EntertainmentManager.Instance.OnETPNormal += NormalCrowd;
+        EntertainmentManager.Instance.OnETPAngry += AngryCrowd;
+        EntertainmentManager.Instance.OnETPExited += ExcitedCrowd;
 
 
         foreach (var audience in _crowdSections)
@@ -115,7 +115,7 @@ public class CrowdBehaviour : MonoBehaviour
 
         int randomChampionFan = Random.Range(0, _championFans.Count);
 
-        Instantiate(fallingObject, _championFans[randomChampionFan].transform.position, transform.rotation);
+        Instantiate(fallingObject, _championFans[randomChampionFan].transform.position , transform.rotation);
         yield return new WaitForSeconds(2);
         _throwObject = true;      
     }

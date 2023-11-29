@@ -8,5 +8,6 @@ public interface IMenu
     void ClickMenuOption1();
     void ClickMenuOption2();
     void ClickMenuOption3();
+    void ClickMenuOption4();
 
 }

@@ -7,40 +7,33 @@ public class ParticleSystemManager : MonoBehaviour
     // Singleton
     public static ParticleSystemManager Instance { get; private set; }
 
-    [Header("Weapon effects")]
-    //[SerializeField] private ParticleSystem _weaponTrail;
+    [Header("Particle effects")]
+    [SerializeField] private GameObject _slamEffectPrefab;
+    [SerializeField] private GameObject _stunPrefab;
+    [SerializeField] private GameObject _bloodPrefab;
 
-    [Header("Shockwave effects")]
-    [SerializeField] private Vector3 _shockwavePositionOffset;
-    //[SerializeField] private Quaternion _shockwaveRotation;
-    [SerializeField] private int _shockWaveEffectPoolSize = 5;
-    [SerializeField] private ParticleSystem _shockWaveCircle;
-    [SerializeField] private ParticleSystem _debree;
-    [SerializeField] private ParticleSystem _crack;
-    [SerializeField] private ParticleSystem _shockWaveFill;
+    [Header("Pool sizes")]
+    [SerializeField] private int _slamPoolSize;
+    [SerializeField] private int _stunPoolSize;
+    [SerializeField] private int _bloodPoolSize;
 
-    [Header("Bleed effects")]
-    [SerializeField] private ParticleSystem _hitBloodEffect; // Initial blood spray from normal hits.
-    [SerializeField] private ParticleSystem _stabbedBloodEffect; // Initial blood spray from stab
-    [SerializeField] private ParticleSystem _bleedEffect;
-    [SerializeField] private ParticleSystem _heavyBleedEffect;
+    [Header("Particle settings")]
+    [SerializeField] private float _slamLifeTime;
+    [SerializeField] private float _stunLifeTime;
+    [SerializeField] private float _bloodLifeTime;
 
-    [Header("Misc effects")]
-    [SerializeField] private int stunEffectPoolSize;
-    [SerializeField] private ParticleSystem _stunEffect;
+    private int _slamPoolIndex = 0;
+    private int _stunPoolIndex = 0;
+    private int _bloodPoolIndex = 0;
+
+    private List<GameObject> _slamPool;
+    private List<GameObject> _stunPool;
+    private List<GameObject> _bloodPool;
 
 
-    public List<ShockwaveEffect> _shockwaveEffectsPool = new List<ShockwaveEffect>(); // Done
-    public List<ParticleSystem> _stunEffectPool = new List<ParticleSystem>(); // Done
+    public enum ParticleEffects { Slam, Stun, Blood };
 
-    //private List<ParticleSystem> _weaponTrailPool = new List<ParticleSystem>();
-
-    //private List<ParticleSystem> _hitBloodEffectList = new List<ParticleSystem>();
-    //private List<ParticleSystem> _stabbedBloodEffectList = new List<ParticleSystem>();
-    //private List<ParticleSystem> _bleedEffectList = new List<ParticleSystem>();
-    //private List<ParticleSystem> _heavyEffectList = new List<ParticleSystem>();
     
-
     private void Awake()
     {
         // Make sure there is only one instance, otherwhise remove the other one.
@@ -52,49 +45,98 @@ public class ParticleSystemManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        InitializeShockWavePool();
-        InitializeStunEffectPool();
+  
+        InitializePools();
     }
     
 
-    private void InitializeShockWavePool()
+    /// <summary>
+    /// Creates each pool and calls method to fill them with gameobjects.
+    /// </summary>
+    private void InitializePools()
     {
-        //for (int i = 0; i < _shockWaveEffectPoolSize; i++)
-        //{
-        //    ShockwaveEffect e = new ShockwaveEffect
-        //    {
-        //        ShockWaveCircle = _shockWaveCircle,
-        //        Debree = _debree,
-        //        Crack = _crack,
-        //        ShockWaveFill = _shockWaveFill
-        //    };
-            
-        //    _shockwaveEffectsPool.Add(Instantiate(e, transform.position, Quaternion.identity));
-        //}
+        _slamPool = new List<GameObject>();
+        _stunPool = new List<GameObject>();
+        _bloodPool = new List<GameObject>();
+
+        AddObjectsToPool(_slamPool, _slamEffectPrefab, _slamPoolSize);
+        AddObjectsToPool(_stunPool, _stunPrefab, _stunPoolSize);
+        AddObjectsToPool(_bloodPool, _bloodPrefab, _bloodPoolSize);
     }
 
 
-    private void InitializeStunEffectPool()
+
+    /// <summary>
+    /// Adds particle effects objects into desired pool.
+    /// </summary>
+    private void AddObjectsToPool(List<GameObject> pool, GameObject prefab, int poolsize)
     {
-        for (int i = 0; i < stunEffectPoolSize; i++)
+        for (int i = 0; i < poolsize; i++)
         {
-            _stunEffectPool.Add(_stunEffect);
+            GameObject particleEffect = Instantiate(prefab, this.transform);
+            particleEffect.SetActive(false);
+            pool.Add(particleEffect);
         }
     }
 
 
-    public void PlayStunEffect(Vector3 particlePos, Quaternion rot, Transform parent)
+
+    /// <summary>
+    /// Retrieves the PE that should be played from its pool and activates it and moves it where it should be played.
+    /// </summary>
+    public void PlayParticleFromPool(ParticleEffects effect, Transform _transform)
     {
-        _stunEffectPool[0].transform.SetPositionAndRotation(particlePos, rot);
-        _stunEffectPool[0].transform.parent = parent;
-        _stunEffectPool[0].Play();
+        GameObject currentEffect = null;
+        Vector3 newPos = _transform.position;
+        float coroutineTime = 0;
+
+        switch (effect) 
+        {
+            case ParticleEffects.Slam:
+                _slamPoolIndex = (_slamPoolIndex + 1) % _slamPoolSize;
+                currentEffect = _slamPool[_slamPoolIndex];
+                coroutineTime = _slamLifeTime;
+                break;
+
+            case ParticleEffects.Stun:
+                newPos = new Vector3(newPos.x, newPos.y + _transform.localScale.y + 2, newPos.z);
+                //newTransform.rotation = Quaternion.Euler(-90, 0, 0);
+                _stunPoolIndex = (_stunPoolIndex + 1) % _stunPoolSize;
+                currentEffect = _stunPool[_stunPoolIndex];
+                coroutineTime = _stunLifeTime;
+                break;
+
+            case ParticleEffects.Blood:
+                _bloodPoolIndex = (_bloodPoolIndex + 1) % _bloodPoolSize;
+                currentEffect = _bloodPool[_bloodPoolIndex];
+                coroutineTime = _bloodLifeTime;
+                break;
+            default:
+                break;
+        }
+
+        // Activate and place particle effect
+        // Set timer (coroutine) to return to pool (set to pool pos and deactivate)
+        currentEffect.SetActive(true);
+        currentEffect.transform.position = newPos;
+        StartCoroutine(StartReturnToPool(currentEffect, Time.time, coroutineTime));
     }
 
-    public void PlayShockWaveEffect(Vector3 attackerPos)
+
+
+    /// <summary>
+    /// Starts a coroutine that will reset and de-activate the particle effect when its done playing.
+    /// </summary>
+    private IEnumerator StartReturnToPool(GameObject particleEffect, float startTime, float coroutineTime)
     {
-        Vector3 particlePos = attackerPos + _shockwavePositionOffset;
-        _shockwaveEffectsPool[0].SetTransform(particlePos);
-        _shockwaveEffectsPool[0].Play();
+        // Start timer for particle life time
+        while((Time.time - startTime) < coroutineTime)
+        {
+            yield return null;
+        }
+
+        // Particle is finished, return it to pool (reset position and de-activate)
+        particleEffect.transform.position = this.transform.position;
+        particleEffect.SetActive(false);
     }
 }

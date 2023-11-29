@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MenuAbstract, IMenu
 {
-    public bool GameIsPaused = false;
+    public static bool GameIsPaused = false;
+    GameManager _gameManager = GameManager.Instance;
 
     [SerializeField] GameObject _pauseMenuUI;
+
    
 
     private void Start()
@@ -58,7 +61,7 @@ public class PauseMenu : MenuAbstract, IMenu
 
     public override void ClickMenuOption1()
     {
-        Resume();
+        base.ClickMenuOption1();
     }
 
     public override void ClickMenuOption2()
@@ -73,6 +76,21 @@ public class PauseMenu : MenuAbstract, IMenu
 
     public void QuitGame()
     {
-        Application.Quit();
+        if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene)
+        {
+            Resume();
+            //Loading main menu
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
+        else if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen)
+        {
+            Resume();
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+        }
+        else if (GameManager.Instance._currentScen == GameManager.CurrentScen.MainMenuScene)
+        {
+            Application.Quit();
+        }
+        
     }
 }
