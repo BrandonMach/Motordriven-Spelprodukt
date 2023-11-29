@@ -191,29 +191,39 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void PlayDeathSound(EventReference deathSoundRef)
     {
-        FMOD.Studio.EventInstance deathSound = FMODUnity.RuntimeManager.CreateInstance(deathSoundRef);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(deathSound, this.transform, this.GetComponent<Rigidbody>());
-        deathSound.start();
-        deathSound.release();
+        if (!deathSoundRef.IsNull)
+        {
+            FMOD.Studio.EventInstance deathSound = FMODUnity.RuntimeManager.CreateInstance(deathSoundRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(deathSound, this.transform, this.GetComponent<Rigidbody>());
+            deathSound.start();
+            deathSound.release();
+        }
     }
 
     public void PlayHitSound(EventReference hitSoundRef)
     {
-        FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(hitSoundRef);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(hitSound, this.transform, this.GetComponent<Rigidbody>());
-        hitSound.getVolume(out float volume);
-        hitSound.setVolume(volume / 3);
-        hitSound.start();
-        hitSound.release();
+        if (!hitSoundRef.IsNull)
+        {
+            FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(hitSoundRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(hitSound, this.transform, this.GetComponent<Rigidbody>());
+            hitSound.getVolume(out float volume);
+            hitSound.setVolume(volume / 3);
+            hitSound.start();
+            hitSound.release();
+        }
     }
 
 
     public void PlayMinionHit(EventReference minionHitRef)
     {
-        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHitRef);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
-        minionHit.start();
-        minionHit.release();
+        if (!minionHitRef.IsNull)
+        {
+            FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHitRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
+            minionHit.start();
+            minionHit.release();
+        }
+ 
     }
 
     public void PlayRandomMinionHit()

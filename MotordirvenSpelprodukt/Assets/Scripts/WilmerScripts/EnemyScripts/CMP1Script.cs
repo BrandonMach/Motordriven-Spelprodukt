@@ -117,18 +117,24 @@ public class CMP1Script : ChampionScript
 
     private void PlayChampionSlam()
     {
-        FMOD.Studio.EventInstance championSlam = FMODUnity.RuntimeManager.CreateInstance(championSlamEventPath);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(championSlam, this.transform, this.GetComponent<Rigidbody>());
-        championSlam.start();
-        championSlam.release();
+        if (!championSlamEventPath.IsNull)
+        {
+            FMOD.Studio.EventInstance championSlam = FMODUnity.RuntimeManager.CreateInstance(championSlamEventPath);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(championSlam, this.transform, this.GetComponent<Rigidbody>());
+            championSlam.start();
+            championSlam.release();
+        }
     }
 
     private void PlayTauntScream()
     {
-        FMOD.Studio.EventInstance tauntScream = FMODUnity.RuntimeManager.CreateInstance(tauntScreamEventPath);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(tauntScream, this.transform, this.GetComponent<Rigidbody>());
-        tauntScream.start();
-        tauntScream.release();
+        if (!tauntScreamEventPath.IsNull)
+        {
+            FMOD.Studio.EventInstance tauntScream = FMODUnity.RuntimeManager.CreateInstance(tauntScreamEventPath);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(tauntScream, this.transform, this.GetComponent<Rigidbody>());
+            tauntScream.start();
+            tauntScream.release();
+        }
     }
 
     #endregion
