@@ -223,7 +223,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
             if(_input.Length <= _tempComboChecker && _input.Length == 3) //Only give ETP if 3 hit-combo is executed
             {
-                _entertainmentManager.increaseETP(GetCurrentAttackSO(_input).ETPChange);
+                _entertainmentManager?.increaseETP(GetCurrentAttackSO(_input).ETPChange);
             }
             
             OnComboBroken();
