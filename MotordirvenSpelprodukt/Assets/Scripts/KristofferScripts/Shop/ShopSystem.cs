@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class ShopSystem : MonoBehaviour
 {
@@ -100,5 +101,10 @@ public class ShopSystem : MonoBehaviour
             UpdateText();
         }
         
+    }
+
+    public void PlayBuySound()
+    {
+        FMODSFXController.Instance.PlayCoinDrop();
     }
 }
