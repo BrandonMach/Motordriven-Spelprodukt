@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4931687474804970840
+--- !u!114 &-6702076708399200489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,26 +10,69 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music
+  m_Name: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing
   m_EditorClassIdentifier: 
-  Path: event:/Music
+  Path: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing
   Guid:
-    Data1: 148056549
-    Data2: 1156491615
-    Data3: 217249950
-    Data4: 689223721
+    Data1: -1550743548
+    Data2: 1146907083
+    Data3: 1033922703
+    Data4: -1880423139
   Banks:
-  - {fileID: 9007089841168078153}
-  IsStream: 1
+  - {fileID: 4832947828519068657}
+  IsStream: 0
   Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 6583575974819536667}
-  - {fileID: -3313076487809671415}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 174000
---- !u!114 &-3313076487809671415
+  Length: 0
+--- !u!114 &-5026567658653267688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainMenu
+  m_EditorClassIdentifier: 
+  Path: event:/MainMenu
+  Guid:
+    Data1: -1097580260
+    Data2: 1328688552
+    Data3: 1839412869
+    Data4: -2050834838
+  Banks:
+  - {fileID: 4832947828519068657}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 81628
+--- !u!114 &-412340976761262354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMODBanks/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638363412665169038
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-42755124702844245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,7 +96,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &-1499926722422552715
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,22 +105,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  Path: Assets/FMODBanks/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-<<<<<<< Updated upstream
-  lastModified: 638364203019417209
-=======
-  lastModified: 638362814744174713
->>>>>>> Stashed changes
-  FileSizes:
-  - Name: 
-    Value: 1098
-  Exists: 1
---- !u!114 &-455291010110255859
+  EditorBanks:
+  - {fileID: 4443068015286522858}
+  - {fileID: 4832947828519068657}
+  - {fileID: -412340976761262354}
+  EditorEvents:
+  - {fileID: -6702076708399200489}
+  - {fileID: -5026567658653267688}
+  - {fileID: 8833555625180025754}
+  - {fileID: 181498478982293285}
+  EditorParameters:
+  - {fileID: 890073028430141655}
+  - {fileID: 1573354117453849482}
+  MasterBanks:
+  - {fileID: -412340976761262354}
+  StringsBanks:
+  - {fileID: 4443068015286522858}
+  cacheTime: 638363412665179176
+  cacheVersion: 131608
+--- !u!114 &181498478982293285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing2
+  m_EditorClassIdentifier: 
+  Path: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing2
+  Guid:
+    Data1: -1964632470
+    Data2: 1131302479
+    Data3: -1354141535
+    Data4: 1615230901
+  Banks:
+  - {fileID: -412340976761262354}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &890073028430141655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,114 +177,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -1499926722422552715}
-  - {fileID: 9007089841168078153}
-  - {fileID: 7762716958111315406}
-  EditorEvents:
-  - {fileID: -4931687474804970840}
-  - {fileID: 8897502962544500815}
-  - {fileID: 14584294840677208}
-  - {fileID: 8591787557094629181}
-  EditorParameters:
-  - {fileID: -455291010110255859}
-  - {fileID: 8011688024286926249}
-  MasterBanks:
-  - {fileID: 7762716958111315406}
-  StringsBanks:
-  - {fileID: -1499926722422552715}
-<<<<<<< Updated upstream
-  cacheTime: 638364203019417209
-=======
-  cacheTime: 638362814744174713
->>>>>>> Stashed changes
-  cacheVersion: 131608
---- !u!114 &14584294840677208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing
-  m_EditorClassIdentifier: 
-  Path: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing
-  Guid:
-    Data1: -1550743548
-    Data2: 1146907083
-    Data3: 1033922703
-    Data4: -1880423139
-  Banks:
-  - {fileID: 9007089841168078153}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &6583575974819536667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Music/Health
-  m_EditorClassIdentifier: 
-  Name: Health
-  StudioPath: 
-  Min: 0
-  Max: 100
-  Default: 0
-  ID:
-    data1: 1197805461
-    data2: 619291858
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &7762716958111315406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMODBanks/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-<<<<<<< Updated upstream
-  lastModified: 638364203019407513
-=======
-  lastModified: 638362814744174713
->>>>>>> Stashed changes
-  FileSizes: []
-  Exists: 1
---- !u!114 &8011688024286926249
+--- !u!114 &1573354117453849482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,7 +201,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &8591787557094629181
+--- !u!114 &4443068015286522858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,25 +210,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing2
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: event:/Assets/Sound Effects/Booing Sound effect.wav/Booing2
-  Guid:
-    Data1: -1964632470
-    Data2: 1131302479
-    Data3: -1354141535
-    Data4: 1615230901
-  Banks:
-  - {fileID: 7762716958111315406}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &8897502962544500815
+  Path: Assets/FMODBanks/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638363412665179176
+  FileSizes:
+  - Name: 
+    Value: 1098
+  Exists: 1
+--- !u!114 &4500373916916826732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,25 +230,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MainMenu
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Health
   m_EditorClassIdentifier: 
-  Path: event:/MainMenu
-  Guid:
-    Data1: -1097580260
-    Data2: 1328688552
-    Data3: 1839412869
-    Data4: -2050834838
-  Banks:
-  - {fileID: 9007089841168078153}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 81628
---- !u!114 &9007089841168078153
+  Name: Health
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 1197805461
+    data2: 619291858
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &4832947828519068657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,10 +260,35 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/FAME_Music.bank
   Name: FAME_Music
   StudioPath: bank:/FAME_Music
-<<<<<<< Updated upstream
-  lastModified: 638364203019397509
-=======
-  lastModified: 638362814744165354
->>>>>>> Stashed changes
+  lastModified: 638363412665153997
   FileSizes: []
   Exists: 1
+--- !u!114 &8833555625180025754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  Guid:
+    Data1: 148056549
+    Data2: 1156491615
+    Data3: 217249950
+    Data4: 689223721
+  Banks:
+  - {fileID: 4832947828519068657}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4500373916916826732}
+  - {fileID: -42755124702844245}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 174000
