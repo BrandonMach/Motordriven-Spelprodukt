@@ -175,10 +175,13 @@ public class AttackManager : MonoBehaviour
 
     private void PlaySwordInAir(EventReference swordInAirRef)
     {
-        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAirRef);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
-        swordInAir.start();
-        swordInAir.release();
+        if (!swordInAirRef.IsNull)
+        {
+            FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAirRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
+            swordInAir.start();
+            swordInAir.release();
+        }
     }
 
     public void PlayRandomSwordInAir()
