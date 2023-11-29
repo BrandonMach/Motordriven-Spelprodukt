@@ -16,10 +16,15 @@ public class ProgressBarUI : MonoBehaviour
     private bool increaseHealth;
     public bool IsChampionHPbar;
 
-   
+    private Color _damageColor = Color.red;
+    private Color _normalColor = Color.green;
+
+    public Image _healthBar;
 
     private void Start()
     {
+
+        //_healthBar = GetComponent<Image>();
 
         if (IsChampionHPbar)
         {
@@ -50,30 +55,45 @@ public class ProgressBarUI : MonoBehaviour
     {
         _targetFillAmount = e.progressNormalized;
 
-        if (_targetFillAmount > _slider.value) 
-        { 
+
+        if (_targetFillAmount > _slider.value)
+        {
             increaseHealth = true;
+            //_healthBar.color = Color.green;
         }
         else
         {
             increaseHealth = false;
+            //_healthBar.color = Color.red;
         }
     }
 
     private void Update()
     {
-        
+
+        //if (!increaseHealth)
+        //{
+        //    _healthBar.color = Color.green;
+        //}
+        //else _healthBar.color = Color.red;
+
+
         if (_slider.value != _targetFillAmount)
         {
+            
             if (increaseHealth && _slider.value <= _targetFillAmount)
             {
                 _slider.value += _refillSpeed * Time.deltaTime;
+                _healthBar.color = Color.green;
             }
             else if (!increaseHealth && _slider.value >= _targetFillAmount)
             {
                 _slider.value -= _refillSpeed * Time.deltaTime;
+                _healthBar.color = Color.red;
             }
+            else _healthBar.color = Color.green;
         }
+        
     }
 
     private void OnDestroy()
