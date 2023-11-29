@@ -184,25 +184,9 @@ public class HealthManager : MonoBehaviour,IHasProgress
     #region FmodSFX
 
 
-    public void PlayMinionHit()
+    public void PlayMinionHit(EventReference minionHitRef)
     {
-        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHitEventPath);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
-        minionHit.start();
-        minionHit.release();
-    }
-
-    public void PlayMinionHit2()
-    {
-        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHit2EventPath);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
-        minionHit.start();
-        minionHit.release();
-    }
-
-    public void PlayMinionHit3()
-    {
-        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHit3EventPath);
+        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHitRef);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
         minionHit.start();
         minionHit.release();
@@ -214,15 +198,15 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
         if (randomNumber == 1)
         {
-            PlayMinionHit();
+            PlayMinionHit(minionHitEventPath);
         }
         else if (randomNumber == 2)
         {
-            PlayMinionHit2();
+            PlayMinionHit(minionHit2EventPath);
         }
         else if (randomNumber == 3)
         {
-            PlayMinionHit3();
+            PlayMinionHit(minionHit3EventPath);
         }
     }
 
