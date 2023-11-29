@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class OutOfArenaScript : MonoBehaviour
 {
 
+    public EventReference wilhelmScreamEventRef;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,9 +17,16 @@ public class OutOfArenaScript : MonoBehaviour
         {
             other.gameObject.GetComponent<HealthManager>().ReduceHealth(300);
             GameLoopManager.Instance.KnockedOutOfArena++;
+
+            PlayWilhelmScream();
         }
+    }
 
-
-        
+    private void PlayWilhelmScream()
+    {
+        FMOD.Studio.EventInstance wilhelmScream = FMODUnity.RuntimeManager.CreateInstance(wilhelmScreamEventRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(wilhelmScream, this.transform, this.GetComponent<Rigidbody>());
+        wilhelmScream.start();
+        wilhelmScream.release();
     }
 }
