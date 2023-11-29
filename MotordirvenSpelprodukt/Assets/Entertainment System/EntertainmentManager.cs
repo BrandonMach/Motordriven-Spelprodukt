@@ -148,13 +148,14 @@ public class EntertainmentManager : MonoBehaviour
         if(GetETP() > GetExcitedThreshold())
         {
             OnETPExited?.Invoke(this, EventArgs.Empty);
+            FMODSFXController.Instance.PlayCrowdCheer();    // VArFoR iNtE fOnKa??
 
 
         }
         else if (GetETP() < GetAngryThreshold())
         {
             OnETPAngry?.Invoke(this, EventArgs.Empty);
-
+            FMODSFXController.Instance.PlayCrowdBoo();      // VArFoR iNtE fOnKa??
         }
         else
         {
