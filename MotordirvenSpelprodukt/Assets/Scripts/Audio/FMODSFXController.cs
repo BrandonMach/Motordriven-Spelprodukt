@@ -173,7 +173,7 @@ public class FMODSFXController : MonoBehaviour
 
     public void PlayBowLoad() => bowLoad.start();
     public void PlayBowRelease() => bowRelease.start();
-    public void PlayChampionSlam() => championSlam.start();
+  
     public void PlayCrowdBoo() => crowdBoo.start();
     public void PlayCrowdCheer() => crowdCheer.start();
     public void PlayItemEquip() => itemEquip.start();
@@ -182,9 +182,37 @@ public class FMODSFXController : MonoBehaviour
     public void PlayTomatoSplash() => tomatoSplash.start();
     public void PlayTomatoSplash2() => tomatoSplash2.start();
     public void PlayCoinDrop() => coinDrop.start();
-    public void PlayMinionHit() => minionHit.start();
-    public void PlayMinionHit2() => minionHit2.start();
-    public void PlayMinionHit3() => minionHit3.start();
+    //public void PlayMinionHit() => minionHit.start();
+    //public void PlayMinionHit2() => minionHit2.start();
+    //public void PlayMinionHit3() => minionHit3.start();
+
+    public void PlayChampionSlam()
+    {
+        FMOD.Studio.EventInstance championSlam = FMODUnity.RuntimeManager.CreateInstance(championSlamEventPath);
+        championSlam.start();
+        championSlam.release();
+    }
+
+    public void PlayMinionHit()
+    {
+        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHitEventPath);
+        minionHit.start();
+        minionHit.release();
+    }
+
+    public void PlayMinionHit2()
+    {
+        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHit2EventPath);
+        minionHit.start();
+        minionHit.release();
+    }
+
+    public void PlayMinionHit3()
+    {
+        FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHit3EventPath);
+        minionHit.start();
+        minionHit.release();
+    }
 
     public void PlayRandomMinionHit()
     {
