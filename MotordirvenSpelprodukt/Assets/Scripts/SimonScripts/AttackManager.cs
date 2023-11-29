@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,12 @@ public class AttackManager : MonoBehaviour
     public bool isPlayer;
 
     [SerializeField] private ParticleSystem stunEffect;
+
+    [Header("SFX EventReferences")]
+    public EventReference swordInAirEventRef;
+    public EventReference swordInAir2EventRef;
+    public EventReference swordInAir3EventRef;
+
 
     void Start()
     {
@@ -68,6 +75,7 @@ public class AttackManager : MonoBehaviour
         if(enemyHits.Length==0 && isPlayer) //if attack misses enemy as player dont get ETP fo completed combo
         {
             AttackMissed?.Invoke(this, System.EventArgs.Empty);
+            PlayRandomSwordInAir();
         }
 
         for (int i = 0; i < enemyHits.Length; i++)
@@ -162,4 +170,50 @@ public class AttackManager : MonoBehaviour
     //        //attack.Attack(test[i]);
     //    }
     //}
+
+    #region SFX
+
+    private void PlaySwordInAir()
+    {
+        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAirEventRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
+        swordInAir.start();
+        swordInAir.release();
+    }
+
+    private void PlaySwordInAir2()
+    {
+        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAir2EventRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
+        swordInAir.start();
+        swordInAir.release();
+    }
+
+    private void PlaySwordInAir3()
+    {
+        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAir3EventRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
+        swordInAir.start();
+        swordInAir.release();
+    }
+
+    public void PlayRandomSwordInAir()
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlaySwordInAir();
+        }
+        else if (randomNumber == 2)
+        {
+            PlaySwordInAir2();
+        }
+        else if (randomNumber == 3)
+        {
+            PlaySwordInAir3();
+        }
+    }
+
+    #endregion
 }
