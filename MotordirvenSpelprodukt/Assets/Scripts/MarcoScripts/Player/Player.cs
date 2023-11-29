@@ -68,6 +68,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
 
     private bool _invulnerable = false;
+    private bool _interruptable = false;
 
 
     private void Awake()
@@ -147,7 +148,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         if (GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
         {
             _canAttack = false;
-            
+
         }
     }
 
@@ -185,7 +186,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     {
         if (!_invulnerable)
         {
-            if (!IsDashing && _input != "")
+            if (!IsDashing && _input != "" && _interruptable)
             {
                 //If we get here the player got damaged while attacking, we reset the player combo with OnComboBroken()
                 OnComboBroken();
@@ -268,6 +269,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     {
         if (!_playerDash.IsDashing)
         {
+            SetInterruptable(true);
             OnEnableMovement();
             RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = CurrentWeapon });
             _canAttack = true;
@@ -308,7 +310,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         OnEnableMovement();
 
         ResetComboChecker(this, EventArgs.Empty);
-
+        SetInterruptable(false);
         _playerInputSpamChecker?.AddInputSequence(_input);
         _input = "";
         ComboBroken?.Invoke(this, EventArgs.Empty);
@@ -319,12 +321,18 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     {
         if (!_playerDash.IsDashing)
         {
+            SetInterruptable(false);
             _playerMovement.AttackDash();
             OnDisableMovement();
             ChangeAttackAnimation?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = attack });
                        
             _canAttack = false;
         }
+    }
+
+    private void SetInterruptable(bool interruptable)
+    {
+        _interruptable = interruptable;
     }
 
     public void SetPlayerInvulnarableState(bool invulnerable)
