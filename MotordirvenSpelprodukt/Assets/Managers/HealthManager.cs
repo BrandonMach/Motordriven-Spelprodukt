@@ -37,6 +37,11 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public EventReference minionHitEventPath;
     public EventReference minionHit2EventPath;
     public EventReference minionHit3EventPath;
+
+    public EventReference bloodSoundEventPath;
+    public EventReference bloodSound2EventPath;
+    public EventReference bloodSound3EventPath;
+
     public EventReference deathSoundEventPath;
     public EventReference deathSound2EventPath;
     public EventReference deathSound3EventPath;
@@ -121,6 +126,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             else if (!IsPlayer && !isBleeding)
             {
                 PlayRandomMinionHit();
+                PlayRandomBloodSound();
             }
 
 
@@ -183,6 +189,24 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     #region FmodSFX
 
+    public void PlayDeathSound(EventReference deathSoundRef)
+    {
+        FMOD.Studio.EventInstance deathSound = FMODUnity.RuntimeManager.CreateInstance(deathSoundRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(deathSound, this.transform, this.GetComponent<Rigidbody>());
+        deathSound.start();
+        deathSound.release();
+    }
+
+    public void PlayBloodSound(EventReference bloodSoundRef)
+    {
+        FMOD.Studio.EventInstance bloodSound = FMODUnity.RuntimeManager.CreateInstance(bloodSoundRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(bloodSound, this.transform, this.GetComponent<Rigidbody>());
+        bloodSound.getVolume(out float volume);
+        bloodSound.setVolume(volume / 3);
+        bloodSound.start();
+        bloodSound.release();
+    }
+
 
     public void PlayMinionHit(EventReference minionHitRef)
     {
@@ -236,12 +260,23 @@ public class HealthManager : MonoBehaviour,IHasProgress
         }
     }
 
-    public void PlayDeathSound(EventReference deathSoundRef)
+
+    public void PlayRandomBloodSound()
     {
-        FMOD.Studio.EventInstance deathSound = FMODUnity.RuntimeManager.CreateInstance(deathSoundRef);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(deathSound, this.transform, this.GetComponent<Rigidbody>());
-        deathSound.start();
-        deathSound.release();
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlayBloodSound(bloodSoundEventPath);
+        }
+        else if (randomNumber == 2)
+        {
+            PlayBloodSound(bloodSound2EventPath);
+        }
+        else if (randomNumber == 3)
+        {
+            PlayBloodSound(bloodSound3EventPath);
+        }
     }
 
     #endregion
