@@ -173,9 +173,25 @@ public class AttackManager : MonoBehaviour
 
     #region SFX
 
-    private void PlaySwordInAir(EventReference swordInAirRef)
+    private void PlaySwordInAir()
     {
-        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAirRef);
+        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAirEventRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
+        swordInAir.start();
+        swordInAir.release();
+    }
+
+    private void PlaySwordInAir2()
+    {
+        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAir2EventRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
+        swordInAir.start();
+        swordInAir.release();
+    }
+
+    private void PlaySwordInAir3()
+    {
+        FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAir3EventRef);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
         swordInAir.start();
         swordInAir.release();
@@ -187,15 +203,15 @@ public class AttackManager : MonoBehaviour
 
         if (randomNumber == 1)
         {
-            PlaySwordInAir(swordInAirEventRef);
+            PlaySwordInAir();
         }
         else if (randomNumber == 2)
         {
-            PlaySwordInAir(swordInAir2EventRef);
+            PlaySwordInAir2();
         }
         else if (randomNumber == 3)
         {
-            PlaySwordInAir(swordInAir3EventRef);
+            PlaySwordInAir3();
         }
     }
 
