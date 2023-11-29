@@ -197,9 +197,9 @@ public class HealthManager : MonoBehaviour,IHasProgress
         deathSound.release();
     }
 
-    public void PlayHitSound(EventReference bloodSoundRef)
+    public void PlayHitSound(EventReference hitSoundRef)
     {
-        FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(bloodSoundRef);
+        FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(hitSoundRef);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(hitSound, this.transform, this.GetComponent<Rigidbody>());
         hitSound.getVolume(out float volume);
         hitSound.setVolume(volume / 3);
