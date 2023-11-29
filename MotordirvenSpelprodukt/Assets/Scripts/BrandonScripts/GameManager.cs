@@ -373,4 +373,39 @@ public class GameManager : MonoBehaviour
 
 
     #endregion
+
+
+    public void Reset()
+    {
+        _gameStartTimerX = 0;
+         _berserkerTimerX = 0;
+         _challengeTimerX = 0;
+         _isTimerActive = false;
+
+         _killCountX = 0;
+         _knockedUpCountX = 0;
+         _knockedOutOfArenaX = 0;
+         _killstreakKillCountX = 0;
+         _totalDeathsX = 0;
+
+         _totalKillcountX = 0;
+         _totalKnockUpsX = 0;
+         _totalKnockedOutOfArenaX = 0;
+         _highestKillStreakKillCountX = 0;
+
+         _challengeTimerMinionX = 0;
+         _challengeTimerChampionX = 0;
+         _championIsDeadX =false;
+         _challengeRequirementsMetX = false;
+
+         beenOutOfCombatX= false;
+
+
+
+         ChampionsKilled = 0;
+         TotalMoneyEarned = 0;
+         GameManagerKillCount = 0;
+
+         PlayerCoins = 50;
+    }
 }

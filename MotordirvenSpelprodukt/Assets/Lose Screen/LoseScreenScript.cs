@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LoseScreenScript : MonoBehaviour
 {
@@ -34,6 +35,13 @@ public class LoseScreenScript : MonoBehaviour
         _championSlain.text = "Champions Slain: " +  GameManager.ChampionsKilled.ToString();
         _moneyEarned.text = "Total money earned:" + GameManager.Instance.TotalMoneyEarned.ToString();
         _minionsKilled.text = "Minions Killed: " + GameManager.Instance.GameManagerKillCount.ToString();
+
+    }
+
+    public void RestartGame()
+    {
+        GameManager.Instance.Reset();
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
 
     }
 }

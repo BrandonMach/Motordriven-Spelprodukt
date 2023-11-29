@@ -61,7 +61,7 @@ public class PauseMenu : MenuAbstract, IMenu
 
     public override void ClickMenuOption1()
     {
-        Resume();
+        base.ClickMenuOption1();
     }
 
     public override void ClickMenuOption2()
