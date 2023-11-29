@@ -15,8 +15,8 @@ public class Arrow : MonoBehaviour
     private Rigidbody _rb;
     private bool _fired;
     private Vector3 fireDirection;
-   
 
+    [SerializeField] TrailRenderer trailRenderer;
 
     void Start()
     {
@@ -97,7 +97,8 @@ public class Arrow : MonoBehaviour
         {
             _rb.isKinematic = true;
             transform.SetParent(other.transform);
-            //Player.Instance.TakeDamage(_attack);                  
+            //Player.Instance.TakeDamage(_attack);
+            trailRenderer.autodestruct = true;
         }
     }
 

@@ -35,10 +35,10 @@ public class SpawnEnemy : MonoBehaviour
     {
         _target = Player.Instance.transform;
 
-        for (int i = 0; i < 5; i++)
-        {
-            SpawNewEnemy(i);
-        }
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    SpawNewEnemy(i);
+        //}
     }
 
     // Update is called once per frame
@@ -46,10 +46,10 @@ public class SpawnEnemy : MonoBehaviour
     {
 
 
-        if (!GameLoopManager.Instance.MatchIsFinished && GameLoopManager.Instance.EnemyGameObjects.Length < (2 + MinimumMinionCount))
-        {
-            SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
-        }
+        //if (!GameLoopManager.Instance.MatchIsFinished && GameLoopManager.Instance.EnemyGameObjects.Length < (2 + MinimumMinionCount))
+        //{
+        //    SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
+        //}
 
 
         if (Input.GetKeyDown(KeyCode.Y)) // För testing
