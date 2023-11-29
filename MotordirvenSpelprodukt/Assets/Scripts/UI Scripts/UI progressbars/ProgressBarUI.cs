@@ -16,7 +16,7 @@ public class ProgressBarUI : MonoBehaviour
     private bool increaseHealth;
     public bool IsChampionHPbar;
 
-   
+    public Image healthBar;
 
     private void Start()
     {
@@ -68,11 +68,14 @@ public class ProgressBarUI : MonoBehaviour
             if (increaseHealth && _slider.value <= _targetFillAmount)
             {
                 _slider.value += _refillSpeed * Time.deltaTime;
+                healthBar.color = Color.green;
             }
             else if (!increaseHealth && _slider.value >= _targetFillAmount)
             {
                 _slider.value -= _refillSpeed * Time.deltaTime;
+                healthBar.color = Color.red;
             }
+            else healthBar.color = Color.green;
         }
     }
 

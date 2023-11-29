@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,10 @@ public class RMScript : MinionScript
     [SerializeField] private ArrowManager _arrowManager;
     [SerializeField] private float _agentRotationSpeed;
     private NavMeshAgent _navMesh;
+
+    [Header("SFX EventReferences")]
+    public EventReference bowLoadEventRef;
+    public EventReference bowShootEventRef;
 
     public float StartFleeRange 
     { 
@@ -98,6 +103,7 @@ public class RMScript : MinionScript
         };
 
         _arrowManager.FireArrowFromPool(attack, _fireArrowPos, transform.forward);
+        PlayBowSound(bowShootEventRef);
     }
 
     protected override void HandleAttack()
@@ -105,6 +111,7 @@ public class RMScript : MinionScript
         base.HandleAttack();
         ResetTriggers();
         Anim.SetTrigger("Shoot");
+       
     }
 
 
@@ -127,4 +134,16 @@ public class RMScript : MinionScript
     {
         //Death animation
     }
+
+    #region SFX
+
+    private void PlayBowSound(EventReference bowSoundRef)
+    {
+        FMOD.Studio.EventInstance bowSound = FMODUnity.RuntimeManager.CreateInstance(bowSoundRef);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(bowSound, this.transform, this.GetComponent<Rigidbody>());
+        bowSound.start();
+        bowSound.release();
+    }
+
+    #endregion
 }
