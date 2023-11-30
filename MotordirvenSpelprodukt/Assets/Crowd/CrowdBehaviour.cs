@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,11 @@ public class CrowdBehaviour : MonoBehaviour
     {
         return _emotion;
     }
+
+
+    [Header("SFX EventReferences")]
+    public EventReference booSound;
+    public EventReference excitedSound;
 
     private void Awake()
     {
@@ -80,6 +86,7 @@ public class CrowdBehaviour : MonoBehaviour
         _emotion = CrowdEmotion.Excited;
 
         //StartCoroutine(FadeTheme(ExcitedTheme, LatestEmotion));
+       // FMODSFXController.Instance.PlayCrowdCheer();
         LatestEmotion = _emotion;
     }
     #endregion
@@ -93,7 +100,7 @@ public class CrowdBehaviour : MonoBehaviour
         }
 
         _emotion = CrowdEmotion.Angry;
-
+       // FMODSFXController.Instance.PlayCrowdBoo();
         //StartCoroutine(FadeTheme(AngryTheme, LatestEmotion));
         LatestEmotion = _emotion;
     }
@@ -120,6 +127,13 @@ public class CrowdBehaviour : MonoBehaviour
         _throwObject = true;      
     }
 
+    private void PlayDiamondSounds(EventReference sound)
+    {
+        FMOD.Studio.EventInstance soundInstance = FMODUnity.RuntimeManager.CreateInstance(sound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(soundInstance, this.transform, this.GetComponent<Rigidbody>());
+        soundInstance.start();
+        soundInstance.release();
+    }
 
 
 }

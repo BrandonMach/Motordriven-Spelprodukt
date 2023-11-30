@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    Player _player;
+   [SerializeField] public Player _player;
     
 
 

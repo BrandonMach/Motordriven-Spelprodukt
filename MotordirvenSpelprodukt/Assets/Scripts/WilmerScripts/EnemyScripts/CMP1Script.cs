@@ -110,6 +110,8 @@ public class CMP1Script : ChampionScript
         if (CurrentState == ChampionState.SpecialAttack)
         {
             PlayChampionSlam();
+            PlayerDamageHUD.Instance.ShakeScreen();
+
         }
     }
 

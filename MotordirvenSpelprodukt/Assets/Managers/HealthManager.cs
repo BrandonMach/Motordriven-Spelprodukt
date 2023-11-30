@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using static UnityEngine.EventSystems.EventTrigger;
 
 
@@ -168,6 +169,9 @@ public class HealthManager : MonoBehaviour,IHasProgress
     {
         if (IsPlayer)
         {
+            GameLoopManager.Instance.volumeProfile.TryGet(out ColorAdjustments colorAdjustments);
+
+            colorAdjustments.saturation.value = -100;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             GameLoopManager.Instance.TotalDeaths++;
         }
