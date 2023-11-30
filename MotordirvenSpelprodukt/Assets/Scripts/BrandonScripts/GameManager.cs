@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
             //Customization Scene
            // Debug.Log("In Customization Scene");
         }
-        if (currentScene.buildIndex == 2)
+        if (currentScene.buildIndex == 2 || _currentScen == GameManager.CurrentScen.AreaScen)
         {
             //Brandon new testing Scene
             // Debug.Log("In Brandon new testing Scene");
@@ -335,9 +335,10 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    //Tested works
     private bool ThisIsSpartaCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "This is Sparta!" /* && int outOfArena >= challenge.Requirement */)
+        if (challenge.ChallengeName == "This is Sparta!" && _knockedOutOfArenaX >= challenge.Requirement)
         {
             return true;
         }

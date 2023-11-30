@@ -16,7 +16,10 @@ public class OutOfArenaScript : MonoBehaviour
         if(other.gameObject.GetComponent<HealthManager>() != null)
         {
             other.gameObject.GetComponent<HealthManager>().ReduceHealth(300);
+            GameManager.Instance.KnockedOutOfArena++;
             GameLoopManager.Instance.KnockedOutOfArena++;
+
+            Debug.Log("Knocked out of arena: " + GameManager.Instance.KnockedOutOfArena + " " + GameLoopManager.Instance.KnockedOutOfArena);
 
             PlayWilhelmScream();
         }

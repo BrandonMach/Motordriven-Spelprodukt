@@ -127,6 +127,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
             {
                 PlayRandomMinionHit();
                 PlayRandomHitSound();
+
+                //FMODSFXController.Instance.PlayMinionHit();
             }
 
 
