@@ -12,48 +12,48 @@ public class ChallengeManager : MonoBehaviour
     // Is only to be instantiated in the CustomizationScreen, but can be reachable throughout the project with ChallengeManager.Instance;
     #region Singleton
 
-    private static ChallengeManager _instance;
-    public static ChallengeManager Instance { get => _instance; set => _instance = value; }
+    //private static ChallengeManager _instance;
+    //public static ChallengeManager Instance { get => _instance; set => _instance = value; }
 
     public bool ChallengesActive;
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Debug.LogWarning("More than one instance of ChallengeManager found");
-            return;
-        }
-        Instance = this;
+    //private void Awake()
+    //{
+    //    if (Instance != null)
+    //    {
+    //        Debug.LogWarning("More than one instance of ChallengeManager found");
+    //        return;
+    //    }
+    //    Instance = this;
 
-        DontDestroyOnLoad(gameObject);
+    //    DontDestroyOnLoad(gameObject);
 
-        //foreach (GameObject item in AvailableChallengeButtons)
-        //{
+    //    //foreach (GameObject item in AvailableChallengeButtons)
+    //    //{
 
-        //}
+    //    //}
 
-        ActiveChallenges = new List<Challenge>();
-    }
+    //    ActiveChallenges = new List<Challenge>();
+    //}
     #endregion
 
 
     #region Singleton
 
 
-    //private static ChallengeManager _instance;
-    //public static ChallengeManager Instance { get => _instance; set => _instance = value; }
-    //private void Awake()
-    //{
-    //    if (Instance != null && Instance != this)
-    //    {
-    //        Destroy(gameObject);
-    //        Debug.LogWarning("More than one instance of GameManager found");
-    //        return;
-    //    }
-    //    Instance = this;
+    private static ChallengeManager _instance;
+    public static ChallengeManager Instance { get => _instance; set => _instance = value; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            Debug.LogWarning("More than one instance of GameManager found");
+            return;
+        }
+        Instance = this;
 
-    //    ActiveChallenges = new List<Challenge>();
-    //}
+        ActiveChallenges = new List<Challenge>();
+    }
 
 
 
