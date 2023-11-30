@@ -263,6 +263,7 @@ public class GameLoopManager : MonoBehaviour
 
        // _championIsDead = true;
         GameManager.Instance._championIsDeadX = true;
+        _championIsDead = true;
         
 
        
@@ -429,7 +430,7 @@ public class GameLoopManager : MonoBehaviour
 
     private bool ThisIsSpartaCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "This is Sparta!" /* && int outOfArena >= challenge.Requirement */)
+        if (challenge.ChallengeName == "This is Sparta!" && _knockedOutOfArena >= challenge.Requirement )
         {
             return true;
         }
