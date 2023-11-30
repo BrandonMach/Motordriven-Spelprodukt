@@ -114,9 +114,13 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-       
-        GetMoveDir();
+
+        if (_canMove)
+        {
+            GetMoveDir();
+        }
         
+
         _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
     }
 
@@ -147,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
         GetCameraValues();
 
         Vector2 inputvector = _playerScript.GameInput.GetMovementVectorNormalized();
+        //Vector2 inputvector = GameManager.Instance.gameObject.GetComponent<GameInput>().GetMovementVectorNormalized();
 
         if (!_canMove)
         {
