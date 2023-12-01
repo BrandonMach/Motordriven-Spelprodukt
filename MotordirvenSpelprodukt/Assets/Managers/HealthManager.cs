@@ -77,6 +77,19 @@ public class HealthManager : MonoBehaviour,IHasProgress
             }
             
         }
+
+
+        if (CurrentHealthPoints <= 0)
+        {
+            Die();
+
+            if (HasDismembrent)
+            {
+                _dismembrentScript = GetComponent<DismemberentEnemyScript>();
+                _dismembrentScript.GetKilled();
+            }
+
+        }
     }
 
     private void OnDestroy()
@@ -105,9 +118,11 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public void HealDamage(float damageHealed)
     {
         CurrentHealthPoints += damageHealed;
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints /*/ _maxHealthPoints*/ });
 
-        if(CurrentHealthPoints > _maxHealthPoints) //No Overheal
+        if (CurrentHealthPoints > _maxHealthPoints) //No Overheal
         {
+
             CurrentHealthPoints = _maxHealthPoints;
         }
     }
@@ -137,18 +152,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints /*/ _maxHealthPoints*/ });
 
 
-            if (CurrentHealthPoints <= 0)
-            {
-                if (HasDismembrent)
-                {
-                    _dismembrentScript = GetComponent<DismemberentEnemyScript>();
-                    _dismembrentScript.GetKilled();
-                }
-
-
-                Die();
-
-            }
+            
         }
 
       

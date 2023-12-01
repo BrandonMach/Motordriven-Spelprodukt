@@ -17,6 +17,7 @@ public class Arrow : MonoBehaviour
     private Vector3 fireDirection;
 
     [SerializeField] TrailRenderer trailRenderer;
+    bool didDamage;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class Arrow : MonoBehaviour
         //_rb.useGravity = false;
         Player.Instance.StartEvade += Player_OnEvade;
         trailRenderer.enabled = false;
+        didDamage = false;
     }
 
     private void Player_OnEvade(object sender, System.EventArgs e)
@@ -97,22 +99,21 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {    
-        if (other.transform.CompareTag("Player"))
+        if (other.gameObject == Player.Instance.gameObject)
         {
             _rb.isKinematic = true;
             transform.SetParent(other.transform);
-            //Player.Instance.TakeDamage(_attack);
             trailRenderer.enabled = false;
+
+            if (!didDamage)
+            {
+                didDamage = true;
+                Player.Instance.TakeDamage(_attack);
+            }
+           
+            
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if(collision.transform.CompareTag("Player"))
-    //    {
-    //        Player.Instance.TakeDamage(_attack);
-    //        _rb.isKinematic = true;
-    //        transform.SetParent(collision.transform);
-    //    }
-    //}
+
 }

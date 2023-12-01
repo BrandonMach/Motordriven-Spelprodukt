@@ -15,9 +15,8 @@ public class FallingObjectType : MonoBehaviour
     }
 
     public ObjectType Type;
-    public GameObject IndicatorPrefab;
-    private GameObject _indicator;
-    [SerializeField] GameObject _splashEffects;
+ 
+    [SerializeField] GameObject _healthpack;
     
 
     public LayerMask Ground;
@@ -30,7 +29,7 @@ public class FallingObjectType : MonoBehaviour
 
     
 
-    Vector3 _targetIndicatorPosition;
+    Vector3 _targetPosition;
     Vector3 _playerPosition;
 
     public float _speed = 0.1f;
@@ -53,7 +52,7 @@ public class FallingObjectType : MonoBehaviour
             float posZ = Random.Range(-2, 2);
 
 
-            _targetIndicatorPosition = new Vector3(posX + _playerPosition.x, -1.001f, /*posZ +*/ posZ + _playerPosition.z);
+            _targetPosition = new Vector3(posX + _playerPosition.x, -1.001f, /*posZ +*/ posZ + _playerPosition.z);
            // _indicator = Instantiate(IndicatorPrefab, _targetIndicatorPosition, IndicatorPrefab.transform.rotation);
             //_indicator.transform.SetParent(this.transform);
         }
@@ -62,10 +61,13 @@ public class FallingObjectType : MonoBehaviour
 
         float throwPosX = Random.Range(-10, 10);
         float throwPosZ = Random.Range(-10, 10);
-        //_startPos = new Vector3(throwPosX, 10, throwPosZ);
+      
 
         //transform.position= _startPos; 
-        _journeyLength = Vector3.Distance(transform.position, _targetIndicatorPosition);
+
+      
+
+        _journeyLength = Vector3.Distance(transform.position, _targetPosition);
         isFalling = true;
 
 
@@ -81,53 +83,10 @@ public class FallingObjectType : MonoBehaviour
         float fractionOfJourney = _distCovered / _journeyLength;
 
         
-        transform.position = Vector3.Lerp(transform.position, _targetIndicatorPosition, fractionOfJourney);
+        transform.position = Vector3.Lerp(transform.position, _targetPosition, fractionOfJourney);
 
 
-
-
-        //if (isFalling)
-        //{
-
-        //    float distanceCovered = (Time.time - _startTime) * _speed;
-        //    float journeyFraction = distanceCovered / _journeyLength;
-
-        //    Vector3 currentPos = Vector3.Lerp(this.transform.position, _targetIndicatorPosition, journeyFraction);
-
-        //    currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y, journeyFraction) /*+ Mathf.Sin(journeyFraction * Mathf.PI) * 2*/;
-        //    if (currentPos.x != _targetIndicatorPosition.x && currentPos.z != _targetIndicatorPosition.x)
-        //    {
-        //        currentPos.y = Mathf.Lerp(this.transform.position.y, _targetIndicatorPosition.y + 0.01f, journeyFraction) /*+ Mathf.Sin(journeyFraction * Mathf.PI) * 2*/;
-        //    }
-
-        //    transform.position = currentPos;
-
-        //    if (journeyFraction >= 1.0f)
-        //    {
-
-        //        isFalling = false;
-        //        //Object has reached its destination
-        //        //You can add additional logic here if needed
-        //    }
-        //    else
-        //    {
-
-
-        //    }
-
-
-        //}
-
-
-
-        if (Type == ObjectType.HealthPotion)
-        {
-           // HoverObject();
-            //float y = Mathf.PingPong(Time.time * 2, 1) * 6 - 3;
-            //transform.position = new Vector3(transform.position.x, y, transform.position.z);
-        }
         
-
         
     }
 
@@ -144,7 +103,7 @@ public class FallingObjectType : MonoBehaviour
                 Debug.Log("Tomato");
                 Debug.LogError("Player take damage");
                 other.gameObject.GetComponent<HealthManager>().ReduceHealth(5);
-                Destroy(_indicator);
+               
 
             }
             else if (Type == ObjectType.HealthPotion)
@@ -168,66 +127,18 @@ public class FallingObjectType : MonoBehaviour
                 
                 Debug.Log("Tomato Splash");
 
-                Instantiate(_splashEffects, transform.position, _splashEffects.transform.rotation);
-
                 Destroy(gameObject);
-                Destroy(_indicator);
-
+               
             }
-            
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Kanske ta bort target
-        if (other.gameObject.tag == ("Target"))
-        {
-            if (Type == ObjectType.Tomato)
+            if (Type == ObjectType.HealthPotion)
             {
-
-                Debug.Log("Tomato Splash");
-
-                Instantiate(_splashEffects, transform.position, _splashEffects.transform.rotation);
-
                 Destroy(gameObject);
-                Destroy(_indicator);
+                Instantiate(_healthpack, gameObject.transform.position + new  Vector3(0,2,0), Quaternion.identity);
 
             }
-        }
-    }
-
-
-    void HoverObject()
-    {
-
-
-        //float y = Mathf.PingPong(Time.time * 2, 1) * 6 - 3;
-        //transform.position = new Vector3(transform.position.x, y, transform.position.z);
-
-        //float distance = RaycastDownwardsFromMe();
-
-        //float fractionalPosition = (MaxDistance - distance) / (MaxDistance - MinDistance);
-        //if (fractionalPosition < 0) fractionalPosition = 0;
-        //if (fractionalPosition > 1) fractionalPosition = 1;
-        //float force = fractionalPosition * MaxForce;
-
-        //rb.AddForceAtPosition(Vector3.up * force, transform.position);
-    }
-
-    float RaycastDownwardsFromMe()
-    {
-        RaycastHit rch;
-        if (Physics.Raycast(transform.position, -transform.up, out rch, MaxDistance))
-        {
-            IndicatorPrefab.transform.position = rch.transform.position;
             
-            return rch.distance;
         }
-
-        // report no contact
-       // contactTracker.ReportContactState(this, false);
-
-        return 100;
     }
+
+   
 }
