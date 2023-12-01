@@ -21,6 +21,8 @@ public class AudienceAnimationScipt : MonoBehaviour
         {
             _fansMultipier = -1;
         }
+
+       
     }
 
     // Update is called once per frame

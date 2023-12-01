@@ -36,12 +36,15 @@ public class CrowdBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        _crowdSections = GameObject.FindObjectsOfType<AudienceAnimationScipt>();
+        
 
     }
 
     void Start()
     {
+
+        _crowdSections = GameObject.FindObjectsOfType<AudienceAnimationScipt>();
+
         //Subscribes to events
         EntertainmentManager.Instance.OnETPNormal += NormalCrowd;
         EntertainmentManager.Instance.OnETPAngry += AngryCrowd;
