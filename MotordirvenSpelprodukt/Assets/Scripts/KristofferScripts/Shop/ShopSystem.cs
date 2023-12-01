@@ -105,6 +105,6 @@ public class ShopSystem : MonoBehaviour
 
     public void PlayBuySound()
     {
-        FMODSFXController.Instance.PlayCoinDrop();
+        //FMODSFXController.Instance.PlayCoinDrop();
     }
 }

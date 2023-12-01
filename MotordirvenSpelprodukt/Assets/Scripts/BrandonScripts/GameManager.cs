@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
             //Customization Scene
            // Debug.Log("In Customization Scene");
         }
-        if (currentScene.buildIndex == 2 || _currentScen == GameManager.CurrentScen.AreaScen)
+        if (currentScene.buildIndex == 2 /*|| _currentScen == GameManager.CurrentScen.AreaScen*/)
         {
             //Brandon new testing Scene
             // Debug.Log("In Brandon new testing Scene");
