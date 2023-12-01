@@ -49,6 +49,10 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public EventReference deathSound4EventPath;
     public EventReference deathSound5EventPath;
 
+    public System.EventHandler PlayReciveDamageSoundEvent;
+    public System.EventHandler PlayDeathSoundEvent;
+    public System.EventHandler PlayDoDamageSoundEvent;
+
     void Start()
     {
         
@@ -141,8 +145,12 @@ public class HealthManager : MonoBehaviour,IHasProgress
             }
             else if (!IsPlayer && !isBleeding)
             {
-                PlayRandomMinionHit();
-                PlayRandomHitSound();
+
+                PlayDoDamageSoundEvent?.Invoke(this, EventArgs.Empty);
+                PlayReciveDamageSoundEvent?.Invoke(this, EventArgs.Empty);
+
+                //PlayRandomMinionHit();
+                //PlayRandomHitSound();
 
                 //FMODSFXController.Instance.PlayMinionHit();
             }
@@ -185,7 +193,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
             GameLoopManager.Instance.KillCount++;
             Debug.Log("Killcount: " + GameLoopManager.Instance.KillCount);
             IsDeadOnce = true;
-            PlayRandomDeathSound();
+           // PlayRandomDeathSound();
+            PlayDeathSoundEvent?.Invoke(this, EventArgs.Empty);
         }
 
         if (hasSlowMo)

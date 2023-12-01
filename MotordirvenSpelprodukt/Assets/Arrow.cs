@@ -27,7 +27,7 @@ public class Arrow : MonoBehaviour
         _rb.isKinematic = false;
         //_rb.useGravity = false;
         Player.Instance.StartEvade += Player_OnEvade;
-        trailRenderer.enabled = false;
+        //trailRenderer.enabled = false;
         didDamage = false;
     }
 
@@ -41,6 +41,7 @@ public class Arrow : MonoBehaviour
         if (_fired)
         {
            
+
             MoveArrow();
             _timeSinceFire += Time.deltaTime;
 
@@ -67,13 +68,13 @@ public class Arrow : MonoBehaviour
 
     private void MoveArrow()
     {
-        
+        trailRenderer.enabled = true;
         //transform.Translate(Vector3.forward * _arrowSpeed * Time.deltaTime);
         //_rb.AddForce(transform.forward *  _arrowSpeed, ForceMode.Impulse);
         if (_rb.isKinematic == false)
         {
             _rb.velocity = transform.up * _arrowSpeed;
-            trailRenderer.enabled = true;
+            
         }
  
         //_rb.AddTorque(transform.up * _arrowSpeed*5);
