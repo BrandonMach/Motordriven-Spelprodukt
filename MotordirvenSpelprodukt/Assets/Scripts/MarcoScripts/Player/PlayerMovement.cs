@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen && GameLoopManager.Instance.MatchIsFinished )
+            if (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen && GameLoopManager.Instance.MatchIsFinished )
             {
                 _canMove = false;
             }

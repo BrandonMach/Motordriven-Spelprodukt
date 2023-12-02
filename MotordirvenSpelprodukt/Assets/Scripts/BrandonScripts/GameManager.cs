@@ -34,9 +34,9 @@ public class GameManager : MonoBehaviour
     {
         MainMenuScene,
         CustomizationScene,
-        AreaScen,
+        ArenaScen,
         ShopScen,
-        OpenWorld
+        HUBWorld
     }
 
     public CurrentScen _currentScen;
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
 
             CheckChallengesCompletion();
             ChallengeTimersUpdate();
-            _currentScen = CurrentScen.AreaScen;
+            _currentScen = CurrentScen.ArenaScen;
 
 
             
@@ -173,10 +173,10 @@ public class GameManager : MonoBehaviour
 
 
 
-        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.OpenWorld)
+        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.HUBWorld)
         {
       
-            _currentScen = CurrentScen.OpenWorld;
+            _currentScen = CurrentScen.HUBWorld;
 
 
 

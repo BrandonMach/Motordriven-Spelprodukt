@@ -115,7 +115,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
 
-        if (_playerDash.IsDashAvailable() && (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen))
+        if (_playerDash.IsDashAvailable() && (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen))
         {
             IsDashing = true;
             _input += "E";
@@ -146,7 +146,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     void Update()
     {
        // _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
-        if (GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        if (GameManager.Instance._currentScen != GameManager.CurrentScen.ArenaScen)
         {
             _canAttack = false;
 
