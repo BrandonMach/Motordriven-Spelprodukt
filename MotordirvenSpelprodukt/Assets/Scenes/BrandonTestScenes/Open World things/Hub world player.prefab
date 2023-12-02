@@ -480,15 +480,15 @@ RectTransform:
   m_GameObject: {fileID: 988507079861591392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.68972945, y: 0.68972945, z: 0.68972945}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3393854132433464348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.687515, y: 122.7}
-  m_SizeDelta: {x: 270.4915, y: 107.3872}
+  m_AnchoredPosition: {x: 16.971382, y: 71.9466}
+  m_SizeDelta: {x: 197.8837, y: 89.3806}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6793127579093123071
 CanvasRenderer:
@@ -555,15 +555,15 @@ RectTransform:
   m_GameObject: {fileID: 1038911409543715993}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.000015258789}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3397456, y: 0.3397456, z: 0.3397456}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3393854132433464348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -61.9, y: 128.3}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -9.1, y: 82}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3085263158958350184
 CanvasRenderer:
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ha
+  m_text: I'll teach you powerfull spells (DLC)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
   m_sharedMaterial: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
@@ -620,15 +620,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
+  m_fontSize: 37.6
   m_fontSizeBase: 25
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2850,7 +2850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354014679871184113}
   m_Layer: 0
-  m_Name: CustomizationTrigger
+  m_Name: PopUp Textbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3684,7 +3684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.74
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4905,6 +4905,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1328770420257781953}
+    - targetCorrespondingSourceObject: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6022576734965991921}
   m_SourcePrefab: {fileID: 100100000, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
 --- !u!65 &1860385129789688105 stripped
 BoxCollider:
@@ -5054,6 +5057,22 @@ MonoBehaviour:
     m_DissipationDistance: 417.1
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &6022576734965991921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185919285020078566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824783b8c02d035418d650c180d2919b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoToPopup: {fileID: 0}
+  ScenIndex: 0
+  isdlc: 0
+  _activatePopup: 0
 --- !u!4 &7925066658305670380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
@@ -5136,6 +5155,10 @@ PrefabInstance:
     - target: {fileID: 1216674268834692, guid: 404a923dea987c14498264bf7d13d458, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Slayer_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216674268834692, guid: 404a923dea987c14498264bf7d13d458, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4470466264897572, guid: 404a923dea987c14498264bf7d13d458, type: 3}
       propertyPath: m_LocalScale.x

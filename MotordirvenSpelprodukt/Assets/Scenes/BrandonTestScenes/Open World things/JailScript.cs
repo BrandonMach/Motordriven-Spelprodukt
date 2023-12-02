@@ -9,7 +9,7 @@ public class JailScript : MonoBehaviour
     TextMeshProUGUI text;
     [SerializeField] string textToDisplay;
     [SerializeField] int ScenIndex;
-    
+    [SerializeField] bool isdlc;
     public bool _activatePopup;
     void Start()
     {
@@ -28,7 +28,7 @@ public class JailScript : MonoBehaviour
             text.text = textToDisplay;
         }
 
-        if(_activatePopup && Input.GetKeyDown(KeyCode.E))
+        if(_activatePopup && Input.GetKeyDown(KeyCode.E) && !isdlc)
         {
             SceneManager.LoadScene(ScenIndex, LoadSceneMode.Single);
         }
