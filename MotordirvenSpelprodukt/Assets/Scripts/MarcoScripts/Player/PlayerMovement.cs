@@ -102,13 +102,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-        if(GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        if(GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene )
         {
             _canMove = false;
         }
         else
         {
-            if (GameLoopManager.Instance.MatchIsFinished)
+            if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen && GameLoopManager.Instance.MatchIsFinished )
             {
                 _canMove = false;
             }

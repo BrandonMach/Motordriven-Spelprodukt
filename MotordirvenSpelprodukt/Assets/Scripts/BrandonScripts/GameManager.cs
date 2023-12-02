@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
         MainMenuScene,
         CustomizationScene,
         AreaScen,
-        ShopScen
+        ShopScen,
+        OpenWorld
     }
 
     public CurrentScen _currentScen;
@@ -167,6 +168,18 @@ public class GameManager : MonoBehaviour
 
 
             
+        }
+
+
+
+
+        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.OpenWorld)
+        {
+      
+            _currentScen = CurrentScen.OpenWorld;
+
+
+
         }
 
 

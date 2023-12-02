@@ -15,6 +15,11 @@ public class GameLoopManager : MonoBehaviour
 
     private static GameLoopManager _instance;
     public static GameLoopManager Instance { get => _instance; set => _instance = value; }
+
+
+ 
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -193,6 +198,9 @@ public class GameLoopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+      
+
         foreach (var canvas in Canvases)
         {
             canvas.SetActive(!PauseMenu.GameIsPaused);

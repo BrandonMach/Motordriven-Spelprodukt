@@ -1,4 +1,5 @@
 using FMODUnity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,29 @@ public class RMScript : MinionScript
     public EventReference bowLoadEventRef;
     public EventReference bowShootEventRef;
 
+
+    HealthManager healthManager;
+
+    #region SFX
+
+    [Header("SFX EventReferences")]
+
+    public EventReference minionHitEventPath;
+    public EventReference minionHit2EventPath;
+    public EventReference minionHit3EventPath;
+
+    public EventReference hitSoundEventPath;
+    public EventReference hitSound2EventPath;
+    public EventReference hitSound3EventPath;
+
+    public EventReference deathSoundEventPath;
+    public EventReference deathSound2EventPath;
+    public EventReference deathSound3EventPath;
+    public EventReference deathSound4EventPath;
+    public EventReference deathSound5EventPath;
+    #endregion
+
+
     public float StartFleeRange 
     { 
         get { return _startFleeRange; } 
@@ -32,6 +56,13 @@ public class RMScript : MinionScript
         _navMesh.angularSpeed = _agentRotationSpeed;
         //_agentRotationSpeed = _navMesh.angularSpeed;
         _arrowManager = GameLoopManager.Instance.gameObject.GetComponent<ArrowManager>();
+
+
+        healthManager = GetComponent<HealthManager>();
+        healthManager.PlayReciveDamageSoundEvent += PlayRandomReciveDamageSound;
+        healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
+        healthManager.PlayDeathSoundEvent += PlayRandomDeathSound;
+
     }
 
 
@@ -119,22 +150,6 @@ public class RMScript : MinionScript
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    public void OnDestroy()
-    {
-        //Death animation
-    }
-
     #region SFX
 
     private void PlayBowSound(EventReference bowSoundRef)
@@ -144,6 +159,110 @@ public class RMScript : MinionScript
         bowSound.start();
         bowSound.release();
     }
+
+
+    public void PlayDeathSound(EventReference deathSoundRef)
+    {
+        if (!deathSoundRef.IsNull)
+        {
+            FMOD.Studio.EventInstance deathSound = FMODUnity.RuntimeManager.CreateInstance(deathSoundRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(deathSound, this.transform, this.GetComponent<Rigidbody>());
+            deathSound.start();
+            deathSound.release();
+        }
+    }
+
+    public void PlayHitSound(EventReference hitSoundRef)
+    {
+        if (!hitSoundRef.IsNull)
+        {
+            FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(hitSoundRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(hitSound, this.transform, this.GetComponent<Rigidbody>());
+            hitSound.getVolume(out float volume);
+            hitSound.setVolume(volume / 3);
+            hitSound.start();
+            hitSound.release();
+        }
+    }
+
+
+    public void PlayMinionHit(EventReference minionHitRef)
+    {
+        if (!minionHitRef.IsNull)
+        {
+            FMOD.Studio.EventInstance minionHit = FMODUnity.RuntimeManager.CreateInstance(minionHitRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(minionHit, this.transform, this.GetComponent<Rigidbody>());
+            minionHit.start();
+            minionHit.release();
+        }
+
+    }
+
+    public void PlayRandomReciveDamageSound(object sender, EventArgs e)
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 6);
+
+        if (randomNumber == 1)
+        {
+            PlayMinionHit(minionHitEventPath);
+        }
+        else if (randomNumber == 2)
+        {
+            PlayMinionHit(minionHit2EventPath);
+        }
+        else if (randomNumber == 3)
+        {
+            PlayMinionHit(minionHit3EventPath);
+        }
+    }
+
+    public void PlayRandomDeathSound(object sender, EventArgs e)
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 6);
+
+        if (randomNumber == 1)
+        {
+            PlayDeathSound(deathSoundEventPath);
+        }
+        else if (randomNumber == 2)
+        {
+            PlayDeathSound(deathSound2EventPath);
+        }
+        else if (randomNumber == 3)
+        {
+            PlayDeathSound(deathSound3EventPath);
+        }
+        else if (randomNumber == 4)
+        {
+            PlayDeathSound(deathSound4EventPath);
+        }
+        else if (randomNumber == 5)
+        {
+            PlayDeathSound(deathSound5EventPath);
+        }
+    }
+
+
+    public void PlayRandomDoDamageSound(object sender, EventArgs e)
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlayHitSound(hitSoundEventPath);
+        }
+        else if (randomNumber == 2)
+        {
+            PlayHitSound(hitSound2EventPath);
+        }
+        else if (randomNumber == 3)
+        {
+            PlayHitSound(hitSound3EventPath);
+        }
+    }
+
+
+
 
     #endregion
 }
