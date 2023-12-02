@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
 
 public class GameLoopManager : MonoBehaviour
 {
@@ -13,6 +15,11 @@ public class GameLoopManager : MonoBehaviour
 
     private static GameLoopManager _instance;
     public static GameLoopManager Instance { get => _instance; set => _instance = value; }
+
+
+ 
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -119,6 +126,10 @@ public class GameLoopManager : MonoBehaviour
 
     #endregion
 
+
+    public VolumeProfile volumeProfile;
+    [SerializeField] float defaultSaturation = -16.3f;
+
     #endregion
 
     //public int KillCount { get => _killCount; set => _killCount = value; }
@@ -181,11 +192,15 @@ public class GameLoopManager : MonoBehaviour
         OnMatchFinished += MatchFinished;
         UpdateEnemyList();
         
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+      
+
         foreach (var canvas in Canvases)
         {
             canvas.SetActive(!PauseMenu.GameIsPaused);
@@ -213,8 +228,16 @@ public class GameLoopManager : MonoBehaviour
         if(_player == null)
         {
             SceneManager.LoadScene(3, LoadSceneMode.Single);
+           
         }
 
+        if (!_player.GetComponent<HealthManager>().Dead)
+        {
+           volumeProfile.TryGet(out ColorAdjustments colorAdjustments);
+
+            colorAdjustments.saturation.value = defaultSaturation;
+;
+        }
         // Testing challenges
         CheckChallengesCompletion();
         ChallengeTimersUpdate();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using FMODUnity;
 
 public class PlayerDamageHUD : MonoBehaviour
 {
@@ -41,6 +42,10 @@ public class PlayerDamageHUD : MonoBehaviour
     public HealthManager _playerHP;
 
     public CinemachineImpulseSource ImpulseSource;
+
+
+
+
     private void Start()
     {
         _hurtImage.enabled = false;

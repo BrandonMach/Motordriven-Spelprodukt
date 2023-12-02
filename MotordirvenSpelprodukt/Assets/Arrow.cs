@@ -15,8 +15,9 @@ public class Arrow : MonoBehaviour
     private Rigidbody _rb;
     private bool _fired;
     private Vector3 fireDirection;
-   
 
+    [SerializeField] TrailRenderer trailRenderer;
+    bool didDamage;
 
     void Start()
     {
@@ -26,6 +27,8 @@ public class Arrow : MonoBehaviour
         _rb.isKinematic = false;
         //_rb.useGravity = false;
         Player.Instance.StartEvade += Player_OnEvade;
+        //trailRenderer.enabled = false;
+        didDamage = false;
     }
 
     private void Player_OnEvade(object sender, System.EventArgs e)
@@ -36,16 +39,19 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         if (_fired)
-        {          
+        {
+           
+
             MoveArrow();
             _timeSinceFire += Time.deltaTime;
 
             if (_timeSinceFire >= _maxLifeTime)
             {
+                
                 _rb.isKinematic = false;
                 transform.SetPositionAndRotation(_startPos.position, _startPos.rotation);
                 _fired = false;
-                
+               
                 transform.parent = defaultParent;
                 //transform.position = defaultParent.position;
                 _timeSinceFire = 0;
@@ -62,12 +68,13 @@ public class Arrow : MonoBehaviour
 
     private void MoveArrow()
     {
+        trailRenderer.enabled = true;
         //transform.Translate(Vector3.forward * _arrowSpeed * Time.deltaTime);
         //_rb.AddForce(transform.forward *  _arrowSpeed, ForceMode.Impulse);
         if (_rb.isKinematic == false)
         {
             _rb.velocity = transform.up * _arrowSpeed;
-
+            
         }
  
         //_rb.AddTorque(transform.up * _arrowSpeed*5);
@@ -93,21 +100,26 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {    
-        if (other.transform.CompareTag("Player"))
+        if (other.gameObject == Player.Instance.gameObject)
         {
             _rb.isKinematic = true;
             transform.SetParent(other.transform);
-            //Player.Instance.TakeDamage(_attack);                  
+            trailRenderer.enabled = false;
+
+            if (!didDamage)
+            {
+                didDamage = true;
+                Player.Instance.TakeDamage(_attack);
+            }
+           
+            
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if(collision.transform.CompareTag("Player"))
-    //    {
-    //        Player.Instance.TakeDamage(_attack);
-    //        _rb.isKinematic = true;
-    //        transform.SetParent(collision.transform);
-    //    }
-    //}
+
+
+
+
+
+
 }

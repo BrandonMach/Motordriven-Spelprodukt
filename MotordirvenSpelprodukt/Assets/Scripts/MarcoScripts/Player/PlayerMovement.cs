@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _attackDashForce = 1.5f;
     [SerializeField] private Camera _mainCamera;
 
-    private Player _playerScript;
+    //private Player _playerScript;
 
     private Rigidbody _rigidbody;
 
@@ -51,16 +51,16 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _playerAnimation = GetComponent<PlayerAnimation>();
-        _playerScript = GetComponent<Player>();
+        Player.Instance = GetComponent<Player>();
         _characterController = GetComponent<CharacterController>();
         _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        _playerScript.ChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
-        _playerScript.DisableMovement += PlayerScript_OnDisableMovement;
-        _playerScript.EnableMovement += PlayerScript_OnEnableMovement;
+        Player.Instance.ChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
+        Player.Instance.DisableMovement += PlayerScript_OnDisableMovement;
+        Player.Instance.EnableMovement += PlayerScript_OnEnableMovement;
     }
 
     public void AttackDash()
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerScript_OnDisableMovement(object sender, System.EventArgs e)
     {
-        if (!_playerScript.IsDashing)
+        if (!Player.Instance.IsDashing)
         {
             _rigidbody.velocity = Vector3.zero;
         }
@@ -102,21 +102,25 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-        if(GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+        if(GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene )
         {
             _canMove = false;
         }
         else
         {
-            if (GameLoopManager.Instance.MatchIsFinished)
+            if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen && GameLoopManager.Instance.MatchIsFinished )
             {
                 _canMove = false;
             }
 
         }
-       
-        GetMoveDir();
+
+        if (_canMove)
+        {
+            GetMoveDir();
+        }
         
+
         _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
     }
 
@@ -146,7 +150,8 @@ public class PlayerMovement : MonoBehaviour
     {
         GetCameraValues();
 
-        Vector2 inputvector = _playerScript.GameInput.GetMovementVectorNormalized();
+        Vector2 inputvector = Player.Instance.GameInput.GetMovementVectorNormalized();
+        //Vector2 inputvector = GameManager.Instance.gameObject.GetComponent<GameInput>().GetMovementVectorNormalized();
 
         if (!_canMove)
         {
@@ -179,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
         switch (_currentInputMode)
         {
             case InputMode.Controller:
-                Vector3 input = _playerScript.GameInput.GetDirectionVectorNormalized();
+                Vector3 input = Player.Instance.GameInput.GetDirectionVectorNormalized();
                 _rotateInputDirection = input.x * _camRight + input.y * _camForward;
                 break;
             case InputMode.MnK:

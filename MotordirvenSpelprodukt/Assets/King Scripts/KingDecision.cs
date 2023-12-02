@@ -87,6 +87,6 @@ public class KingDecision : MonoBehaviour
     {
         //testar gå till concept save money
 
-        SceneManager.LoadScene(4, LoadSceneMode.Single);
+        SceneManager.LoadScene(5, LoadSceneMode.Single);
     }
 }

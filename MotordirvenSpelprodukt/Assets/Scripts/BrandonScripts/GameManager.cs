@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
         MainMenuScene,
         CustomizationScene,
         AreaScen,
-        ShopScen
+        ShopScen,
+        OpenWorld
     }
 
     public CurrentScen _currentScen;
@@ -113,7 +114,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    Player _player;
+   [SerializeField] public Player _player;
     
 
 
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour
             //Customization Scene
            // Debug.Log("In Customization Scene");
         }
-        if (currentScene.buildIndex == 2 || _currentScen == GameManager.CurrentScen.AreaScen)
+        if (currentScene.buildIndex == 2 /*|| _currentScen == GameManager.CurrentScen.AreaScen*/)
         {
             //Brandon new testing Scene
             // Debug.Log("In Brandon new testing Scene");
@@ -167,6 +168,18 @@ public class GameManager : MonoBehaviour
 
 
             
+        }
+
+
+
+
+        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.OpenWorld)
+        {
+      
+            _currentScen = CurrentScen.OpenWorld;
+
+
+
         }
 
 
