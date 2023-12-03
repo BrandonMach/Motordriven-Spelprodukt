@@ -10,7 +10,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     public static Player Instance;
 
-    public GameInput GameInput { get { return GameManager.Instance.gameObject.GetComponent<GameInput>(); } }
+
+    private GameInput _gameInput;
+    public GameInput GameInput { get { return _gameInput; } }
 
 
     public event EventHandler ChangeControllerTypeButtonPressed;
@@ -69,11 +71,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private bool _invulnerable = false;
     private bool _interruptable = false;
-
+    
 
     private void Awake()
     {
-        //_gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
+       
         if (Instance == null)
         {
             Instance = this;
@@ -93,10 +95,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Start()
     {
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnInteractActionPressed += GameInput_OnInteractActionPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
+        _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
+        _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
+        _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
+        _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
+        _gameInput.OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
 
         _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
 
@@ -146,11 +149,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     void Update()
     {
        // _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
-        if (GameManager.Instance._currentScen != GameManager.CurrentScen.ArenaScen)
-        {
-            _canAttack = false;
+        //if (GameManager.Instance._currentScen != GameManager.CurrentScen.ArenaScen)
+        //{
+        //    _canAttack = false;
 
-        }
+        //}
     }
 
     
@@ -175,10 +178,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void OnDestroy()
     {
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnInteractActionPressed -= GameInput_OnInteractActionPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnLightAttackButtonPressed -= GameInput_OnLightAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
+        _gameInput.OnInteractActionPressed -= GameInput_OnInteractActionPressed;
+        _gameInput.OnLightAttackButtonPressed -= GameInput_OnLightAttackButtonPressed;
+        _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
+        _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
 
     }

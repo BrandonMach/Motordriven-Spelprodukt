@@ -9,6 +9,8 @@ public class CustomizationMenu : MonoBehaviour
 
     float Angle = 45;
 
+    [SerializeField] private GameObject _playerRepresentation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +50,8 @@ public class CustomizationMenu : MonoBehaviour
 
     IEnumerator Rotate(float angle, float duration = 1.0f)
     {
-        Quaternion from = GameManager.Instance._player.transform.rotation;
-        Quaternion to = GameManager.Instance._player.transform.rotation;
+        Quaternion from = _playerRepresentation.transform.rotation;
+        Quaternion to = _playerRepresentation.transform.rotation;
 
         to *= Quaternion.Euler(new Vector3(0, 1, 0) * angle);
 
@@ -57,7 +59,7 @@ public class CustomizationMenu : MonoBehaviour
 
         while(elapse < duration)
         {
-            GameManager.Instance._player.transform.rotation = Quaternion.Slerp(from, to, elapse / duration);
+            _playerRepresentation.transform.rotation = Quaternion.Slerp(from, to, elapse / duration);
             elapse += Time.deltaTime;
             yield return null;
         }

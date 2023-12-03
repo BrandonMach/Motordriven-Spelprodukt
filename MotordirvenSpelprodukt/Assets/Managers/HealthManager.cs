@@ -101,8 +101,9 @@ public class HealthManager : MonoBehaviour,IHasProgress
         if (!IsPlayer)
         {
             SpawnEnemy.Instance.ScriptableObjectWaves[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
+            GameLoopManager.Instance.UpdateEnemyList();
         }
-        GameLoopManager.Instance.UpdateEnemyList();
+        
     }
 
 

@@ -137,7 +137,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _player = Player.Instance;
+
+        if(Player.Instance != null)
+        {
+            _player = Player.Instance;
+        }
+       
         currentScene = SceneManager.GetActiveScene();
 
         if (currentScene.buildIndex == 0)
