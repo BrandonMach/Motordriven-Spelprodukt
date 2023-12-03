@@ -21,6 +21,8 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     private float startBleedTime;
 
+   
+
 
     #region Properties
     public float MovementSpeed 
@@ -54,6 +56,8 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
         RB = GetComponent<Rigidbody>();
         RB.useGravity = true;
         AttackRange = _weapon.GetRange();
+
+        
     }
 
 
@@ -144,4 +148,6 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     {
         //CanMove = false;
     }
+
+
 }

@@ -98,7 +98,11 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance?.UpdateEnemyList();
+        if (!IsPlayer)
+        {
+            SpawnEnemy.Instance.ScriptableObjectWaves[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
+        }
+        GameLoopManager.Instance.UpdateEnemyList();
     }
 
 
