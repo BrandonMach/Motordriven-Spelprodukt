@@ -34,8 +34,9 @@ public class GameManager : MonoBehaviour
     {
         MainMenuScene,
         CustomizationScene,
-        AreaScen,
-        ShopScen
+        ArenaScen,
+        ShopScen,
+        HUBWorld
     }
 
     public CurrentScen _currentScen;
@@ -113,7 +114,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    Player _player;
+   [SerializeField] public Player _player;
     
 
 
@@ -156,17 +157,29 @@ public class GameManager : MonoBehaviour
             //Customization Scene
            // Debug.Log("In Customization Scene");
         }
-        if (currentScene.buildIndex == 2)
+        if (currentScene.buildIndex == 2 /*|| _currentScen == GameManager.CurrentScen.AreaScen*/)
         {
             //Brandon new testing Scene
             // Debug.Log("In Brandon new testing Scene");
 
             CheckChallengesCompletion();
             ChallengeTimersUpdate();
-            _currentScen = CurrentScen.AreaScen;
+            _currentScen = CurrentScen.ArenaScen;
 
 
             
+        }
+
+
+
+
+        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.HUBWorld)
+        {
+      
+            _currentScen = CurrentScen.HUBWorld;
+
+
+
         }
 
 
@@ -335,9 +348,10 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    //Tested works
     private bool ThisIsSpartaCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "This is Sparta!" /* && int outOfArena >= challenge.Requirement */)
+        if (challenge.ChallengeName == "This is Sparta!" && _knockedOutOfArenaX >= challenge.Requirement)
         {
             return true;
         }

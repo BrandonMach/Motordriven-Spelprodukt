@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class CustomizationMenu : MonoBehaviour
 {
     [SerializeField] ChallengeManager challengeManager;
-    public GameObject PlayerObject;
+
     float Angle = 45;
 
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class CustomizationMenu : MonoBehaviour
         //Angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, TargetRotation, ref r, 0.1f);
 
         //PlayerObject.transform.rotation = Quaternion.Euler(0, Angle, 0);
-        PlayerObject = Player.Instance.gameObject;
+       // PlayerObject = Player.Instance.gameObject;
     }
 
     public void ClickEnterArena()
@@ -48,8 +48,8 @@ public class CustomizationMenu : MonoBehaviour
 
     IEnumerator Rotate(float angle, float duration = 1.0f)
     {
-        Quaternion from = PlayerObject.transform.rotation;
-        Quaternion to = PlayerObject.transform.rotation;
+        Quaternion from = GameManager.Instance._player.transform.rotation;
+        Quaternion to = GameManager.Instance._player.transform.rotation;
 
         to *= Quaternion.Euler(new Vector3(0, 1, 0) * angle);
 
@@ -57,7 +57,7 @@ public class CustomizationMenu : MonoBehaviour
 
         while(elapse < duration)
         {
-            PlayerObject.transform.rotation = Quaternion.Slerp(from, to, elapse / duration);
+            GameManager.Instance._player.transform.rotation = Quaternion.Slerp(from, to, elapse / duration);
             elapse += Time.deltaTime;
             yield return null;
         }

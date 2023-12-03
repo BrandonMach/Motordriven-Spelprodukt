@@ -15,7 +15,7 @@ public class ChallengeManager : MonoBehaviour
     //private static ChallengeManager _instance;
     //public static ChallengeManager Instance { get => _instance; set => _instance = value; }
 
-    //public bool ChallengesActive;
+    public bool ChallengesActive;
     //private void Awake()
     //{
     //    if (Instance != null)
@@ -25,7 +25,7 @@ public class ChallengeManager : MonoBehaviour
     //    }
     //    Instance = this;
 
-    //    //DontDestroyOnLoad(gameObject);
+    //    DontDestroyOnLoad(gameObject);
 
     //    //foreach (GameObject item in AvailableChallengeButtons)
     //    //{

@@ -63,7 +63,7 @@ public class FMODSFXController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateSFXInstances();
+        //CreateSFXInstances();
         //InitializeEventInstancesList();
         SFXVolumeSlider.value = 0.3f;
     }

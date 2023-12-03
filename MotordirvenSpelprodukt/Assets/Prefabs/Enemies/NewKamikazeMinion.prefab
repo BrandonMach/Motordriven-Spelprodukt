@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e7e0f6c975ac141b6a7dfca1dc96b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 4
+  _movementSpeed: 2
   _healthManager: {fileID: 126686193265288532}
   anim: {fileID: 8568157067451352393}
   _weapon: {fileID: 11400000, guid: 59deb1df378993645aaf5a6944d71fd8, type: 2}
@@ -1486,8 +1486,10 @@ MonoBehaviour:
   _automaticExplodeRange: 25
   _activateManualExplodeRange: 3
   _maunalExplodeActive: 0
+  _explodeTimer: 5
   _explosion: {fileID: 0}
   _countdownNumber: {fileID: 4424722017936933565}
+  bombImage: {fileID: 8963161397468502620}
 --- !u!4 &6376993833523115797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}

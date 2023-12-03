@@ -22,9 +22,18 @@ public class FMODController : MonoBehaviour
     private static FMODController _instance;
 
     bool firstTime;
+    bool introIsPlaying;
+    bool arenaMusicIsPlaying;
+
+    bool afterArenaMusicActivated;
 
     public float _intensity;
     public float _health;
+
+    [Header("Music EventReferences")]
+    public EventReference introMusicRef;
+    public EventReference battleMusicRef;
+    public EventReference customizationMusicRef;
 
     public static FMODController Instance { get => _instance; set => _instance = value; }
 
@@ -47,6 +56,7 @@ public class FMODController : MonoBehaviour
     void Start()
     {
         firstTime = true;
+        introIsPlaying = true;
         _intensity = 50;
         _gameManager = GameLoopManager.Instance;
         //_entertainmentManager = EntertainmentManager.Instance;
@@ -63,11 +73,19 @@ public class FMODController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameLoopManager.Instance != null && firstTime)
+        if (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen && introIsPlaying)
         {
-            firstTime = false;
+            introIsPlaying = false;
             ChangeEvent("event:/Music");
+            afterArenaMusicActivated = true;
         }
+        else if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene && afterArenaMusicActivated)
+        {          
+            ChangeEvent("event:/AfterArenaMusic");
+            Debug.Log("AfterArenaMusic event changed");
+        }
+
+
 
         //if (Input.GetKeyDown(KeyCode.X))
         //{
@@ -79,6 +97,30 @@ public class FMODController : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+
+    //private void MusicManager()
+    //{
+    //    if (GameManager.Instance._currentScen == GameManager.CurrentScen.MainMenuScene && !introPlayOnce)
+    //    {
+    //        PlayIntroMusic();
+    //        introPlayOnce = true;
+    //    }
+    //    else if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen && !arenaMusicPlayOnce)
+    //    {
+
+    //    }
+    //}
+
+    //private void PlayIntroMusic()
+    //{
+    //    if (!introMusicRef.IsNull)
+    //    {
+    //        FMOD.Studio.EventInstance introMusic = FMODUnity.RuntimeManager.CreateInstance(introMusicRef);
+    //        FMODUnity.RuntimeManager.AttachInstanceToGameObject(introMusic, this.transform, this.GetComponent<Rigidbody>());
+    //        introMusic.start();
+    //        introMusic.release();
+    //    }
+    //}
 
     public void SetFMOD(FMODController fmod)
     {
@@ -94,6 +136,7 @@ public class FMODController : MonoBehaviour
         // Create a new instance with the updated event path
         _fmodEventInstance = FMODUnity.RuntimeManager.CreateInstance(newEventPath);
         _fmodEventInstance.start();
+        _fmodEventInstance.release();
     }
 
     public void Destroy()

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
 
 public class GameLoopManager : MonoBehaviour
 {
@@ -13,6 +15,19 @@ public class GameLoopManager : MonoBehaviour
 
     private static GameLoopManager _instance;
     public static GameLoopManager Instance { get => _instance; set => _instance = value; }
+
+
+ 
+
+    public enum MatchType
+    {
+        Champion,
+        Tutorial,
+    }
+
+    [SerializeField] public MatchType _currentMatchType;
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -119,6 +134,10 @@ public class GameLoopManager : MonoBehaviour
 
     #endregion
 
+
+    public VolumeProfile volumeProfile;
+    [SerializeField] float defaultSaturation = -16.3f;
+
     #endregion
 
     //public int KillCount { get => _killCount; set => _killCount = value; }
@@ -181,26 +200,40 @@ public class GameLoopManager : MonoBehaviour
         OnMatchFinished += MatchFinished;
         UpdateEnemyList();
         
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
         foreach (var canvas in Canvases)
         {
             canvas.SetActive(!PauseMenu.GameIsPaused);
         }
 
-       
 
 
-        if (_champion != null)
+        if (_currentMatchType == MatchType.Tutorial)
         {
 
-            _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
-            var championHealthManager = _champion.GetComponent<HealthManager>();
-            _championHPText.text = (championHealthManager.CurrentHealthPoints / championHealthManager.MaxHP * 100).ToString() + "%";
         }
+
+
+
+        if (_currentMatchType == MatchType.Champion)
+        {
+            if (_champion != null)
+            {
+
+                _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
+                var championHealthManager = _champion.GetComponent<HealthManager>();
+                _championHPText.text = (championHealthManager.CurrentHealthPoints / championHealthManager.MaxHP * 100).ToString() + "%";
+            }
+        }
+
+       
+       
 
         
         if (_champion == null && !_kingCam)
@@ -210,14 +243,23 @@ public class GameLoopManager : MonoBehaviour
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
 
+        
         if(_player == null)
         {
             SceneManager.LoadScene(3, LoadSceneMode.Single);
+           
         }
 
+        if (!_player.GetComponent<HealthManager>().Dead)
+        {
+           volumeProfile.TryGet(out ColorAdjustments colorAdjustments);
+
+            colorAdjustments.saturation.value = defaultSaturation;
+;
+        }
         // Testing challenges
-       // CheckChallengesCompletion();
-        //ChallengeTimersUpdate();
+        CheckChallengesCompletion();
+        ChallengeTimersUpdate();
     }
 
 
@@ -263,6 +305,7 @@ public class GameLoopManager : MonoBehaviour
 
        // _championIsDead = true;
         GameManager.Instance._championIsDeadX = true;
+        _championIsDead = true;
         
 
        
@@ -429,7 +472,7 @@ public class GameLoopManager : MonoBehaviour
 
     private bool ThisIsSpartaCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "This is Sparta!" /* && int outOfArena >= challenge.Requirement */)
+        if (challenge.ChallengeName == "This is Sparta!" && _knockedOutOfArena >= challenge.Requirement )
         {
             return true;
         }

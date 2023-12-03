@@ -10,7 +10,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     public static Player Instance;
 
-    public GameInput GameInput { get { return _gameInput; } }
+    public GameInput GameInput { get { return GameManager.Instance.gameObject.GetComponent<GameInput>(); } }
 
 
     public event EventHandler ChangeControllerTypeButtonPressed;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     public bool IsDashing { get; private set; }
 
-    [SerializeField] private GameInput _gameInput;
+  //  [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
     [SerializeField] private Weapon _currentWeapon;
     [SerializeField] private GameObject weaponHand;
@@ -73,6 +73,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void Awake()
     {
+        //_gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
         if (Instance == null)
         {
             Instance = this;
@@ -85,17 +86,17 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         _collider = GetComponent<BoxCollider>();
         _playerInputSpamChecker = GetComponent<PlayerInputSpamChecker>();
-        
+       
         
     }
 
 
     void Start()
     {
-        _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
-        _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
-        _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
-        _gameInput.OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnInteractActionPressed += GameInput_OnInteractActionPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
 
         _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
 
@@ -114,7 +115,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
 
-        if (_playerDash.IsDashAvailable() && (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen))
+        if (_playerDash.IsDashAvailable() && (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen))
         {
             IsDashing = true;
             _input += "E";
@@ -144,8 +145,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Update()
     {
-        _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
-        if (GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
+       // _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
+        if (GameManager.Instance._currentScen != GameManager.CurrentScen.ArenaScen)
         {
             _canAttack = false;
 
@@ -174,10 +175,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void OnDestroy()
     {
-        _gameInput.OnInteractActionPressed -= GameInput_OnInteractActionPressed;
-        _gameInput.OnLightAttackButtonPressed -= GameInput_OnLightAttackButtonPressed;
-        _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
-        _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnInteractActionPressed -= GameInput_OnInteractActionPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnLightAttackButtonPressed -= GameInput_OnLightAttackButtonPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
+        GameManager.Instance.gameObject.GetComponent<GameInput>().OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
 
     }

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -7881201175476180074}
   - component: {fileID: 6628473562971353631}
   - component: {fileID: 4463740786308776446}
-  - component: {fileID: 8841607035781111071}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Untagged
@@ -101,15 +100,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  IndicatorPrefab: {fileID: 4337470545796039950, guid: 7f6e954951881c5479e09e8c722912fa, type: 3}
-  _splashEffects: {fileID: 0}
+  _healthpack: {fileID: 1586026491850648, guid: 429401e1134e18541a6dd7fbef57e902, type: 3}
   Ground:
     serializedVersion: 2
     m_Bits: 64
   MinDistance: 1
   MaxDistance: 2
   MaxForce: 5
-  _speed: 2
+  _speed: 1
   _journeyLength: 0
   _distCovered: 0
 --- !u!54 &-7881201175476180074
@@ -137,7 +135,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!96 &6628473562971353631
 TrailRenderer:
@@ -191,7 +189,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.52586746
+        value: 0.19478989
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -212,17 +210,17 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5176471, g: 0.24705884, b: 0.23529413, a: 1}
+      key0: {r: 0.6666667, g: 0.61960787, b: 0.56078434, a: 1}
       key1: {r: 0.5176471, g: 0.24705884, b: 0.23529413, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0.5176471, g: 0.24705884, b: 0.23529413, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
+      ctime0: 37201
       ctime1: 65535
-      ctime2: 0
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -273,21 +271,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.81531584, y: 1.0648125, z: 0.8150801}
   m_Center: {x: 0, y: 0.5324063, z: -0.000030845404}
---- !u!114 &8841607035781111071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6514215347004428284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3fc06402318df4c9e0980f47e9e337, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPoint: {fileID: 5507891628935325747}
-  arcHeight: 2
-  speed: 2
-  journeyLength: 0
-  startTime: 0
-  isRunning: 0

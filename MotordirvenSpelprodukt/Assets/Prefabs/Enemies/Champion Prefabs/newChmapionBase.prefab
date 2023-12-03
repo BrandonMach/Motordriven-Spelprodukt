@@ -155,6 +155,7 @@ MonoBehaviour:
   _slider: {fileID: 1771751523862762451}
   _refillSpeed: 0.5
   IsChampionHPbar: 0
+  IsMinionhpbar: 0
 --- !u!1 &2324902738467017218
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,11 +346,88 @@ MonoBehaviour:
   IsDeadOnce: 0
   Dead: 0
   _destroydelay: 2.5
-  IsPlayer: 1
+  IsPlayer: 0
   GodMode: 0
   Explode: 0
   hasSlowMo: 0
   _slowMo: {fileID: 0}
+  minionHitEventPath:
+    Guid:
+      Data1: -682446972
+      Data2: 1222123052
+      Data3: 138052231
+      Data4: -30634744
+    Path: event:/minionHit
+  minionHit2EventPath:
+    Guid:
+      Data1: 1830128848
+      Data2: 1231730185
+      Data3: -898910538
+      Data4: 1024743558
+    Path: event:/minionHit2
+  minionHit3EventPath:
+    Guid:
+      Data1: -833794151
+      Data2: 1107683780
+      Data3: 814735012
+      Data4: 373602252
+    Path: event:/minionHit3
+  hitSoundEventPath:
+    Guid:
+      Data1: 339850642
+      Data2: 1073815689
+      Data3: 2109365181
+      Data4: 1231159114
+    Path: event:/swordHit2
+  hitSound2EventPath:
+    Guid:
+      Data1: -444931135
+      Data2: 1183646791
+      Data3: 1128442280
+      Data4: 615258466
+    Path: event:/swordHit3
+  hitSound3EventPath:
+    Guid:
+      Data1: 1780858378
+      Data2: 1296660713
+      Data3: -1424329851
+      Data4: -1559942629
+    Path: event:/swordHit4
+  deathSoundEventPath:
+    Guid:
+      Data1: 489153183
+      Data2: 1161213650
+      Data3: -24965981
+      Data4: -1656712461
+    Path: event:/deathPain
+  deathSound2EventPath:
+    Guid:
+      Data1: -1695018768
+      Data2: 1225353042
+      Data3: 812778914
+      Data4: 1674258272
+    Path: event:/deathPain2
+  deathSound3EventPath:
+    Guid:
+      Data1: 1873476988
+      Data2: 1299195340
+      Data3: -1659027819
+      Data4: 1317447752
+    Path: event:/deathPain3
+  deathSound4EventPath:
+    Guid:
+      Data1: 623699580
+      Data2: 1155527896
+      Data3: -1395256158
+      Data4: 810854827
+    Path: event:/deathPain4
+  deathSound5EventPath:
+    Guid:
+      Data1: 1630117624
+      Data2: 1142404488
+      Data3: -472538240
+      Data4: 1205369701
+    Path: event:/deathPain5
 --- !u!114 &6781590833126301414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +435,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7189006194749984216}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c781b6e9c0ac562459670ad76b1711ba, type: 3}
   m_Name: 
@@ -380,6 +458,27 @@ MonoBehaviour:
     m_Bits: 256
   isPlayer: 0
   stunEffect: {fileID: 0}
+  swordInAirEventRef:
+    Guid:
+      Data1: -1404392728
+      Data2: 1174384766
+      Data3: 651052213
+      Data4: 1172619654
+    Path: event:/swordHit
+  swordInAir2EventRef:
+    Guid:
+      Data1: 339850642
+      Data2: 1073815689
+      Data3: 2109365181
+      Data4: 1231159114
+    Path: event:/swordHit2
+  swordInAir3EventRef:
+    Guid:
+      Data1: -444931135
+      Data2: 1183646791
+      Data3: 1128442280
+      Data4: 615258466
+    Path: event:/swordHit3
 --- !u!95 &1893978260557283440
 Animator:
   serializedVersion: 5
@@ -449,6 +548,20 @@ MonoBehaviour:
   CurrentState: 0
   PreviousState: 0
   _jumpAttack: {fileID: 11400000, guid: af6b6f4b1983ad146bf8cdd60bd5e5e4, type: 2}
+  tauntScreamEventPath:
+    Guid:
+      Data1: 1976834556
+      Data2: 1312020305
+      Data3: 1042638464
+      Data4: -209347349
+    Path: event:/championTauntScream
+  championSlamEventPath:
+    Guid:
+      Data1: 31650344
+      Data2: 1306650206
+      Data3: 359365277
+      Data4: 740203240
+    Path: event:/championSlam
 --- !u!114 &2587968681938888123
 MonoBehaviour:
   m_ObjectHideFlags: 0

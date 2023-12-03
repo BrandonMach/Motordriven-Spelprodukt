@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -15,6 +16,9 @@ public class CMP1Script : ChampionScript
 
     protected static string _jumpAttackStringKey = "jumpAttack";
 
+    [Header("SFX EventReferences")]
+    public EventReference tauntScreamEventPath;
+    public EventReference championSlamEventPath;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -105,7 +109,35 @@ public class CMP1Script : ChampionScript
 
         if (CurrentState == ChampionState.SpecialAttack)
         {
-            FMODSFXController.Instance.PlayChampionSlam();
+            PlayChampionSlam();
+            PlayerDamageHUD.Instance.ShakeScreen();
+
         }
     }
+
+    #region SFX
+
+    private void PlayChampionSlam()
+    {
+        if (!championSlamEventPath.IsNull)
+        {
+            FMOD.Studio.EventInstance championSlam = FMODUnity.RuntimeManager.CreateInstance(championSlamEventPath);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(championSlam, this.transform, this.GetComponent<Rigidbody>());
+            championSlam.start();
+            championSlam.release();
+        }
+    }
+
+    private void PlayTauntScream()
+    {
+        if (!tauntScreamEventPath.IsNull)
+        {
+            FMOD.Studio.EventInstance tauntScream = FMODUnity.RuntimeManager.CreateInstance(tauntScreamEventPath);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(tauntScream, this.transform, this.GetComponent<Rigidbody>());
+            tauntScream.start();
+            tauntScream.release();
+        }
+    }
+
+    #endregion
 }

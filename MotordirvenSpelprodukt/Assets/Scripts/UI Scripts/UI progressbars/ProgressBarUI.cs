@@ -15,8 +15,9 @@ public class ProgressBarUI : MonoBehaviour
 
     private bool increaseHealth;
     public bool IsChampionHPbar;
+    public bool IsMinionhpbar;
 
-   
+    //public Image healthBar;
 
     private void Start()
     {
@@ -24,9 +25,10 @@ public class ProgressBarUI : MonoBehaviour
         if (IsChampionHPbar)
         {
             _hasProgressGameObject = GameLoopManager.Instance._champion;
-            
+
             //_slider.maxValue = 250;
             //_slider.value = 230;
+            
         }
 
 
@@ -68,11 +70,26 @@ public class ProgressBarUI : MonoBehaviour
             if (increaseHealth && _slider.value <= _targetFillAmount)
             {
                 _slider.value += _refillSpeed * Time.deltaTime;
+               
+                
             }
             else if (!increaseHealth && _slider.value >= _targetFillAmount)
             {
                 _slider.value -= _refillSpeed * Time.deltaTime;
+                if (IsMinionhpbar)
+                {
+                    _slider.fillRect.GetComponent<Image>().color = Color.red;
+                    //gameObject.GetComponentInParent<Image>().color = Color.red;
+                }
             }
+            else
+            {
+                if (IsMinionhpbar)
+                {
+                    _slider.fillRect.GetComponent<Image>().color = Color.green;
+                }
+            }
+           
         }
     }
 

@@ -3351,6 +3351,27 @@ MonoBehaviour:
     m_Bits: 256
   isPlayer: 0
   stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
+  swordInAirEventRef:
+    Guid:
+      Data1: -863582595
+      Data2: 1326961157
+      Data3: 1874499228
+      Data4: -1211592969
+    Path: event:/swordInAir
+  swordInAir2EventRef:
+    Guid:
+      Data1: 523462310
+      Data2: 1283869980
+      Data3: -1938585941
+      Data4: 1271918653
+    Path: event:/swordInAir2
+  swordInAir3EventRef:
+    Guid:
+      Data1: -391011878
+      Data2: 1114945115
+      Data3: -1321376879
+      Data4: 514694945
+    Path: event:/swordInAir3
 --- !u!114 &3003743497886142356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3390,25 +3411,81 @@ MonoBehaviour:
   _slowMo: {fileID: 0}
   minionHitEventPath:
     Guid:
-      Data1: 1395151063
-      Data2: 1185043464
-      Data3: 345159358
-      Data4: 181485389
+      Data1: -682446972
+      Data2: 1222123052
+      Data3: 138052231
+      Data4: -30634744
     Path: event:/minionHit
   minionHit2EventPath:
     Guid:
-      Data1: 1263206723
-      Data2: 1252347712
-      Data3: 1582611116
-      Data4: 2062640189
+      Data1: 1830128848
+      Data2: 1231730185
+      Data3: -898910538
+      Data4: 1024743558
     Path: event:/minionHit2
   minionHit3EventPath:
     Guid:
-      Data1: 945129624
-      Data2: 1193592541
-      Data3: -1516287856
-      Data4: 1634267565
+      Data1: -833794151
+      Data2: 1107683780
+      Data3: 814735012
+      Data4: 373602252
     Path: event:/minionHit3
+  hitSoundEventPath:
+    Guid:
+      Data1: 339850642
+      Data2: 1073815689
+      Data3: 2109365181
+      Data4: 1231159114
+    Path: event:/swordHit2
+  hitSound2EventPath:
+    Guid:
+      Data1: -444931135
+      Data2: 1183646791
+      Data3: 1128442280
+      Data4: 615258466
+    Path: event:/swordHit3
+  hitSound3EventPath:
+    Guid:
+      Data1: 623699580
+      Data2: 1155527896
+      Data3: -1395256158
+      Data4: 810854827
+    Path: event:/deathPain4
+  deathSoundEventPath:
+    Guid:
+      Data1: 489153183
+      Data2: 1161213650
+      Data3: -24965981
+      Data4: -1656712461
+    Path: event:/deathPain
+  deathSound2EventPath:
+    Guid:
+      Data1: -1695018768
+      Data2: 1225353042
+      Data3: 812778914
+      Data4: 1674258272
+    Path: event:/deathPain2
+  deathSound3EventPath:
+    Guid:
+      Data1: 1873476988
+      Data2: 1299195340
+      Data3: -1659027819
+      Data4: 1317447752
+    Path: event:/deathPain3
+  deathSound4EventPath:
+    Guid:
+      Data1: 623699580
+      Data2: 1155527896
+      Data3: -1395256158
+      Data4: 810854827
+    Path: event:/deathPain4
+  deathSound5EventPath:
+    Guid:
+      Data1: 1630117624
+      Data2: 1142404488
+      Data3: -472538240
+      Data4: 1205369701
+    Path: event:/deathPain5
 --- !u!95 &8457842664103634729
 Animator:
   serializedVersion: 5
@@ -3469,7 +3546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac284029a1350a40a4accb7569c5f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 3
+  _movementSpeed: 2
   _healthManager: {fileID: 7492074816532999623}
   anim: {fileID: 8457842664103634729}
   _weapon: {fileID: 11400000, guid: ff20cb8b570afe74687ac32136c44c71, type: 2}
@@ -3484,6 +3561,97 @@ MonoBehaviour:
   _startFleeRange: 14
   _arrowManager: {fileID: 0}
   _agentRotationSpeed: 120
+  bowLoadEventRef:
+    Guid:
+      Data1: 110061906
+      Data2: 1124993712
+      Data3: 1287218589
+      Data4: -56469675
+    Path: event:/bowLoading
+  bowShootEventRef:
+    Guid:
+      Data1: 1332313864
+      Data2: 1316300492
+      Data3: 1151824032
+      Data4: 682063643
+    Path: event:/bowRelease
+  minionHitEventPath:
+    Guid:
+      Data1: -682446972
+      Data2: 1222123052
+      Data3: 138052231
+      Data4: -30634744
+    Path: event:/minionHit
+  minionHit2EventPath:
+    Guid:
+      Data1: 1830128848
+      Data2: 1231730185
+      Data3: -898910538
+      Data4: 1024743558
+    Path: event:/minionHit2
+  minionHit3EventPath:
+    Guid:
+      Data1: -833794151
+      Data2: 1107683780
+      Data3: 814735012
+      Data4: 373602252
+    Path: event:/minionHit3
+  hitSoundEventPath:
+    Guid:
+      Data1: -1404392728
+      Data2: 1174384766
+      Data3: 651052213
+      Data4: 1172619654
+    Path: event:/swordHit
+  hitSound2EventPath:
+    Guid:
+      Data1: 339850642
+      Data2: 1073815689
+      Data3: 2109365181
+      Data4: 1231159114
+    Path: event:/swordHit2
+  hitSound3EventPath:
+    Guid:
+      Data1: -444931135
+      Data2: 1183646791
+      Data3: 1128442280
+      Data4: 615258466
+    Path: event:/swordHit3
+  deathSoundEventPath:
+    Guid:
+      Data1: 489153183
+      Data2: 1161213650
+      Data3: -24965981
+      Data4: -1656712461
+    Path: event:/deathPain
+  deathSound2EventPath:
+    Guid:
+      Data1: -1695018768
+      Data2: 1225353042
+      Data3: 812778914
+      Data4: 1674258272
+    Path: event:/deathPain2
+  deathSound3EventPath:
+    Guid:
+      Data1: 1873476988
+      Data2: 1299195340
+      Data3: -1659027819
+      Data4: 1317447752
+    Path: event:/deathPain3
+  deathSound4EventPath:
+    Guid:
+      Data1: 623699580
+      Data2: 1155527896
+      Data3: -1395256158
+      Data4: 810854827
+    Path: event:/deathPain4
+  deathSound5EventPath:
+    Guid:
+      Data1: 1630117624
+      Data2: 1142404488
+      Data3: -472538240
+      Data4: 1205369701
+    Path: event:/deathPain5
 --- !u!195 &6014165299961343417
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3700,6 +3868,7 @@ MonoBehaviour:
   _slider: {fileID: 5552871259317986825}
   _refillSpeed: 30
   IsChampionHPbar: 0
+  IsMinionhpbar: 1
 --- !u!1 &6706769011353083866
 GameObject:
   m_ObjectHideFlags: 0
@@ -3782,7 +3951,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 5202336575340959078}
   m_HandleRect: {fileID: 0}
-  m_Direction: 1
+  m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
@@ -3838,7 +4007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9128207382477179424
@@ -3907,7 +4076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -4.650013, y: 0}
+  m_AnchoredPosition: {x: 4.650013, y: 0}
   m_SizeDelta: {x: 19.31, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1684962909103273166
