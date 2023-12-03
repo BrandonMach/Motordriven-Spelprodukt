@@ -150,8 +150,8 @@ public class PlayerMovement : MonoBehaviour
     {
         GetCameraValues();
 
-        //Vector2 inputvector = Player.Instance.GameInput.GetMovementVectorNormalized();
-        Vector2 inputvector = GameManager.Instance.gameObject.GetComponent<GameInput>().GetMovementVectorNormalized();
+        Vector2 inputvector = Player.Instance.GameInput.GetMovementVectorNormalized();
+       // Vector2 inputvector = GameManager.Instance.gameObject.GetComponent<GameInput>().GetMovementVectorNormalized();
 
         if (!_canMove)
         {
