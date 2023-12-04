@@ -73,7 +73,7 @@ public class FMODController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen && introIsPlaying)
+        if (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen && introIsPlaying)
         {
             introIsPlaying = false;
             ChangeEvent("event:/Music");

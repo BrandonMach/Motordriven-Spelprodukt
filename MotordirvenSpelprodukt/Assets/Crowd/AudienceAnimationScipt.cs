@@ -8,6 +8,7 @@ public class AudienceAnimationScipt : MonoBehaviour
     CrowdBehaviour _crowdManager;
     public bool ChallengerFans;
     private int _fansMultipier;
+    [SerializeField] float animSpeed;
     void Start()
     {
         _anim = gameObject.GetComponent<Animator>();
@@ -22,6 +23,8 @@ public class AudienceAnimationScipt : MonoBehaviour
             _fansMultipier = -1;
         }
 
+        _anim.speed = Random.RandomRange(0.5f, 1.6f);
+        animSpeed = _anim.speed;
        
     }
 

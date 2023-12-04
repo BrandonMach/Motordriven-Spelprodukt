@@ -579,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919906926192141552, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3380360415078866215, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
       propertyPath: healthSlider
@@ -1143,17 +1143,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222999043}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &224243239 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9125231602323231107, guid: 9d51002ab0a5d944facd600a64429d8a, type: 3}
-  m_PrefabInstance: {fileID: 3002786270460021599}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 173f270b1abacc24aaa2db5f8168c27a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &232667513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,7 +2221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &635619759
 Transform:
   m_ObjectHideFlags: 0
@@ -2348,6 +2337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921c79b0ece1e034886d2b9f155d2dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentMatchType: 0
   _etp: {fileID: 0}
   _player: {fileID: 0}
   MatchIsFinished: 0
@@ -2855,6 +2845,10 @@ PrefabInstance:
     - target: {fileID: 3952778467163949250, guid: a54000f2f1979ae4b903c99870e5ee85, type: 3}
       propertyPath: m_Name
       value: FMODSFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952778467163949250, guid: a54000f2f1979ae4b903c99870e5ee85, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8694396665295552924, guid: a54000f2f1979ae4b903c99870e5ee85, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3895,11 +3889,23 @@ MonoBehaviour:
   - {fileID: 384687326}
   - {fileID: 1642515330}
   - {fileID: 1930762714}
-  MinionTypes:
-  - {fileID: 315945659908084176, guid: 0983b47fc0fef904a9e1b218275298b2, type: 3}
-  - {fileID: 4063314324975484624, guid: c9c64c8aec9ebe44293e0813d533cece, type: 3}
   _target: {fileID: 1359269657}
   MinimumMinionCount: 5
+  TestWave:
+    WaveMinions:
+    - {fileID: 315945659908084176, guid: 0983b47fc0fef904a9e1b218275298b2, type: 3}
+    - {fileID: 4063314324975484624, guid: c9c64c8aec9ebe44293e0813d533cece, type: 3}
+    timeToNextEnemy: 1
+    timeToNextWave: 4
+    EnemiesLeft: 0
+  _countdown: 0
+  ScriptableObjectWaves:
+  - {fileID: 11400000, guid: 6823e2994b9b64944a2a387fd2a6be28, type: 2}
+  - {fileID: 11400000, guid: 18f146f345f1fc249a2350e2d05090a6, type: 2}
+  - {fileID: 11400000, guid: 6823e2994b9b64944a2a387fd2a6be28, type: 2}
+  _currentWaveIndex: 0
+  readyToCountdown: 0
+  debugInt: 0
 --- !u!4 &1359269657
 Transform:
   m_ObjectHideFlags: 0
@@ -4455,7 +4461,7 @@ PrefabInstance:
     - target: {fileID: 7168040140328720354, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: _gameInput
       value: 
-      objectReference: {fileID: 224243239}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5993,11 +5999,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 507254421202324312, guid: 486226e97b9844940b545dfdde40e2ee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -120.000015
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 694136655276626219, guid: 486226e97b9844940b545dfdde40e2ee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 210.00002
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 774385087249488093, guid: 486226e97b9844940b545dfdde40e2ee, type: 3}
       propertyPath: m_CastShadows

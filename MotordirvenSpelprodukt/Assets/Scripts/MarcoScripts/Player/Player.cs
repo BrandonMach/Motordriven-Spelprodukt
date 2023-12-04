@@ -10,7 +10,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     public static Player Instance;
 
-    public GameInput GameInput { get { return GameManager.Instance.gameObject.GetComponent<GameInput>(); } }
+
+    [SerializeField] private GameInput _gameInput;
+    public GameInput GameInput { get { return _gameInput; } }
 
 
     public event EventHandler ChangeControllerTypeButtonPressed;
@@ -37,9 +39,12 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
   //  [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
-    [SerializeField] private Weapon _currentWeapon;
-    [SerializeField] private GameObject weaponHand;
-    [SerializeField] private GameObject weaponObject;
+
+    [SerializeField] private PlayerWeaponHolder _playerWeaponHolder;
+
+    //[SerializeField] private Weapon _currentWeapon;
+    //[SerializeField] private GameObject weaponHand;
+    //[SerializeField] private GameObject weaponObject;
     [SerializeField] private List<GameObject> _damageEffects = new List<GameObject>();
 
 
@@ -65,15 +70,15 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     /// Used for testing challenge "KillStreak"
     /// </summary>
     public bool HasTakenDamage { get; set; }
-    public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
+   // public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
 
     private bool _invulnerable = false;
     private bool _interruptable = false;
-
+    
 
     private void Awake()
     {
-        //_gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
+       
         if (Instance == null)
         {
             Instance = this;
@@ -93,10 +98,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Start()
     {
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnInteractActionPressed += GameInput_OnInteractActionPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
+       
+
+        _gameInput = GameInput.Instance;
+        _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
+        _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
+        _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
+        _gameInput.OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
 
         _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
 
@@ -105,17 +113,25 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         GetComponent<AttackManager>().EnemyHit += AttackLanded;
         GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
+        _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
+        
         if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon() != null)
-            SetWeapon(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon());
+        {
+            _playerWeaponHolder.SetWeapon(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon());
+        }
+           
 
         _shockwavePosition = transform.Find("ShockwavePosition");
+
+
+        PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
     }
 
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
 
-        if (_playerDash.IsDashAvailable() && (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen))
+        if (_playerDash.IsDashAvailable() && (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen))
         {
             IsDashing = true;
             _input += "E";
@@ -146,11 +162,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     void Update()
     {
        // _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
-        if (GameManager.Instance._currentScen != GameManager.CurrentScen.AreaScen)
-        {
-            _canAttack = false;
+        //if (GameManager.Instance._currentScen != GameManager.CurrentScen.ArenaScen)
+        //{
+        //    _canAttack = false;
 
-        }
+        //}
     }
 
     
@@ -175,10 +191,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void OnDestroy()
     {
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnInteractActionPressed -= GameInput_OnInteractActionPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnLightAttackButtonPressed -= GameInput_OnLightAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
-        GameManager.Instance.gameObject.GetComponent<GameInput>().OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
+        _gameInput.OnInteractActionPressed -= GameInput_OnInteractActionPressed;
+        _gameInput.OnLightAttackButtonPressed -= GameInput_OnLightAttackButtonPressed;
+        _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
+        _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
 
     }
@@ -272,7 +288,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         {
             SetInterruptable(true);
             OnEnableMovement();
-            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO = CurrentWeapon });
+            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO =_playerWeaponHolder.CurrentWeapon });
             _canAttack = true;
         }
     }
@@ -348,31 +364,31 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             Instantiate(_damageEffects[0], _collider.ClosestPoint(attackerPosition), transform.rotation);
         }
     }
-    public void SetWeapon(Weapon _weapon)
-    {
-        CurrentWeapon = _weapon;
-        ReplaceWeapon();
+    //public void SetWeapon(Weapon _weapon)
+    //{
+    //    CurrentWeapon = _weapon;
+    //    ReplaceWeapon();
 
-    }
-    public void ReplaceWeapon()
-    {
-        if(CurrentWeapon != null)
-        {
-            Debug.Log(CurrentWeapon.GetPath());
+    //}
+    //public void ReplaceWeapon()
+    //{
+    //    if(CurrentWeapon != null)
+    //    {
+    //        Debug.Log(CurrentWeapon.GetPath());
             
-            GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+CurrentWeapon.GetPath()));
-            weaponnew.transform.parent = weaponHand.transform;
-            weaponnew.transform.position = weaponObject.transform.position;
-            weaponnew.transform.rotation = weaponObject.transform.rotation;
-            weaponnew.transform.localScale = weaponObject.transform.localScale;
-            weaponObject.transform.GetChild(0).parent = weaponnew.transform;
-            WeaponVisualEffects wve = gameObject.GetComponent<WeaponVisualEffects>();
-            wve.SetNewTrail(weaponnew.transform.GetChild(0));
-            Destroy(weaponObject);
-            weaponObject = weaponnew;
+    //        GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+CurrentWeapon.GetPath()));
+    //        weaponnew.transform.parent = weaponHand.transform;
+    //        weaponnew.transform.position = weaponObject.transform.position;
+    //        weaponnew.transform.rotation = weaponObject.transform.rotation;
+    //        weaponnew.transform.localScale = weaponObject.transform.localScale;
+    //        weaponObject.transform.GetChild(0).parent = weaponnew.transform;
+    //        WeaponVisualEffects wve = gameObject.GetComponent<WeaponVisualEffects>();
+    //        wve.SetNewTrail(weaponnew.transform.GetChild(0));
+    //        Destroy(weaponObject);
+    //        weaponObject = weaponnew;
 
-        }
+    //    }
         
-    }
+    //}
     
 }

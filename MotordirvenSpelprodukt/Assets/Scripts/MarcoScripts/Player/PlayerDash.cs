@@ -52,7 +52,7 @@ public class PlayerDash : MonoBehaviour
 
     void Update()
     {
-        if((GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen))
+        if((GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen))
         {
             HandleTimers();
         }
@@ -61,7 +61,7 @@ public class PlayerDash : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen))
+        if ((GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen))
         {
             HandleRoll();
         }

@@ -19,6 +19,14 @@ public class GameLoopManager : MonoBehaviour
 
  
 
+    public enum MatchType
+    {
+        Champion,
+        Tutorial,
+    }
+
+    [SerializeField] public MatchType _currentMatchType;
+
 
     private void Awake()
     {
@@ -199,23 +207,33 @@ public class GameLoopManager : MonoBehaviour
     void Update()
     {
 
-      
-
         foreach (var canvas in Canvases)
         {
             canvas.SetActive(!PauseMenu.GameIsPaused);
         }
 
-       
 
 
-        if (_champion != null)
+        if (_currentMatchType == MatchType.Tutorial)
         {
 
-            _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
-            var championHealthManager = _champion.GetComponent<HealthManager>();
-            _championHPText.text = (championHealthManager.CurrentHealthPoints / championHealthManager.MaxHP * 100).ToString() + "%";
         }
+
+
+
+        if (_currentMatchType == MatchType.Champion)
+        {
+            if (_champion != null)
+            {
+
+                _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
+                var championHealthManager = _champion.GetComponent<HealthManager>();
+                _championHPText.text = (championHealthManager.CurrentHealthPoints / championHealthManager.MaxHP * 100).ToString() + "%";
+            }
+        }
+
+       
+       
 
         
         if (_champion == null && !_kingCam)
@@ -225,6 +243,7 @@ public class GameLoopManager : MonoBehaviour
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
 
+        
         if(_player == null)
         {
             SceneManager.LoadScene(3, LoadSceneMode.Single);

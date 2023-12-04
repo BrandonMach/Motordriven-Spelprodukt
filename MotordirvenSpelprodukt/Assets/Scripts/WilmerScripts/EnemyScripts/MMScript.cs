@@ -162,7 +162,7 @@ public class MMScript : MinionScript
 
     public void PlayRandomReciveDamageSound(object sender, EventArgs e)
     {
-        int randomNumber = UnityEngine.Random.Range(1, 6);
+        int randomNumber = UnityEngine.Random.Range(1, 4);
 
         if (randomNumber == 1)
         {
@@ -224,5 +224,8 @@ public class MMScript : MinionScript
     }
 
     #endregion
+
+
+    
 
 }

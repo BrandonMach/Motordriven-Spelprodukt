@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+        Debug.developerConsoleVisible = true;
 
     }
 
@@ -34,9 +35,9 @@ public class GameManager : MonoBehaviour
     {
         MainMenuScene,
         CustomizationScene,
-        AreaScen,
+        ArenaScen,
         ShopScen,
-        OpenWorld
+        HUBWorld
     }
 
     public CurrentScen _currentScen;
@@ -137,7 +138,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _player = Player.Instance;
+
+        if(Player.Instance != null)
+        {
+            _player = Player.Instance;
+        }
+       
         currentScene = SceneManager.GetActiveScene();
 
         if (currentScene.buildIndex == 0)
@@ -164,7 +170,7 @@ public class GameManager : MonoBehaviour
 
             CheckChallengesCompletion();
             ChallengeTimersUpdate();
-            _currentScen = CurrentScen.AreaScen;
+            _currentScen = CurrentScen.ArenaScen;
 
 
             
@@ -173,10 +179,10 @@ public class GameManager : MonoBehaviour
 
 
 
-        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.OpenWorld)
+        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.HUBWorld)
         {
       
-            _currentScen = CurrentScen.OpenWorld;
+            _currentScen = CurrentScen.HUBWorld;
 
 
 
