@@ -16,7 +16,7 @@ public class Arrow : MonoBehaviour
     private bool _fired;
     private Vector3 fireDirection;
 
-    [SerializeField] TrailRenderer trailRenderer;
+
     bool didDamage;
 
     void Start()
@@ -68,7 +68,7 @@ public class Arrow : MonoBehaviour
 
     private void MoveArrow()
     {
-        trailRenderer.enabled = true;
+  
         //transform.Translate(Vector3.forward * _arrowSpeed * Time.deltaTime);
         //_rb.AddForce(transform.forward *  _arrowSpeed, ForceMode.Impulse);
         if (_rb.isKinematic == false)
@@ -104,7 +104,7 @@ public class Arrow : MonoBehaviour
         {
             _rb.isKinematic = true;
             transform.SetParent(other.transform);
-            trailRenderer.enabled = false;
+            //trailRenderer.enabled = false;
 
             if (!didDamage)
             {
