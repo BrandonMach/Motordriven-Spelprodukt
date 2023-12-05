@@ -71,7 +71,7 @@ public class KingDecision : MonoBehaviour
         StartCoroutine(LoseScreen());
         CamManager.GoToExecute();
         LoseScreenScript.KingExecution = true;
-        _playerDismemberent.PlayerDismember();
+        _playerDismemberent.DismemberCharacter();
             
     }
 
