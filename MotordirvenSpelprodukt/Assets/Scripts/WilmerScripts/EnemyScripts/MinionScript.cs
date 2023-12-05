@@ -7,9 +7,9 @@ using Random = UnityEngine.Random;
 public class MinionScript : EnemyScript
 {
     [SerializeField] private ParticleSystem stunEffect;
-    [SerializeField] private Transform _groundCheck;
+    
     [SerializeField] private float _landOffsetCheck;
-    [SerializeField] private bool _onGround = true;
+
     private bool _shouldCheckOnGround;
 
     public enum EnemyState { none, stunned, airborne, inAttack, pushed, chasing, fleeing, taunt }
@@ -20,11 +20,7 @@ public class MinionScript : EnemyScript
     #region Properties
     public float StunDuration { get; set; }
     //public bool OutOfCombat { get; set; }
-    public bool OnGround
-    {
-        get { return _onGround; }
-        set { _onGround = value; }
-    }
+
     public float LandOffsetCheck
     {
         get { return _landOffsetCheck; }

@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class CMP1Script : ChampionScript
 {
     public string ChampionName;
+    private bool _shouldCheckForGround;
     public enum ChampionState { Enter, Taunt, SpecialAttack, BasicAttack, None }
     public ChampionState CurrentState = ChampionState.Enter;
     public ChampionState PreviousState = ChampionState.Enter;
@@ -64,6 +65,24 @@ public class CMP1Script : ChampionScript
             default:
                 break;
         }
+
+        if (_shouldCheckForGround)
+        {
+            OnGround = Physics.Raycast(_groundCheck.position, Vector3.down, 0.3f);
+            if (OnGround)
+            {
+                ParticleSystemManager.Instance.PlayParticleFromPool
+                    (ParticleSystemManager.ParticleEffects.JumpCrack, transform);
+
+                _shouldCheckForGround = false;
+            }
+        }
+
+        if(CurrentState == ChampionState.SpecialAttack
+            && OnGround)
+        {
+
+        }
     }
 
 
@@ -113,6 +132,12 @@ public class CMP1Script : ChampionScript
             PlayerDamageHUD.Instance.ShakeScreen();
 
         }
+    }
+
+
+    public void StartCheckForGround()
+    {
+        _shouldCheckForGround = true;
     }
 
     #region SFX

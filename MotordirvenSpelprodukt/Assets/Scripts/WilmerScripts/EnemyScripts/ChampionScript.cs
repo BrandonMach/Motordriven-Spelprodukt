@@ -14,5 +14,6 @@ public class ChampionScript : EnemyScript
     protected override void Update()
     {
         base.Update();
+
     }
 }
