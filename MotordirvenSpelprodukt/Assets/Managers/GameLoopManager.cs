@@ -267,7 +267,7 @@ public class GameLoopManager : MonoBehaviour
         
         if(_player == null)
         {
-            SceneManager.LoadScene(3, LoadSceneMode.Single);
+            SceneManager.LoadScene(4, LoadSceneMode.Single);
            
         }
 

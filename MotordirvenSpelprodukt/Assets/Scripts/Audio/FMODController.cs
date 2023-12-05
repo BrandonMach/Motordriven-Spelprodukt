@@ -12,28 +12,12 @@ public class FMODController : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] Slider volumeSlider;
 
-    GameLoopManager _gameManager;
-    HealthManager _healthManager;
-    EntertainmentManager _entertainmentManager;
-
-    public EventInstance _fmodEventInstance;
-
-    private StudioEventEmitter eventEmitter;
     private static FMODController _instance;
-
-    bool firstTime;
-    bool introIsPlaying;
-    bool arenaMusicIsPlaying;
-
-    bool afterArenaMusicActivated;
 
     public float _intensity;
     public float _health;
 
-    [Header("Music EventReferences")]
-    public EventReference introMusicRef;
-    public EventReference battleMusicRef;
-    public EventReference customizationMusicRef;
+    public EventInstance _musicEventInstance;
 
     public static FMODController Instance { get => _instance; set => _instance = value; }
 
@@ -55,88 +39,52 @@ public class FMODController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        firstTime = true;
-        introIsPlaying = true;
+        GameManager.OnMainMenuEnter += HandleMainMenuEnter;
+        GameManager.OnArenaEnter += HandleOnArenaEnter;
+        GameManager.OnAfterArenaEnter += HandleOnAfterArenaEnter;
+
         _intensity = 50;
-        _gameManager = GameLoopManager.Instance;
-        //_entertainmentManager = EntertainmentManager.Instance;
 
-        //if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM() != null)
-        //    SetFMOD(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM());
-
-        _fmodEventInstance = GetComponent<FMODUnity.StudioEventEmitter>().EventInstance;
         volumeSlider.value = 0.3f;
-
-        
+      
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen && introIsPlaying)
-        {
-            introIsPlaying = false;
-            ChangeEvent("event:/Music");
-            afterArenaMusicActivated = true;
-        }
-        else if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene && afterArenaMusicActivated)
-        {          
-            ChangeEvent("event:/AfterArenaMusic");
-            Debug.Log("AfterArenaMusic event changed");
-        }
-
-
-
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    gameObject.GetComponent<StudioEventEmitter>().EventInstance.start();
-        //}
-
         UpdateIntensityParameter();
         UpdateHealthParameter();
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
-    //private void MusicManager()
-    //{
-    //    if (GameManager.Instance._currentScen == GameManager.CurrentScen.MainMenuScene && !introPlayOnce)
-    //    {
-    //        PlayIntroMusic();
-    //        introPlayOnce = true;
-    //    }
-    //    else if (GameManager.Instance._currentScen == GameManager.CurrentScen.AreaScen && !arenaMusicPlayOnce)
-    //    {
-
-    //    }
-    //}
-
-    //private void PlayIntroMusic()
-    //{
-    //    if (!introMusicRef.IsNull)
-    //    {
-    //        FMOD.Studio.EventInstance introMusic = FMODUnity.RuntimeManager.CreateInstance(introMusicRef);
-    //        FMODUnity.RuntimeManager.AttachInstanceToGameObject(introMusic, this.transform, this.GetComponent<Rigidbody>());
-    //        introMusic.start();
-    //        introMusic.release();
-    //    }
-    //}
-
-    public void SetFMOD(FMODController fmod)
+    private void HandleMainMenuEnter()
     {
-        Instance = fmod;
+        ChangeEvent("event:/introMusic");
+    }
+
+    private void HandleOnArenaEnter()
+    {
+        ChangeEvent("event:/music");
+    }
+
+    private void HandleOnAfterArenaEnter()
+    {
+        ChangeEvent("event:/AfterArenaMusic");
     }
 
     public void ChangeEvent(string newEventPath)
     {
-        // Stop and release the current instance
-        _fmodEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        //_fmodEventInstance.release();
+        _musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        _musicEventInstance.release();
 
-        // Create a new instance with the updated event path
-        _fmodEventInstance = FMODUnity.RuntimeManager.CreateInstance(newEventPath);
-        _fmodEventInstance.start();
-        _fmodEventInstance.release();
+        _musicEventInstance = RuntimeManager.CreateInstance(newEventPath);
+        _musicEventInstance.start();
+    }
+
+    public void SetFMOD(FMODController fmod)
+    {
+        Instance = fmod;
     }
 
     public void Destroy()
@@ -146,10 +94,10 @@ public class FMODController : MonoBehaviour
 
     public float GetVolume()
     {
-        if (_fmodEventInstance.isValid())
+        if (_musicEventInstance.isValid())
         {
             float volume;
-            _fmodEventInstance.getVolume(out volume);
+            _musicEventInstance.getVolume(out volume);
             return volume;
         }
         else
@@ -161,9 +109,9 @@ public class FMODController : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        if (_fmodEventInstance.isValid())
+        if (_musicEventInstance.isValid())
         {
-            _fmodEventInstance.setVolume(volume);
+            _musicEventInstance.setVolume(volume);
         }
         else
         {

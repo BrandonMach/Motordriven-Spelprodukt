@@ -41,7 +41,7 @@ public class LoseScreenScript : MonoBehaviour
     public void RestartGame()
     {
         GameManager.Instance.Reset();
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
 
     }
 }
