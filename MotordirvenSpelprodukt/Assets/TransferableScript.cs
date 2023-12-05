@@ -34,7 +34,11 @@ public class TransferableScript : MonoBehaviour
     }
     public void SetWeapon(Weapon weapon)
     {
+      
         _weapon = weapon;
+
+      
+
     }
     //public FMODController GetFMODAM()
     //{

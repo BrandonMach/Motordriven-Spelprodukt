@@ -17,7 +17,7 @@ public class AttackManager : MonoBehaviour
     private CurrentAttackSO.AttackType _attackType;
     private Vector3 _checkPos;
     private string debugCurrentAttackMessage;
-    private ICanAttack attacker;
+    [SerializeField] private ICanAttack attacker;
     private float _etpDecrease;
     private bool _screenShake;
 

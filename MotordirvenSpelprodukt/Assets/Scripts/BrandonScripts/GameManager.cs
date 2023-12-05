@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+        Debug.developerConsoleVisible = true;
 
     }
 
@@ -48,6 +49,23 @@ public class GameManager : MonoBehaviour
 
     public static float PlayerCoins; //Static så att anadra scener kan få access
 
+    #region UsedForFmod
+
+    public delegate void EnterMainMenuEvent();
+    public static event EnterMainMenuEvent OnMainMenuEnter;
+
+    public delegate void EnterArenaEvent();
+    public static event EnterArenaEvent OnArenaEnter;
+
+    public delegate void AfterArenaEvent();
+    public static event AfterArenaEvent OnAfterArenaEnter;
+
+    bool _beenIntoArena = false;
+    private bool _mainMenuEventInvoked = false;
+    private bool _afterArenaEventInvoked = false;
+    private bool _arenaEventInvoked = false;
+
+    #endregion
 
     #region ChallengeVariables
 
@@ -124,6 +142,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+       
 
         //För testing
         PlayerCoins = 50;
@@ -145,27 +164,67 @@ public class GameManager : MonoBehaviour
        
         currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.buildIndex == 0)
-        {
-            _currentScen = CurrentScen.MainMenuScene;
-           // Debug.Log("In MainMenuScene");
-        }
         if (currentScene.buildIndex == 1)
         {
+            #region FMOD
+
+            if (!_mainMenuEventInvoked)
+            {
+                OnMainMenuEnter?.Invoke();
+                _mainMenuEventInvoked = true;
+            }
+
+            #endregion
+
+            _currentScen = CurrentScen.MainMenuScene;
+
+        }
+        else
+        {
+            // Used for FMOD
+            _mainMenuEventInvoked = false;
+        }
+
+        if (currentScene.buildIndex == 2)
+        {
+
+            #region FMOD
+
+            if (!_afterArenaEventInvoked && _beenIntoArena)
+            {
+                OnAfterArenaEnter?.Invoke();
+                _afterArenaEventInvoked = true;
+            }
+
+            #endregion
+
+
             foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
             {
                 ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
             }
             
             _currentScen = CurrentScen.CustomizationScene;
-
-            //Customization Scene
-           // Debug.Log("In Customization Scene");
+            
         }
-        if (currentScene.buildIndex == 2 /*|| _currentScen == GameManager.CurrentScen.AreaScen*/)
+        else
         {
-            //Brandon new testing Scene
-            // Debug.Log("In Brandon new testing Scene");
+            // Used for FMOD
+            _afterArenaEventInvoked = false;
+        }
+
+        if (currentScene.buildIndex == 3)
+        {
+            #region FMOD
+
+            if (!_arenaEventInvoked)
+            {
+                OnArenaEnter?.Invoke();
+                _arenaEventInvoked = true;
+                _beenIntoArena = true;
+            }
+
+            #endregion
 
             CheckChallengesCompletion();
             ChallengeTimersUpdate();
@@ -174,11 +233,16 @@ public class GameManager : MonoBehaviour
 
             
         }
+        else
+        {
+            // Used for FMOD
+            _arenaEventInvoked = false;
+        }
 
 
 
 
-        if (currentScene.buildIndex == 5 || _currentScen == GameManager.CurrentScen.HUBWorld)
+        if (currentScene.buildIndex == 6 || _currentScen == GameManager.CurrentScen.HUBWorld)
         {
       
             _currentScen = CurrentScen.HUBWorld;

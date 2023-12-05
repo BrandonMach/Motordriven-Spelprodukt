@@ -30,11 +30,11 @@ public class DismemberentEnemyScript : MonoBehaviour
         {
             //_limbs[Random.Range(0, _limbs.Count)].Dismember();
             //ActivateRagdoll();
-            PlayerDismember();
+            DismemberCharacter();
         }
     }
 
-    public void PlayerDismember()
+    public void DismemberCharacter()
     {
         _limbs[Random.Range(0, _limbs.Count)].Dismember();
         ActivateRagdoll();
@@ -65,12 +65,4 @@ public class DismemberentEnemyScript : MonoBehaviour
             ragdollparts.isKinematic = true;
         }
     }
-
-    public void GetKilled()
-    {
-        //_limbs[Random.Range(0, _limbs.Count)].Dismember();
-        //ActivateRagdoll();
-        PlayerDismember();
-    }
-
 }

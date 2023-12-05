@@ -34,7 +34,7 @@ public class CustomizationMenu : MonoBehaviour
     public void ClickEnterArena()
     {
 
-        SceneManager.LoadScene(2,LoadSceneMode.Single);
+        SceneManager.LoadScene(3,LoadSceneMode.Single);
     }
 
     public void RotateLeftButton()

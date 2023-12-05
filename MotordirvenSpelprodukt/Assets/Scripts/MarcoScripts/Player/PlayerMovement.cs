@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
+    private CharacterController _characterController;
+
 
     private Vector3 _camForward;
     private Vector3 _camRight;
@@ -49,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _playerAnimation = GetComponent<PlayerAnimation>();
+        Player.Instance = GetComponent<Player>();
+        _characterController = GetComponent<CharacterController>();
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -115,6 +119,8 @@ public class PlayerMovement : MonoBehaviour
         {
             GetMoveDir();
         }
+        
+
         _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
     }
 
@@ -145,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         GetCameraValues();
 
         Vector2 inputvector = Player.Instance.GameInput.GetMovementVectorNormalized();
-        //Vector2 inputvector = GameManager.Instance.gameObject.GetComponent<GameInput>().GetMovementVectorNormalized();
+       // Vector2 inputvector = GameManager.Instance.gameObject.GetComponent<GameInput>().GetMovementVectorNormalized();
 
         if (!_canMove)
         {

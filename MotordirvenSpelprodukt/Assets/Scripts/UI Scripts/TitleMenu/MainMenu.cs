@@ -17,7 +17,8 @@ public class MainMenu : MenuAbstract, IMenu
 
     public void ClickNewGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
     public void ClickESC()
