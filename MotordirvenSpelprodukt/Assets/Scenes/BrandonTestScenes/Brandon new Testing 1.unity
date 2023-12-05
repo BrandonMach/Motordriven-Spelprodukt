@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 48556992}
   - component: {fileID: 48556991}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Wave text Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1803,6 +1803,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &464574026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5648320868103823982, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+  m_PrefabInstance: {fileID: 1537310725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &464574028
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464574026}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 384cefddbcb173d4aa70fb4f58195063, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &551432534 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7874954761698854048, guid: 486226e97b9844940b545dfdde40e2ee, type: 3}
@@ -4679,6 +4705,10 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 27000593}
+    - target: {fileID: 4445148973989027988, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: _damageAnimator
+      value: 
+      objectReference: {fileID: 464574028}
     - target: {fileID: 4837593979468772016, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: m_Name
       value: tpose player
@@ -4730,7 +4760,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5648320868103823982, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 464574028}
   m_SourcePrefab: {fileID: 100100000, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
 --- !u!4 &1537310726 stripped
 Transform:

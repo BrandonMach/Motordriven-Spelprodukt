@@ -140,7 +140,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             else if (!IsPlayer && !isBleeding)
             {
 
-                _damageAnimator.SetTrigger("DamageBlink");
+
                 PlayDoDamageSoundEvent?.Invoke(this, EventArgs.Empty);
                 PlayReciveDamageSoundEvent?.Invoke(this, EventArgs.Empty);
 
@@ -150,7 +150,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 //FMODSFXController.Instance.PlayMinionHit();
             }
 
-
+            _damageAnimator.SetTrigger("DamageBlink");
             CurrentHealthPoints -= damage;
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints /*/ _maxHealthPoints*/ });
 
