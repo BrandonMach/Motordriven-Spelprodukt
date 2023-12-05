@@ -40,6 +40,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public System.EventHandler PlayDeathSoundEvent;
     public System.EventHandler PlayDoDamageSoundEvent;
 
+    [SerializeField] Animator _damageAnimator;
+
     void Start()
     {
         
@@ -138,6 +140,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             else if (!IsPlayer && !isBleeding)
             {
 
+                _damageAnimator.SetTrigger("DamageBlink");
                 PlayDoDamageSoundEvent?.Invoke(this, EventArgs.Empty);
                 PlayReciveDamageSoundEvent?.Invoke(this, EventArgs.Empty);
 
