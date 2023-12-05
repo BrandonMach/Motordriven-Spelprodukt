@@ -10,8 +10,6 @@ public class PauseMenu : MenuAbstract, IMenu
 
     [SerializeField] GameObject _pauseMenuUI;
 
-   
-
     private void Start()
     {
         //InitializeToHideList();
@@ -24,8 +22,6 @@ public class PauseMenu : MenuAbstract, IMenu
         ClickESC();
 
     }
-
-
 
     public void Resume()
     {
@@ -80,12 +76,12 @@ public class PauseMenu : MenuAbstract, IMenu
         {
             Resume();
             //Loading main menu
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
         }
         else if (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen)
         {
             Resume();
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
         else if (GameManager.Instance._currentScen == GameManager.CurrentScen.MainMenuScene)
         {

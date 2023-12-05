@@ -78,7 +78,7 @@ public class KingDecision : MonoBehaviour
     private IEnumerator LoseScreen()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(3, LoadSceneMode.Single);
+        SceneManager.LoadScene(4, LoadSceneMode.Single);
     }
 
 
@@ -87,6 +87,6 @@ public class KingDecision : MonoBehaviour
     {
         //testar gå till concept save money
 
-        SceneManager.LoadScene(5, LoadSceneMode.Single);
+        SceneManager.LoadScene(6, LoadSceneMode.Single);
     }
 }
