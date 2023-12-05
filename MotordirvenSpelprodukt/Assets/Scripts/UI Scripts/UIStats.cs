@@ -36,9 +36,10 @@ public class UIStats : MonoBehaviour
 
     private void UpdateDamageText()
     {
-        if (Player.Instance != null)
-        {
-            damageText.text = PlayerWeaponHolder.Instance.CurrentWeapon.GetDamage().ToString();
-        }
+        damageText.text = PlayerWeaponHolder.Instance.CurrentWeapon.GetDamage().ToString();
+        //if (Player.Instance != null)
+        //{
+            
+        //}
     }
 }
