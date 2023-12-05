@@ -99,7 +99,7 @@ public class SpawnEnemy : MonoBehaviour
 
         if(_currentWaveIndex >= ScriptableObjectWaves.Length)
         {
-            Debug.Log("YOu survid´ved every wave");
+            //Debug.Log("YOu survid´ved every wave");
             return;
         }
 
