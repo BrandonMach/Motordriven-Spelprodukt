@@ -87,7 +87,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     {
         if (!IsPlayer)
         {
-            SpawnEnemy.Instance._waveBattleInformation[SpawnEnemy.Instance._currentWaveBattleIndex].waveInfoHolder[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
+            SpawnEnemy.Instance._waveBattleInformation[SpawnEnemy._currentWaveBattleIndex].waveInfoHolder[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
             GameLoopManager.Instance.UpdateEnemyList();
         }
         

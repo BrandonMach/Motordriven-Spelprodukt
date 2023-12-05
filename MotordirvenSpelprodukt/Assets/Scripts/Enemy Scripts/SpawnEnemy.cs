@@ -41,7 +41,7 @@ public class SpawnEnemy : MonoBehaviour
     public float _countdown;
 
     [SerializeField] public WaveBattleInfo[] _waveBattleInformation;
-    [SerializeField] public int _currentWaveBattleIndex; //Borde vara static
+    [SerializeField] public static int _currentWaveBattleIndex; //Borde vara static
 
     //public WaveInfoHolder[] ScriptableObjectWaves;
 
@@ -80,7 +80,7 @@ public class SpawnEnemy : MonoBehaviour
         _target = Player.Instance.transform;
 
 
-        for (int i = 0; i < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count      /* ScriptableObjectWaves.Length*/; i++)
+        for (int i = 0; i < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count; i++)
         {
             _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[i].EnemiesLeft = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[i].WaveMinions.Length;
         }
