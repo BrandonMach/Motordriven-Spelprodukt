@@ -23,6 +23,7 @@ public class TransferableScript : MonoBehaviour
         if (Instance != null)
         {
             Debug.LogWarning("More than one instance of GameManager found");
+            Destroy(this.gameObject);
             return;
         }
         Instance = this;

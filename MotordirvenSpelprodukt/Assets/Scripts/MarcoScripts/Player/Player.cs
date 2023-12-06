@@ -115,9 +115,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
         _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
         
-        if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon() != null)
+        if (TransferableScript.Instance.GetWeapon() != null)
         {
-            _playerWeaponHolder.SetWeapon(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon());
+            _playerWeaponHolder.SetWeapon(TransferableScript.Instance.GetWeapon());
         }
            
 
