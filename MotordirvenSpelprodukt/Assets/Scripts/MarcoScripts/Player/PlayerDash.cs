@@ -52,56 +52,47 @@ public class PlayerDash : MonoBehaviour
 
     void Update()
     {
-        if((GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen))
-        {
-            HandleTimers();
-        }
-        
+        HandleTimers();
     }
 
     private void FixedUpdate()
     {
-        if ((GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen))
+        if (IsDashing)
         {
             HandleRoll();
-        }
-        else
-        {
-            IsDashing = false;
         }
     }
 
     private void HandleRoll()
     {
 
-        if (IsDashing)
-        {
-            _rigidBody.rotation = Quaternion.Slerp(_rigidBody.rotation, Quaternion.LookRotation(_rigidBody.velocity.normalized),_rotationSpeed * Time.fixedDeltaTime);
+     
+        _rigidBody.rotation = Quaternion.Slerp(_rigidBody.rotation, Quaternion.LookRotation(_rigidBody.velocity.normalized),_rotationSpeed * Time.fixedDeltaTime);
 
-            if (_currentDashTime <= 0)
+        if (_currentDashTime <= 0)
+        {
+            _currentDashTime = _dashTime;
+            _rigidBody.velocity = Vector3.zero;
+            EvadePerformed?.Invoke(this, EventArgs.Empty);
+            IsDashing = false;
+        }
+        else
+        {
+            if (_rigidBody.velocity != Vector3.zero)
             {
-                _currentDashTime = _dashTime;
-                _rigidBody.velocity = Vector3.zero;
-                EvadePerformed?.Invoke(this, EventArgs.Empty);
-                IsDashing = false;
+                _rigidBody.velocity = _rigidBody.velocity.normalized * _playerMovement.MoveSpeed * _speedMultiplier;
             }
             else
             {
-                if (_rigidBody.velocity != Vector3.zero)
-                {
-                    _rigidBody.velocity = _rigidBody.velocity.normalized * _playerMovement.MoveSpeed * _speedMultiplier;
-                }
-                else
-                {
-                    _rigidBody.velocity = transform.forward * _playerMovement.MoveSpeed * _speedMultiplier;
-                }
+                _rigidBody.velocity = transform.forward * _playerMovement.MoveSpeed * _speedMultiplier;
+            }
 
-                if (_currentDashTime <= _dashTime / 2)
-                {
-                    _player.SetPlayerInvulnarableState(false);
-                }
+            if (_currentDashTime <= _dashTime / 2)
+            {
+                _player.SetPlayerInvulnarableState(false);
             }
         }
+        
     }
 
     private void HandleTimers()
