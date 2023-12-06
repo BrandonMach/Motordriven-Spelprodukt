@@ -12,7 +12,8 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     [SerializeField] private Animator anim;
     [SerializeField] protected Weapon _weapon;
     [SerializeField] protected CurrentAttackSO _normalAttackSO;
-
+    [SerializeField] private bool _onGround = true;
+    [SerializeField] protected Transform _groundCheck;
     protected static string _normalAttackString = "normalAttack";
 
     protected CurrentAttackSO _currentAttackSO;
@@ -34,6 +35,11 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
     { 
         get { return anim; } 
         set { anim = value; } 
+    }
+    public bool OnGround
+    {
+        get { return _onGround; }
+        set { _onGround = value; }
     }
     public Rigidbody RB { get; set; }
     public float DistanceToPlayer { get; set; }
@@ -63,6 +69,7 @@ public class EnemyScript : MonoBehaviour, IDamagable, ICanAttack
 
     protected virtual void Update()
     {
+        
         RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);    
         if(Player.Instance != null)
         {

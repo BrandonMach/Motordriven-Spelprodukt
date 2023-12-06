@@ -302,6 +302,7 @@ Transform:
   m_Children:
   - {fileID: 5165603096656557807}
   - {fileID: 6880972791787181750}
+  - {fileID: 1472087293192799887}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &747679442005463012
@@ -351,83 +352,6 @@ MonoBehaviour:
   Explode: 0
   hasSlowMo: 0
   _slowMo: {fileID: 0}
-  minionHitEventPath:
-    Guid:
-      Data1: -682446972
-      Data2: 1222123052
-      Data3: 138052231
-      Data4: -30634744
-    Path: event:/minionHit
-  minionHit2EventPath:
-    Guid:
-      Data1: 1830128848
-      Data2: 1231730185
-      Data3: -898910538
-      Data4: 1024743558
-    Path: event:/minionHit2
-  minionHit3EventPath:
-    Guid:
-      Data1: -833794151
-      Data2: 1107683780
-      Data3: 814735012
-      Data4: 373602252
-    Path: event:/minionHit3
-  hitSoundEventPath:
-    Guid:
-      Data1: 339850642
-      Data2: 1073815689
-      Data3: 2109365181
-      Data4: 1231159114
-    Path: event:/swordHit2
-  hitSound2EventPath:
-    Guid:
-      Data1: -444931135
-      Data2: 1183646791
-      Data3: 1128442280
-      Data4: 615258466
-    Path: event:/swordHit3
-  hitSound3EventPath:
-    Guid:
-      Data1: 1780858378
-      Data2: 1296660713
-      Data3: -1424329851
-      Data4: -1559942629
-    Path: event:/swordHit4
-  deathSoundEventPath:
-    Guid:
-      Data1: 489153183
-      Data2: 1161213650
-      Data3: -24965981
-      Data4: -1656712461
-    Path: event:/deathPain
-  deathSound2EventPath:
-    Guid:
-      Data1: -1695018768
-      Data2: 1225353042
-      Data3: 812778914
-      Data4: 1674258272
-    Path: event:/deathPain2
-  deathSound3EventPath:
-    Guid:
-      Data1: 1873476988
-      Data2: 1299195340
-      Data3: -1659027819
-      Data4: 1317447752
-    Path: event:/deathPain3
-  deathSound4EventPath:
-    Guid:
-      Data1: 623699580
-      Data2: 1155527896
-      Data3: -1395256158
-      Data4: 810854827
-    Path: event:/deathPain4
-  deathSound5EventPath:
-    Guid:
-      Data1: 1630117624
-      Data2: 1142404488
-      Data3: -472538240
-      Data4: 1205369701
-    Path: event:/deathPain5
 --- !u!114 &6781590833126301414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +468,8 @@ MonoBehaviour:
   anim: {fileID: 1893978260557283440}
   _weapon: {fileID: 11400000, guid: 08da9303af86cef4e909e5362b0b9389, type: 2}
   _normalAttackSO: {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
+  _onGround: 1
+  _groundCheck: {fileID: 1472087293192799887}
   ChampionName: 'Ozgath: King of Chaos'
   CurrentState: 0
   PreviousState: 0
@@ -655,6 +581,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8841441542125771887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1472087293192799887}
+  m_Layer: 7
+  m_Name: GroundCheckPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1472087293192799887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841441542125771887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5057656701927062546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8866075447007711788
 GameObject:
   m_ObjectHideFlags: 0
