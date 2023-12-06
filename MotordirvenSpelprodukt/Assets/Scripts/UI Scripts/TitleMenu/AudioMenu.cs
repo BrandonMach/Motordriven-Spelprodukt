@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class AudioMenu : MenuAbstract, IMenu
 {
-
+    public Slider SFXvolumeSlider;
     public AudioMixer audioMixer;
     public FMODController FMODController;
 
@@ -16,6 +17,8 @@ public class AudioMenu : MenuAbstract, IMenu
         //FMODController.SetFMOD(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM());
 
         FMODController = FMODController.Instance;
+
+        SFXvolumeSlider.value = FMODController.GetVolume();
     }
 
     // Update is called once per frame
