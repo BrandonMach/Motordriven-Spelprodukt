@@ -88,7 +88,8 @@ public class KMScript : MinionScript
     protected override void OnAttack()
     {
 
-
+        ParticleSystemManager.Instance.PlayParticleFromPool
+            (ParticleSystemManager.ParticleEffects.Explosion, transform);
         gameObject.GetComponent<HealthManager>().ReduceHealth(100);
         base.OnAttack();
         //Instantiate(_explosion, this.transform);

@@ -31,7 +31,7 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
-        _player.ChangeAttackAnimation += Player_ChangeAttackAnimation;
+        _player.StartAttackAnimation += Player_OnStartAttackAnimation;
         _player.StartEvade += Player_StartEvade;
         _player.ComboBroken += Player_OnComboBroken;
         _player.PlayerInterrupted += Player_OnPlayerInterrupted;
@@ -52,7 +52,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetTrigger("Evade");
     }
 
-    private void Player_ChangeAttackAnimation(object sender, Player.OnAttackPressedAnimationEventArgs e)
+    private void Player_OnStartAttackAnimation(object sender, Player.OnAttackPressedAnimationEventArgs e)
     {
         //_startComboWindowTimer = true;
         HandleAttackAnimation(e.attackType);

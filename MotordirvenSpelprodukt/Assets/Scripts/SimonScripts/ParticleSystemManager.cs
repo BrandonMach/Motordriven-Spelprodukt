@@ -11,27 +11,42 @@ public class ParticleSystemManager : MonoBehaviour
     [SerializeField] private GameObject _slamEffectPrefab;
     [SerializeField] private GameObject _stunPrefab;
     [SerializeField] private GameObject _bloodPrefab;
+    [SerializeField] private GameObject _jumpCrackPrefab;
+    [SerializeField] private GameObject _explosionPrefab;
 
     [Header("Pool sizes")]
     [SerializeField] private int _slamPoolSize;
     [SerializeField] private int _stunPoolSize;
     [SerializeField] private int _bloodPoolSize;
+    [SerializeField] private int _jumpCrackPoolSize;
+    [SerializeField] private int _explosionPoolSize;
 
     [Header("Particle settings")]
     [SerializeField] private float _slamLifeTime;
     [SerializeField] private float _stunLifeTime;
     [SerializeField] private float _bloodLifeTime;
+    [SerializeField] private float _jumpCrackLifeTime;
+    [SerializeField] private float _explosionLifeTime;
+
+    [Header("Particle Offsets")]
+    [SerializeField] private float _stunHeightOffset = 2.0f;
+    [SerializeField] private float _crackYvalue = 0.02f;
+    [SerializeField] private float _explosionYvalue = 1.5f;
 
     private int _slamPoolIndex = 0;
     private int _stunPoolIndex = 0;
     private int _bloodPoolIndex = 0;
+    private int _jumpCrackPoolIndex = 0;
+    private int _explosionPoolIndex = 0;
 
     private List<GameObject> _slamPool;
     private List<GameObject> _stunPool;
     private List<GameObject> _bloodPool;
+    private List<GameObject> _jumpCrackPool;
+    private List<GameObject> _explosionPool;
 
 
-    public enum ParticleEffects { Slam, Stun, Blood };
+    public enum ParticleEffects { Slam, Stun, Blood, JumpCrack, Explosion };
 
     
     private void Awake()
@@ -58,10 +73,14 @@ public class ParticleSystemManager : MonoBehaviour
         _slamPool = new List<GameObject>();
         _stunPool = new List<GameObject>();
         _bloodPool = new List<GameObject>();
+        _jumpCrackPool = new List<GameObject>();
+        _explosionPool = new List<GameObject>();
 
         AddObjectsToPool(_slamPool, _slamEffectPrefab, _slamPoolSize);
         AddObjectsToPool(_stunPool, _stunPrefab, _stunPoolSize);
         AddObjectsToPool(_bloodPool, _bloodPrefab, _bloodPoolSize);
+        AddObjectsToPool(_jumpCrackPool, _jumpCrackPrefab, _jumpCrackPoolSize);
+        AddObjectsToPool(_explosionPool, _explosionPrefab, _explosionPoolSize);
     }
 
 
@@ -99,8 +118,9 @@ public class ParticleSystemManager : MonoBehaviour
                 break;
 
             case ParticleEffects.Stun:
-                newPos = new Vector3(newPos.x, newPos.y + _transform.localScale.y + 2, newPos.z);
-                //newTransform.rotation = Quaternion.Euler(-90, 0, 0);
+                newPos = new Vector3(newPos.x, 
+                    newPos.y + _transform.localScale.y + _stunHeightOffset, newPos.z);
+
                 _stunPoolIndex = (_stunPoolIndex + 1) % _stunPoolSize;
                 currentEffect = _stunPool[_stunPoolIndex];
                 coroutineTime = _stunLifeTime;
@@ -111,6 +131,21 @@ public class ParticleSystemManager : MonoBehaviour
                 currentEffect = _bloodPool[_bloodPoolIndex];
                 coroutineTime = _bloodLifeTime;
                 break;
+
+            case ParticleEffects.JumpCrack:
+                newPos = new Vector3(newPos.x, _crackYvalue, newPos.z);
+                _jumpCrackPoolIndex = (_jumpCrackPoolIndex + 1) % _jumpCrackPoolSize;
+                currentEffect = _jumpCrackPool[_jumpCrackPoolIndex];
+                coroutineTime = _jumpCrackLifeTime;
+                break;
+
+            case ParticleEffects.Explosion:
+                newPos = new Vector3(newPos.x, _explosionYvalue, newPos.z);
+                _explosionPoolIndex = (_explosionPoolIndex + 1) % _explosionPoolSize;
+                currentEffect = _explosionPool[_explosionPoolIndex];
+                coroutineTime = _explosionLifeTime;
+                break;
+
             default:
                 break;
         }

@@ -6,8 +6,9 @@ public class Arrow : MonoBehaviour
 {  
     [SerializeField] private float _maxLifeTime;
     [SerializeField] private float _arrowSpeed;
-
+    [SerializeField] private ParticleSystem _trailEffect;
     private Transform _startPos;
+    
     //private Transform _firePos;
     private Transform defaultParent;
     private Attack _attack;
@@ -16,7 +17,7 @@ public class Arrow : MonoBehaviour
     private bool _fired;
     private Vector3 fireDirection;
 
-    [SerializeField] TrailRenderer trailRenderer;
+
     bool didDamage;
 
     void Start()
@@ -47,7 +48,7 @@ public class Arrow : MonoBehaviour
 
             if (_timeSinceFire >= _maxLifeTime)
             {
-                
+                _trailEffect.Stop();
                 _rb.isKinematic = false;
                 transform.SetPositionAndRotation(_startPos.position, _startPos.rotation);
                 _fired = false;
@@ -68,7 +69,7 @@ public class Arrow : MonoBehaviour
 
     private void MoveArrow()
     {
-        trailRenderer.enabled = true;
+  
         //transform.Translate(Vector3.forward * _arrowSpeed * Time.deltaTime);
         //_rb.AddForce(transform.forward *  _arrowSpeed, ForceMode.Impulse);
         if (_rb.isKinematic == false)
@@ -92,6 +93,7 @@ public class Arrow : MonoBehaviour
         //_rb.useGravity = true;
         _fired = true;
         transform.SetParent(null);
+        _trailEffect.Play();
         //transform.SetPositionAndRotation(pos, rot);
         //transform.localScale = scale;
         //transform.parent = null;
@@ -102,9 +104,10 @@ public class Arrow : MonoBehaviour
     {    
         if (other.gameObject == Player.Instance.gameObject)
         {
+            _trailEffect.Stop();
             _rb.isKinematic = true;
             transform.SetParent(other.transform);
-            trailRenderer.enabled = false;
+            //trailRenderer.enabled = false;
 
             if (!didDamage)
             {

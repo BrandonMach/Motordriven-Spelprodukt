@@ -42,6 +42,7 @@ public class FMODController : MonoBehaviour
         GameManager.OnMainMenuEnter += HandleMainMenuEnter;
         GameManager.OnArenaEnter += HandleOnArenaEnter;
         GameManager.OnAfterArenaEnter += HandleOnAfterArenaEnter;
+        GameManager.OnOpenWorldEnter += HandleOnOpenWorldEnter;
 
         _intensity = 50;
 
@@ -71,6 +72,13 @@ public class FMODController : MonoBehaviour
     private void HandleOnAfterArenaEnter()
     {
         ChangeEvent("event:/AfterArenaMusic");
+    }
+
+    private void HandleOnOpenWorldEnter()
+    {
+        // TODO : Add new music track
+        _musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        _musicEventInstance.release();
     }
 
     public void ChangeEvent(string newEventPath)
