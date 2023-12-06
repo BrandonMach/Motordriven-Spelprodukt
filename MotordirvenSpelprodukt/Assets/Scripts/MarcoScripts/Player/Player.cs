@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private PlayerMovement _playerMovement;
     private EntertainmentManager _entertainmentManager;
 
-    private BoxCollider _collider;
+    private CapsuleCollider _collider;
 
 
     private string _input;
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _playerMovement = GetComponent<PlayerMovement>();
         _playerDash = GetComponent<PlayerDash>();
 
-        _collider = GetComponent<BoxCollider>();
+        _collider = GetComponent<CapsuleCollider>();
         _playerInputSpamChecker = GetComponent<PlayerInputSpamChecker>();
        
         
