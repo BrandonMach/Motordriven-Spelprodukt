@@ -511,6 +511,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c9809fc9a2cc0c4e97b28897b0a524f, type: 3}
+--- !u!114 &1059450583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3829662406721266657, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+  m_PrefabInstance: {fileID: 4127257110149154492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127257110149154493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a92f567240b21d4d9c0cd2b6b131f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1288938707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,9 +1494,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7593654814552821522, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593654814552821522, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1973342476}
+      objectReference: {fileID: 1059450583}
+    - target: {fileID: 7593654814552821522, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593654814552821522, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AudioMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8228643565279458500, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 181
@@ -1493,12 +1516,41 @@ PrefabInstance:
     - target: {fileID: 8959047223425956507, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607340133}
+      objectReference: {fileID: 4127257110149154494}
+    - target: {fileID: 8959047223425956507, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSFXVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959047223425956507, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SFXBus, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 596128329329882961, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4127257110149154494}
   m_SourcePrefab: {fileID: 100100000, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+--- !u!1 &4127257110149154493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 596128329329882961, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+  m_PrefabInstance: {fileID: 4127257110149154492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4127257110149154494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127257110149154493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf791287989dacd48b95ee78c7ed8546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class SFXBus : MonoBehaviour
 {
-    FMOD.Studio.Bus bus;
+    FMOD.Studio.Bus sfxBus;
 
-    [SerializeField]
-    [Range(-80f, 10f)]
     private float busVolume;
 
     public Slider volumeSlider;
@@ -17,27 +15,25 @@ public class SFXBus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
+        sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
 
-        if (volumeSlider != null)
-        {
-            volumeSlider.value = busVolume;
-        }
+        //if (volumeSlider != null)
+        //{
+        //    volumeSlider.value = busVolume;
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (volumeSlider != null)
-        {
-            busVolume = volumeSlider.value;
-            bus.setVolume(DecibelToLinear(busVolume));
-        }
+        
     }
 
-    private float DecibelToLinear(float dB)
+    public void ChangeSFXVolume(float volume)
     {
-        float linear = Mathf.Pow(10.0f, dB / 20f);
-        return linear;
+        sfxBus.setVolume(volume);
+        sfxBus.getVolume(out float asd);
+
+        Debug.Log("SFXbus volume: " + asd);
     }
 }

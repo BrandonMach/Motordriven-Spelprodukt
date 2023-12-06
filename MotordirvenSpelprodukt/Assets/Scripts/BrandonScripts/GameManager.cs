@@ -60,10 +60,14 @@ public class GameManager : MonoBehaviour
     public delegate void AfterArenaEvent();
     public static event AfterArenaEvent OnAfterArenaEnter;
 
+    public delegate void EnterOpenWorldEvent();
+    public static event EnterOpenWorldEvent OnOpenWorldEnter;
+
     bool _beenIntoArena = false;
     private bool _mainMenuEventInvoked = false;
     private bool _afterArenaEventInvoked = false;
     private bool _arenaEventInvoked = false;
+    private bool _openWorldEventInvoked = false;
 
     #endregion
 
@@ -244,7 +248,18 @@ public class GameManager : MonoBehaviour
 
         if (currentScene.buildIndex == 6 || _currentScen == GameManager.CurrentScen.HUBWorld)
         {
-      
+
+            #region FMOD
+
+            if (!_openWorldEventInvoked)
+            {
+                OnOpenWorldEnter?.Invoke();
+                _openWorldEventInvoked = true;
+            }
+
+            #endregion
+
+
             _currentScen = CurrentScen.HUBWorld;
 
 
