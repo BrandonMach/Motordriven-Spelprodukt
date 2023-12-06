@@ -144,7 +144,6 @@ public class ParticleSystemManager : MonoBehaviour
                 _explosionPoolIndex = (_explosionPoolIndex + 1) % _explosionPoolSize;
                 currentEffect = _explosionPool[_explosionPoolIndex];
                 coroutineTime = _explosionLifeTime;
-                PlayExplosionSound();
                 break;
 
             default:
@@ -175,36 +174,4 @@ public class ParticleSystemManager : MonoBehaviour
         particleEffect.transform.position = this.transform.position;
         particleEffect.SetActive(false);
     }
-
-
-    #region FMOD
-
-    private void PlayExplosionSound()
-    {
-        string eventPath;
-        int random = Random.Range(1, 4);
-
-        if (random == 1)
-        {
-            eventPath = "event:/explosion";
-        }
-        if (random == 2)
-        {
-            eventPath = "event:/explosion2";
-        }
-        else
-        {
-            eventPath = "event:/explosion3";
-        }
-
-        FMOD.Studio.EventInstance explosion = FMODUnity.RuntimeManager.CreateInstance(eventPath);
-        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(explosion, this.transform);
-        explosion.start();
-        explosion.release();
-
-        Debug.Log("Explosionsound played");
-    }
-
-
-    #endregion
 }

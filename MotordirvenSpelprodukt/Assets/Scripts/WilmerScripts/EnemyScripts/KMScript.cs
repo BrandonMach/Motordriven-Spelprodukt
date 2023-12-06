@@ -1,4 +1,5 @@
 
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -10,7 +11,6 @@ public class KMScript : MinionScript
 
     public Animator Anim;
     public float ChaseDistance;
-
 
     [Header("Attack")]
     //[SerializeField] private Collider expolisionHitbox;
@@ -108,6 +108,8 @@ public class KMScript : MinionScript
 
     public void Explode()
     {
+        PlayExplosionSound();
+
         MovementSpeed = 0;
         ParticleSystemManager.Instance.PlayParticleFromPool
             (ParticleSystemManager.ParticleEffects.Explosion, transform);
@@ -142,4 +144,33 @@ public class KMScript : MinionScript
             yield return null;
         }
     }
+
+    #region FMOD
+
+    private void PlayExplosionSound()
+    {
+        string eventPath;
+        int random = Random.Range(1, 4);
+
+        if (random == 1)
+        {
+            eventPath = "event:/explosion1";
+        }
+        else if (random == 2)
+        {
+            eventPath = "event:/explosion2";
+        }
+        else
+        {
+            eventPath = "event:/explosion3";
+        }
+
+        FMOD.Studio.EventInstance explosion = FMODUnity.RuntimeManager.CreateInstance(eventPath);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(explosion, this.transform);
+        explosion.start();
+        explosion.release();
+    }
+
+
+    #endregion
 }
