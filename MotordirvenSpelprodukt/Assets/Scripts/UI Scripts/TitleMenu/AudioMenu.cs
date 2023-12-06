@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class AudioMenu : MenuAbstract, IMenu
 {
-    public Slider SFXvolumeSlider;
+    public Slider masterVolumeSlider;
     public AudioMixer audioMixer;
     public FMODController FMODController;
 
@@ -18,7 +18,7 @@ public class AudioMenu : MenuAbstract, IMenu
 
         FMODController = FMODController.Instance;
 
-        SFXvolumeSlider.value = FMODController.GetVolume();
+        masterVolumeSlider.value = FMODController.GetVolume();
     }
 
     // Update is called once per frame
