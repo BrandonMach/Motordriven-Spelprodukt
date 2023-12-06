@@ -28,34 +28,6 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] public MatchType _currentMatchType;
 
 
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Debug.LogWarning("More than one instance of GameLoopManager found");
-            return;
-        }
-        Instance = this;
-
-       
-
-        Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 1.5f, _championStartPos.position.z);
-        Quaternion championRotation = Quaternion.Euler(_championList[KilledChampions].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
-
-        _champion = Instantiate(_championList[KilledChampions], championSpawnPos, championRotation);
-
-        //_champion = GameObject.FindObjectOfType<CMP1Script>();
-
-
-    }
-
-    /// <summary>
-    /// Set your _gameManager variable to this instance in order to achieve the Singleton pattern.
-    /// Example: _gameManager = GameManager.Instance
-    /// </summary>
-
-    #endregion
-
     #region ChallengeVariables
 
     private ChallengeManager _challengeManager;
@@ -100,21 +72,23 @@ public class GameLoopManager : MonoBehaviour
     public System.EventHandler OnMatchFinished;
 
     public GameObject[] Canvases;
+   
 
     #region Champions
 
     //Champion Path 
     [Header("Champion Path")]
 
+    public GameObject ChampionhpCanvas;
     [SerializeField] public GameObject _champion;
     public int AmountOfChampionsToKill; //CHampion road-map
     public static int KilledChampions;
     [SerializeField] private List<GameObject> _championList;
     [SerializeField] private Transform _championStartPos;
-    
+
     //HP bar
 
-    [SerializeField] private  TextMeshProUGUI _championHPText;
+    [SerializeField] private TextMeshProUGUI _championHPText;
     [SerializeField] private TextMeshProUGUI _championNameText;
     #endregion
 
@@ -129,7 +103,7 @@ public class GameLoopManager : MonoBehaviour
     #region Minions
 
     //Enemy List
-    public  GameObject[] EnemyGameObjects;
+    public GameObject[] EnemyGameObjects;
     private SpawnEnemy _spawnEnemy;
 
     #endregion
@@ -139,6 +113,50 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] float defaultSaturation = -16.3f;
 
     #endregion
+
+
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one instance of GameLoopManager found");
+            return;
+        }
+        Instance = this;
+
+       
+
+       
+
+
+        if(_currentMatchType == MatchType.Champion)
+        {
+            Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 1.5f, _championStartPos.position.z);
+            Quaternion championRotation = Quaternion.Euler(_championList[KilledChampions].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
+
+            _champion = Instantiate(_championList[KilledChampions], championSpawnPos, championRotation);
+
+        }
+        else
+        {
+            ChampionhpCanvas.SetActive(false);
+        }
+
+       
+
+
+
+    }
+
+    /// <summary>
+    /// Set your _gameManager variable to this instance in order to achieve the Singleton pattern.
+    /// Example: _gameManager = GameManager.Instance
+    /// </summary>
+
+    #endregion
+
+  
 
     //public int KillCount { get => _killCount; set => _killCount = value; }
     public int KillCount
@@ -230,23 +248,26 @@ public class GameLoopManager : MonoBehaviour
                 var championHealthManager = _champion.GetComponent<HealthManager>();
                 _championHPText.text = (championHealthManager.CurrentHealthPoints / championHealthManager.MaxHP * 100).ToString() + "%";
             }
+           
+
+            if (_champion == null && !_kingCam)
+            {
+                OnMatchFinished?.Invoke(this, EventArgs.Empty);
+            }
         }
 
        
        
 
         
-        if (_champion == null && !_kingCam)
-        {
-            OnMatchFinished?.Invoke(this, EventArgs.Empty);
-        }
+       
 
         //If player dies ... Simon jobbar med att flytta Healthmanager och i Damage
 
         
         if(_player == null)
         {
-            SceneManager.LoadScene(3, LoadSceneMode.Single);
+            SceneManager.LoadScene(4, LoadSceneMode.Single);
            
         }
 

@@ -19,7 +19,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public System.EventHandler OnShakeScreen;
 
     [Header("Dismembrent")]
-    private DismemberentEnemyScript _dismembrentScript;
+    //private DismemberentEnemyScript _dismembrentScript;
     public bool HasDismembrent;
 
     private bool isBleeding;
@@ -76,8 +76,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
             if (HasDismembrent)
             {
-                _dismembrentScript = GetComponent<DismemberentEnemyScript>();
-                _dismembrentScript.GetKilled();
+                GetComponent<DismemberentEnemyScript>().DismemberCharacter();
+                HasDismembrent = false;
             }
 
         }
@@ -87,7 +87,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     {
         if (!IsPlayer)
         {
-            SpawnEnemy.Instance.ScriptableObjectWaves[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
+            SpawnEnemy.Instance._waveBattleInformation[SpawnEnemy._currentWaveBattleIndex].waveInfoHolder[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
             GameLoopManager.Instance.UpdateEnemyList();
         }
         

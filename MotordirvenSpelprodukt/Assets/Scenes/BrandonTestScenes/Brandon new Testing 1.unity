@@ -1701,6 +1701,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &551432534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7874954761698854048, guid: 486226e97b9844940b545dfdde40e2ee, type: 3}
+  m_PrefabInstance: {fileID: 1913177860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &555786122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2344,6 +2349,7 @@ MonoBehaviour:
   Canvases:
   - {fileID: 1565805247}
   - {fileID: 976007180}
+  ChampionhpCanvas: {fileID: 551432534}
   _champion: {fileID: 0}
   AmountOfChampionsToKill: 0
   _championList:
@@ -3899,10 +3905,9 @@ MonoBehaviour:
     timeToNextWave: 4
     EnemiesLeft: 0
   _countdown: 0
-  ScriptableObjectWaves:
-  - {fileID: 11400000, guid: 6823e2994b9b64944a2a387fd2a6be28, type: 2}
-  - {fileID: 11400000, guid: 18f146f345f1fc249a2350e2d05090a6, type: 2}
-  - {fileID: 11400000, guid: 6823e2994b9b64944a2a387fd2a6be28, type: 2}
+  _waveBattleInformation:
+  - {fileID: 11400000, guid: fbd946b0e18576f4c9e6adb64a3357fc, type: 2}
+  _currentWaveBattleIndex: 0
   _currentWaveIndex: 0
   readyToCountdown: 0
   debugInt: 0

@@ -40,7 +40,10 @@ public class SpawnEnemy : MonoBehaviour
 
     public float _countdown;
 
-    public WaveInfoHolder[] ScriptableObjectWaves;
+    [SerializeField] public WaveBattleInfo[] _waveBattleInformation;
+    [SerializeField] public static int _currentWaveBattleIndex; //Borde vara static
+
+    //public WaveInfoHolder[] ScriptableObjectWaves;
 
     public int _currentWaveIndex = 0;
 
@@ -77,9 +80,9 @@ public class SpawnEnemy : MonoBehaviour
         _target = Player.Instance.transform;
 
 
-        for (int i = 0; i < ScriptableObjectWaves.Length; i++)
+        for (int i = 0; i < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count; i++)
         {
-            ScriptableObjectWaves[i].EnemiesLeft = ScriptableObjectWaves[i].WaveMinions.Length;
+            _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[i].EnemiesLeft = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[i].WaveMinions.Length;
         }
 
 
@@ -97,9 +100,9 @@ public class SpawnEnemy : MonoBehaviour
         //    SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         //}
 
-        if(_currentWaveIndex >= ScriptableObjectWaves.Length)
+        if(_currentWaveIndex >= _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count)
         {
-            //Debug.Log("YOu survid´ved every wave");
+            Debug.Log("You have survived every wave");
             return;
         }
 
@@ -111,7 +114,7 @@ public class SpawnEnemy : MonoBehaviour
         }
 
 
-        debugInt = ScriptableObjectWaves[_currentWaveIndex].EnemiesLeft;
+        debugInt = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft;
 
 
         if (readyToCountdown)
@@ -123,12 +126,12 @@ public class SpawnEnemy : MonoBehaviour
         if (_countdown <= 0 )
         {
             readyToCountdown = false;
-            _countdown = ScriptableObjectWaves[_currentWaveIndex].timeToNextWave;
+            _countdown = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].timeToNextWave;
             StartCoroutine(SpawnWave());
         }
 
 
-        if(ScriptableObjectWaves[_currentWaveIndex].EnemiesLeft == 0)
+        if (_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
         {
             readyToCountdown = true;
             _currentWaveIndex++;
@@ -151,18 +154,18 @@ public class SpawnEnemy : MonoBehaviour
     {
 
 
-        if(_currentWaveIndex < ScriptableObjectWaves.Length)
+        if(_currentWaveIndex < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count)
         {
-            for (int i = 0; i < ScriptableObjectWaves[_currentWaveIndex].WaveMinions.Length; i++)
+            for (int i = 0; i < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].WaveMinions.Length; i++)
             {
                 var randomSpawnPos = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
 
 
-                EnemyScript minion = Instantiate(ScriptableObjectWaves[_currentWaveIndex].WaveMinions[i], randomSpawnPos.position, Quaternion.identity);
+                EnemyScript minion = Instantiate(_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].WaveMinions[i], randomSpawnPos.position, Quaternion.identity);
                 minion.transform.SetParent(randomSpawnPos);
                 GameLoopManager.Instance.UpdateEnemyList();
 
-                yield return new WaitForSeconds(ScriptableObjectWaves[_currentWaveIndex].timeToNextEnemy);
+                yield return new WaitForSeconds(_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].timeToNextEnemy);
             }
         }
        
