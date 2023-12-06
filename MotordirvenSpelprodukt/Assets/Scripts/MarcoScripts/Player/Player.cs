@@ -220,7 +220,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             if (attack.AttackSO.CurrentAttackEffect == CurrentAttackSO.AttackEffect.Pushback)
             {
                 Debug.Log("Push back player");
-                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);            
+                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);
+                OnDisableMovement();
             }
         }
         else
@@ -228,6 +229,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             Debug.Log("invulnerable");
         }
     }
+
+
+    //public void GetUpAnimEvent()
+    //{
+    //    OnEnableMovement();
+
+    //}
 
 
     /// <summary>
@@ -240,6 +248,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         Debug.Log("Pushback force: " + knockBackForce + " AttackerPos: " + attackerPos);
         _anim.SetTrigger("PushedBack");
         Debug.Log(this.GetType().ToString() + "Player knocked back with force: " + knockBackForce);
+        Vector3 direction = attackerPos - transform.position;
+        _rb.AddForce(-direction * 5, ForceMode.Impulse);
+        _rb.AddForce(transform.up * 2, ForceMode.Impulse);
         StartFacingExplosion(attackerPos);
     }
 
@@ -256,8 +267,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
             Quaternion targetRot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10);
-            //transform.Translate(-direction.normalized * 10 * Time.deltaTime, Space.World);
-            _rb.AddForce(-direction * 30, ForceMode.Force);
+            //transform.Translate(-direction * 13 * Time.deltaTime, Space.World);
+            //_rb.AddForce(-direction * 10, ForceMode.Impulse);
             if (Quaternion.Angle(transform.rotation, targetRot) < 0.1f)
             {
                 yield break;

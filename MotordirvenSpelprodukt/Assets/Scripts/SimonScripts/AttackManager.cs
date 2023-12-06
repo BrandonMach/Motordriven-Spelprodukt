@@ -71,6 +71,7 @@ public class AttackManager : MonoBehaviour
         }
 
         Debug.Log("Checking for attack hits");
+
         Collider[] enemyHits = Physics.OverlapSphere(_checkPos, _range, _enemyLayerMask);
         Debug.Log(enemyHits.Length);    
 
