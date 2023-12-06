@@ -57,7 +57,8 @@ public class SpawnEnemy : MonoBehaviour
     public int debugInt;
 
 
-
+    [SerializeField] private Animator _anim;
+    [SerializeField] private TMPro.TextMeshProUGUI _waveText;
 
 
 
@@ -133,8 +134,10 @@ public class SpawnEnemy : MonoBehaviour
 
         if (_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
         {
+            
             readyToCountdown = true;
             _currentWaveIndex++;
+            
         }
 
     }
@@ -152,9 +155,12 @@ public class SpawnEnemy : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
+        //Fade in wave text
+        _waveText.text = "Wave " + (1+_currentWaveIndex).ToString();
+        _anim.SetTrigger("ActivateFade");
 
 
-        if(_currentWaveIndex < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count)
+        if (_currentWaveIndex < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count)
         {
             for (int i = 0; i < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].WaveMinions.Length; i++)
             {

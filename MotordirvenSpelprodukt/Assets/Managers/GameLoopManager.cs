@@ -273,10 +273,10 @@ public class GameLoopManager : MonoBehaviour
 
         if (!_player.GetComponent<HealthManager>().Dead)
         {
-           volumeProfile.TryGet(out ColorAdjustments colorAdjustments);
-
-            colorAdjustments.saturation.value = defaultSaturation;
-;
+            if (volumeProfile.TryGet(out ColorAdjustments colorAdjustments))
+            {
+                colorAdjustments.saturation.value = defaultSaturation;
+            }
         }
         // Testing challenges
         CheckChallengesCompletion();

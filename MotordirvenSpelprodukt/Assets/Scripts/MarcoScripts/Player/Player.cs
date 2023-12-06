@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     public event EventHandler ComboBroken;
     public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
-    public event EventHandler<OnAttackPressedAnimationEventArgs> ChangeAttackAnimation;
+    public event EventHandler<OnAttackPressedAnimationEventArgs> StartAttackAnimation;
     public event EventHandler PlayerInterrupted;
 
     public class OnAttackPressedAnimationEventArgs : EventArgs
@@ -115,9 +115,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
         _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
         
-        if (GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon() != null)
+        if (TransferableScript.Instance.GetWeapon() != null)
         {
-            _playerWeaponHolder.SetWeapon(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetWeapon());
+            _playerWeaponHolder.SetWeapon(TransferableScript.Instance.GetWeapon());
         }
            
 
@@ -288,7 +288,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         {
             SetInterruptable(true);
             OnEnableMovement();
-            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO =_playerWeaponHolder.CurrentWeapon });
+            RegisterAttack?.Invoke(this, new OnAttackPressedEventArgs { CurrentAttackSO = GetCurrentAttackSO(_input), weaponSO =_playerWeaponHolder.CurrentWeapon});
+
+            if (_playerWeaponHolder.CurrentWeapon == null)
+            {
+                Debug.LogWarning("Player Weapon is null");
+            }
+
             _canAttack = true;
         }
     }
@@ -341,7 +347,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             SetInterruptable(false);
             _playerMovement.AttackDash();
             OnDisableMovement();
-            ChangeAttackAnimation?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = attack });
+            StartAttackAnimation?.Invoke(this, new OnAttackPressedAnimationEventArgs { attackType = attack });
                        
             _canAttack = false;
         }

@@ -302,7 +302,6 @@ Transform:
   m_Children:
   - {fileID: 5165603096656557807}
   - {fileID: 6880972791787181750}
-  - {fileID: 1472087293192799887}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &747679442005463012
@@ -352,6 +351,7 @@ MonoBehaviour:
   Explode: 0
   hasSlowMo: 0
   _slowMo: {fileID: 0}
+  _damageAnimator: {fileID: 2001267079186224976}
 --- !u!114 &6781590833126301414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,8 +468,6 @@ MonoBehaviour:
   anim: {fileID: 1893978260557283440}
   _weapon: {fileID: 11400000, guid: 08da9303af86cef4e909e5362b0b9389, type: 2}
   _normalAttackSO: {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
-  _onGround: 1
-  _groundCheck: {fileID: 1472087293192799887}
   ChampionName: 'Ozgath: King of Chaos'
   CurrentState: 0
   PreviousState: 0
@@ -581,37 +579,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &8841441542125771887
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1472087293192799887}
-  m_Layer: 7
-  m_Name: GroundCheckPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1472087293192799887
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8841441542125771887}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5057656701927062546}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8866075447007711788
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,6 +812,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1248874732774416, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2001267079186224976}
     - targetCorrespondingSourceObject: {fileID: 4000155004322133092, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7284907128656886222}
@@ -860,6 +830,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4155741821396558, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
   m_PrefabInstance: {fileID: 1048636834696273325}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1047630610600229309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1248874732774416, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
+  m_PrefabInstance: {fileID: 1048636834696273325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2001267079186224976
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047630610600229309}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 384cefddbcb173d4aa70fb4f58195063, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4111476867564382665 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4000155004322133092, guid: 3c9c85e47d53d1f4aaa97330d98c0680, type: 3}
