@@ -16,21 +16,25 @@ public class AudioMenu : MenuAbstract, IMenu
     {
         //FMODController.SetFMOD(GameObject.Find("Transferables").GetComponent<TransferableScript>().GetFMODAM());
 
-        FMODController = FMODController.Instance;
+        //FMODController = FMODController.Instance;
 
-        masterVolumeSlider.value = FMODController.GetVolume();
+        //masterVolumeSlider.value = FMODController.GetVolume();
+
+        masterVolumeSlider.value = FMODController.Instance.GetVolume();
     }
 
     // Update is called once per frame
     void Update()
     {
         base.Update();
+
+       
     }
 
     public void SetVolume(float volume)
     {
         //audioMixer.SetFloat("volume", volume);
-        FMODController.SetVolume(volume);
+        FMODController.Instance.SetVolume(volume);
         Debug.Log("float volume:" + volume);
     }
 

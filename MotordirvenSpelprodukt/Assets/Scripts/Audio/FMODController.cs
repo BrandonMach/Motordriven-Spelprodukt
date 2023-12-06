@@ -9,15 +9,14 @@ using UnityEngine.UI;
 
 public class FMODController : MonoBehaviour
 {
-    [SerializeField] Slider healthSlider;
-    [SerializeField] Slider volumeSlider;
-
     private static FMODController _instance;
 
     public float _intensity;
     public float _health;
 
     public EventInstance _musicEventInstance;
+
+    bool _firstTime = true;
 
     public static FMODController Instance { get => _instance; set => _instance = value; }
 
@@ -45,9 +44,14 @@ public class FMODController : MonoBehaviour
         GameManager.OnOpenWorldEnter += HandleOnOpenWorldEnter;
 
         _intensity = 50;
+        
+        _musicEventInstance.getVolume(out float vol);
+        Debug.Log("EeventVol: " + vol);
+        _musicEventInstance.setVolume(100);
 
-        volumeSlider.value = 0.3f;
-      
+        _musicEventInstance.getVolume(out float vol2);
+
+        Debug.Log("EeventVol: " + vol2);
     }
 
     // Update is called once per frame
@@ -83,10 +87,20 @@ public class FMODController : MonoBehaviour
 
     public void ChangeEvent(string newEventPath)
     {
+        _musicEventInstance.getVolume(out float vol);
+
         _musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         _musicEventInstance.release();
 
         _musicEventInstance = RuntimeManager.CreateInstance(newEventPath);
+
+        if (_firstTime)
+        {
+            vol = 1f;
+            _firstTime = false;
+        }
+
+        _musicEventInstance.setVolume(vol);
         _musicEventInstance.start();
     }
 
@@ -104,8 +118,7 @@ public class FMODController : MonoBehaviour
     {
         if (_musicEventInstance.isValid())
         {
-            float volume;
-            _musicEventInstance.getVolume(out volume);
+            _musicEventInstance.getVolume(out float volume);
             return volume;
         }
         else
@@ -130,19 +143,13 @@ public class FMODController : MonoBehaviour
     
     private void UpdateIntensityParameter()
     {
-        //Debug.Log("ETP: " + _intensity);
-
-    
 
         if (EntertainmentManager.Instance != null)
-        {
-            //_entertainmentManager = EntertainmentManager.Instance;
+        {           
             _intensity = EntertainmentManager.Instance.GetETP();
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Entertainment", _intensity);
         }
-        
        
-
 
         //_fmodEventInstance.getParameterByName("Intensity", out float changedParamValue);
         //Debug.Log($"ChangedParamValue: {changedParamValue}");
@@ -151,7 +158,6 @@ public class FMODController : MonoBehaviour
     
     private void UpdateHealthParameter()
     {
-        //_health = healthSlider.value;
 
         if (Player.Instance != null)
         {
