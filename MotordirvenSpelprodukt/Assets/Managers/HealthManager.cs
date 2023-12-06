@@ -40,6 +40,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
     public System.EventHandler PlayDeathSoundEvent;
     public System.EventHandler PlayDoDamageSoundEvent;
 
+    [SerializeField] Animator _damageAnimator;
+
     void Start()
     {
         
@@ -138,6 +140,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             else if (!IsPlayer && !isBleeding)
             {
 
+
                 PlayDoDamageSoundEvent?.Invoke(this, EventArgs.Empty);
                 PlayReciveDamageSoundEvent?.Invoke(this, EventArgs.Empty);
 
@@ -147,7 +150,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 //FMODSFXController.Instance.PlayMinionHit();
             }
 
-
+            _damageAnimator.SetTrigger("DamageBlink");
             CurrentHealthPoints -= damage;
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = CurrentHealthPoints /*/ _maxHealthPoints*/ });
 
