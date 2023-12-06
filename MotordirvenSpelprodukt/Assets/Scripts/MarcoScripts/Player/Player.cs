@@ -59,8 +59,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private EntertainmentManager _entertainmentManager;
 
     private CapsuleCollider _collider;
-
-
+    [SerializeField] private Animator _anim;
+    [SerializeField] private Rigidbody _rb;
     private string _input;
     public bool _canAttack = true;
     private PlayerInputSpamChecker _playerInputSpamChecker;
@@ -123,7 +123,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         _shockwavePosition = transform.Find("ShockwavePosition");
 
-
+        _rb = GetComponent<Rigidbody>();
+        _anim = GetComponent<Animator>();   
         PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
     }
 
@@ -161,12 +162,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Update()
     {
-       // _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
+        // _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
         //if (GameManager.Instance._currentScen != GameManager.CurrentScen.ArenaScen)
         //{
         //    _canAttack = false;
 
         //}
+       
     }
 
     
@@ -213,11 +215,72 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             PlayDamageVFX(attack.AttackerPosition);
             _healthManager.ReduceHealth(attack.Damage);
             HasTakenDamage = true;
+
+            Debug.Log(attack.AttackSO.CurrentAttackEffect);
+            if (attack.AttackSO.CurrentAttackEffect == CurrentAttackSO.AttackEffect.Pushback)
+            {
+                Debug.Log("Push back player");
+                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);            
+            }
         }
         else
         {
             Debug.Log("invulnerable");
         }
+    }
+
+
+    /// <summary>
+    /// Calls Pushback on enemy. Only for minions.
+    /// </summary>
+    private void GetPushedback(Vector3 attackerPos, float knockBackForce)
+    {
+        //PushBack(attackerPos, knockBackForce);
+        Debug.Log("In GetPushedBack method, setting anim trigger");
+        Debug.Log("Pushback force: " + knockBackForce + " AttackerPos: " + attackerPos);
+        _anim.SetTrigger("PushedBack");
+        Debug.Log(this.GetType().ToString() + "Player knocked back with force: " + knockBackForce);
+        StartFacingExplosion(attackerPos);
+    }
+
+
+    private IEnumerator FaceExplosion(Vector3 targetPos)
+    {
+        while(true)
+        {
+            Vector3 direction = targetPos - transform.position;
+            direction.y = 0;
+
+            // Normalize the direction to get a unit vector
+            direction.Normalize();
+
+            Quaternion targetRot = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10);
+            //transform.Translate(-direction.normalized * 10 * Time.deltaTime, Space.World);
+            _rb.AddForce(-direction * 30, ForceMode.Force);
+            if (Quaternion.Angle(transform.rotation, targetRot) < 0.1f)
+            {
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    private void StartFacingExplosion(Vector3 explosionPos)
+    {
+        StartCoroutine(FaceExplosion(explosionPos));
+    }
+
+
+    /// <summary>
+    /// Adds force to enemy backwards. Only for minions.
+    /// </summary>
+    private void PushBack(Vector3 attackerPos, float knockBackForce)
+    {
+        Vector3 knockbackDirection = (transform.position - attackerPos).normalized;
+        _rb.AddForce(knockbackDirection * knockBackForce, ForceMode.Impulse);
+        //_rb.AddExplosionForce(1000, attackerPos, range);
     }
 
     private void AttackLanded(object sender, EventArgs e)

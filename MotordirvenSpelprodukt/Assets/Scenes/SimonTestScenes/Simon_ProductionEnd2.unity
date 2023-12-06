@@ -31269,6 +31269,8 @@ MonoBehaviour:
   _currentWaveIndex: 0
   readyToCountdown: 0
   debugInt: 0
+  _anim: {fileID: 0}
+  _waveText: {fileID: 0}
 --- !u!4 &1359269657
 Transform:
   m_ObjectHideFlags: 0
@@ -37412,6 +37414,14 @@ PrefabInstance:
       value: -0.1771468
       objectReference: {fileID: 0}
     - target: {fileID: 7168040140328720354, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 1537310755}
+    - target: {fileID: 7168040140328720354, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+      propertyPath: _anim
+      value: 
+      objectReference: {fileID: 1537310764}
+    - target: {fileID: 7168040140328720354, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
       propertyPath: _gameInput
       value: 
       objectReference: {fileID: 0}
@@ -37841,6 +37851,16 @@ MonoBehaviour:
   effect3: {fileID: 1289860922}
   effect4: {fileID: 1073083831}
   effect5: {fileID: 104080063}
+--- !u!54 &1537310755 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8199499030154146345, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+  m_PrefabInstance: {fileID: 1537310725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1537310764 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 343317170530130105, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+  m_PrefabInstance: {fileID: 1537310725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1544462294 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8145404299867027779, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
@@ -38193,15 +38213,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5202336575340959078, guid: 0983b47fc0fef904a9e1b218275298b2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.876
       objectReference: {fileID: 0}
     - target: {fileID: 5202336575340959078, guid: 0983b47fc0fef904a9e1b218275298b2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6053341380786954417, guid: 0983b47fc0fef904a9e1b218275298b2, type: 3}
       propertyPath: m_Name
       value: MeleeMinionNew (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053341380786954417, guid: 0983b47fc0fef904a9e1b218275298b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8178507471188277434, guid: 0983b47fc0fef904a9e1b218275298b2, type: 3}
       propertyPath: m_LocalPosition.x

@@ -85,7 +85,7 @@ public class AttackManager : MonoBehaviour
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
-                enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, AttackerPosition = _checkPos, Damage = _damage });
+                enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, AttackerPosition = transform.position, Damage = _damage });
 
                 Debug.Log("Player took: " +  _damage + "Damage");
 
