@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ParticleSystemManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class ParticleSystemManager : MonoBehaviour
     [SerializeField] private GameObject _bloodPrefab;
     [SerializeField] private GameObject _jumpCrackPrefab;
     [SerializeField] private GameObject _explosionPrefab;
+    [SerializeField] private GameObject _healPrefab;
 
     [Header("Pool sizes")]
     [SerializeField] private int _slamPoolSize;
@@ -44,7 +46,7 @@ public class ParticleSystemManager : MonoBehaviour
     private List<GameObject> _bloodPool;
     private List<GameObject> _jumpCrackPool;
     private List<GameObject> _explosionPool;
-
+    private List<ParticleSystem> _healEffects;
 
     public enum ParticleEffects { Slam, Stun, Blood, JumpCrack, Explosion };
 
@@ -63,7 +65,17 @@ public class ParticleSystemManager : MonoBehaviour
   
         InitializePools();
     }
-    
+
+
+    // !!!!!!!!!!!!   Only for debug reason, update should be removed  !!!!!!!!!!!!
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayHealEffect();
+        }
+    }
+
 
     /// <summary>
     /// Creates each pool and calls method to fill them with gameobjects.
@@ -81,6 +93,8 @@ public class ParticleSystemManager : MonoBehaviour
         AddObjectsToPool(_bloodPool, _bloodPrefab, _bloodPoolSize);
         AddObjectsToPool(_jumpCrackPool, _jumpCrackPrefab, _jumpCrackPoolSize);
         AddObjectsToPool(_explosionPool, _explosionPrefab, _explosionPoolSize);
+
+        _healEffects = _healPrefab.GetComponentsInChildren<ParticleSystem>().ToList<ParticleSystem>();
     }
 
 
@@ -105,6 +119,7 @@ public class ParticleSystemManager : MonoBehaviour
     /// </summary>
     public void PlayParticleFromPool(ParticleEffects effect, Transform _transform)
     {
+        Debug.Log("Playing particle from pool, the effect is: " + effect.ToString());
         GameObject currentEffect = null;
         Vector3 newPos = _transform.position;
         float coroutineTime = 0;
@@ -112,6 +127,7 @@ public class ParticleSystemManager : MonoBehaviour
         switch (effect) 
         {
             case ParticleEffects.Slam:
+                Debug.Log("Activating Slam effect inside PSManager");
                 _slamPoolIndex = (_slamPoolIndex + 1) % _slamPoolSize;
                 currentEffect = _slamPool[_slamPoolIndex];
                 coroutineTime = _slamLifeTime;
@@ -149,6 +165,7 @@ public class ParticleSystemManager : MonoBehaviour
             default:
                 break;
         }
+        Debug.Log(effect.ToString());
 
         // Activate and place particle effect
         // Set timer (coroutine) to return to pool (set to pool pos and deactivate)
@@ -173,5 +190,15 @@ public class ParticleSystemManager : MonoBehaviour
         // Particle is finished, return it to pool (reset position and de-activate)
         particleEffect.transform.position = this.transform.position;
         particleEffect.SetActive(false);
+    }
+
+
+    public void PlayHealEffect()
+    {
+        Debug.Log("Play heal effects");
+        foreach (ParticleSystem ps in _healEffects)
+        {
+            ps.Play();
+        }       
     }
 }

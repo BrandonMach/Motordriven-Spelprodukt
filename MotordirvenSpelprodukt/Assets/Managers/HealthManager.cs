@@ -123,6 +123,8 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
             CurrentHealthPoints = _maxHealthPoints;
         }
+
+        ParticleSystemManager.Instance.PlayHealEffect();
     }
 
 

@@ -91,9 +91,7 @@ public class FallingObjectType : MonoBehaviour
     }
 
 
-   
-
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == ("Player"))
         {
@@ -103,7 +101,7 @@ public class FallingObjectType : MonoBehaviour
                 Debug.Log("Tomato");
                 Debug.LogError("Player take damage");
                 other.gameObject.GetComponent<HealthManager>().ReduceHealth(5);
-               
+
 
             }
             else if (Type == ObjectType.HealthPotion)
@@ -120,25 +118,70 @@ public class FallingObjectType : MonoBehaviour
 
 
 
-        if(other.gameObject.tag == ("Ground") || other.gameObject.tag == ("EnemyTesting"))
+        if (other.gameObject.tag == ("Ground") || other.gameObject.tag == ("EnemyTesting"))
         {
             if (Type == ObjectType.Tomato)
             {
-                
+
                 Debug.Log("Tomato Splash");
 
                 Destroy(gameObject);
-               
+
             }
             if (Type == ObjectType.HealthPotion)
             {
                 Destroy(gameObject);
-                Instantiate(_healthpack, gameObject.transform.position + new  Vector3(0,2,0), Quaternion.identity);
+                Instantiate(_healthpack, gameObject.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
 
             }
-            
         }
     }
 
-   
+
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.gameObject.tag == ("Player"))
+    //    {
+    //        if (Type == ObjectType.Tomato)
+    //        {
+    //            Destroy(gameObject);
+    //            Debug.Log("Tomato");
+    //            Debug.LogError("Player take damage");
+    //            other.gameObject.GetComponent<HealthManager>().ReduceHealth(5);
+
+
+    //        }
+    //        else if (Type == ObjectType.HealthPotion)
+    //        {
+    //            Debug.Log("Heal Player");
+    //            other.gameObject.GetComponent<HealthManager>().HealDamage(20);
+    //            Destroy(this.gameObject);
+    //        }
+    //        else if (Type == ObjectType.CannonBall)
+    //        {
+    //            Debug.Log("Cannonball");
+    //        }
+    //    }
+
+
+
+    //    if (other.gameObject.tag == ("Ground") || other.gameObject.tag == ("EnemyTesting"))
+    //    {
+    //        if (Type == ObjectType.Tomato)
+    //        {
+
+    //            Debug.Log("Tomato Splash");
+
+    //            Destroy(gameObject);
+
+    //        }
+    //        if (Type == ObjectType.HealthPotion)
+    //        {
+    //            Destroy(gameObject);
+    //            Instantiate(_healthpack, gameObject.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+
+    //        }
+
+    //    }
+    //}
 }

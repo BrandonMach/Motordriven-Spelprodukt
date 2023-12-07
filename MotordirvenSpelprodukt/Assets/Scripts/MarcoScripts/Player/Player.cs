@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     public bool IsDashing { get; private set; }
 
-  //  [SerializeField] private GameInput _gameInput;
+    //  [SerializeField] private GameInput _gameInput;
     [SerializeField] private CurrentAttackSO[] _AttackSOArray;
 
     [SerializeField] private PlayerWeaponHolder _playerWeaponHolder;
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private string _input;
     public bool _canAttack = true;
     private PlayerInputSpamChecker _playerInputSpamChecker;
-    private Transform _shockwavePosition;
+    [SerializeField] private Transform _shockwavePosition;
 
     /// <summary>
     /// Used for testing challenge "KillStreak"
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         }
            
 
-        _shockwavePosition = transform.Find("ShockwavePosition");
+        //_shockwavePosition = transform.Find("ShockwavePosition");
 
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();   
@@ -376,7 +376,13 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     public void PlaySlamEffect()
     {
+        Debug.Log("Play Slam Effect");
+        if (ParticleSystemManager.Instance == null)
+        {
+            Debug.Log("PSManager is null");
+        }
         ParticleSystemManager.Instance.PlayParticleFromPool(ParticleSystemManager.ParticleEffects.Slam, _shockwavePosition);
+        
     }
 
 

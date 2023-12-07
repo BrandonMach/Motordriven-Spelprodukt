@@ -2506,8 +2506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34b5b6be6dbcf44691e374f819bbe4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 0}
-  arrowPoolSize: 0
+  arrowPrefab: {fileID: -7601555457848662976, guid: 3d1ec2962868c264286ee7cb66b534d9, type: 3}
+  arrowPoolSize: 20
 --- !u!1 &737683375
 GameObject:
   m_ObjectHideFlags: 0
@@ -3232,6 +3232,10 @@ PrefabInstance:
     - target: {fileID: 7462808753988161564, guid: 51ec81c10bf88394983b1b7c2e3b5604, type: 3}
       propertyPath: m_Name
       value: ArrowManager (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462808753988161564, guid: 51ec81c10bf88394983b1b7c2e3b5604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5143420295326237249, guid: 51ec81c10bf88394983b1b7c2e3b5604, type: 3}
@@ -4325,6 +4329,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4496794516304670787, guid: 091d6080a30f88040ae057088c859e72, type: 3}
+      propertyPath: _healPrefab
+      value: 
+      objectReference: {fileID: 1408831589}
+    - target: {fileID: 4496794516304670787, guid: 091d6080a30f88040ae057088c859e72, type: 3}
       propertyPath: _bloodPrefab
       value: 
       objectReference: {fileID: 1883644452}
@@ -4333,6 +4341,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 091d6080a30f88040ae057088c859e72, type: 3}
+--- !u!1 &1408831589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3726294282389079914, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+  m_PrefabInstance: {fileID: 1537310725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1461621593
 PrefabInstance:
   m_ObjectHideFlags: 0
