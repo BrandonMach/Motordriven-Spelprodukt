@@ -188,37 +188,6 @@ Transform:
   - {fileID: 1045752128351304675}
   m_Father: {fileID: 5057656701927062546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5058654192794343292
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8067363101147554696}
-  m_Layer: 7
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8067363101147554696
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5058654192794343292}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5057656701927062546}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5894004236768342529
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +302,7 @@ Transform:
   m_Children:
   - {fileID: 5165603096656557807}
   - {fileID: 6880972791787181750}
-  - {fileID: 8067363101147554696}
+  - {fileID: 7166501588398600227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &747679442005463012
@@ -501,7 +470,7 @@ MonoBehaviour:
   _weapon: {fileID: 11400000, guid: 08da9303af86cef4e909e5362b0b9389, type: 2}
   _normalAttackSO: {fileID: 11400000, guid: 778fb0553747d434a84283a271e2853b, type: 2}
   _onGround: 1
-  _groundCheck: {fileID: 8067363101147554696}
+  _groundCheck: {fileID: 7166501588398600227}
   ChampionName: 'Ozgath: King of Chaos'
   CurrentState: 0
   PreviousState: 0
@@ -718,6 +687,37 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _target: {fileID: 5057656701927062546}
   _offset: {x: 0, y: 6, z: 0}
+--- !u!1 &9149979542550106889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7166501588398600227}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7166501588398600227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149979542550106889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5057656701927062546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1048636834696273325
 PrefabInstance:
   m_ObjectHideFlags: 0
