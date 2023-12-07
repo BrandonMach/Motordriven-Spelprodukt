@@ -21,6 +21,7 @@ public class CMP1Script : ChampionScript
     public EventReference tauntScreamEventPath;
     public EventReference championSlamEventPath;
 
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -29,8 +30,8 @@ public class CMP1Script : ChampionScript
         Anim = GetComponent<Animator>();
 
         _attackSODictionary.Add(_jumpAttackStringKey, _jumpAttack);
-
     }
+
 
     // Update is called once per frame
     protected override void Update()
@@ -86,7 +87,6 @@ public class CMP1Script : ChampionScript
     }
 
 
-
     public override void TakeDamage(Attack attack)
     {
         base.TakeDamage(attack);
@@ -94,21 +94,27 @@ public class CMP1Script : ChampionScript
         switch (CurrentState) { }
     }
 
+
     public void EnterBasicAttackState()
     {
         CurrentState = ChampionState.BasicAttack;
 
         _currentAttackSO = _attackSODictionary[_normalAttackString];
     }
+
+
     public void EnterSpecialState()
     {
         CurrentState = ChampionState.SpecialAttack;
         _currentAttackSO = _attackSODictionary[_jumpAttackStringKey];
     }
+
+
     public void EnterTauntState()
     {
         CurrentState = ChampionState.Taunt;
     }
+
 
     public void EnterNoneState()
     {
@@ -119,9 +125,9 @@ public class CMP1Script : ChampionScript
         Anim.ResetTrigger("Taunt");
         Anim.ResetTrigger("Landing");
     }
+    
 
     //Reset triggers method
-
     protected override void OnAttack()
     {
         base.OnAttack();
@@ -140,8 +146,8 @@ public class CMP1Script : ChampionScript
         _shouldCheckForGround = true;
     }
 
-    #region SFX
 
+    #region SFX
     private void PlayChampionSlam()
     {
         if (!championSlamEventPath.IsNull)
@@ -153,6 +159,7 @@ public class CMP1Script : ChampionScript
         }
     }
 
+
     private void PlayTauntScream()
     {
         if (!tauntScreamEventPath.IsNull)
@@ -163,6 +170,5 @@ public class CMP1Script : ChampionScript
             tauntScream.release();
         }
     }
-
     #endregion
 }
