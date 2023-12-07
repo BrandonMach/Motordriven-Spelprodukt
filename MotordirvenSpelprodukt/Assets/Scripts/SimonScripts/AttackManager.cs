@@ -70,7 +70,10 @@ public class AttackManager : MonoBehaviour
                 break;
         }
 
+        Debug.Log("Checking for attack hits");
+
         Collider[] enemyHits = Physics.OverlapSphere(_checkPos, _range, _enemyLayerMask);
+        Debug.Log(enemyHits.Length);    
 
         if(enemyHits.Length==0 && isPlayer) //if attack misses enemy as player dont get ETP fo completed combo
         {
@@ -83,9 +86,9 @@ public class AttackManager : MonoBehaviour
             IDamagable enemy = enemyHits[i].GetComponent<IDamagable>();
             if (enemy != null)
             {
-                enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, AttackerPosition = _checkPos, Damage = _damage });
+                enemy.TakeDamage(new Attack { AttackSO = e.CurrentAttackSO, AttackerPosition = transform.position, Damage = _damage });
 
-                
+                Debug.Log("Player took: " +  _damage + "Damage");
 
                 if (enemyHits[i].CompareTag("Player"))
                 {

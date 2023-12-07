@@ -34,13 +34,21 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (isMouseOver)
         {
             _textMeshPro.characterSpacing = hoverCharacterSpacing;
-            _hoverObjectIcon.SetActive(true);
-            Debug.Log("Spacing!");
+
+            if (_hoverObjectIcon != null)
+            {
+                _hoverObjectIcon.SetActive(true);
+            }
+            //Debug.Log("Spacing!");
         }
         else if (!isMouseOver)
         {
             _textMeshPro.characterSpacing = originalCharacterSpacing;
-            _hoverObjectIcon.SetActive(false);
+
+            if (_hoverObjectIcon != null)
+            {
+                _hoverObjectIcon.SetActive(false);
+            }
         }
     }
 

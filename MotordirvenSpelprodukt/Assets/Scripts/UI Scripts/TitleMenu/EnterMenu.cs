@@ -35,7 +35,8 @@ public class EnterMenu : MenuAbstract, IMenu
 
     public void ClickMenuOption1()
     {
-        throw new System.NotImplementedException();
+        _menuOption1.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void ClickMenuOption2()

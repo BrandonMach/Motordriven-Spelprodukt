@@ -1,4 +1,5 @@
 
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -11,16 +12,15 @@ public class KMScript : MinionScript
     public Animator Anim;
     public float ChaseDistance;
 
-
     [Header("Attack")]
     //[SerializeField] private Collider expolisionHitbox;
     [SerializeField] public float _automaticExplodeRange;
-    [SerializeField] public float _activateManualExplodeRange;
+    [SerializeField] public float _exploadRange;
 
     public bool _maunalExplodeActive;
     //private bool _blink;
     public float _explodeTimer;
-    int intTimer;
+    //int intTimer;
 
     public ParticleSystem _explosion;
     public TMPro.TextMeshProUGUI _countdownNumber;
@@ -38,6 +38,7 @@ public class KMScript : MinionScript
         _timer = 0;
         _pulseTimer = _explodeTimer;
         ChaseDistance = 2;
+        CurrentState = EnemyState.chasing;
 
         //_explodeTimer = 3;
 
@@ -49,23 +50,34 @@ public class KMScript : MinionScript
 
     }
 
+    protected override void HandleChase()
+    {
+        RB.velocity = transform.forward * MovementSpeed;
+        RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);
+        FacePlayer();
+    }
+
 
     protected override void Update()
     {
-
-
-        intTimer = (int)_explodeTimer;
+        base.Update();
         _timer += Time.deltaTime;
+
+        if (DistanceToPlayer < _automaticExplodeRange)
+        {
+            _maunalExplodeActive = true;
+        }   
         
         if (_maunalExplodeActive)
         {
-
             _explodeTimer -= Time.deltaTime;
 
             if (_explodeTimer <= 0)
             {
-                Debug.Log("Active bomba");
-                OnAttack();
+                //Debug.Log("Active bomba");
+            
+                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
         }
 
@@ -79,22 +91,34 @@ public class KMScript : MinionScript
             StopCoroutine(PulseCanvas());
             bombImage.color = Color.red;
         }
+        if (DistanceToPlayer <= _exploadRange)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
 
-        base.Update();
+        }
     }
 
 
-
-    protected override void OnAttack()
+    private void OnDestroy()
     {
+        Explode();
+    }
 
+
+    public void Explode()
+    {
+        PlayExplosionSound();
+
+        MovementSpeed = 0;
         ParticleSystemManager.Instance.PlayParticleFromPool
             (ParticleSystemManager.ParticleEffects.Explosion, transform);
-        gameObject.GetComponent<HealthManager>().ReduceHealth(100);
-        base.OnAttack();
-        //Instantiate(_explosion, this.transform);
-
+        OnAttack();
+        
+        Debug.Log("Deactivating KM");
     }
+
+
     
 
     IEnumerator PulseCanvas()
@@ -120,4 +144,33 @@ public class KMScript : MinionScript
             yield return null;
         }
     }
+
+    #region FMOD
+
+    private void PlayExplosionSound()
+    {
+        string eventPath;
+        int random = Random.Range(1, 4);
+
+        if (random == 1)
+        {
+            eventPath = "event:/explosion1";
+        }
+        else if (random == 2)
+        {
+            eventPath = "event:/explosion2";
+        }
+        else
+        {
+            eventPath = "event:/explosion3";
+        }
+
+        FMOD.Studio.EventInstance explosion = FMODUnity.RuntimeManager.CreateInstance(eventPath);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(explosion, this.transform);
+        explosion.start();
+        explosion.release();
+    }
+
+
+    #endregion
 }

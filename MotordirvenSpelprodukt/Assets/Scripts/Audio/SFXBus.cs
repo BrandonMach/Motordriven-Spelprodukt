@@ -16,11 +16,9 @@ public class SFXBus : MonoBehaviour
     void Start()
     {
         sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
+        sfxBus.getVolume(out float vol);
+        volumeSlider.value = vol;
 
-        //if (volumeSlider != null)
-        //{
-        //    volumeSlider.value = busVolume;
-        //}
     }
 
     // Update is called once per frame
