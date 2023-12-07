@@ -80,9 +80,7 @@ public class FMODController : MonoBehaviour
 
     private void HandleOnOpenWorldEnter()
     {
-        // TODO : Add new music track
-        _musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        _musicEventInstance.release();
+        ChangeEvent("event:/introMusic");
     }
 
     public void ChangeEvent(string newEventPath)
