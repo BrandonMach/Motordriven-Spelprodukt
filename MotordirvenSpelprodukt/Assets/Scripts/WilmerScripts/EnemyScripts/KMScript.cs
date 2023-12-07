@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class KMScript : MinionScript
@@ -11,7 +12,7 @@ public class KMScript : MinionScript
 
     public Animator Anim;
     public float ChaseDistance;
-
+    [SerializeField] private float _agentRotationSpeed;
     [Header("Attack")]
     //[SerializeField] private Collider expolisionHitbox;
     [SerializeField] public float _automaticExplodeRange;
@@ -31,7 +32,9 @@ public class KMScript : MinionScript
     private float _pulseTimer;
     private float _timer;
     private float timeRemaining;
+    private NavMeshAgent _navMesh;
     private bool isRed = false;
+
 
     protected override void Start()
     {
@@ -44,16 +47,19 @@ public class KMScript : MinionScript
 
         base.Start();
 
-
+        _navMesh = GetComponent<NavMeshAgent>();
+        _navMesh.speed = MovementSpeed;
+        _navMesh.angularSpeed = _agentRotationSpeed;
         timeRemaining = _explodeTimer;
         StartCoroutine(PulseCanvas());
-
     }
 
     protected override void HandleChase()
     {
-        RB.velocity = transform.forward * MovementSpeed;
-        RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);
+        //RB.velocity = transform.forward * MovementSpeed;
+        //RB.AddForce(Vector3.down * RB.mass * 9.81f, ForceMode.Force);
+        //FacePlayer();
+        _navMesh.SetDestination(Player.Instance.transform.position);
         FacePlayer();
     }
 
@@ -143,6 +149,9 @@ public class KMScript : MinionScript
             // Wait for a short duration before the next iteration
             yield return null;
         }
+
+
+
     }
 
     #region FMOD

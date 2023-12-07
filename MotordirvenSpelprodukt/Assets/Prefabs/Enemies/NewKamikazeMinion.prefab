@@ -1472,6 +1472,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4630754298611515477, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4986899907661843118}
+    - targetCorrespondingSourceObject: {fileID: 4630754298611515477, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2008216444718542563}
   m_SourcePrefab: {fileID: 100100000, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
 --- !u!114 &126686193265288532 stripped
 MonoBehaviour:
@@ -1521,6 +1524,28 @@ MonoBehaviour:
   _explosion: {fileID: 0}
   _countdownNumber: {fileID: 4424722017936933565}
   bombImage: {fileID: 8963161397468502620}
+--- !u!195 &2008216444718542563
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3280085971499641167}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &5529833274257220340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2412628267880975342, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
