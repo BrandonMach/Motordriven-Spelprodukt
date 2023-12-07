@@ -117,8 +117,11 @@ public class MinionScript : EnemyScript
     // Event for out/in combat. Only for minions
     protected virtual void OnDestroy()
     {
+        SpawnEnemy.Instance._waveBattleInformation[SpawnEnemy._currentWaveBattleIndex].waveInfoHolder[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
+        GameLoopManager.Instance.UpdateEnemyList();
         EntertainmentManager.Instance.OutOfCombat -= Instance_OnOutOfCombat;
         EntertainmentManager.Instance.InCombat -= Instance_OnInCombat;
+        EntertainmentManager.Instance.increaseETP(7);
     }
     #endregion
 
