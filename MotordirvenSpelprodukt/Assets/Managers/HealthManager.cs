@@ -146,10 +146,6 @@ public class HealthManager : MonoBehaviour,IHasProgress
                 PlayDoDamageSoundEvent?.Invoke(this, EventArgs.Empty);
                 PlayReciveDamageSoundEvent?.Invoke(this, EventArgs.Empty);
 
-                //PlayRandomMinionHit();
-                //PlayRandomHitSound();
-
-                //FMODSFXController.Instance.PlayMinionHit();
             }
 
             _damageAnimator.SetTrigger("DamageBlink");
