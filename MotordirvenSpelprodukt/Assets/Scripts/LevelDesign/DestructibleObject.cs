@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructibleObject : MonoBehaviour
+public class DestructibleObject : MonoBehaviour, IDamagable
 {
     [Header("Settings")]
     [SerializeField] private GameObject referencePrefab;
@@ -29,6 +29,12 @@ public class DestructibleObject : MonoBehaviour
         referencePrefab.SetActive(false);
         destroyedPrefab.SetActive(true);
         Destroy(gameObject, removeDelay);
+    }
+
+    public void TakeDamage(Attack attack)
+    {
+        hp -= attack.Damage;
+        if (hp <= 0) DestroyObjectWithDelay();
     }
 }
 

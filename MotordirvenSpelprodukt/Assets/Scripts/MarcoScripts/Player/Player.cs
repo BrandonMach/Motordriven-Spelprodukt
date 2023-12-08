@@ -230,8 +230,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             if (attack.AttackSO.CurrentAttackEffect == CurrentAttackSO.AttackEffect.Pushback)
             {
                 Debug.Log("Push back player");
-                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);
                 OnDisableMovement();
+                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);
+                
             }
         }
         else
