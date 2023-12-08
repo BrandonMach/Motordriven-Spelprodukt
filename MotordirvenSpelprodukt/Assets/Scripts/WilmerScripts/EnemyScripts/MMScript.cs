@@ -140,8 +140,8 @@ public class MMScript : MinionScript
         {
             FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(hitSoundRef);
             FMODUnity.RuntimeManager.AttachInstanceToGameObject(hitSound, this.transform, this.GetComponent<Rigidbody>());
-            hitSound.getVolume(out float volume);
-            hitSound.setVolume(volume / 3);
+            //hitSound.getVolume(out float volume);
+            //hitSound.setVolume(volume / 3);
             hitSound.start();
             hitSound.release();
         }

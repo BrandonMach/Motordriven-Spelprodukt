@@ -100,7 +100,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Start()
     {
-       
+
+        //_healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
 
         _gameInput = GameInput.Instance;
         _gameInput.OnInteractActionPressed += GameInput_OnInteractActionPressed;
@@ -116,6 +117,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
         GetComponent<AttackManager>().EnemyHit += AttackLanded;
         GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
+        GetComponent<AttackManager>().AttackMissed += PlayRandomSwordInAir;
+        GetComponent<HealthManager>().PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
         _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
         
         if (TransferableScript.Instance.GetWeapon() != null)
@@ -467,7 +470,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     //    if(CurrentWeapon != null)
     //    {
     //        Debug.Log(CurrentWeapon.GetPath());
-            
+
     //        GameObject weaponnew = (GameObject)Instantiate(Resources.Load("WeaponResources/"+CurrentWeapon.GetPath()));
     //        weaponnew.transform.parent = weaponHand.transform;
     //        weaponnew.transform.position = weaponObject.transform.position;
@@ -480,7 +483,71 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     //        weaponObject = weaponnew;
 
     //    }
-        
+
     //}
-    
+
+    #region SFX
+
+    private void PlaySwordInAir(string swordInAirRef)
+    {
+        if (swordInAirRef != null)
+        {
+            FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAirRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
+            swordInAir.start();
+            swordInAir.release();
+        }
+    }
+
+    public void PlayRandomSwordInAir(object sender, EventArgs e)
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlaySwordInAir("event:/swordInAir");
+        }
+        else if (randomNumber == 2)
+        {
+            PlaySwordInAir("event:/swordInAir2");
+        }
+        else if (randomNumber == 3)
+        {
+            PlaySwordInAir("event:/swordInAir3");
+        }
+    }
+
+    public void PlayRandomDoDamageSound(object sender, EventArgs e)
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlayHitSound("event:/swordHit2");
+        }
+        else if (randomNumber == 2)
+        {
+            PlayHitSound("event:/swordHit3");
+        }
+        else if (randomNumber == 3)
+        {
+            PlayHitSound("event:/swordHit4");
+        }
+    }
+
+    public void PlayHitSound(string hitSoundRef)
+    {
+        if (hitSoundRef != null)
+        {
+            FMOD.Studio.EventInstance hitSound = FMODUnity.RuntimeManager.CreateInstance(hitSoundRef);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(hitSound, this.transform, this.GetComponent<Rigidbody>());
+            //hitSound.getVolume(out float volume);
+            //hitSound.setVolume(volume / 3);
+            hitSound.start();
+            hitSound.release();
+        }
+    }
+
+    #endregion
+
 }
