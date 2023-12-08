@@ -2690,6 +2690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4259744980791144513}
   - component: {fileID: 55120825577907736}
+  - component: {fileID: 4369142194131108741}
   m_Layer: 0
   m_Name: DestructiblePillar
   m_TagString: Destructible
@@ -2730,6 +2731,27 @@ MonoBehaviour:
   destroyedPrefab: {fileID: 7195922272960482638}
   removeDelay: 10
   hp: 20
+--- !u!65 &4369142194131108741
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483103102280624891}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4006426159625373668
 GameObject:
   m_ObjectHideFlags: 0

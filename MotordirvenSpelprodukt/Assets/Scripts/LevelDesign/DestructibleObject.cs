@@ -8,52 +8,20 @@ public class DestructibleObject : MonoBehaviour, IDamagable
     [SerializeField] private GameObject referencePrefab;
     [SerializeField] private GameObject destroyedPrefab;
     [SerializeField] private float removeDelay = 10;
-    [SerializeField] private float disablePhysicsDelay = 4;
 
     [Header("Debug")]
     [SerializeField] private float hp = 20;
-
-    Rigidbody[] rbsFragments;
-    MeshCollider[] mcFragments;
 
     void Awake()
     {
         referencePrefab.SetActive(true);
         destroyedPrefab.SetActive(false);
-        rbsFragments = destroyedPrefab.GetComponentsInChildren<Rigidbody>();
-        mcFragments = destroyedPrefab.GetComponentsInChildren<MeshCollider>();
-    }
-
-    // Remove Update() when not debugging!
-    //bool performed = false;
-    //private void Update()
-    //{
-    //    if (hp <= 0 && !performed)
-    //    {
-    //        performed = true;
-    //        DestroyObjectWithDelay();
-    //        StartCoroutine(DisablePhysicsOnDelay());
-    //    }
-    //}
-
-    /// <summary>
-    /// IDamageable interface method
-    /// </summary>
-    /// <param name="attack"> Retrieve damage number from attack object </param>
-    public void TakeDamage(Attack attack)
-    {
-        Debug.Log("Damage: " + attack.Damage);
-        ReceiveDamage(attack.Damage);
     }
 
     public void ReceiveDamage(float damage)
     {
         hp -= damage;
-        if (hp <= 0)
-        {
-            DestroyObjectWithDelay();
-            StartCoroutine(DisablePhysicsOnDelay());
-        }
+        if (hp <= 0) DestroyObjectWithDelay();
     }
 
     private void DestroyObjectWithDelay()
@@ -63,17 +31,10 @@ public class DestructibleObject : MonoBehaviour, IDamagable
         Destroy(gameObject, removeDelay);
     }
 
-    IEnumerator DisablePhysicsOnDelay()
+    public void TakeDamage(Attack attack)
     {
-        yield return new WaitForSeconds(disablePhysicsDelay);
-        Debug.Log("Disable physics");
-
-        foreach (Rigidbody rb in rbsFragments)
-            Destroy(rb);
-
-        foreach(MeshCollider coll in mcFragments)
-            Destroy(coll);
+        hp -= attack.Damage;
+        if (hp <= 0) DestroyObjectWithDelay();
     }
-
 }
 

@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 242.974
       objectReference: {fileID: 0}
+    - target: {fileID: 1750998570860437719, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: _enemyLayerMask.m_Bits
+      value: 1280
+      objectReference: {fileID: 0}
     - target: {fileID: 3871170069054643727, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -100,6 +104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChampionBase
       objectReference: {fileID: 0}
+    - target: {fileID: 7783520723240619086, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
+      propertyPath: HasDismembrent
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4747666722037663986, guid: 87359f1aabb2b5e45a426cac7f44cc5d, type: 3}
     m_RemovedGameObjects: []
@@ -130,7 +138,9 @@ MonoBehaviour:
   _healthManager: {fileID: 0}
   anim: {fileID: 0}
   _weapon: {fileID: 0}
-  _attackSOArray: []
+  _normalAttackSO: {fileID: 0}
+  _onGround: 1
+  _groundCheck: {fileID: 0}
   DamageBuff: 0
   ChaseDistance: 0
   Anim: {fileID: 0}

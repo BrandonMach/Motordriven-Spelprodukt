@@ -235,12 +235,17 @@ public class GameManager : MonoBehaviour
             _currentScen = CurrentScen.ArenaScen;
 
 
-            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
         }
         else
         {
             // Used for FMOD
             _arenaEventInvoked = false;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
 
