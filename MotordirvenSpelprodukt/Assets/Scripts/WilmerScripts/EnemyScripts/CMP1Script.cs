@@ -29,6 +29,9 @@ public class CMP1Script : ChampionScript
     public EventReference championThirdHitEventPath;
     public EventReference championTakeDamage1;
     public EventReference championTakeDamage2;
+    public EventReference hitSoundEventPath;
+    public EventReference hitSound2EventPath;
+    public EventReference hitSound3EventPath;
 
     HealthManager _healthManager;
 
@@ -44,6 +47,7 @@ public class CMP1Script : ChampionScript
 
         _healthManager = GetComponent<HealthManager>();
         _healthManager.PlayReciveDamageSoundEvent += PlayRecieveDamageSound;
+        _healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
     }
 
 
@@ -183,17 +187,26 @@ public class CMP1Script : ChampionScript
         }
     }
 
+    public void PlayRandomDoDamageSound(object sender, EventArgs e)
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlaySound(hitSoundEventPath);
+        }
+        else if (randomNumber == 2)
+        {
+            PlaySound(hitSound2EventPath);
+        }
+        else if (randomNumber == 3)
+        {
+            PlaySound(hitSound3EventPath);
+        }
+    }
+
     private void PlayRecieveDamageSound(object sender, EventArgs e)
     {
-        //if (!hasTakenDamage)
-        //{
-        //    PlaySound(championTakeDamage1);
-        //    hasTakenDamage = true;
-        //}
-        //else
-        //{
-        //    PlaySound(championTakeDamage2);
-        //}
 
         int rand = UnityEngine.Random.Range(1, 3);
 
