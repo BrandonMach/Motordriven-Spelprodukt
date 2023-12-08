@@ -141,8 +141,6 @@ public class HealthManager : MonoBehaviour,IHasProgress
             }
             else if (!IsPlayer && !isBleeding)
             {
-
-
                 PlayDoDamageSoundEvent?.Invoke(this, EventArgs.Empty);
                 PlayReciveDamageSoundEvent?.Invoke(this, EventArgs.Empty);
 
