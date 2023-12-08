@@ -217,8 +217,7 @@ public class GameLoopManager : MonoBehaviour
 
         OnMatchFinished += MatchFinished;
         UpdateEnemyList();
-        
-        
+
     }
 
     // Update is called once per frame
@@ -228,6 +227,18 @@ public class GameLoopManager : MonoBehaviour
         foreach (var canvas in Canvases)
         {
             canvas.SetActive(!PauseMenu.GameIsPaused);
+
+            if (PauseMenu.GameIsPaused)
+            {
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
 
