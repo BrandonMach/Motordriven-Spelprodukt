@@ -130,7 +130,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void ReduceHealth(float damage)
     {
-        EntertainmentManager.Instance.firstTimeInCombat = true;
+        EntertainmentManager.Instance.CanGoOTC = true;
         if (!GodMode)
         {
             if (IsPlayer)

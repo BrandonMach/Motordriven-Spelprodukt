@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
     public float TotalMoneyEarned;
     public float GameManagerKillCount;
 
+    public System.EventHandler OnRestartGame;
     void Start()
     {
        
@@ -510,5 +511,8 @@ public class GameManager : MonoBehaviour
          GameManagerKillCount = 0;
 
          PlayerCoins = 50;
+
+        TransferableScript.Instance.ResetInventorySlots();
+
     }
 }

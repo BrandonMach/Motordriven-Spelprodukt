@@ -27,7 +27,7 @@ public class GenerateWeapon : MonoBehaviour
     {
         _purshased = false;
         _weapon.SetUpWeapon(type,level, 
-            1f, 
+            15f, 
             1f, 
             1f);
         _weapon.SetName(GenerateName(type));

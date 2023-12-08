@@ -79,7 +79,8 @@ public class EntertainmentManager : MonoBehaviour
     public event System.EventHandler OutOfCombat;
     public event System.EventHandler InCombat;
 
-    public bool firstTimeInCombat;
+    public bool CanGoOTC;
+   // public bool WavesAreSpawning;
 
     #endregion
 
@@ -105,7 +106,7 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints = _startETP;
 
         Player.Instance.GetComponent<AttackManager>().EnemyHit += EnemyHitPlayerInCombat;
-      
+        SpawnEnemy.Instance.SpawningDone += ResetFirstTimeInCombat;
 
 
     }
@@ -121,11 +122,15 @@ public class EntertainmentManager : MonoBehaviour
 
         //For testing
         EntertainmentText.text = "ETP: " + Mathf.Round(_entertainmentPoints).ToString();
+
        
 
-        if (!GameLoopManager.Instance.MatchIsFinished && firstTimeInCombat)
+        if (!GameLoopManager.Instance.MatchIsFinished && CanGoOTC)
         {
+
             //Debug.Log("sdkasd");
+
+
             CheckIfOutOfCombat();
             if (_isOutOfCombat)
             {
@@ -142,20 +147,28 @@ public class EntertainmentManager : MonoBehaviour
     }
 
 
+    private void ResetFirstTimeInCombat(object sender, System.EventArgs e)
+    {
+        //_timeOutOfCombatCounter = 0;
+       
+
+
+    }
+
     #region ETP Change Events
     void CheckETPChanges()
     {
         if(GetETP() > GetExcitedThreshold())
         {
             OnETPExited?.Invoke(this, EventArgs.Empty);
-            FMODSFXController.Instance.PlayCrowdCheer();    // VArFoR iNtE fOnKa??
+          //  FMODSFXController.Instance.PlayCrowdCheer();    // VArFoR iNtE fOnKa??
 
 
         }
         else if (GetETP() < GetAngryThreshold())
         {
             OnETPAngry?.Invoke(this, EventArgs.Empty);
-            FMODSFXController.Instance.PlayCrowdBoo();      // VArFoR iNtE fOnKa??
+           // FMODSFXController.Instance.PlayCrowdBoo();      // VArFoR iNtE fOnKa??
         }
         else
         {
@@ -241,8 +254,5 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints += amoutToIncrease;     
     }
 
-    //private void OnDestroy()
-    //{
-    //    Debug.Log("sdad");
-    //}
+
 }

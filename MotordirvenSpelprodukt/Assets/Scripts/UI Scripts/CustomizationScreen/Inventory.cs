@@ -27,6 +27,9 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
+        
     }
     #endregion
 
@@ -40,6 +43,23 @@ public class Inventory : MonoBehaviour
     public List<Item> InventoryList { get => _inventoryList; set => _inventoryList = value; }
     public int Capacity { get => _capacity; set => _capacity = value; }
 
+
+    private void Start()
+    {
+        UpdateInventoryVisualiser();
+    }
+
+
+    private void UpdateInventoryVisualiser()
+    {
+        _inventoryList.Clear();
+
+        for (int i = 0; i < TransferableScript.Instance.InventoryItems.Count; i++)
+        {
+            _inventoryList.Add(TransferableScript.Instance.InventoryItems[i]);
+        }
+    }
+
     public bool Add(Item item)
     {
         if (_inventoryList.Count >= _capacity)
@@ -50,7 +70,11 @@ public class Inventory : MonoBehaviour
 
         if (item is Weapon weapon)
         {
-            _inventoryList.Add(weapon);
+           // _inventoryList.Add(weapon);
+           
+
+            TransferableScript.Instance.InventoryItems.Add(weapon);
+            UpdateInventoryVisualiser();
         }
 
         //else if (item is Potion potion)

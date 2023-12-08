@@ -9,6 +9,8 @@ public class TransferableScript : MonoBehaviour
 
     [SerializeField] public List<FoodHeal> HealItems;
 
+    [SerializeField] public List<Weapon> InventoryItems;
+
     #region Singleton
 
 
@@ -28,6 +30,9 @@ public class TransferableScript : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+       
+
     }
     public Weapon GetWeapon()
     {
@@ -41,6 +46,19 @@ public class TransferableScript : MonoBehaviour
       
 
     }
+
+    public void ResetInventorySlots()
+    {
+        for (int i = 0; i < InventoryItems.Count; i++)
+        {
+            if (i != 0)
+            {
+                InventoryItems.RemoveAt(i);
+            }
+            
+        }
+    }
+
     //public FMODController GetFMODAM()
     //{
     //    return _FMODcontroller;
