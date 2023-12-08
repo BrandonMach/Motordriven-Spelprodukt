@@ -980,7 +980,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8986635283583572664}
   - component: {fileID: 8769770014793321298}
-  m_Layer: 0
+  - component: {fileID: 8734048887178888934}
+  m_Layer: 10
   m_Name: DestructibleBarricade
   m_TagString: Destructible
   m_Icon: {fileID: 0}
@@ -1019,8 +1020,29 @@ MonoBehaviour:
   referencePrefab: {fileID: 311261204734210585}
   destroyedPrefab: {fileID: 8174347809787821737}
   removeDelay: 10
-  disablePhysicsDelay: 4
+  removePhysicsDelay: 4
   hp: 20
+--- !u!65 &8734048887178888934
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457796124249074299}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8512037, y: 0.8355074, z: 0.32195193}
+  m_Center: {x: 0.00089883804, y: 0.4327407, z: -0.24651936}
 --- !u!1 &1499311146207443200
 GameObject:
   m_ObjectHideFlags: 0
