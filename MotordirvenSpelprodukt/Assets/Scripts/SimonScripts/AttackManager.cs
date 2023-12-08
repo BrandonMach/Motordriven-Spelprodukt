@@ -28,11 +28,6 @@ public class AttackManager : MonoBehaviour
 
     [SerializeField] private ParticleSystem stunEffect;
 
-    [Header("SFX EventReferences")]
-    public EventReference swordInAirEventRef;
-    public EventReference swordInAir2EventRef;
-    public EventReference swordInAir3EventRef;
-
 
     void Start()
     {
@@ -40,6 +35,8 @@ public class AttackManager : MonoBehaviour
 
         attacker.RegisterAttack += Attacker_OnAttack;
         //stunEffect = Resources.Load<ParticleSystem>("ObjStunnedEffect");
+
+      
     }
 
     private void Attacker_OnAttack(object sender, OnAttackPressedEventArgs e)
@@ -78,7 +75,6 @@ public class AttackManager : MonoBehaviour
         if(enemyHits.Length==0 && isPlayer) //if attack misses enemy as player dont get ETP fo completed combo
         {
             AttackMissed?.Invoke(this, System.EventArgs.Empty);
-            PlayRandomSwordInAir();
         }
 
         for (int i = 0; i < enemyHits.Length; i++)
@@ -173,37 +169,4 @@ public class AttackManager : MonoBehaviour
     //        //attack.Attack(test[i]);
     //    }
     //}
-
-    #region SFX
-
-    private void PlaySwordInAir(EventReference swordInAirRef)
-    {
-        if (!swordInAirRef.IsNull)
-        {
-            FMOD.Studio.EventInstance swordInAir = FMODUnity.RuntimeManager.CreateInstance(swordInAirRef);
-            FMODUnity.RuntimeManager.AttachInstanceToGameObject(swordInAir, this.transform, this.GetComponent<Rigidbody>());
-            swordInAir.start();
-            swordInAir.release();
-        }
-    }
-
-    public void PlayRandomSwordInAir()
-    {
-        int randomNumber = UnityEngine.Random.Range(1, 4);
-
-        if (randomNumber == 1)
-        {
-            PlaySwordInAir(swordInAirEventRef);
-        }
-        else if (randomNumber == 2)
-        {
-            PlaySwordInAir(swordInAir2EventRef);
-        }
-        else if (randomNumber == 3)
-        {
-            PlaySwordInAir(swordInAir3EventRef);
-        }
-    }
-
-    #endregion
 }
