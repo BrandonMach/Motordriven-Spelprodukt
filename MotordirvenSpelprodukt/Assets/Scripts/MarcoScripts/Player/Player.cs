@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 {
@@ -132,6 +133,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();   
         PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
+
+       
     }
 
     private void gameInput_OnHealButtonPressed(object sender, EventArgs e)
