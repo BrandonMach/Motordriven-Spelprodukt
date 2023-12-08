@@ -1,7 +1,9 @@
 using FMODUnity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +11,8 @@ public class CMP1Script : ChampionScript
 {
     public string ChampionName;
     private bool _shouldCheckForGround;
+    private bool hasTakenDamage;
+
     public enum ChampionState { Enter, Taunt, SpecialAttack, BasicAttack, None }
     public ChampionState CurrentState = ChampionState.Enter;
     public ChampionState PreviousState = ChampionState.Enter;
@@ -20,6 +24,17 @@ public class CMP1Script : ChampionScript
     [Header("SFX EventReferences")]
     public EventReference tauntScreamEventPath;
     public EventReference championSlamEventPath;
+    public EventReference championFirstHitEventPath;
+    public EventReference championSecondHitEventPath;
+    public EventReference championThirdHitEventPath;
+    public EventReference championTakeDamage1;
+    public EventReference championTakeDamage2;
+    public EventReference hitSoundEventPath;
+    public EventReference hitSound2EventPath;
+    public EventReference hitSound3EventPath;
+
+    HealthManager _healthManager;
+
 
     // Start is called before the first frame update
     protected override void Start()
@@ -30,7 +45,11 @@ public class CMP1Script : ChampionScript
 
         _attackSODictionary.Add(_jumpAttackStringKey, _jumpAttack);
 
+        _healthManager = GetComponent<HealthManager>();
+        _healthManager.PlayReciveDamageSoundEvent += PlayRecieveDamageSound;
+        _healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
     }
+
 
     // Update is called once per frame
     protected override void Update()
@@ -86,7 +105,6 @@ public class CMP1Script : ChampionScript
     }
 
 
-
     public override void TakeDamage(Attack attack)
     {
         base.TakeDamage(attack);
@@ -94,21 +112,27 @@ public class CMP1Script : ChampionScript
         switch (CurrentState) { }
     }
 
+
     public void EnterBasicAttackState()
     {
         CurrentState = ChampionState.BasicAttack;
 
         _currentAttackSO = _attackSODictionary[_normalAttackString];
     }
+
+
     public void EnterSpecialState()
     {
         CurrentState = ChampionState.SpecialAttack;
         _currentAttackSO = _attackSODictionary[_jumpAttackStringKey];
     }
+
+
     public void EnterTauntState()
     {
         CurrentState = ChampionState.Taunt;
     }
+
 
     public void EnterNoneState()
     {
@@ -119,14 +143,14 @@ public class CMP1Script : ChampionScript
         Anim.ResetTrigger("Taunt");
         Anim.ResetTrigger("Landing");
     }
+    
 
     //Reset triggers method
-
     protected override void OnAttack()
     {
         base.OnAttack();
 
-        if (CurrentState == ChampionState.SpecialAttack)
+        if (CurrentState == ChampionState.SpecialAttack || CurrentState == ChampionState.Enter)
         {
             PlayChampionSlam();
             PlayerDamageHUD.Instance.ShakeScreen();
@@ -140,29 +164,85 @@ public class CMP1Script : ChampionScript
         _shouldCheckForGround = true;
     }
 
+
     #region SFX
+    private void PlaySound(EventReference eventReference)
+    {
+        if (!eventReference.IsNull)
+        {
+            FMOD.Studio.EventInstance firstHit = FMODUnity.RuntimeManager.CreateInstance(eventReference);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(firstHit, this.transform, this.GetComponent<Rigidbody>());
+            firstHit.start();
+            firstHit.release();
+        }
+    }
+
+    private void PlayHurtSound(EventReference eventReference)
+    {
+        if (!eventReference.IsNull)
+        {
+            FMOD.Studio.EventInstance firstHit = FMODUnity.RuntimeManager.CreateInstance(eventReference);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(firstHit, this.transform, this.GetComponent<Rigidbody>());
+            firstHit.start();
+        }
+    }
+
+    public void PlayRandomDoDamageSound(object sender, EventArgs e)
+    {
+        int randomNumber = UnityEngine.Random.Range(1, 4);
+
+        if (randomNumber == 1)
+        {
+            PlaySound(hitSoundEventPath);
+        }
+        else if (randomNumber == 2)
+        {
+            PlaySound(hitSound2EventPath);
+        }
+        else if (randomNumber == 3)
+        {
+            PlaySound(hitSound3EventPath);
+        }
+    }
+
+    private void PlayRecieveDamageSound(object sender, EventArgs e)
+    {
+
+        int rand = UnityEngine.Random.Range(1, 3);
+
+        if (rand == 1)
+        {
+            PlayHurtSound(championTakeDamage1);
+        }
+        else
+        {
+            PlayHurtSound(championTakeDamage2);
+        }
+    }
 
     private void PlayChampionSlam()
     {
-        if (!championSlamEventPath.IsNull)
-        {
-            FMOD.Studio.EventInstance championSlam = FMODUnity.RuntimeManager.CreateInstance(championSlamEventPath);
-            FMODUnity.RuntimeManager.AttachInstanceToGameObject(championSlam, this.transform, this.GetComponent<Rigidbody>());
-            championSlam.start();
-            championSlam.release();
-        }
+        PlaySound(championSlamEventPath);
     }
 
     private void PlayTauntScream()
     {
-        if (!tauntScreamEventPath.IsNull)
-        {
-            FMOD.Studio.EventInstance tauntScream = FMODUnity.RuntimeManager.CreateInstance(tauntScreamEventPath);
-            FMODUnity.RuntimeManager.AttachInstanceToGameObject(tauntScream, this.transform, this.GetComponent<Rigidbody>());
-            tauntScream.start();
-            tauntScream.release();
-        }
+        PlaySound(tauntScreamEventPath);
     }
 
+    private void PlayFirstHitSound()
+    {     
+        PlaySound(championFirstHitEventPath);
+    }
+
+    private void PlaySecondHitSound()
+    {
+        PlaySound(championSecondHitEventPath);
+    }
+
+    private void PlayThirdHitSound()
+    {
+        PlaySound(championThirdHitEventPath);
+    }
     #endregion
 }

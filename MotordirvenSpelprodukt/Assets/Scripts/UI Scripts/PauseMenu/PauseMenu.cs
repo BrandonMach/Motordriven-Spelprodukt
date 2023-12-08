@@ -9,6 +9,7 @@ public class PauseMenu : MenuAbstract, IMenu
     GameManager _gameManager = GameManager.Instance;
 
     [SerializeField] GameObject _pauseMenuUI;
+    [SerializeField] GameObject _bloodSplatterUI;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class PauseMenu : MenuAbstract, IMenu
     public void Resume()
     {
         _pauseMenuUI.SetActive(false);
+        _bloodSplatterUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -33,6 +35,7 @@ public class PauseMenu : MenuAbstract, IMenu
     public void Pause()
     {
         _pauseMenuUI.SetActive(true);
+        _bloodSplatterUI.SetActive(false);
         Time.timeScale = 0f;    // Freezes the game
         GameIsPaused = true;
         Debug.Log("Clicked");
