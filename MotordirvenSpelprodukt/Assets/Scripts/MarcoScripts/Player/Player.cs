@@ -19,6 +19,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     public event EventHandler StartEvade;
     public event EventHandler DisableMovement;
     public event EventHandler EnableMovement;
+    public event EventHandler InteractButtonPressed;
+    public event EventHandler HealButtonPressed;
 
     public event EventHandler ComboBroken;
     public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
@@ -105,6 +107,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _gameInput.OnLightAttackButtonPressed += GameInput_OnLightAttackButtonPressed;
         _gameInput.OnHeavyAttackButtonPressed += GameInput_OnHeavyAttackButtonPressed;
         _gameInput.OnEvadeButtonPressed += GameInput_OnEvadeButtonPressed;
+        _gameInput.OnHealButtonPressed += gameInput_OnHealButtonPressed;
 
         _playerDash.EvadePerformed += PlayerDash_OnEvadePerformed;
 
@@ -128,6 +131,10 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
     }
 
+    private void gameInput_OnHealButtonPressed(object sender, EventArgs e)
+    {
+        HealButtonPressed?.Invoke(this, e);
+    }
 
     private void GameInput_OnEvadeButtonPressed(object sender, EventArgs e)
     {
@@ -388,8 +395,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     private void GameInput_OnInteractActionPressed(object sender, System.EventArgs e)
     {
-        ChangeControllerTypeButtonPressed?.Invoke(this, e);
-        TakeDamage(new Attack { });
+        InteractButtonPressed?.Invoke(this, e);
 
     }
     private void OnDisableMovement()

@@ -690,6 +690,69 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &101159029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 101159031}
+  - component: {fileID: 101159030}
+  m_Layer: 0
+  m_Name: particleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &101159030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101159029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed43da9891aac3f42826c94114be837d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slamEffectPrefab: {fileID: 0}
+  _stunPrefab: {fileID: 0}
+  _bloodPrefab: {fileID: 0}
+  _jumpCrackPrefab: {fileID: 0}
+  _explosionPrefab: {fileID: 0}
+  _healPrefab: {fileID: 1573896780}
+  _slamPoolSize: 0
+  _stunPoolSize: 0
+  _bloodPoolSize: 0
+  _jumpCrackPoolSize: 0
+  _explosionPoolSize: 0
+  _slamLifeTime: 0
+  _stunLifeTime: 0
+  _bloodLifeTime: 0
+  _jumpCrackLifeTime: 0
+  _explosionLifeTime: 0
+  _stunHeightOffset: 2
+  _crackYvalue: 0.02
+  _explosionYvalue: 1.5
+--- !u!4 &101159031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101159029}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &107647397
 GameObject:
   m_ObjectHideFlags: 0
@@ -6249,6 +6312,8 @@ MonoBehaviour:
   _currentWaveIndex: 0
   readyToCountdown: 0
   debugInt: 0
+  _anim: {fileID: 0}
+  _waveText: {fileID: 0}
 --- !u!4 &1359269657
 Transform:
   m_ObjectHideFlags: 0
@@ -7404,6 +7469,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &1573896780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3726294282389079914, guid: 7ad6a9298b3463046bcebf5afe4e894c, type: 3}
+  m_PrefabInstance: {fileID: 1537310725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1582928666
 GameObject:
   m_ObjectHideFlags: 0
@@ -10208,8 +10278,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5345028204499432433, guid: 95666561deee16142b8ccddb160c3615, type: 3}
       propertyPath: HealItems.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5345028204499432433, guid: 95666561deee16142b8ccddb160c3615, type: 3}
+      propertyPath: HealItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f7ff4ca00a31364dabb7ed1bc9fd5f2, type: 2}
     - target: {fileID: 8575050763449726260, guid: 95666561deee16142b8ccddb160c3615, type: 3}
       propertyPath: m_Name
       value: Transferables
@@ -10429,3 +10503,4 @@ SceneRoots:
   - {fileID: 2144529549}
   - {fileID: 36511687}
   - {fileID: 1428837026}
+  - {fileID: 101159031}

@@ -12,9 +12,24 @@ public class UseHealFood : MonoBehaviour
 
     [SerializeField] Image _icon;
     [SerializeField] TextMeshProUGUI _healText;
+
+    private Player _player;
     void Start()
     {
-        _playerHealth = Player.Instance.gameObject.GetComponent<HealthManager>();
+        _player = Player.Instance;
+
+        _playerHealth = _player.gameObject.GetComponent<HealthManager>();
+        _player.HealButtonPressed += Player_HealButtonPressed;
+    }
+
+    private void Player_HealButtonPressed(object sender, System.EventArgs e)
+    {
+        if (TransferableScript.Instance.HealItems.Count > 0)
+        {
+
+            _player.GetComponent<HealthManager>().HealDamage(TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].HPToHeal);
+            TransferableScript.Instance.HealItems.RemoveAt(TransferableScript.Instance.HealItems.Count - 1);
+        }
     }
 
     // Update is called once per frame
@@ -31,22 +46,5 @@ public class UseHealFood : MonoBehaviour
             _icon.sprite = TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].Foodimage;
             _healText.text = TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].HPToHeal.ToString();
         }
-
-
-
-        if(GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen)
-        {
-            if(Input.GetKeyDown(KeyCode.E) && TransferableScript.Instance.HealItems.Count > 0)
-            {
-               
-                _playerHealth.HealDamage(TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].HPToHeal);
-                TransferableScript.Instance.HealItems.RemoveAt(TransferableScript.Instance.HealItems.Count - 1);
-
-            }
-        }
-
-
-
-
     }
 }

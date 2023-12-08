@@ -7,24 +7,13 @@ using UnityEngine.InputSystem.HID;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public enum RotateMode
-    {
-        TwoStick,
-        OneStick
-    }
 
-    public enum InputMode
-    {
-        Controller,
-        MnK
-    }
+
 
     public Vector3 _moveDirection {  get; private set; }
 
     public float MoveSpeed { get { return _moveSpeed; } private set { _moveSpeed = value; } }
 
-    [SerializeField] private RotateMode _currentRotateMode;
-    [SerializeField] private InputMode _currentInputMode;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _attackDashForce = 1.5f;
@@ -58,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        Player.Instance.ChangeControllerTypeButtonPressed += PlayerScript_OnChangeControllerTypeButtonPressed;
         Player.Instance.DisableMovement += PlayerScript_OnDisableMovement;
         Player.Instance.EnableMovement += PlayerScript_OnEnableMovement;
     }
@@ -83,37 +71,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void PlayerScript_OnChangeControllerTypeButtonPressed(object sender, System.EventArgs e)
-    {
-        switch (_currentRotateMode)
-        {
-            case RotateMode.TwoStick:
-                _currentRotateMode = RotateMode.OneStick;
-                break;
-            case RotateMode.OneStick:
-                _currentRotateMode= RotateMode.TwoStick;
-                break;
-            default:
-                break;
-        }
-    }
-
 
     void Update()
     {
-        
-        //if(GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene )
-        //{
-        //    _canMove = false;
-        //}
-        //else
-        //{
-        //    if (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen && GameLoopManager.Instance.MatchIsFinished )
-        //    {
-        //        _canMove = false;
-        //    }
-
-        //}
 
         if (_canMove)
         {
@@ -129,20 +89,7 @@ public class PlayerMovement : MonoBehaviour
         if (_canMove)
         {
             Move();
-
-
-            switch (_currentRotateMode)
-            {
-                case RotateMode.TwoStick:
-                    RotateWithInput();
-                    break;
-                case RotateMode.OneStick:
-                    //RotateTowardsMovement();
-                    SetRotateDirectionTowardsMovement();
-                    break;
-                default:
-                    break;
-            }
+            SetRotateDirectionTowardsMovement();
         }
     }
 
@@ -179,40 +126,40 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void RotateWithInput()
-    {
-        switch (_currentInputMode)
-        {
-            case InputMode.Controller:
-                Vector3 input = Player.Instance.GameInput.GetDirectionVectorNormalized();
-                _rotateInputDirection = input.x * _camRight + input.y * _camForward;
-                break;
-            case InputMode.MnK:
+    //private void RotateWithInput()
+    //{
+    //    switch (_currentInputMode)
+    //    {
+    //        case InputMode.Controller:
+    //            Vector3 input = Player.Instance.GameInput.GetDirectionVectorNormalized();
+    //            _rotateInputDirection = input.x * _camRight + input.y * _camForward;
+    //            break;
+    //        case InputMode.MnK:
 
-                Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Plane groundPlane = new Plane(Vector3.up, transform.position);
-                float rayLength;
+    //            Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //            Plane groundPlane = new Plane(Vector3.up, transform.position);
+    //            float rayLength;
 
-                if (groundPlane.Raycast(cameraRay, out rayLength))
-                {
-                    //Get the point in worldspace where we have our mouse and calculate the direction from the player
-                    Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-                    _rotateInputDirection = pointToLook - transform.position;
-                    _rotateInputDirection.Normalize();
-                }
-                break;
-            default:
-                break;
-        }
+    //            if (groundPlane.Raycast(cameraRay, out rayLength))
+    //            {
+    //                //Get the point in worldspace where we have our mouse and calculate the direction from the player
+    //                Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+    //                _rotateInputDirection = pointToLook - transform.position;
+    //                _rotateInputDirection.Normalize();
+    //            }
+    //            break;
+    //        default:
+    //            break;
+    //    }
 
-        _newRotation = Quaternion.LookRotation(_rotateInputDirection);
+    //    _newRotation = Quaternion.LookRotation(_rotateInputDirection);
 
-        bool isRotating = transform.rotation != _newRotation && _rotateInputDirection != Vector3.zero;
-        if (isRotating)
-        {
-            Rotate();
-        }
-    }
+    //    bool isRotating = transform.rotation != _newRotation && _rotateInputDirection != Vector3.zero;
+    //    if (isRotating)
+    //    {
+    //        Rotate();
+    //    }
+    //}
 
     private void Rotate()
     {
@@ -232,5 +179,11 @@ public class PlayerMovement : MonoBehaviour
         _camRight.y = 0;
         _camForward = _camForward.normalized;
         _camRight = _camRight.normalized;
+    }
+
+    private void OnDestroy()
+    {
+        Player.Instance.DisableMovement -= PlayerScript_OnDisableMovement;
+        Player.Instance.EnableMovement -= PlayerScript_OnEnableMovement;
     }
 }
