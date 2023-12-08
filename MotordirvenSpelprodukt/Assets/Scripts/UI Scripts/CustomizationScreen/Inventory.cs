@@ -37,27 +37,36 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
 
-    private List<Item> _inventoryList = new List<Item>();
+    [SerializeField] public List<Item> _inventoryList = new List<Item>();
     private int _capacity = 25;
 
     public List<Item> InventoryList { get => _inventoryList; set => _inventoryList = value; }
     public int Capacity { get => _capacity; set => _capacity = value; }
 
-
     private void Start()
     {
+       // TransferableScript.Instance.InventoryItems.Add(TransferableScript.Instance.GetWeapon());
+        _inventoryList.Add(TransferableScript.Instance.GetWeapon());
         UpdateInventoryVisualiser();
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+
     }
 
 
     private void UpdateInventoryVisualiser()
     {
+        Debug.LogError("sdadad" + TransferableScript.Instance.InventoryItems.Count);
         _inventoryList.Clear();
 
-        for (int i = 0; i < TransferableScript.Instance.InventoryItems.Count; i++)
+
+        foreach (var weapons in TransferableScript.Instance.InventoryItems)
         {
-            _inventoryList.Add(TransferableScript.Instance.InventoryItems[i]);
+            _inventoryList.Add(weapons);
         }
+
     }
 
     public bool Add(Item item)

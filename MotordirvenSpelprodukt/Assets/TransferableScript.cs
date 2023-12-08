@@ -34,6 +34,12 @@ public class TransferableScript : MonoBehaviour
        
 
     }
+
+    //private void Start()
+    //{
+    //    InventoryItems.Add(_weapon);
+    //}
+
     public Weapon GetWeapon()
     {
         return _weapon;
@@ -49,14 +55,7 @@ public class TransferableScript : MonoBehaviour
 
     public void ResetInventorySlots()
     {
-        for (int i = 0; i < InventoryItems.Count; i++)
-        {
-            if (i != 0)
-            {
-                InventoryItems.RemoveAt(i);
-            }
-            
-        }
+        InventoryItems.RemoveRange(1, InventoryItems.Count-1);
     }
 
     //public FMODController GetFMODAM()
