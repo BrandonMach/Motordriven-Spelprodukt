@@ -211,7 +211,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
         _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
-
     }
 
     public void TakeDamage(Attack attack)
@@ -489,6 +488,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     //    }
 
     //}
+
+
+    
 
     #region SFX
 
