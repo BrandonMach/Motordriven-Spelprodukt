@@ -104,7 +104,6 @@ namespace LevelDesign
 
         private void OnDrawGizmos()
         {
-            return;
             if (surfaces?.Length > 0)
             {
                 for (int i = 0; i< surfaces.Length;i++) DrawGizmoAuxiliaries.DrawSpawnSurfaces(surfaces[i].type, surfaces[i].data, gizmoHeightOffset);
