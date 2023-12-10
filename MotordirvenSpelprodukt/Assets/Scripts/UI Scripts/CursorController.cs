@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
+//using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -8,24 +8,13 @@ using UnityEngine.InputSystem.UI;
 
 public class CursorController : MonoBehaviour
 {
-
-    //public enum GameDevice
-    //{
-    //    KeyboardMouse,
-    //    Gamepad,
-    //}
-
-    //private GameDevice activeGameDevice;
-
     private VirtualMouseInput virtualMouseInput;
 
     private void Awake()
     {
         virtualMouseInput = GetComponent<VirtualMouseInput>();
 
-       
-
-        //InputSystem.onActionChange += handleOnActionChange;
+        Cursor.visible = false;
     }
 
     private void Start()
@@ -39,14 +28,13 @@ public class CursorController : MonoBehaviour
         virtualMousePosition.x = Mathf.Clamp(virtualMousePosition.x, 0f, Screen.width);
         virtualMousePosition.y = Mathf.Clamp(virtualMousePosition.y, 0f, Screen.height);
 
-        InputState.Change(virtualMouseInput.virtualMouse.position, virtualMousePosition);
-
-        
+        InputState.Change(virtualMouseInput.virtualMouse.position, virtualMousePosition);      
     }
 
     private void HandleOnGameDeviceChanged(object sender, System.EventArgs e)
     {
         UpdateVisibility();
+        GamePadCursorToCenter();
     }
 
     private void UpdateVisibility()
@@ -77,6 +65,14 @@ public class CursorController : MonoBehaviour
         Cursor.visible = true;
     }
 
+    private void GamePadCursorToCenter()
+    {
+        //Vector2 virtualMousePosition = virtualMouseInput.virtualMouse.position.value;
+        Vector2 centerOfScreen = new Vector2(Screen.width / 2, Screen.height / 2);
+
+        InputState.Change(virtualMouseInput.virtualMouse.position, centerOfScreen);
+    }
+
     private void ToggleCursorMode()
     {
         if (virtualMouseInput.cursorMode == VirtualMouseInput.CursorMode.SoftwareCursor)
@@ -89,41 +85,4 @@ public class CursorController : MonoBehaviour
         }
         
     }
-
-    //private void handleOnActionChange(object arg1, InputActionChange inputActionChange)
-    //{
-    //    if (inputActionChange == InputActionChange.ActionPerformed && arg1 is InputAction)
-    //    {
-    //        InputAction inputAction = arg1 as InputAction;
-
-    //        if (inputAction.activeControl.device.displayName == "VirtualMouse")
-    //        {
-    //            // Ignore virtual mouse
-    //            return;
-    //        }
-    //        if (inputAction.activeControl.device is Gamepad)
-    //        {
-    //            if (activeGameDevice != GameDevice.Gamepad)
-    //            {
-    //                ChangeActiveGameDevice(GameDevice.Gamepad);
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (activeGameDevice != GameDevice.KeyboardMouse)
-    //            {
-    //                ChangeActiveGameDevice(GameDevice.KeyboardMouse);
-    //            }
-    //        }          
-    //    }
-    //}
-
-    //private void ChangeActiveGameDevice(GameDevice activeGameDevice)
-    //{
-    //    this.activeGameDevice = activeGameDevice;
-
-    //    Cursor.visible = activeGameDevice == GameDevice.KeyboardMouse;
-    //    OnGameDeviceChanged?.Invoke(this, EventArgs.Empty);
-    //}
-
 }

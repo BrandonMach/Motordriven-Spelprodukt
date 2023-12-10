@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+public class TMPFeatures : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject _hoverObjectIcon;
     [SerializeField] private Image _img;
@@ -68,7 +68,7 @@ public class ClickableButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public void OnPointerDown(PointerEventData eventData)
     {
         //_img.sprite = _pressed;
-        Debug.Log("Clicked!");
+       // Debug.Log("Clicked!");
     }
 
     public void OnPointerUp(PointerEventData eventData)
