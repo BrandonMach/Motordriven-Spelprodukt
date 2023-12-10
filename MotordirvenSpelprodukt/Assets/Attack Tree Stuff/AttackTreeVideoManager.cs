@@ -12,7 +12,9 @@ public class AttackTreeVideoManager : MonoBehaviour
     [SerializeField] private VideoPlayer _videoClip;
     [SerializeField] private TextMeshProUGUI _description;
 
-    public VideoClip[] AttackClips;
+    //public VideoClip[] AttackClips;
+    public AttackTreeSO _attackSO;
+
     //Lägg till path till vapen typ eller vapen
     public string Path;
     
@@ -50,8 +52,11 @@ public class AttackTreeVideoManager : MonoBehaviour
     public void SwitchVideoClip(int comboIndex)
     {
         ComboIndex = comboIndex;
-        _videoClip.clip = AttackClips[comboIndex];
-        _description.text = lines[comboIndex];
+
+        _videoClip.clip = _attackSO.AttackClips[comboIndex];
+        _description.text = _attackSO.Descriptions[comboIndex];
+        //_videoClip.clip = AttackClips[comboIndex];
+       // _description.text = lines[comboIndex];
        
 
 

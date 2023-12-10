@@ -60,7 +60,8 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private TMPro.TextMeshProUGUI _waveText;
 
-
+    public System.EventHandler SpawningDone;
+    public bool WavesAreSpawning;
 
     #endregion
 
@@ -120,7 +121,15 @@ public class SpawnEnemy : MonoBehaviour
 
         if (readyToCountdown)
         {
+            //EntertainmentManager.Instance.CanGoOTC = false;
+            WavesAreSpawning = true;
             _countdown -= Time.deltaTime;
+            
+        }
+        else
+        {
+            WavesAreSpawning = false;
+            
         }
 
 
@@ -162,6 +171,8 @@ public class SpawnEnemy : MonoBehaviour
 
         if (_currentWaveIndex < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count)
         {
+           
+
             for (int i = 0; i < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].WaveMinions.Length; i++)
             {
                 var randomSpawnPos = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
@@ -174,8 +185,10 @@ public class SpawnEnemy : MonoBehaviour
                 yield return new WaitForSeconds(_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].timeToNextEnemy);
             }
         }
-       
-    
+
+        
+
+         
     }
 
 

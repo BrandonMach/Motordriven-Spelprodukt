@@ -27,6 +27,9 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
+        
     }
     #endregion
 
@@ -34,11 +37,37 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
 
-    private List<Item> _inventoryList = new List<Item>();
+    [SerializeField] public List<Item> _inventoryList = new List<Item>();
     private int _capacity = 25;
 
     public List<Item> InventoryList { get => _inventoryList; set => _inventoryList = value; }
     public int Capacity { get => _capacity; set => _capacity = value; }
+
+    private void Start()
+    {
+       // TransferableScript.Instance.InventoryItems.Add(TransferableScript.Instance.GetWeapon());
+        _inventoryList.Add(TransferableScript.Instance.GetWeapon());
+        UpdateInventoryVisualiser();
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+
+    }
+
+
+    private void UpdateInventoryVisualiser()
+    {
+        Debug.LogError("sdadad" + TransferableScript.Instance.InventoryItems.Count);
+        _inventoryList.Clear();
+
+
+        foreach (var weapons in TransferableScript.Instance.InventoryItems)
+        {
+            _inventoryList.Add(weapons);
+        }
+
+    }
 
     public bool Add(Item item)
     {
@@ -50,7 +79,11 @@ public class Inventory : MonoBehaviour
 
         if (item is Weapon weapon)
         {
-            _inventoryList.Add(weapon);
+           // _inventoryList.Add(weapon);
+           
+
+            TransferableScript.Instance.InventoryItems.Add(weapon);
+            UpdateInventoryVisualiser();
         }
 
         //else if (item is Potion potion)

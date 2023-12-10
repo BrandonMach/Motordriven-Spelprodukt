@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
     public float TotalMoneyEarned;
     public float GameManagerKillCount;
 
+    public System.EventHandler OnRestartGame;
     void Start()
     {
        
@@ -235,12 +236,17 @@ public class GameManager : MonoBehaviour
             _currentScen = CurrentScen.ArenaScen;
 
 
-            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
         }
         else
         {
             // Used for FMOD
             _arenaEventInvoked = false;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
 
@@ -505,5 +511,8 @@ public class GameManager : MonoBehaviour
          GameManagerKillCount = 0;
 
          PlayerCoins = 50;
+
+        TransferableScript.Instance.ResetInventorySlots();
+
     }
 }
