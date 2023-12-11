@@ -19,7 +19,6 @@ public class Gates : MonoBehaviour
             transform.position = transform.position - new Vector3(0, downVelocity, 0);
             height = transform.localPosition.y;
             yield return new WaitForSeconds(Time.fixedDeltaTime);
-            Debug.Log(height);
         }
     }
 }
