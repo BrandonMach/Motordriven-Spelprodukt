@@ -63,6 +63,8 @@ public class SpawnEnemy : MonoBehaviour
     public System.EventHandler SpawningDone;
     public bool WavesAreSpawning;
 
+    public System.EventHandler KilledAllWaves;
+
     #endregion
 
     private void Awake()
@@ -102,9 +104,16 @@ public class SpawnEnemy : MonoBehaviour
         //    SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
         //}
 
-        if(_currentWaveIndex >= _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count)
+        if(_currentWaveIndex >= _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count && !GameLoopManager.Instance.MatchIsFinished)
         {
-            Debug.Log("You have survived every wave");
+            if(GameLoopManager.Instance._currentMatchType == GameLoopManager.MatchType.Tutorial)
+            {
+               
+                Debug.Log("You have survived every wave");
+                KilledAllWaves?.Invoke(this, System.EventArgs.Empty);
+            }
+           
+
             return;
         }
 
