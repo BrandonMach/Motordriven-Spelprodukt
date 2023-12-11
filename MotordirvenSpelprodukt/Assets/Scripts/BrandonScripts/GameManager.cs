@@ -146,6 +146,9 @@ public class GameManager : MonoBehaviour
     public static int ArenaLayoutIndex;
 
     public System.EventHandler OnRestartGame;
+
+
+
     void Start()
     {
 
@@ -255,6 +258,7 @@ public class GameManager : MonoBehaviour
 
         if (currentScene.buildIndex == 6 || _currentScen == GameManager.CurrentScen.HUBWorld)
         {
+           
 
             #region FMOD
 
@@ -268,21 +272,22 @@ public class GameManager : MonoBehaviour
 
 
             _currentScen = CurrentScen.HUBWorld;
-
+            GameManager.Instance.gameObject.GetComponent<SlowMo>().GoBackToNormal();
 
 
         }
 
 
-        //switch (currentScene.buildIndex)
-        //{
-
-        //}
 
 
 
 
     }
+
+
+  
+
+
 
     #region Money
     public void RewardCoins(float amount)

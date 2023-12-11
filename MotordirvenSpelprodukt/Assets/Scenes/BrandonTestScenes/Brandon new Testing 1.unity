@@ -2438,7 +2438,6 @@ MonoBehaviour:
   - {fileID: 7189006194749984216, guid: 36517bdddac9c89449e4f69b5be930e1, type: 3}
   - {fileID: 7189006194749984216, guid: 544b1e5e7e39ace43aad83a002b46e2c, type: 3}
   _championStartPos: {fileID: 967999941}
-  _championHPText: {fileID: 0}
   _championNameText: {fileID: 1742057482}
   CamManager: {fileID: 449361483}
   EnemyGameObjects: []
@@ -4195,6 +4194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
   slowDownDuration: 2
+  _returnSlowMo: 0
 --- !u!4 &1386944804
 Transform:
   m_ObjectHideFlags: 0
@@ -5829,7 +5829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 507254421202324312, guid: 486226e97b9844940b545dfdde40e2ee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -120.000015
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 694136655276626219, guid: 486226e97b9844940b545dfdde40e2ee, type: 3}
       propertyPath: m_AnchoredPosition.y

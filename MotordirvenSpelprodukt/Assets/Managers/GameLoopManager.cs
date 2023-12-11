@@ -87,8 +87,6 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] private Transform _championStartPos;
 
     //HP bar
-
-    [SerializeField] private TextMeshProUGUI _championHPText;
     [SerializeField] private TextMeshProUGUI _championNameText;
     #endregion
 
@@ -243,15 +241,7 @@ public class GameLoopManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            GameManager.ArenaLayoutIndex++;
-            foreach (var areanLayouts in _areanStageLayouts)
-            {
-                areanLayouts.SetActive(false);
-            }
-            _areanStageLayouts[GameManager.ArenaLayoutIndex].SetActive(true);
-        }
+        
 
 
         foreach (var canvas in Canvases)
@@ -287,7 +277,7 @@ public class GameLoopManager : MonoBehaviour
 
                 _championNameText.text = _champion.GetComponent<CMP1Script>().ChampionName;
                 var championHealthManager = _champion.GetComponent<HealthManager>();
-                _championHPText.text = (championHealthManager.CurrentHealthPoints / championHealthManager.MaxHP * 100).ToString() + "%";
+
             }
            
 

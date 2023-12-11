@@ -97,8 +97,8 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        _waveText.gameObject.SetActive(!GameLoopManager.Instance.MatchIsFinished);
+        
         //if (!GameLoopManager.Instance.MatchIsFinished && GameLoopManager.Instance.EnemyGameObjects.Length < (2 + MinimumMinionCount))
         //{
         //    SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
