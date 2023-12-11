@@ -132,7 +132,7 @@ public class GameLoopManager : MonoBehaviour
 
         if(_currentMatchType == MatchType.Champion)
         {
-            Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 0f, _championStartPos.position.z-17);
+            Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 15f, _championStartPos.position.z-10);
             Quaternion championRotation = Quaternion.Euler(_championList[GameManager.ChampionsKilled].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
 
             _champion = Instantiate(_championList[GameManager.ChampionsKilled], championSpawnPos, championRotation);
