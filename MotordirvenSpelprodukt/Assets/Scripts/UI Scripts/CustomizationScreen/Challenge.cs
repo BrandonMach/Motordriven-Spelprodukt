@@ -29,8 +29,9 @@ public class Challenge : MonoBehaviour
 
     private void Start()
     {
-        //trigger = GetComponent<TooltipTrigger>();
-        //trigger.content = _description;
+        trigger = GetComponent<TooltipTrigger>();
+        trigger.content = "Reward: " + _reward.ToString();
+        trigger.header = _description;
         DontDestroyOnLoad(ChallengeButton);
     }
 

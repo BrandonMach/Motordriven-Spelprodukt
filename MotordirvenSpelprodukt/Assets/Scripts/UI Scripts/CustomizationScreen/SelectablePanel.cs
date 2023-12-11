@@ -124,10 +124,10 @@ public class SelectablePanel : MonoBehaviour
         
         ChallengeManager.Instance.ChallengePanelOpen();
 
-        foreach (var challengeButton in ChallengeManager.Instance.ChallengeButtonArray)
-        {
-            challengeButton.UpdateButtonInfo();
-        }
+        //foreach (var challengeButton in ChallengeManager.Instance.ChallengeButtonArray)
+        //{
+        //    challengeButton.UpdateButtonInfo();
+        //}
     }
 
     public void ShopPanelClicked()
