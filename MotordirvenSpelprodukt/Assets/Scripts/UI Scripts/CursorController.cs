@@ -8,18 +8,26 @@ using UnityEngine.InputSystem.UI;
 
 public class CursorController : MonoBehaviour
 {
+    [SerializeField] RectTransform canvasRectTransform;
+
     private VirtualMouseInput virtualMouseInput;
 
     private void Awake()
     {
+        GameInput.Instance.OnGameDeviceChanged += HandleOnGameDeviceChanged;
         virtualMouseInput = GetComponent<VirtualMouseInput>();
-
-        Cursor.visible = false;
+        GamePadCursorToCenter();
     }
 
-    private void Start()
+    private void OnDestroy()
     {
-        GameInput.Instance.OnGameDeviceChanged += HandleOnGameDeviceChanged;
+        GameInput.Instance.OnGameDeviceChanged -= HandleOnGameDeviceChanged;
+    }
+
+    private void Update()
+    {
+        //transform.localScale = Vector3.one * (1f / canvasRectTransform.localScale.x);
+        transform.SetAsLastSibling();
     }
 
     private void LateUpdate()
@@ -27,8 +35,8 @@ public class CursorController : MonoBehaviour
         Vector2 virtualMousePosition = virtualMouseInput.virtualMouse.position.value;
         virtualMousePosition.x = Mathf.Clamp(virtualMousePosition.x, 0f, Screen.width);
         virtualMousePosition.y = Mathf.Clamp(virtualMousePosition.y, 0f, Screen.height);
-
-        InputState.Change(virtualMouseInput.virtualMouse.position, virtualMousePosition);      
+        
+        InputState.Change(virtualMouseInput.virtualMouse.position, virtualMousePosition);
     }
 
     private void HandleOnGameDeviceChanged(object sender, System.EventArgs e)
@@ -67,10 +75,8 @@ public class CursorController : MonoBehaviour
 
     private void GamePadCursorToCenter()
     {
-        //Vector2 virtualMousePosition = virtualMouseInput.virtualMouse.position.value;
-        Vector2 centerOfScreen = new Vector2(Screen.width / 2, Screen.height / 2);
-
-        InputState.Change(virtualMouseInput.virtualMouse.position, centerOfScreen);
+        virtualMouseInput.cursorTransform.anchoredPosition = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        //InputState.Change(virtualMouseInput.virtualMouse.position, centerOfScreen);
     }
 
     private void ToggleCursorMode()
