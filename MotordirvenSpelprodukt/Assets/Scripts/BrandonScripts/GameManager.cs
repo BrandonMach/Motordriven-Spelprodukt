@@ -210,7 +210,10 @@ public class GameManager : MonoBehaviour
             }
             
             _currentScen = CurrentScen.CustomizationScene;
-            
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
         }
         else
         {
