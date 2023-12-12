@@ -12,7 +12,7 @@ public class SlowMo: MonoBehaviour
    
     void Update()
     {
-        if (!PauseMenu.GameIsPaused)
+        if (!PauseMenu.GameIsPaused &&  !_returnSlowMo)
         {
             Time.timeScale += (1f / slowDownDuration) * Time.unscaledDeltaTime;
             //Time.fixedDeltaTime += (0.01f / slowDownDuration) * Time.unscaledDeltaTime;
@@ -23,13 +23,15 @@ public class SlowMo: MonoBehaviour
 
     public void DoSlowmotion()
     {
+        _returnSlowMo = false;
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
-        _returnSlowMo = true;
+        
 
     }
     public void GoBackToNormal()
     {
+        
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 1;
     }

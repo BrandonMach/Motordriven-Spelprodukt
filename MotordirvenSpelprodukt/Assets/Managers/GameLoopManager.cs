@@ -241,9 +241,7 @@ public class GameLoopManager : MonoBehaviour
     void Update()
     {
 
-        
-
-
+ 
         foreach (var canvas in Canvases)
         {
             canvas.SetActive(!PauseMenu.GameIsPaused);
@@ -322,7 +320,7 @@ public class GameLoopManager : MonoBehaviour
         SettingStatistics();
 
 
-        GameManager.ArenaLayoutIndex++;
+       // GameManager.ArenaLayoutIndex++;
         MatchIsFinished = true; //Stop the match
       
   
