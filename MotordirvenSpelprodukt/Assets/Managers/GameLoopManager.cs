@@ -109,6 +109,13 @@ public class GameLoopManager : MonoBehaviour
     #endregion
 
 
+    #region AreanaPrefabs
+    [Header("Area Layouts")]
+    [SerializeField] int _areanLayoutIndex;
+    [SerializeField] GameObject[] _areanStageLayouts;
+
+    #endregion
+
     public VolumeProfile volumeProfile;
     [SerializeField] float defaultSaturation = -16.3f;
 
@@ -132,7 +139,7 @@ public class GameLoopManager : MonoBehaviour
 
         if(_currentMatchType == MatchType.Champion)
         {
-            Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 0f, _championStartPos.position.z-17);
+            Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 15f, _championStartPos.position.z-10);
             Quaternion championRotation = Quaternion.Euler(_championList[GameManager.ChampionsKilled].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
 
             _champion = Instantiate(_championList[GameManager.ChampionsKilled], championSpawnPos, championRotation);
@@ -143,7 +150,10 @@ public class GameLoopManager : MonoBehaviour
             ChampionhpCanvas.SetActive(false);
         }
 
-       
+        
+
+      
+
 
 
 
@@ -216,13 +226,33 @@ public class GameLoopManager : MonoBehaviour
         AmountOfChampionsToKill = 2;
 
         OnMatchFinished += MatchFinished;
+        SpawnEnemy.Instance.KilledAllWaves += MatchFinished;
+
         UpdateEnemyList();
+
+        //Arena layout
+        foreach (var areanLayouts in _areanStageLayouts)
+        {
+            areanLayouts.SetActive(false);
+        }
+        _areanStageLayouts[GameManager.ArenaLayoutIndex].SetActive(true);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            GameManager.ArenaLayoutIndex++;
+            foreach (var areanLayouts in _areanStageLayouts)
+            {
+                areanLayouts.SetActive(false);
+            }
+            _areanStageLayouts[GameManager.ArenaLayoutIndex].SetActive(true);
+        }
+
 
         foreach (var canvas in Canvases)
         {
@@ -301,8 +331,11 @@ public class GameLoopManager : MonoBehaviour
     {
         SettingStatistics();
 
+
+        GameManager.ArenaLayoutIndex++;
         MatchIsFinished = true; //Stop the match
-        
+      
+  
 
         foreach (var canvas in Canvases)
         {
@@ -338,9 +371,11 @@ public class GameLoopManager : MonoBehaviour
        // _championIsDead = true;
         GameManager.Instance._championIsDeadX = true;
         _championIsDead = true;
+
         
 
-       
+
+
     }
 
     /// <summary>

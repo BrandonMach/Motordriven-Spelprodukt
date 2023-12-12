@@ -143,12 +143,13 @@ public class GameManager : MonoBehaviour
     public static int ChampionsKilled;
     public float TotalMoneyEarned;
     public float GameManagerKillCount;
+    public static int ArenaLayoutIndex;
 
     public System.EventHandler OnRestartGame;
     void Start()
     {
-       
 
+        //ArenaLayoutIndex = 0;
         //För testing
         PlayerCoins = 50;
         //Debug.Log("Coins" +     PlayerCoins);
@@ -161,6 +162,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Arean index" + ArenaLayoutIndex);
 
         if(Player.Instance != null)
         {
