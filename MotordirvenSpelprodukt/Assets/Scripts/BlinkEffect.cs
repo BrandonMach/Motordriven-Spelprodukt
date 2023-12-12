@@ -12,6 +12,8 @@ public class BlinkEffect : MonoBehaviour
     public float speed = 1;
 
     Renderer renderer;
+
+    public bool startBlink;
     void Start()
     {
         renderer = GetComponent<Renderer>(); 
@@ -20,6 +22,27 @@ public class BlinkEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        renderer.material.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * speed, 1));
+        if (startBlink)
+        {
+            renderer.material.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * speed, 1));
+        }
+        
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.CompareTag("EtpArrow"))
+    //    {
+    //        startBlink = true;
+    //    }     
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("EtpArrow"))
+    //    {
+    //        startBlink = false;
+    //    }
+
+    //}
 }

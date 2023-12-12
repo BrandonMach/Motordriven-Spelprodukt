@@ -593,7 +593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I'll teach you powerfull spells (DLC)
+  m_text: placeholder
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
   m_sharedMaterial: {fileID: 9032678278685489197, guid: 51dff41fce5da0e4ea9a878de1f7314d, type: 2}
@@ -620,7 +620,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.6
+  m_fontSize: 41
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2026,7 +2026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3393854132433464348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3672,7 +3672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_Name
-      value: tpose player
+      value: Hub world player
       objectReference: {fileID: 0}
     - target: {fileID: 4661310135420309803, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}
       propertyPath: m_Layer
@@ -4941,27 +4941,6 @@ MonoBehaviour:
     m_Bits: 128
   isPlayer: 1
   stunEffect: {fileID: 8025750769134217613}
-  swordInAirEventRef:
-    Guid:
-      Data1: -863582595
-      Data2: 1326961157
-      Data3: 1874499228
-      Data4: -1211592969
-    Path: event:/swordInAir
-  swordInAir2EventRef:
-    Guid:
-      Data1: 523462310
-      Data2: 1283869980
-      Data3: -1938585941
-      Data4: 1271918653
-    Path: event:/swordInAir2
-  swordInAir3EventRef:
-    Guid:
-      Data1: -391011878
-      Data2: 1114945115
-      Data3: -1321376879
-      Data4: 514694945
-    Path: event:/swordInAir3
 --- !u!114 &7835878037569026087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5069,10 +5048,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824783b8c02d035418d650c180d2919b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoToPopup: {fileID: 0}
-  ScenIndex: 0
-  isdlc: 0
+  Popup: {fileID: 6045090617414536348}
   _activatePopup: 0
+  _currentInteractingObject: {fileID: 0}
 --- !u!4 &7925066658305670380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5688804410230971425, guid: 31e15b27d86e46943b0ff08a152bc95c, type: 3}

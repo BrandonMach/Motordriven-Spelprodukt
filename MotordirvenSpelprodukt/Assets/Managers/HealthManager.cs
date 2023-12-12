@@ -25,14 +25,15 @@ public class HealthManager : MonoBehaviour,IHasProgress
     private bool isBleeding;
     public bool IsDeadOnce;
     public bool Dead;
-    public float _destroydelay = 1.5f;
+    public float _destroydelay;
 
     public bool IsPlayer;
     public bool GodMode;
     public bool Explode;
 
     public bool hasSlowMo;
-    public SlowMo _slowMo;
+    public bool isChampion;
+    
 
  
 
@@ -74,24 +75,25 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
         if (CurrentHealthPoints <= 0)
         {
-            Die();
-
             if (HasDismembrent)
             {
                 GetComponent<DismemberentEnemyScript>().DismemberCharacter();
                 HasDismembrent = false;
             }
+            Die();
+
+            
 
         }
     }
 
     private void OnDestroy()
     {
-        //if (!IsPlayer)
-        //{
-        //    SpawnEnemy.Instance._waveBattleInformation[SpawnEnemy._currentWaveBattleIndex].waveInfoHolder[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
-        //    GameLoopManager.Instance.UpdateEnemyList();
-        //}
+        if (hasSlowMo)
+        {
+            GameManager.Instance.GetComponent<SlowMo>();
+        }
+
         
     }
 
@@ -188,15 +190,17 @@ public class HealthManager : MonoBehaviour,IHasProgress
             PlayDeathSoundEvent?.Invoke(this, EventArgs.Empty);
         }
 
+       
+        Dead = true;
+
         if (hasSlowMo)
         {
-            _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
+            GameManager.Instance.GetComponent<SlowMo>().DoSlowmotion(); 
         }
-        
-        Dead = true;
+
 
     }
 
-   
+
 
 }
