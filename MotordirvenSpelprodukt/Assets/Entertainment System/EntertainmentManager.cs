@@ -106,7 +106,7 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints = _startETP;
 
         Player.Instance.GetComponent<AttackManager>().EnemyHit += EnemyHitPlayerInCombat;
-        SpawnEnemy.Instance.SpawningDone += ResetFirstTimeInCombat;
+       // SpawnEnemy.Instance.SpawningDone += ResetFirstTimeInCombat;
 
 
     }
