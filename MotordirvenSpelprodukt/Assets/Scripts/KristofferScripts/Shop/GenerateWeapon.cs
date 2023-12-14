@@ -23,6 +23,7 @@ public class GenerateWeapon : MonoBehaviour
     ImagePrefab prefab;
 
     private int _priceModifyier;
+    public GameObject weaponPrefab;
     private void Awake()
     {
         _weapon = new Weapon();
@@ -32,8 +33,6 @@ public class GenerateWeapon : MonoBehaviour
     public void GenerateWeaponPanel(Weapontype type, int level)
     {
 
-      
-
         _purshased = false;
         _weapon.SetUpWeapon(type,level, 
             2f, 
@@ -42,6 +41,9 @@ public class GenerateWeapon : MonoBehaviour
 
 
         prefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType());
+
+        //Set prefab
+        // weaponPrefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType()).GetModelPrefab();
         //_weapon.SetName(GenerateName(type));
 
         GenerateModel();
@@ -77,6 +79,7 @@ public class GenerateWeapon : MonoBehaviour
             _weapon.SetImage(prefab.GetImage());
             _weapon.SetPrefabPath(prefab.GetPath());
             _weaponNameText.text = prefab.GetWeaponName();
+            _weapon.SetName(prefab.GetWeaponName());
         }
     }
     private void UpdatePanel( int level)

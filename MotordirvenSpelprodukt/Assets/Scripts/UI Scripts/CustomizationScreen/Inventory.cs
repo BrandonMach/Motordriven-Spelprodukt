@@ -27,9 +27,9 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //_inventoryList.Add(TransferableScript.Instance.GetWeapon());
+        //UpdateInventoryVisualiser();
 
-
-        
     }
     #endregion
 
@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-       // TransferableScript.Instance.InventoryItems.Add(TransferableScript.Instance.GetWeapon());
+        //TransferableScript.Instance.InventoryItems.Add(TransferableScript.Instance.GetWeapon());
         _inventoryList.Add(TransferableScript.Instance.GetWeapon());
         UpdateInventoryVisualiser();
         if (onItemChangedCallback != null)
