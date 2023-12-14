@@ -8,6 +8,7 @@ public class ShopPanel : MonoBehaviour
     [SerializeField] private WeapontypeList _weaponTypeList;
     [SerializeField] private List<GenerateWeapon> panelList;
     private List<Weapontype> _weaponList;
+   
     private void Awake()
     {
         _weaponList = new List<Weapontype>();

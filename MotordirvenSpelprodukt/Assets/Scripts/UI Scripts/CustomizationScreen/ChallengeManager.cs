@@ -133,45 +133,45 @@ public class ChallengeManager : MonoBehaviour
 
     public void ChallengePanelOpen()
     {
-        
-        //AvailableChallengesArray = tempArray;
-        //AvailableChallengesArray = FindObjectsOfType<Challenge>();
+
+        AvailableChallengesArray = tempArray;
+        AvailableChallengesArray = FindObjectsOfType<Challenge>();
 
 
-        
-
-        //if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene /*&& ChallengesActive*/)
-        //{
-        //    _firstActiveChallengeText = GameObject.FindWithTag("FirstActiveChallenge").GetComponent<TextMeshProUGUI>();
-        //    _secondActiveChallengeText = GameObject.FindWithTag("SecondActiveChallenge").GetComponent<TextMeshProUGUI>();
-        //    ChallengeButtonArray = FindObjectsOfType<CustomButton>();
-
-        //    for (int i = 0; i < ChallengeButtonArray.Length; i++)
-        //    {
-        //        ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
-                
-
-        //    }
-
-        //    for (int i = 0; i < AvailableChallengesArray.Length; i++)
-        //    {
-        //        AvailableChallengesArray[i].trigger = ChallengeButtonArray[i].gameObject.GetComponent<TooltipTrigger>(); //Assigne tool tip
-        //    }
-
-        //}
 
 
-        //foreach (var availableChallenges in AvailableChallengesArray)
-        //{
+        if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene /*&& ChallengesActive*/)
+        {
+            _firstActiveChallengeText = GameObject.FindWithTag("FirstActiveChallenge").GetComponent<TextMeshProUGUI>();
+            _secondActiveChallengeText = GameObject.FindWithTag("SecondActiveChallenge").GetComponent<TextMeshProUGUI>();
+            ChallengeButtonArray = FindObjectsOfType<CustomButton>();
 
-        //    availableChallenges.UpdateTriggerContent(); //Update tooltip
+            for (int i = 0; i < ChallengeButtonArray.Length; i++)
+            {
+                ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
 
 
-        //    if (availableChallenges.IsCompleted)
-        //    {
-        //        availableChallenges.ChallengeButton.SetActive(false);
-        //    }
-        //}
+            }
+
+            for (int i = 0; i < AvailableChallengesArray.Length; i++)
+            {
+                AvailableChallengesArray[i].trigger = ChallengeButtonArray[i].gameObject.GetComponent<TooltipTrigger>(); //Assigne tool tip
+            }
+
+        }
+
+
+        foreach (var availableChallenges in AvailableChallengesArray)
+        {
+
+            availableChallenges.UpdateTriggerContent(); //Update tooltip
+
+
+            if (availableChallenges.IsCompleted)
+            {
+                availableChallenges.ChallengeButton.SetActive(false);
+            }
+        }
     }
 
 

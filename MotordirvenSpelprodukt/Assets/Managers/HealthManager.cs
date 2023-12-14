@@ -16,6 +16,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event System.EventHandler OnDead;
     public System.EventHandler OnShakeScreen;
 
     [Header("Dismembrent")]
@@ -179,6 +180,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             colorAdjustments.saturation.value = -100;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             GameLoopManager.Instance.TotalDeaths++;
+            OnDead?.Invoke(this, EventArgs.Empty);
         }
         else if (!IsDeadOnce)
         {
