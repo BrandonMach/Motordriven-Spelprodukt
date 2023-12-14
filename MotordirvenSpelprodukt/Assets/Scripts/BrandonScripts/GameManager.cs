@@ -197,21 +197,20 @@ public class GameManager : MonoBehaviour
         if (currentScene.buildIndex == 2)
         {
 
-            #region FMOD
-
             if (!_afterArenaEventInvoked && _beenIntoArena)
             {
                 OnAfterArenaEnter?.Invoke();
                 _afterArenaEventInvoked = true;
+                ChallengeManager.Instance.ResetActiveChallengesOnLoad();
             }
-
-            #endregion
 
 
             foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
             {
                 ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
             }
+
+           
             
             _currentScen = CurrentScen.CustomizationScene;
 
