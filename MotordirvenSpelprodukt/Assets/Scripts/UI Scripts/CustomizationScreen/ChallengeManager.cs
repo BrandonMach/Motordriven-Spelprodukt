@@ -53,6 +53,7 @@ public class ChallengeManager : MonoBehaviour
         Instance = this;
 
         ActiveChallenges = new List<Challenge>();
+
     }
 
 
@@ -296,9 +297,8 @@ public class ChallengeManager : MonoBehaviour
     {
         foreach (Challenge challenge in ActiveChallenges)
         {
-            if (!challenge.IsCompleted /* && player.killCount >= challenge.Requirement */) // TODO : add player.killcount in Player class
+            if (!challenge.IsCompleted) 
             {
-                // player.GrantReward(challenge.Reward); TODO : add GrantReward in Player class
 
                 OnChallengeCompleted?.Invoke(challenge);
                 challenge.IsCompleted = true;
@@ -306,6 +306,14 @@ public class ChallengeManager : MonoBehaviour
         }
 
         ReverseIterateRemove();
+    }
+
+    public void ResetActiveChallengesOnLoad()
+    {
+        for (int i = ActiveChallenges.Count - 1; i >= 0; i--)
+        {
+            DeActivateChallenge(ActiveChallenges[i]);
+        }
     }
 
 }

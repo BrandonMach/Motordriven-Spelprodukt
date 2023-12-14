@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,12 +24,19 @@ public class StatsMenu : MenuAbstract, IMenu
         {
             _gameLoopManager = GameLoopManager.Instance;
         }
+
+        GameManager.OnAfterArenaEnter += HandleOnAfterArenaEnter; 
+    }
+
+    private void HandleOnAfterArenaEnter()
+    {
+        UpdateStatisticsTMPs();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateStatisticsTMPs();
+        //UpdateStatisticsTMPs();
         ClickESC();
     }
 
@@ -47,7 +55,7 @@ public class StatsMenu : MenuAbstract, IMenu
         if (GameLoopManager.Instance != null)
         {
 
-            _totalKills.text = $"Total kills: {GameManager.Instance.KillCount}";
+            _totalKills.text = $"Total kills: {GameManager.Instance.TotalKillcount}";
             _totalKnockUps.text = $"Total knock ups: {GameManager.Instance.TotalKnockUps}";
             _totalOutOfArenas.text = $"Total out of arenas: {GameManager.Instance.TotalKnockedOutOfArena}";
             _highestKillstreak.text = $"Highest killstreak: {GameManager.Instance.HighestKillStreakKillCount}";

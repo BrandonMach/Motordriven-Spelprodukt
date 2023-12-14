@@ -28,7 +28,7 @@ public class SelectablePanel : MonoBehaviour
     private int _currentButtonIndex = 0;
     private int _currentPanelIndex = 0;
 
-    private bool firstTimeChallenges = true;
+    private static bool firstTimeChallenges = true;
 
     // Start is called before the first frame update
     void Start()
