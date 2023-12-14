@@ -127,13 +127,14 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _input = "";
         _entertainmentManager = EntertainmentManager.Instance;
 
-        GetComponent<AttackManager>().EnemyHit += AttackLanded;
-        GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
-        GetComponent<AttackManager>().AttackMissed += PlayRandomSwordInAir;
-        GetComponent<HealthManager>().PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
+        AttackManager attackManager = GetComponent<AttackManager>();
+        attackManager.EnemyHit += AttackLanded;
+        attackManager.AttackMissed += ResetComboChecker;
+        attackManager.AttackMissed += PlayRandomSwordInAir;
+        _healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
+        _healthManager.OnDead += HealthManager_OnDead;
 
 
-       
 
 
 
@@ -149,6 +150,11 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         }
 
 
+    }
+
+    private void HealthManager_OnDead(object sender, EventArgs e)
+    {
+        DisableMovement?.Invoke(this, EventArgs.Empty);
     }
 
     private void gameInput_OnHealButtonPressed(object sender, EventArgs e)
@@ -225,6 +231,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
         _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
+        _healthManager.OnDead -= HealthManager_OnDead;
+        _healthManager.PlayDoDamageSoundEvent -= PlayRandomDoDamageSound;
     }
 
     public void TakeDamage(Attack attack)
