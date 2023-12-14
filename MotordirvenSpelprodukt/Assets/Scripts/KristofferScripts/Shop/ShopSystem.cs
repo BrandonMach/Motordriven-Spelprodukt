@@ -35,6 +35,12 @@ public class ShopSystem : MonoBehaviour
         _rerollButtonText.text = (rerollCounter * rerollBaseline).ToString();
     }
 
+    private void Start()
+    {
+       
+    }
+
+
     private void Update()
     {
         //_currency = GameManager.PlayerCoins;

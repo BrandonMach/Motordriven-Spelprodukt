@@ -35,10 +35,7 @@ public class TransferableScript : MonoBehaviour
 
     }
 
-    //private void Start()
-    //{
-    //    InventoryItems.Add(_weapon);
-    //}
+
 
     public Weapon GetWeapon()
     {

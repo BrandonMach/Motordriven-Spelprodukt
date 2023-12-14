@@ -61,7 +61,7 @@ public class PlayerWeaponHolder : MonoBehaviour
             weaponnew.transform.parent = weaponHand.transform;
             weaponnew.transform.position = weaponObject.transform.position;
             weaponnew.transform.rotation = weaponObject.transform.rotation;
-            weaponnew.transform.localScale = weaponObject.transform.lossyScale;
+            weaponnew.transform.localScale = weaponObject.transform.localScale;
             weaponObject.transform.GetChild(0).parent = weaponnew.transform;
             WeaponVisualEffects wve = gameObject.GetComponent<WeaponVisualEffects>();
 
