@@ -35,8 +35,6 @@ public class AttackManager : MonoBehaviour
 
         attacker.RegisterAttack += Attacker_OnAttack;
         //stunEffect = Resources.Load<ParticleSystem>("ObjStunnedEffect");
-
-      
     }
 
     private void Attacker_OnAttack(object sender, OnAttackPressedEventArgs e)
@@ -50,9 +48,6 @@ public class AttackManager : MonoBehaviour
     private void HandleAttack(OnAttackPressedEventArgs e)
     {
         Gizmos.color = Color.red;
-        // Temporary fix until _range can be passed on via event.
-        // SHOULD BE REMOVED LATER.
-
 
         switch (_attackType)
         {
@@ -129,44 +124,5 @@ public class AttackManager : MonoBehaviour
         //Vector3 drawPos = new Vector3(transform.position.)
         Gizmos.DrawWireSphere(_checkPos, _range);
     }
-    //private void HandleInput(Player.OnAttackPressedEventArgs e)
-    //{
-    //    switch (e.attackType1)
-    //    {
-    //        case Player.OnAttackPressedEventArgs.AttackType.Light:
-    //            _currentCombo += "L";
-    //            break;
-    //        case Player.OnAttackPressedEventArgs.AttackType.Heavy:
-    //            _currentCombo += "H";
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
 
-
-    //private void HandleAttack(Player.OnAttackPressedEventArgs e)
-    //{
-    //    switch (_currentCombo)
-    //    {
-    //        case "L":
-    //            attack = new L_Attack();
-    //            break;
-
-    //        case "LL":
-    //            attack = new L_Attack();
-    //            break;
-
-    //        case "LLH":
-    //            attack = new LLH_Attack();
-    //            break;
-    //    }
-
-    //    RaycastHit[] test = Physics.SphereCastAll(transform.position, e.weaponRange, transform.forward, e.weaponRange, LayerMask.NameToLayer("enemyLayer"));
-
-    //    for (int i = 0; i < test.Length; i++)
-    //    {
-    //        //attack.Attack(test[i]);
-    //    }
-    //}
 }

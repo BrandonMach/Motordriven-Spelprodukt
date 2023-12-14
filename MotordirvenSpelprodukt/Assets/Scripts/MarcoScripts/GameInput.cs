@@ -18,6 +18,16 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnPauseButtonPressed;
     public event EventHandler OnHealButtonPressed;
 
+    public event EventHandler OnGameDeviceChanged;
+
+    public enum GameDevice
+    {
+        KeyboardMouse,
+        Gamepad,
+    }
+
+    private GameDevice activeGameDevice;
+
     private void Awake()
     {
         if (Instance == null)
@@ -36,7 +46,10 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.HeavyAttack.performed += HeavyAttack_performed;
         _playerInputActions.Player.Evade.performed += Evade_performed;
         _playerInputActions.Player.Pause.performed += Pause_performed;
-        _playerInputActions.Player.Heal.performed += Heal_performed; ; 
+        _playerInputActions.Player.Heal.performed += Heal_performed; ;
+
+
+        InputSystem.onActionChange += HandleOnActionChange;
 
     }
 
@@ -78,5 +91,50 @@ public class GameInput : MonoBehaviour
     {
         Vector2 inputVector = _playerInputActions.Player.Look.ReadValue<Vector2>();
         return inputVector.normalized;
+    }
+
+
+
+    private void HandleOnActionChange(object arg1, InputActionChange inputActionChange)
+    {
+        if (inputActionChange == InputActionChange.ActionPerformed && arg1 is InputAction)
+        {
+            InputAction inputAction = arg1 as InputAction;
+
+            if (inputAction.activeControl.device.displayName == "VirtualMouse")
+            {
+                // Ignore virtual mouse
+                return;
+            }
+            if (inputAction.activeControl.device is Gamepad)
+            {
+                if (activeGameDevice != GameDevice.Gamepad)
+                {
+                    ChangeActiveGameDevice(GameDevice.Gamepad);
+                }
+            }
+            else
+            {
+                if (activeGameDevice != GameDevice.KeyboardMouse)
+                {
+                    ChangeActiveGameDevice(GameDevice.KeyboardMouse);
+                }
+            }
+        }
+    }
+
+    private void ChangeActiveGameDevice(GameDevice activeGameDevice)
+    {
+        this.activeGameDevice = activeGameDevice;
+
+        Debug.Log("New activeGameDevice: " + activeGameDevice);
+
+        Cursor.visible = activeGameDevice == GameDevice.KeyboardMouse;
+        OnGameDeviceChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public GameDevice GetActiveGameDevice()
+    {
+        return activeGameDevice;
     }
 }

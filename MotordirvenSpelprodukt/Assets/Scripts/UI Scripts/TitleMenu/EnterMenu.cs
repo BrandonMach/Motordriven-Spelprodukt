@@ -33,18 +33,28 @@ public class EnterMenu : MenuAbstract, IMenu
         // Do nothing
     }
 
-    public void ClickMenuOption1()
+    public void PressToStart()
     {
         _menuOption1.SetActive(true);
         gameObject.SetActive(false);
+
+        Debug.Log("Press to Start was hit");
     }
 
-    public void ClickMenuOption2()
+    public override void ClickMenuOption1()
+    {
+        _menuOption1.SetActive(true);
+        gameObject.SetActive(false);
+
+        Debug.Log("ClickMenuOption1 was hit");
+    }
+
+    public override void ClickMenuOption2()
     {
         throw new System.NotImplementedException();
     }
 
-    public void ClickMenuOption3()
+    public override void ClickMenuOption3()
     {
         throw new System.NotImplementedException();
     }

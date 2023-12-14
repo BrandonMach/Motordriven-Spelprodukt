@@ -8,6 +8,9 @@ public class PauseMenuStartUp : MonoBehaviour
     [SerializeField] private GameObject pauseSettingMenu;
     [SerializeField] private GameObject pauseAudioMenu;
     [SerializeField] private GameObject pauseVideoMenu;
+    [SerializeField] private GameObject attackTreeMenu;
+    [SerializeField] private GameObject controlsMenu;
+    [SerializeField] private GameObject statisticsMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -32,5 +35,8 @@ public class PauseMenuStartUp : MonoBehaviour
         pauseSettingMenu.SetActive(false);
         pauseAudioMenu.SetActive(false);
         pauseVideoMenu.SetActive(false);
+        attackTreeMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+        statisticsMenu.SetActive(false);
     }
 }

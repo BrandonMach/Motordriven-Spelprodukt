@@ -16,6 +16,8 @@ public class DestructibleObject : MonoBehaviour, IDamagable
     Rigidbody[] rbsFragments;
     MeshCollider[] mcFragments;
 
+    private bool _destroyed = false;
+
     void Awake()
     {
         referencePrefab.SetActive(true);
@@ -34,13 +36,6 @@ public class DestructibleObject : MonoBehaviour, IDamagable
     //        StartCoroutine(DisablePhysicsWithDelay());
     //    }
     //}
-
-
-    public void ReceiveDamage(float damage)
-    {
-        hp -= damage;
-        if (hp <= 0) DestroyObjectWithDelay();
-    }
 
     private void DestroyObjectWithDelay()
     {
@@ -69,6 +64,26 @@ public class DestructibleObject : MonoBehaviour, IDamagable
 
         foreach(MeshCollider coll in mcFragments)
             Destroy(coll);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out MMScript minion) && !_destroyed)
+        {
+            if (minion.CurrentState == MMScript.EnemyState.pushed)
+            {
+                DestroyObjectWithDelay();
+                StartCoroutine(DisablePhysicsWithDelay());
+            }
+        }
+        else if (other.TryGetComponent(out Player player) && !_destroyed)
+        {
+            if (player.CurrentPlayerState == Player.PlayerState.pushedBack)
+            {
+                DestroyObjectWithDelay();
+                StartCoroutine(DisablePhysicsWithDelay());
+            }
+        }
     }
 }
 
