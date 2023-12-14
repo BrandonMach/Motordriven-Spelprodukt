@@ -106,7 +106,7 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints = _startETP;
 
         Player.Instance.GetComponent<AttackManager>().EnemyHit += EnemyHitPlayerInCombat;
-       // SpawnEnemy.Instance.SpawningDone += ResetFirstTimeInCombat;
+        SpawnEnemy.Instance.SpawningDone += ResetFirstTimeInCombat;
 
 
     }
@@ -181,7 +181,7 @@ public class EntertainmentManager : MonoBehaviour
 
     void UpdateETPArrow()
     {
-        _indicatorArrow.localPosition = new Vector3(-160 +(320/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, _indicatorArrow.localPosition.z);      
+        _indicatorArrow.localPosition = new Vector3(-160 +(320/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, _indicatorArrow.localPosition.z);
     }
 
     #region OOC

@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using Unity.Mathematics;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -62,12 +61,7 @@ public class CMP1Script : ChampionScript
 
             FacePlayer();
         }
-        ///////
-        if (_healthManager.Dead)
-        {
-            DeathAnimation();
-        }
-        ///////
+
         switch (CurrentState)
         {
             case ChampionState.Enter:
@@ -170,13 +164,6 @@ public class CMP1Script : ChampionScript
         _shouldCheckForGround = true;
     }
 
-    public void DeathAnimation()
-    {
-        Anim.ResetTrigger("BasicCombo1");
-        Anim.ResetTrigger("JumpAttack");
-        Anim.ResetTrigger("Taunt");
-        Anim.SetTrigger("Death");
-    }
 
     #region SFX
     private void PlaySound(EventReference eventReference)

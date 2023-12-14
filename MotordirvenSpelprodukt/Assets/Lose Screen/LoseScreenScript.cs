@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class LoseScreenScript : MonoBehaviour
 {
@@ -11,8 +10,7 @@ public class LoseScreenScript : MonoBehaviour
     [Header("Death Cause")]
     public TextMeshProUGUI CauseOfDeathText;
     public static bool KingExecution;
-    private Image _image;
-    [SerializeField] Sprite[] _deathImages;
+
 
     [Header ("Textboxes")]
     [SerializeField] private TextMeshProUGUI _championSlain;
@@ -21,15 +19,12 @@ public class LoseScreenScript : MonoBehaviour
     
     void Start()
     {
-        _image.GetComponent<Image>();
         if (KingExecution)
         {
-            _image.sprite = _deathImages[0];
             CauseOfDeathText.text = "King Execution";
         }
         else
         {
-            _image.sprite = _deathImages[1];
             CauseOfDeathText.text = "Slain in battle";
         }
     }

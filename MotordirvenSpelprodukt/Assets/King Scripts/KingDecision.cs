@@ -86,7 +86,7 @@ public class KingDecision : MonoBehaviour
     public void GoToShop()
     {
         //testar gå till concept save money
-        GameManager.ArenaLayoutIndex++;
+
         SceneManager.LoadScene(6, LoadSceneMode.Single);
     }
 }

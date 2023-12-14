@@ -8,31 +8,21 @@ public class SlowMo: MonoBehaviour
     public float slowDownDuration = 2;
     //public PauseMenu pauseMenu;
 
-    public bool _returnSlowMo;
-   
+    // Update is called once per frame
     void Update()
     {
-        if (!PauseMenu.GameIsPaused &&  !_returnSlowMo)
+        if (!PauseMenu.GameIsPaused)
         {
             Time.timeScale += (1f / slowDownDuration) * Time.unscaledDeltaTime;
-            //Time.fixedDeltaTime += (0.01f / slowDownDuration) * Time.unscaledDeltaTime;
+            Time.fixedDeltaTime += (0.01f / slowDownDuration) * Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-            //Time.fixedDeltaTime = Mathf.Clamp(Time.fixedDeltaTime, 0f, 0.01f);
+            Time.fixedDeltaTime = Mathf.Clamp(Time.fixedDeltaTime, 0f, 0.01f);
         }
     }
 
     public void DoSlowmotion()
     {
-        _returnSlowMo = false;
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
-        
-
-    }
-    public void GoBackToNormal()
-    {
-        
-        Time.timeScale = 1f;
-        Time.fixedDeltaTime = 1;
     }
 }

@@ -4996,7 +4996,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
   slowDownDuration: 2
-  _returnSlowMo: 0
 --- !u!4 &1386944804
 Transform:
   m_ObjectHideFlags: 0
@@ -5032,7 +5031,6 @@ MonoBehaviour:
   startColor: {r: 0, g: 1, b: 0, a: 1}
   endColor: {r: 0, g: 0, b: 0, a: 1}
   speed: 6.14
-  startBlink: 0
 --- !u!1001 &1403861513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6175,21 +6173,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1595314972600947066, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2476335580994413219, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2523206065004486959, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3479560159420408453, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3736591282916049867, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
       propertyPath: GoToPopup
@@ -6211,22 +6197,6 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5312528166312348732, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6235220449110970030, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6662875482985505555, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_TagString
-      value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 6912126428061330682, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8145404299867027779, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -6246,10 +6216,6 @@ PrefabInstance:
     - target: {fileID: 8834770508884921049, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8981279044214431144, guid: f44716a5e15ca554b8590a2e517c86ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8804,10 +8770,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5913922754793154131, guid: 9d51002ab0a5d944facd600a64429d8a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6025071362521298506, guid: 9d51002ab0a5d944facd600a64429d8a, type: 3}
       propertyPath: m_Name
       value: '*GameManager'
@@ -8940,11 +8902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &5903874319683085810 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2619019888256113647, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
-  m_PrefabInstance: {fileID: 9050432667311664716}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8145404298476251674 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5711109304504582258, guid: b07e7b495a14bd4438036f56a2d54642, type: 3}
@@ -8962,10 +8919,18 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 27000593}
-    - target: {fileID: 2101847195329438658, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
-      propertyPath: _damageAnimator
+    - target: {fileID: 6022576734965991921, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
+      propertyPath: Popup
       value: 
-      objectReference: {fileID: 5903874319683085810}
+      objectReference: {fileID: 682660688}
+    - target: {fileID: 6022576734965991921, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
+      propertyPath: GoToPopup
+      value: 
+      objectReference: {fileID: 682660688}
+    - target: {fileID: 6045090617414536348, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7185919285020078566, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
       propertyPath: m_Name
       value: HUB player
@@ -9009,6 +8974,14 @@ PrefabInstance:
     - target: {fileID: 7925066658305670380, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709433510052076515, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
+      propertyPath: m_text
+      value: placeholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709433510052076515, guid: 5afb8765ff245f343806c6429d73de81, type: 3}
+      propertyPath: m_fontSize
+      value: 41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

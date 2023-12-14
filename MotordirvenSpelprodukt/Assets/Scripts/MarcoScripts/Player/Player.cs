@@ -120,24 +120,21 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
         GetComponent<AttackManager>().AttackMissed += PlayRandomSwordInAir;
         GetComponent<HealthManager>().PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
-
-
-       
-
-
+        _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
+        
+        if (TransferableScript.Instance.GetWeapon() != null)
+        {
+            _playerWeaponHolder.SetWeapon(TransferableScript.Instance.GetWeapon());
+        }
+           
 
         //_shockwavePosition = transform.Find("ShockwavePosition");
 
         _rb = GetComponent<Rigidbody>();
-        _anim = GetComponent<Animator>();
-        //PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
-        if (TransferableScript.Instance.GetWeapon() != null && GameManager.Instance._currentScen != GameManager.CurrentScen.HUBWorld)
-        {
-            _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
-            _playerWeaponHolder.SetWeapon(TransferableScript.Instance.GetWeapon());
-        }
+        _anim = GetComponent<Animator>();   
+        PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
 
-
+       
     }
 
     private void gameInput_OnHealButtonPressed(object sender, EventArgs e)
@@ -214,6 +211,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
         _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
+
     }
 
     public void TakeDamage(Attack attack)
@@ -491,9 +489,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     //    }
 
     //}
-
-
-    
 
     #region SFX
 
