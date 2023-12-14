@@ -18,7 +18,7 @@ public class FreedomPathScript : MonoBehaviour
 
     bool _paymentConfirmed;
 
-    int amountWaged = 0;
+    public int amountWaged = 0;
     float _tempPlayerCoins;
     int _tempFreedomPrice;
     public int FreedomPrice; //Öka destå fler du dödar i arenan
@@ -26,19 +26,19 @@ public class FreedomPathScript : MonoBehaviour
     void Start()
     {
        
-
-
-        _freedomPriceText.text = "Freedom Price Pot:" + FreedomPrice;
+        _freedomPriceText.text = "Freedom Price Pot: " + FreedomPrice;
         //_tempPlayerCoins = GameManager.PlayerCoins;
         _tempFreedomPrice = FreedomPrice;
 
         _ogErrorPanelColor = _errorPanel.GetComponent<Image>().color;
         _ogErrorTeextColor = _errorPanel.GetComponentInChildren<TextMeshProUGUI>().color;
+
+        _tempPlayerCoins = GameManager.PlayerCoins;
     }
 
     void Update()
     {
-        _tempPlayerCoins = GameManager.PlayerCoins;
+       //
         _currencyText.text = "Currency: " + _tempPlayerCoins;
        
         Debug.LogError("Actual gold: " + GameManager.PlayerCoins);
@@ -68,8 +68,9 @@ public class FreedomPathScript : MonoBehaviour
 
     public void PayforFreedom(int amount)
     {
-        
-        if ((_tempPlayerCoins - amount) >= 0 && _tempFreedomPrice >= 0 && (GameManager.PlayerCoins - amount) >= 0)
+        amountWaged += amount;
+
+        if (/*(_tempPlayerCoins - amountWaged) >= 0 && */_tempFreedomPrice >= 0 && (GameManager.PlayerCoins - amountWaged) >= 0)
         {  
             if ((_tempFreedomPrice - amount) >= 0)
             {
@@ -77,11 +78,15 @@ public class FreedomPathScript : MonoBehaviour
                 _freedomPriceText.text = "Freedom Price Pot: " + (_tempFreedomPrice - amount).ToString();
                 _tempFreedomPrice -= amount;
                 _tempPlayerCoins -= amount;
-                amountWaged += amount;
-            }            
+                
+                
+            }
+
+            
         }
         else
         {
+             amountWaged -= amount;
             _errorPanel.GetComponent<Image>().color = _ogErrorPanelColor;
             _errorPanel.GetComponentInChildren<TextMeshProUGUI>().color = _ogErrorTeextColor;
             _errorPanel.SetActive(true);
@@ -103,7 +108,7 @@ public class FreedomPathScript : MonoBehaviour
     public void CancelPayment()
     {
         _freedomPriceText.color = Color.white;
-        _freedomPriceText.text = "Freedom Price Pot:" + FreedomPrice;
+        _freedomPriceText.text = "Freedom Price Pot: " + FreedomPrice;
         
         _tempFreedomPrice = FreedomPrice;
         _tempPlayerCoins = GameManager.PlayerCoins;

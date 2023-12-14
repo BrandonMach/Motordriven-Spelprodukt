@@ -143,12 +143,16 @@ public class GameManager : MonoBehaviour
     public static int ChampionsKilled;
     public float TotalMoneyEarned;
     public float GameManagerKillCount;
+    public static int ArenaLayoutIndex;
 
     public System.EventHandler OnRestartGame;
+
+
+
     void Start()
     {
-       
 
+        //ArenaLayoutIndex = 0;
         //För testing
         PlayerCoins = 50;
         //Debug.Log("Coins" +     PlayerCoins);
@@ -258,6 +262,7 @@ public class GameManager : MonoBehaviour
         if (currentScene.buildIndex == 6 || _currentScen == GameManager.CurrentScen.HUBWorld)
         {
 
+
             #region FMOD
 
             if (!_openWorldEventInvoked)
@@ -270,21 +275,22 @@ public class GameManager : MonoBehaviour
 
 
             _currentScen = CurrentScen.HUBWorld;
-
+            GetComponent<SlowMo>()._returnSlowMo = true;
 
 
         }
 
 
-        //switch (currentScene.buildIndex)
-        //{
-
-        //}
 
 
 
 
     }
+
+
+  
+
+
 
     #region Money
     public void RewardCoins(float amount)

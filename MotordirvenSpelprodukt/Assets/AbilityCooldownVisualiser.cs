@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class AbilityCooldownVisualiser : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class AbilityCooldownVisualiser : MonoBehaviour
 
 
     float _cooldownDuration;
+
+    private PlayerDash _playerDash;
+
     public enum AbilityType
     {
         Dashing,
@@ -31,13 +35,14 @@ public class AbilityCooldownVisualiser : MonoBehaviour
 
     void Start()
     {
+        _playerDash = Player.Instance.GetComponent<PlayerDash>();
+
         AbilityImage.fillAmount = 0;
 
         switch (_abilityType)
         {
             case AbilityType.Dashing:
-                _cooldownDuration = Player.Instance.GetComponent<PlayerDash>().CooldownDuration; //Get max cooldown
-                
+                _cooldownDuration = _playerDash.CooldownDuration; //Get max cooldown
                 break;
             case AbilityType.Bleeding:
                 break;
@@ -48,29 +53,32 @@ public class AbilityCooldownVisualiser : MonoBehaviour
             default:
                 break;
         }
-
-
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        switch (_abilityType)
-        {
-            case AbilityType.Dashing:
-                _isAbilityCooldown = Player.Instance.GetComponent<PlayerDash>().IsOnCooldown;
-                _currrentAbilityCooldown = Player.Instance.GetComponent<PlayerDash>().DashCooldown;
-                break;
-            case AbilityType.Bleeding:
-                break;
-            case AbilityType.Stunned:
-                break;
-            case AbilityType.Airborne:
-                break;
-            default:
-                break;
-        }
 
+        if (!Player.Instance.IsDestroyed())
+        {
+            switch (_abilityType)
+            {
+                case AbilityType.Dashing:
+                    _isAbilityCooldown = _playerDash.IsOnCooldown;
+                    _currrentAbilityCooldown = _playerDash.DashCooldown;
+                    break;
+                case AbilityType.Bleeding:
+                    break;
+                case AbilityType.Stunned:
+                    break;
+                case AbilityType.Airborne:
+                    break;
+                default:
+                    break;
+            }
+        }
+       
         //När en isAbility sätts igång +1 i active abilities. Lägg ability icon på x position
         if (_isAbilityCooldown)
         {
