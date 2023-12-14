@@ -6,6 +6,7 @@ public class InventorySlot : MonoBehaviour
 {
     [SerializeField] Image _icon;
     Item _item;
+    [SerializeField] GameObject _weaponGameobject;
 
     public Image Icon { get => _icon; set => _icon = value; }
     private TooltipTrigger trigger;
@@ -18,6 +19,7 @@ public class InventorySlot : MonoBehaviour
         if (newItem is Weapon weapon)
         {
             _item = weapon; // Might not work
+            
 
             if (weapon.GetImage() != null)
             {
