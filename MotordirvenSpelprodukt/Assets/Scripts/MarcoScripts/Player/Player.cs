@@ -28,6 +28,15 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     public event EventHandler<OnAttackPressedAnimationEventArgs> StartAttackAnimation;
     public event EventHandler PlayerInterrupted;
 
+    public enum PlayerState
+    {
+        Normal,
+        pushedBack
+    }
+
+    public PlayerState CurrentPlayerState { get; private set; }
+
+
     public class OnAttackPressedAnimationEventArgs : EventArgs
     {
         public enum AttackType
@@ -60,6 +69,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private PlayerDash _playerDash;
     private PlayerMovement _playerMovement;
     private EntertainmentManager _entertainmentManager;
+
 
     private CapsuleCollider _collider;
     [SerializeField] private Animator _anim;
@@ -101,6 +111,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Start()
     {
+        CurrentPlayerState = PlayerState.Normal;
 
         //_healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
 
@@ -259,6 +270,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         //PushBack(attackerPos, knockBackForce);
         Debug.Log("In GetPushedBack method, setting anim trigger");
         Debug.Log("Pushback force: " + knockBackForce + " AttackerPos: " + attackerPos);
+        CurrentPlayerState = PlayerState.pushedBack;
         _anim.SetTrigger("PushedBack");
         Debug.Log(this.GetType().ToString() + "Player knocked back with force: " + knockBackForce);
         Vector3 direction = attackerPos - transform.position;
@@ -430,6 +442,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _input = "";
         ComboBroken?.Invoke(this, EventArgs.Empty);
         _canAttack = true;
+        CurrentPlayerState = PlayerState.Normal;
     }
 
     private void OnAttack(OnAttackPressedAnimationEventArgs.AttackType attack)
