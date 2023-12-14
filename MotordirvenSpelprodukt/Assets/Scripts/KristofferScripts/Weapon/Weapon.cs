@@ -24,7 +24,7 @@ public class Weapon : Item
         UpdateWeaponDamage();
     }
     private void UpdateWeaponDamage() { _weaponDamage = _weaponType.GetDamage()*_damageOffset * _weaponLevel; }   
-    private void UpdateRange() { _range = _weaponType.GetRange() * _rangeOffset; }
+    private void UpdateRange() { _range = 2;/*_weaponType.GetRange() * _rangeOffset;*/ }
     private void UpdateSpeed() { _attackSpeed = _weaponType.GetAttackSpeed() * _speedOffset; }
     public void SetUpWeapon(Weapontype type, int level, float damageOffset=1, float rangeOffset=1, float speedOffset=1)
     {
