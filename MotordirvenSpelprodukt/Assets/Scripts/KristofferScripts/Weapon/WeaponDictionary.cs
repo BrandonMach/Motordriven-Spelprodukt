@@ -22,4 +22,5 @@ public class WeaponDictionary : ScriptableObject
         wepImageDictionary.TryGetValue(wep, out ImagePrefabList value);
         return value.GetRandomItem();
     }
+
 }
