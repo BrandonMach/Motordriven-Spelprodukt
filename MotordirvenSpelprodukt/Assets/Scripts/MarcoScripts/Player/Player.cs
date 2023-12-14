@@ -255,7 +255,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             {
                 Debug.Log("Push back player");
                 OnDisableMovement();
-                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);
+                GetPushedback(attack.AttackerPosition, 30);//attack.AttackSO.Force);
                 
             }
         }
