@@ -4489,6 +4489,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Icon_Arrow_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1437149170512201962, guid: b4a134fead4a6f146b9f4a47894f2d32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5144590051629500849, guid: b4a134fead4a6f146b9f4a47894f2d32, type: 3}
       propertyPath: m_LocalScale.x
       value: 9.3474455
@@ -4544,6 +4548,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1437149170512201962, guid: b4a134fead4a6f146b9f4a47894f2d32, type: 3}
       insertIndex: -1
       addedObject: {fileID: 504165336}
+    - targetCorrespondingSourceObject: {fileID: 1437149170512201962, guid: b4a134fead4a6f146b9f4a47894f2d32, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 504165339}
   m_SourcePrefab: {fileID: 100100000, guid: b4a134fead4a6f146b9f4a47894f2d32, type: 3}
 --- !u!4 &504165334 stripped
 Transform:
@@ -4570,12 +4577,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.39026564, y: 0.39999995, z: 1.9120212}
   m_Center: {x: 0.00028716246, y: 0, z: -0.9160106}
+--- !u!114 &504165339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504165335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420fb8f725349c64c9ecec1fd9bed431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSceneName: CustomizationMenu
 --- !u!1 &504245248
 GameObject:
   m_ObjectHideFlags: 0
@@ -5896,6 +5916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _challengeText: {fileID: 661537058}
   _completedChallengeBox: {fileID: 801500580}
+  _animator: {fileID: 0}
 --- !u!114 &894968188 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1800511540857894261, guid: fb94f113d9f35bb459dbd443fefcd5d7, type: 3}
@@ -8288,6 +8309,7 @@ MonoBehaviour:
   _objList:
   - {fileID: 11400000, guid: 4697808a1035c1842a8952830cafd862, type: 2}
   - {fileID: 11400000, guid: 9b202662e6861464aa60221126501cb9, type: 2}
+  _arrow: {fileID: 504165335}
   _canvas: {fileID: 1848699634}
   attackText: {fileID: 730938577}
   descTextField: {fileID: 1688786786}
