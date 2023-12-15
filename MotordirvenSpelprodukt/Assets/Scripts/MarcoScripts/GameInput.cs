@@ -49,7 +49,7 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.Heal.performed += Heal_performed; ;
 
 
-        InputSystem.onActionChange += HandleOnActionChange;
+        //InputSystem.onActionChange += HandleOnActionChange;
 
     }
 

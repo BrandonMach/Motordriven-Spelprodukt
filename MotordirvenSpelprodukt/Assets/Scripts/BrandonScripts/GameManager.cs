@@ -175,15 +175,18 @@ public class GameManager : MonoBehaviour
 
         if (currentScene.buildIndex == 1)
         {
-            #region FMOD
 
             if (!_mainMenuEventInvoked)
             {
                 OnMainMenuEnter?.Invoke();
                 _mainMenuEventInvoked = true;
+
+                if (ChallengeManager.Instance != null)
+                {
+                    ChallengeManager.Instance.ResetActiveChallengesOnLoad();
+                }
             }
 
-            #endregion
 
             _currentScen = CurrentScen.MainMenuScene;
 
