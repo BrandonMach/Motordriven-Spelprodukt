@@ -130,12 +130,6 @@ public class ChallengeManager : MonoBehaviour
         {
 
             availableChallenges.UpdateTriggerContent(); //Update tooltip
-
-
-            if (availableChallenges.IsCompleted)
-            {
-                availableChallenges.ChallengeButton.SetActive(false);
-            }
         }
     }
 
