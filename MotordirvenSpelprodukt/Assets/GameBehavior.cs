@@ -5,19 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class GameBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static GameBehavior instance;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if(instance==null)
+        {
+            instance = this;
+        }
+        else if(instance!=this)
+        {
+            Destroy(gameObject);
+        }
     }
     public void sceneToMoveTo()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("CustomizationMenu");
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+        GameBehavior.instance.sceneToMoveTo();
+        Debug.Log("here");
     }
 }
