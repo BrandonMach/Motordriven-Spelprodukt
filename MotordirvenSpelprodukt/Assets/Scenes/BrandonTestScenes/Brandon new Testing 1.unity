@@ -1345,6 +1345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _challengeText: {fileID: 1508480913}
   _completedChallengeBox: {fileID: 692211218}
+  _animator: {fileID: 1508480915}
 --- !u!1001 &248364762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6386,6 +6387,7 @@ GameObject:
   - component: {fileID: 1508480912}
   - component: {fileID: 1508480914}
   - component: {fileID: 1508480913}
+  - component: {fileID: 1508480915}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -6509,6 +6511,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508480911}
   m_CullTransparentMesh: 1
+--- !u!95 &1508480915
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508480911}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adc64c843b03e5345979c3a2a08e0b12, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1537310725
 PrefabInstance:
   m_ObjectHideFlags: 0
