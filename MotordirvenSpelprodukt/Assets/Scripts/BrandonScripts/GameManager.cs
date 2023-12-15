@@ -212,10 +212,10 @@ public class GameManager : MonoBehaviour
             }
 
 
-            foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
-            {
-                ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
-            }
+            //foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
+            //{
+            //    ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
+            //}
 
            
             
@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
 
             #endregion
 
-            CheckChallengesCompletion();
+            //CheckChallengesCompletion();
             ChallengeTimersUpdate();
             _currentScen = CurrentScen.ArenaScen;
 
@@ -319,7 +319,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.RewardCoins(completedChallenge.Reward);
         completedChallenge.IsCompleted = true;
         _challengeManager.DeActivateChallenge(completedChallenge);
-        _challengeManager.RemoveChallenge(completedChallenge);
+        //_challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
         Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
 
