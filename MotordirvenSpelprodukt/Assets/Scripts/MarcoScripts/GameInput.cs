@@ -46,7 +46,7 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.HeavyAttack.performed += HeavyAttack_performed;
         _playerInputActions.Player.Evade.performed += Evade_performed;
         _playerInputActions.Player.Pause.performed += Pause_performed;
-        _playerInputActions.Player.Heal.performed += Heal_performed; ;
+        _playerInputActions.Player.Heal.performed += Heal_performed;
 
 
         //InputSystem.onActionChange += HandleOnActionChange;
