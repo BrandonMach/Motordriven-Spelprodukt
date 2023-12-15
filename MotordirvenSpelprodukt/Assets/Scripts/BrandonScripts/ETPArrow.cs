@@ -2,10 +2,13 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ETPArrow : MonoBehaviour
 {
-    
+    public Slider SliderDist;
+    public GameObject handel;
+    float Loc;
 
     [Header("SFX EventReferences")]
     public EventReference whiteDiamondSound;
@@ -21,6 +24,7 @@ public class ETPArrow : MonoBehaviour
     void Update()
     {
         
+        this.transform.position = handel.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)

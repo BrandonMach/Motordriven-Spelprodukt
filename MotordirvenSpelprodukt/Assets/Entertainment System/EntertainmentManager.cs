@@ -80,11 +80,14 @@ public class EntertainmentManager : MonoBehaviour
     public event System.EventHandler InCombat;
 
     public bool CanGoOTC;
-   // public bool WavesAreSpawning;
+    // public bool WavesAreSpawning;
 
     #endregion
 
     // [SerializeField] private bool _startComboWindowTimer;
+
+
+    IEnumerator corutine;
 
     private void Awake()
     {
@@ -181,7 +184,8 @@ public class EntertainmentManager : MonoBehaviour
 
     void UpdateETPArrow()
     {
-        _indicatorArrow.localPosition = new Vector3(-160 +(320/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, _indicatorArrow.localPosition.z);      
+        
+      //  _indicatorArrow.localPosition = new Vector3(-160 +(320/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, _indicatorArrow.localPosition.z);      
     }
 
     #region OOC
@@ -224,7 +228,11 @@ public class EntertainmentManager : MonoBehaviour
 
     void OutOfCombatDecreaseOverTime()
     {
-        _entertainmentPoints -= (Time.deltaTime); //Every second ETP -1
+        //_entertainmentPoints -= (Time.deltaTime); //Every second ETP -1
+        //DecreseETP(1);
+
+
+        ChangeEtp(-1);
     }
     private void OnDrawGizmosSelected()
     {
@@ -247,12 +255,51 @@ public class EntertainmentManager : MonoBehaviour
     #endregion
     public void DecreseETP(float amoutToDecrese)
     {
-        _entertainmentPoints -= amoutToDecrese;
+        //_entertainmentPoints -= amoutToDecrese;
+        StopAllCoroutines();
+        corutine = ChangeEtpCorutine(-amoutToDecrese);
+        StartCoroutine(corutine);
     }
     public void increaseETP(int amoutToIncrease)
     {
-        _entertainmentPoints += amoutToIncrease;     
+         // _entertainmentPoints += amoutToIncrease;
+        StopAllCoroutines();
+        //StopCoroutine(corutine);
+        corutine = ChangeEtpCorutine(amoutToIncrease);
+        StartCoroutine(corutine);
     }
 
+    public void ChangeEtp(float amoutToChange)
+    {
+       // StopCoroutine(corutine);
+
+
+        corutine = ChangeEtpCorutine(amoutToChange);
+        StartCoroutine(corutine);
+    }
+
+
+    
+    IEnumerator ChangeEtpCorutine(float etpChange)
+    {
+        float current = _entertainmentPoints;
+        float etpTarget = (_entertainmentPoints + etpChange);
+        float timeMultiplyer = 1;
+
+
+
+        if(_entertainmentPoints <= current)
+        {
+           _entertainmentPoints = Mathf.Lerp(_entertainmentPoints, etpTarget, Time.deltaTime * timeMultiplyer);
+        }
+        else
+        {
+            yield return null;
+        }
+
+
+    }
+
+  
 
 }
