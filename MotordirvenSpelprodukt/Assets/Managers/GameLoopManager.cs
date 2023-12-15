@@ -53,6 +53,8 @@ public class GameLoopManager : MonoBehaviour
     float _challengeTimerChampion;
     bool _championIsDead;
     bool _challengeRequirementsMet;
+    bool _isStraightEdge = false;
+    bool _neverHealed = true;
 
     bool beenOutOfCombat;
 
@@ -148,14 +150,16 @@ public class GameLoopManager : MonoBehaviour
             ChampionhpCanvas.SetActive(false);
         }
 
-        
 
-      
+
+        GameInput.Instance.OnHealButtonPressed += HandleStraightEdgeFail;
 
 
 
 
     }
+
+ 
 
     /// <summary>
     /// Set your _gameManager variable to this instance in order to achieve the Singleton pattern.
@@ -164,7 +168,7 @@ public class GameLoopManager : MonoBehaviour
 
     #endregion
 
-  
+
 
     //public int KillCount { get => _killCount; set => _killCount = value; }
     public int KillCount
@@ -323,6 +327,11 @@ public class GameLoopManager : MonoBehaviour
         SettingStatistics();
 
 
+        if (_neverHealed)
+        {
+            _isStraightEdge = true;
+        }
+
        // GameManager.ArenaLayoutIndex++;
         MatchIsFinished = true; //Stop the match
       
@@ -363,10 +372,11 @@ public class GameLoopManager : MonoBehaviour
         GameManager.Instance._championIsDeadX = true;
         _championIsDead = true;
 
-        
+    }
 
-
-
+    private void HandleStraightEdgeFail(object sender, EventArgs e)
+    {
+        _neverHealed = false;
     }
 
     /// <summary>
@@ -374,13 +384,13 @@ public class GameLoopManager : MonoBehaviour
     /// </summary>
     private void SettingStatistics()
     {
-        GameManager.Instance.TotalKillcount = GameManager.Instance.KillCount;
-        GameManager.Instance.TotalKnockUps = GameManager.Instance.KnockedUpCount;
-        GameManager.Instance.TotalKnockedOutOfArena = GameManager.Instance.KnockedOutOfArena;
+        TotalKillcount = KillCount;
+        Instance.TotalKnockUps = KnockedUpCount;
+        Instance.TotalKnockedOutOfArena = KnockedOutOfArena;
 
-        GameManager.Instance.KillCount = 0;
-        GameManager.Instance.KnockedUpCount = 0;
-        GameManager.Instance.KnockedOutOfArena = 0;
+        KillCount = 0;
+        KnockedUpCount = 0;
+        KnockedOutOfArena = 0;
     }
     #endregion
 
@@ -394,7 +404,7 @@ public class GameLoopManager : MonoBehaviour
         GameManager.Instance.RewardCoins( completedChallenge.Reward);
         completedChallenge.IsCompleted = true;
         _challengeManager.DeActivateChallenge(completedChallenge);
-        _challengeManager.RemoveChallenge(completedChallenge);
+        //_challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
         Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
         //completedChallenge.ChallengeButton.SetActive(false);
@@ -540,7 +550,7 @@ public class GameLoopManager : MonoBehaviour
 
     private bool StraightEdgeCheck(Challenge challenge)
     {
-        if (challenge.ChallengeName == "Straight Edge" /* && !bool potionsUsed */)
+        if (challenge.ChallengeName == "Straight Edge" && _isStraightEdge )
         {
             return true;
         }
