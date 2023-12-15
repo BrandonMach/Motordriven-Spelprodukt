@@ -143,11 +143,16 @@ public class GameManager : MonoBehaviour
     public static int ChampionsKilled;
     public float TotalMoneyEarned;
     public float GameManagerKillCount;
+    public static int ArenaLayoutIndex;
+
+    public System.EventHandler OnRestartGame;
+
+
 
     void Start()
     {
-       
 
+        //ArenaLayoutIndex = 0;
         //För testing
         PlayerCoins = 50;
         //Debug.Log("Coins" +     PlayerCoins);
@@ -170,15 +175,18 @@ public class GameManager : MonoBehaviour
 
         if (currentScene.buildIndex == 1)
         {
-            #region FMOD
 
             if (!_mainMenuEventInvoked)
             {
                 OnMainMenuEnter?.Invoke();
                 _mainMenuEventInvoked = true;
+
+                if (ChallengeManager.Instance != null)
+                {
+                    ChallengeManager.Instance.ResetActiveChallengesOnLoad();
+                }
             }
 
-            #endregion
 
             _currentScen = CurrentScen.MainMenuScene;
 
@@ -192,24 +200,26 @@ public class GameManager : MonoBehaviour
         if (currentScene.buildIndex == 2)
         {
 
-            #region FMOD
-
             if (!_afterArenaEventInvoked && _beenIntoArena)
             {
                 OnAfterArenaEnter?.Invoke();
                 _afterArenaEventInvoked = true;
+                ChallengeManager.Instance.ResetActiveChallengesOnLoad();
             }
-
-            #endregion
 
 
             foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
             {
                 ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
             }
+
+           
             
             _currentScen = CurrentScen.CustomizationScene;
-            
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
         }
         else
         {
@@ -254,6 +264,7 @@ public class GameManager : MonoBehaviour
         if (currentScene.buildIndex == 6 || _currentScen == GameManager.CurrentScen.HUBWorld)
         {
 
+
             #region FMOD
 
             if (!_openWorldEventInvoked)
@@ -266,21 +277,22 @@ public class GameManager : MonoBehaviour
 
 
             _currentScen = CurrentScen.HUBWorld;
-
+            GetComponent<SlowMo>()._returnSlowMo = true;
 
 
         }
 
 
-        //switch (currentScene.buildIndex)
-        //{
-
-        //}
 
 
 
 
     }
+
+
+  
+
+
 
     #region Money
     public void RewardCoins(float amount)
@@ -510,5 +522,8 @@ public class GameManager : MonoBehaviour
          GameManagerKillCount = 0;
 
          PlayerCoins = 50;
+
+        TransferableScript.Instance.ResetInventorySlots();
+
     }
 }

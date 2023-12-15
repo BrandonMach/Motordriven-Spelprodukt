@@ -6,6 +6,7 @@ public class InventorySlot : MonoBehaviour
 {
     [SerializeField] Image _icon;
     Item _item;
+  
 
     public Image Icon { get => _icon; set => _icon = value; }
     private TooltipTrigger trigger;
@@ -18,6 +19,7 @@ public class InventorySlot : MonoBehaviour
         if (newItem is Weapon weapon)
         {
             _item = weapon; // Might not work
+            
 
             if (weapon.GetImage() != null)
             {
@@ -36,7 +38,7 @@ public class InventorySlot : MonoBehaviour
     }
     private void TooltipSetup(Weapon weapon)
     {
-        trigger.header = weapon.GetName();       
+        trigger.header = weapon.GetName();      
         trigger.content = "Level: " + weapon.GetLevel() + "\n" + "Damage:" + weapon.GetDamage();
     }
     public void OnPress()

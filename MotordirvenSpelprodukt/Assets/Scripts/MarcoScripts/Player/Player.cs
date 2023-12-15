@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.WSA;
+using UnityEngine.XR.WSA;
 
 public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 {
@@ -27,6 +27,15 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     public event EventHandler<OnAttackPressedEventArgs> RegisterAttack;
     public event EventHandler<OnAttackPressedAnimationEventArgs> StartAttackAnimation;
     public event EventHandler PlayerInterrupted;
+
+    public enum PlayerState
+    {
+        Normal,
+        pushedBack
+    }
+
+    public PlayerState CurrentPlayerState { get; private set; }
+
 
     public class OnAttackPressedAnimationEventArgs : EventArgs
     {
@@ -60,6 +69,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private PlayerDash _playerDash;
     private PlayerMovement _playerMovement;
     private EntertainmentManager _entertainmentManager;
+
 
     private CapsuleCollider _collider;
     [SerializeField] private Animator _anim;
@@ -101,6 +111,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
     void Start()
     {
+        CurrentPlayerState = PlayerState.Normal;
 
         //_healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
 
@@ -116,25 +127,34 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _input = "";
         _entertainmentManager = EntertainmentManager.Instance;
 
-        GetComponent<AttackManager>().EnemyHit += AttackLanded;
-        GetComponent<AttackManager>().AttackMissed += ResetComboChecker;
-        GetComponent<AttackManager>().AttackMissed += PlayRandomSwordInAir;
-        GetComponent<HealthManager>().PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
-        _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
-        
-        if (TransferableScript.Instance.GetWeapon() != null)
-        {
-            _playerWeaponHolder.SetWeapon(TransferableScript.Instance.GetWeapon());
-        }
-           
+        AttackManager attackManager = GetComponent<AttackManager>();
+        attackManager.EnemyHit += AttackLanded;
+        attackManager.AttackMissed += ResetComboChecker;
+        attackManager.AttackMissed += PlayRandomSwordInAir;
+        _healthManager.PlayDoDamageSoundEvent += PlayRandomDoDamageSound;
+        _healthManager.OnDead += HealthManager_OnDead;
+
+
+
+
 
         //_shockwavePosition = transform.Find("ShockwavePosition");
 
         _rb = GetComponent<Rigidbody>();
-        _anim = GetComponent<Animator>();   
-        PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
+        _anim = GetComponent<Animator>();
+        //PlayerWeaponHolder.Instance.SetWeapon(TransferableScript.Instance.GetWeapon());
+        if (TransferableScript.Instance.GetWeapon() != null && GameManager.Instance._currentScen != GameManager.CurrentScen.HUBWorld)
+        {
+            _playerWeaponHolder = GetComponent<PlayerWeaponHolder>();
+            _playerWeaponHolder.SetWeapon(TransferableScript.Instance.GetWeapon());
+        }
 
-       
+
+    }
+
+    private void HealthManager_OnDead(object sender, EventArgs e)
+    {
+        DisableMovement?.Invoke(this, EventArgs.Empty);
     }
 
     private void gameInput_OnHealButtonPressed(object sender, EventArgs e)
@@ -211,7 +231,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _gameInput.OnHeavyAttackButtonPressed -= GameInput_OnHeavyAttackButtonPressed;
         _gameInput.OnEvadeButtonPressed -= GameInput_OnEvadeButtonPressed;
         _playerDash.EvadePerformed -= PlayerDash_OnEvadePerformed;
-
+        _healthManager.OnDead -= HealthManager_OnDead;
+        _healthManager.PlayDoDamageSoundEvent -= PlayRandomDoDamageSound;
     }
 
     public void TakeDamage(Attack attack)
@@ -234,7 +255,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             {
                 Debug.Log("Push back player");
                 OnDisableMovement();
-                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);
+                GetPushedback(attack.AttackerPosition, 30);//attack.AttackSO.Force);
                 
             }
         }
@@ -260,6 +281,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         //PushBack(attackerPos, knockBackForce);
         Debug.Log("In GetPushedBack method, setting anim trigger");
         Debug.Log("Pushback force: " + knockBackForce + " AttackerPos: " + attackerPos);
+        CurrentPlayerState = PlayerState.pushedBack;
         _anim.SetTrigger("PushedBack");
         Debug.Log(this.GetType().ToString() + "Player knocked back with force: " + knockBackForce);
         Vector3 direction = attackerPos - transform.position;
@@ -431,6 +453,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         _input = "";
         ComboBroken?.Invoke(this, EventArgs.Empty);
         _canAttack = true;
+        CurrentPlayerState = PlayerState.Normal;
     }
 
     private void OnAttack(OnAttackPressedAnimationEventArgs.AttackType attack)
@@ -489,6 +512,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     //    }
 
     //}
+
+
+    
 
     #region SFX
 

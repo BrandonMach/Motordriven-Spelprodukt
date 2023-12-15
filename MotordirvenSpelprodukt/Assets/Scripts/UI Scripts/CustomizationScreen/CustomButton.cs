@@ -15,7 +15,7 @@ public class CustomButton : Button
     void Start()
     {
         // Used for auto writing button text
-        // TMP.text = ($"{Challenge.ChallengeName}");
+        //TMP.text = ($"{Challenge.ChallengeName}");
 
         //TMP.text = ($"{Challenge.ChallengeName} |  {Challenge.Description}");
         onClick.AddListener(delegate () { ChallengeManager.Instance.ActivateOrDeactivateChalleng(Challenge); });
@@ -37,7 +37,7 @@ public class CustomButton : Button
         TMP.text = ($"{Challenge.ChallengeName}");
 
 
-        //onClick.AddListener(delegate () { ChallengeManager.Instance.ActivateOrDeactivateChalleng(Challenge); });
+        onClick.AddListener(delegate () { ChallengeManager.Instance.ActivateOrDeactivateChalleng(Challenge); });
     }
 
     

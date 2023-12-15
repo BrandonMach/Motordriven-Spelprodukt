@@ -29,8 +29,9 @@ public class Challenge : MonoBehaviour
 
     private void Start()
     {
-        //trigger = GetComponent<TooltipTrigger>();
-        //trigger.content = _description;
+        trigger = GetComponent<TooltipTrigger>();
+        trigger.content = "Reward: " + _reward.ToString();
+        trigger.header = _description;
         DontDestroyOnLoad(ChallengeButton);
     }
 
@@ -41,7 +42,7 @@ public class Challenge : MonoBehaviour
 
     public void UpdateTriggerContent()
     {
-        trigger.content = _description;
+        trigger.content = _description + "\n" + "Reward: " + _reward.ToString(); ;
     }
 
     public Challenge(string name, string description, int requirement)

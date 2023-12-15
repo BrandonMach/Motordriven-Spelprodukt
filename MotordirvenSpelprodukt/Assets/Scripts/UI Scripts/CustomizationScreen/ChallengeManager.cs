@@ -53,6 +53,7 @@ public class ChallengeManager : MonoBehaviour
         Instance = this;
 
         ActiveChallenges = new List<Challenge>();
+
     }
 
 
@@ -85,60 +86,24 @@ public class ChallengeManager : MonoBehaviour
 
     private void Start()
     {
+        AvailableChallengesArray = FindObjectsOfType<Challenge>();
         DontDestroyOnLoad(gameObject);
 
     }
 
     private void Update()
     {
-        //AvailableChallengesArray = FindObjectsOfType<Challenge>();
+      
 
-        ////foreach (Challenge challenge in AvailableChallenges)
-        ////{
-        ////    if (challenge.IsCompleted)
-        ////    {
-        ////        challenge.ChallengeButton.SetActive(false);
-        ////    }
-        ////}
-
-
-        //foreach (var item in AvailableChallengesArray)
-        //{
-        //    if (item.IsCompleted)
-        //    {
-        //        item.ChallengeButton.SetActive(false);
-        //    }
-        //}
-
-        //if(GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene && ChallengesActive)
-        //{
-        //    _firstActiveChallengeText = GameObject.FindWithTag("FirstActiveChallenge").GetComponent<TextMeshProUGUI>();
-        //    _secondActiveChallengeText = GameObject.FindWithTag("SecondActiveChallenge").GetComponent<TextMeshProUGUI>();
-        //    ChallengeButtonArray = FindObjectsOfType<CustomButton>();
-
-        //    for (int i = 0; i < ChallengeButtonArray.Length; i++)
-        //    {
-        //        ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
-                
-        //    }
-
-        //    for (int i = 0; i < AvailableChallengesArray.Length; i++)
-        //    {
-        //        AvailableChallengesArray[i].trigger = ChallengeButtonArray[i].gameObject.GetComponent<TooltipTrigger>();
-        //    }
-
-        //}
-        
     }
 
     public void ChallengePanelOpen()
     {
-        
+
         AvailableChallengesArray = tempArray;
         AvailableChallengesArray = FindObjectsOfType<Challenge>();
 
 
-        
 
         if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene /*&& ChallengesActive*/)
         {
@@ -149,7 +114,7 @@ public class ChallengeManager : MonoBehaviour
             for (int i = 0; i < ChallengeButtonArray.Length; i++)
             {
                 ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
-                
+                ChallengeButtonArray[i].TMP.text = AvailableChallengesArray[i].ChallengeName;
 
             }
 
@@ -296,9 +261,8 @@ public class ChallengeManager : MonoBehaviour
     {
         foreach (Challenge challenge in ActiveChallenges)
         {
-            if (!challenge.IsCompleted /* && player.killCount >= challenge.Requirement */) // TODO : add player.killcount in Player class
+            if (!challenge.IsCompleted) 
             {
-                // player.GrantReward(challenge.Reward); TODO : add GrantReward in Player class
 
                 OnChallengeCompleted?.Invoke(challenge);
                 challenge.IsCompleted = true;
@@ -306,6 +270,14 @@ public class ChallengeManager : MonoBehaviour
         }
 
         ReverseIterateRemove();
+    }
+
+    public void ResetActiveChallengesOnLoad()
+    {
+        for (int i = ActiveChallenges.Count - 1; i >= 0; i--)
+        {
+            DeActivateChallenge(ActiveChallenges[i]);
+        }
     }
 
 }

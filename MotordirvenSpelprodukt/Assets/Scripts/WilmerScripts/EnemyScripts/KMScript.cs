@@ -25,7 +25,7 @@ public class KMScript : MinionScript
 
     public ParticleSystem _explosion;
     public TMPro.TextMeshProUGUI _countdownNumber;
-
+    HealthManager hpManager;
 
     [SerializeField] public Image bombImage;
 
@@ -44,6 +44,8 @@ public class KMScript : MinionScript
         CurrentState = EnemyState.chasing;
 
         //_explodeTimer = 3;
+
+        hpManager = GetComponent<HealthManager>();
 
         base.Start();
 
@@ -83,7 +85,9 @@ public class KMScript : MinionScript
                 //Debug.Log("Active bomba");
             
                 gameObject.SetActive(false);
+
                 Destroy(gameObject);
+          
             }
         }
 
@@ -101,6 +105,7 @@ public class KMScript : MinionScript
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
+            
 
         }
     }
@@ -108,7 +113,11 @@ public class KMScript : MinionScript
 
     private void OnDestroy()
     {
+
+        
         Explode();
+        base.OnDestroy();
+
     }
 
 

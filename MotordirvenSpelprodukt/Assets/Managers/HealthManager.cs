@@ -16,6 +16,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     [SerializeField] float _currentHealth;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event System.EventHandler OnDead;
     public System.EventHandler OnShakeScreen;
 
     [Header("Dismembrent")]
@@ -25,14 +26,15 @@ public class HealthManager : MonoBehaviour,IHasProgress
     private bool isBleeding;
     public bool IsDeadOnce;
     public bool Dead;
-    public float _destroydelay = 1.5f;
+    public float _destroydelay;
 
     public bool IsPlayer;
     public bool GodMode;
     public bool Explode;
 
     public bool hasSlowMo;
-    public SlowMo _slowMo;
+    public bool isChampion;
+    
 
  
 
@@ -74,24 +76,25 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
         if (CurrentHealthPoints <= 0)
         {
-            Die();
-
             if (HasDismembrent)
             {
                 GetComponent<DismemberentEnemyScript>().DismemberCharacter();
                 HasDismembrent = false;
             }
+            Die();
+
+            
 
         }
     }
 
     private void OnDestroy()
     {
-        //if (!IsPlayer)
-        //{
-        //    SpawnEnemy.Instance._waveBattleInformation[SpawnEnemy._currentWaveBattleIndex].waveInfoHolder[SpawnEnemy.Instance._currentWaveIndex].EnemiesLeft--;
-        //    GameLoopManager.Instance.UpdateEnemyList();
-        //}
+        if (hasSlowMo)
+        {
+            GameManager.Instance.GetComponent<SlowMo>();
+        }
+
         
     }
 
@@ -130,7 +133,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
 
     public void ReduceHealth(float damage)
     {
-        EntertainmentManager.Instance.firstTimeInCombat = true;
+        EntertainmentManager.Instance.CanGoOTC = true;
         if (!GodMode)
         {
             if (IsPlayer)
@@ -177,6 +180,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
             colorAdjustments.saturation.value = -100;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             GameLoopManager.Instance.TotalDeaths++;
+            OnDead?.Invoke(this, EventArgs.Empty);
         }
         else if (!IsDeadOnce)
         {
@@ -188,15 +192,17 @@ public class HealthManager : MonoBehaviour,IHasProgress
             PlayDeathSoundEvent?.Invoke(this, EventArgs.Empty);
         }
 
+       
+        Dead = true;
+
         if (hasSlowMo)
         {
-            _slowMo.DoSlowmotion();//Only do slow mo when you kill Champion
+            GameManager.Instance.GetComponent<SlowMo>().DoSlowmotion(); 
         }
-        
-        Dead = true;
+
 
     }
 
-   
+
 
 }
