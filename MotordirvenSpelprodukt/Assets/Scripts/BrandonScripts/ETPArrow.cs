@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class ETPArrow : MonoBehaviour
 {
-    public Slider SliderDist;
+    
     public GameObject handel;
-    float Loc;
+
 
     [Header("SFX EventReferences")]
     public EventReference whiteDiamondSound;
