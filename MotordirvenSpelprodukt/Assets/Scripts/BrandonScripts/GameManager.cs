@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -146,6 +147,9 @@ public class GameManager : MonoBehaviour
     public static int ArenaLayoutIndex;
 
     public System.EventHandler OnRestartGame;
+
+    public delegate void ChallengeCompletedEvent(EventArgs e, Challenge completedChallenge);
+    public static event ChallengeCompletedEvent OnChallengeCompleted;
 
 
 
@@ -318,6 +322,8 @@ public class GameManager : MonoBehaviour
         _challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
         Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
+
+        OnChallengeCompleted?.Invoke(EventArgs.Empty, completedChallenge);
         //completedChallenge.ChallengeButton.SetActive(false);
     }
 

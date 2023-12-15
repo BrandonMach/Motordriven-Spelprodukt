@@ -199,6 +199,9 @@ public class GameLoopManager : MonoBehaviour
 
     public event EventHandler OnChampionKilled;
 
+    public delegate void ChallengeCompletedEvent(EventArgs e, Challenge completedChallenge);
+    public static event ChallengeCompletedEvent OnChallengeCompleted;
+
     public void UpdateEnemyList()
     {
         EnemyGameObjects =   GameObject.FindGameObjectsWithTag("EnemyTesting");
@@ -395,6 +398,7 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
         Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
         //completedChallenge.ChallengeButton.SetActive(false);
+        OnChallengeCompleted?.Invoke(EventArgs.Empty, completedChallenge);
     }
 
     /// <summary>
