@@ -3465,6 +3465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3061400205063226885}
+  - component: {fileID: 2849858672940909782}
   m_Layer: 0
   m_Name: BarricadeFragments
   m_TagString: Untagged
@@ -3528,8 +3529,21 @@ Transform:
   - {fileID: 6676065884669482161}
   - {fileID: 7848917241850611860}
   - {fileID: 7247923919855559829}
-  m_Father: {fileID: 8022851955000191802}
+  m_Father: {fileID: 7043166281671617086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2849858672940909782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845083675356068968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804b746d17680914ba6eb5978c6a68d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayColliderActivations: 1
 --- !u!1 &1881059843396780043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4765,9 +4779,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5748233195062057296}
-  - {fileID: 3061400205063226885}
-  - {fileID: 8671358967416873339}
   - {fileID: 8743599260006447749}
   - {fileID: 124559320913878715}
   - {fileID: 7043166281671617086}
@@ -10232,6 +10243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5748233195062057296}
+  - component: {fileID: 8065994637246353708}
   m_Layer: 0
   m_Name: PillarFragments
   m_TagString: Untagged
@@ -10293,8 +10305,21 @@ Transform:
   - {fileID: 3336101365897436906}
   - {fileID: 5945646998669327996}
   - {fileID: 4325551938010048183}
-  m_Father: {fileID: 8022851955000191802}
+  m_Father: {fileID: 7043166281671617086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8065994637246353708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044413560815067438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804b746d17680914ba6eb5978c6a68d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayColliderActivations: 1
 --- !u!1 &5143091217440079991
 GameObject:
   m_ObjectHideFlags: 0
@@ -12822,6 +12847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8671358967416873339}
+  - component: {fileID: 6665611491106870218}
   m_Layer: 0
   m_Name: BarricadeFragments2
   m_TagString: Untagged
@@ -12885,8 +12911,21 @@ Transform:
   - {fileID: 1213165054432316076}
   - {fileID: 4128695287163617571}
   - {fileID: 4926348426805730167}
-  m_Father: {fileID: 8022851955000191802}
+  m_Father: {fileID: 7043166281671617086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6665611491106870218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430943069314966460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804b746d17680914ba6eb5978c6a68d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayColliderActivations: 1
 --- !u!1 &6461259094426433329
 GameObject:
   m_ObjectHideFlags: 0
@@ -15060,6 +15099,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8671358967416873339}
+  - {fileID: 3061400205063226885}
+  - {fileID: 5748233195062057296}
   - {fileID: 5405018962383517631}
   - {fileID: 2905037195223361453}
   m_Father: {fileID: 8022851955000191802}

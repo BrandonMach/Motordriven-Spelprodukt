@@ -49,10 +49,12 @@ public class DestructibleObject : MonoBehaviour, IDamagable
         hp -= attack.Damage;
         if (hp <= 0)
         {
+            // Destroy game object
             DestroyObjectWithDelay();
             StartCoroutine(DisablePhysicsWithDelay());
         }
     }
+
 
     IEnumerator DisablePhysicsWithDelay()
     {
