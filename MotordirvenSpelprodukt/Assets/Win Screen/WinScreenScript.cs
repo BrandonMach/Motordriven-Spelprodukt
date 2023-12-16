@@ -42,10 +42,10 @@ public class WinScreenScript : MonoBehaviour
 
     }
 
-    public void RestartGame()
+    public void GoToHUb()
     {
-        GameManager.Instance.Reset();
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        //GameManager.Instance.Reset();
+        SceneManager.LoadScene(6, LoadSceneMode.Single);
 
     }
 }

@@ -156,6 +156,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Player Statue")]
     [SerializeField] private GameObject _playerStatue;
+    bool _buildPlayerStatue;
+   
 
     void Start()
     {
@@ -173,7 +175,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _playerStatue.SetActive(KilledAllChampions);
+        
         if (Input.GetKeyDown(KeyCode.J))
         {
             KilledAllChampions = true;
@@ -287,12 +289,16 @@ public class GameManager : MonoBehaviour
             }
 
             #endregion
-
+            
             Player.Instance._canAttack = false;
             _currentScen = CurrentScen.HUBWorld;
             GetComponent<SlowMo>()._returnSlowMo = true;
 
-
+            if (KilledAllChampions && !_buildPlayerStatue)
+            {
+                _buildPlayerStatue = true;
+                Instantiate(_playerStatue,new Vector3(0.8f,10,70), _playerStatue.transform.rotation);
+            }
         }
 
 
@@ -303,7 +309,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-  
+    
 
 
 

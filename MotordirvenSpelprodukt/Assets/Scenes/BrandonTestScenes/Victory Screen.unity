@@ -1332,7 +1332,6 @@ GameObject:
   - component: {fileID: 1267563743}
   - component: {fileID: 1267563745}
   - component: {fileID: 1267563744}
-  - component: {fileID: 1267563746}
   - component: {fileID: 1267563747}
   m_Layer: 5
   m_Name: Panel
@@ -1380,7 +1379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1217b33436f1b734d95d04de2e08b770, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa5cb15ce4c4c9948ba79b46eea6e66b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1398,25 +1397,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267563742}
   m_CullTransparentMesh: 1
---- !u!114 &1267563746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267563742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e608cb5916a8c254eaeb671cc4747c42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CauseOfDeathText: {fileID: 1240786510}
-  _deathImages:
-  - {fileID: 21300000, guid: 037744fc83d33204b818c735df48db12, type: 3}
-  - {fileID: 21300000, guid: 1217b33436f1b734d95d04de2e08b770, type: 3}
-  _championSlain: {fileID: 1786446532}
-  _minionsKilled: {fileID: 1088780049}
-  _moneyEarned: {fileID: 687044467}
 --- !u!114 &1267563747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1429,8 +1409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4719d6b6dc73afd4899653623af33004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CauseOfDeathText: {fileID: 488779211}
-  _winImages: []
+  CauseOfDeathText: {fileID: 1240786510}
+  _winImages:
+  - {fileID: 21300000, guid: fa5cb15ce4c4c9948ba79b46eea6e66b, type: 3}
+  - {fileID: 21300000, guid: 4272d765265c3674c95854b5128cd261, type: 3}
   _championSlain: {fileID: 1786446532}
   _minionsKilled: {fileID: 1088780049}
   _moneyEarned: {fileID: 687044467}
@@ -1860,9 +1842,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1267563746}
-        m_TargetAssemblyTypeName: LoseScreenScript, Assembly-CSharp
-        m_MethodName: RestartGame
+      - m_Target: {fileID: 1267563747}
+        m_TargetAssemblyTypeName: WinScreenScript, Assembly-CSharp
+        m_MethodName: GoToHUb
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
