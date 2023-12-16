@@ -25,7 +25,7 @@ public class FreedomPathScript : MonoBehaviour
     private float _stagePriceMultiplier = 1.3f;
     void Start()
     {
-       
+        FreedomPrice = 300;
         _freedomPriceText.text = "Freedom Price Pot: " + FreedomPrice;
         //_tempPlayerCoins = GameManager.PlayerCoins;
         _tempFreedomPrice = FreedomPrice;
@@ -61,6 +61,7 @@ public class FreedomPathScript : MonoBehaviour
 
         if(FreedomPrice >= 0)
         {
+            GameManager.FreedomWin = true;
             Debug.Log("You win, you bought your freedom");
         }
     }

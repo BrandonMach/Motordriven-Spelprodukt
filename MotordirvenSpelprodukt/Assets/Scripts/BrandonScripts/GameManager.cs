@@ -151,7 +151,11 @@ public class GameManager : MonoBehaviour
     public delegate void ChallengeCompletedEvent(EventArgs e, Challenge completedChallenge);
     public static event ChallengeCompletedEvent OnChallengeCompleted;
 
+    public static bool FreedomWin;
+    public static bool KilledAllChampions;
 
+    [Header("Player Statue")]
+    [SerializeField] private GameObject _playerStatue;
 
     void Start()
     {
@@ -169,6 +173,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _playerStatue.SetActive(KilledAllChampions);
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            KilledAllChampions = true;
+        }
 
         if(Player.Instance != null)
         {
@@ -279,7 +288,7 @@ public class GameManager : MonoBehaviour
 
             #endregion
 
-
+            Player.Instance._canAttack = false;
             _currentScen = CurrentScen.HUBWorld;
             GetComponent<SlowMo>()._returnSlowMo = true;
 
