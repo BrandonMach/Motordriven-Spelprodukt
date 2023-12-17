@@ -21,7 +21,7 @@ public class LoseScreenScript : MonoBehaviour
     
     void Start()
     {
-        _image.GetComponent<Image>();
+        _image = gameObject.GetComponent<Image>();
         if (KingExecution)
         {
             _image.sprite = _deathImages[0];

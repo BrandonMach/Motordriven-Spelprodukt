@@ -170,18 +170,23 @@ public class GameManager : MonoBehaviour
         TotalMoneyEarned = PlayerCoins;
 
         _challengeManager = ChallengeManager.Instance;
+
+        //For testing
+        KilledAllChampions = true;
+        //FreedomWin = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Ta bort sen
         if (Input.GetKeyDown(KeyCode.J))
         {
             KilledAllChampions = true;
         }
+        
 
-        if(Player.Instance != null)
+        if (Player.Instance != null)
         {
             _player = Player.Instance;
         }

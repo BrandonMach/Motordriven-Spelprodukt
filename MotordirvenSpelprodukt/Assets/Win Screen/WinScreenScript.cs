@@ -18,18 +18,23 @@ public class WinScreenScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _minionsKilled;
     [SerializeField] private TextMeshProUGUI _moneyEarned;
 
+    [SerializeField] private TextMeshProUGUI _buttonText;
+
     void Start()
     {
-        _image.GetComponent<Image>();
+        _image = gameObject.GetComponent<Image>();
         if (GameManager.FreedomWin)
         {
             _image.sprite = _winImages[0];
             CauseOfDeathText.text = "Bought your freedom";
+            _buttonText.text = "Start over";
         }
-        else
+        if(GameManager.KilledAllChampions)
         {
             _image.sprite = _winImages[1];
             CauseOfDeathText.text = "Slayed all champions";
+            _buttonText.text = "Townhall";
+
         }
     }
 
@@ -44,8 +49,17 @@ public class WinScreenScript : MonoBehaviour
 
     public void GoToHUb()
     {
-        //GameManager.Instance.Reset();
-        SceneManager.LoadScene(6, LoadSceneMode.Single);
+        if (GameManager.KilledAllChampions)
+        {
+            SceneManager.LoadScene(6, LoadSceneMode.Single);         
+        }
+
+        if(GameManager.FreedomWin)
+        {
+            GameManager.Instance.Reset();
+            SceneManager.LoadScene(1, LoadSceneMode.Single);      
+        }
+       
 
     }
 }
