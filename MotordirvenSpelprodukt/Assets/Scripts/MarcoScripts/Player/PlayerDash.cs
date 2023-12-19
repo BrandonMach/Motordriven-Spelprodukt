@@ -65,8 +65,6 @@ public class PlayerDash : MonoBehaviour
 
     private void HandleRoll()
     {
-
-     
         _rigidBody.rotation = Quaternion.Slerp(_rigidBody.rotation, Quaternion.LookRotation(_rigidBody.velocity.normalized),_rotationSpeed * Time.fixedDeltaTime);
 
         if (_currentDashTime <= 0)
@@ -78,12 +76,13 @@ public class PlayerDash : MonoBehaviour
         }
         else
         {
-            if (_rigidBody.velocity != Vector3.zero)
+            if (_rigidBody.velocity != Vector3.zero) // if the player is moving we evade towards the movement direction
             {
-                _rigidBody.velocity = _rigidBody.velocity.normalized * _playerMovement.MoveSpeed * _speedMultiplier;
+                _rigidBody.velocity = _playerMovement.MoveDirection * _playerMovement.MoveSpeed * _speedMultiplier;
             }
             else
             {
+                // If the player isn't moving we roll towards the characters facing direction
                 _rigidBody.velocity = transform.forward * _playerMovement.MoveSpeed * _speedMultiplier;
             }
 
@@ -92,7 +91,6 @@ public class PlayerDash : MonoBehaviour
                 _player.SetPlayerInvulnarableState(false);
             }
         }
-        
     }
 
     private void HandleTimers()
