@@ -23,7 +23,7 @@ public class KingDecision : MonoBehaviour
         _etp = EntertainmentManager.Instance;
 
         _anim = GetComponent<Animator>();
-        gameManager.OnChampionKilled += PlayDecisionAnimation;
+        gameManager.OnFightComplete += PlayDecisionAnimation;
 
 
         //King Emotes
@@ -59,9 +59,8 @@ public class KingDecision : MonoBehaviour
 
     private void PlayDecisionAnimation(object sender, EventArgs e)
     {
-        Debug.Log("Champion Is dead");
         _anim.SetBool("Approved", true);
-        _anim.SetFloat("ETP", (_etp.GetETP() / 100)); //Selects what animation to play based on ETP
+        _anim.SetFloat("ETP", (_etp.GetETP() / 100)); //Selects what animation to play based on ETP       
     }
 
 
@@ -85,8 +84,17 @@ public class KingDecision : MonoBehaviour
     //King playes win animation
     public void GoToShop()
     {
-        //testar gå till concept save money
+        StartCoroutine(ShowMatchSummary());
+
+    }
+
+    private IEnumerator ShowMatchSummary()
+    {
+        SceneManager.LoadScene(9, LoadSceneMode.Additive);
+        yield return new WaitForSeconds(10);
+
         GameManager.ArenaLayoutIndex++;
+        GameManager.BattleIndex++;
         SceneManager.LoadScene(6, LoadSceneMode.Single);
     }
 }
