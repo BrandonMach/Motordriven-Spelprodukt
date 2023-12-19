@@ -43,7 +43,7 @@ public class StoreInputScript : MonoBehaviour
 
                 if (_isSpamming)
                 {
-                    _etpManager.DecreseETP(10);
+                    _etpManager.ChangeEtp(-10);
                 }
 
             }
