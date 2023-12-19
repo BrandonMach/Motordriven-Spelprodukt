@@ -32,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerAnimation _playerAnimation;
 
-    private Quaternion _newRotation;
-
     private bool _isMoving = false;
     public bool _canMove = true;
 
@@ -121,8 +119,8 @@ public class PlayerMovement : MonoBehaviour
         if (_isMoving)
         {
             _rotateInputDirection = _moveDirection.x * _camRight + _moveDirection.y * _camForward;
-            _newRotation = Quaternion.LookRotation(_moveDirection); 
-            Rotate();
+            Quaternion newRotation = Quaternion.LookRotation(_moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _rotationSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -163,7 +161,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotate()
     {
-         transform.rotation = Quaternion.Slerp(transform.rotation, _newRotation, _rotationSpeed * Time.fixedDeltaTime);
     }
     public bool IsMoving()
     {

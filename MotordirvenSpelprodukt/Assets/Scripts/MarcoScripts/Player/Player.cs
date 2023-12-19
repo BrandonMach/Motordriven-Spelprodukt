@@ -187,7 +187,6 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     private void PlayerDash_OnEvadePerformed(object sender, EventArgs e)
     {
         IsDashing = false;
-        OnEnableMovement();
         OnComboBroken();
     }
 
@@ -290,10 +289,9 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
         StartFacingExplosion(attackerPos);
     }
 
-
     private IEnumerator FaceExplosion(Vector3 targetPos)
     {
-        while(true)
+        while(CurrentPlayerState == PlayerState.pushedBack)
         {
             Vector3 direction = targetPos - transform.position;
             direction.y = 0;
