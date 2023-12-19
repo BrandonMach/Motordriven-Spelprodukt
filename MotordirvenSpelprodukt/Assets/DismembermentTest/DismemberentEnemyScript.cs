@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DismemberentEnemyScript : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class DismemberentEnemyScript : MonoBehaviour
     [SerializeField] List<DismembermentLimbsScript> _limbs;
     [SerializeField] Collider _mainCollider;
     [SerializeField] Rigidbody _rb;
+
     void Start()
     {
         _anim = GetComponent<Animator>();
@@ -44,14 +47,23 @@ public class DismemberentEnemyScript : MonoBehaviour
     {
         _mainCollider.enabled = false;
         _anim.enabled = false;
+
+
+        if(gameObject.GetComponent<NavMeshAgent>() != null)
+        {
+            GetComponent<NavMeshAgent>().enabled = false;
+        }
+        
+
         foreach (var ragdollparts in _ragdollRigids)
         {
             ragdollparts.gameObject.GetComponent<Collider>().enabled = true;
             ragdollparts.useGravity = true;
             ragdollparts.isKinematic = false; //Unlocks ragdoll for rigidbody
 
+            ragdollparts.angularVelocity = Vector3.zero;
             //Add random force to ragdoll
-            ragdollparts.AddForce(new Vector3(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)) * Random.Range(1, 10));
+           // ragdollparts.AddForce(new Vector3(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)) * Random.Range(1, 10));
         }
     }
 

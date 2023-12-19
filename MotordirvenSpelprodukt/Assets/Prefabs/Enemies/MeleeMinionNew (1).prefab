@@ -4404,27 +4404,6 @@ MonoBehaviour:
     m_Bits: 256
   isPlayer: 0
   stunEffect: {fileID: 1768112299768337191, guid: fcf9502658e948e42b50aa9b2b5c134b, type: 3}
-  swordInAirEventRef:
-    Guid:
-      Data1: -863582595
-      Data2: 1326961157
-      Data3: 1874499228
-      Data4: -1211592969
-    Path: event:/swordInAir
-  swordInAir2EventRef:
-    Guid:
-      Data1: 1830128848
-      Data2: 1231730185
-      Data3: -898910538
-      Data4: 1024743558
-    Path: event:/minionHit2
-  swordInAir3EventRef:
-    Guid:
-      Data1: -833794151
-      Data2: 1107683780
-      Data3: 814735012
-      Data4: 373602252
-    Path: event:/minionHit3
 --- !u!114 &3003743497886142356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4450,7 +4429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8529c9789877d46bae31e50ce0a30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoints: 100
+  _maxHealthPoints: 200
   _bleedDuration: 6
   _currentHealth: 0
   HasDismembrent: 1
@@ -4461,7 +4440,7 @@ MonoBehaviour:
   GodMode: 0
   Explode: 0
   hasSlowMo: 0
-  _slowMo: {fileID: 0}
+  isChampion: 0
   _damageAnimator: {fileID: 7812201735477555256}
 --- !u!114 &315945659908084176
 MonoBehaviour:
