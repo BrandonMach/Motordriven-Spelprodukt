@@ -34,7 +34,7 @@ public class PlayerInputSpamChecker : MonoBehaviour
             if (repeatCount >= _inputSpamAmount)
             {
                 Debug.Log("Repeated combo detected: " + lastCombo);
-                _entertainmentManager?.DecreseETP(_enertainmentDecrease);
+                _entertainmentManager?.ChangeEtp(_enertainmentDecrease);
          
             }
         }

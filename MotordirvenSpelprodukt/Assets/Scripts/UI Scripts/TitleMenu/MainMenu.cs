@@ -38,6 +38,7 @@ public class MainMenu : MenuAbstract, IMenu
 
     public override void ClickMenuOption3()
     {
-        base.ClickMenuOption3();
+        SceneManager.LoadScene(7, LoadSceneMode.Single);
+        //base.ClickMenuOption3();
     }
 }

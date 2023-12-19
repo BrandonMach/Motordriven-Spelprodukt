@@ -84,7 +84,8 @@ public class AttackManager : MonoBehaviour
                 if (enemyHits[i].CompareTag("Player"))
                 {
                     Debug.Log("Player has been hit");
-                    EntertainmentManager.Instance.DecreseETP(_etpDecrease);
+                    //EntertainmentManager.Instance.DecreseETP(_etpDecrease);
+                    EntertainmentManager.Instance.ChangeEtp(-_etpDecrease);
 
                     if(_screenShake == true)
                     {

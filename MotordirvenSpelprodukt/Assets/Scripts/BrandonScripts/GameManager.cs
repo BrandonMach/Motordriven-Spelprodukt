@@ -151,7 +151,13 @@ public class GameManager : MonoBehaviour
     public delegate void ChallengeCompletedEvent(EventArgs e, Challenge completedChallenge);
     public static event ChallengeCompletedEvent OnChallengeCompleted;
 
+    public static bool FreedomWin;
+    public static bool KilledAllChampions;
 
+    [Header("Player Statue")]
+    [SerializeField] private GameObject _playerStatue;
+    bool _buildPlayerStatue;
+   
 
     void Start()
     {
@@ -164,13 +170,23 @@ public class GameManager : MonoBehaviour
         TotalMoneyEarned = PlayerCoins;
 
         _challengeManager = ChallengeManager.Instance;
+
+        //For testing
+        KilledAllChampions = true;
+        //FreedomWin = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Ta bort sen
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            KilledAllChampions = true;
+        }
+        
 
-        if(Player.Instance != null)
+        if (Player.Instance != null)
         {
             _player = Player.Instance;
         }
@@ -278,12 +294,16 @@ public class GameManager : MonoBehaviour
             }
 
             #endregion
-
-
+            
+            Player.Instance._canAttack = false;
             _currentScen = CurrentScen.HUBWorld;
             GetComponent<SlowMo>()._returnSlowMo = true;
 
-
+            if (KilledAllChampions && !_buildPlayerStatue)
+            {
+                _buildPlayerStatue = true;
+                Instantiate(_playerStatue,new Vector3(0.8f,10,70), _playerStatue.transform.rotation);
+            }
         }
 
 
@@ -294,7 +314,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-  
+    
 
 
 
