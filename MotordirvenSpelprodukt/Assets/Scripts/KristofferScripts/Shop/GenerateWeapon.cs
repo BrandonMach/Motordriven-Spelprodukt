@@ -18,21 +18,36 @@ public class GenerateWeapon : MonoBehaviour
     private Weapon _weapon;
     private bool _purshased;
     private List<string> _naming;
+
+
+    ImagePrefab prefab;
+
+    private int _priceModifyier;
+    public GameObject weaponPrefab;
     private void Awake()
     {
         _weapon = new Weapon();
         _naming = new List<string>();
+        _priceModifyier = 1;
     }
     public void GenerateWeaponPanel(Weapontype type, int level)
     {
+
         _purshased = false;
         _weapon.SetUpWeapon(type,level, 
             2f, 
             1f, 
             1f);
-        _weapon.SetName(GenerateName(type));
+
+
+        prefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType());
+
+        //Set prefab
+        // weaponPrefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType()).GetModelPrefab();
+        //_weapon.SetName(GenerateName(type));
+
         GenerateModel();
-        UpdatePanel(level);
+        UpdatePanel(prefab.GetBaseLevel());
        
     }
 
@@ -58,27 +73,29 @@ public class GenerateWeapon : MonoBehaviour
     }
     private void GenerateModel()
     {
-        ImagePrefab prefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType());
+      //  ImagePrefab prefab = _weaponDictionary.GetImagePrefab(_weapon.GetWeaponType());
         if (prefab != null)
         {
             _weapon.SetImage(prefab.GetImage());
             _weapon.SetPrefabPath(prefab.GetPath());
+            _weaponNameText.text = prefab.GetWeaponName();
+            _weapon.SetName(prefab.GetWeaponName());
         }
     }
-    private void UpdatePanel(int level)
+    private void UpdatePanel( int level)
     {
         if(_weapon.GetImage()!=null)
         {
             _weaponImage.sprite = _weapon.GetImage(); 
         }
-        _weaponNameText.text = _weapon.GetName();
+        //_weaponNameText.text = _weapon.GetName();
         _weaponLevelText.text = "Level " + level.ToString();      
         _weaponDamageText.text = _weapon.GetDamage().ToString();
         _weaponSpeedText.text = _weapon.GetSpeed().ToString();          // Tog bort + " dmg/spd/rng" pga att det syns på annat vis i UI
         _weaponRangeText.text = _weapon.GetRange().ToString();
-        _buttonText.text = (_weapon.GetWeaponType().GetBaseCost()*level).ToString();
+        _buttonText.text = ((int) Price()).ToString();
     }
-    public int Price(){ return (int)_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel(); }    
+    public int Price(){ return (int) prefab.GetBasePrice() + (_priceModifyier * /*_weapon.GetLevel()*/ prefab.GetBaseLevel()); }    
     public Weapon Purshase()
     {
         _weaponImage.sprite = null;

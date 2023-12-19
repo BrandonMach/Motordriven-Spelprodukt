@@ -121,7 +121,7 @@ public class MinionScript : EnemyScript
         GameLoopManager.Instance.UpdateEnemyList();
         EntertainmentManager.Instance.OutOfCombat -= Instance_OnOutOfCombat;
         EntertainmentManager.Instance.InCombat -= Instance_OnInCombat;
-        EntertainmentManager.Instance.increaseETP(7);
+        EntertainmentManager.Instance.ChangeEtp(7);
     }
     #endregion
 

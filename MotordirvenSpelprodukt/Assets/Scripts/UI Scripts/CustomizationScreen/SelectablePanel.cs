@@ -14,6 +14,8 @@ public class SelectablePanel : MonoBehaviour
     [SerializeField] private GameObject _inventoryVariantPanel;
     [SerializeField] private GameObject _panelInfo;
     [SerializeField] private GameObject _shopPanelInfo;
+    [SerializeField] private GameObject _challengesInfoBox;
+
     [SerializeField] private TextMeshProUGUI _panelInfoText;
 
     [SerializeField] private Button _inventoryButton;
@@ -26,9 +28,13 @@ public class SelectablePanel : MonoBehaviour
     private int _currentButtonIndex = 0;
     private int _currentPanelIndex = 0;
 
+    private static bool firstTimeChallenges = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        _challengesInfoBox.SetActive(false);
+
         _panels = new GameObject[]
         {
             _inventoryPanel,
@@ -96,7 +102,9 @@ public class SelectablePanel : MonoBehaviour
         _abilitiesButton.interactable = true;
         _challengesButton.interactable = true;
         _shopButton.interactable = true;
-       
+
+        HideChallengeInfoBox();
+
     }
     public void AbilitiesPanelClicked()
     {
@@ -108,7 +116,8 @@ public class SelectablePanel : MonoBehaviour
         _inventoryButton.interactable = true;
         _challengesButton.interactable = true;
         _shopButton.interactable = true;
-        
+
+        HideChallengeInfoBox();
     }
 
     public void ChallengesPanelClicked()
@@ -124,10 +133,31 @@ public class SelectablePanel : MonoBehaviour
         
         ChallengeManager.Instance.ChallengePanelOpen();
 
+        if (firstTimeChallenges)
+        {
+            _challengesInfoBox.SetActive(true);
+            firstTimeChallenges = false;
+        }
+
+ 
+
         //foreach (var challengeButton in ChallengeManager.Instance.ChallengeButtonArray)
         //{
         //    challengeButton.UpdateButtonInfo();
         //}
+    }
+
+    public void ClickContinueChallengInfoBox()
+    {
+        _challengesInfoBox.SetActive(false);
+    }
+
+    private void HideChallengeInfoBox()
+    {
+        if (!firstTimeChallenges)
+        {
+            _challengesInfoBox.SetActive(false);
+        }
     }
 
     public void ShopPanelClicked()
@@ -140,8 +170,8 @@ public class SelectablePanel : MonoBehaviour
         _challengesButton.interactable = true;
         _abilitiesButton.interactable = true;
         _inventoryButton.interactable = true;
-        
-       
+
+        HideChallengeInfoBox();
     }
 
     private void ActivateShop()

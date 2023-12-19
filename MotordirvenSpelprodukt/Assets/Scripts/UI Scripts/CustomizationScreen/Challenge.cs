@@ -42,7 +42,7 @@ public class Challenge : MonoBehaviour
 
     public void UpdateTriggerContent()
     {
-        trigger.content = _description;
+        trigger.content = _description + "\n" + "Reward: " + _reward.ToString(); ;
     }
 
     public Challenge(string name, string description, int requirement)

@@ -10,7 +10,7 @@ public class ShopSystem : MonoBehaviour
     [Header("Player Weapon")]
     [SerializeField] private Weapon _weapon;
     [Header("Shop Menu")]
-    [SerializeField] private float _currency;
+    //[SerializeField] private float _currency;
     [SerializeField] private TextMeshProUGUI _currencyText;
     [Header("Upgrade Menu")]
     [SerializeField] private Image _weaponImage;
@@ -35,9 +35,16 @@ public class ShopSystem : MonoBehaviour
         _rerollButtonText.text = (rerollCounter * rerollBaseline).ToString();
     }
 
+    private void Start()
+    {
+       
+    }
+
+
     private void Update()
     {
-        _currency = GameManager.PlayerCoins;
+        //_currency = GameManager.PlayerCoins;
+        Debug.Log(GameManager.PlayerCoins + " Player money");
     }
     public void MakePurshase(GenerateWeapon g)
     {
@@ -46,16 +53,16 @@ public class ShopSystem : MonoBehaviour
         _weapon = TryPurshase(g);
 
         UpdateUpgradeView();
-        GameManager.Instance.RemoveCoins((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()));
+
         Inventory.Instance.Add(_weapon);
     }
     public Weapon TryPurshase(GenerateWeapon g)
     {
         if(!g.Bought())
         {
-            if (g.Price()<=_currency)
+            if (g.Price()<= GameManager.PlayerCoins)
             {
-                _currency-=g.Price();
+                GameManager.PlayerCoins -= g.Price();
                 UpdateText();
                                    
                 return g.Purshase();
@@ -65,7 +72,7 @@ public class ShopSystem : MonoBehaviour
     }
     private void UpdateText()
     {
-        _currencyText.text = _currency.ToString();
+        _currencyText.text = GameManager.PlayerCoins.ToString();
     }
     private void UpdateUpgradeView()
     {
@@ -82,9 +89,9 @@ public class ShopSystem : MonoBehaviour
     }
     public void UpgradeWeapon()
     {
-        if(_currency>= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2))
+        if(GameManager.PlayerCoins >= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2))
         {
-            _currency -= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2);
+            GameManager.PlayerCoins -= (int)((_weapon.GetWeaponType().GetBaseCost() * _weapon.GetLevel()) / 2);
             _weapon.UpgradeWeapon();
             UpdateUpgradeView();
             UpdateText();
@@ -92,10 +99,10 @@ public class ShopSystem : MonoBehaviour
     }
     public void RerollShop()
     {
-        if(_currency>=rerollCounter*rerollBaseline)
+        if(GameManager.PlayerCoins >= rerollCounter*rerollBaseline)
         {
             GetComponent<ShopPanel>().Generate();
-            _currency -= rerollCounter*rerollBaseline;
+            GameManager.PlayerCoins -= rerollCounter*rerollBaseline;
             rerollCounter++;
             _rerollButtonText.text = (rerollCounter * rerollBaseline).ToString();
             UpdateText();

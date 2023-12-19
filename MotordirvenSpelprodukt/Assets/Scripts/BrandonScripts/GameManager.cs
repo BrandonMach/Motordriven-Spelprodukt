@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -147,7 +148,16 @@ public class GameManager : MonoBehaviour
 
     public System.EventHandler OnRestartGame;
 
+    public delegate void ChallengeCompletedEvent(EventArgs e, Challenge completedChallenge);
+    public static event ChallengeCompletedEvent OnChallengeCompleted;
 
+    public static bool FreedomWin;
+    public static bool KilledAllChampions;
+
+    [Header("Player Statue")]
+    [SerializeField] private GameObject _playerStatue;
+    bool _buildPlayerStatue;
+   
 
     void Start()
     {
@@ -160,13 +170,23 @@ public class GameManager : MonoBehaviour
         TotalMoneyEarned = PlayerCoins;
 
         _challengeManager = ChallengeManager.Instance;
+
+        //For testing
+        KilledAllChampions = true;
+        //FreedomWin = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Ta bort sen
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            KilledAllChampions = true;
+        }
+        
 
-        if(Player.Instance != null)
+        if (Player.Instance != null)
         {
             _player = Player.Instance;
         }
@@ -175,15 +195,18 @@ public class GameManager : MonoBehaviour
 
         if (currentScene.buildIndex == 1)
         {
-            #region FMOD
 
             if (!_mainMenuEventInvoked)
             {
                 OnMainMenuEnter?.Invoke();
                 _mainMenuEventInvoked = true;
+
+                if (ChallengeManager.Instance != null)
+                {
+                    ChallengeManager.Instance.ResetActiveChallengesOnLoad();
+                }
             }
 
-            #endregion
 
             _currentScen = CurrentScen.MainMenuScene;
 
@@ -197,21 +220,20 @@ public class GameManager : MonoBehaviour
         if (currentScene.buildIndex == 2)
         {
 
-            #region FMOD
-
             if (!_afterArenaEventInvoked && _beenIntoArena)
             {
                 OnAfterArenaEnter?.Invoke();
                 _afterArenaEventInvoked = true;
+                ChallengeManager.Instance.ResetActiveChallengesOnLoad();
             }
 
-            #endregion
 
+            //foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
+            //{
+            //    ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
+            //}
 
-            foreach (var oldActiveChallenges in ChallengeManager.Instance.ActiveChallenges)
-            {
-                ChallengeManager.Instance.RemoveChallenge(oldActiveChallenges);
-            }
+           
             
             _currentScen = CurrentScen.CustomizationScene;
 
@@ -238,7 +260,7 @@ public class GameManager : MonoBehaviour
 
             #endregion
 
-            CheckChallengesCompletion();
+            //CheckChallengesCompletion();
             ChallengeTimersUpdate();
             _currentScen = CurrentScen.ArenaScen;
 
@@ -272,12 +294,16 @@ public class GameManager : MonoBehaviour
             }
 
             #endregion
-
-
+            
+            Player.Instance._canAttack = false;
             _currentScen = CurrentScen.HUBWorld;
             GetComponent<SlowMo>()._returnSlowMo = true;
 
-
+            if (KilledAllChampions && !_buildPlayerStatue)
+            {
+                _buildPlayerStatue = true;
+                Instantiate(_playerStatue,new Vector3(0.8f,10,70), _playerStatue.transform.rotation);
+            }
         }
 
 
@@ -288,7 +314,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-  
+    
 
 
 
@@ -313,9 +339,11 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.RewardCoins(completedChallenge.Reward);
         completedChallenge.IsCompleted = true;
         _challengeManager.DeActivateChallenge(completedChallenge);
-        _challengeManager.RemoveChallenge(completedChallenge);
+        //_challengeManager.RemoveChallenge(completedChallenge);
         Debug.Log("Challenge completed " + completedChallenge.ChallengeName);
         Debug.Log("PlayerCoins = " + GameManager.PlayerCoins);
+
+        OnChallengeCompleted?.Invoke(EventArgs.Empty, completedChallenge);
         //completedChallenge.ChallengeButton.SetActive(false);
     }
 

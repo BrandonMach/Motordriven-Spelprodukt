@@ -21,7 +21,7 @@ public class LoseScreenScript : MonoBehaviour
     
     void Start()
     {
-        _image.GetComponent<Image>();
+        _image = gameObject.GetComponent<Image>();
         if (KingExecution)
         {
             _image.sprite = _deathImages[0];
@@ -38,7 +38,7 @@ public class LoseScreenScript : MonoBehaviour
     void Update()
     {
         _championSlain.text = "Champions Slain: " +  GameManager.ChampionsKilled.ToString();
-        _moneyEarned.text = "Total money earned:" + GameManager.Instance.TotalMoneyEarned.ToString();
+        _moneyEarned.text = "Total money earned:" + (GameManager.Instance.TotalMoneyEarned - 50).ToString();
         _minionsKilled.text = "Minions Killed: " + GameManager.Instance.GameManagerKillCount.ToString();
 
     }

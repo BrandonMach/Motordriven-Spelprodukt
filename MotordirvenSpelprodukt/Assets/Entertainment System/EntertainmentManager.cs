@@ -80,11 +80,18 @@ public class EntertainmentManager : MonoBehaviour
     public event System.EventHandler InCombat;
 
     public bool CanGoOTC;
-   // public bool WavesAreSpawning;
+    // public bool WavesAreSpawning;
 
     #endregion
 
     // [SerializeField] private bool _startComboWindowTimer;
+
+
+
+    public Slider _sliderDist;
+    private float _etpChangevalue;
+    bool increaseEtp;
+    [SerializeField] float _arrowMoveSpeed;
 
     private void Awake()
     {
@@ -181,7 +188,18 @@ public class EntertainmentManager : MonoBehaviour
 
     void UpdateETPArrow()
     {
-        _indicatorArrow.localPosition = new Vector3(-160 +(320/_maxETP)*_entertainmentPoints, _indicatorArrow.localPosition.y, _indicatorArrow.localPosition.z);      
+        if(_entertainmentPoints != _sliderDist.value)
+        {
+            if (increaseEtp &&  _sliderDist.value <= _entertainmentPoints)
+            {
+                _sliderDist.value += _arrowMoveSpeed * Time.deltaTime;
+            }
+            else if ( !increaseEtp && _sliderDist.value >= _entertainmentPoints)
+            {
+                _sliderDist.value -= _arrowMoveSpeed * Time.deltaTime;
+            }
+        }
+      
     }
 
     #region OOC
@@ -224,7 +242,12 @@ public class EntertainmentManager : MonoBehaviour
 
     void OutOfCombatDecreaseOverTime()
     {
+        increaseEtp = false;
         _entertainmentPoints -= (Time.deltaTime); //Every second ETP -1
+      
+
+
+        //ChangeEtp(-1);
     }
     private void OnDrawGizmosSelected()
     {
@@ -245,14 +268,40 @@ public class EntertainmentManager : MonoBehaviour
  
 
     #endregion
-    public void DecreseETP(float amoutToDecrese)
+    //public void DecreseETP(float amoutToDecrese)
+    //{
+    //    //_entertainmentPoints -= amoutToDecrese;
+    //    StopAllCoroutines();
+        
+    //    StartCoroutine(corutine);
+    //}
+    //public void increaseETP(int amoutToIncrease)
+    //{
+    //     // _entertainmentPoints += amoutToIncrease;
+    //    StopAllCoroutines();
+    //    //StopCoroutine(corutine);
+     
+    //    StartCoroutine(corutine);
+    //}
+
+    public void ChangeEtp(float amoutToChange)
     {
-        _entertainmentPoints -= amoutToDecrese;
-    }
-    public void increaseETP(int amoutToIncrease)
-    {
-        _entertainmentPoints += amoutToIncrease;     
+        // StopCoroutine(corutine);
+        if (_entertainmentPoints + amoutToChange > _sliderDist.value)
+        {
+            increaseEtp = true;
+        }
+        else
+        {
+            increaseEtp = false;
+        }
+
+        _entertainmentPoints += amoutToChange;
+     
+        //corutine = ChangeEtpCorutine(amoutToChange);
+        //StartCoroutine(corutine);
     }
 
+  
 
 }

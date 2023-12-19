@@ -10,6 +10,8 @@ public class StartUp : MonoBehaviour
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject audioMenu;
     [SerializeField] private GameObject videoMenu;
+    [SerializeField] private GameObject controlsMenu;
+    [SerializeField] private GameObject attackTreeMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,8 @@ public class StartUp : MonoBehaviour
         optionsMenu.SetActive(false);
         audioMenu.SetActive(false);
         videoMenu.SetActive(false);
-
+        controlsMenu.SetActive(false);
+        attackTreeMenu.SetActive(false);
     }
 
     // Update is called once per frame

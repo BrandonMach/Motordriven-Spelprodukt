@@ -715,7 +715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259744980791144513, guid: 5c8df41f9e5f71c4f8007b99926647bb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4259744980791144513, guid: 5c8df41f9e5f71c4f8007b99926647bb, type: 3}
       propertyPath: m_LocalScale.y
@@ -723,7 +723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259744980791144513, guid: 5c8df41f9e5f71c4f8007b99926647bb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4259744980791144513, guid: 5c8df41f9e5f71c4f8007b99926647bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -838,6 +838,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fbd20eb42ea7d9e439ada68ce436cbc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6965321092513624149}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fbd20eb42ea7d9e439ada68ce436cbc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1534714944757263241}
   m_SourcePrefab: {fileID: 100100000, guid: fbd20eb42ea7d9e439ada68ce436cbc8, type: 3}
 --- !u!4 &7481533673403153683 stripped
 Transform:
@@ -871,6 +874,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2699660337440932153, guid: fbd20eb42ea7d9e439ada68ce436cbc8, type: 3}
+--- !u!114 &1534714944757263241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7825127017508054953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 550b6682e9ab5cf44bcc7f05831badf7, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1001 &8735974566721194338
 PrefabInstance:
   m_ObjectHideFlags: 0

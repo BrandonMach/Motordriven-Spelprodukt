@@ -14,7 +14,7 @@ public class CursorController : MonoBehaviour
 
     private void Awake()
     {
-        GameInput.Instance.OnGameDeviceChanged += HandleOnGameDeviceChanged;
+        //GameInput.Instance.OnGameDeviceChanged += HandleOnGameDeviceChanged;
         virtualMouseInput = GetComponent<VirtualMouseInput>();
         GamePadCursorToCenter();
     }

@@ -254,7 +254,7 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
             {
                 Debug.Log("Push back player");
                 OnDisableMovement();
-                GetPushedback(attack.AttackerPosition, 100);//attack.AttackSO.Force);
+                GetPushedback(attack.AttackerPosition, 30);//attack.AttackSO.Force);
                 
             }
         }
@@ -349,7 +349,8 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
 
             if(_input.Length <= _tempComboChecker && _input.Length == 3) //Only give ETP if 3 hit-combo is executed
             {
-                _entertainmentManager?.increaseETP(GetCurrentAttackSO(_input).ETPChange);
+                //_entertainmentManager?.increaseETP(GetCurrentAttackSO(_input).ETPChange);
+                _entertainmentManager?.ChangeEtp(GetCurrentAttackSO(_input).ETPChange);
             }
             
             OnComboBroken();

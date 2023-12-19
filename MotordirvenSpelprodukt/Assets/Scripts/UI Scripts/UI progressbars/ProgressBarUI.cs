@@ -16,11 +16,13 @@ public class ProgressBarUI : MonoBehaviour
     private bool increaseHealth;
     public bool IsChampionHPbar;
     public bool IsMinionhpbar;
+    
 
     //public Image healthBar;
 
     private void Start()
     {
+        
 
         if (IsChampionHPbar)
         {
@@ -65,6 +67,7 @@ public class ProgressBarUI : MonoBehaviour
     private void Update()
     {
         
+
         if (_slider.value != _targetFillAmount)
         {
             if (increaseHealth && _slider.value <= _targetFillAmount)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,6 +24,13 @@ public class StatsMenu : MenuAbstract, IMenu
         {
             _gameLoopManager = GameLoopManager.Instance;
         }
+
+        GameManager.OnAfterArenaEnter += HandleOnAfterArenaEnter; 
+    }
+
+    private void HandleOnAfterArenaEnter()
+    {
+        UpdateStatisticsTMPs();
     }
 
     // Update is called once per frame
@@ -47,11 +55,11 @@ public class StatsMenu : MenuAbstract, IMenu
         if (GameLoopManager.Instance != null)
         {
 
-            _totalKills.text = $"Total kills: {GameManager.Instance.KillCount}";
-            _totalKnockUps.text = $"Total knock ups: {GameManager.Instance.TotalKnockUps}";
-            _totalOutOfArenas.text = $"Total out of arenas: {GameManager.Instance.TotalKnockedOutOfArena}";
-            _highestKillstreak.text = $"Highest killstreak: {GameManager.Instance.HighestKillStreakKillCount}";
-            _totalDeaths.text = $"Total deaths: {GameManager.Instance.TotalDeaths}";
+            _totalKills.text = $"Total kills: {GameLoopManager.Instance.TotalKillcount}";
+            _totalKnockUps.text = $"Total knock ups: {GameLoopManager.Instance.TotalKnockUps}";
+            _totalOutOfArenas.text = $"Total out of arenas: {GameLoopManager.Instance.TotalKnockedOutOfArena}";
+            _highestKillstreak.text = $"Highest killstreak: {GameLoopManager.Instance.HighestKillStreakKillCount}";
+            _totalDeaths.text = $"Total deaths: {GameLoopManager.Instance.TotalDeaths}";
         }
 
     }
