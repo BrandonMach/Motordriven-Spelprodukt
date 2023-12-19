@@ -9,9 +9,10 @@ public class DestructibleObject : MonoBehaviour, IDamagable
     [SerializeField] private GameObject destroyedPrefab;
     [SerializeField] private float removeDelay = 10;
     [SerializeField] private float removePhysicsDelay = 4;
+    [SerializeField] private float destructionForce = 5f;
 
     [Header("Debug")]
-    [SerializeField] private float hp = 20;
+    [SerializeField] private float hp = 150;
 
     Rigidbody[] rbsFragments;
     MeshCollider[] mcFragments;
@@ -23,8 +24,9 @@ public class DestructibleObject : MonoBehaviour, IDamagable
         referencePrefab.SetActive(true);
         destroyedPrefab.SetActive(false);
 
-        rbsFragments = GetComponentsInChildren<Rigidbody>();
-        mcFragments = GetComponentsInChildren<MeshCollider>();
+        rbsFragments = destroyedPrefab.GetComponentsInChildren<Rigidbody>();
+        mcFragments = destroyedPrefab.GetComponentsInChildren<MeshCollider>();
+        Debug.LogWarning(rbsFragments.Length);
     }
 
     // ONLY FOR DEBUG PURPOSES
@@ -37,21 +39,33 @@ public class DestructibleObject : MonoBehaviour, IDamagable
     //    }
     //}
 
-    private void DestroyObjectWithDelay()
+    private void DestroyObjectWithDelay(Vector3 force)
     {
         referencePrefab.SetActive(false);
         destroyedPrefab.SetActive(true);
+        ApplyForce(force);
         Destroy(gameObject, removeDelay);
     }
 
     public void TakeDamage(Attack attack)
     {
         hp -= attack.Damage;
+        Vector3 forceDirection = Vector3.Normalize(transform.position - attack.AttackerPosition);
+
         if (hp <= 0)
         {
-            DestroyObjectWithDelay();
+            // Destroy game object
+            DestroyObjectWithDelay(forceDirection);
             StartCoroutine(DisablePhysicsWithDelay());
         }
+    }
+
+    void ApplyForce(Vector3 direction)
+    {
+        foreach (Rigidbody rb in rbsFragments)
+            rb.velocity = direction*destructionForce;
+
+        Debug.LogWarning(direction);
     }
 
     IEnumerator DisablePhysicsWithDelay()
@@ -72,7 +86,8 @@ public class DestructibleObject : MonoBehaviour, IDamagable
         {
             if (minion.CurrentState == MMScript.EnemyState.pushed)
             {
-                DestroyObjectWithDelay();
+                Vector3 direction = Vector3.Normalize(transform.position - minion.transform.position);
+                DestroyObjectWithDelay(direction);
                 StartCoroutine(DisablePhysicsWithDelay());
             }
         }
@@ -80,7 +95,8 @@ public class DestructibleObject : MonoBehaviour, IDamagable
         {
             if (player.CurrentPlayerState == Player.PlayerState.pushedBack)
             {
-                DestroyObjectWithDelay();
+                Vector3 direction = Vector3.Normalize(transform.position - player.transform.position);
+                DestroyObjectWithDelay(direction);
                 StartCoroutine(DisablePhysicsWithDelay());
             }
         }
