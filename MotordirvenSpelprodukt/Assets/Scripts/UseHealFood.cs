@@ -13,13 +13,10 @@ public class UseHealFood : MonoBehaviour
     [SerializeField] Image _icon;
     [SerializeField] TextMeshProUGUI _healText;
 
-    private Player _player;
     void Start()
     {
-        _player = Player.Instance;
-
-        _playerHealth = _player.gameObject.GetComponent<HealthManager>();
-        _player.HealButtonPressed += Player_HealButtonPressed;
+        _playerHealth = Player.Instance.gameObject.GetComponent<HealthManager>();
+        Player.Instance.HealButtonPressed += Player_HealButtonPressed;
     }
 
     private void Player_HealButtonPressed(object sender, System.EventArgs e)
@@ -27,7 +24,7 @@ public class UseHealFood : MonoBehaviour
         if (TransferableScript.Instance.HealItems.Count > 0)
         {
 
-            _player.GetComponent<HealthManager>().HealDamage(TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].HPToHeal);
+            Player.Instance.GetComponent<HealthManager>().HealDamage(TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].HPToHeal);
             TransferableScript.Instance.HealItems.RemoveAt(TransferableScript.Instance.HealItems.Count - 1);
         }
     }
