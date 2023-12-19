@@ -22,7 +22,7 @@ public class GameLoopManager : MonoBehaviour
     public enum MatchType
     {
         Champion,
-        Tutorial,
+        WaveBattle,
     }
 
     [SerializeField] public MatchType _currentMatchType;
@@ -201,7 +201,7 @@ public class GameLoopManager : MonoBehaviour
     public int TotalDeaths { get => _totalDeaths; set => _totalDeaths = value; }
     public bool BeenOutOfCombat { get => beenOutOfCombat; set => beenOutOfCombat = value; }
 
-    public event EventHandler OnChampionKilled;
+    public event EventHandler OnFightComplete;
 
     public delegate void ChallengeCompletedEvent(EventArgs e, Challenge completedChallenge);
     public static event ChallengeCompletedEvent OnChallengeCompleted;
@@ -268,7 +268,7 @@ public class GameLoopManager : MonoBehaviour
 
 
 
-        if (_currentMatchType == MatchType.Tutorial)
+        if (_currentMatchType == MatchType.WaveBattle)
         {
 
         }
@@ -336,7 +336,6 @@ public class GameLoopManager : MonoBehaviour
         MatchIsFinished = true; //Stop the match
       
   
-
         foreach (var canvas in Canvases)
         {
             canvas.SetActive(MatchIsFinished);
@@ -348,15 +347,38 @@ public class GameLoopManager : MonoBehaviour
             Destroy(enemies);
         }
 
+
+        _kingCam = true;
+        CamManager.GoToKingCam();
+
+
         if (_etp.GetETP() > (_etp.GetMaxETP() / 2))
         {
-            GameManager.ChampionsKilled++;
-            Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
-            GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33);
-            if (GameManager.ChampionsKilled == AmountOfChampionsToKill)
+            if (_currentMatchType == MatchType.Champion)
             {
-                Debug.Log("You killed all champions");
+                GameManager.ChampionsKilled++;
+                Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
+
+                GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33);
+
+
+                // _championIsDead = true;
+                GameManager.Instance._championIsDeadX = true;
+                _championIsDead = true;
+
+
+                if (GameManager.ChampionsKilled == AmountOfChampionsToKill)
+                {
+                    Debug.Log("You killed all champions");
+                }
             }
+            else
+            {
+                Debug.LogError("Wave battle completed hhhsshshsh");
+            }
+
+          
+
         }
         else
         {
@@ -364,14 +386,8 @@ public class GameLoopManager : MonoBehaviour
            _player.gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
-        _kingCam = true;
-        CamManager.GoToKingCam();
-        OnChampionKilled?.Invoke(this, EventArgs.Empty);
 
-       // _championIsDead = true;
-        GameManager.Instance._championIsDeadX = true;
-        _championIsDead = true;
-
+        OnFightComplete?.Invoke(this, EventArgs.Empty);
     }
 
     private void HandleStraightEdgeFail(object sender, EventArgs e)

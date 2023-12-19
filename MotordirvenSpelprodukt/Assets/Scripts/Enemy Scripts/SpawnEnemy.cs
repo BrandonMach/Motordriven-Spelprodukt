@@ -13,30 +13,13 @@ public class SpawnEnemy : MonoBehaviour
     private static SpawnEnemy _instance;
     public static SpawnEnemy Instance { get => _instance; set => _instance = value; }
 
-   
+
     #endregion
-
-  
-
-
-    public Transform[] SpawnPoints;
-    private List<int> pointUsed;
-    
-
-    public Transform _target;
-
-
-    [SerializeField] int MinimumMinionCount;
-
-
-
 
 
     #region Wave Spawn
 
-
-    public Wave TestWave;
-
+    public Transform[] SpawnPoints;
 
     public float _countdown;
 
@@ -77,15 +60,15 @@ public class SpawnEnemy : MonoBehaviour
             return;
         }
         _instance = this;
+        
     }
    
     
 
     void Start()
     {
-
+        _currentWaveBattleIndex = GameManager.BattleIndex;
         GameLoopManager.Instance.OnMatchFinished += StopWaveSpawn;
-        _target = Player.Instance.transform;
 
 
         for (int i = 0; i < _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count; i++)
@@ -111,7 +94,7 @@ public class SpawnEnemy : MonoBehaviour
 
             if (_currentWaveIndex >= _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count && !GameLoopManager.Instance.MatchIsFinished)
             {
-                if (GameLoopManager.Instance._currentMatchType == GameLoopManager.MatchType.Tutorial)
+                if (GameLoopManager.Instance._currentMatchType == GameLoopManager.MatchType.WaveBattle)
                 {
 
                     Debug.Log("You have survived every wave");
@@ -121,64 +104,46 @@ public class SpawnEnemy : MonoBehaviour
 
                 return;
             }
-
-
-            if (Input.GetKeyDown(KeyCode.Y)) // För testing
-            {
-                SpawNewEnemy(Random.Range(0, SpawnPoints.Length));
-                readyToCountdown = true;
-            }
-
-
-            debugInt = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft;
-
-
-            if (readyToCountdown)
-            {
-                //EntertainmentManager.Instance.CanGoOTC = false;
-                WavesAreSpawning = true;
-                _countdown -= Time.deltaTime;
-
-            }
             else
             {
-                WavesAreSpawning = false;
 
-            }
+                if (readyToCountdown)
+                {
+                    //EntertainmentManager.Instance.CanGoOTC = false;
+                    WavesAreSpawning = true;
+                    _countdown -= Time.deltaTime;
+
+                }
+                else
+                {
+                    WavesAreSpawning = false;
+
+                }
 
 
-            if (_countdown <= 0)
-            {
-                readyToCountdown = false;
-                _countdown = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].timeToNextWave;
-                StartCoroutine(SpawnWave());
-            }
+                if (_countdown <= 0)
+                {
+                    readyToCountdown = false;
+                    _countdown = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].timeToNextWave;
+                    StartCoroutine(SpawnWave());
+                }
 
 
-            if (_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
-            {
+                if (_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
+                {
 
-                readyToCountdown = true;
-                _currentWaveIndex++;
+                    readyToCountdown = true;
+                    _currentWaveIndex++;
 
-            }
+                }
+
+            }         
         }
-
-       
-
     }
 
     private void StopWaveSpawn(object sender, System.EventArgs e)
     {
         stopSpawn = true;
-    }
-
-
-    public void SpawNewEnemy(int spawnPointIndex)
-    {
-        Instantiate(TestWave.WaveMinions[Random.Range(0, TestWave.WaveMinions.Length)], SpawnPoints[spawnPointIndex].position, Quaternion.identity);
-        GameLoopManager.Instance.UpdateEnemyList();
-        //pointUsed.Add(spawnPointIndex);
     }
 
 
@@ -213,14 +178,4 @@ public class SpawnEnemy : MonoBehaviour
 
 
    
-}
-
-[System.Serializable] //Viewable in inspector
-public class Wave
-{
-    public EnemyScript[] WaveMinions;
-    public float timeToNextEnemy;
-    public float timeToNextWave;
-    [HideInInspector] public int EnemiesLeft;
-    
 }

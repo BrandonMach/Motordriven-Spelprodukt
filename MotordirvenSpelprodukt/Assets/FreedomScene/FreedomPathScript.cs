@@ -25,7 +25,7 @@ public class FreedomPathScript : MonoBehaviour
     private float _stagePriceMultiplier = 1.3f;
     void Start()
     {
-        FreedomPrice = 300;
+        FreedomPrice = 50;
         _freedomPriceText.text = "Freedom Price Pot: " + FreedomPrice;
         //_tempPlayerCoins = GameManager.PlayerCoins;
         _tempFreedomPrice = FreedomPrice;
@@ -38,7 +38,7 @@ public class FreedomPathScript : MonoBehaviour
 
     void Update()
     {
-       //
+       
         _currencyText.text = "Currency: " + _tempPlayerCoins;
        
         Debug.LogError("Actual gold: " + GameManager.PlayerCoins);
@@ -59,10 +59,14 @@ public class FreedomPathScript : MonoBehaviour
             
         }
 
-        if(FreedomPrice >= 0)
+        if(FreedomPrice <= 0)
         {
             GameManager.FreedomWin = true;
             Debug.Log("You win, you bought your freedom");
+
+
+            StartCoroutine(GoToVictoryScreen());
+            
         }
     }
 
@@ -116,10 +120,17 @@ public class FreedomPathScript : MonoBehaviour
         amountWaged = 0;
     }
 
-    public void GoToInventory()
+    public void GoToBacToHUB()
     {
-        FMODSFXController.Instance.PlayJailDoorClose();
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
+      //  FMODSFXController.Instance.PlayJailDoorClose();
+        SceneManager.LoadScene(6, LoadSceneMode.Single);
         
+    }
+
+    public IEnumerator GoToVictoryScreen()
+    {
+        
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(8, LoadSceneMode.Single);
     }
 }

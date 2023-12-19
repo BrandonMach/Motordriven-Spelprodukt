@@ -95,6 +95,7 @@ public class AttackManager : MonoBehaviour
                 else if (enemyHits[i].CompareTag("EnemyTesting"))
                 {
                     EnemyHit?.Invoke(this, System.EventArgs.Empty);
+                    EntertainmentManager.Instance.ChangeEtp(_etpDecrease);
                 }
                 
             }
