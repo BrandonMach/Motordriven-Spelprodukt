@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    public Vector3 _moveDirection {  get; private set; }
+    public Vector3 MoveDirection {  get; private set; }
 
     public float MoveSpeed { get { return _moveSpeed; } private set { _moveSpeed = value; } }
 
@@ -22,9 +22,6 @@ public class PlayerMovement : MonoBehaviour
     //private Player _playerScript;
 
     private Rigidbody _rigidbody;
-
-    private CharacterController _characterController;
-
 
     private Vector3 _camForward;
     private Vector3 _camRight;
@@ -39,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _playerAnimation = GetComponent<PlayerAnimation>();
         Player.Instance = GetComponent<Player>();
-        _characterController = GetComponent<CharacterController>();
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -79,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
 
-        _playerAnimation.Locomotion(_moveDirection, _rotateInputDirection);
+        _playerAnimation.Locomotion(MoveDirection, _rotateInputDirection);
     }
 
     private void FixedUpdate()
@@ -100,26 +96,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (!_canMove)
         {
-            _moveDirection = Vector3.zero;
+            MoveDirection = Vector3.zero;
         }
         else
         {
-            _moveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
+            MoveDirection = inputvector.x * _camRight + inputvector.y * _camForward;
         }
     }
 
     private void Move()
     {
-        _rigidbody.velocity = new Vector3(_moveDirection.x * _moveSpeed, _rigidbody.velocity.y, _moveDirection.z * _moveSpeed);
-        _isMoving = _moveDirection != Vector3.zero;
+        _rigidbody.velocity = new Vector3(MoveDirection.x * _moveSpeed, _rigidbody.velocity.y, MoveDirection.z * _moveSpeed);
+        _isMoving = MoveDirection != Vector3.zero;
     }
 
     private void SetRotateDirectionTowardsMovement()
     {
         if (_isMoving)
         {
-            _rotateInputDirection = _moveDirection.x * _camRight + _moveDirection.y * _camForward;
-            Quaternion newRotation = Quaternion.LookRotation(_moveDirection);
+            _rotateInputDirection = MoveDirection.x * _camRight + MoveDirection.y * _camForward;
+            Quaternion newRotation = Quaternion.LookRotation(MoveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _rotationSpeed * Time.fixedDeltaTime);
         }
     }
