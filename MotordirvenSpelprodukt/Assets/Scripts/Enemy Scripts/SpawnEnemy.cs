@@ -94,7 +94,7 @@ public class SpawnEnemy : MonoBehaviour
 
             if (_currentWaveIndex >= _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count && !GameLoopManager.Instance.MatchIsFinished)
             {
-                if (GameLoopManager.Instance._currentMatchType == GameLoopManager.MatchType.WaveBattle)
+                if (GameManager.Instance._currentMatchType == GameManager.MatchType.WaveBattle)
                 {
 
                     Debug.Log("You have survived every wave");
@@ -134,6 +134,7 @@ public class SpawnEnemy : MonoBehaviour
 
                     readyToCountdown = true;
                     _currentWaveIndex++;
+
 
                 }
 

@@ -165,6 +165,15 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Progress")]
     [SerializeField] public static int BattleIndex = 0;
+    private int _amountOfWaveBattleCount = 2;
+
+    public enum MatchType
+    {
+        Champion,
+        WaveBattle,
+    }
+
+    [SerializeField] public MatchType _currentMatchType;
 
     void Start()
     {
@@ -187,9 +196,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
-        
-        
+
+        if (BattleIndex < _amountOfWaveBattleCount)
+        {
+            _currentMatchType = MatchType.WaveBattle;
+        }
+        else
+        {
+            _currentMatchType = MatchType.Champion;
+        }
+
+
+
+
 
         if (Player.Instance != null)
         {
@@ -272,6 +291,9 @@ public class GameManager : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+
+          
 
         }
         else
