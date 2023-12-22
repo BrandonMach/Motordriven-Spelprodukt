@@ -93,7 +93,12 @@ public class KingDecision : MonoBehaviour
         SceneManager.LoadScene(9, LoadSceneMode.Additive);
         yield return new WaitForSeconds(10);
 
-        GameManager.ArenaLayoutIndex++;
+        if(GameManager.ArenaLayoutIndex < 2)
+        {
+            GameManager.ArenaLayoutIndex++;
+        }
+        
+
         GameManager.BattleIndex++;
         SceneManager.LoadScene(6, LoadSceneMode.Single);
     }

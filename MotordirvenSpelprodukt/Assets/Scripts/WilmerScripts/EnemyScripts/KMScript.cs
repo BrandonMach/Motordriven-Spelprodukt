@@ -63,6 +63,7 @@ public class KMScript : MinionScript
     protected override void Update()
     {
         base.Update();
+        CurrentState = EnemyState.chasing;
         _timer += Time.deltaTime;
 
         if (DistanceToPlayer < _automaticExplodeRange)
