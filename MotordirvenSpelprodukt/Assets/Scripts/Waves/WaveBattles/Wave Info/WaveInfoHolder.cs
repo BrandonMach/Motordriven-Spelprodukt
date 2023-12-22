@@ -10,7 +10,7 @@ public class WaveInfoHolder : ScriptableObject
     public float timeToNextEnemy;
     public float timeToNextWave;
     [HideInInspector] public int EnemiesLeft;
-
+    [SerializeField] string Description;
 
 
 }

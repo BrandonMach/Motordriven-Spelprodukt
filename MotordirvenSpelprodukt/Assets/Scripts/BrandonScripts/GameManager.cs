@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Progress")]
     [SerializeField] public static int BattleIndex = 0;
-    private int _amountOfWaveBattleCount = 2;
+    private int _amountOfWaveBattleCount = 3;
 
     public enum MatchType
     {
@@ -196,6 +196,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
 
         if (BattleIndex < _amountOfWaveBattleCount)
         {

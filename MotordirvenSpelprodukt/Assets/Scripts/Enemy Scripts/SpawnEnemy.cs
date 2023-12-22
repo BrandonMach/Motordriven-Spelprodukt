@@ -120,8 +120,9 @@ public class SpawnEnemy : MonoBehaviour
 
                 }
 
+                
 
-                if (_countdown <= 0)
+                if (_countdown <= 0 && !GameLoopManager.Instance.MatchIsFinished)
                 {
                     readyToCountdown = false;
                     _countdown = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].timeToNextWave;
@@ -129,7 +130,7 @@ public class SpawnEnemy : MonoBehaviour
                 }
 
 
-                if (_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
+                if (!GameLoopManager.Instance.MatchIsFinished && _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
                 {
 
                     readyToCountdown = true;
@@ -137,6 +138,8 @@ public class SpawnEnemy : MonoBehaviour
 
 
                 }
+                
+             
 
             }         
         }
