@@ -391,6 +391,8 @@ public class GameLoopManager : MonoBehaviour
         OnFightComplete?.Invoke(this, EventArgs.Empty);
     }
 
+
+ 
     private void HandleStraightEdgeFail(object sender, EventArgs e)
     {
         _neverHealed = false;
