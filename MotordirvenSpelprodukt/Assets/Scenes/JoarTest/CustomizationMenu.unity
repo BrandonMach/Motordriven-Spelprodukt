@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2388,8 +2388,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1999728086445217433, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: _text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999728086445217433, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: _reward
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999728086445217433, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: _championChallenge
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2562330923461146147, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: _reward
@@ -2405,7 +2413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallenges.Array.size
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallenges.Array.data[0]
@@ -2430,19 +2438,19 @@ PrefabInstance:
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallenges.Array.data[5]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 854377316}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: ChallengeButtonArray.Array.data[0]
       value: 
-      objectReference: {fileID: 209967803}
+      objectReference: {fileID: 436214049}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: ChallengeButtonArray.Array.data[1]
       value: 
-      objectReference: {fileID: 1343000050}
+      objectReference: {fileID: 209967803}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: ChallengeButtonArray.Array.data[2]
       value: 
-      objectReference: {fileID: 436214049}
+      objectReference: {fileID: 1343000050}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: ChallengeButtonArray.Array.data[3]
       value: 
@@ -2454,23 +2462,23 @@ PrefabInstance:
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: ChallengeButtonArray.Array.data[5]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 408167813}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallengesArray.Array.size
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallengesArray.Array.data[0]
       value: 
-      objectReference: {fileID: 409706027}
+      objectReference: {fileID: 1197476201}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallengesArray.Array.data[1]
       value: 
-      objectReference: {fileID: 1744948328}
+      objectReference: {fileID: 409706027}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallengesArray.Array.data[2]
       value: 
-      objectReference: {fileID: 1197476201}
+      objectReference: {fileID: 1744948328}
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallengesArray.Array.data[3]
       value: 
@@ -2482,7 +2490,7 @@ PrefabInstance:
     - target: {fileID: 3771213102692119474, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: AvailableChallengesArray.Array.data[5]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 854377316}
     - target: {fileID: 5130734711064739255, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 976.74176
@@ -2539,13 +2547,31 @@ PrefabInstance:
       propertyPath: _reward
       value: 50
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7866373241281053125, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 3645024104652226563, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 5299691783851056667, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 3180889943716620776, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 745934884343935508, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 7919021309033044743, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 2402407444410881878, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 1599634720768253917, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 8330401849075902510, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 6189446754268492754, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 5751492490881052367, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 243322788582924958, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
     m_RemovedGameObjects:
     - {fileID: 167404233072245147, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
     - {fileID: 1091683864013729938, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
     - {fileID: 6382439236878064846, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
     - {fileID: 2812499579032386438, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
     - {fileID: 4853593652512776030, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 4848708996221533781, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 8808742770319038409, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 3931611529905740696, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 2610676284628405636, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 163292184754460280, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+    - {fileID: 7488538906846814603, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
@@ -2991,6 +3017,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: 
   header: 
+--- !u!114 &408167813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2096455836980965949, guid: 2bbce6b2e4df96e4fbe2c71c31d7dfc0, type: 3}
+  m_PrefabInstance: {fileID: 408167806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180017245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df83b919b7fda25428dc3709ff34c5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &409706027 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7782750324887181859, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
@@ -3517,6 +3554,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40a79452cdaad4c42a9b216673d07501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &854377316 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5235244893617079805, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+  m_PrefabInstance: {fileID: 187731882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b86bd5b3242e443932d80ca5b6d07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &969258175
@@ -4443,6 +4491,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 775581559709109221, guid: 9d51002ab0a5d944facd600a64429d8a, type: 3}
+      propertyPath: _currentMatchType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3189020751520113118, guid: 9d51002ab0a5d944facd600a64429d8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

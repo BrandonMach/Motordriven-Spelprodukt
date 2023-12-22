@@ -11,9 +11,9 @@ public class Challenge : MonoBehaviour
     [SerializeField] private string _description;
     [SerializeField] private int _requirement;
     [SerializeField] private int _reward;
-    [SerializeField] private TextMeshProUGUI _text;
+  //  [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private GameObject _challengeButton;
-
+    [SerializeField] public bool _championChallenge;
     private bool _isCompleted;
     private bool _isActivated;
     public TooltipTrigger trigger;
@@ -22,7 +22,7 @@ public class Challenge : MonoBehaviour
     public string Description { get => _description; set => _description = value; }
     public int Requirement { get => _requirement; set => _requirement = value; }
     public int Reward { get => _reward; set => _reward = value; }
-    public TextMeshProUGUI Text { get => _text; set => _text = value; }
+   // public TextMeshProUGUI Text { get => _text; set => _text = value; }
     public bool IsCompleted { get => _isCompleted; set => _isCompleted = value; }
     public bool IsActivated { get => _isActivated; set => _isActivated = value; }
     public GameObject ChallengeButton { get => _challengeButton; set => _challengeButton = value; }
@@ -58,6 +58,6 @@ public class Challenge : MonoBehaviour
 
     public void ChangeActiveText()
     {
-        Text.text = ChallengeName;
+       // Text.text = ChallengeName;
     }
 }

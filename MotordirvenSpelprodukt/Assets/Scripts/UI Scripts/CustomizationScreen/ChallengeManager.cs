@@ -62,7 +62,7 @@ public class ChallengeManager : MonoBehaviour
 
     GameLoopManager _gameManager = GameLoopManager.Instance;
 
-    public List<Challenge> AvailableChallenges = new List<Challenge>();
+   // public List<Challenge> AvailableChallenges = new List<Challenge>();
     public List<Challenge> ActiveChallenges;
 
 
@@ -86,23 +86,16 @@ public class ChallengeManager : MonoBehaviour
 
     private void Start()
     {
-        AvailableChallengesArray = FindObjectsOfType<Challenge>();
         DontDestroyOnLoad(gameObject);
 
     }
 
     private void Update()
     {
-      
-
     }
 
     public void ChallengePanelOpen()
     {
-
-        AvailableChallengesArray = tempArray;
-        AvailableChallengesArray = FindObjectsOfType<Challenge>();
-
 
 
         if (GameManager.Instance._currentScen == GameManager.CurrentScen.CustomizationScene /*&& ChallengesActive*/)
@@ -113,8 +106,19 @@ public class ChallengeManager : MonoBehaviour
 
             for (int i = 0; i < ChallengeButtonArray.Length; i++)
             {
-                ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
-                ChallengeButtonArray[i].TMP.text = AvailableChallengesArray[i].ChallengeName;
+                if (GameManager.Instance._currentMatchType == GameManager.MatchType.WaveBattle && AvailableChallengesArray[i]._championChallenge)
+                {
+                    //Disable Champion specific challenges
+                    ChallengeButtonArray[i].gameObject.SetActive(false);
+                    Debug.Log(AvailableChallengesArray[i].ChallengeName + " is a champion challenge");
+                }
+                else
+                {
+
+                    ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
+                    ChallengeButtonArray[i].TMP.text = AvailableChallengesArray[i].ChallengeName;
+                }
+
 
             }
 
@@ -178,23 +182,23 @@ public class ChallengeManager : MonoBehaviour
         //_activeChallengesText.text -= challenge.ChallengeName + ", ";
     }
 
-    public void AddChallenge(Challenge challenge)
-    {
-        if (!AvailableChallenges.Contains(challenge))
-        {
-            AvailableChallenges.Add(challenge);
-            Debug.Log("Challenge added to AvailableChallenges (List)" + challenge.ChallengeName);
-        }
-    }
+    //public void AddChallenge(Challenge challenge)
+    //{
+    //    if (!AvailableChallenges.Contains(challenge))
+    //    {
+    //        AvailableChallenges.Add(challenge);
+    //        Debug.Log("Challenge added to AvailableChallenges (List)" + challenge.ChallengeName);
+    //    }
+    //}
 
-    public void RemoveChallenge(Challenge challenge)
-    {
-        if (AvailableChallenges.Contains(challenge))
-        {
-            AvailableChallenges.Remove(challenge);
-            Debug.Log("Challenge removed from AvailableChallenges (List)" + challenge.ChallengeName);
-        }
-    }
+    //public void RemoveChallenge(Challenge challenge)
+    //{
+    //    if (AvailableChallenges.Contains(challenge))
+    //    {
+    //        AvailableChallenges.Remove(challenge);
+    //        Debug.Log("Challenge removed from AvailableChallenges (List)" + challenge.ChallengeName);
+    //    }
+    //}
 
     public void ActivateOrDeactivateChalleng(Challenge challenge)
     {
