@@ -131,13 +131,14 @@ public class GameManager : MonoBehaviour
     public int HighestKillStreakKillCount { get => _highestKillStreakKillCountX; set => _highestKillStreakKillCountX = value; }
     public int TotalDeaths { get => _totalDeathsX; set => _totalDeathsX = value; }
     public bool BeenOutOfCombat { get => beenOutOfCombatX; set => beenOutOfCombatX = value; }
+    public float GameStartTimerX { get => _gameStartTimerX; set => _gameStartTimerX = value; }
 
 
     #endregion
 
 
 
-   [SerializeField] public Player _player;
+    [SerializeField] public Player _player;
     
 
 
@@ -429,7 +430,7 @@ public class GameManager : MonoBehaviour
     // Tested and works
     private bool ChampionslayerCheck(TimeChallenge timeChallenge)
     {
-        if (timeChallenge.ChallengeName == "Championslayer" && timeChallenge.TimeForCompletion >= _gameStartTimerX && _championIsDeadX)
+        if (timeChallenge.ChallengeName == "Championslayer" && timeChallenge.TimeForCompletion >= GameStartTimerX && _championIsDeadX)
         {
             return true;
         }
@@ -510,7 +511,7 @@ public class GameManager : MonoBehaviour
 
     public void ChallengeTimersUpdate()
     {
-        _gameStartTimerX += Time.deltaTime;
+        GameStartTimerX += Time.deltaTime;
         _berserkerTimerX += Time.deltaTime;
     }
 
@@ -523,7 +524,7 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
-        _gameStartTimerX = 0;
+        GameStartTimerX = 0;
          _berserkerTimerX = 0;
          _challengeTimerX = 0;
          _isTimerActive = false;
