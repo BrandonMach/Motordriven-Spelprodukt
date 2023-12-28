@@ -230,7 +230,7 @@ public class GameLoopManager : MonoBehaviour
 
         _spawnEnemy = SpawnEnemy.Instance;
 
-        AmountOfChampionsToKill = 2;
+        AmountOfChampionsToKill = _championList.Count;
 
         OnMatchFinished += MatchFinished;
         SpawnEnemy.Instance.KilledAllWaves += MatchFinished;
@@ -360,7 +360,7 @@ public class GameLoopManager : MonoBehaviour
                 GameManager.ChampionsKilled++;
                 Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
 
-                GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33);
+                GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33 +30);
 
 
                 // _championIsDead = true;
@@ -371,10 +371,12 @@ public class GameLoopManager : MonoBehaviour
                 if (GameManager.ChampionsKilled == AmountOfChampionsToKill)
                 {
                     Debug.Log("You killed all champions");
+                    SceneManager.LoadScene(8, LoadSceneMode.Single);
                 }
             }
             else
             {
+                GameManager.Instance.RewardCoins(50);
                 Debug.LogError("Wave battle completed hhhsshshsh");
             }
 

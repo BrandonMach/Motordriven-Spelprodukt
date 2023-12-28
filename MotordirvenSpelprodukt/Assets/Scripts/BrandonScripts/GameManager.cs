@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        
+
 
         if (BattleIndex < _amountOfWaveBattleCount)
         {
