@@ -405,9 +405,9 @@ public class GameLoopManager : MonoBehaviour
     /// </summary>
     private void SettingStatistics()
     {
-        TotalKillcount = KillCount;
-        Instance.TotalKnockUps = KnockedUpCount;
-        Instance.TotalKnockedOutOfArena = KnockedOutOfArena;
+        TotalKillcount += KillCount;
+        Instance.TotalKnockUps += KnockedUpCount;
+        Instance.TotalKnockedOutOfArena += KnockedOutOfArena;
 
         KillCount = 0;
         KnockedUpCount = 0;
