@@ -45,7 +45,7 @@ public class ArrowManager : MonoBehaviour
     {
         for (int i = 0; i < arrowPoolSize; i++)
         {
-            Arrow arrow = Instantiate(arrowPrefab);
+            Arrow arrow = Instantiate(arrowPrefab, new Vector3(-10, -10,-10), Quaternion.identity);
             arrowPool.Add(arrow);
         }
     }

@@ -20,12 +20,13 @@ public class RMFleeNode : ActionNode
         // If player is close enough then flee
         if (_rangedMinionScript.DistanceToPlayer < _rangedMinionScript.StartFleeRange)
         {
+            Debug.Log(_rangedMinionScript.DistanceToPlayer);
             if (_rangedMinionScript.CurrentState != MinionScript.EnemyState.fleeing)
             {
                 _rangedMinionScript.PreviousState = _rangedMinionScript.CurrentState;
             }
             _rangedMinionScript.CurrentState = MinionScript.EnemyState.fleeing;
-            //Debug.Log("Enemy is in fleeing");
+            Debug.Log("Enemy is in fleeing");
             return State.Success;
         }
         //Debug.Log("Enemy is NOT in fleeing");
