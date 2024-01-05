@@ -22,19 +22,19 @@ public class DismemberentEnemyScript : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         DeactivateRagdoll();
 
-        DeactivateRagdoll();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         //För testing
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            //_limbs[Random.Range(0, _limbs.Count)].Dismember();
-            //ActivateRagdoll();
-            DismemberCharacter();
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    //_limbs[Random.Range(0, _limbs.Count)].Dismember();
+        //    //ActivateRagdoll();
+        //    DismemberCharacter();
+        //}
     }
 
     public void DismemberCharacter()
@@ -45,14 +45,17 @@ public class DismemberentEnemyScript : MonoBehaviour
 
     void ActivateRagdoll()
     {
+        //Add random force to ragdoll
+        // ragdollparts.AddForce(new Vector3(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)) * Random.Range(1, 10));
+        if (gameObject.GetComponent<NavMeshAgent>() != null)
+        {
+            GetComponent<NavMeshAgent>().enabled = false;
+        }
         _mainCollider.enabled = false;
         _anim.enabled = false;
 
 
-        if(gameObject.GetComponent<NavMeshAgent>() != null)
-        {
-            GetComponent<NavMeshAgent>().enabled = false;
-        }
+       
         
 
         foreach (var ragdollparts in _ragdollRigids)
@@ -63,7 +66,7 @@ public class DismemberentEnemyScript : MonoBehaviour
 
             ragdollparts.angularVelocity = Vector3.zero;
             //Add random force to ragdoll
-           // ragdollparts.AddForce(new Vector3(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)) * Random.Range(1, 10));
+            //ragdollparts.AddForce(new Vector3(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)) * Random.Range(1, 10));
         }
     }
 

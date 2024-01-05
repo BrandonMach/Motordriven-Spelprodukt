@@ -31,10 +31,7 @@ public class CinemachineShake : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            ShakeCamera(8, 0.1f);
-        }
+        
 
         if (shakeTimer > 0)
         {
