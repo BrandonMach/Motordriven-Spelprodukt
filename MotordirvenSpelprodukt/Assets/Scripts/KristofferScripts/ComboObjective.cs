@@ -7,10 +7,7 @@ public class ComboObjective : TutorialObjective
 {
     
     [SerializeField] private List<string> _attackList;
-    [SerializeField] private int _numOfTarget;
-    private int _currentTarget = 0;
     private Queue attackQueue;
-    private string _currentAttack;
 
     public override void Setup()
     {
@@ -27,23 +24,23 @@ public class ComboObjective : TutorialObjective
         {
             attackQueue.Enqueue(_attackList[i]);
         }
-        _currentAttack = (string)attackQueue.Dequeue();
+        _attack = (string)attackQueue.Dequeue();
     }
     public override void CheckQueue(string attackvalue)
     {
-        Debug.Log(_currentAttack + ":"+ attackvalue);
-        if (_currentAttack == attackvalue)
+        Debug.Log(_attack + ":"+ attackvalue);
+        if (_attack == attackvalue)
         {
             if(attackQueue.Count > 0)
             {
-                _currentAttack = (string)attackQueue.Dequeue();
+                _attack = (string)attackQueue.Dequeue();
             }
             else
             {
                 IncrementObjective();
             }
         }
-        else if(_currentAttack != attackvalue)
+        else if(_attack != attackvalue)
         {
             Debug.Log("fail");
             SetQueue();
@@ -59,7 +56,7 @@ public class ComboObjective : TutorialObjective
     }
     public override string GetObjective()
     {
-        return _currentAttack;
+        return _attack;
     }
     public override void GetNumber(ref int cur, ref int max)
     {

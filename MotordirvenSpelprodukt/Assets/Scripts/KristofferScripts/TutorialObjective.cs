@@ -5,9 +5,9 @@ using UnityEngine;
 public class TutorialObjective : ScriptableObject
 {
 
-    [SerializeField] private int _numOfTarget;
-    private int _currentTarget = 0;
-    [SerializeField] private string _attack;
+    [SerializeField] protected int _numOfTarget;
+    protected int _currentTarget = 0;
+    [SerializeField] protected string _attack;
     [SerializeField][TextArea(15,20)] 
     private string _descText;
     
