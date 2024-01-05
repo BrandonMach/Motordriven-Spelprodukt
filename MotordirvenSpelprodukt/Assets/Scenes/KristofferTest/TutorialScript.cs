@@ -90,7 +90,7 @@ public class TutorialScript : MonoBehaviour
         GameInput.Instance.OnLightAttackButtonPressed -= LightAttackChecker;
         GameInput.Instance.OnHeavyAttackButtonPressed -= HeavyAttackChecker;
         attackText.text = "Tutorial Completed";
-        descTextField.text = "You may step on the arrow to leave";
+        descTextField.text = "There are more Combos in the game. Experiment to find them for yourself."+"\n"+ "You may step on the arrow to leave";
         _arrow.SetActive(true);
     }
 }
