@@ -44,7 +44,7 @@ public class ShopSystem : MonoBehaviour
     private void Update()
     {
         //_currency = GameManager.PlayerCoins;
-        Debug.Log(GameManager.PlayerCoins + " Player money");
+        
     }
     public void MakePurshase(GenerateWeapon g)
     {
