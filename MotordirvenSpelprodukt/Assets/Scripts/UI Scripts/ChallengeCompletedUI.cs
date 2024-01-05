@@ -10,7 +10,7 @@ public class ChallengeCompletedUI : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI _challengeText;
     [SerializeField] GameObject _completedChallengeBox;
-    [SerializeField] Animator _animator;
+    //[SerializeField] Animator _animator;
 
     float _showTimer;
     float _showPeriod = 3.5f;
@@ -27,7 +27,7 @@ public class ChallengeCompletedUI : MonoBehaviour
 
     private void HandleOnChallengeCompled(EventArgs eventArgs, Challenge completedChallenge)
     {
-        _animator.SetTrigger("ActivateFade");
+        //_animator.SetTrigger("ActivateFade");
         _challengeText.text = ($"{completedChallenge.ChallengeName} completed");
         _completedChallengeBox.SetActive(true);
         _shouldShow = true;
@@ -35,7 +35,8 @@ public class ChallengeCompletedUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.OnChallengeCompleted -= HandleOnChallengeCompled;
+        //GameManager.OnChallengeCompleted -= HandleOnChallengeCompled;
+        GameLoopManager.OnChallengeCompleted -= HandleOnChallengeCompled;
     }
 
     // Update is called once per frame
