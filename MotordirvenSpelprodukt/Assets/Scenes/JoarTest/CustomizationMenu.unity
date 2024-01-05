@@ -368,6 +368,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0.5507562
       objectReference: {fileID: 0}
+    - target: {fileID: 800419845174861933, guid: 442f68be6078be141a66ad46599fc950, type: 3}
+      propertyPath: reT
+      value: 
+      objectReference: {fileID: 665875626}
     - target: {fileID: 879695451795204083, guid: 442f68be6078be141a66ad46599fc950, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1308,6 +1312,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4719558466742032928, guid: 442f68be6078be141a66ad46599fc950, type: 3}
+      propertyPath: reT
+      value: 
+      objectReference: {fileID: 1343000051}
     - target: {fileID: 4746828695331806010, guid: 442f68be6078be141a66ad46599fc950, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2399,6 +2407,10 @@ PrefabInstance:
       propertyPath: _requirement
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 914670369080353518, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1999728086445217433, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: _text
       value: 
@@ -2503,6 +2515,10 @@ PrefabInstance:
       propertyPath: AvailableChallengesArray.Array.data[5]
       value: 
       objectReference: {fileID: 854377316}
+    - target: {fileID: 4248599412356629280, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5130734711064739255, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 976.74176
@@ -2543,6 +2559,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5361113505535564720, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637603396293040656, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6300928552980503240, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: _reward
       value: 50
@@ -2555,9 +2579,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6767658162411705900, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7782750324887181859, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
       propertyPath: _reward
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292393991618463501, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7866373241281053125, guid: 727c6b240104f20469ac5ff1e0144edf, type: 3}
@@ -3029,6 +3061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: 
   header: 
+  reT: {fileID: 0}
+  _virtualMouseInput: {fileID: 0}
 --- !u!114 &408167813 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2096455836980965949, guid: 2bbce6b2e4df96e4fbe2c71c31d7dfc0, type: 3}
@@ -3557,6 +3591,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4111310620960406, guid: 5da2d8875d58bc649b45623b6841c604, type: 3}
   m_PrefabInstance: {fileID: 398912565}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &665875626 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 909161080723274127, guid: 442f68be6078be141a66ad46599fc950, type: 3}
+  m_PrefabInstance: {fileID: 136448440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &694478353 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1355442238675668045, guid: 442f68be6078be141a66ad46599fc950, type: 3}
@@ -3817,6 +3856,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1062670430}
   - component: {fileID: 1062670431}
+  - component: {fileID: 1062670432}
+  - component: {fileID: 1062670433}
   m_Layer: 5
   m_Name: Virtual Mouse test Brandon
   m_TagString: Untagged
@@ -3961,6 +4002,33 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+--- !u!114 &1062670432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062670429}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9b52f2adb77554d8a51d56055f89ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cursorArrow: {fileID: 2800000, guid: a110b14e6b60fe7499f1e422b0027349, type: 3}
+  _virtualMouseInput: {fileID: 0}
+--- !u!114 &1062670433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062670429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9d11f9379b6b042b0c1d9af37a336d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasRectTransform: {fileID: 23014953}
 --- !u!1001 &1128796480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4490,6 +4558,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df83b919b7fda25428dc3709ff34c5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1343000051 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7302538998306245721, guid: 442f68be6078be141a66ad46599fc950, type: 3}
+  m_PrefabInstance: {fileID: 136448440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1475773750 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3393006714749602189, guid: 442f68be6078be141a66ad46599fc950, type: 3}
