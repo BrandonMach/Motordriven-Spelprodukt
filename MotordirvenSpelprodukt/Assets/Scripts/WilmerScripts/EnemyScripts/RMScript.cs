@@ -92,7 +92,7 @@ public class RMScript : MinionScript
 
     protected override void HandleFleeing()
     {
-        base.HandleFleeing();
+        //base.HandleFleeing();
         
         ResetTriggers();
         Anim.SetTrigger("Backpaddle");
