@@ -94,7 +94,7 @@ public class SpawnEnemy : MonoBehaviour
 
             if (_currentWaveIndex >= _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder.Count && !GameLoopManager.Instance.MatchIsFinished)
             {
-                if (GameLoopManager.Instance._currentMatchType == GameLoopManager.MatchType.WaveBattle)
+                if (GameManager.Instance._currentMatchType == GameManager.MatchType.WaveBattle)
                 {
 
                     Debug.Log("You have survived every wave");
@@ -120,8 +120,9 @@ public class SpawnEnemy : MonoBehaviour
 
                 }
 
+                
 
-                if (_countdown <= 0)
+                if (_countdown <= 0 && !GameLoopManager.Instance.MatchIsFinished)
                 {
                     readyToCountdown = false;
                     _countdown = _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].timeToNextWave;
@@ -129,13 +130,16 @@ public class SpawnEnemy : MonoBehaviour
                 }
 
 
-                if (_waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
+                if (!GameLoopManager.Instance.MatchIsFinished && _waveBattleInformation[_currentWaveBattleIndex].waveInfoHolder[_currentWaveIndex].EnemiesLeft == 0)
                 {
 
                     readyToCountdown = true;
                     _currentWaveIndex++;
 
+
                 }
+                
+             
 
             }         
         }

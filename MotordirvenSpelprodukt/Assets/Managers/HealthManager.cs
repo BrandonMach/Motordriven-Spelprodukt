@@ -55,6 +55,7 @@ public class HealthManager : MonoBehaviour,IHasProgress
     void Update()
     {
         _currentHealth = CurrentHealthPoints;
+        
         if (!GodMode && Dead)
         {
             if (Explode)

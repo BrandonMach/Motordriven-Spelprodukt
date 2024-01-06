@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.UI;
 
 public class InteractableObject : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class InteractableObject : MonoBehaviour
 
     [SerializeField] int scenIndex;
     [SerializeField] GameObject interachHUDPopup;
+    [SerializeField] VirtualMouseInput VirtualMouse;
 
     bool isInteracting;
     public enum InteractionType
@@ -21,13 +24,14 @@ public class InteractableObject : MonoBehaviour
     public  InteractionType _interactionType;
     void Start()
     {
+        GameInput.Instance.OnLightAttackButtonPressed += Close;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isInteracting &&_interactionType == InteractionType.interact && Input.GetKeyDown(KeyCode.Q))
+        if (isInteracting && _interactionType == InteractionType.interact && Input.GetKeyDown(KeyCode.Q))
         {
             Player.Instance.GetComponent<PlayerMovement>()._canMove = true;
             interachHUDPopup.SetActive(false);
@@ -35,9 +39,20 @@ public class InteractableObject : MonoBehaviour
         }
 
 
-       
+
     }
 
+
+    void Close(object sender, EventArgs e)
+    {
+        if (isInteracting && _interactionType == InteractionType.interact)
+        {
+            Player.Instance.GetComponent<PlayerMovement>()._canMove = true;
+            interachHUDPopup.SetActive(false);
+            isInteracting = false;
+            //VirtualMouse.gameObject.SetActive(false);
+        }
+    }
 
     public void Interacting()
     {
@@ -64,6 +79,7 @@ public class InteractableObject : MonoBehaviour
     {
        
         interachHUDPopup.SetActive(true);
+        //VirtualMouse.gameObject.SetActive(true);
     }
 
 

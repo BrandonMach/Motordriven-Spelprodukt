@@ -31,39 +31,55 @@ public class TutorialScript : MonoBehaviour
     }
     private void LightAttackChecker(object sender, EventArgs e)
     {
-        if (_currentObjective.GetObjective()=="Light")
+        string light = "Light";
+        if (_currentObjective as ComboObjective)
         {
-            _currentObjective.IncrementObjective();
-            CheckCompleted();           
+            _currentObjective.CheckQueue(light);
+            UpdateUI();
+            CheckCompleted();
+        }
+        else if (_currentObjective.GetObjective()== light && _currentObjective as EasyObjective)
+        {
+            _currentObjective.IncrementObjective();               
+            CheckCompleted();
         }
     }
     private void HeavyAttackChecker(object sender, EventArgs e)
     {
-        if (_currentObjective.GetObjective() == "Heavy")
+        string heavy = "Heavy";
+        if (_currentObjective as ComboObjective)
         {
-            _currentObjective.IncrementObjective();
+            _currentObjective.CheckQueue(heavy);
+            UpdateUI();
+            CheckCompleted();
+        }
+        else if (_currentObjective.GetObjective() == heavy && _currentObjective as EasyObjective)
+        {
+            _currentObjective.IncrementObjective();                         
             CheckCompleted();
         }
     }
     private void CheckCompleted()
     {
-        Debug.Log(_objStack.Count);
         UpdateUI();
         if (_currentObjective.CheckCompleted())
         {           
             if(_objStack.Count>0)
             {
                 _currentObjective = (TutorialObjective)_objStack.Pop();
+                if(_currentObjective as ComboObjective)
+                { _currentObjective.Setup(); }
                 UpdateUI();
             }
             else
-            {
+            {              
                 SetCompleted();
             }
-        }                   
+        }     
+        
     }
     private void UpdateUI()
-    {
+    {    
         int current=0, max=0;
         _currentObjective.GetNumber(ref current, ref max);
         attackText.text = _currentObjective.GetObjective() + ": " + current + "/" + max;
@@ -73,9 +89,8 @@ public class TutorialScript : MonoBehaviour
     {
         GameInput.Instance.OnLightAttackButtonPressed -= LightAttackChecker;
         GameInput.Instance.OnHeavyAttackButtonPressed -= HeavyAttackChecker;
-        Debug.Log("Here");
         attackText.text = "Tutorial Completed";
-        descTextField.text = "You may step on the arrow to leave";
+        descTextField.text = "There are more Combos in the game. Experiment to find them for yourself."+"\n"+ "You may step on the arrow to leave";
         _arrow.SetActive(true);
     }
 }

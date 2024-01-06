@@ -75,7 +75,7 @@ public class FreedomPathScript : MonoBehaviour
     {
         amountWaged += amount;
 
-        if (/*(_tempPlayerCoins - amountWaged) >= 0 && */_tempFreedomPrice >= 0 && (GameManager.PlayerCoins - amountWaged) >= 0)
+        if (/*(_tempPlayerCoins - amountWaged) >= 0 &&*/ _tempFreedomPrice >= 0 && (GameManager.PlayerCoins - amountWaged) >= 0)
         {  
             if ((_tempFreedomPrice - amount) >= 0)
             {

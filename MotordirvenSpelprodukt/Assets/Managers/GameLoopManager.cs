@@ -19,13 +19,13 @@ public class GameLoopManager : MonoBehaviour
 
  
 
-    public enum MatchType
-    {
-        Champion,
-        WaveBattle,
-    }
+    //public enum MatchType
+    //{
+    //    Champion,
+    //    WaveBattle,
+    //}
 
-    [SerializeField] public MatchType _currentMatchType;
+    //[SerializeField] public MatchType _currentMatchType;
 
 
     #region ChallengeVariables
@@ -132,12 +132,14 @@ public class GameLoopManager : MonoBehaviour
         }
         Instance = this;
 
-       
-
-       
 
 
-        if(_currentMatchType == MatchType.Champion)
+        
+
+
+
+
+        if (GameManager.Instance._currentMatchType == GameManager.MatchType.Champion)
         {
             Vector3 championSpawnPos = new Vector3(_championStartPos.position.x, 15f, _championStartPos.position.z-10);
             Quaternion championRotation = Quaternion.Euler(_championList[GameManager.ChampionsKilled].transform.rotation.x, _championList[KilledChampions].transform.rotation.y + 180, _championList[KilledChampions].transform.rotation.z);
@@ -228,7 +230,7 @@ public class GameLoopManager : MonoBehaviour
 
         _spawnEnemy = SpawnEnemy.Instance;
 
-        AmountOfChampionsToKill = 2;
+        AmountOfChampionsToKill = _championList.Count;
 
         OnMatchFinished += MatchFinished;
         SpawnEnemy.Instance.KilledAllWaves += MatchFinished;
@@ -268,14 +270,9 @@ public class GameLoopManager : MonoBehaviour
 
 
 
-        if (_currentMatchType == MatchType.WaveBattle)
-        {
-
-        }
 
 
-
-        if (_currentMatchType == MatchType.Champion)
+        if (GameManager.Instance._currentMatchType == GameManager.MatchType.Champion)
         {
             if (_champion != null)
             {
@@ -341,11 +338,15 @@ public class GameLoopManager : MonoBehaviour
             canvas.SetActive(MatchIsFinished);
         }
 
-
-        foreach (var enemies in EnemyGameObjects)
+        if(GameManager.Instance._currentMatchType == GameManager.MatchType.Champion)
         {
-            Destroy(enemies);
+            foreach (var enemies in EnemyGameObjects)
+            {
+                Destroy(enemies);
+            }
         }
+
+       
 
 
         _kingCam = true;
@@ -354,12 +355,12 @@ public class GameLoopManager : MonoBehaviour
 
         if (_etp.GetETP() > (_etp.GetMaxETP() / 2))
         {
-            if (_currentMatchType == MatchType.Champion)
+            if (GameManager.Instance._currentMatchType == GameManager.MatchType.Champion)
             {
                 GameManager.ChampionsKilled++;
                 Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
 
-                GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33);
+                GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33 +30);
 
 
                 // _championIsDead = true;
@@ -370,10 +371,12 @@ public class GameLoopManager : MonoBehaviour
                 if (GameManager.ChampionsKilled == AmountOfChampionsToKill)
                 {
                     Debug.Log("You killed all champions");
+                    SceneManager.LoadScene(8, LoadSceneMode.Single);
                 }
             }
             else
             {
+                GameManager.Instance.RewardCoins(50);
                 Debug.LogError("Wave battle completed hhhsshshsh");
             }
 
@@ -390,6 +393,8 @@ public class GameLoopManager : MonoBehaviour
         OnFightComplete?.Invoke(this, EventArgs.Empty);
     }
 
+
+ 
     private void HandleStraightEdgeFail(object sender, EventArgs e)
     {
         _neverHealed = false;
@@ -400,9 +405,9 @@ public class GameLoopManager : MonoBehaviour
     /// </summary>
     private void SettingStatistics()
     {
-        TotalKillcount = KillCount;
-        Instance.TotalKnockUps = KnockedUpCount;
-        Instance.TotalKnockedOutOfArena = KnockedOutOfArena;
+        TotalKillcount += KillCount;
+        Instance.TotalKnockUps += KnockedUpCount;
+        Instance.TotalKnockedOutOfArena += KnockedOutOfArena;
 
         KillCount = 0;
         KnockedUpCount = 0;

@@ -41,7 +41,7 @@ public class UseHealFood : MonoBehaviour
         else
         {
             _icon.sprite = TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].Foodimage;
-            _healText.text = TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].HPToHeal.ToString();
+            _healText.text = (TransferableScript.Instance.HealItems.Count).ToString();
         }
     }
 }

@@ -68,9 +68,15 @@ public class RMScript : MinionScript
 
     protected override void Update()
     {
+        if (gameObject.GetComponent<HealthManager>().Dead)
+        {
+            ResetTriggers();
+        }
+
+
         base.Update();
         CheckCanMove("Shoot");
-        if (CurrentState == EnemyState.fleeing)
+        if (CurrentState == EnemyState.fleeing && !gameObject.GetComponent<HealthManager>().Dead)
         {
             _navMesh.enabled = true;
         }
@@ -92,7 +98,7 @@ public class RMScript : MinionScript
 
     protected override void HandleFleeing()
     {
-        base.HandleFleeing();
+        //base.HandleFleeing();
         
         ResetTriggers();
         Anim.SetTrigger("Backpaddle");

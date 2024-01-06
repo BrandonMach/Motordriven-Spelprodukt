@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
 
     private void UpdateInventoryVisualiser()
     {
-        Debug.LogError("sdadad" + TransferableScript.Instance.InventoryItems.Count);
+        //Debug.LogError("sdadad" + TransferableScript.Instance.InventoryItems.Count);
         _inventoryList.Clear();
 
 

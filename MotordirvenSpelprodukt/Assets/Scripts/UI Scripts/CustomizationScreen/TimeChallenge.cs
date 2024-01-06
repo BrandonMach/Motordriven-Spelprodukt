@@ -10,7 +10,7 @@ public class TimeChallenge : Challenge
     public TimeChallenge(string name, string description, int requirement, float timeForCompletion) : base(name, description, requirement)
     {
         _timeForCompletion = timeForCompletion;
-        ChallengeManager.Instance.AddChallenge(this);
+        //ChallengeManager.Instance.AddChallenge(this);
     }
 
     public float TimeForCompletion { get => _timeForCompletion; set => _timeForCompletion = value; }

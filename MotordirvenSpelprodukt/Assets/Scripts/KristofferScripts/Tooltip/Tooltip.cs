@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem.UI;
 
 [ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
@@ -13,9 +14,12 @@ public class Tooltip : MonoBehaviour
     public int characterWrapLimit;
     public RectTransform rectTransform;
     public Vector2 position;
+
+    [SerializeField] private VirtualMouseInput _virtualMouseInput;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        _virtualMouseInput = FindAnyObjectByType<VirtualMouseInput>();
     }
     public void SetText(string header, string content="")
     {
@@ -35,13 +39,43 @@ public class Tooltip : MonoBehaviour
     }
     private void Update()
     {
-        position = new Vector2(Input.mousePosition.x , Input.mousePosition.y+40);
-        
-        float pivotX = position.x / Screen.width;
-        float pivotY = position.y / Screen.height;
-        rectTransform.pivot = new Vector2(pivotX, pivotY);
-        
-        
-        transform.position = position;
+        //position = new Vector2(Input.mousePosition.x , Input.mousePosition.y+40);
+
+        //float pivotX = position.x / Screen.width;
+        //float pivotY = position.y / Screen.height;
+        //rectTransform.pivot = new Vector2(pivotX, pivotY);
+
+
+        if (_virtualMouseInput != null)
+        {
+            position = new Vector2(_virtualMouseInput.cursorTransform.position.x + 830, _virtualMouseInput.cursorTransform.position.y );
+
+            float pivotX = position.x / Screen.width;
+            float pivotY = position.y / Screen.height;
+            rectTransform.pivot = new Vector2(pivotX, pivotY);
+
+
+            transform.position = position;  //new Vector2(_virtualMouseInput.cu rsorTransform.position.x, _virtualMouseInput.cursorTransform.position.x + 40);
+        }
+        else
+        {
+            position = new Vector2(Input.mousePosition.x, Input.mousePosition.y + 40);
+
+            float pivotX = position.x / Screen.width;
+            float pivotY = position.y / Screen.height;
+            rectTransform.pivot = new Vector2(pivotX, pivotY);
+
+            transform.position = position;
+        }
+
+        //position = new Vector2(Input.mousePosition.x, Input.mousePosition.y + 40);
+
+        //float pivotX = position.x / Screen.width;
+        //float pivotY = position.y / Screen.height;
+        //rectTransform.pivot = new Vector2(pivotX, pivotY);
+
+        //transform.position = position;
+
+
     }
 }

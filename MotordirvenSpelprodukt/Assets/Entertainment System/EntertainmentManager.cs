@@ -206,31 +206,30 @@ public class EntertainmentManager : MonoBehaviour
     void CheckIfOutOfCombat()
     {
         //Scan for enemies
-        foreach (GameObject enemies in  GameLoopManager.Instance.EnemyGameObjects)
+        if(GameLoopManager.Instance.EnemyGameObjects.Length > 0)
         {
-            float dist = Vector3.Distance(enemies.transform.position, Player.Instance.transform.position);
-            if (dist > _scanEnemyArea && !_isOutOfCombat)
+            foreach (GameObject enemies in GameLoopManager.Instance.EnemyGameObjects)
             {
-                PlayerNearEnemies = false; 
-                _timeOutOfCombatCounter += Time.deltaTime;
-
-                if (_timeOutOfCombatCounter >= _timeOutOfCombatThreshold)
+                float dist = Vector3.Distance(enemies.transform.position, Player.Instance.transform.position);
+                if (dist > _scanEnemyArea && !_isOutOfCombat)
                 {
-                    Debug.Log("Out of Combat");
-                    _isOutOfCombat = true;
-                    OnOutOfCombat();
+                    PlayerNearEnemies = false;
+                    _timeOutOfCombatCounter += Time.deltaTime;
+
+                    if (_timeOutOfCombatCounter >= _timeOutOfCombatThreshold)
+                    {
+                        Debug.Log("Out of Combat");
+                        _isOutOfCombat = true;
+                        OnOutOfCombat();
+                    }
+                }
+                else
+                {
+                    _timeOutOfCombatCounter = 0;
                 }
             }
-            else
-            {      
-                _timeOutOfCombatCounter = 0;
-            }
-
-            //if (dist < _scanEnemyArea  /* attack hits enemy*/)
-            //{
-            //    PlayerNearEnemies = true;
-            //}
         }
+       
     }
 
     private void EnemyHitPlayerInCombat(object sender, System.EventArgs e) // Player hit Enemy => Player in combat
