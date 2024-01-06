@@ -307,6 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 161627036}
   - component: {fileID: 161627037}
+  - component: {fileID: 161627038}
   m_Layer: 5
   m_Name: Virtual Mouse test Brandon
   m_TagString: Untagged
@@ -451,6 +452,19 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+--- !u!114 &161627038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161627035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9d11f9379b6b042b0c1d9af37a336d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasRectTransform: {fileID: 2030157393}
 --- !u!224 &279934627 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8994518379756535698, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
@@ -2367,6 +2381,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2182652719643377354, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
+      propertyPath: _attackSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 26061860271378b46a3d4952bd554c1c, type: 2}
     - target: {fileID: 2311047153697744972, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -2397,7 +2415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2910728523885692777, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3095675710364878885, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_fontAsset
@@ -2897,7 +2915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454578160482789824, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7501225852639475662, guid: 1f487c0497c79904bbf2fe36c957e3e1, type: 3}
       propertyPath: m_AnchorMax.y

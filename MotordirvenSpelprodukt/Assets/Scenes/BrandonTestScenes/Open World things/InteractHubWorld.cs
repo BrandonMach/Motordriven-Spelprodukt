@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,7 @@ public class InteractHubWorld : MonoBehaviour
     {
 
         text = Popup.GetComponentInChildren<TextMeshProUGUI>();
+        GameInput.Instance.OnHeavyAttackButtonPressed += Open;
     }
 
     // Update is called once per frame
@@ -24,10 +26,6 @@ public class InteractHubWorld : MonoBehaviour
 
 
 
-        if (_activatePopup)
-        {
-        
-        }
 
         if (_activatePopup && Input.GetKeyDown(KeyCode.E))
         {
@@ -35,7 +33,20 @@ public class InteractHubWorld : MonoBehaviour
             Popup.SetActive(false);
             _currentInteractingObject.Interacting();
 
-          
+
+        }
+    }
+
+    void Open(object sender, EventArgs e)
+    {
+        
+        if (_activatePopup )
+        {
+            Player.Instance.GetComponent<PlayerMovement>()._canMove = false;
+            Popup.SetActive(false);
+            _currentInteractingObject.Interacting();
+
+
         }
     }
 

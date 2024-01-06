@@ -9,13 +9,11 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public string content;
     public string header;
 
-    public RectTransform reT;
-    [SerializeField] private VirtualMouseInput _virtualMouseInput;
+    
 
     private void Start()
     {
-        reT = GetComponent<RectTransform>();
-        _virtualMouseInput = FindAnyObjectByType<VirtualMouseInput>();
+        
     }
 
     private void Update()
