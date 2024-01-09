@@ -34,7 +34,8 @@ public class DismemberentEnemyScript : MonoBehaviour
         //    //_limbs[Random.Range(0, _limbs.Count)].Dismember();
         //    //ActivateRagdoll();
 
-        //    DismemberCharacter();
+        //    DismemberCharacter();d
+
         //}
     }
 
