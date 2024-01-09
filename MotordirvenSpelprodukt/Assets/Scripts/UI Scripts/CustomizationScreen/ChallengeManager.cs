@@ -106,18 +106,20 @@ public class ChallengeManager : MonoBehaviour
 
             for (int i = 0; i < ChallengeButtonArray.Length; i++)
             {
-                if (GameManager.Instance._currentMatchType == GameManager.MatchType.WaveBattle && AvailableChallengesArray[i]._championChallenge)
-                {
-                    //Disable Champion specific challenges
-                    ChallengeButtonArray[i].gameObject.SetActive(false);
-                    Debug.Log(AvailableChallengesArray[i].ChallengeName + " is a champion challenge");
-                }
-                else
-                {
+                //if (GameManager.Instance._currentMatchType == GameManager.MatchType.WaveBattle && AvailableChallengesArray[i]._championChallenge)
+                //{
+                //    //Disable Champion specific challenges
+                //    ChallengeButtonArray[i].gameObject.SetActive(false);
+                //    Debug.Log(AvailableChallengesArray[i].ChallengeName + " is a champion challenge");
+                //}
+                //else
+                //{
 
-                    ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
-                    ChallengeButtonArray[i].TMP.text = AvailableChallengesArray[i].ChallengeName;
-                }
+                //    ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
+                //    ChallengeButtonArray[i].TMP.text = AvailableChallengesArray[i].ChallengeName;
+                //}
+                ChallengeButtonArray[i].Challenge = AvailableChallengesArray[i];
+                ChallengeButtonArray[i].TMP.text = AvailableChallengesArray[i].ChallengeName;
 
 
             }
