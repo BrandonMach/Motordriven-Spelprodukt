@@ -70,10 +70,7 @@ public class ParticleSystemManager : MonoBehaviour
     // !!!!!!!!!!!!   Only for debug reason, update should be removed  !!!!!!!!!!!!
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            PlayHealEffect();
-        }
+       
     }
 
 

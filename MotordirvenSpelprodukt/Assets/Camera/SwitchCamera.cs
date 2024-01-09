@@ -18,11 +18,7 @@ public class SwitchCamera : MonoBehaviour
 
     private void Update()
     {      
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            //SwitchCameraPriority();
-            StartCoroutine(ChangeCameraAndDoSomething());
-        }
+       
        
     }
 

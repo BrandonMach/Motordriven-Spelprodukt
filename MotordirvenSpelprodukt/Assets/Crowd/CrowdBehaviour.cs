@@ -75,10 +75,10 @@ public class CrowdBehaviour : MonoBehaviour
         
 
         //Inte klar än med potions, health potion
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(ThrowObject(_fallingObjects[1]));     
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    StartCoroutine(ThrowObject(_fallingObjects[1]));     
+        //}
         
             
     }
