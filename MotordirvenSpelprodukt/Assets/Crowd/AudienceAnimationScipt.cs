@@ -34,12 +34,12 @@ public class AudienceAnimationScipt : MonoBehaviour
 
         if (_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Angry)
         {
-            _anim.SetInteger("Emotion", -1 *_fansMultipier);
+            _anim.SetInteger("Emotion", 1 *_fansMultipier);
         }
 
         else if (_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Excited)
         {
-            _anim.SetInteger("Emotion", 1* _fansMultipier);
+            _anim.SetInteger("Emotion", -1* _fansMultipier);
         }
 
         else if(_crowdManager.GetCrowdEmotion() == CrowdBehaviour.CrowdEmotion.Normal)
