@@ -16,8 +16,13 @@ public class SFXBus : MonoBehaviour
     void Start()
     {
         sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
-        sfxBus.getVolume(out float vol);
-        volumeSlider.value = vol;
+
+        if (sfxBus.isValid())
+        {
+            sfxBus.getVolume(out float vol);
+            volumeSlider.value = vol;
+        }
+      
 
     }
 
