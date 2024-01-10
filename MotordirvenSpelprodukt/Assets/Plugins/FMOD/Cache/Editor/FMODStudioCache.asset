@@ -123,10 +123,10 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638405084495960350
+  lastModified: 638405082133670878
   FileSizes:
   - Name: 
-    Value: 3030
+    Value: 3082
   Exists: 1
 --- !u!114 &-8200462082090016373
 MonoBehaviour:
@@ -650,9 +650,36 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638405084495950345
+  lastModified: 638405082133611046
   FileSizes: []
   Exists: 1
+--- !u!114 &-3984860100278358202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/bonusEarned
+  m_EditorClassIdentifier: 
+  Path: event:/bonusEarned
+  Guid:
+    Data1: -420694538
+    Data2: 1097632977
+    Data3: 154618020
+    Data4: -1316439581
+  Banks:
+  - {fileID: -4077486323425077107}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1649
 --- !u!114 &-3921242675424218427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,12 +874,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: "bank:/F\xC4ME_Music.bank"
   m_EditorClassIdentifier: 
-  Path: 
-  Name: 
-  StudioPath: 
-  lastModified: 0
+  Path: "Assets/FMODBanks/Desktop/F\xC4ME_Music.bank"
+  Name: "F\xC4ME_Music"
+  StudioPath: "bank:/F\xC4ME_Music"
+  lastModified: 638366981854296563
   FileSizes: []
-  Exists: 0
+  Exists: 1
 --- !u!114 &-2373149057574865149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -926,7 +953,7 @@ MonoBehaviour:
     Data3: 217249950
     Data4: 689223721
   Banks:
-  - {fileID: 6239966619208553768}
+  - {fileID: -887709596141170628}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1180,6 +1207,24 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-887709596141170628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FAME_Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMODBanks/Desktop/FAME_Music.bank
+  Name: FAME_Music
+  StudioPath: bank:/FAME_Music
+  lastModified: 638405082125139125
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-657673568065021807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1199,7 +1244,7 @@ MonoBehaviour:
     Data3: -567231077
     Data4: -1054419619
   Banks:
-  - {fileID: 6239966619208553768}
+  - {fileID: -887709596141170628}
   - {fileID: -4077486323425077107}
   IsStream: 1
   Is3D: 0
@@ -1331,7 +1376,7 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -8416467223801088665}
   - {fileID: -4077486323425077107}
-  - {fileID: 6239966619208553768}
+  - {fileID: -887709596141170628}
   EditorEvents:
   - {fileID: -5622994057479538818}
   - {fileID: -2257887856294195657}
@@ -1380,6 +1425,7 @@ MonoBehaviour:
   - {fileID: -8529322583325456159}
   - {fileID: 414237252329364943}
   - {fileID: 4820610246734753455}
+  - {fileID: -3984860100278358202}
   EditorParameters:
   - {fileID: 6940841768855664645}
   - {fileID: 5870800321921403845}
@@ -1387,7 +1433,7 @@ MonoBehaviour:
   - {fileID: -4077486323425077107}
   StringsBanks:
   - {fileID: -8416467223801088665}
-  cacheTime: 638405084495960350
+  cacheTime: 638405082133670878
   cacheVersion: 131608
 --- !u!114 &14598746650409638
 MonoBehaviour:
@@ -2121,24 +2167,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1872
---- !u!114 &6239966619208553768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/FAME_Music.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMODBanks/Desktop/FAME_Music.bank
-  Name: FAME_Music
-  StudioPath: bank:/FAME_Music
-  lastModified: 638404372859833658
-  FileSizes: []
-  Exists: 1
 --- !u!114 &6612306578561162714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2290,7 +2318,7 @@ MonoBehaviour:
     Data3: 382546305
     Data4: 1952826947
   Banks:
-  - {fileID: 6239966619208553768}
+  - {fileID: -887709596141170628}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
