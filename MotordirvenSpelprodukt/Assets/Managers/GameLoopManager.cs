@@ -358,7 +358,7 @@ public class GameLoopManager : MonoBehaviour
             if (GameManager.Instance._currentMatchType == GameManager.MatchType.Champion)
             {
                 GameManager.ChampionsKilled++;
-                Debug.LogError("Champions Killed" + GameManager.ChampionsKilled);
+                Debug.Log("Champions Killed" + GameManager.ChampionsKilled);
 
                 GameManager.Instance.RewardCoins(GameManager.ChampionsKilled * 33 +30);
 
@@ -377,7 +377,7 @@ public class GameLoopManager : MonoBehaviour
             else
             {
                 GameManager.Instance.RewardCoins(50);
-                Debug.LogError("Wave battle completed hhhsshshsh");
+                Debug.Log("Wave battle completed hhhsshshsh");
             }
 
           

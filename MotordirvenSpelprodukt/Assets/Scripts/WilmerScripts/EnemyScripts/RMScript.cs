@@ -112,6 +112,12 @@ public class RMScript : MinionScript
         }
     }
 
+    protected override void OnDestroy()
+    {
+        _navMesh.enabled = false;
+        base.OnDestroy();
+    }
+
 
     protected override void ResetTriggers()
     {
@@ -151,7 +157,7 @@ public class RMScript : MinionScript
        
     }
 
-
+    
 
 
 

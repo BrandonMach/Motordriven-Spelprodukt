@@ -69,7 +69,7 @@ public class GameInput : MonoBehaviour
     }
 
     private void HeavyAttack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
+    {        
         OnHeavyAttackButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 

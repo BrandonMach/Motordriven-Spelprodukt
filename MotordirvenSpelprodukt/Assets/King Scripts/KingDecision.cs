@@ -91,7 +91,7 @@ public class KingDecision : MonoBehaviour
     private IEnumerator ShowMatchSummary()
     {
         SceneManager.LoadScene(9, LoadSceneMode.Additive);
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
 
         if(GameManager.ArenaLayoutIndex < 2)
         {

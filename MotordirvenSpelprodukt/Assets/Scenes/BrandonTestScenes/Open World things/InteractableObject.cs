@@ -11,9 +11,9 @@ public class InteractableObject : MonoBehaviour
 
     [SerializeField] int scenIndex;
     [SerializeField] GameObject interachHUDPopup;
-    [SerializeField] VirtualMouseInput VirtualMouse;
+    
 
-    bool isInteracting;
+    public bool isInteracting;
     public enum InteractionType
     {
         ScenSwitch,
@@ -24,8 +24,8 @@ public class InteractableObject : MonoBehaviour
     public  InteractionType _interactionType;
     void Start()
     {
-        GameInput.Instance.OnLightAttackButtonPressed += Close;
-        
+        //GameInput.Instance.OnLightAttackButtonPressed += Close;
+
     }
 
     // Update is called once per frame
@@ -45,6 +45,8 @@ public class InteractableObject : MonoBehaviour
 
     void Close(object sender, EventArgs e)
     {
+        Debug.LogError("hej");
+
         if (isInteracting && _interactionType == InteractionType.interact)
         {
             Player.Instance.GetComponent<PlayerMovement>()._canMove = true;
@@ -84,6 +86,6 @@ public class InteractableObject : MonoBehaviour
 
 
 
-
     
+
 }

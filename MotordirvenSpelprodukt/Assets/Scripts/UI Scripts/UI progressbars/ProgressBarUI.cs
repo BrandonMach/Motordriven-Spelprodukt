@@ -40,7 +40,7 @@ public class ProgressBarUI : MonoBehaviour
 
         if (_hasProgress == null)
         {
-            Debug.LogError("Game Object: " + _hasProgressGameObject + " does not implement IHasProgress");
+            Debug.Log("Game Object: " + _hasProgressGameObject + " does not implement IHasProgress");
         }
 
         _hasProgress.OnProgressChanged += HasProgress_OnProgressChanged; //när OnProgressChanges Invokes 

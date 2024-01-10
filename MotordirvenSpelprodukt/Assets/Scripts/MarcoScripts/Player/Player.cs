@@ -195,12 +195,19 @@ public class Player : MonoBehaviour, ICanAttack, IDamagable, IHasDamageVFX
     void Update()
     {
         // _gameInput = GameManager.Instance.gameObject.GetComponent<GameInput>();
-        //if (GameManager.Instance._currentScen != GameManager.CurrentScen.ArenaScen)
-        //{
-        //    _canAttack = false;
+        
 
-        //}
-       
+        if(GameLoopManager.Instance != null)
+        {
+            if (GameLoopManager.Instance.MatchIsFinished)
+            {
+                _canAttack = false;
+                
+            }
+        }
+
+
+
     }
 
     

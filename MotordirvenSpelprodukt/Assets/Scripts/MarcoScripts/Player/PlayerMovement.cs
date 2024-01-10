@@ -68,6 +68,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (GameLoopManager.Instance != null)
+        {
+            if (GameLoopManager.Instance.MatchIsFinished)
+            {
+                _canMove = false;
+
+            }
+        }
 
         if (_canMove)
         {

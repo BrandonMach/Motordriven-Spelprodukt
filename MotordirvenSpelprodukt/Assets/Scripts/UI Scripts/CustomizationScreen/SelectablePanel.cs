@@ -82,7 +82,7 @@ public class SelectablePanel : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Invalid panel index");
+            Debug.Log("Invalid panel index");
         }
     }
 

@@ -23,9 +23,7 @@ public class InteractHubWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
+       
 
         if (_activatePopup && Input.GetKeyDown(KeyCode.E))
         {
@@ -72,5 +70,10 @@ public class InteractHubWorld : MonoBehaviour
             Popup.SetActive(_activatePopup);
             _currentInteractingObject = null;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnHeavyAttackButtonPressed -= Open;
     }
 }

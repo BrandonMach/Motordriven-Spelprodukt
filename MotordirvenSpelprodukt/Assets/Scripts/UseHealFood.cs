@@ -21,7 +21,7 @@ public class UseHealFood : MonoBehaviour
 
     private void Player_HealButtonPressed(object sender, System.EventArgs e)
     {
-        if (TransferableScript.Instance.HealItems.Count > 0)
+        if (GameManager.Instance._currentScen == GameManager.CurrentScen.ArenaScen && TransferableScript.Instance.HealItems.Count > 0)
         {
 
             Player.Instance.GetComponent<HealthManager>().HealDamage(TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].HPToHeal);
@@ -43,5 +43,10 @@ public class UseHealFood : MonoBehaviour
             _icon.sprite = TransferableScript.Instance.HealItems[TransferableScript.Instance.HealItems.Count - 1].Foodimage;
             _healText.text = (TransferableScript.Instance.HealItems.Count).ToString();
         }
+    }
+
+    private void OnDestroy()
+    {
+        Player.Instance.HealButtonPressed -= Player_HealButtonPressed;
     }
 }

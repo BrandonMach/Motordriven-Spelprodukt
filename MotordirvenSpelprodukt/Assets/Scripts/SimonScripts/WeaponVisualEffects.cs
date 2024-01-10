@@ -27,10 +27,13 @@ public class WeaponVisualEffects : MonoBehaviour
         _debreeParticleMainModule = _debree.main;
         _debreeParticleStartColor = _debreeParticleMainModule.startColor.color;
 
+        
+
     }
     public void StartWeaponTrail()
     {
         _weaponTrail.Play();
+        
     }
 
     public void StartShockWave()

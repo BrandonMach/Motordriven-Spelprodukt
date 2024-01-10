@@ -47,18 +47,6 @@ public class EquipmentWheel : MonoBehaviour
             float angle = Mathf.Atan2(delta.x, delta.y) * Mathf.Rad2Deg;
             angle += 180;
 
-            //Debug.LogError(angle);
-
-
-
-
-
-
-
-
-
-
-
 
 
 

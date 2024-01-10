@@ -190,8 +190,10 @@ public class GameManager : MonoBehaviour
 
         //For testing
 
-            //KilledAllChampions = true;
-            //FreedomWin = true;
+        //KilledAllChampions = true;
+        //FreedomWin = true;
+
+        Debug.developerConsoleVisible = true;
     }
 
     // Update is called once per frame

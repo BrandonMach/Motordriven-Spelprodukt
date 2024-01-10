@@ -106,7 +106,7 @@ public class KMScript : MinionScript
     }
 
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
 
         
