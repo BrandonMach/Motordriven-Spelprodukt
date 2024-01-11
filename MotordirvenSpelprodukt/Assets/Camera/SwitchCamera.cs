@@ -6,20 +6,50 @@ using Cinemachine;
 public class SwitchCamera : MonoBehaviour
 {
     [SerializeField] private CinemachineBrain _cinemachineBrain;
-    [SerializeField] private CinemachineVirtualCamera _vcamPlayer;
+    
     [SerializeField] private CinemachineVirtualCamera _vcamKing;
     [SerializeField] private CinemachineVirtualCamera _vcamExecute;
-    [SerializeField] private GameObject _grayTint;
+    
 
     public GameObject Player;
 
 
     private bool playerCamera = true;
 
+    
+   
+
+    [SerializeField] private CinemachineVirtualCamera[] _vCamsPlayers;
+
+    private void Start()
+    {
+        
+
+        foreach (var playerCams in _vCamsPlayers)
+        {
+            playerCams.Priority = 0;
+        }
+
+    }
+
     private void Update()
-    {      
-       
-       
+    {
+        if (playerCamera && !PauseMenu.GameIsPaused)
+        {
+            if (GameManager.Instance.OverTheSholderCamActive)
+            {
+                _vCamsPlayers[0].Priority = 0;
+                _vCamsPlayers[1].Priority = 1;
+                
+
+            }
+            else
+            {
+                _vCamsPlayers[1].Priority = 0;
+                _vCamsPlayers[0].Priority = 1;
+            }
+        }
+        
     }
 
  
@@ -35,7 +65,13 @@ public class SwitchCamera : MonoBehaviour
 
     public void SwitchToExecute()
     {
-        _vcamPlayer.Priority = 0;
+
+        foreach (var playerCams in _vCamsPlayers)
+        {
+            playerCams.Priority = 0;
+        }
+
+        //_vcamPlayer.Priority = 0;
         _vcamKing.Priority = 0;
         _vcamExecute.Priority = 1;
         
@@ -45,14 +81,30 @@ public class SwitchCamera : MonoBehaviour
 
     void SwitchCameraPriority()
     {
-        if (playerCamera)
+        if (playerCamera)//Switch to king Cam
         {
-            _vcamPlayer.Priority = 0;
+            foreach (var playerCams in _vCamsPlayers)
+            {
+                playerCams.Priority = 0;
+            }
+           
             _vcamKing.Priority = 1;        
         }
-        else
+        else //Switch to player cam
         {           
-            _vcamPlayer.Priority = 1;
+            //_vcamPlayer.Priority = 1;
+
+            if (GameManager.Instance.OverTheSholderCamActive)
+            {
+                _vCamsPlayers[1].Priority = 1;
+
+            }
+            else
+            {
+                _vCamsPlayers[0].Priority = 1;
+            }
+
+
             _vcamKing.Priority = 0;         
         }
         playerCamera = !playerCamera;
@@ -67,14 +119,14 @@ public class SwitchCamera : MonoBehaviour
         if (playerCamera)
         {
             
-            _grayTint.SetActive(true);
+            
             // cause IsBlending has little bit delay so it's need to wait
             yield return new WaitUntil(() => _cinemachineBrain.IsBlending);
 
             // wait until blending is finished
 
             yield return new WaitUntil(() => !_cinemachineBrain.IsBlending);
-            _grayTint.SetActive(false);
+            
             Time.timeScale = 1;
         }
     }

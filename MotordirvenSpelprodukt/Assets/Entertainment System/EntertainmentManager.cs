@@ -93,6 +93,12 @@ public class EntertainmentManager : MonoBehaviour
     bool increaseEtp;
     [SerializeField] float _arrowMoveSpeed;
 
+    [SerializeField] RectTransform _etpBarObject;
+    [SerializeField] Vector3 _overTheShoulderCamPos;
+
+    private Vector3 _originalETPTextPos;
+    private Vector3 _originalETPBarPos;
+
     private void Awake()
     {
         if (_instance != null)
@@ -113,14 +119,26 @@ public class EntertainmentManager : MonoBehaviour
         _entertainmentPoints = _startETP;
 
         Player.Instance.GetComponent<AttackManager>().EnemyHit += EnemyHitPlayerInCombat;
-       // SpawnEnemy.Instance.SpawningDone += ResetFirstTimeInCombat;
-
+        // SpawnEnemy.Instance.SpawningDone += ResetFirstTimeInCombat;
+        _originalETPBarPos = _etpBarObject.anchoredPosition;
+        _originalETPTextPos = EntertainmentText.gameObject.GetComponentInParent<RectTransform>().localPosition;
 
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        if (GameManager.Instance.OverTheSholderCamActive)
+        {
+            _etpBarObject.anchoredPosition = new Vector3(_etpBarObject.localPosition.x,  93 ,_etpBarObject.localPosition.z);
+            EntertainmentText.gameObject.GetComponentInParent<RectTransform>().localPosition = new Vector3(248, 410, -464);
+        }
+        else
+        {
+            _etpBarObject.anchoredPosition = _originalETPBarPos;
+            EntertainmentText.gameObject.GetComponentInParent<RectTransform>().localPosition = _originalETPTextPos;
+        }
+
         _entertainmentPoints = Mathf.Clamp(_entertainmentPoints, 0, _maxETP);
 
         CheckETPChanges();
