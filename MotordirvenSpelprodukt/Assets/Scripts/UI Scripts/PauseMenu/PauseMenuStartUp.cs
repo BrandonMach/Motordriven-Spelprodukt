@@ -13,8 +13,38 @@ public class PauseMenuStartUp : MonoBehaviour
     [SerializeField] private GameObject statisticsMenu;
 
     // Start is called before the first frame update
+
+
+    #region Singleton
+
+
+    private static PauseMenuStartUp _instance;
+    public static PauseMenuStartUp Instance { get => _instance; set => _instance = value; }
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one instance of PauseMenuStartUp found");
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        
+
+
+    }
+
+
+
+    #endregion
+
     void Start()
     {
+        
         SetPauseMenuToDefault();
     }
 

@@ -201,10 +201,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            OverTheSholderCamActive = !OverTheSholderCamActive;
-        }
+        
 
 
         if (BattleIndex < _amountOfWaveBattleCount)
@@ -352,7 +349,10 @@ public class GameManager : MonoBehaviour
 
 
     
-
+    public void Toggle3rdPersonCam()
+    {
+        OverTheSholderCamActive = !OverTheSholderCamActive;
+    }
 
 
     #region Money
